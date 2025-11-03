@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { CampaignList } from '../CampaignList/CampaignList';
+import { CampaignList } from '../CampaignList';
 import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '../../types/campaign.types';
 import type { TabKey } from '../../types/campaign.types';
-import styles from './CampaignTabs.module.scss';
+import styles from './style.module.scss';
 
 // Swiper CSS 임포트
 import 'swiper/css';

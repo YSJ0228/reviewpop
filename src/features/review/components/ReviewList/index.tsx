@@ -21,9 +21,9 @@
 
 'use client';
 
-import { useReviews } from '../hooks/useReviews';
-import { ReviewCard } from './ReviewCard';
-import styles from './ReviewList.module.scss';
+import { useReviews } from '../../hooks/useReviews';
+import { ReviewCard } from '../ReviewCard';
+import styles from './style.module.scss';
 
 export function ReviewList() {
   const { data: reviews, isLoading, error } = useReviews();

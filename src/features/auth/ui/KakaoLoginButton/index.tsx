@@ -8,19 +8,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { CONSTANTS } from '@shared/config/constants';
 import { ROUTES } from '@shared/config/routes';
 import { toUnix, toUTCString, now } from '@shared/lib/date';
-
-interface KakaoLoginButtonProps {
-  className?: string;
-}
-
-/**
- * 랜덤 state 문자열 생성 (CSRF 방지)
- */
-function generateState(): string {
-  const array = new Uint8Array(16);
-  crypto.getRandomValues(array);
-  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
-}
+import type { KakaoLoginButtonProps } from './types';
+import { generateState } from './utils';
+import styles from './style.module.scss';
 
 export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
   const router = useRouter();
@@ -69,36 +59,12 @@ export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
     window.location.href = kakaoAuthUrl.toString();
   };
 
+  const buttonClassName = [styles.KakaoLoginButton, className].filter(Boolean).join(' ');
+
   return (
-    <button
-      onClick={handleKakaoLogin}
-      className={className}
-      style={{
-        backgroundColor: '#FEE500',
-        color: '#000000',
-        border: 'none',
-        borderRadius: '8px',
-        padding: '12px 24px',
-        fontSize: '16px',
-        fontWeight: 600,
-        cursor: 'pointer',
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '8px',
-        transition: 'opacity 0.2s',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.opacity = '0.9';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.opacity = '1';
-      }}
-    >
+    <button onClick={handleKakaoLogin} className={buttonClassName}>
       <svg
-        width="20"
-        height="20"
+        className={styles.KakaoLoginButton__Icon}
         viewBox="0 0 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

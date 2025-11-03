@@ -1,13 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Campaign } from '../../types/campaign.types';
 import { STATUS_LABELS } from '../../types/campaign.types';
 import { formatDate } from '@shared/lib/date';
-import styles from './CampaignCard.module.scss';
-
-interface CampaignCardProps {
-  campaign: Campaign;
-}
+import type { CampaignCardProps } from './types';
+import styles from './style.module.scss';
 
 export function CampaignCard({ campaign }: CampaignCardProps) {
   return (

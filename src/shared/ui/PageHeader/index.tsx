@@ -1,12 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import styles from './PageHeader.module.scss';
-
-interface PageHeaderProps {
-  title?: string;
-  showBackButton?: boolean;
-}
+import type { PageHeaderProps } from './types';
+import styles from './style.module.scss';
 
 export function PageHeader({ title, showBackButton = true }: PageHeaderProps) {
   const router = useRouter();

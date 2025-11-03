@@ -5,15 +5,9 @@
  */
 
 import Image from 'next/image';
-
-import type { Review } from '../api/reviewApi';
 import { formatDate } from '@shared/lib/date';
-
-import styles from './ReviewCard.module.scss';
-
-interface ReviewCardProps {
-  review: Review;
-}
+import type { ReviewCardProps } from './types';
+import styles from './style.module.scss';
 
 /**
  * 별점을 표시하는 함수

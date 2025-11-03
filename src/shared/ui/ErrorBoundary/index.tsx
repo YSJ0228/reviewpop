@@ -14,22 +14,12 @@
 
 'use client';
 
-import { Component, ReactNode } from 'react';
-import styles from './ErrorBoundary.module.scss';
+import { Component } from 'react';
+import type { ErrorBoundaryProps, ErrorBoundaryState } from './types';
+import styles from './style.module.scss';
 
-interface Props {
-  children: ReactNode;
-  /** 에러 발생 시 표시할 폴백 UI (선택사항) */
-  fallback?: ReactNode;
-}
-
-interface State {
-  hasError: boolean;
-  error: Error | null;
-}
-
-export class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {
       hasError: false,
@@ -40,7 +30,7 @@ export class ErrorBoundary extends Component<Props, State> {
   /**
    * 에러가 발생하면 이 메서드가 호출됩니다
    */
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return {
       hasError: true,
       error,

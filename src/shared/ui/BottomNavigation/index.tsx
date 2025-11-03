@@ -2,14 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { IconHome, IconSales, IconUser } from '@pop-ui/foundation';
-import styles from './BottomNavigation.module.scss';
-
-const NAV_ITEMS = [
-  { label: '홈', path: '/', icon: IconHome },
-  { label: '내 체험', path: '/my', icon: IconSales },
-  { label: '프로필', path: '/profile', icon: IconUser },
-] as const;
+import { NAV_ITEMS } from './constants';
+import styles from './style.module.scss';
 
 export function BottomNavigation() {
   const pathname = usePathname();
