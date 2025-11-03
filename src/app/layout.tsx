@@ -14,9 +14,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${fontClasses}`}>
-        <Providers>
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </Providers>
+        <div className="app-container">
+          <Providers>
+            <ErrorBoundary>{children}</ErrorBoundary>
+          </Providers>
+        </div>
       </body>
     </html>
   );
@@ -25,4 +27,10 @@ export default function RootLayout({
 export const metadata: Metadata = {
   title: '리뷰팝',
   description: '체험단 리뷰 플랫폼',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };

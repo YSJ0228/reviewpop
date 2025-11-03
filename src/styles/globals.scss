@@ -70,14 +70,23 @@ body {
   max-width: 100dvw;
   min-height: 100dvh;
   overflow-x: hidden;
+  background: #f5f5f5;
 }
 
 body {
   color: var(--color-gray-900);
-  background: var(--color-white);
   font-family: var(--font-pretendard), var(--font-noto-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+  max-width: 480px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--color-white);
+  position: relative;
 }
 
 * {
