@@ -38,8 +38,6 @@ export const CONSTANTS = {
     AUTH_TOKEN: 'auth_token',
     /** 사용자 정보 (deprecated - 서버 세션 사용) */
     USER: 'user',
-    /** 테마 설정 */
-    THEME: 'theme',
     /** OAuth State */
     OAUTH_STATE: 'oauth_state',
   },

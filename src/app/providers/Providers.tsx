@@ -15,7 +15,6 @@ import { ReactNode, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { useThemeStore } from '@entities/theme/store/themeStore';
 import { useUserStore } from '@entities/user/store/userStore';
 import { env } from '@shared/config/env';
 
@@ -47,7 +46,6 @@ const queryClient = new QueryClient({
 
 export function Providers({ children }: ProvidersProps) {
   const [isMswReady, setIsMswReady] = useState(!env.useMock);
-  const detectSystemTheme = useThemeStore((state) => state.detectSystemTheme);
   const restoreUser = useUserStore((state) => state.restoreUser);
 
   /**
@@ -74,14 +72,6 @@ export function Providers({ children }: ProvidersProps) {
       initMocks();
     }
   }, []);
-
-  /**
-   * 테마 초기화
-   * localStorage에 저장된 테마 또는 시스템 테마를 감지합니다.
-   */
-  useEffect(() => {
-    detectSystemTheme();
-  }, [detectSystemTheme]);
 
   /**
    * 사용자 정보 복원

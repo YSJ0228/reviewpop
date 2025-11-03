@@ -158,7 +158,7 @@ src/
 | 레이어       | 역할                              | 예시                   |
 | ------------ | --------------------------------- | ---------------------- |
 | **features** | 사용자가 실제로 사용하는 기능     | 리뷰 작성, 제품 필터링 |
-| **entities** | 비즈니스 엔티티와 전역 상태       | User, Theme            |
+| **entities** | 비즈니스 엔티티와 전역 상태       | User                   |
 | **shared**   | 프로젝트 전체에서 재사용하는 코드 | Button, API 클라이언트 |
 
 ### 폴더 구조
@@ -179,11 +179,9 @@ reviewpop-web/
 │   │   └── product/            # 제품 기능 (예정)
 │   │
 │   ├── entities/               # 비즈니스 엔티티
-│   │   ├── user/               # 사용자
-│   │   │   ├── store/          # userStore (Zustand)
-│   │   │   └── types/          # user.types.ts
-│   │   └── theme/              # 테마
-│   │       └── store/          # themeStore (Zustand)
+│   │   └── user/               # 사용자
+│   │       ├── store/          # userStore (Zustand)
+│   │       └── types/          # user.types.ts
 │   │
 │   ├── shared/                 # 공유 자원
 │   │   ├── ui/                 # Button, Input, ErrorBoundary
