@@ -7,10 +7,16 @@
 import { authHandlers } from './auth';
 import { productHandlers } from './products';
 import { reviewHandlers } from './reviews';
+import { kakaoOAuthHandlers } from './oauth/kakao';
 
 /**
  * 모든 MSW 핸들러
  *
  * 새로운 도메인 핸들러를 추가할 때는 여기에 추가하세요.
  */
-export const handlers = [...reviewHandlers, ...productHandlers, ...authHandlers];
+export const handlers = [
+  ...kakaoOAuthHandlers, // OAuth 핸들러 (외부 도메인)
+  ...reviewHandlers,
+  ...productHandlers,
+  ...authHandlers,
+];

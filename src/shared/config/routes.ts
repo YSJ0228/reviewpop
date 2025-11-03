@@ -36,9 +36,37 @@ export const ROUTES = {
   /** 마이페이지 */
   MY_PAGE: '/my-page',
 
+  /** 프로필 페이지 */
+  PROFILE: '/profile',
+
   /** 로그인 페이지 */
   LOGIN: '/login',
 
+  /** 로그인 페이지 (리다이렉트 포함) */
+  LOGIN_WITH_REDIRECT: (redirectUrl: string) =>
+    `/login?redirect=${encodeURIComponent(redirectUrl)}`,
+
   /** 회원가입 페이지 */
   SIGNUP: '/signup',
+
+  /** OAuth 콜백 */
+  AUTH_CALLBACK: {
+    /** 카카오 콜백 */
+    KAKAO: '/api/auth/callback/kakao',
+    /** 네이버 콜백 */
+    NAVER: '/api/auth/callback/naver',
+  },
+
+  /** 인증 API */
+  API: {
+    /** 로그아웃 */
+    LOGOUT: '/api/auth/logout',
+    /** 현재 사용자 정보 */
+    ME: '/api/auth/me',
+    /** 소셜 로그인 (백엔드) */
+    SOCIAL_LOGIN: {
+      KAKAO: '/api/auth/social/kakao',
+      NAVER: '/api/auth/social/naver',
+    },
+  },
 } as const;

@@ -34,11 +34,49 @@ export const CONSTANTS = {
 
   /** 로컬 스토리지 키 */
   STORAGE_KEYS: {
-    /** 인증 토큰 */
+    /** 인증 토큰 (deprecated - 쿠키 사용) */
     AUTH_TOKEN: 'auth_token',
-    /** 사용자 정보 */
+    /** 사용자 정보 (deprecated - 서버 세션 사용) */
     USER: 'user',
     /** 테마 설정 */
     THEME: 'theme',
+    /** OAuth State */
+    OAUTH_STATE: 'oauth_state',
+  },
+
+  /** 쿠키 키 */
+  COOKIE_KEYS: {
+    /** 인증 토큰 */
+    AUTH_TOKEN: 'auth_token',
+  },
+
+  /** JWT 설정 */
+  JWT: {
+    /** 만료 시간 */
+    EXPIRES_IN: '7d',
+    /** 알고리즘 */
+    ALGORITHM: 'HS256' as const,
+  },
+
+  /** OAuth 설정 */
+  OAUTH: {
+    /** 카카오 */
+    KAKAO: {
+      /** 인증 URL */
+      AUTHORIZE_URL: 'https://kauth.kakao.com/oauth/authorize',
+      /** 토큰 URL */
+      TOKEN_URL: 'https://kauth.kakao.com/oauth/token',
+      /** 사용자 정보 URL */
+      USER_INFO_URL: 'https://kapi.kakao.com/v2/user/me',
+    },
+    /** 네이버 */
+    NAVER: {
+      /** 인증 URL */
+      AUTHORIZE_URL: 'https://nid.naver.com/oauth2.0/authorize',
+      /** 토큰 URL */
+      TOKEN_URL: 'https://nid.naver.com/oauth2.0/token',
+      /** 사용자 정보 URL */
+      USER_INFO_URL: 'https://openapi.naver.com/v1/nid/me',
+    },
   },
 } as const;
