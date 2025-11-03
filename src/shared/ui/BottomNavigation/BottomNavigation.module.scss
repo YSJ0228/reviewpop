@@ -1,0 +1,34 @@
+.navigation {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--color-white);
+  border-top: 1px solid var(--gray-200);
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 1000;
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-500);
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  &.active {
+    color: var(--primary-500);
+    font-weight: 600;
+  }
+}
