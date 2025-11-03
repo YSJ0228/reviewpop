@@ -1,0 +1,191 @@
+@use '@/styles/mixins' as *;
+
+.Page {
+  min-height: 100vh;
+  background: var(--color-gray-50);
+}
+
+.Page__Loading,
+.Page__Error {
+  @include flex($direction: column, $align: center, $justify: center);
+  min-height: 400px;
+  padding: 40px 20px;
+  text-align: center;
+
+  p {
+    font-size: 16px;
+    color: var(--color-gray-600);
+  }
+}
+
+.Page__ImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-gray-200);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.Page__Badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px 16px;
+  background: rgb(0 0 0 / 85%);
+  color: var(--color-white);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.Page__Section {
+  padding: 24px 20px;
+  background: var(--color-white);
+  border-bottom: 8px solid var(--color-gray-100);
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 40px;
+  }
+}
+
+.Page__Section--Notice {
+  background: var(--color-red-50);
+  border-bottom: 8px solid var(--color-gray-100);
+}
+
+.Page__Brand {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-gray-600);
+  margin: 0 0 8px;
+}
+
+.Page__Title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  line-height: 1.4;
+  margin: 0 0 20px;
+}
+
+.Page__Meta {
+  @include flex($direction: column, $gap: 12);
+  padding: 16px;
+  background: var(--color-gray-50);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.Page__MetaItem {
+  @include flex($align: center, $justify: space-between);
+}
+
+.Page__MetaLabel {
+  font-size: 14px;
+  color: var(--color-gray-600);
+}
+
+.Page__MetaValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+.Page__Recruitment {
+  @include flex($direction: column, $gap: 8);
+}
+
+.Page__RecruitmentBar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background: var(--color-gray-200);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.Page__RecruitmentProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-blue-500), var(--color-blue-600));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.Page__RecruitmentText {
+  font-size: 14px;
+  color: var(--color-gray-700);
+  margin: 0;
+  text-align: right;
+
+  strong {
+    color: var(--color-blue-600);
+    font-weight: 700;
+  }
+}
+
+.Page__SectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin: 0 0 16px;
+}
+
+.Page__Description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-gray-700);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.Page__List {
+  @include flex($direction: column, $gap: 12);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Page__ListItem {
+  position: relative;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-gray-700);
+
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-blue-600);
+    font-weight: 700;
+  }
+}
+
+.Page__DeliveryInfo {
+  @include flex($direction: column, $gap: 12);
+  padding: 16px;
+  background: var(--color-gray-50);
+  border-radius: 12px;
+
+  p {
+    font-size: 14px;
+    color: var(--color-gray-700);
+    margin: 0;
+
+    strong {
+      font-weight: 600;
+      color: var(--color-gray-900);
+      margin-right: 8px;
+    }
+  }
+}

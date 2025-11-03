@@ -1,5 +1,29 @@
 @use '@/styles/mixins' as *;
 
+.CampaignCard__Link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover .CampaignCard {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
+  }
+
+  &:active .CampaignCard {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-blue-500);
+    outline-offset: 2px;
+    border-radius: 12px;
+  }
+}
+
 .CampaignCard {
   background: #fff;
   border-radius: 12px;
@@ -8,16 +32,6 @@
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
 }
 
 .CampaignCard__ImageWrapper {

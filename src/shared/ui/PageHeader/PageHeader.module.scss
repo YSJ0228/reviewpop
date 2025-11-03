@@ -1,0 +1,56 @@
+@use '@/styles/mixins' as *;
+
+.PageHeader {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  @include flex($align: center, $gap: 12);
+  height: 56px;
+  padding: 0 16px;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.PageHeader__BackButton {
+  @include flex($align: center, $justify: center);
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: var(--color-gray-900);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: var(--color-gray-100);
+  }
+
+  &:active {
+    background: var(--color-gray-200);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-blue-500);
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.PageHeader__Title {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
