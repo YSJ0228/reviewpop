@@ -12,7 +12,7 @@ import { ApiResponse, unwrapApiResponse } from '@shared/api/types/common.types';
  */
 export interface Review {
   id: number;
-  productId: number;
+  campaignId: string;
   userId: number;
   user: {
     id: number;
@@ -31,7 +31,7 @@ export interface Review {
  * 리뷰 작성 요청 데이터
  */
 export interface CreateReviewRequest {
-  productId: number;
+  campaignId: string;
   rating: number;
   title: string;
   content: string;

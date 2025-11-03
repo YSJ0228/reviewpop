@@ -11,7 +11,7 @@ import { mockUsers } from './users';
 export const mockReviews: Review[] = [
   {
     id: 1,
-    productId: 1,
+    campaignId: '13',
     userId: 1,
     user: {
       id: mockUsers[0].id,
@@ -28,7 +28,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 2,
-    productId: 1,
+    campaignId: '13',
     userId: 2,
     user: {
       id: mockUsers[1].id,
@@ -45,7 +45,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 3,
-    productId: 2,
+    campaignId: '14',
     userId: 1,
     user: {
       id: mockUsers[0].id,
@@ -62,7 +62,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 4,
-    productId: 1,
+    campaignId: '14',
     userId: 3,
     user: {
       id: mockUsers[2].id,
@@ -79,7 +79,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 5,
-    productId: 2,
+    campaignId: '15',
     userId: 2,
     user: {
       id: mockUsers[1].id,
@@ -96,7 +96,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 6,
-    productId: 3,
+    campaignId: '15',
     userId: 1,
     user: {
       id: mockUsers[0].id,
@@ -113,7 +113,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 7,
-    productId: 3,
+    campaignId: '10',
     userId: 3,
     user: {
       id: mockUsers[2].id,
@@ -130,7 +130,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 8,
-    productId: 4,
+    campaignId: '10',
     userId: 2,
     user: {
       id: mockUsers[1].id,
@@ -147,7 +147,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 9,
-    productId: 4,
+    campaignId: '11',
     userId: 1,
     user: {
       id: mockUsers[0].id,
@@ -164,7 +164,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 10,
-    productId: 6,
+    campaignId: '11',
     userId: 3,
     user: {
       id: mockUsers[2].id,
@@ -181,7 +181,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 11,
-    productId: 6,
+    campaignId: '12',
     userId: 1,
     user: {
       id: mockUsers[0].id,
@@ -198,7 +198,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 12,
-    productId: 1,
+    campaignId: '13',
     userId: 2,
     user: {
       id: mockUsers[1].id,
@@ -215,7 +215,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 13,
-    productId: 2,
+    campaignId: '14',
     userId: 3,
     user: {
       id: mockUsers[2].id,
@@ -232,7 +232,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 14,
-    productId: 3,
+    campaignId: '15',
     userId: 2,
     user: {
       id: mockUsers[1].id,
@@ -249,7 +249,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: 15,
-    productId: 4,
+    campaignId: '12',
     userId: 3,
     user: {
       id: mockUsers[2].id,

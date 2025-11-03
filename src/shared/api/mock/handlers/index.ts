@@ -5,7 +5,6 @@
  */
 
 import { authHandlers } from './auth';
-import { productHandlers } from './products';
 import { reviewHandlers } from './reviews';
 import { kakaoOAuthHandlers } from './oauth/kakao';
 import { campaignHandlers } from './campaigns';
@@ -18,7 +17,6 @@ import { campaignHandlers } from './campaigns';
 export const handlers = [
   ...kakaoOAuthHandlers, // OAuth 핸들러 (외부 도메인)
   ...reviewHandlers,
-  ...productHandlers,
   ...authHandlers,
   ...campaignHandlers,
 ];

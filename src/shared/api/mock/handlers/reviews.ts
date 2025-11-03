@@ -19,7 +19,7 @@ const ITEMS_PER_PAGE = 10; // 백엔드 고정값
 export const reviewHandlers = [
   /**
    * 리뷰 목록 조회 (페이지네이션 + 필터링)
-   * GET /api/reviews?page=1&productId=1&rating=5&minRating=4&searchQuery=좋은
+   * GET /api/reviews?page=1&campaignId=13&rating=5&minRating=4&searchQuery=좋은
    */
   http.get('/api/reviews', ({ request }) => {
     const url = new URL(request.url);
@@ -29,9 +29,7 @@ export const reviewHandlers = [
 
     // 필터 파라미터 파싱
     const filters: ReviewFilterParams = {
-      productId: url.searchParams.get('productId')
-        ? Number(url.searchParams.get('productId'))
-        : undefined,
+      campaignId: url.searchParams.get('campaignId') || undefined,
       userId: url.searchParams.get('userId') ? Number(url.searchParams.get('userId')) : undefined,
       rating: url.searchParams.get('rating') ? Number(url.searchParams.get('rating')) : undefined,
       minRating: url.searchParams.get('minRating')
