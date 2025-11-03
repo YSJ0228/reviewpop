@@ -1,0 +1,40 @@
+@use '@/styles/mixins' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px); // 하단 네비게이션 높이 제외
+  overflow: hidden;
+  background: var(--gray-50);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding: 20px;
+  border-bottom: 1px solid var(--gray-200);
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.loading {
+  @include flex($direction: column, $align: center, $justify: center);
+  height: 100vh;
+  color: var(--gray-600);
+  font-size: 15px;
+}

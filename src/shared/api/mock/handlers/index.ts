@@ -8,6 +8,7 @@ import { authHandlers } from './auth';
 import { productHandlers } from './products';
 import { reviewHandlers } from './reviews';
 import { kakaoOAuthHandlers } from './oauth/kakao';
+import { campaignHandlers } from './campaigns';
 
 /**
  * 모든 MSW 핸들러
@@ -19,4 +20,5 @@ export const handlers = [
   ...reviewHandlers,
   ...productHandlers,
   ...authHandlers,
+  ...campaignHandlers,
 ];

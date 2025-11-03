@@ -1,0 +1,67 @@
+@use '@/styles/mixins' as *;
+
+.list {
+  padding: 16px;
+  @include flex($direction: column, $gap: 16);
+  overflow-y: auto;
+  min-height: 200px;
+}
+
+.loading,
+.error,
+.empty {
+  @include flex($direction: column, $align: center, $justify: center);
+  min-height: 400px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.loading {
+  color: var(--gray-600);
+
+  span {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--primary-500);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  color: var(--error-500);
+
+  p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+
+.errorMessage {
+  margin-top: 8px !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--gray-600) !important;
+}
+
+.empty {
+  color: var(--gray-500);
+
+  p {
+    margin: 0;
+    font-size: 15px;
+  }
+}
