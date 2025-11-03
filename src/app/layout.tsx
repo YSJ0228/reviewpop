@@ -1,5 +1,8 @@
+import { ErrorBoundary } from '@shared/ui/ErrorBoundary';
 import '@styles/globals.scss';
 import { fontClasses } from '@styles/fonts';
+
+import { Providers } from './providers/Providers';
 
 import type { Metadata } from 'next';
 
@@ -10,7 +13,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${fontClasses}`}>{children}</body>
+      <body className={`${fontClasses}`}>
+        <Providers>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </Providers>
+      </body>
     </html>
   );
 }
