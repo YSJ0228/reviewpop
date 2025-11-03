@@ -1,5 +1,6 @@
 import { requireAuth } from '@shared/lib/auth.server';
 import { ROUTES } from '@shared/config/routes';
+import { formatDate } from '@shared/lib/date';
 
 export default async function ProfilePage() {
   // 인증 필수 - 미인증 시 로그인 페이지로 리다이렉트
@@ -25,7 +26,7 @@ export default async function ProfilePage() {
             <strong>로그인 방식:</strong> {user.provider === 'kakao' ? '카카오' : user.provider}
           </p>
           <p>
-            <strong>가입일:</strong> {new Date(user.createdAt).toLocaleDateString('ko-KR')}
+            <strong>가입일:</strong> {formatDate(user.createdAt, 'LONG')}
           </p>
         </div>
       </div>

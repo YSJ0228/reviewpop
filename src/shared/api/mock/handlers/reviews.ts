@@ -8,6 +8,7 @@ import { http, HttpResponse } from 'msw';
 
 import type { CreateReviewRequest, ReviewFilterParams } from '@entities/review/types/review.types';
 import type { ApiResponse } from '@shared/api/types/common.types';
+import { toISO } from '@shared/lib/date';
 
 import { mockReviews } from '../data/reviews';
 import { mockUsers } from '../data/users';
@@ -88,8 +89,8 @@ export const reviewHandlers = [
         profileImage: mockUsers[0].profileImage,
       },
       images: [],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: toISO(),
+      updatedAt: toISO(),
     };
 
     mockReviews.push(newReview);

@@ -7,6 +7,7 @@
 import { redirect } from 'next/navigation';
 import { getAuthCookie } from './cookies.server';
 import { verifyJWT } from './jwt';
+import { fromUnix } from './date';
 import { ROUTES } from '@shared/config/routes';
 import type { User } from '@entities/user/types/user.types';
 
@@ -38,7 +39,7 @@ export async function getSession(): Promise<User | null> {
       name: payload.name,
       profileImage: null, // JWT에는 프로필 이미지가 없음
       provider: payload.provider,
-      createdAt: new Date(payload.iat * 1000).toISOString(),
+      createdAt: fromUnix(payload.iat).toISOString(),
     };
 
     return user;

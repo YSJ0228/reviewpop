@@ -8,6 +8,7 @@ import { http, HttpResponse } from 'msw';
 import { ROUTES } from '@shared/config/routes';
 import { CONSTANTS } from '@shared/config/constants';
 import { generateJWT, verifyJWT } from '@shared/lib/jwt';
+import { toISO, fromUnix } from '@shared/lib/date';
 import type { AuthResponse, AuthErrorResponse, KakaoUserInfo } from '@shared/types/auth.types';
 import type { LoginRequest } from '@entities/user/types/user.types';
 import type { ApiResponse } from '@shared/api/types/common.types';
@@ -56,7 +57,7 @@ export const authHandlers = [
         name: kakaoUser.properties.nickname,
         profileImage: kakaoUser.properties.profile_image || null,
         provider: 'kakao' as const,
-        createdAt: new Date().toISOString(),
+        createdAt: toISO(),
       };
 
       return HttpResponse.json({
@@ -143,7 +144,7 @@ export const authHandlers = [
       name: payload.name,
       profileImage: null, // JWT에는 프로필 이미지가 없으므로
       provider: payload.provider,
-      createdAt: new Date(payload.iat * 1000).toISOString(),
+      createdAt: fromUnix(payload.iat).toISOString(),
     };
 
     return HttpResponse.json({

@@ -7,6 +7,7 @@
 import Image from 'next/image';
 
 import type { Review } from '../api/reviewApi';
+import { formatDate } from '@shared/lib/date';
 
 import styles from './ReviewCard.module.scss';
 
@@ -30,18 +31,6 @@ function renderStars(rating: number) {
   ));
 }
 
-/**
- * 날짜 포맷팅 함수
- */
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
-
 export function ReviewCard({ review }: ReviewCardProps) {
   return (
     <article className={styles.ReviewCard}>
@@ -49,7 +38,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
       <div className={styles.ReviewCard__Header}>
         <div className={styles.ReviewCard__UserInfo}>
           <span className={styles.ReviewCard__UserName}>{review.user.name}</span>
-          <span className={styles.ReviewCard__Date}>{formatDate(review.createdAt)}</span>
+          <span className={styles.ReviewCard__Date}>{formatDate(review.createdAt, 'LONG')}</span>
         </div>
         <div className={styles.ReviewCard__Rating}>{renderStars(review.rating)}</div>
       </div>

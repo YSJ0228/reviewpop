@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Campaign } from '../../types/campaign.types';
 import { STATUS_LABELS } from '../../types/campaign.types';
+import { formatDate } from '@shared/lib/date';
 import styles from './CampaignCard.module.scss';
 
 interface CampaignCardProps {
@@ -32,10 +33,12 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
           <div className={styles.CampaignCard__Meta}>
             <time dateTime={campaign.applicationDate}>
-              신청일: {formatDate(campaign.applicationDate)}
+              신청일: {formatDate(campaign.applicationDate, 'SHORT')}
             </time>
             {campaign.deadline && (
-              <time dateTime={campaign.deadline}>마감: {formatDate(campaign.deadline)}</time>
+              <time dateTime={campaign.deadline}>
+                마감: {formatDate(campaign.deadline, 'SHORT')}
+              </time>
             )}
           </div>
           {campaign.category && (
@@ -52,12 +55,4 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
       </article>
     </Link>
   );
-}
-
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
 }

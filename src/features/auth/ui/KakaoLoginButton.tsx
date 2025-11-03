@@ -7,6 +7,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { CONSTANTS } from '@shared/config/constants';
 import { ROUTES } from '@shared/config/routes';
+import { toUnix, toUTCString, now } from '@shared/lib/date';
 
 interface KakaoLoginButtonProps {
   className?: string;
@@ -34,17 +35,17 @@ export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
     const stateData = {
       state,
       redirectUrl: redirectUrl || ROUTES.HOME,
-      timestamp: Date.now(),
+      timestamp: toUnix(),
     };
 
     // 쿠키에 저장 (10분 유효)
-    const expires = new Date(Date.now() + 10 * 60 * 1000).toUTCString();
+    const expires = toUTCString(now().add(10, 'minute'));
     document.cookie = `${CONSTANTS.STORAGE_KEYS.OAUTH_STATE}=${encodeURIComponent(JSON.stringify(stateData))}; path=/; expires=${expires}; SameSite=Lax`;
 
     // 개발 환경: Mock OAuth (바로 콜백 호출)
     if (process.env.NODE_ENV === 'development') {
       // Mock authorization code 생성
-      const mockCode = `mock-kakao-code-${Date.now()}`;
+      const mockCode = `mock-kakao-code-${toUnix()}`;
 
       // 콜백 URL로 이동 (실제 카카오 OAuth 리다이렉트 시뮬레이션)
       const callbackUrl = new URL(ROUTES.AUTH_CALLBACK.KAKAO, window.location.origin);

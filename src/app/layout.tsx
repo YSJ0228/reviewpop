@@ -1,6 +1,7 @@
 import { ErrorBoundary } from '@shared/ui/ErrorBoundary';
 import '@styles/globals.scss';
 import { fontClasses } from '@styles/fonts';
+import '@shared/lib/dayjs.config';
 
 import { Providers } from './providers/Providers';
 
