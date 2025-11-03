@@ -1,0 +1,129 @@
+@use 'sass:meta';
+
+$colors: (
+  'black': #000000,
+  'white': #ffffff,
+  'gray': (
+    25: #fafafa,
+    50: #f6f6f6,
+    75: #f2f2f2,
+    100: #e7e7e7,
+    200: #d8d8d8,
+    300: #cdcdcd,
+    400: #b0b0b0,
+    500: #9b9b9b,
+    600: #808080,
+    700: #666666,
+    800: #4a4a4a,
+    900: #333333,
+  ),
+  'red': (
+    50: #fef3f2,
+    100: #fee4e2,
+    200: #fecdca,
+    300: #fda29b,
+    400: #ff8a8a,
+    500: #fa5252,
+    600: #f03e3e,
+    700: #e03131,
+    800: #c92a2a,
+    900: #ab1313,
+  ),
+  'green': (
+    50: #efffef,
+    100: #d1fcd3,
+    200: #a5f8a9,
+    300: #8bed90,
+    400: #6de372,
+    500: #30cc37,
+    600: #0f8c14,
+    700: #027a48,
+    800: #05603a,
+    900: #054f31,
+  ),
+  'yellow': (
+    50: #fbffbf,
+    100: #ffff9f,
+    200: #fdff78,
+    300: #fffc33,
+    400: #fff200,
+    500: #ffe500,
+    600: #fcc419,
+    700: #f59f00,
+    800: #f08c00,
+    900: #e27500,
+  ),
+  'orange': (
+    50: #fff4e6,
+    100: #ffe8cc,
+    200: #ffd8a8,
+    300: #ffc078,
+    400: #ffa94d,
+    500: #ff922b,
+    600: #fd7e14,
+    700: #f76707,
+    800: #e8590c,
+  ),
+  'aqua': (
+    50: #edfcff,
+    75: #d5f8ff,
+    100: #c8fdff,
+    200: #98f4f6,
+    300: #72eef1,
+    400: #49e5e9,
+    500: #0fd3d8,
+    600: #11badd,
+    700: #07a3c6,
+    800: #00759a,
+    900: #006180,
+  ),
+  'blue': (
+    50: #eff8ff,
+    100: #d8f0ff,
+    200: #b2ddff,
+    300: #84caff,
+    400: #53b1fd,
+    500: #2e90fa,
+    600: #1570ef,
+    700: #175cd3,
+    800: #1849a9,
+    900: #194185,
+  ),
+  'purple': (
+    50: #f3f0ff,
+    100: #e5dbff,
+    200: #d0bfff,
+    300: #b197fc,
+    400: #9775fa,
+    500: #845ef7,
+    600: #7248ef,
+    700: #5f36da,
+    800: #5730cc,
+    900: #4827ab,
+  ),
+  'grape': (
+    50: #f8f0fc,
+    100: #f3d9fa,
+    200: #eebefa,
+    300: #e599f7,
+    400: #da77f2,
+    500: #cc5de8,
+    600: #be4bdb,
+    700: #ae3ec9,
+    800: #9c36b5,
+    900: #862e9c,
+  ),
+);
+
+// CSS 변수 자동 생성
+:root {
+  @each $color-name, $color-value in $colors {
+    @if meta.type-of($color-value) == 'map' {
+      @each $shade, $shade-value in $color-value {
+        --color-#{$color-name}-#{$shade}: #{$shade-value};
+      }
+    } @else {
+      --color-#{$color-name}: #{$color-value};
+    }
+  }
+}
