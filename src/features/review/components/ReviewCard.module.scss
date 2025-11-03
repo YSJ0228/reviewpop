@@ -1,0 +1,80 @@
+.card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--gray-900);
+}
+
+.date {
+  font-size: 14px;
+  color: var(--gray-500);
+}
+
+.rating {
+  display: flex;
+  gap: 2px;
+  font-size: 18px;
+}
+
+.starFilled {
+  color: var(--warning-500);
+}
+
+.starEmpty {
+  color: var(--gray-300);
+}
+
+.body {
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gray-900);
+}
+
+.content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+.images {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+}

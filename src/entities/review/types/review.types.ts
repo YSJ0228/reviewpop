@@ -1,0 +1,64 @@
+/**
+ * Review 관련 타입 정의
+ */
+
+import type { User } from '@entities/user/types/user.types';
+
+/**
+ * 리뷰 정보
+ */
+export interface Review {
+  /** 리뷰 ID */
+  id: number;
+  /** 제품 ID */
+  productId: number;
+  /** 작성자 ID */
+  userId: number;
+  /** 작성자 정보 */
+  user: Pick<User, 'id' | 'name' | 'email' | 'profileImage'>;
+  /** 평점 (1-5) */
+  rating: number;
+  /** 리뷰 제목 */
+  title: string;
+  /** 리뷰 내용 */
+  content: string;
+  /** 리뷰 이미지 URL 배열 */
+  images: string[];
+  /** 생성일 */
+  createdAt: string;
+  /** 수정일 */
+  updatedAt: string;
+}
+
+/**
+ * 리뷰 작성 요청 데이터
+ */
+export interface CreateReviewRequest {
+  /** 제품 ID */
+  productId: number;
+  /** 평점 (1-5) */
+  rating: number;
+  /** 리뷰 제목 */
+  title: string;
+  /** 리뷰 내용 */
+  content: string;
+}
+
+/**
+ * 리뷰 필터 쿼리 파라미터
+ *
+ * @example
+ * GET /api/reviews?productId=1&rating=5&minRating=4
+ */
+export interface ReviewFilterParams extends Record<string, unknown> {
+  /** 특정 제품의 리뷰만 필터링 */
+  productId?: number;
+  /** 특정 사용자의 리뷰만 필터링 */
+  userId?: number;
+  /** 정확히 N점인 리뷰만 필터링 */
+  rating?: number;
+  /** N점 이상인 리뷰만 필터링 */
+  minRating?: number;
+  /** 검색어 (제목, 내용에서 검색) */
+  searchQuery?: string;
+}

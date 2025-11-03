@@ -1,0 +1,34 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.loading,
+.error,
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.loading {
+  color: var(--gray-600);
+}
+
+.error {
+  color: var(--error-600);
+}
+
+.errorMessage {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--error-500);
+}
+
+.empty {
+  color: var(--gray-500);
+}
