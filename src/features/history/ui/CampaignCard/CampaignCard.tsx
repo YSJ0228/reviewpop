@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Campaign } from '../../types/campaign.types';
 import { STATUS_LABELS } from '../../types/campaign.types';
 import styles from './CampaignCard.module.scss';
@@ -10,10 +11,12 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
   return (
     <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
       <div className={styles.CampaignCard__ImageWrapper}>
-        <img
+        <Image
           src={campaign.imageUrl}
           alt={`${campaign.brand} ${campaign.title} 캠페인 이미지`}
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: 'cover' }}
         />
         <div
           className={styles.CampaignCard__Badge}
