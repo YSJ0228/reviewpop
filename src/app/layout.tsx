@@ -4,7 +4,7 @@ import { fontClasses } from '@styles/fonts';
 
 import { Providers } from './providers/Providers';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 export default function RootLayout({
   children,
@@ -27,10 +27,11 @@ export default function RootLayout({
 export const metadata: Metadata = {
   title: '리뷰팝',
   description: '체험단 리뷰 플랫폼',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
