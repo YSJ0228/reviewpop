@@ -30,7 +30,7 @@ export function ReviewList() {
 
   if (isLoading) {
     return (
-      <div className={styles.loading}>
+      <div className={styles['ReviewList--Loading']}>
         <p>리뷰를 불러오는 중...</p>
       </div>
     );
@@ -38,23 +38,23 @@ export function ReviewList() {
 
   if (error) {
     return (
-      <div className={styles.error}>
+      <div className={styles['ReviewList--Error']}>
         <p>리뷰를 불러오는데 실패했습니다.</p>
-        <p className={styles.errorMessage}>{error.message}</p>
+        <p className={styles.ReviewList__ErrorMessage}>{error.message}</p>
       </div>
     );
   }
 
   if (!reviews || reviews.length === 0) {
     return (
-      <div className={styles.empty}>
+      <div className={styles['ReviewList--Empty']}>
         <p>아직 작성된 리뷰가 없습니다.</p>
       </div>
     );
   }
 
   return (
-    <div className={styles.list}>
+    <div className={styles.ReviewList}>
       {reviews.map((review) => (
         <ReviewCard key={review.id} review={review} />
       ))}

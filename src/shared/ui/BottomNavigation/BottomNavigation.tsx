@@ -15,17 +15,20 @@ export function BottomNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className={styles.navigation}>
+    <nav className={styles.BottomNavigation}>
       {NAV_ITEMS.map(({ label, path, icon: Icon }) => {
         const isActive = pathname === path;
         const iconColor = isActive ? 'var(--primary-500)' : 'var(--gray-500)';
 
+        const itemClassName = [
+          styles.BottomNavigation__Item,
+          isActive ? styles['BottomNavigation__Item--Active'] : '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+
         return (
-          <Link
-            key={path}
-            href={path}
-            className={`${styles.navItem} ${isActive ? styles.active : ''}`}
-          >
+          <Link key={path} href={path} className={itemClassName}>
             <Icon size={24} color={iconColor} />
             <span>{label}</span>
           </Link>

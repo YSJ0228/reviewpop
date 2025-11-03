@@ -1,0 +1,22 @@
+{
+  "customSyntax": "postcss-scss",
+  "rules": {
+    "selector-class-pattern": [
+      "^[A-Z][a-zA-Z0-9]*(__[A-Z][a-zA-Z0-9]*)?(--[A-Z][a-zA-Z0-9]*)?$",
+      {
+        "message": "클래스명은 파스칼 케이스 BEM을 따라야 합니다 (예: .Card, .Card__Header, .Card__Header--Active)"
+      }
+    ]
+  },
+  "ignoreFiles": [
+    "node_modules/**/*",
+    ".next/**/*",
+    "build/**/*",
+    "dist/**/*",
+    "public/**/*",
+    "src/styles/_reset.scss",
+    "src/styles/_colors.scss",
+    "src/styles/globals.scss",
+    "src/styles/mixins/**/*"
+  ]
+}

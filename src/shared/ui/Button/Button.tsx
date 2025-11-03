@@ -38,12 +38,16 @@ export function Button({
   className = '',
   ...props
 }: ButtonProps) {
+  // variant와 size를 파스칼 케이스 BEM 형식으로 변환
+  const variantClass = `Button--${variant.charAt(0).toUpperCase()}${variant.slice(1)}`;
+  const sizeClass = `Button--${size.charAt(0).toUpperCase()}${size.slice(1)}`;
+
   // 클래스명을 조합합니다
   const classNames = [
-    styles.button,
-    styles[variant],
-    styles[size],
-    fullWidth ? styles.fullWidth : '',
+    styles.Button,
+    styles[variantClass],
+    styles[sizeClass],
+    fullWidth ? styles['Button--FullWidth'] : '',
     className,
   ]
     .filter(Boolean)

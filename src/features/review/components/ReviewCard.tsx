@@ -19,7 +19,12 @@ interface ReviewCardProps {
  */
 function renderStars(rating: number) {
   return Array.from({ length: 5 }, (_, i) => (
-    <span key={i} className={i < rating ? styles.starFilled : styles.starEmpty}>
+    <span
+      key={i}
+      className={
+        i < rating ? styles['ReviewCard__Star--Filled'] : styles['ReviewCard__Star--Empty']
+      }
+    >
       ★
     </span>
   ));
@@ -39,25 +44,25 @@ function formatDate(dateString: string) {
 
 export function ReviewCard({ review }: ReviewCardProps) {
   return (
-    <article className={styles.card}>
+    <article className={styles.ReviewCard}>
       {/* 헤더 */}
-      <div className={styles.header}>
-        <div className={styles.userInfo}>
-          <span className={styles.userName}>{review.user.name}</span>
-          <span className={styles.date}>{formatDate(review.createdAt)}</span>
+      <div className={styles.ReviewCard__Header}>
+        <div className={styles.ReviewCard__UserInfo}>
+          <span className={styles.ReviewCard__UserName}>{review.user.name}</span>
+          <span className={styles.ReviewCard__Date}>{formatDate(review.createdAt)}</span>
         </div>
-        <div className={styles.rating}>{renderStars(review.rating)}</div>
+        <div className={styles.ReviewCard__Rating}>{renderStars(review.rating)}</div>
       </div>
 
       {/* 본문 */}
-      <div className={styles.body}>
-        <h3 className={styles.title}>{review.title}</h3>
-        <p className={styles.content}>{review.content}</p>
+      <div className={styles.ReviewCard__Body}>
+        <h3 className={styles.ReviewCard__Title}>{review.title}</h3>
+        <p className={styles.ReviewCard__Content}>{review.content}</p>
       </div>
 
       {/* 이미지 */}
       {review.images && review.images.length > 0 && (
-        <div className={styles.images}>
+        <div className={styles.ReviewCard__Images}>
           {review.images.map((image, index) => (
             <Image
               key={index}
@@ -65,7 +70,6 @@ export function ReviewCard({ review }: ReviewCardProps) {
               alt={`리뷰 이미지 ${index + 1}`}
               width={200}
               height={200}
-              className={styles.image}
             />
           ))}
         </div>

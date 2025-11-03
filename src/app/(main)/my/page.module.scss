@@ -1,6 +1,6 @@
 @use '@/styles/mixins' as *;
 
-.container {
+.MyPage {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 60px); // 하단 네비게이션 높이 제외
@@ -8,10 +8,10 @@
   background: var(--gray-50);
 }
 
-.header {
+.MyPage__Header {
   position: sticky;
   top: 0;
-  background: white;
+  background: #fff;
   z-index: 10;
   padding: 20px;
   border-bottom: 1px solid var(--gray-200);
@@ -25,14 +25,14 @@
   }
 }
 
-.main {
+.MyPage__Main {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.loading {
+.MyPage--Loading {
   @include flex($direction: column, $align: center, $justify: center);
   height: 100vh;
   color: var(--gray-600);

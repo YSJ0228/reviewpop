@@ -7,6 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "lint:scss": "stylelint \"src/**/*.scss\"",
+    "lint:scss:fix": "stylelint \"src/**/*.scss\" --fix",
     "prepare": "husky"
   },
   "dependencies": {
@@ -39,8 +41,14 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "msw": "^2.11.6",
+    "postcss": "^8.5.6",
+    "postcss-scss": "^4.0.9",
     "prettier": "^3.6.2",
     "sass": "^1.93.3",
+    "stylelint": "^16.25.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-order": "^7.0.0",
     "typescript": "^5"
   },
   "lint-staged": {
@@ -48,7 +56,11 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,md,scss,css}": [
+    "*.{scss,css}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
       "prettier --write"
     ]
   },

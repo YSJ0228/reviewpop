@@ -77,18 +77,18 @@ export class ErrorBoundary extends Component<Props, State> {
 
       // 기본 에러 UI
       return (
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <h2 className={styles.title}>앗, 문제가 발생했어요!</h2>
-            <p className={styles.message}>
+        <div className={styles.ErrorBoundary}>
+          <div className={styles.ErrorBoundary__Content}>
+            <h2 className={styles.ErrorBoundary__Title}>앗, 문제가 발생했어요!</h2>
+            <p className={styles.ErrorBoundary__Message}>
               일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.
             </p>
 
             {/* 개발 환경에서만 에러 상세 정보 표시 */}
             {process.env.NODE_ENV === 'development' && this.state.error && (
-              <details className={styles.details}>
+              <details className={styles.ErrorBoundary__Details}>
                 <summary>개발자 정보 (프로덕션에서는 표시되지 않음)</summary>
-                <pre className={styles.errorDetails}>
+                <pre className={styles.ErrorBoundary__ErrorDetails}>
                   {this.state.error.toString()}
                   {'\n\n'}
                   {this.state.error.stack}
@@ -96,7 +96,7 @@ export class ErrorBoundary extends Component<Props, State> {
               </details>
             )}
 
-            <button className={styles.button} onClick={this.handleReset}>
+            <button className={styles.ErrorBoundary__Button} onClick={this.handleReset}>
               다시 시도
             </button>
           </div>

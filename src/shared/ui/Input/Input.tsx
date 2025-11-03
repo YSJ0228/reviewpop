@@ -32,19 +32,23 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, fullWidth = false, className = '', ...props }, ref) => {
-    const containerClassName = [styles.container, fullWidth ? styles.fullWidth : '']
+    const containerClassName = [styles.Input, fullWidth ? styles['Input--FullWidth'] : '']
       .filter(Boolean)
       .join(' ');
 
-    const inputClassName = [styles.input, error ? styles.error : '', className]
+    const inputClassName = [
+      styles.Input__Field,
+      error ? styles['Input__Field--Error'] : '',
+      className,
+    ]
       .filter(Boolean)
       .join(' ');
 
     return (
       <div className={containerClassName}>
-        {label && <label className={styles.label}>{label}</label>}
+        {label && <label className={styles.Input__Label}>{label}</label>}
         <input ref={ref} className={inputClassName} {...props} />
-        {error && <span className={styles.errorMessage}>{error}</span>}
+        {error && <span className={styles.Input__ErrorMessage}>{error}</span>}
       </div>
     );
   },

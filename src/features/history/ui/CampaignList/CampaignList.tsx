@@ -18,12 +18,12 @@ export function CampaignList({ status }: CampaignListProps) {
   if (isLoading) {
     return (
       <div
-        className={styles.loading}
+        className={styles['CampaignList--Loading']}
         role="status"
         aria-live="polite"
         aria-label="캠페인 목록 로딩 중"
       >
-        <div className={styles.spinner} />
+        <div className={styles.CampaignList__Spinner} />
         <span>로딩 중...</span>
       </div>
     );
@@ -31,9 +31,9 @@ export function CampaignList({ status }: CampaignListProps) {
 
   if (error) {
     return (
-      <div className={styles.error} role="alert" aria-live="assertive">
+      <div className={styles['CampaignList--Error']} role="alert" aria-live="assertive">
         <p>데이터를 불러오는데 실패했습니다.</p>
-        <p className={styles.errorMessage}>
+        <p className={styles.CampaignList__ErrorMessage}>
           {error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.'}
         </p>
       </div>
@@ -43,7 +43,7 @@ export function CampaignList({ status }: CampaignListProps) {
   if (filteredCampaigns.length === 0) {
     return (
       <div
-        className={styles.empty}
+        className={styles['CampaignList--Empty']}
         role="status"
         aria-label={`${STATUS_LABELS[status]} 상태의 캠페인이 없습니다`}
       >
@@ -54,7 +54,7 @@ export function CampaignList({ status }: CampaignListProps) {
 
   return (
     <div
-      className={styles.list}
+      className={styles.CampaignList}
       role="feed"
       aria-label={`${STATUS_LABELS[status]} 캠페인 목록`}
       aria-busy={isLoading}

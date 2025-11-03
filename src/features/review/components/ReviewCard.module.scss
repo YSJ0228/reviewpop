@@ -1,72 +1,72 @@
-.card {
-  background: white;
+.ReviewCard {
+  background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 12px;
   padding: 24px;
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
     transform: translateY(-2px);
   }
 }
 
-.header {
+.ReviewCard__Header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 16px;
 }
 
-.userInfo {
+.ReviewCard__UserInfo {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.userName {
+.ReviewCard__UserName {
   font-weight: 600;
   font-size: 16px;
   color: var(--gray-900);
 }
 
-.date {
+.ReviewCard__Date {
   font-size: 14px;
   color: var(--gray-500);
 }
 
-.rating {
+.ReviewCard__Rating {
   display: flex;
   gap: 2px;
   font-size: 18px;
 }
 
-.starFilled {
+.ReviewCard__Star--Filled {
   color: var(--warning-500);
 }
 
-.starEmpty {
+.ReviewCard__Star--Empty {
   color: var(--gray-300);
 }
 
-.body {
+.ReviewCard__Body {
   margin-bottom: 16px;
 }
 
-.title {
+.ReviewCard__Title {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
   color: var(--gray-900);
 }
 
-.content {
+.ReviewCard__Content {
   font-size: 14px;
   line-height: 1.6;
   color: var(--gray-700);
 }
 
-.images {
+.ReviewCard__Images {
   display: flex;
   gap: 8px;
   overflow-x: auto;

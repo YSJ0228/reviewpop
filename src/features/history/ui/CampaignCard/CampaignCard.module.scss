@@ -1,10 +1,10 @@
 @use '@/styles/mixins' as *;
 
-.card {
-  background: white;
+.CampaignCard {
+  background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -12,7 +12,7 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
   }
 
   &:active {
@@ -20,7 +20,7 @@
   }
 }
 
-.imageWrapper {
+.CampaignCard__ImageWrapper {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -32,32 +32,32 @@
   }
 }
 
-.badge {
+.CampaignCard__Badge {
   position: absolute;
   top: 12px;
   right: 12px;
   padding: 6px 12px;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
+  background: rgb(0 0 0 / 85%);
+  color: #fff;
   border-radius: 16px;
   font-size: 12px;
   font-weight: 600;
   line-height: 1;
 }
 
-.content {
+.CampaignCard__Content {
   padding: 16px;
   @include flex($direction: column, $gap: 8);
 }
 
-.brand {
+.CampaignCard__Brand {
   font-size: 14px;
   color: var(--gray-700);
   font-weight: 500;
   margin: 0;
 }
 
-.title {
+.CampaignCard__Title {
   font-size: 16px;
   font-weight: 600;
   color: var(--gray-900);
@@ -70,7 +70,7 @@
   text-overflow: ellipsis;
 }
 
-.meta {
+.CampaignCard__Meta {
   @include flex($direction: column, $gap: 4);
   font-size: 13px;
   color: var(--gray-600);
@@ -80,12 +80,12 @@
   }
 }
 
-.tags {
+.CampaignCard__Tags {
   @include flex($align: center, $gap: 8);
   margin-top: 4px;
 }
 
-.tag {
+.CampaignCard__Tag {
   display: inline-block;
   padding: 4px 10px;
   background: var(--gray-100);
@@ -95,7 +95,7 @@
   font-weight: 500;
 }
 
-.points {
+.CampaignCard__Points {
   display: inline-block;
   padding: 4px 10px;
   background: var(--primary-50);

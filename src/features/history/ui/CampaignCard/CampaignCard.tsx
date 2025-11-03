@@ -8,21 +8,24 @@ interface CampaignCardProps {
 
 export function CampaignCard({ campaign }: CampaignCardProps) {
   return (
-    <article className={styles.card} aria-label={`${campaign.brand} ${campaign.title}`}>
-      <div className={styles.imageWrapper}>
+    <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
+      <div className={styles.CampaignCard__ImageWrapper}>
         <img
           src={campaign.imageUrl}
           alt={`${campaign.brand} ${campaign.title} 캠페인 이미지`}
           loading="lazy"
         />
-        <div className={styles.badge} aria-label={`상태: ${STATUS_LABELS[campaign.status]}`}>
+        <div
+          className={styles.CampaignCard__Badge}
+          aria-label={`상태: ${STATUS_LABELS[campaign.status]}`}
+        >
           {STATUS_LABELS[campaign.status]}
         </div>
       </div>
-      <div className={styles.content}>
-        <p className={styles.brand}>{campaign.brand}</p>
-        <h3 className={styles.title}>{campaign.title}</h3>
-        <div className={styles.meta}>
+      <div className={styles.CampaignCard__Content}>
+        <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
+        <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
+        <div className={styles.CampaignCard__Meta}>
           <time dateTime={campaign.applicationDate}>
             신청일: {formatDate(campaign.applicationDate)}
           </time>
@@ -31,10 +34,12 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           )}
         </div>
         {campaign.category && (
-          <div className={styles.tags}>
-            <span className={styles.tag}>{campaign.category}</span>
+          <div className={styles.CampaignCard__Tags}>
+            <span className={styles.CampaignCard__Tag}>{campaign.category}</span>
             {campaign.points && (
-              <span className={styles.points}>{campaign.points.toLocaleString()}P</span>
+              <span className={styles.CampaignCard__Points}>
+                {campaign.points.toLocaleString()}P
+              </span>
             )}
           </div>
         )}

@@ -83,31 +83,40 @@ export function CampaignTabs() {
   const indicatorTransform = `translateX(${validIndex * 100}%)`;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.CampaignTabs}>
       {/* 탭 바 (sticky) */}
-      <div className={styles.tabBar}>
-        <div className={styles.tabs} role="tablist" aria-label="캠페인 상태별 탭">
-          {TAB_CONFIG.map((tab, index) => (
-            <button
-              key={tab.key}
-              ref={(el) => {
-                tabRefs.current[index] = el;
-              }}
-              role="tab"
-              aria-selected={validIndex === index}
-              aria-controls={`panel-${tab.key}`}
-              id={`tab-${tab.key}`}
-              tabIndex={validIndex === index ? 0 : -1}
-              onClick={() => handleTabClick(index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              className={`${styles.tab} ${validIndex === index ? styles.active : ''}`}
-            >
-              {tab.label}
-            </button>
-          ))}
+      <div className={styles.CampaignTabs__TabBar}>
+        <div className={styles.CampaignTabs__Tabs} role="tablist" aria-label="캠페인 상태별 탭">
+          {TAB_CONFIG.map((tab, index) => {
+            const tabClassName = [
+              styles.CampaignTabs__Tab,
+              validIndex === index ? styles['CampaignTabs__Tab--Active'] : '',
+            ]
+              .filter(Boolean)
+              .join(' ');
+
+            return (
+              <button
+                key={tab.key}
+                ref={(el) => {
+                  tabRefs.current[index] = el;
+                }}
+                role="tab"
+                aria-selected={validIndex === index}
+                aria-controls={`panel-${tab.key}`}
+                id={`tab-${tab.key}`}
+                tabIndex={validIndex === index ? 0 : -1}
+                onClick={() => handleTabClick(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                className={tabClassName}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
         <div
-          className={styles.indicator}
+          className={styles.CampaignTabs__Indicator}
           style={{
             transform: indicatorTransform,
             width: `${100 / TAB_CONFIG.length}%`,
@@ -126,11 +135,11 @@ export function CampaignTabs() {
         speed={300}
         touchRatio={1}
         threshold={10}
-        className={styles.swiper}
+        className={styles.CampaignTabs__Swiper}
         allowTouchMove={true}
       >
         {TAB_CONFIG.map((tab) => (
-          <SwiperSlide key={tab.key} className={styles.slide}>
+          <SwiperSlide key={tab.key} className={styles.CampaignTabs__Slide}>
             <div
               role="tabpanel"
               aria-labelledby={`tab-${tab.key}`}

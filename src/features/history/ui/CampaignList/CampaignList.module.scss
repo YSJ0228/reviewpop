@@ -1,22 +1,22 @@
 @use '@/styles/mixins' as *;
 
-.list {
+.CampaignList {
   padding: 16px;
   @include flex($direction: column, $gap: 16);
   overflow-y: auto;
   min-height: 200px;
 }
 
-.loading,
-.error,
-.empty {
+.CampaignList--Loading,
+.CampaignList--Error,
+.CampaignList--Empty {
   @include flex($direction: column, $align: center, $justify: center);
   min-height: 400px;
   padding: 40px 20px;
   text-align: center;
 }
 
-.loading {
+.CampaignList--Loading {
   color: var(--gray-600);
 
   span {
@@ -25,7 +25,7 @@
   }
 }
 
-.spinner {
+.CampaignList__Spinner {
   width: 40px;
   height: 40px;
   border: 3px solid var(--gray-200);
@@ -40,7 +40,7 @@
   }
 }
 
-.error {
+.CampaignList--Error {
   color: var(--error-500);
 
   p {
@@ -50,14 +50,14 @@
   }
 }
 
-.errorMessage {
+.CampaignList__ErrorMessage {
   margin-top: 8px !important;
   font-size: 13px !important;
   font-weight: 400 !important;
   color: var(--gray-600) !important;
 }
 
-.empty {
+.CampaignList--Empty {
   color: var(--gray-500);
 
   p {
