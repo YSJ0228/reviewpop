@@ -1,9 +1,11 @@
+@use '@/styles/mixins' as *;
+
 .ErrorBoundary {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  padding: 24px;
+  @include padding($all: 24);
 }
 
 .ErrorBoundary__Content {
@@ -15,29 +17,29 @@
   font-size: 24px;
   font-weight: 700;
   color: var(--error-600);
-  margin-bottom: 16px;
+  @include margin($bottom: 16);
 }
 
 .ErrorBoundary__Message {
   font-size: 16px;
   color: var(--gray-700);
-  margin-bottom: 24px;
+  @include margin($bottom: 24);
   line-height: 1.6;
 }
 
 .ErrorBoundary__Details {
-  margin: 24px 0;
+  @include margin($y: 24, $x: 0);
   text-align: left;
   background-color: var(--gray-50);
   border: 1px solid var(--gray-300);
   border-radius: 8px;
-  padding: 16px;
+  @include padding($all: 16);
 
   summary {
     cursor: pointer;
     font-weight: 600;
     color: var(--gray-900);
-    margin-bottom: 8px;
+    @include margin($bottom: 8);
 
     &:hover {
       color: var(--primary-600);
@@ -52,11 +54,11 @@
   white-space: pre-wrap;
   word-break: break-all;
   overflow-x: auto;
-  margin-top: 8px;
+  @include margin($top: 8);
 }
 
 .ErrorBoundary__Button {
-  padding: 12px 24px;
+  @include padding($y: 12, $x: 24);
   background-color: var(--primary-500);
   color: #fff;
   border: none;

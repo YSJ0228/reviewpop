@@ -1,3 +1,5 @@
+@use '@/styles/mixins' as *;
+
 .Button {
   // 기본 스타일
   display: inline-flex;
@@ -30,19 +32,19 @@
 
 // 크기 변형
 .Button--Small {
-  padding: 8px 16px;
+  @include padding($y: 8, $x: 16);
   font-size: 14px;
   height: 32px;
 }
 
 .Button--Medium {
-  padding: 12px 24px;
+  @include padding($y: 12, $x: 24);
   font-size: 16px;
   height: 44px;
 }
 
 .Button--Large {
-  padding: 16px 32px;
+  @include padding($y: 16, $x: 32);
   font-size: 18px;
   height: 52px;
 }

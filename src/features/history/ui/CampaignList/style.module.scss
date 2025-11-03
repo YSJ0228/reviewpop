@@ -1,7 +1,7 @@
 @use '@/styles/mixins' as *;
 
 .CampaignList {
-  padding: 16px;
+  @include padding($all: 16);
   @include flex($direction: column, $gap: 16);
   overflow-y: auto;
   min-height: 200px;
@@ -12,7 +12,7 @@
 .CampaignList--Empty {
   @include flex($direction: column, $align: center, $justify: center);
   min-height: 400px;
-  padding: 40px 20px;
+  @include padding($y: 40, $x: 20);
   text-align: center;
 }
 
@@ -44,7 +44,7 @@
   color: var(--error-500);
 
   p {
-    margin: 0;
+    @include margin($all: 0);
     font-size: 15px;
     font-weight: 500;
   }
@@ -61,7 +61,7 @@
   color: var(--gray-500);
 
   p {
-    margin: 0;
+    @include margin($all: 0);
     font-size: 15px;
   }
 }

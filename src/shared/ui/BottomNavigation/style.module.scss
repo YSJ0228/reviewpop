@@ -1,3 +1,5 @@
+@use '@/styles/mixins' as *;
+
 .BottomNavigation {
   position: fixed;
   bottom: 0;
@@ -11,7 +13,7 @@
   justify-content: space-around;
   background: var(--color-white);
   border-top: 1px solid var(--gray-200);
-  padding-bottom: env(safe-area-inset-bottom);
+  @include padding($bottom: env(safe-area-inset-bottom));
   z-index: 1000;
 }
 

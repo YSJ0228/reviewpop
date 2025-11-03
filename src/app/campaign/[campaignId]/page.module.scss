@@ -9,7 +9,7 @@
 .Page__Error {
   @include flex($direction: column, $align: center, $justify: center);
   min-height: 400px;
-  padding: 40px 20px;
+  @include padding($y: 40, $x: 20);
   text-align: center;
 
   p {
@@ -36,7 +36,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  padding: 8px 16px;
+  @include padding($y: 8, $x: 16);
   background: rgb(0 0 0 / 85%);
   color: var(--color-white);
   border-radius: 20px;
@@ -45,13 +45,13 @@
 }
 
 .Page__Section {
-  padding: 24px 20px;
+  @include padding($y: 24, $x: 20);
   background: var(--color-white);
   border-bottom: 8px solid var(--color-gray-100);
 
   &:last-child {
     border-bottom: none;
-    padding-bottom: 40px;
+    @include padding($bottom: 40);
   }
 }
 
@@ -64,7 +64,7 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--color-gray-600);
-  margin: 0 0 8px;
+  @include margin($top: 0, $x: 0, $bottom: 8);
 }
 
 .Page__Title {
@@ -72,15 +72,15 @@
   font-weight: 700;
   color: var(--color-gray-900);
   line-height: 1.4;
-  margin: 0 0 20px;
+  @include margin($top: 0, $x: 0, $bottom: 20);
 }
 
 .Page__Meta {
   @include flex($direction: column, $gap: 12);
-  padding: 16px;
+  @include padding($all: 16);
   background: var(--color-gray-50);
   border-radius: 12px;
-  margin-bottom: 20px;
+  @include margin($bottom: 20);
 }
 
 .Page__MetaItem {
@@ -124,7 +124,7 @@
 .Page__RecruitmentText {
   font-size: 14px;
   color: var(--color-gray-700);
-  margin: 0;
+  @include margin($all: 0);
   text-align: right;
 
   strong {
@@ -137,7 +137,7 @@
   font-size: 18px;
   font-weight: 700;
   color: var(--color-gray-900);
-  margin: 0 0 16px;
+  @include margin($top: 0, $x: 0, $bottom: 16);
 }
 
 .Page__Description {
@@ -145,19 +145,19 @@
   line-height: 1.6;
   color: var(--color-gray-700);
   white-space: pre-wrap;
-  margin: 0;
+  @include margin($all: 0);
 }
 
 .Page__List {
   @include flex($direction: column, $gap: 12);
   list-style: none;
-  padding: 0;
-  margin: 0;
+  @include padding($all: 0);
+  @include margin($all: 0);
 }
 
 .Page__ListItem {
   position: relative;
-  padding-left: 20px;
+  @include padding($left: 20);
   font-size: 15px;
   line-height: 1.6;
   color: var(--color-gray-700);
@@ -173,19 +173,19 @@
 
 .Page__DeliveryInfo {
   @include flex($direction: column, $gap: 12);
-  padding: 16px;
+  @include padding($all: 16);
   background: var(--color-gray-50);
   border-radius: 12px;
 
   p {
     font-size: 14px;
     color: var(--color-gray-700);
-    margin: 0;
+    @include margin($all: 0);
 
     strong {
       font-weight: 600;
       color: var(--color-gray-900);
-      margin-right: 8px;
+      @include margin($right: 8);
     }
   }
 }

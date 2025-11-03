@@ -1,0 +1,107 @@
+@use './utils' as *;
+
+// Padding 믹스인
+// Named parameters로 원하는 속성만 선택적으로 지정 가능
+// 우선순위: 개별 방향($top/$right/$bottom/$left) > 축($x/$y) > 전체($all)
+//
+// 사용 예시:
+//   @include padding($all: 24);                    // padding: 24px
+//   @include padding($y: 12, $x: 24);              // padding: 12px 24px (상하 12, 좌우 24)
+//   @include padding($all: 16, $x: 24);            // padding: 16px 24px (전체 16, 좌우만 24로 오버라이드)
+//   @include padding($top: 40, $x: 20, $bottom: 0);// padding-top: 40px, left/right: 20px, bottom: 0
+//   @include padding($y: 0, $x: auto);             // margin 센터링 패턴에도 사용 가능
+@mixin padding(
+  $all: null,
+  $x: null,
+  $y: null,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  // 1. $all이 지정되면 padding 전체 적용
+  @if $all != null {
+    padding: to-unit($all);
+  }
+
+  // 2. $y/$x가 지정되면 해당 축 적용 (덮어씀)
+  @if $y != null {
+    padding-top: to-unit($y);
+    padding-bottom: to-unit($y);
+  }
+
+  @if $x != null {
+    padding-left: to-unit($x);
+    padding-right: to-unit($x);
+  }
+
+  // 3. 개별 방향이 지정되면 최종 적용 (최우선)
+  @if $top != null {
+    padding-top: to-unit($top);
+  }
+
+  @if $right != null {
+    padding-right: to-unit($right);
+  }
+
+  @if $bottom != null {
+    padding-bottom: to-unit($bottom);
+  }
+
+  @if $left != null {
+    padding-left: to-unit($left);
+  }
+}
+
+// Margin 믹스인
+// Named parameters로 원하는 속성만 선택적으로 지정 가능
+// 우선순위: 개별 방향($top/$right/$bottom/$left) > 축($x/$y) > 전체($all)
+//
+// 사용 예시:
+//   @include margin($all: 0);                      // margin: 0
+//   @include margin($y: 0, $x: auto);              // margin: 0 auto (수평 센터링)
+//   @include margin($bottom: 16);                  // margin-bottom: 16px
+//   @include margin($top: 0, $x: 0, $bottom: 8);   // margin: 0 0 8px
+//   @include margin($all: 16, $top: 0);            // margin: 0 16px 16px 16px
+@mixin margin(
+  $all: null,
+  $x: null,
+  $y: null,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  // 1. $all이 지정되면 margin 전체 적용
+  @if $all != null {
+    margin: to-unit($all);
+  }
+
+  // 2. $y/$x가 지정되면 해당 축 적용 (덮어씀)
+  @if $y != null {
+    margin-top: to-unit($y);
+    margin-bottom: to-unit($y);
+  }
+
+  @if $x != null {
+    margin-left: to-unit($x);
+    margin-right: to-unit($x);
+  }
+
+  // 3. 개별 방향이 지정되면 최종 적용 (최우선)
+  @if $top != null {
+    margin-top: to-unit($top);
+  }
+
+  @if $right != null {
+    margin-right: to-unit($right);
+  }
+
+  @if $bottom != null {
+    margin-bottom: to-unit($bottom);
+  }
+
+  @if $left != null {
+    margin-left: to-unit($left);
+  }
+}

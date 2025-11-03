@@ -1,3 +1,5 @@
+@use '@/styles/mixins' as *;
+
 .Input {
   display: flex;
   flex-direction: column;
@@ -15,7 +17,7 @@
 }
 
 .Input__Field {
-  padding: 12px 16px;
+  @include padding($y: 12, $x: 16);
   border: 1px solid var(--gray-300);
   border-radius: 8px;
   font-size: 16px;
@@ -52,5 +54,5 @@
 .Input__ErrorMessage {
   font-size: 12px;
   color: var(--error-500);
-  margin-top: -4px;
+  @include margin($top: -4);
 }

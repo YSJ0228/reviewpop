@@ -1,8 +1,10 @@
+@use '@/styles/mixins' as *;
+
 .ReviewCard {
   background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 12px;
-  padding: 24px;
+  @include padding($all: 24);
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -15,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 16px;
+  @include margin($bottom: 16);
 }
 
 .ReviewCard__UserInfo {
@@ -50,13 +52,13 @@
 }
 
 .ReviewCard__Body {
-  margin-bottom: 16px;
+  @include margin($bottom: 16);
 }
 
 .ReviewCard__Title {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 8px;
+  @include margin($bottom: 8);
   color: var(--gray-900);
 }
 

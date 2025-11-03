@@ -2,10 +2,16 @@
 @use 'sass:math';
 
 // 숫자를 자동으로 px로 변환하는 유틸리티 함수
+// 단위가 없는 숫자는 px로 변환, 나머지는 그대로 반환
+//
 // 예시:
-//   100 -> 100px
-//   100% -> 100%
-//   1rem -> 1rem
+//   100 -> 100px (unitless number)
+//   -4 -> -4px (negative unitless number)
+//   100% -> 100% (percentage)
+//   1rem -> 1rem (has unit)
+//   auto -> auto (string)
+//   0 -> 0px (unitless zero)
+//   env(safe-area-inset-bottom) -> env(safe-area-inset-bottom) (CSS function)
 @function to-unit($value) {
   @if meta.type-of($value) == 'number' and math.is-unitless($value) {
     @return #{$value}px;
