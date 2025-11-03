@@ -1,5 +1,6 @@
 @use './colors';
 @use './reset';
+@use './mixins' as *;
 
 // 자주 사용하는 색상에 대한 간단한 alias
 :root {

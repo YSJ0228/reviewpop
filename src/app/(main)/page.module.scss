@@ -1,8 +1,7 @@
+@use '@styles/mixins' as *;
+
 .HomeContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  @include flex($direction: column, $align: center, $justify: center);
+  @include size($min-height: 100vh);
   background-color: var(--color-blue-500);
 }

@@ -1,0 +1,14 @@
+@use 'sass:meta';
+@use 'sass:math';
+
+// 숫자를 자동으로 px로 변환하는 유틸리티 함수
+// 예시:
+//   100 -> 100px
+//   100% -> 100%
+//   1rem -> 1rem
+@function to-unit($value) {
+  @if meta.type-of($value) == 'number' and math.is-unitless($value) {
+    @return #{$value}px;
+  }
+  @return $value;
+}

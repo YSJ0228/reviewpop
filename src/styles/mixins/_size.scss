@@ -1,0 +1,42 @@
+@use './utils' as *;
+
+// Size 믹스인
+// Named parameters로 필요한 size 속성만 선택적으로 지정 가능
+//
+// 사용 예시:
+//   @include size($width: 100%, $height: 200);
+//   @include size($width: 100%);
+//   @include size($width: 100%, $min-height: 200, $max-width: 480);
+//   @include size($min-width: 320, $max-width: 480);
+@mixin size(
+  $width: null,
+  $height: null,
+  $min-width: null,
+  $min-height: null,
+  $max-width: null,
+  $max-height: null
+) {
+  @if $width {
+    width: to-unit($width);
+  }
+
+  @if $height {
+    height: to-unit($height);
+  }
+
+  @if $min-width {
+    min-width: to-unit($min-width);
+  }
+
+  @if $min-height {
+    min-height: to-unit($min-height);
+  }
+
+  @if $max-width {
+    max-width: to-unit($max-width);
+  }
+
+  @if $max-height {
+    max-height: to-unit($max-height);
+  }
+}
