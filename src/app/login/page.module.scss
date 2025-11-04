@@ -1,0 +1,95 @@
+@use '@shared/styles/mixins' as *;
+
+// 메인 컨테이너
+.LoginPage {
+  @include flex($direction: column, $align: center, $justify: center);
+  min-height: 100vh;
+  @include padding($all: 20);
+  background-color: var(--color-gray-50);
+}
+
+// 로그인 카드
+.LoginPage__Card {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--color-white);
+  border-radius: 16px;
+  @include padding($all: 40);
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+}
+
+// 타이틀
+.LoginPage__Title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  @include margin($top: 0, $x: 0, $bottom: 8);
+}
+
+// 부제목
+.LoginPage__Subtitle {
+  font-size: 14px;
+  color: var(--color-gray-700);
+  text-align: center;
+  @include margin($top: 0, $x: 0, $bottom: 32);
+}
+
+// 알림 블록 (공통)
+.LoginPage__Alert {
+  border-radius: 8px;
+  @include padding($all: 12);
+  @include margin($bottom: 20);
+  font-size: 14px;
+  text-align: center;
+}
+
+// 에러 알림
+.LoginPage__Alert--Error {
+  background-color: var(--color-red-50);
+  border: 1px solid var(--color-red-200);
+  color: var(--color-red-700);
+}
+
+// 안내 알림
+.LoginPage__Alert--Info {
+  background-color: var(--color-blue-50);
+  border: 1px solid var(--color-blue-300);
+  color: var(--color-blue-700);
+}
+
+// 버튼 컨테이너
+.LoginPage__Actions {
+  @include flex($direction: column, $gap: 12);
+}
+
+// 네이버 로그인 버튼 (disabled)
+.LoginPage__NaverButton {
+  @include flex($align: center, $justify: center, $gap: 8);
+  width: 100%;
+  background-color: #03c75a;
+  color: var(--color-white);
+  border: none;
+  border-radius: 8px;
+  @include padding($y: 12, $x: 24);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+// 개발 환경 안내
+.LoginPage__DevInfo {
+  @include margin($top: 24);
+  @include padding($all: 12);
+  background-color: var(--color-gray-75);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--color-gray-700);
+  text-align: center;
+}
+
+// Suspense Fallback
+.LoginPage__Fallback {
+  @include flex($align: center, $justify: center);
+  min-height: 100vh;
+}
