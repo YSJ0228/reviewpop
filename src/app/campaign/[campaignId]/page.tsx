@@ -1,9 +1,8 @@
 'use client';
 
 import { use } from 'react';
-import { PageHeader } from '@shared/ui/PageHeader';
-import { useCampaignDetail } from '@/features/history/hooks/useCampaignDetail';
-import { STATUS_LABELS } from '@/features/history/types/campaign.types';
+import { PageHeader } from '@shared/components/PageHeader';
+import { useCampaignDetail, STATUS_LABELS } from '@features/history';
 import styles from './page.module.scss';
 
 interface CampaignDetailPageProps {

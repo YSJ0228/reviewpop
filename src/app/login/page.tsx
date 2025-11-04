@@ -6,7 +6,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import { KakaoLoginButton } from '@/features/auth/ui/KakaoLoginButton';
+import { KakaoLoginButton } from '@features/auth';
 
 function LoginContent() {
   const searchParams = useSearchParams();

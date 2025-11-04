@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import { CampaignTabs } from '@/features/history/ui/CampaignTabs';
+import { CampaignTabs } from '@features/history';
 import styles from './page.module.scss';
 
 function MyPageContent() {

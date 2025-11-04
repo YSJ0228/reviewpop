@@ -23,9 +23,7 @@
       "@app/*": ["./src/app/*"],
       "@features/*": ["./src/features/*"],
       "@entities/*": ["./src/entities/*"],
-      "@shared/*": ["./src/shared/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@shared/*": ["./src/shared/*"]
     }
   },
   "include": [

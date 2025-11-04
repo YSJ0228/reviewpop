@@ -1,4 +1,4 @@
-import { BottomNavigation } from '@shared/ui/BottomNavigation';
+import { BottomNavigation } from '@shared/components/BottomNavigation';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (

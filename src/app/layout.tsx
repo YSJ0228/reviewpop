@@ -1,6 +1,6 @@
-import { ErrorBoundary } from '@shared/ui/ErrorBoundary';
-import '@styles/globals.scss';
-import { fontClasses } from '@styles/fonts';
+import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import '@shared/styles/globals.scss';
+import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';
 
 import { Providers } from './providers/Providers';
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${fontClasses}`}>
-        <div className="app-container">
+        <div className="AppContainer">
           <Providers>
             <ErrorBoundary>{children}</ErrorBoundary>
           </Providers>
