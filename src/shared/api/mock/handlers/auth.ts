@@ -163,33 +163,4 @@ export const authHandlers = [
       message: '로그아웃되었습니다.',
     });
   }),
-
-  /**
-   * (deprecated) 이메일 로그인
-   * POST /api/auth/login
-   */
-  http.post('/api/auth/login', async ({ request }) => {
-    const body = (await request.json()) as LoginRequest;
-
-    // 간단한 검증 (실제로는 백엔드에서 처리)
-    if (body.email === 'user@example.com' && body.password === 'password123') {
-      const loginData = {
-        user: mockUsers[0],
-        token: 'mock-jwt-token-12345',
-      };
-
-      return HttpResponse.json({
-        success: true,
-        data: loginData,
-      } satisfies ApiResponse<typeof loginData>);
-    }
-
-    return HttpResponse.json(
-      {
-        success: false,
-        error: '이메일 또는 비밀번호가 올바르지 않습니다.',
-      } satisfies ApiResponse<never>,
-      { status: 401 },
-    );
-  }),
 ];

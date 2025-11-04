@@ -9,3 +9,10 @@ export { useUserStore } from './store/userStore';
 
 // Types
 export type { User } from './types/user.types';
+export type {
+  PointTransaction,
+  PointSummary,
+  PointTransactionType,
+  PointReason,
+} from './types/points.types';
+export { POINT_TRANSACTION_TYPE_LABELS, POINT_REASON_LABELS } from './types/points.types';

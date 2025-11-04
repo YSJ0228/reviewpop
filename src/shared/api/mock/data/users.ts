@@ -2,33 +2,165 @@
  * Mock 사용자 데이터
  *
  * 테스트 및 개발용 가짜 사용자 데이터입니다.
+ * 총 20명의 사용자로 다양한 활동 패턴을 시뮬레이션합니다.
  */
 
 import type { User } from '@entities/user/types/user.types';
 
 export const mockUsers: User[] = [
+  // Kakao OAuth 사용자
   {
-    id: 'legacy-1',
-    email: 'user@example.com',
-    name: '홍길동',
-    profileImage: null,
-    provider: undefined, // 기존 이메일 로그인 (deprecated)
-    createdAt: '2024-01-01T00:00:00Z',
+    id: 'kakao-1001',
+    email: 'park.minsoo@kakao.com',
+    name: '박민수',
+    profileImage: 'https://i.pravatar.cc/150?img=11',
+    provider: 'kakao',
+    createdAt: '2024-02-01T00:00:00Z',
   },
   {
-    id: 'legacy-2',
-    email: 'test@example.com',
-    name: '김철수',
-    profileImage: null,
-    provider: undefined,
-    createdAt: '2024-01-02T00:00:00Z',
+    id: 'kakao-1002',
+    email: 'choi.jiyoung@kakao.com',
+    name: '최지영',
+    profileImage: 'https://i.pravatar.cc/150?img=12',
+    provider: 'kakao',
+    createdAt: '2024-02-05T00:00:00Z',
   },
   {
-    id: 'legacy-3',
-    email: 'jane@example.com',
-    name: '이영희',
-    profileImage: null,
-    provider: undefined,
-    createdAt: '2024-01-03T00:00:00Z',
+    id: 'kakao-1003',
+    email: 'jung.sehun@kakao.com',
+    name: '정세훈',
+    profileImage: 'https://i.pravatar.cc/150?img=13',
+    provider: 'kakao',
+    createdAt: '2024-02-10T00:00:00Z',
+  },
+  {
+    id: 'kakao-1004',
+    email: 'kang.yuna@kakao.com',
+    name: '강유나',
+    profileImage: 'https://i.pravatar.cc/150?img=14',
+    provider: 'kakao',
+    createdAt: '2024-02-15T00:00:00Z',
+  },
+  {
+    id: 'kakao-1005',
+    email: 'song.jihoon@kakao.com',
+    name: '송지훈',
+    profileImage: 'https://i.pravatar.cc/150?img=15',
+    provider: 'kakao',
+    createdAt: '2024-02-20T00:00:00Z',
+  },
+
+  // Naver OAuth 사용자
+  {
+    id: 'naver-2001',
+    email: 'han.sora@naver.com',
+    name: '한소라',
+    profileImage: 'https://i.pravatar.cc/150?img=21',
+    provider: 'naver',
+    createdAt: '2024-03-01T00:00:00Z',
+  },
+  {
+    id: 'naver-2002',
+    email: 'yoon.taeyang@naver.com',
+    name: '윤태양',
+    profileImage: 'https://i.pravatar.cc/150?img=22',
+    provider: 'naver',
+    createdAt: '2024-03-05T00:00:00Z',
+  },
+  {
+    id: 'naver-2003',
+    email: 'lim.hyemin@naver.com',
+    name: '임혜민',
+    profileImage: 'https://i.pravatar.cc/150?img=23',
+    provider: 'naver',
+    createdAt: '2024-03-10T00:00:00Z',
+  },
+  {
+    id: 'naver-2004',
+    email: 'oh.juwon@naver.com',
+    name: '오주원',
+    profileImage: 'https://i.pravatar.cc/150?img=24',
+    provider: 'naver',
+    createdAt: '2024-03-15T00:00:00Z',
+  },
+  {
+    id: 'naver-2005',
+    email: 'shin.dongha@naver.com',
+    name: '신동하',
+    profileImage: 'https://i.pravatar.cc/150?img=25',
+    provider: 'naver',
+    createdAt: '2024-03-20T00:00:00Z',
+  },
+
+  // 최근 가입한 사용자들
+  {
+    id: 'kakao-1006',
+    email: 'lee.chaerin@kakao.com',
+    name: '이채린',
+    profileImage: 'https://i.pravatar.cc/150?img=31',
+    provider: 'kakao',
+    createdAt: '2024-10-01T00:00:00Z',
+  },
+  {
+    id: 'kakao-1007',
+    email: 'kim.dohyun@kakao.com',
+    name: '김도현',
+    profileImage: 'https://i.pravatar.cc/150?img=32',
+    provider: 'kakao',
+    createdAt: '2024-10-05T00:00:00Z',
+  },
+  {
+    id: 'naver-2006',
+    email: 'jeon.subin@naver.com',
+    name: '전수빈',
+    profileImage: 'https://i.pravatar.cc/150?img=33',
+    provider: 'naver',
+    createdAt: '2024-10-10T00:00:00Z',
+  },
+  {
+    id: 'naver-2007',
+    email: 'baek.jiho@naver.com',
+    name: '백지호',
+    profileImage: 'https://i.pravatar.cc/150?img=34',
+    provider: 'naver',
+    createdAt: '2024-10-15T00:00:00Z',
+  },
+  {
+    id: 'kakao-1008',
+    email: 'nam.yejin@kakao.com',
+    name: '남예진',
+    profileImage: 'https://i.pravatar.cc/150?img=35',
+    provider: 'kakao',
+    createdAt: '2024-10-20T00:00:00Z',
+  },
+  {
+    id: 'kakao-1009',
+    email: 'go.seungho@kakao.com',
+    name: '고승호',
+    profileImage: 'https://i.pravatar.cc/150?img=36',
+    provider: 'kakao',
+    createdAt: '2024-10-25T00:00:00Z',
+  },
+  {
+    id: 'naver-2008',
+    email: 'hwang.minji@naver.com',
+    name: '황민지',
+    profileImage: 'https://i.pravatar.cc/150?img=37',
+    provider: 'naver',
+    createdAt: '2024-10-30T00:00:00Z',
   },
 ];
+
+/**
+ * User ID로 사용자 찾기
+ */
+export function findUserById(userId: string): User | undefined {
+  return mockUsers.find((user) => user.id === userId);
+}
+
+/**
+ * Email로 사용자 찾기
+ */
+export function findUserByEmail(email: string): User | undefined {
+  return mockUsers.find((user) => user.email === email);
+}

@@ -13,7 +13,7 @@ export interface Review {
   /** 캠페인 ID */
   campaignId: string;
   /** 작성자 ID */
-  userId: number;
+  userId: string;
   /** 작성자 정보 */
   user: Pick<User, 'id' | 'name' | 'email' | 'profileImage'>;
   /** 평점 (1-5) */
@@ -54,7 +54,7 @@ export interface ReviewFilterParams extends Record<string, unknown> {
   /** 특정 캠페인의 리뷰만 필터링 */
   campaignId?: string;
   /** 특정 사용자의 리뷰만 필터링 */
-  userId?: number;
+  userId?: string;
   /** 정확히 N점인 리뷰만 필터링 */
   rating?: number;
   /** N점 이상인 리뷰만 필터링 */
