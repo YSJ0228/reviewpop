@@ -677,6 +677,121 @@ git commit -m "feat: 로그인 기능 추가"
 
 환영합니다! 🎉 이 프로젝트는 주니어 개발자 친화적으로 설계되었습니다.
 
+---
+
+### 📚 인턴을 위한 3단계 학습 로드맵
+
+프로젝트를 처음 접하는 인턴이라면 다음 순서로 학습하세요!
+
+#### **1단계: 프로젝트 구조 이해하기** (첫 주)
+
+**목표:** FSD 아키텍처와 폴더 구조 파악
+
+**읽을 문서 (순서대로):**
+
+1. ✅ [루트 README.md](README.md) - 전체 개요 (현재 문서)
+2. ✅ [src/features/README.md](src/features/README.md) - 기능 레이어
+3. ✅ [src/entities/README.md](src/entities/README.md) - 엔티티 레이어
+4. ✅ [src/shared/README.md](src/shared/README.md) - 공유 레이어
+
+**체크리스트:**
+
+- [ ] FSD의 3개 레이어(features, entities, shared)를 설명할 수 있다
+- [ ] 의존성 규칙을 이해했다 (features → entities → shared)
+- [ ] 다른 feature를 import하면 안 되는 이유를 안다
+- [ ] 프로젝트의 폴더 구조를 둘러봤다
+
+**실습:**
+
+- VSCode에서 `src/` 폴더를 열어서 구조 탐색
+- 각 폴더의 README.md를 읽으면서 역할 파악
+- 예시 코드를 직접 열어서 import 패턴 확인
+
+---
+
+#### **2단계: Mock API로 개발 연습하기** (둘째 주)
+
+**목표:** 백엔드 없이 프론트엔드 개발하는 방법 익히기
+
+**읽을 문서:**
+
+1. ✅ [src/shared/api/README.md](src/shared/api/README.md) - API 클라이언트와 Mock API
+2. ✅ [src/app/providers/README.md](src/app/providers/README.md) - React Query 설정
+
+**체크리스트:**
+
+- [ ] Mock API가 활성화되어 있는지 확인 (브라우저 콘솔에서 "MSW 활성화됨" 메시지)
+- [ ] React Query Devtools를 열어봤다 (우측 하단 아이콘)
+- [ ] apiClient를 사용해서 API를 호출할 수 있다
+- [ ] Mock 데이터를 수정해봤다
+
+**실습:**
+
+1. **개발 서버 실행:**
+
+   ```bash
+   yarn dev
+   ```
+
+2. **Mock API 확인:**
+   - 브라우저 콘솔 열기 (F12)
+   - "🎭 MSW 활성화됨" 메시지 확인
+   - Network 탭에서 API 요청 확인
+
+3. **React Query Devtools 사용:**
+   - 우측 하단 React Query 아이콘 클릭
+   - 쿼리 목록 확인
+   - 캐시된 데이터 확인
+
+4. **Mock 데이터 수정 연습:**
+   - `src/shared/api/mock/data/` 폴더의 데이터 수정
+   - 브라우저에서 변경 사항 확인
+
+---
+
+#### **3단계: 첫 기능 만들어보기** (셋째 주)
+
+**목표:** 실제로 코드 작성하면서 FSD 패턴 체득하기
+
+**읽을 문서:**
+
+1. ✅ [src/features/review/README.md](src/features/review/README.md) - 리뷰 기능 예시
+2. ✅ [src/features/history/README.md](src/features/history/README.md) - 캠페인 히스토리 예시
+3. ✅ [src/entities/user/README.md](src/entities/user/README.md) - 사용자 엔티티
+
+**체크리스트:**
+
+- [ ] 커스텀 훅을 만들어봤다 (useQuery 사용)
+- [ ] 컴포넌트에서 API 데이터를 표시해봤다
+- [ ] 로딩/에러 상태를 처리해봤다
+- [ ] 타입을 제대로 정의했다
+- [ ] React Query Devtools로 캐싱을 확인했다
+
+**실습 과제:**
+
+**과제 1: 캠페인 목록 표시하기**
+
+1. `features/history/hooks/useCampaigns.ts` 열어보기
+2. 새 페이지에서 `useCampaigns` 훅 사용
+3. 로딩/에러 상태 처리
+4. 캠페인 목록 렌더링
+
+**과제 2: 새로운 컴포넌트 만들기**
+
+1. `shared/components/Card/` 참고
+2. 비슷한 구조로 새 컴포넌트 만들기
+3. SCSS 모듈로 스타일링
+4. 다른 곳에서 import해서 사용
+
+**과제 3: Mock API 핸들러 추가**
+
+1. `src/shared/api/mock/handlers/` 폴더 탐색
+2. 새로운 엔드포인트 추가
+3. Mock 데이터 반환
+4. 브라우저에서 테스트
+
+---
+
 #### 1. 먼저 읽어야 할 것들
 
 읽는 순서:
