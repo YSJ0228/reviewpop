@@ -1,5 +1,38 @@
+'use client';
+
+import { Suspense } from 'react';
+
+import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+
 import styles from './page.module.scss';
 
+/**
+ * 홈 페이지 (캠페인 목록)
+ * - 하단 탭: O
+ * - 전체 캠페인 목록 + 필터 + 배너
+ *
+ * TODO:
+ * 1. [ ] Banner 컴포넌트 구현 (@shared/components/Banner)
+ * 2. [ ] CampaignFilter 컴포넌트 구현 (@features/campaign/components/CampaignFilter)
+ * 3. [ ] CampaignList 컴포넌트 구현 (@features/campaign/components/CampaignList)
+ * 4. [ ] 캠페인 목록 API 연동 (useCampaigns 훅)
+ * 5. [ ] 필터 기능 구현 (카테고리, 지역, 상태 등)
+ * 6. [ ] 무한 스크롤 또는 페이지네이션
+ */
 export default function Home() {
-  return <main className={styles.HomeContainer}></main>;
+  return (
+    <main className={styles.HomeContainer}>
+      <ErrorBoundary>
+        <Suspense fallback={<div>로딩 중...</div>}>
+          {/* TODO: Banner 컴포넌트 추가 */}
+          {/* TODO: CampaignFilter 컴포넌트 추가 */}
+          {/* TODO: CampaignList 컴포넌트 추가 */}
+          <div className={styles.Placeholder}>
+            <p>홈 - 캠페인 목록</p>
+            <p className={styles.Todo}>배너, 필터, 캠페인 목록 컴포넌트를 구현하세요</p>
+          </div>
+        </Suspense>
+      </ErrorBoundary>
+    </main>
+  );
 }

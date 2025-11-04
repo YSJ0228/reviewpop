@@ -1,7 +1,12 @@
 @use '@shared/styles/mixins' as *;
 
-.HomeContainer {
+.CampaignApplyCompletePage {
   @include padding($y: 20, $x: 16);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   min-height: 100vh;
 
@@ -13,9 +18,6 @@
   flex-direction: column;
   gap: 12px;
   align-items: center;
-  justify-content: center;
-
-  min-height: 400px;
 
   text-align: center;
 

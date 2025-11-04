@@ -1,6 +1,6 @@
 @use '@shared/styles/mixins' as *;
 
-.HomeContainer {
+.CampaignImagesPage {
   @include padding($y: 20, $x: 16);
 
   min-height: 100vh;
