@@ -31,7 +31,7 @@ export const reviewHandlers = [
     // 필터 파라미터 파싱
     const filters: ReviewFilterParams = {
       campaignId: url.searchParams.get('campaignId') || undefined,
-      userId: url.searchParams.get('userId') ? Number(url.searchParams.get('userId')) : undefined,
+      userId: url.searchParams.get('userId') ?? undefined,
       rating: url.searchParams.get('rating') ? Number(url.searchParams.get('rating')) : undefined,
       minRating: url.searchParams.get('minRating')
         ? Number(url.searchParams.get('minRating'))
@@ -81,7 +81,7 @@ export const reviewHandlers = [
     const newReview = {
       id: mockReviews.length + 1,
       ...body,
-      userId: 1,
+      userId: '1',
       user: {
         id: mockUsers[0].id,
         name: mockUsers[0].name,

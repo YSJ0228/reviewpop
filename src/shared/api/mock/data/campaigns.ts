@@ -5,7 +5,11 @@
  * 총 15개의 캠페인 데이터로 다양한 상태와 카테고리를 시뮬레이션합니다.
  */
 
-import type { Campaign, CampaignStatus, CampaignCategory } from '@entities/campaign';
+import type {
+  Campaign,
+  CampaignStatus,
+  CampaignCategory,
+} from '@entities/campaign/types/campaign.types';
 
 /**
  * Campaign mock 데이터

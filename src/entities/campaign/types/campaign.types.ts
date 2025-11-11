@@ -17,7 +17,8 @@ export type CampaignStatus =
   | 'in_progress'
   | 'review_period'
   | 'completed'
-  | 'closed';
+  | 'closed'
+  | 'active';
 
 /**
  * 캠페인 카테고리

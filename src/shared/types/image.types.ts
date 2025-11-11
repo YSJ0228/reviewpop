@@ -54,7 +54,11 @@ export function validateImageFile(file: File): {
   }
 
   // MIME 타입 검증
-  if (!IMAGE_CONSTRAINTS.ALLOWED_MIME_TYPES.includes(file.type)) {
+  if (
+    !IMAGE_CONSTRAINTS.ALLOWED_MIME_TYPES.includes(
+      file.type as (typeof IMAGE_CONSTRAINTS.ALLOWED_MIME_TYPES)[number],
+    )
+  ) {
     return {
       valid: false,
       error: `지원하지 않는 파일 형식입니다. (허용: ${IMAGE_CONSTRAINTS.ALLOWED_EXTENSIONS.join(', ')})`,
