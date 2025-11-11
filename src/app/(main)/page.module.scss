@@ -1,4 +1,4 @@
-@use '@shared/styles/mixins' as *;
+@use '../../shared/styles/mixins' as *;
 
 .HomeContainer {
   @include padding($y: 20, $x: 16);
