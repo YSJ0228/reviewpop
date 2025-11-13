@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 
 import styles from './page.module.scss';
+import { CampaignList } from '@features/campaign';
 
 /**
  * 홈 페이지 (캠페인 목록)
@@ -27,6 +28,7 @@ export default function Home() {
           {/* TODO: Banner 컴포넌트 추가 */}
           {/* TODO: CampaignFilter 컴포넌트 추가 */}
           {/* TODO: CampaignList 컴포넌트 추가 */}
+          <CampaignList status="applied" />
         </Suspense>
       </ErrorBoundary>
     </main>
