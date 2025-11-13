@@ -128,7 +128,7 @@ export const applicationHandlers = [
 
     // 신청 마감일 확인
     const now = new Date();
-    const deadline = new Date(campaign.applicationDeadline);
+    const deadline = new Date(campaign.schedule.applicationSchedule[1]);
     if (now > deadline) {
       return HttpResponse.json(
         {
