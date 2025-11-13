@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 
 import styles from './page.module.scss';
+import { Settings } from '@features/profile/components/Settings';
 
 /**
  * 설정 페이지
@@ -25,12 +26,13 @@ export default function SettingsPage() {
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: Settings 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
+          <Settings />
+          {/* <div className={styles.Placeholder}>
             <p>설정</p>
             <p className={styles.Todo}>
               features/profile/components/Settings 컴포넌트를 구현하세요
             </p>
-          </div>
+          </div> */}
         </Suspense>
       </ErrorBoundary>
     </main>

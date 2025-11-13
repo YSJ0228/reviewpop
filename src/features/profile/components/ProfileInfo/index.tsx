@@ -1,5 +1,7 @@
 import { ProfileInfoProps } from './types';
+
 import styles from './style.module.scss';
+
 export function ProfileInfo({ name, campaign, review }: ProfileInfoProps) {
   return (
     <div className={styles.ProfileInfo}>
