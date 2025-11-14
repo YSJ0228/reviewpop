@@ -13,7 +13,7 @@ export function useCampaigns() {
   return useQuery({
     queryKey: ['campaigns'],
     queryFn: async (): Promise<Campaign[]> => {
-      const response = await fetch('/api/campaigns');
+      const response = await fetch('/api/my-campaigns');
       if (!response.ok) {
         throw new Error('캠페인 목록을 불러오는데 실패했습니다.');
       }

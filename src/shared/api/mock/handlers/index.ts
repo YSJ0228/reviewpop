@@ -7,7 +7,8 @@
 import { authHandlers } from './auth';
 import { reviewHandlers } from './reviews';
 import { kakaoOAuthHandlers } from './oauth/kakao';
-import { campaignHandlers } from './campaigns';
+import { myCampaignHandlers } from '@entities/campaign/api/mock';
+import { campaignHandlers } from '@entities/campaign/api/mock';
 import { applicationHandlers } from './applications';
 import { reservationHandlers } from './reservations';
 
@@ -21,6 +22,7 @@ export const handlers = [
   ...reviewHandlers,
   ...authHandlers,
   ...campaignHandlers,
+  ...myCampaignHandlers,
   ...applicationHandlers,
   ...reservationHandlers,
 ];

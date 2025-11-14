@@ -1,10 +1,10 @@
-import { Campaign } from '../types/myCampaigns.types';
+import { MyCampaign } from '../types/myCampaigns.types';
 
-export const mockMyCampaigns: Campaign[] = [
+export const mockMyCampaigns: MyCampaign[] = [
   // 신청 상태 (5개)
   {
     id: '1',
-    title: '신제품 커피 체험단 모집',
+    title: '신제품 커피 체험단 모집 바보',
     brand: '스타벅스',
     imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
     status: 'applied',
@@ -174,3 +174,7 @@ export const mockMyCampaigns: Campaign[] = [
     points: 500,
   },
 ];
+
+export function findMyCampaignById(id: string): MyCampaign | undefined {
+  return mockMyCampaigns.find((campaign) => campaign.id === id);
+}
