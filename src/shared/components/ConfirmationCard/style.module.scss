@@ -1,0 +1,40 @@
+@use '@shared/styles/mixins' as *;
+
+.ConfirmationCard {
+  @include flex($direction: column, $align: center, $justify: center);
+  // @include padding($y: 40, $x: 16);
+  @include size($width: 260);
+
+  gap: 16px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ConfirmationCard__Content {
+  @include flex($direction: column, $align: center, $justify: center);
+  @include size($width: 100%);
+  gap: 8px;
+}
+
+.ConfirmationCard__Message {
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+  color: var(--color-gray-900);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.ConfirmationCard__SubMessage {
+  font-family: var(--font-pretendard), sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: var(--color-blue-500);
+}
+
+.ConfirmationCard__ResultText {
+  color: var(--color-gray-900);
+}
