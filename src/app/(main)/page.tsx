@@ -28,7 +28,7 @@ export default function Home() {
           {/* TODO: Banner 컴포넌트 추가 */}
           {/* TODO: CampaignFilter 컴포넌트 추가 */}
           {/* TODO: CampaignList 컴포넌트 추가 */}
-          <CampaignList status="applied" />
+          <CampaignList status="active" />
         </Suspense>
       </ErrorBoundary>
     </main>

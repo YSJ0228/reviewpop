@@ -7,7 +7,7 @@
 import { authHandlers } from './auth';
 import { reviewHandlers } from './reviews';
 import { kakaoOAuthHandlers } from './oauth/kakao';
-import { myCampaignHandlers } from '@entities/campaign/api/mock';
+import { myCampaignHandlers } from '@entities/history/api/myMock';
 import { campaignHandlers } from '@entities/campaign/api/mock';
 import { applicationHandlers } from './applications';
 import { reservationHandlers } from './reservations';

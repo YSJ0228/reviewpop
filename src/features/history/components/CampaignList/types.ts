@@ -1,5 +1,5 @@
-import type { CampaignStatus } from '../../types/campaign.types';
+import type { MyCampaignStatus } from '@entities/history/types/myCampaign.types';
 
-export interface CampaignListProps {
-  status: CampaignStatus;
+export interface MyCampaignListProps {
+  status: MyCampaignStatus;
 }

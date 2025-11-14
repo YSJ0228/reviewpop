@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { STATUS_LABELS } from '../../types/campaign.types';
+import { STATUS_LABELS } from '@entities/history/types/myCampaign.types';
 import { formatDate } from '@shared/lib/date';
 import type { CampaignCardProps } from './types';
 import styles from './style.module.scss';

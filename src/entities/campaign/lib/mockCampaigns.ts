@@ -38,7 +38,7 @@ export const mockCampaigns: Campaign[] = [
   // Active 캠페인 (5개)
   {
     id: '1',
-    title: '신제품 커피 체험단 모집',
+    title: '신제품 커피 체험단 모집!!!',
     brand: '스타벅스',
     description:
       '스타벅스의 신제품 커피를 가장 먼저 체험해보세요! 프리미엄 원두를 사용한 특별한 블렌드로, 부드러운 맛과 풍부한 향이 특징입니다.',

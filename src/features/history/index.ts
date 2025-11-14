@@ -10,8 +10,8 @@ export { CampaignList } from './components/CampaignList';
 export { CampaignTabs } from './components/CampaignTabs';
 
 // Hooks
-export { useCampaigns } from './hooks/useCampaigns';
-export { useCampaignDetail } from './hooks/useCampaignDetail';
+export { useCampaigns } from '../../entities/campaign/hooks/useCampaigns';
+export { useCampaignDetail } from '../../entities/campaign/hooks/useCampaignDetail';
 
 // Types
 export type { Campaign, CampaignStatus, CampaignDetail, TabKey } from './types/campaign.types';

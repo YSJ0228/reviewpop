@@ -1,13 +1,13 @@
 'use client';
 
-import { useCampaigns, filterCampaignsByStatus } from '../../hooks/useCampaigns';
-import { STATUS_LABELS } from '../../types/campaign.types';
+import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
+import { STATUS_LABELS } from '@entities/history/types/myCampaign.types';
 import { CampaignCard } from '../CampaignCard';
-import type { CampaignListProps } from './types';
+import type { MyCampaignListProps } from './types';
 import styles from './style.module.scss';
 
-export function CampaignList({ status }: CampaignListProps) {
-  const { data: campaigns, isLoading, error } = useCampaigns();
+export function CampaignList({ status }: MyCampaignListProps) {
+  const { data: campaigns, isLoading, error } = useMyCampaigns();
 
   const filteredCampaigns = filterCampaignsByStatus(campaigns, status);
 

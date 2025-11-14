@@ -1,19 +1,19 @@
 import { http, HttpResponse } from 'msw';
-import { mockCampaignDetails, mockCampaigns } from '../lib';
+import { mockMyCampaignDetails, mockMyCampaigns } from '../lib';
 
-export const campaignHandlers = [
+export const myCampaignHandlers = [
   // 캠페인 목록 조회
-  http.get('/api/campaigns', () => {
+  http.get('/api/my-campaigns', () => {
     return HttpResponse.json({
-      data: mockCampaigns,
+      data: mockMyCampaigns,
       success: true,
     });
   }),
 
   // 캠페인 상세 조회
-  http.get('/api/campaigns/:id', ({ params }) => {
+  http.get('/api/my-campaigns/:id', ({ params }) => {
     const { id } = params;
-    const campaign = mockCampaignDetails[String(id)];
+    const campaign = mockMyCampaignDetails[String(id)];
 
     if (!campaign) {
       return HttpResponse.json(

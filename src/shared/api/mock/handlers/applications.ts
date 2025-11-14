@@ -17,7 +17,7 @@ import {
   getApplicationsByCampaignId,
   findApplicationByUserAndCampaign,
 } from '../data/applications';
-import { findCampaignById } from '../data/campaigns';
+import { findCampaignById } from '@entities/campaign/lib';
 
 export const applicationHandlers = [
   /**

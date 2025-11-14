@@ -2,9 +2,9 @@
 
 import { use } from 'react';
 import { PageHeader } from '@shared/components/PageHeader';
-import { useCampaignDetail, STATUS_LABELS } from '@features/history';
+import { useCampaignDetail } from '@entities/campaign/hooks/useCampaignDetail';
 import styles from './page.module.scss';
-
+//, STATUS_LABELS
 interface CampaignDetailPageProps {
   params: Promise<{
     campaignId: string;
@@ -44,9 +44,9 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       {/* 메인 이미지 */}
       <div className={styles.Page__ImageWrapper}>
         <img src={campaign.imageUrl} alt={`${campaign.brand} ${campaign.title}`} />
-        <div className={styles.Page__Badge} aria-label={`상태: ${STATUS_LABELS[campaign.status]}`}>
+        {/* <div className={styles.Page__Badge} aria-label={`상태: ${STATUS_LABELS[campaign.status]}`}>
           {STATUS_LABELS[campaign.status]}
-        </div>
+        </div> */}
       </div>
 
       {/* 기본 정보 */}
@@ -57,12 +57,16 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         <div className={styles.Page__Meta}>
           <div className={styles.Page__MetaItem}>
             <span className={styles.Page__MetaLabel}>신청일</span>
-            <span className={styles.Page__MetaValue}>{formatDate(campaign.applicationDate)}</span>
+            <span className={styles.Page__MetaValue}>
+              {formatDate(campaign.schedule.applicationSchedule[0])}
+            </span>
           </div>
-          {campaign.deadline && (
+          {campaign.schedule && (
             <div className={styles.Page__MetaItem}>
               <span className={styles.Page__MetaLabel}>마감일</span>
-              <span className={styles.Page__MetaValue}>{formatDate(campaign.deadline)}</span>
+              <span className={styles.Page__MetaValue}>
+                {formatDate(campaign.schedule.applicationSchedule[1])}
+              </span>
             </div>
           )}
           {campaign.category && (
@@ -159,11 +163,11 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       )}
 
       {/* 주의사항 */}
-      {campaign.notices && campaign.notices.length > 0 && (
+      {campaign.experiencePrecautions && campaign.experiencePrecautions.length > 0 && (
         <section className={`${styles.Page__Section} ${styles['Page__Section--Notice']}`}>
           <h2 className={styles.Page__SectionTitle}>주의사항</h2>
           <ul className={styles.Page__List}>
-            {campaign.notices.map((notice, index) => (
+            {campaign.experiencePrecautions.map((notice, index) => (
               <li key={index} className={styles.Page__ListItem}>
                 {notice}
               </li>

@@ -1,5 +1,5 @@
-import type { Campaign } from '../../types/campaign.types';
+import type { MyCampaign } from '@entities/history/types/myCampaign.types';
 
 export interface CampaignCardProps {
-  campaign: Campaign;
+  campaign: MyCampaign;
 }

@@ -1,4 +1,4 @@
-import { MyCampaignDetail } from '../types/myCampaigns.types';
+import { MyCampaignDetail } from '../types/myCampaign.types';
 import { findMyCampaignById } from './mockMyCampaigns';
 
 function requireMyCampaign(id: string) {

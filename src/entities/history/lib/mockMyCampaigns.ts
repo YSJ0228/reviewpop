@@ -1,4 +1,4 @@
-import { MyCampaign } from '../types/myCampaigns.types';
+import { MyCampaign } from '../types/myCampaign.types';
 
 export const mockMyCampaigns: MyCampaign[] = [
   // 신청 상태 (5개)

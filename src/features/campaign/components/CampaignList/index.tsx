@@ -1,6 +1,6 @@
 'use client';
 
-import { useCampaigns, filterCampaignsByStatus } from '../../hooks/useCampaigns';
+import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/useCampaigns';
 import { CampaignCard } from '../CampaignCard';
 import type { CampaignListProps } from './types';
 import styles from './style.module.scss';
