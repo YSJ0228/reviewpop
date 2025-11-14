@@ -2,10 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { STATUS_LABELS } from '@entities/history/types/myCampaign.types';
 import { formatDate } from '@shared/lib/date';
-import type { CampaignCardProps } from './types';
+import type { MyCampaignCardProps } from './types';
 import styles from './style.module.scss';
 
-export function CampaignCard({ campaign }: CampaignCardProps) {
+export function CampaignCard({ campaign }: MyCampaignCardProps) {
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
       <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>

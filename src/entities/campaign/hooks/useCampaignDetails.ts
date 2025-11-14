@@ -9,7 +9,7 @@ interface CampaignDetailResponse {
 /**
  * 캠페인 상세 정보를 가져오는 React Query 훅
  */
-export function useCampaignDetail(id: string) {
+export function useCampaignDetails(id: string) {
   return useQuery({
     queryKey: ['campaigns', id],
     queryFn: async (): Promise<CampaignDetail> => {

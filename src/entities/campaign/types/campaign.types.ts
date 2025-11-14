@@ -20,6 +20,15 @@ export type CampaignStatus =
   | 'closed'
   | 'active';
 
+export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
+  recruiting: '모집 중',
+  in_progress: '진행 중',
+  review_period: '리뷰 기간',
+  completed: '완료',
+  closed: '마감',
+  active: '진행 중',
+};
+
 /**
  * 캠페인 카테고리
  */
@@ -186,60 +195,3 @@ export interface CampaignApplyData {
   // - 신청 동기
   // etc.
 }
-
-/**
- * 사용자 관점의 캠페인 상태
- * (나의 체험 페이지에서 사용)
- */
-// export type MyCampaignStatus = 'applied' | 'selected' | 'registered' | 'completed' | 'rejected';
-
-// /**
-//  * 나의 캠페인 (나의 체험)
-//  * Campaign의 간소화된 버전 + 사용자별 신청/참여 상태
-//  */
-// export interface MyCampaign {
-//   /** 캠페인 ID */
-//   id: string;
-//   /** 캠페인 제목 */
-//   title: string;
-//   /** 브랜드명 */
-//   brand: string;
-//   /** 썸네일 이미지 URL */
-//   imageUrl: string;
-//   /** 사용자의 신청/참여 상태 */
-//   status: MyCampaignStatus;
-//   /** 신청일 (ISO 8601) */
-//   applicationDate: string;
-//   /** 신청 마감일 (ISO 8601) */
-//   deadline?: string;
-//   /** 카테고리 */
-//   category?: string;
-//   /** 지급 포인트 */
-//   points?: number;
-//   /** 예약일 (선정된 경우) */
-//   reservationDate?: string;
-//   /** 리뷰 제출 여부 */
-//   reviewSubmitted?: boolean;
-// }
-
-/**
- * 상태별 레이블 매핑
- */
-// export const MY_CAMPAIGN_STATUS_LABELS: Record<MyCampaignStatus, string> = {
-//   applied: '신청',
-//   selected: '선정',
-//   registered: '등록',
-//   completed: '종료',
-//   rejected: '거절',
-// };
-
-// /**
-//  * 상태별 설명 매핑
-//  */
-// export const MY_CAMPAIGN_STATUS_DESCRIPTIONS: Record<MyCampaignStatus, string> = {
-//   applied: '신청 대기 중인 캠페인',
-//   selected: '선정된 캠페인',
-//   registered: '등록 완료된 캠페인',
-//   completed: '종료된 캠페인',
-//   rejected: '거절된 캠페인',
-// };

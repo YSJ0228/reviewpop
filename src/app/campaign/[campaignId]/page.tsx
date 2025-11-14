@@ -2,9 +2,9 @@
 
 import { use } from 'react';
 import { PageHeader } from '@shared/components/PageHeader';
-import { useCampaignDetail } from '@entities/campaign/hooks/useCampaignDetail';
+import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
+import { CAMPAIGN_STATUS_LABELS } from '@entities/campaign/types/campaign.types';
 import styles from './page.module.scss';
-//, STATUS_LABELS
 interface CampaignDetailPageProps {
   params: Promise<{
     campaignId: string;
@@ -13,7 +13,7 @@ interface CampaignDetailPageProps {
 
 export default function CampaignDetailPage({ params }: CampaignDetailPageProps) {
   const { campaignId } = use(params);
-  const { data: campaign, isLoading, error } = useCampaignDetail(campaignId);
+  const { data: campaign, isLoading, error } = useCampaignDetails(campaignId);
 
   if (isLoading) {
     return (
@@ -44,9 +44,12 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       {/* 메인 이미지 */}
       <div className={styles.Page__ImageWrapper}>
         <img src={campaign.imageUrl} alt={`${campaign.brand} ${campaign.title}`} />
-        {/* <div className={styles.Page__Badge} aria-label={`상태: ${STATUS_LABELS[campaign.status]}`}>
-          {STATUS_LABELS[campaign.status]}
-        </div> */}
+        <div
+          className={styles.Page__Badge}
+          aria-label={`상태: ${CAMPAIGN_STATUS_LABELS[campaign.status]}`}
+        >
+          {CAMPAIGN_STATUS_LABELS[campaign.status]}
+        </div>
       </div>
 
       {/* 기본 정보 */}
