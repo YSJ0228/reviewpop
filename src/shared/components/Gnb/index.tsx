@@ -25,7 +25,7 @@ export function Gnb({ notification = 0 }: GnbProps) {
         <IconNotification size={24} />
         {validNotificationCount > 0 && (
           <span className={styles.NotificationIcon__Active}>
-            {validNotificationCount >= MAX_BADGE_COUNT
+            {validNotificationCount > MAX_BADGE_COUNT
               ? `${MAX_BADGE_COUNT}+`
               : validNotificationCount}
           </span>
