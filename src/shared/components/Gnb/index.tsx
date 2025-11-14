@@ -10,7 +10,7 @@ import styles from './style.module.scss';
 const MAX_BADGE_COUNT = 9;
 
 export function Gnb({ notification = 0 }: GnbProps) {
-  const validNotificationCount = Math.max(0, Math.floor(notification));
+  const validNotificationCount = Math.max(0, Math.floor(notification ?? 0));
 
   return (
     <header className={styles.Gnb}>
