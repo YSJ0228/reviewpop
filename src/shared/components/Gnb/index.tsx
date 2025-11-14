@@ -11,10 +11,7 @@ export function Gnb({ notification = 0 }: GnbProps) {
   let notifiStyles = '';
 
   if (notification > 0) {
-    notifiStyles = styles.notificationIconActive;
-    if (notification >= 9) {
-      notifiStyles = styles.notificationIconActivePlus;
-    }
+    notifiStyles = styles.NotificationIcon__Active;
   }
 
   return (
@@ -28,7 +25,9 @@ export function Gnb({ notification = 0 }: GnbProps) {
         aria-label="알림 페이지로 이동"
       >
         <IconNotification size={24} />
-        {notification > 0 && <span className={notifiStyles}>{notification}</span>}
+        {notification > 0 && (
+          <span className={notifiStyles}> {notification >= 10 ? '9+' : notification}</span>
+        )}
       </Link>
     </header>
   );

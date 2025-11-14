@@ -25,6 +25,25 @@
   gap: 10px;
 }
 
-.Notification__Icon {
+.NotificationIcon {
   position: relative;
+}
+
+.NotificationIcon__Active {
+  display: flex;
+  width: 13px;
+  height: 13px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 99px;
+  background: var(--color-red-500);
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  color: var(--color-white);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 13px;
+  letter-spacing: -0.16px;
+  text-align: center;
 }
