@@ -35,7 +35,7 @@ export function ConfirmationCard({ date, type }: ConfirmationCardProps) {
   const { dateText, resultText } = formatDateForConfirmationCard(date, type);
 
   return (
-    <article className={styles.ConfirmationCard}>
+    <article className={styles.ConfirmationCard} aria-label={`${MAIN_MESSAGES[type]} 확인 카드`}>
       <IconCheckCircle color={Colors.COLOR_AQUA_500} size={48} />
       <div className={styles.ConfirmationCard__Content}>
         <h2 className={styles.ConfirmationCard__Message}>{MAIN_MESSAGES[type]}</h2>
