@@ -22,11 +22,15 @@ export function Gnb({ notification = 0 }: GnbProps) {
       <Link
         href="/notifications"
         className={styles.Notification__Icon}
-        aria-label="알림 페이지로 이동"
+        aria-label={
+          validNotificationCount > 0
+            ? `알림 페이지로 이동, ${validNotificationCount}개의 새 알림`
+            : '알림 페이지로 이동'
+        }
       >
         <IconNotification size={24} />
         {validNotificationCount > 0 && (
-          <span className={styles.NotificationIcon__Active}>
+          <span className={styles.NotificationIcon__Active} aria-hidden="true">
             {validNotificationCount > MAX_BADGE_COUNT
               ? `${MAX_BADGE_COUNT}+`
               : validNotificationCount}

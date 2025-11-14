@@ -3,15 +3,15 @@
 .Gnb {
   position: sticky;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   z-index: 100;
-  @include flex($align: center, $gap: 12);
   height: 56px;
   @include padding($y: 0, $x: 16);
+  @include flex($align: center, $gap: 12);
+  justify-content: space-between;
   background: var(--color-white);
   border-bottom: 1px solid var(--color-gray-200);
-  justify-content: space-between;
 }
 
 .Gnb__Logo {
@@ -37,7 +37,7 @@
   align-items: center;
   justify-content: center;
   background: var(--color-red-500);
-  color: #fff;
+  color: var(--color-white);
   font-size: 8px;
   font-weight: 700;
   line-height: 1;
