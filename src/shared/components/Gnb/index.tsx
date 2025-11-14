@@ -7,7 +7,11 @@ import { IconNotification } from '@pop-ui/foundation';
 
 import styles from './style.module.scss';
 
+const MAX_BADGE_COUNT = 9;
+
 export function Gnb({ notification = 0 }: GnbProps) {
+  const validNotificationCount = Math.max(0, Math.floor(notification));
+
   return (
     <header className={styles.Gnb}>
       <Link href="/" className={styles.Gnb__Logo}>
@@ -19,9 +23,11 @@ export function Gnb({ notification = 0 }: GnbProps) {
         aria-label="알림 페이지로 이동"
       >
         <IconNotification size={24} />
-        {notification > 0 && (
+        {validNotificationCount > 0 && (
           <span className={styles.NotificationIcon__Active}>
-            {notification >= 10 ? '9+' : notification}
+            {validNotificationCount >= MAX_BADGE_COUNT
+              ? `${MAX_BADGE_COUNT}+`
+              : validNotificationCount}
           </span>
         )}
       </Link>
