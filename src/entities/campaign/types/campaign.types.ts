@@ -58,16 +58,6 @@ export interface CampaignSchedule {
 }
 
 /**
- * 상세 정보 섹션
- */
-export interface CampaignDescription {
-  /** 섹션 제목 */
-  title: string;
-  /** 섹션 내용 */
-  content: string;
-}
-
-/**
  * 캠페인 기본 정보
  */
 export interface Campaign {
@@ -77,18 +67,17 @@ export interface Campaign {
   title: string;
   /** 브랜드명 */
   brand: string;
-  /** 캠페인 설명 */
-  description: CampaignDescription;
-  /** 카테고리 */
-  category: CampaignCategory;
-  /** 캠페인 상태 */
-  status: CampaignStatus;
-
   // 이미지
   /** 썸네일 이미지 URL */
   imageUrl: string;
   /** 상세 이미지 URL 배열 */
   imageUrls?: string[];
+  /** 캠페인 설명 */
+  description: string;
+  /** 캠페인 상태 */
+  status: CampaignStatus;
+  /** 카테고리 */
+  category: CampaignCategory;
 
   // 진행 일정
   schedule: CampaignSchedule;
@@ -107,9 +96,9 @@ export interface Campaign {
   /** 선정 인원 */
   selectedCount?: number;
 
-  // 포인트
+  providedItems: string[];
   /** 지급 포인트 */
-  points: number;
+  points?: number;
 
   // 생성일
   /** 생성일 (ISO 8601) */

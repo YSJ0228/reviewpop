@@ -1,4 +1,3 @@
-//TODO: 필요에 따라 정리하기
 export type CampaignStatus = 'applied' | 'selected' | 'registered' | 'completed';
 
 export interface Campaign {

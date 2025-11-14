@@ -33,12 +33,12 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
           <p className={styles.CampaignCard__Brand}>{campaign.description}</p>
           <div className={styles.CampaignCard__Meta}>
-            <time dateTime={campaign.applicationDate}>
-              신청일: {formatDate(campaign.applicationDate, 'SHORT')}
+            <time dateTime={campaign.schedule.applicationSchedule[0]}>
+              신청일: {formatDate(campaign.schedule.applicationSchedule[0], 'SHORT')}
             </time>
-            {campaign.deadline && (
-              <time dateTime={campaign.deadline}>
-                마감: {formatDate(campaign.deadline, 'SHORT')}
+            {campaign.schedule && (
+              <time dateTime={campaign.schedule.applicationSchedule[1]}>
+                마감: {formatDate(campaign.schedule.applicationSchedule[1], 'SHORT')}
               </time>
             )}
           </div>
