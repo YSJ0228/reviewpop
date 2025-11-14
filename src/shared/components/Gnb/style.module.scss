@@ -1,0 +1,30 @@
+@use '@/shared/styles/mixins' as *;
+
+.Gnb {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  @include flex($align: center, $gap: 12);
+  height: 56px;
+  @include padding($y: 0, $x: 16);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Gnb__Logo {
+  display: flex;
+  height: 36px;
+  padding: 1px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.Notification__Icon {
+  position: relative;
+}
