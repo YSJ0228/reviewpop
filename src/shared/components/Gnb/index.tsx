@@ -8,12 +8,6 @@ import { IconNotification } from '@pop-ui/foundation';
 import styles from './style.module.scss';
 
 export function Gnb({ notification = 0 }: GnbProps) {
-  let notifiStyles = '';
-
-  if (notification > 0) {
-    notifiStyles = styles.NotificationIcon__Active;
-  }
-
   return (
     <header className={styles.Gnb}>
       <Link href="/" className={styles.Gnb__Logo}>
@@ -26,7 +20,9 @@ export function Gnb({ notification = 0 }: GnbProps) {
       >
         <IconNotification size={24} />
         {notification > 0 && (
-          <span className={notifiStyles}> {notification >= 10 ? '9+' : notification}</span>
+          <span className={styles.NotificationIcon__Active}>
+            {notification >= 10 ? '9+' : notification}
+          </span>
         )}
       </Link>
     </header>
