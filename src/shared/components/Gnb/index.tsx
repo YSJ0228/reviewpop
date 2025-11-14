@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import type { GnbProps } from './types';
+
 import { IconNotification } from '@pop-ui/foundation';
+
+import type { GnbProps } from './types';
 
 import styles from './style.module.scss';
 

@@ -15,13 +15,8 @@
 }
 
 .Gnb__Logo {
-  display: flex;
+  @include flex($align: center);
   height: 36px;
-  padding: 1px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
 }
 
 .Notification__Icon {
