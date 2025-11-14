@@ -2,7 +2,8 @@
 
 .ConfirmationCard {
   @include flex($direction: column, $align: center, $justify: center);
-  @include size($width: 260);
+
+  width: 260px;
   gap: 16px;
   margin: 0 auto;
   text-align: center;

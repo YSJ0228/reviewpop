@@ -1,8 +1,10 @@
 import dayjs from '@shared/lib/dayjs.config';
 
-import type { DateInput } from '@shared/lib/date.ts';
+import { formatDate, type DateInput } from '@shared/lib/date';
 
 import type { ConfirmationCardType } from './type';
+
+import { SUB_MESSAGES } from './constants';
 
 /**
  * 타입별 날짜 포맷팅 함수
@@ -23,12 +25,12 @@ export function formatDateForConfirmationCard(date: DateInput, type: Confirmatio
     }
     return {
       dateText: '날짜 오류',
-      resultText: type === 'application' ? '에 선정 결과가 발표돼요' : null,
+      resultText: type === 'application' ? SUB_MESSAGES.resultMessage : null,
     };
   }
 
   if (type === 'reservation') {
-    const dateStr = dayjsDate.format('M월 D일');
+    const dateStr = formatDate(date, 'LONG');
     const weekday = dayjsDate.format('dddd');
     const timeStr = dayjsDate.format('A h:mm');
 
@@ -42,7 +44,7 @@ export function formatDateForConfirmationCard(date: DateInput, type: Confirmatio
 
     return {
       dateText: `${dateStr} ${weekday}`,
-      resultText: '에 선정 결과가 발표돼요',
+      resultText: SUB_MESSAGES.resultMessage,
     };
   }
 }
