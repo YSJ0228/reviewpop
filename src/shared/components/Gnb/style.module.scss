@@ -25,25 +25,26 @@
   gap: 10px;
 }
 
-.NotificationIcon {
+.Notification__Icon {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .NotificationIcon__Active {
-  display: flex;
+  position: absolute;
+  top: -2px; /* 조금 위 */
+  right: -2px; /* 조금 오른쪽 */
   width: 13px;
   height: 13px;
-  justify-content: center;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
-  border-radius: 99px;
+  justify-content: center;
   background: var(--color-red-500);
-  position: absolute;
-  right: 14px;
-  top: 10px;
-  color: var(--color-white);
+  color: #fff;
   font-size: 8px;
   font-weight: 700;
-  line-height: 13px;
-  letter-spacing: -0.16px;
-  text-align: center;
+  line-height: 1;
 }
