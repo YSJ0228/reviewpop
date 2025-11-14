@@ -4,7 +4,7 @@ export const mockMyCampaigns: MyCampaign[] = [
   // 신청 상태 (5개)
   {
     id: '1',
-    title: '신제품 커피 체험단 모집 바보',
+    title: '신제품 커피 체험단 모집',
     brand: '스타벅스',
     imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
     status: 'applied',
