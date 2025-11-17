@@ -16,6 +16,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { useUserStore } from '@entities/user';
+import { ToastProvider } from '@shared/components/Toast';
 import { env } from '@shared/config/env';
 
 interface ProvidersProps {
@@ -99,12 +100,18 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <ToastProvider>
+        {children}
 
-      {/* React Query Devtools - 개발 환경에서만 표시 */}
-      {env.isDev && (
-        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" position="bottom" />
-      )}
+        {/* React Query Devtools - 개발 환경에서만 표시 */}
+        {env.isDev && (
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition="bottom-right"
+            position="bottom"
+          />
+        )}
+      </ToastProvider>
     </QueryClientProvider>
   );
 }
