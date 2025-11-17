@@ -4,14 +4,6 @@ import { formatDate } from '@shared/lib/date';
 import type { CampaignCardProps } from './types';
 import styles from './style.module.scss';
 
-// TODO(모집중):
-// Description 띄우기
-// D-day 띄우기
-// 장소 띄우기 || 전국
-// 바로가기 버튼
-// 신청자 수
-// 타입정리...는 나중에....
-
 export function CampaignCard({ campaign }: CampaignCardProps) {
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
@@ -24,7 +16,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: 'cover' }}
           />
-          <div className={styles.CampaignCard__Badge} aria-label={`상태: 나중에 적기`}>
+          <div className={styles.CampaignCard__Badge} aria-label={`상태: ---`}>
             전국
           </div>
         </div>
@@ -36,11 +28,9 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             <time dateTime={campaign.schedule.applicationSchedule[0]}>
               신청일: {formatDate(campaign.schedule.applicationSchedule[0], 'SHORT')}
             </time>
-            {campaign.schedule && (
-              <time dateTime={campaign.schedule.applicationSchedule[1]}>
-                마감: {formatDate(campaign.schedule.applicationSchedule[1], 'SHORT')}
-              </time>
-            )}
+            <time dateTime={campaign.schedule.applicationSchedule[1]}>
+              마감: {formatDate(campaign.schedule.applicationSchedule[1], 'SHORT')}
+            </time>
           </div>
         </div>
       </article>

@@ -1,6 +1,7 @@
 'use client';
 
 import { use } from 'react';
+
 import { PageHeader } from '@shared/components/PageHeader';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { CAMPAIGN_STATUS_LABELS } from '@entities/campaign/types/campaign.types';
@@ -64,20 +65,16 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
               {formatDate(campaign.schedule.applicationSchedule[0])}
             </span>
           </div>
-          {campaign.schedule && (
-            <div className={styles.Page__MetaItem}>
-              <span className={styles.Page__MetaLabel}>마감일</span>
-              <span className={styles.Page__MetaValue}>
-                {formatDate(campaign.schedule.applicationSchedule[1])}
-              </span>
-            </div>
-          )}
-          {campaign.category && (
-            <div className={styles.Page__MetaItem}>
-              <span className={styles.Page__MetaLabel}>카테고리</span>
-              <span className={styles.Page__MetaValue}>{campaign.category}</span>
-            </div>
-          )}
+          <div className={styles.Page__MetaItem}>
+            <span className={styles.Page__MetaLabel}>마감일</span>
+            <span className={styles.Page__MetaValue}>
+              {formatDate(campaign.schedule.applicationSchedule[1])}
+            </span>
+          </div>
+          <div className={styles.Page__MetaItem}>
+            <span className={styles.Page__MetaLabel}>카테고리</span>
+            <span className={styles.Page__MetaValue}>{campaign.category}</span>
+          </div>
           {campaign.points && (
             <div className={styles.Page__MetaItem}>
               <span className={styles.Page__MetaLabel}>포인트</span>

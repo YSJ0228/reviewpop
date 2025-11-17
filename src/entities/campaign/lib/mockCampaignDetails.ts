@@ -15,7 +15,7 @@ const defaultBusinessHours: VisitReservation['businessHours'] = [
 function requireCampaign(id: string) {
   const campaign = findCampaignById(id);
   if (!campaign) {
-    throw new Error(`mockCampaigns에 ID가 ${id}인 캠페인이 없습니다.`);
+    throw new Error(`ID가 ${id}인 캠페인을 찾을 수 없습니다.`);
   }
   return campaign;
 }
