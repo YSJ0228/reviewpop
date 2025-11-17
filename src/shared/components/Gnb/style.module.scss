@@ -12,33 +12,33 @@
   justify-content: space-between;
   background: var(--color-white);
   border-bottom: 1px solid var(--color-gray-200);
-}
 
-.Gnb__Logo {
-  @include flex($align: center);
-  height: 36px;
-}
+  &__Logo {
+    @include flex($align: center);
+    height: 36px;
+  }
 
-.Notification__Icon {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
+  &__Notification {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-.NotificationIcon__Active {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-red-500);
-  color: var(--color-white);
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1;
+    &__Active {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-red-500);
+      color: var(--color-white);
+      font-size: 8px;
+      font-weight: 700;
+      line-height: 1;
+    }
+  }
 }
