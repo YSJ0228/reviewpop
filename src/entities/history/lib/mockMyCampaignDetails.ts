@@ -26,7 +26,10 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
     currentRecruitment: 47,
     maxRecruitment: 50,
     requirements: ['커피 관련 리뷰 경험 보유자 우대', '인스타그램 팔로워 500명 이상'],
-    notices: ['제품 수령 후 7일 이내 리뷰 작성 필수', '허위 리뷰 작성 시 패널티 부과'],
+    experiencePrecautions: [
+      '제품 수령 후 7일 이내 리뷰 작성 필수',
+      '허위 리뷰 작성 시 패널티 부과',
+    ],
   },
   '2': {
     ...requireMyCampaign('2'),
@@ -42,7 +45,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
     currentRecruitment: 28,
     maxRecruitment: 30,
     requirements: ['뷰티 블로거 또는 인플루언서', '20-40대 여성'],
-    notices: ['민감성 피부는 패치 테스트 권장', '개봉 후 반품 불가'],
+    experiencePrecautions: ['민감성 피부는 패치 테스트 권장', '개봉 후 반품 불가'],
   },
   '3': {
     ...requireMyCampaign('3'),
@@ -58,7 +61,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
     currentRecruitment: 35,
     maxRecruitment: 40,
     requirements: ['전자기기 리뷰 경험자', '유튜브 채널 보유자 우대'],
-    notices: ['체험 후 제품은 증정', '상세한 리뷰 작성 시 추가 포인트 지급'],
+    experiencePrecautions: ['체험 후 제품은 증정', '상세한 리뷰 작성 시 추가 포인트 지급'],
   },
   '4': {
     ...requireMyCampaign('4'),
@@ -74,7 +77,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
     currentRecruitment: 58,
     maxRecruitment: 80,
     requirements: ['건강식품 섭취 경험자', '성실한 후기 작성 가능자'],
-    notices: ['질병 치료 중인 경우 의사와 상담 필요', '임산부 섭취 금지'],
+    experiencePrecautions: ['질병 치료 중인 경우 의사와 상담 필요', '임산부 섭취 금지'],
   },
   '5': {
     ...requireMyCampaign('5'),
@@ -93,7 +96,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       shippingDate: '2025-11-08',
     },
     requirements: ['아이폰 사용자', '테크 리뷰어 또는 유튜버'],
-    notices: ['체험 후 반납 필수', '분실 시 변상 책임'],
+    experiencePrecautions: ['체험 후 반납 필수', '분실 시 변상 책임'],
   },
   '6': {
     ...requireMyCampaign('6'),
@@ -113,7 +116,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '1234567890123',
     },
     requirements: ['자연주의 화장품 선호자', '민감성/건성 피부'],
-    notices: ['개봉 후 1개월 이내 사용 권장', '냉장 보관 필요'],
+    experiencePrecautions: ['개봉 후 1개월 이내 사용 권장', '냉장 보관 필요'],
   },
   '7': {
     ...requireMyCampaign('7'),
@@ -133,7 +136,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '9876543210987',
     },
     requirements: ['요리 블로거', '가족 구성원 3인 이상'],
-    notices: ['수령 후 서늘한 곳에 보관', '개봉 후 1개월 이내 소비 권장'],
+    experiencePrecautions: ['수령 후 서늘한 곳에 보관', '개봉 후 1개월 이내 소비 권장'],
   },
   '8': {
     ...requireMyCampaign('8'),
@@ -153,7 +156,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '1122334455667',
     },
     requirements: ['러닝 동호회 회원 또는 운동 인플루언서', '사이즈 측정 필수'],
-    notices: ['체험 후 제품 증정', '상세 리뷰 미작성 시 포인트 회수'],
+    experiencePrecautions: ['체험 후 제품 증정', '상세 리뷰 미작성 시 포인트 회수'],
   },
   '9': {
     ...requireMyCampaign('9'),
@@ -172,7 +175,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       shippingDate: '2025-10-20',
     },
     requirements: ['스마트 홈 기기 사용 경험자', '상세한 리뷰 작성 가능자'],
-    notices: ['전문 설치 지원 가능', 'Wi-Fi 환경 필수'],
+    experiencePrecautions: ['전문 설치 지원 가능', 'Wi-Fi 환경 필수'],
   },
   '10': {
     ...requireMyCampaign('10'),
@@ -192,7 +195,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '2233445566778',
     },
     requirements: ['유제품 섭취 가능자', '냉장 보관 가능 환경'],
-    notices: ['유통기한 14일', '냉장 보관 필수', '락토프리 제품 아님'],
+    experiencePrecautions: ['유통기한 14일', '냉장 보관 필수', '락토프리 제품 아님'],
   },
   '11': {
     ...requireMyCampaign('11'),
@@ -212,7 +215,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '3344556677889',
     },
     requirements: ['손상모 또는 탈모 고민이 있는 분', '헤어케어 관심자'],
-    notices: ['개봉 후 6개월 이내 사용', '눈에 들어가지 않도록 주의'],
+    experiencePrecautions: ['개봉 후 6개월 이내 사용', '눈에 들어가지 않도록 주의'],
   },
   '12': {
     ...requireMyCampaign('12'),
@@ -232,7 +235,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '4455667788990',
     },
     requirements: ['가전 리뷰어', '유튜브 채널 보유자 우대'],
-    notices: ['체험 후 제품 증정', '상세 리뷰 작성 필수'],
+    experiencePrecautions: ['체험 후 제품 증정', '상세 리뷰 작성 필수'],
   },
   '13': {
     ...requireMyCampaign('13'),
@@ -252,7 +255,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '5566778899001',
     },
     requirements: ['디저트 리뷰어', '선물 추천 콘텐츠 제작 가능자'],
-    notices: ['상온 보관 가능', '유통기한 6개월', '견과류 알레르기 주의'],
+    experiencePrecautions: ['상온 보관 가능', '유통기한 6개월', '견과류 알레르기 주의'],
   },
   '14': {
     ...requireMyCampaign('14'),
@@ -272,7 +275,7 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '6677889900112',
     },
     requirements: ['향수 애호가', '뷰티 인플루언서'],
-    notices: ['직사광선 피해 보관', '피부 테스트 권장', '임산부 사용 주의'],
+    experiencePrecautions: ['직사광선 피해 보관', '피부 테스트 권장', '임산부 사용 주의'],
   },
   '15': {
     ...requireMyCampaign('15'),
@@ -292,6 +295,6 @@ export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
       trackingNumber: '7788990011223',
     },
     requirements: ['캐릭터 굿즈 애호가', '10-30대'],
-    notices: ['기종 선택 필수', '교환/반품 불가'],
+    experiencePrecautions: ['기종 선택 필수', '교환/반품 불가'],
   },
 };
