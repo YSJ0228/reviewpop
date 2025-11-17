@@ -4,13 +4,13 @@
  * 모든 도메인별 핸들러를 하나로 통합합니다.
  */
 
-import { authHandlers } from './auth';
-import { reviewHandlers } from './reviews';
-import { kakaoOAuthHandlers } from './oauth/kakao';
+import { authHandlers } from '@shared/api/mock/handlers/auth';
+import { reviewHandlers } from '@shared/api/mock/handlers/reviews';
+import { kakaoOAuthHandlers } from '@shared/api/mock/handlers/oauth/kakao';
 import { myCampaignHandlers } from '@entities/history/api/myMock';
 import { campaignHandlers } from '@entities/campaign/api/mock';
-import { applicationHandlers } from './applications';
-import { reservationHandlers } from './reservations';
+import { applicationHandlers } from '@shared/api/mock/handlers/applications';
+import { reservationHandlers } from '@shared/api/mock/handlers/reservations';
 
 /**
  * 모든 MSW 핸들러

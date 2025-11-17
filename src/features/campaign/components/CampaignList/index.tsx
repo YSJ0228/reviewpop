@@ -1,13 +1,12 @@
 'use client';
 
-import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
-import { STATUS_LABELS } from '@entities/history/types/myCampaign.types';
+import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/useCampaigns';
 import { CampaignCard } from '../CampaignCard';
-import type { MyCampaignListProps } from './types';
+import type { CampaignListProps } from './types';
 import styles from './style.module.scss';
 
-export function CampaignList({ status }: MyCampaignListProps) {
-  const { data: campaigns, isLoading, error } = useMyCampaigns();
+export function CampaignList({ status }: CampaignListProps) {
+  const { data: campaigns, isLoading, error } = useCampaigns();
 
   const filteredCampaigns = filterCampaignsByStatus(campaigns, status);
 
@@ -36,23 +35,21 @@ export function CampaignList({ status }: MyCampaignListProps) {
     );
   }
 
+  // TODO: 추후 조건 및 문구 수정
   if (filteredCampaigns.length === 0) {
     return (
-      <div
-        className={styles['CampaignList--Empty']}
-        role="status"
-        aria-label={`${STATUS_LABELS[status]} 상태의 캠페인이 없습니다`}
-      >
-        <p>해당 상태의 캠페인이 없습니다.</p>
+      <div className={styles['CampaignList--Empty']} role="status" aria-label={`체험이 없습니다`}>
+        <p>해당 체험이 없습니다.</p>
       </div>
     );
   }
 
+  //TODO: 추후 조건 및 문구 수정
   return (
     <div
       className={styles.CampaignList}
       role="feed"
-      aria-label={`${STATUS_LABELS[status]} 캠페인 목록`}
+      aria-label={`무슨무슨 체험 목록`}
       aria-busy={isLoading}
     >
       {filteredCampaigns.map((campaign) => (
