@@ -13,7 +13,7 @@ const MAX_BADGE_COUNT = 9;
 
 export function Gnb({ notification = 0 }: IGnbProps) {
   const validNotificationCount = useMemo(() => {
-    return Math.max(0, Math.floor(notification ?? 0));
+    return Math.max(0, Math.floor(notification));
   }, [notification]);
 
   return (
