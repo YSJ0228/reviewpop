@@ -6,3 +6,7 @@ export const MAIN_MESSAGES = {
 export const SUB_MESSAGES = {
   resultMessage: '에 선정 결과가 발표돼요',
 } as const;
+
+export const ERROR_MESSAGES = {
+  invalidDate: '날짜 오류',
+} as const;

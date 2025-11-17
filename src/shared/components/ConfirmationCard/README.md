@@ -21,8 +21,15 @@ import { ConfirmationCard } from '@shared/components/ConfirmationCard';
 
 // 표시: "체험단 방문 예약이 완료 되었어요!"
 // "9월 18일 수요일 오후 1:00" (파란색 색상)
+// 카드 타입: reservation(예약 완료) || application(신청 완료)
 <ConfirmationCard
   date={reservationDate}
+  type="reservation"
+/>
+
+// 아래와 같이 API에서 넘겨 받는 값 (DateInput 타입)
+<ConfirmationCard
+  date={new Date('2024-09-18T00:00:00Z')}
   type="reservation"
 />
 ```
@@ -35,7 +42,7 @@ import { ConfirmationCard } from '@shared/components/ConfirmationCard';
 // 표시: "체험단 신청이 완료되었어요!"
 // "12월 23일 목요일" (파란색) "에 선정 결과가 발표돼요" (검정색)
 <ConfirmationCard
-  date={announcementDate}
+  date={mockCampaigns[0].startDate}
   type="application"
 />
 

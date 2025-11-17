@@ -2,9 +2,9 @@ import dayjs from '@shared/lib/dayjs.config';
 
 import { formatDate, type DateInput } from '@shared/lib/date';
 
-import type { ConfirmationCardType } from './type';
+import type { TConfirmationCardType } from './type';
 
-import { SUB_MESSAGES } from './constants';
+import { ERROR_MESSAGES, SUB_MESSAGES } from './constants';
 
 /**
  * 타입별 날짜 포맷팅 함수
@@ -16,7 +16,7 @@ import { SUB_MESSAGES } from './constants';
  * @param type - 카드 타입 ('reservation' | 'application')
  * @returns 포맷팅된 날짜 텍스트와 결과 텍스트를 포함한 객체
  */
-export function formatDateForConfirmationCard(date: DateInput, type: ConfirmationCardType) {
+export function formatDateForConfirmationCard(date: DateInput, type: TConfirmationCardType) {
   const dayjsDate = dayjs(date);
 
   if (!dayjsDate.isValid()) {
@@ -24,23 +24,23 @@ export function formatDateForConfirmationCard(date: DateInput, type: Confirmatio
       console.error('Invalid date:', date);
     }
     return {
-      dateText: '날짜 오류',
+      dateText: ERROR_MESSAGES.invalidDate,
       resultText: type === 'application' ? SUB_MESSAGES.resultMessage : null,
     };
   }
 
   if (type === 'reservation') {
     const dateStr = formatDate(date, 'LONG');
-    const weekday = dayjsDate.format('dddd');
-    const timeStr = dayjsDate.format('A h:mm');
+    const weekday = dayjsDate.format(FORMAT_PATTERNS.WEEKDAY);
+    const timeStr = dayjsDate.format(FORMAT_PATTERNS.TIME);
 
     return {
       dateText: `${dateStr} ${weekday} ${timeStr}`,
       resultText: null,
     };
   } else {
-    const dateStr = dayjsDate.format('M월 D일');
-    const weekday = dayjsDate.format('dddd');
+    const dateStr = dayjsDate.format(FORMAT_PATTERNS.SHORT_DATE);
+    const weekday = dayjsDate.format(FORMAT_PATTERNS.WEEKDAY);
 
     return {
       dateText: `${dateStr} ${weekday}`,
@@ -48,3 +48,9 @@ export function formatDateForConfirmationCard(date: DateInput, type: Confirmatio
     };
   }
 }
+
+const FORMAT_PATTERNS = {
+  WEEKDAY: 'dddd',
+  TIME: 'A h:mm',
+  SHORT_DATE: 'M월 D일',
+} as const;
