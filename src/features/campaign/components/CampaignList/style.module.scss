@@ -1,0 +1,67 @@
+@use '../../../../shared/styles/mixins' as *;
+
+.CampaignList {
+  @include padding($all: 16);
+  @include flex($direction: column, $gap: 16);
+  overflow-y: auto;
+  min-height: 200px;
+}
+
+.CampaignList--Loading,
+.CampaignList--Error,
+.CampaignList--Empty {
+  @include flex($direction: column, $align: center, $justify: center);
+  min-height: 400px;
+  @include padding($y: 40, $x: 20);
+  text-align: center;
+}
+
+.CampaignList--Loading {
+  color: var(--gray-600);
+
+  span {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+}
+
+.CampaignList__Spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--primary-500);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.CampaignList--Error {
+  color: var(--error-500);
+
+  p {
+    @include margin($all: 0);
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+
+.CampaignList__ErrorMessage {
+  margin-top: 8px !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--gray-600) !important;
+}
+
+.CampaignList--Empty {
+  color: var(--gray-500);
+
+  p {
+    @include margin($all: 0);
+    font-size: 15px;
+  }
+}

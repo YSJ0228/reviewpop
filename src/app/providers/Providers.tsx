@@ -56,7 +56,7 @@ export function Providers({ children }: ProvidersProps) {
     if (env.useMock) {
       async function initMocks() {
         try {
-          const { worker } = await import('@shared/api/mock/browser');
+          const { worker } = await import('@mocks/browser');
           await worker.start({
             onUnhandledRequest: 'bypass', // 처리되지 않은 요청은 실제 API로 전달
           });

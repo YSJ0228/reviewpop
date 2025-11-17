@@ -10,11 +10,20 @@ export { CampaignList } from './components/CampaignList';
 export { CampaignTabs } from './components/CampaignTabs';
 
 // Hooks
-export { useCampaigns } from './hooks/useCampaigns';
-export { useCampaignDetail } from './hooks/useCampaignDetail';
+export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
+export { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 
 // Types
-export type { Campaign, CampaignStatus, CampaignDetail, TabKey } from './types/campaign.types';
-export { STATUS_LABELS, STATUS_DESCRIPTIONS, TAB_CONFIG } from './types/campaign.types';
-export type { CampaignCardProps } from './components/CampaignCard/types';
-export type { CampaignListProps } from './components/CampaignList/types';
+export type {
+  MyCampaign,
+  MyCampaignStatus,
+  MyCampaignDetail,
+  TabKey,
+} from '@entities/history/types/myCampaign.types';
+export {
+  STATUS_LABELS,
+  STATUS_DESCRIPTIONS,
+  TAB_CONFIG,
+} from '@entities/history/types/myCampaign.types';
+export type { MyCampaignCardProps } from './components/CampaignCard/types';
+export type { MyCampaignListProps } from './components/CampaignList/types';

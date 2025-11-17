@@ -5,8 +5,8 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 import { CampaignList } from '../CampaignList';
-import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '../../types/campaign.types';
-import type { TabKey } from '../../types/campaign.types';
+import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '@entities/history/types/myCampaign.types';
+import type { TabKey } from '@entities/history/types/myCampaign.types';
 import styles from './style.module.scss';
 
 // Swiper CSS 임포트

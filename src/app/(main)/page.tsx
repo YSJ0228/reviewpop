@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 
 import styles from './page.module.scss';
+import { CampaignList } from '@features/campaign';
 
 /**
  * 홈 페이지 (캠페인 목록)
@@ -27,10 +28,7 @@ export default function Home() {
           {/* TODO: Banner 컴포넌트 추가 */}
           {/* TODO: CampaignFilter 컴포넌트 추가 */}
           {/* TODO: CampaignList 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
-            <p>홈 - 캠페인 목록</p>
-            <p className={styles.Todo}>배너, 필터, 캠페인 목록 컴포넌트를 구현하세요</p>
-          </div>
+          <CampaignList status="active" />
         </Suspense>
       </ErrorBoundary>
     </main>
