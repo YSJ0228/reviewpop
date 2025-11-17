@@ -6,11 +6,11 @@ import { IconNotification } from '@pop-ui/foundation';
 
 import styles from './style.module.scss';
 
-import type { GnbProps } from './types';
+import type { IGnbProps } from './types';
 
 const MAX_BADGE_COUNT = 9;
 
-export function Gnb({ notification = 0 }: GnbProps) {
+export function Gnb({ notification = 0 }: IGnbProps) {
   const validNotificationCount = Math.max(0, Math.floor(notification ?? 0));
 
   return (
