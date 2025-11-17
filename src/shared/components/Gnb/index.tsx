@@ -2,12 +2,11 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { IconNotification } from '@pop-ui/foundation';
 
-import type { GnbProps } from './types';
-
 import styles from './style.module.scss';
+
+import type { GnbProps } from './types';
 
 const MAX_BADGE_COUNT = 9;
 
