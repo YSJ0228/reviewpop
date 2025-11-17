@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IconNotification } from '@pop-ui/foundation';
@@ -11,7 +12,9 @@ import type { IGnbProps } from './types';
 const MAX_BADGE_COUNT = 9;
 
 export function Gnb({ notification = 0 }: IGnbProps) {
-  const validNotificationCount = Math.max(0, Math.floor(notification ?? 0));
+  const validNotificationCount = useMemo(() => {
+    return Math.max(0, Math.floor(notification ?? 0));
+  }, [notification]);
 
   return (
     <header className={styles.Gnb}>
