@@ -28,3 +28,23 @@
 
   // TODO: 개발 완료 후 제거
 }
+
+.RejectedCampaignsPage__Header {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  height: 48px;
+  align-items: center;
+}
+
+.RejectedCampaignsPage__HeaderTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: var(--gray-900);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}

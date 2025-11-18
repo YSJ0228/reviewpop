@@ -8,43 +8,49 @@
     transform 0.2s ease,
     box-shadow 0.2s ease;
 
-  &:hover .CampaignCard {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
-  }
+  // &:hover .CampaignCard {
+  //   transform: translateY(-2px);
+  //   box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
+  // }
 
-  &:active .CampaignCard {
-    transform: translateY(0);
-  }
+  // &:active .CampaignCard {
+  //   transform: translateY(0);
+  // }
 
-  &:focus-visible {
-    outline: 2px solid var(--color-blue-500);
-    outline-offset: 2px;
-    border-radius: 12px;
-  }
+  // &:focus-visible {
+  //   outline: 2px solid var(--color-blue-500);
+  //   outline-offset: 2px;
+  //   border-radius: 12px;
+  // }
 }
 
 .CampaignCard {
+  display: flex;
+  width: 100%;
+  height: 120px;
   background: #fff;
-  border-radius: 12px;
+  // border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  border-bottom: 1px solid var(--gray-50);
+  // box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  padding: 16px;
+  gap: 16px; // 이미지와 텍스트 영역 사이 간격
+  box-sizing: border-box; // 패딩 포함한 크기 계산
 }
 
 .CampaignCard__ImageWrapper {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
   overflow: hidden;
+  border-radius: 8px;
 }
 
 .CampaignCard__Badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 5px;
+  right: 3px;
   @include padding($y: 6, $x: 12);
   background: rgb(0 0 0 / 85%);
   color: #fff;
@@ -55,8 +61,13 @@
 }
 
 .CampaignCard__Content {
-  @include padding($all: 16);
-  @include flex($direction: column, $gap: 8);
+  width: 224px;
+  height: 77px;
+  padding: 0; // 패딩 제거하여 정확한 크기 유지
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
 }
 
 .CampaignCard__Brand {
@@ -80,36 +91,9 @@
 }
 
 .CampaignCard__Meta {
-  @include flex($direction: column, $gap: 4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
   color: var(--gray-600);
-
-  time {
-    display: block;
-  }
-}
-
-.CampaignCard__Tags {
-  @include flex($align: center, $gap: 8);
-  @include margin($top: 4);
-}
-
-.CampaignCard__Tag {
-  display: inline-block;
-  @include padding($y: 4, $x: 10);
-  background: var(--gray-100);
-  color: var(--gray-700);
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.CampaignCard__Points {
-  display: inline-block;
-  @include padding($y: 4, $x: 10);
-  background: var(--primary-50);
-  color: var(--primary-600);
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
 }

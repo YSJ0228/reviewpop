@@ -7,7 +7,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     title: '신제품 커피 체험단 모집',
     brand: '스타벅스',
     imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
-    status: 'applied',
+    status: 'rejected',
     applicationDate: '2025-11-01',
     deadline: '2025-11-15',
     category: '음료',

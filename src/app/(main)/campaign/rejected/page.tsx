@@ -6,6 +6,8 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 
 import styles from './page.module.scss';
 
+import { RejectedList } from '@features/history/components/RejectedList';
+import { IconArrowLeft } from '@pop-ui/foundation';
 /**
  * 미선정 체험 페이지
  * - 하단 탭: O (나의 체험 활성화)
@@ -23,12 +25,14 @@ export default function RejectedCampaignsPage() {
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: RejectedList 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
-            <p>미선정 체험 목록</p>
-            <p className={styles.Todo}>
-              features/history/components/RejectedList 컴포넌트를 구현하세요
-            </p>
+          <div className={styles.RejectedCampaignsPage__Header}>
+            <IconArrowLeft />
+            <span className={styles.RejectedCampaignsPage__HeaderTitle}>미선정 체험 내역</span>
           </div>
+          {/* <p className={styles.Todo}> */}
+          {/* features/history/components/RejectedList 컴포넌트를 구현하세요 */}
+          <RejectedList />
+          {/* </p> */}
         </Suspense>
       </ErrorBoundary>
     </main>

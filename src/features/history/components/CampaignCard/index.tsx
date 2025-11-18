@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { STATUS_LABELS } from '@entities/history/types/myCampaign.types';
-import { formatDate } from '@shared/lib/date';
 import type { MyCampaignCardProps } from './types';
 import styles from './style.module.scss';
 
@@ -26,27 +25,9 @@ export function CampaignCard({ campaign }: MyCampaignCardProps) {
         </div>
         <div className={styles.CampaignCard__Content}>
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
-          <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
           <div className={styles.CampaignCard__Meta}>
-            <time dateTime={campaign.applicationDate}>
-              신청일: {formatDate(campaign.applicationDate, 'SHORT')}
-            </time>
-            {campaign.deadline && (
-              <time dateTime={campaign.deadline}>
-                마감: {formatDate(campaign.deadline, 'SHORT')}
-              </time>
-            )}
+            <p>{campaign.title}</p>
           </div>
-          {campaign.category && (
-            <div className={styles.CampaignCard__Tags}>
-              <span className={styles.CampaignCard__Tag}>{campaign.category}</span>
-              {campaign.points && (
-                <span className={styles.CampaignCard__Points}>
-                  {campaign.points.toLocaleString()}P
-                </span>
-              )}
-            </div>
-          )}
         </div>
       </article>
     </Link>
