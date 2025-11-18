@@ -3,7 +3,7 @@ import { IconCopy } from '@pop-ui/foundation';
 
 import { BUTTON_LABEL } from './constants';
 
-import { WebButtonType } from './types';
+import { WebButtonProps } from './types';
 
 import styles from './style.module.scss';
 
@@ -13,14 +13,14 @@ export function WebButton({
   text = '',
   label,
   isConnected = false,
-}: WebButtonType) {
+}: WebButtonProps) {
   const buttonClass = `Button--${buttonType.charAt(0).toUpperCase()}${buttonType.slice(1)}`;
   const isImage = ['edit', 'connect'].includes(buttonType);
 
   return (
     <div>
       <div className={styles.WebButton__LabelBox}>
-        <label className={styles.WebButton__Label} htmlFor="web-button">
+        <label className={styles.WebButton__Label} htmlFor={label}>
           {label}
         </label>
         {isConnected && <span className={styles.WebButton__Connect}>연결됨</span>}
@@ -37,7 +37,7 @@ export function WebButton({
             />
           )}
           <input
-            id="web-button"
+            id={label}
             className={styles.WebButton__Input}
             placeholder="블로그를 연결해주세요"
             value={text}
@@ -46,7 +46,6 @@ export function WebButton({
         </div>
         <button
           onClick={onClick}
-          disabled
           className={`${styles.WebButton__Button} ${styles[`WebButton__${buttonClass}`]}`}
         >
           {buttonType === 'copy' && <IconCopy size={16} />}

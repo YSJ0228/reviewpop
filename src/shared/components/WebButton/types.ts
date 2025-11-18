@@ -1,6 +1,6 @@
 export type TButtonType = 'copy' | 'edit' | 'connect';
 
-export interface WebButtonType {
+export interface WebButtonProps {
   label: string;
   isConnected?: boolean;
   buttonType: TButtonType;
