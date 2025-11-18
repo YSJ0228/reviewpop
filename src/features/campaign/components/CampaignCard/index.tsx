@@ -33,7 +33,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           <div className={styles.CampaignCard__Header}>
             <span className={styles.CampaignCard__Brand}>{campaign.brand}</span>
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
-            <h3 className={styles.CampaignCard__Items}>{campaign.providedItems.join(' + ')}</h3>
+            <p className={styles.CampaignCard__Items}>{campaign.providedItems.join(' + ')}</p>
           </div>
           <div className={styles.CampaignCard__Content}>
             <div>
@@ -48,14 +48,14 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
               </div>
               <div className={styles.CampaignCard__Meta}>
                 <span>체험단 모집</span>
-                <time dateTime={campaign.schedule.applicationSchedule.join()}>
+                <time dateTime={campaign.schedule.applicationSchedule[0]}>
                   {applicationSchedule.join(' ~ ')}
                 </time>
               </div>
             </div>
-            <button className={styles.CampaignCard__Button}>
+            <div className={styles.CampaignCard__Button} aria-hidden={true}>
               <IconArrowRight color="white" />
-            </button>
+            </div>
           </div>
         </div>
       </article>
