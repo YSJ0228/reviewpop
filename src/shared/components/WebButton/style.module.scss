@@ -1,0 +1,69 @@
+@use '../../../shared/styles/mixins' as *;
+
+.WebButton__InputBox {
+  @include size($height: 54);
+  border-color: var(--gray-100);
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  @include padding($all: 12);
+  @include flex($align: center, $justify: space-between);
+}
+.WebButton__ImageInput {
+  @include flex($align: center, $gap: 8);
+}
+.WebButton__Input {
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-800);
+  &:focus {
+    outline: none;
+  }
+  pointer-events: none;
+  caret-color: transparent;
+}
+.WebButton__Button {
+  @include padding($x: 8);
+  @include size($height: 30);
+  border-color: var(--gray-100);
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  @include flex($justify: center, $align: center);
+}
+.WebButton__Label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.WebButton__Connect {
+  color: var(--color-blue-500);
+  font-size: 14px;
+  font-weight: 600;
+  @include margin($left: 8);
+}
+
+.WebButton__LabelBox {
+  @include margin($bottom: 8);
+  @include flex();
+}
+
+.WebButton__Button--Copy {
+  color: var(--gray-800);
+  border-color: var(--gray-100);
+}
+
+.WebButton__Button--Edit {
+  color: var(--gray-800);
+  border-color: var(--gray-100);
+}
+
+.WebButton__Button--Connect {
+  color: var(--color-aqua-500);
+  border-color: var(--color-aqua-500);
+}
