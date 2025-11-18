@@ -6,6 +6,10 @@
 
 import dayjs, { type Dayjs } from 'dayjs';
 
+import 'dayjs/locale/ko';
+
+dayjs.locale('ko');
+
 /**
  * 날짜 포맷 상수
  *
@@ -15,6 +19,12 @@ import dayjs, { type Dayjs } from 'dayjs';
  * - DATETIME: 시간까지 포함된 짧은 표기
  * - FULL_DATETIME: 시간까지 포함된 긴 표기
  * - ISO: API 통신용 ISO 8601 표준 형식
+ * - MMDD_SHORT: MM.DD
+ * - MMDD_LONG: M월 D일
+ * - MMDD_DDD_SHORT: MM.DD(월)
+ * - MMDD_DDD_LONG: M월 D일 (월)
+ * - MMDD_DDDD_SHORT: MM.DD 월요일
+ * - MMDD_DDDD_LONG: M월 D일 월요일
  */
 export const DATE_FORMATS = {
   SHORT: 'YYYY.MM.DD',
@@ -22,6 +32,12 @@ export const DATE_FORMATS = {
   DATETIME: 'YYYY.MM.DD HH:mm',
   FULL_DATETIME: 'YYYY년 M월 D일 HH:mm',
   ISO: 'YYYY-MM-DDTHH:mm:ssZ',
+  MMDD_SHORT: 'MM.DD',
+  MMDD_LONG: 'M월 D일',
+  MMDD_DDD_SHORT: 'MM.DD(ddd)',
+  MMDD_DDD_LONG: 'M월 D일 (ddd)',
+  MMDD_DDDD_SHORT: 'MM.DD dddd',
+  MMDD_DDDD_LONG: 'M월 D일 dddd',
 } as const;
 
 /**
