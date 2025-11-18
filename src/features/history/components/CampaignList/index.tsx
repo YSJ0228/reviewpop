@@ -17,7 +17,7 @@ export function CampaignList({ status }: MyCampaignListProps) {
         className={styles['CampaignList--Loading']}
         role="status"
         aria-live="polite"
-        aria-label="캠페인 목록 로딩 중"
+        aria-label="체험 목록 로딩 중"
       >
         <div className={styles.CampaignList__Spinner} />
         <span>로딩 중...</span>
@@ -41,9 +41,9 @@ export function CampaignList({ status }: MyCampaignListProps) {
       <div
         className={styles['CampaignList--Empty']}
         role="status"
-        aria-label={`${STATUS_LABELS[status]} 상태의 캠페인이 없습니다`}
+        aria-label={`${STATUS_LABELS[status]} 상태의 체험이 없습니다`}
       >
-        <p>해당 상태의 캠페인이 없습니다.</p>
+        <p>해당 상태의 체험이 없습니다.</p>
       </div>
     );
   }
@@ -52,7 +52,7 @@ export function CampaignList({ status }: MyCampaignListProps) {
     <div
       className={styles.CampaignList}
       role="feed"
-      aria-label={`${STATUS_LABELS[status]} 캠페인 목록`}
+      aria-label={`${STATUS_LABELS[status]} 체험 목록`}
       aria-busy={isLoading}
     >
       {filteredCampaigns.map((campaign) => (

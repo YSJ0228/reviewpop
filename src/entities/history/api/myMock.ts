@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 import { mockMyCampaignDetails, mockMyCampaigns } from '../lib';
 
 export const myCampaignHandlers = [
-  // 캠페인 목록 조회
+  // 체험 목록 조회
   http.get('/api/my-campaigns', () => {
     return HttpResponse.json({
       data: mockMyCampaigns,
@@ -10,7 +10,7 @@ export const myCampaignHandlers = [
     });
   }),
 
-  // 캠페인 상세 조회
+  // 체험 상세 조회
   http.get('/api/my-campaigns/:id', ({ params }) => {
     const { id } = params;
     const campaign = mockMyCampaignDetails[String(id)];
@@ -19,7 +19,7 @@ export const myCampaignHandlers = [
       return HttpResponse.json(
         {
           success: false,
-          message: '캠페인을 찾을 수 없습니다.',
+          message: '체험을 찾을 수 없습니다.',
         },
         { status: 404 },
       );

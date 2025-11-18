@@ -384,7 +384,7 @@ export function getReservationsByUserId(userId: string): Reservation[] {
 }
 
 /**
- * 캠페인별 예약 목록 조회
+ * 체험별 예약 목록 조회
  */
 export function getReservationsByCampaignId(campaignId: string): Reservation[] {
   return mockReservations.filter((res) => res.campaignId === campaignId);

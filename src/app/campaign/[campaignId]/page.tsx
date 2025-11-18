@@ -21,7 +21,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       <div className={styles.Page}>
         <PageHeader showBackButton />
         <div className={styles.Page__Loading}>
-          <p>캠페인 정보를 불러오는 중...</p>
+          <p>체험 정보를 불러오는 중...</p>
         </div>
       </div>
     );
@@ -32,7 +32,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       <div className={styles.Page}>
         <PageHeader showBackButton />
         <div className={styles.Page__Error}>
-          <p>캠페인 정보를 불러올 수 없습니다.</p>
+          <p>체험 정보를 불러올 수 없습니다.</p>
         </div>
       </div>
     );
@@ -99,9 +99,9 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         </div>
       </section>
 
-      {/* 캠페인 소개 */}
+      {/* 체험 소개 */}
       <section className={styles.Page__Section}>
-        <h2 className={styles.Page__SectionTitle}>캠페인 소개</h2>
+        <h2 className={styles.Page__SectionTitle}>체험 소개</h2>
         <p className={styles.Page__Description}>{campaign.description}</p>
       </section>
 

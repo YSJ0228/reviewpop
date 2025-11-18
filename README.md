@@ -756,7 +756,7 @@ git commit -m "feat: 로그인 기능 추가"
 **읽을 문서:**
 
 1. ✅ [src/features/review/README.md](src/features/review/README.md) - 리뷰 기능 예시
-2. ✅ [src/features/history/README.md](src/features/history/README.md) - 캠페인 히스토리 예시
+2. ✅ [src/features/history/README.md](src/features/history/README.md) - 체험 히스토리 예시
 3. ✅ [src/entities/user/README.md](src/entities/user/README.md) - 사용자 엔티티
 
 **체크리스트:**
@@ -769,12 +769,12 @@ git commit -m "feat: 로그인 기능 추가"
 
 **실습 과제:**
 
-**과제 1: 캠페인 목록 표시하기**
+**과제 1: 체험 목록 표시하기**
 
 1. `features/history/hooks/useCampaigns.ts` 열어보기
 2. 새 페이지에서 `useCampaigns` 훅 사용
 3. 로딩/에러 상태 처리
-4. 캠페인 목록 렌더링
+4. 체험 목록 렌더링
 
 **과제 2: 새로운 컴포넌트 만들기**
 
