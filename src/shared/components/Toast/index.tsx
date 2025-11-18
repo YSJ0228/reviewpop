@@ -16,6 +16,16 @@ import type { IToastOptions, TToastInput, ToastProviderProps } from './types';
 
 import styles from './style.module.scss';
 
+// 상수 정의
+const TOAST_ANIMATION_DURATION = 300;
+const TOAST_DEFAULT_AUTO_CLOSE = 4000;
+const ICON_SIZE = 24 as const;
+const SUCCESS_COLOR = '#0FD3D8' as const;
+const ERROR_COLOR = '#FF922B' as const;
+
+// Toast ID 생성 카운터
+let toastCounter = 0;
+
 type IToast = IToastOptions & { id: string };
 
 interface ToastContextType {
@@ -36,34 +46,10 @@ let toastContextRef: ToastContextType | null = null;
  */
 export function ToastProvider({ children }: ToastProviderProps) {
   const [toasts, setToasts] = useState<IToast[]>([]);
-  const timersRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
-  const clearTimer = useCallback((id: string) => {
-    const timer = timersRef.current.get(id);
-    if (timer) {
-      clearTimeout(timer);
-      timersRef.current.delete(id);
-    }
+  const hideToast = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
-
-  const clearAllTimers = useCallback(() => {
-    timersRef.current.forEach((timer) => clearTimeout(timer));
-    timersRef.current.clear();
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      clearAllTimers();
-    };
-  }, [clearAllTimers]);
-
-  const hideToast = useCallback(
-    (id: string) => {
-      clearTimer(id);
-      setToasts((prev) => prev.filter((toast) => toast.id !== id));
-    },
-    [clearTimer],
-  );
 
   const showToast = useCallback((toast: IToast) => {
     setToasts((prev) => {
@@ -84,9 +70,8 @@ export function ToastProvider({ children }: ToastProviderProps) {
   }, []);
 
   const cleanToasts = useCallback(() => {
-    clearAllTimers();
     setToasts([]);
-  }, [clearAllTimers]);
+  }, []);
 
   const contextValue: ToastContextType = useMemo(
     () => ({
@@ -121,7 +106,6 @@ export function ToastProvider({ children }: ToastProviderProps) {
 function ToastContainer() {
   const context = useContext(ToastContext);
   if (!context) {
-    console.warn('ToastContainer: context가 없습니다');
     return null;
   }
 
@@ -144,36 +128,60 @@ function ToastContainer() {
 function ToastItem({ toast }: { toast: IToast }) {
   const context = useContext(ToastContext);
   const [isExiting, setIsExiting] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const contextRef = useRef(context);
+
+  // context ref 업데이트
+  useEffect(() => {
+    contextRef.current = context;
+  }, [context]);
 
   const handleRemove = useCallback(() => {
-    if (!context) return;
+    if (!contextRef.current) return;
     setIsExiting(true);
     setTimeout(() => {
-      context.hideToast(toast.id);
-    }, 300);
-  }, [context, toast.id]);
+      contextRef.current?.hideToast(toast.id);
+    }, TOAST_ANIMATION_DURATION);
+  }, [toast.id]);
+
+  const toastClassName = useMemo(
+    () =>
+      `${styles.Toast} ${isExiting ? styles['Toast--Exiting'] : ''} ${
+        toast.fitContent ? styles['Toast--FitContent'] : ''
+      }`,
+    [isExiting, toast.fitContent],
+  );
 
   useEffect(() => {
     if (!context) return;
+
+    // 이전 타이머 정리
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+
     // autoClose가 명시적으로 false가 아니면 기본 4초
     if (toast.autoClose !== false) {
-      const autoCloseTime = toast.autoClose || 4000;
-      const timer = setTimeout(() => {
+      const autoCloseTime = toast.autoClose || TOAST_DEFAULT_AUTO_CLOSE;
+      timerRef.current = setTimeout(() => {
         handleRemove();
       }, autoCloseTime);
-
-      return () => clearTimeout(timer);
     }
-  }, [toast.id, toast.autoClose, handleRemove, context]);
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toast.id, toast.autoClose]);
 
   if (!context) return null;
 
   return (
-    <div
-      className={`${styles.Toast} ${isExiting ? styles['Toast--Exiting'] : ''} ${
-        toast.fitContent ? styles['Toast--FitContent'] : ''
-      }`}
-    >
+    <div className={toastClassName}>
       {toast.icon && <div className={styles.Toast__Icon}>{toast.icon}</div>}
       <div className={styles.Toast__Message}>{toast.message}</div>
     </div>
@@ -194,9 +202,9 @@ export const toast = ((input: TToastInput): void => {
   const options: IToastOptions = typeof input === 'string' ? { message: input } : input;
   const { message, id, icon, autoClose, fitContent } = options;
 
-  const toastId = id || `toast-${Date.now()}-${Math.random()}`;
+  const toastId = id || `toast-${Date.now()}-${++toastCounter}`;
 
-  const finalAutoClose = autoClose !== undefined ? autoClose : 4000;
+  const finalAutoClose = autoClose !== undefined ? autoClose : TOAST_DEFAULT_AUTO_CLOSE;
 
   // id가 명시된 경우 fitContent를 기본적으로 true로 설정
   const finalFitContent =
@@ -227,10 +235,11 @@ toast.update = (id: string, input: TToastInput): void => {
   const options: IToastOptions = typeof input === 'string' ? { message: input } : input;
   const { message, icon, autoClose, fitContent } = options;
 
-  const finalAutoClose = autoClose !== undefined ? autoClose : 4000;
+  const finalAutoClose = autoClose !== undefined ? autoClose : TOAST_DEFAULT_AUTO_CLOSE;
 
   // icon이 명시되지 않았을 때 자동으로 IconCheckCircle 추가
-  const finalIcon = icon !== undefined ? icon : <IconCheckCircle size={24} color="#0FD3D8" />;
+  const finalIcon =
+    icon !== undefined ? icon : <IconCheckCircle size={ICON_SIZE} color={SUCCESS_COLOR} />;
 
   toastContextRef.updateToast(id, {
     message,
@@ -246,13 +255,14 @@ toast.success = (message: string, options?: Omit<IToastOptions, 'message' | 'ico
     return;
   }
 
-  const toastId = options?.id || `toast-${Date.now()}-${Math.random()}`;
-  const finalAutoClose = options?.autoClose !== undefined ? options.autoClose : 4000;
+  const toastId = options?.id || `toast-${Date.now()}-${++toastCounter}`;
+  const finalAutoClose =
+    options?.autoClose !== undefined ? options.autoClose : TOAST_DEFAULT_AUTO_CLOSE;
 
   toastContextRef.showToast({
     id: toastId,
     message,
-    icon: <IconCheckCircle size={24} color="#0FD3D8" />,
+    icon: <IconCheckCircle size={ICON_SIZE} color={SUCCESS_COLOR} />,
     autoClose: finalAutoClose,
   });
 };
@@ -263,13 +273,14 @@ toast.error = (message: string, options?: Omit<IToastOptions, 'message' | 'icon'
     return;
   }
 
-  const toastId = options?.id || `toast-${Date.now()}-${Math.random()}`;
-  const finalAutoClose = options?.autoClose !== undefined ? options.autoClose : 4000;
+  const toastId = options?.id || `toast-${Date.now()}-${++toastCounter}`;
+  const finalAutoClose =
+    options?.autoClose !== undefined ? options.autoClose : TOAST_DEFAULT_AUTO_CLOSE;
 
   toastContextRef.showToast({
     id: toastId,
     message,
-    icon: <IconWarningCircle size={24} color="#FF922B" />,
+    icon: <IconWarningCircle size={ICON_SIZE} color={ERROR_COLOR} />,
     autoClose: finalAutoClose,
   });
 };

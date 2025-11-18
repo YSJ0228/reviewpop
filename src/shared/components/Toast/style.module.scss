@@ -9,15 +9,6 @@
   flex-direction: column-reverse;
   align-items: center;
   padding: 12px;
-
-  // 정렬 변형
-  &--Left {
-    align-items: flex-start;
-  }
-
-  &--Right {
-    align-items: flex-end;
-  }
 }
 
 .Toast {
@@ -27,7 +18,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 8%);
   min-height: 48px;
-  height: 48px;
+  height: auto;
   padding: 12px 20px;
   display: flex;
   align-items: center;
@@ -42,8 +33,10 @@
   }
 
   &--FitContent {
-    width: auto;
-    min-width: fit-content;
+    width: max-content;
+    max-width: 344px;
+    height: auto;
+    min-height: 48px;
   }
 
   &__Icon {
@@ -60,7 +53,8 @@
     font-weight: 600;
     text-align: left;
     line-height: 150%;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
   }
 }
 
