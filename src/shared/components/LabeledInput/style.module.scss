@@ -1,0 +1,71 @@
+@use '../../../shared/styles/mixins' as *;
+
+.LabeledInput {
+  @include flex($gap: 4, $direction: column);
+  @include margin($bottom: 4);
+}
+.LabeledInput__Label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+.LabeledInput__BlogLink {
+  font-weight: 500;
+  color: var(--gray-400);
+  font-size: 14px;
+}
+.LabeledInput__BlogId {
+  font-weight: 600;
+  color: var(--gray-600);
+  font-size: 14px;
+}
+.LabeledInput__InputSection {
+  @include flex($direction: row, $gap: 4);
+  @include margin($top: 4);
+}
+.LabeledInput__Input {
+  border-color: var(--gray-100);
+  border-radius: 10px;
+  border-width: 1px;
+  box-shadow: none;
+  border-style: solid;
+  @include flex($align: center);
+  @include padding($left: 16);
+  @include size($height: 50, $width: 100%);
+  &:focus {
+    outline: none;
+  }
+}
+.LabeledInput__Button {
+  @include size($width: 68, $height: 50);
+  border-radius: 10px;
+  background-color: var(--color-aqua-500);
+  border-style: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+  cursor: pointer;
+  &:disabled {
+    background-color: var(--gray-300);
+    cursor: not-allowed;
+  }
+  &:hover {
+    background-color: var(--color-aqua-400);
+  }
+}
+.LabeledInput__SuccessMsg {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-blue-500);
+  @include margin($top: 8);
+}
+.LabeledInput__ErrorMsg {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-red-500);
+  @include margin($top: 8);
+}
+.LabeledInput__InputMessage {
+  @include size($width: 100%);
+}
