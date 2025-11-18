@@ -2,6 +2,9 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import '@shared/styles/globals.scss';
 import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';
+import '@mantine/core/styles.css';
+
+import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 
 import { Providers } from './providers/Providers';
 
@@ -13,11 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className={`${fontClasses}`}>
         <div className="AppContainer">
           <Providers>
-            <ErrorBoundary>{children}</ErrorBoundary>
+            <MantineProvider>
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </MantineProvider>
           </Providers>
         </div>
       </body>
