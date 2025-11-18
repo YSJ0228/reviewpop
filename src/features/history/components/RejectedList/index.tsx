@@ -25,7 +25,7 @@ export function RejectedList() {
     );
   }
 
-  if (campaigns?.length === 0) {
+  if (rejectedCampaigns.length === 0) {
     return (
       <div role="status" aria-label="미선정 체험이 없습니다.">
         <p>미선정 캠페인이 없습니다.</p>

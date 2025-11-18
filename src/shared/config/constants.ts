@@ -95,6 +95,6 @@ export const CONSTANTS = {
   /** 기본 값 카운팅 관련 */
   DEFAULT_COUNT: {
     /** 최대 모집 인원 */
-    MAX_RECRUITMENT: 0,
+    MAX_RECRUITMENT: 10,
   },
 } as const;

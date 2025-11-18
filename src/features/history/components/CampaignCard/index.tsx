@@ -8,7 +8,7 @@ import type { MyCampaignCardProps } from './types';
 import styles from './style.module.scss';
 import { CONSTANTS } from '@shared/config/constants';
 
-export function CampaignCard({ campaign }: MyCampaignCardProps) {
+export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
       <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
@@ -26,7 +26,7 @@ export function CampaignCard({ campaign }: MyCampaignCardProps) {
 
           <p className={styles.CampaignCard__Title}>{campaign.title}</p>
 
-          {campaign.status === 'rejected' && (
+          {type === 'rejected' && (
             <div className={styles.CampaignCard__Date}>
               <time dateTime={campaign.applicationDate}>
                 모집 {dayjs(campaign.applicationDate).format('MM.DD')}
