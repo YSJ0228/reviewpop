@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
+import { CONSTANTS } from '@shared/config/constants';
 
 export function CampaignCard({ campaign }: MyCampaignCardProps) {
   return (
@@ -27,12 +28,13 @@ export function CampaignCard({ campaign }: MyCampaignCardProps) {
 
           {campaign.status === 'rejected' && (
             <div className={styles.CampaignCard__Date}>
-              <time dateTime={`${campaign.applicationDate}/${campaign.deadline}`}>
-                모집 {dayjs(campaign.applicationDate).format('MM.DD')} ~{' '}
-                {dayjs(campaign.deadline).format('MM.DD')}
+              <time dateTime={campaign.applicationDate}>
+                모집 {dayjs(campaign.applicationDate).format('MM.DD')}
               </time>
+              <span> ~ </span>
+              <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
               <span className={styles.CampaignCard__MaxRecruitment}>
-                {campaign.maxRecruitment ?? 16}명 선정
+                {campaign.maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}명 선정
               </span>
             </div>
           )}
