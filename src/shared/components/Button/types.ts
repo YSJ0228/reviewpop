@@ -10,7 +10,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** 버튼 내부에 표시될 내용 (텍스트, 아이콘 등) */
   children: ReactNode;
   /** 버튼 스타일 변형 */
-  variant?: 'primary' | 'secondary' | 'outline' | 'text';
+  variant?: 'primary' | 'secondary' | 'outline' | 'text' | 'warning';
   /** 버튼 크기 */
   size?: 'small' | 'medium' | 'large';
   /** 전체 너비 사용 여부 */
