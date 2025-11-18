@@ -7,9 +7,9 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import styles from './page.module.scss';
 
 /**
- * 캠페인 방문 예약 페이지
+ * 체험 방문 예약 페이지
  * - 하단 탭: X
- * - 선정된 캠페인의 방문 예약 폼
+ * - 선정된 체험의 방문 예약 폼
  * - 진입점: 나의 체험 > 신청 탭 > 예약하기 버튼
  *
  * TODO:
@@ -26,7 +26,7 @@ export default function CampaignReservePage({ params }: { params: { campaignId: 
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: ReserveForm 컴포넌트 추가 */}
           <div className={styles.Placeholder}>
-            <p>캠페인 ID: {params.campaignId}</p>
+            <p>체험 ID: {params.campaignId}</p>
             <p>방문 예약하기</p>
             <p className={styles.Todo}>
               features/reserve/components/ReserveForm 컴포넌트를 구현하세요

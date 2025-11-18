@@ -1,8 +1,8 @@
 /**
- * Mock 캠페인 데이터
+ * Mock 체험 데이터
  *
- * 기본 캠페인 엔티티 데이터를 관리합니다.
- * 총 15개의 캠페인 데이터로 다양한 상태와 카테고리를 시뮬레이션합니다.
+ * 기본 체험 엔티티 데이터를 관리합니다.
+ * 총 15개의 체험 데이터로 다양한 상태와 카테고리를 시뮬레이션합니다.
  */
 
 import type {
@@ -35,7 +35,7 @@ const createSchedule = (
  * - closed (마감): 10개
  */
 export const mockCampaigns: Campaign[] = [
-  // Active 캠페인 (5개)
+  // Active 체험 (5개)
   {
     id: '1',
     title: '신제품 커피 체험단 모집',
@@ -183,7 +183,7 @@ export const mockCampaigns: Campaign[] = [
     createdAt: '2025-10-09T00:00:00Z',
   },
 
-  // Closed 캠페인 (10개) - 신청 마감되고 선정 완료
+  // Closed 체험 (10개) - 신청 마감되고 선정 완료
   {
     id: '6',
     title: '유기농 화장품 체험단',
@@ -484,28 +484,28 @@ export function findCampaignById(id: string): Campaign | undefined {
 }
 
 /**
- * 상태별 캠페인 목록 조회
+ * 상태별 체험 목록 조회
  */
 export function getCampaignsByStatus(status: CampaignStatus): Campaign[] {
   return mockCampaigns.filter((campaign) => campaign.status === status);
 }
 
 /**
- * 카테고리별 캠페인 목록 조회
+ * 카테고리별 체험 목록 조회
  */
 export function getCampaignsByCategory(category: CampaignCategory): Campaign[] {
   return mockCampaigns.filter((campaign) => campaign.category === category);
 }
 
 /**
- * 진행 중인 캠페인 목록 조회
+ * 진행 중인 체험 목록 조회
  */
 export function getActiveCampaigns(): Campaign[] {
   return getCampaignsByStatus('active');
 }
 
 /**
- * 마감된 캠페인 목록 조회
+ * 마감된 체험 목록 조회
  */
 export function getClosedCampaigns(): Campaign[] {
   return getCampaignsByStatus('closed');

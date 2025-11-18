@@ -7,9 +7,9 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import styles from './page.module.scss';
 
 /**
- * 캠페인 신청 페이지
+ * 체험 신청 페이지
  * - 하단 탭: X
- * - 캠페인 신청 폼
+ * - 체험 신청 폼
  *
  * TODO:
  * 1. [ ] ApplyForm 컴포넌트 구현 (@features/campaign/components/ApplyForm)
@@ -25,8 +25,8 @@ export default function CampaignApplyPage({ params }: { params: { campaignId: st
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: ApplyForm 컴포넌트 추가 */}
           <div className={styles.Placeholder}>
-            <p>캠페인 ID: {params.campaignId}</p>
-            <p>캠페인 신청 폼</p>
+            <p>체험 ID: {params.campaignId}</p>
+            <p>체험 신청 폼</p>
             <p className={styles.Todo}>
               features/campaign/components/ApplyForm 컴포넌트를 구현하세요
             </p>

@@ -34,7 +34,7 @@ export const CONSTANTS = {
 
   /** 로컬 스토리지 키 */
   STORAGE_KEYS: {
-    /** 인증 토큰 (deprecated - 쿠키 사용) */
+    /** 인증 토큰 (deprecated 쿠키 사용) */
     AUTH_TOKEN: 'auth_token',
     /** 사용자 정보 (deprecated - 서버 세션 사용) */
     USER: 'user',
@@ -76,5 +76,19 @@ export const CONSTANTS = {
       /** 사용자 정보 URL */
       USER_INFO_URL: 'https://openapi.naver.com/v1/nid/me',
     },
+  },
+
+  /**z-index */
+  Z_INDEX: {
+    PAGE: 0,
+    STICKY: 10,
+    DROPDOWN: 100,
+    MODAL_BACKDROP: 900,
+    MODAL: 1000,
+    BOTTOMSHEET_BACKDROP: 1900,
+    BOTTOMSHEET: 2000,
+    ACTIONSHEET_BACKDROP: 2900,
+    ACTIONSHEET: 3000,
+    TOAST: 5000,
   },
 } as const;

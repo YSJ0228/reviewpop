@@ -7,7 +7,7 @@ interface CampaignsResponse {
 }
 
 /**
- * 캠페인 목록을 가져오는 React Query 훅
+ * 체험 목록을 가져오는 React Query 훅
  */
 export function useCampaigns() {
   return useQuery({
@@ -15,7 +15,7 @@ export function useCampaigns() {
     queryFn: async (): Promise<Campaign[]> => {
       const response = await fetch('/api/campaigns');
       if (!response.ok) {
-        throw new Error('캠페인 목록을 불러오는데 실패했습니다.');
+        throw new Error('체험 목록을 불러오는데 실패했습니다.');
       }
       const json: CampaignsResponse = await response.json();
       return json.data;
@@ -24,7 +24,7 @@ export function useCampaigns() {
 }
 
 /**
- * 특정 상태의 캠페인만 필터링하는 헬퍼 함수
+ * 특정 상태의 체험만 필터링하는 헬퍼 함수
  */
 export function filterCampaignsByStatus(
   campaigns: Campaign[] | undefined,

@@ -11,7 +11,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
         <div className={styles.CampaignCard__ImageWrapper}>
           <Image
             src={campaign.imageUrl}
-            alt={`${campaign.brand} ${campaign.title} 캠페인 이미지`}
+            alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: 'cover' }}
