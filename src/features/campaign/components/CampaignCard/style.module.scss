@@ -19,20 +19,21 @@
       transform 0.2s ease,
       box-shadow 0.2s ease;
 
-    &:hover .CampaignCard {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
-    }
+    // TODO: 아직 인터렉션 디자인이 확정되지 않음
+    // &:hover .CampaignCard {
+    //   transform: translateY(-2px);
+    //   box-shadow: 0 4px 12px rgb(0 0 0 / 12%);
+    // }
 
-    &:active .CampaignCard {
-      transform: translateY(0);
-    }
+    // &:active .CampaignCard {
+    //   transform: translateY(0);
+    // }
 
-    &:focus-visible {
-      outline: 2px solid var(--color-blue-500);
-      outline-offset: 2px;
-      border-radius: 12px;
-    }
+    // &:focus-visible {
+    //   outline: 2px solid var(--color-blue-500);
+    //   outline-offset: 2px;
+    //   border-radius: 12px;
+    // }
   }
 
   &__Wrapper {
@@ -75,6 +76,7 @@
     display: flex;
     gap: 8px;
     font-size: 14px;
+    font-weight: 500;
     letter-spacing: -0.28px;
     color: rgba(255 255 255 / 60%);
     height: 24px;
@@ -119,6 +121,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     letter-spacing: -0.48px;
+    margin-bottom: 4px;
   }
 
   &__Items {
@@ -131,36 +134,38 @@
   }
 
   &__Meta {
-    @include flex($direction: column, $gap: 4);
+    @include flex($direction: row, $gap: 8);
     font-size: 12px;
     font-weight: 500;
     color: #fff;
     line-height: 1.5;
     letter-spacing: -0.24px;
+    opacity: 0.7;
   }
 
-  &__Tags {
-    @include flex($align: center, $gap: 8);
-    @include margin($top: 4);
-  }
+  // TODO: 현재는 사용되지 않음
+  // &__Tags {
+  //   @include flex($align: center, $gap: 8);
+  //   @include margin($top: 4);
+  // }
 
-  &__Tag {
-    display: inline-block;
-    @include padding($y: 4, $x: 10);
-    background: var(--gray-100);
-    color: var(--gray-700);
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
-  }
+  // &__Tag {
+  //   display: inline-block;
+  //   @include padding($y: 4, $x: 10);
+  //   background: var(--gray-100);
+  //   color: var(--gray-700);
+  //   border-radius: 12px;
+  //   font-size: 12px;
+  //   font-weight: 500;
+  // }
 
-  &__Points {
-    display: inline-block;
-    @include padding($y: 4, $x: 10);
-    background: var(--primary-50);
-    color: var(--primary-600);
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-  }
+  // &__Points {
+  //   display: inline-block;
+  //   @include padding($y: 4, $x: 10);
+  //   background: var(--primary-50);
+  //   color: var(--primary-600);
+  //   border-radius: 12px;
+  //   font-size: 12px;
+  //   font-weight: 600;
+  // }
 }

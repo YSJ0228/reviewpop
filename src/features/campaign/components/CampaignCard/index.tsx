@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { diff, formatDate } from '@shared/lib/date';
-import type { CampaignCardProps } from './types';
-import styles from './style.module.scss';
 import { IconArrowRight } from '@pop-ui/foundation';
+
+import { diff, formatDate } from '@shared/lib/date';
+
+import type { CampaignCardProps } from './types';
+
+import styles from './style.module.scss';
 
 export function CampaignCard({ campaign }: CampaignCardProps) {
   const givenTime = campaign.schedule.applicationSchedule[1];
@@ -28,24 +31,25 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
         </div>
         <div className={styles.CampaignCard__Wrapper}>
           <div className={styles.CampaignCard__Header}>
-            <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
+            <span className={styles.CampaignCard__Brand}>{campaign.brand}</span>
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
             <h3 className={styles.CampaignCard__Items}>{campaign.providedItems.join(' + ')}</h3>
           </div>
           <div className={styles.CampaignCard__Content}>
             <div>
               <div className={styles.CampaignCard__Recruitment}>
-                <p>
+                <span>
                   <b>{diffInDays}일 남음</b>
-                </p>
-                <p>
+                </span>
+                <span>
                   <b>{`신청 ${campaign.currentRecruitment}명`}</b>
                   {`/${campaign.maxRecruitment}명`}
-                </p>
+                </span>
               </div>
               <div className={styles.CampaignCard__Meta}>
+                <span>체험단 모집</span>
                 <time dateTime={campaign.schedule.applicationSchedule.join()}>
-                  체험단 모집 {applicationSchedule.join(' ~ ')}
+                  {applicationSchedule.join(' ~ ')}
                 </time>
               </div>
             </div>
