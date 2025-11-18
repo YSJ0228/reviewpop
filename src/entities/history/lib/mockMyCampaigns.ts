@@ -18,7 +18,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     title: '프리미엄 화장품 리뷰어 모집',
     brand: '설화수',
     imageUrl: 'https://picsum.photos/seed/campaign2/400/300',
-    status: 'applied',
+    status: 'rejected',
     applicationDate: '2025-10-28',
     deadline: '2025-11-10',
     category: '뷰티',

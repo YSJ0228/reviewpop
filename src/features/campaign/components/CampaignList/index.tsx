@@ -1,8 +1,11 @@
 'use client';
 
 import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/useCampaigns';
+
 import { CampaignCard } from '../CampaignCard';
+
 import type { CampaignListProps } from './types';
+
 import styles from './style.module.scss';
 
 export function CampaignList({ status }: CampaignListProps) {

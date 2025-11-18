@@ -1,9 +1,10 @@
 'use client';
 
 import { Suspense } from 'react';
+
 import { CampaignTabs } from '@features/history';
+
 import styles from './page.module.scss';
-import RejectedCampaignsPage from '../campaign/rejected/page';
 
 function MyPageContent() {
   return (
@@ -30,8 +31,7 @@ export default function MyPage() {
         </div>
       }
     >
-      {/* <MyPageContent /> */}
-      <RejectedCampaignsPage />
+      <MyPageContent />
     </Suspense>
   );
 }
