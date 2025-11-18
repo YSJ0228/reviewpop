@@ -1,4 +1,4 @@
-import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
+import { filterCampaignsByStatus, useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
 
 import { CampaignCard } from '@features/history/components/CampaignCard';
 
@@ -6,6 +6,7 @@ import styles from './style.module.scss';
 
 export function RejectedList() {
   const { data: campaigns, isLoading, error } = useMyCampaigns();
+  const rejectedCampaigns = filterCampaignsByStatus(campaigns, 'rejected');
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -29,11 +30,9 @@ export function RejectedList() {
 
   return (
     <div className={styles.RejectedList}>
-      {campaigns
-        ?.filter((campaign) => campaign.status === 'rejected')
-        .map((campaign) => (
-          <CampaignCard key={campaign.id} campaign={campaign} type="rejected" />
-        ))}
+      {rejectedCampaigns.map((campaign) => (
+        <CampaignCard key={campaign.id} campaign={campaign} type="rejected" />
+      ))}
     </div>
   );
 }
