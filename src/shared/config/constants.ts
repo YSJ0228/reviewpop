@@ -91,4 +91,10 @@ export const CONSTANTS = {
     ACTIONSHEET: 3000,
     TOAST: 5000,
   },
+
+  /** 기본 값 카운팅 관련 */
+  DEFAULT_COUNT: {
+    /** 최대 모집 인원 */
+    MAX_RECRUITMENT: 0,
+  },
 } as const;
