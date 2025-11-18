@@ -29,10 +29,7 @@ export default function RejectedCampaignsPage() {
             <IconArrowLeft />
             <span className={styles.RejectedCampaignsPage__HeaderTitle}>미선정 체험 내역</span>
           </div>
-          {/* <p className={styles.Todo}> */}
-          {/* features/history/components/RejectedList 컴포넌트를 구현하세요 */}
           <RejectedList />
-          {/* </p> */}
         </Suspense>
       </ErrorBoundary>
     </main>
