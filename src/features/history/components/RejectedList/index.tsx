@@ -1,6 +1,8 @@
-import { CampaignCard } from '@features/history/components/CampaignCard';
-import styles from './style.module.scss';
 import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
+
+import { CampaignCard } from '@features/history/components/CampaignCard';
+
+import styles from './style.module.scss';
 
 export function RejectedList() {
   const { data: campaigns, isLoading, error } = useMyCampaigns();
