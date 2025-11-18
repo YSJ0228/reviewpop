@@ -16,14 +16,21 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: 'cover' }}
           />
-          <div className={styles.CampaignCard__Badge} aria-label={`상태: ---`}>
-            전국
+          <div className={styles.CampaignCard__Badge} aria-label={`상태: ${campaign.location}`}>
+            {campaign.location}
           </div>
         </div>
         <div className={styles.CampaignCard__Content}>
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
           <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
-          <p className={styles.CampaignCard__Brand}>{campaign.description}</p>
+          <h3 className={styles.CampaignCard__Title}>{campaign.providedItems.join(' + ')}</h3>
+          <p className={styles.CampaignCard__Brand}>며칠 남음</p>
+          <p className={styles.CampaignCard__Brand}>
+            {`신청 ${campaign.currentRecruitment}명/${campaign.maxRecruitment}명`}
+          </p>
+          <p className={styles.CampaignCard__Brand}>
+            체험단 모집 {campaign.schedule.applicationSchedule.join(' ~ ')}
+          </p>
           <div className={styles.CampaignCard__Meta}>
             <time dateTime={campaign.schedule.applicationSchedule[0]}>
               신청일: {formatDate(campaign.schedule.applicationSchedule[0], 'SHORT')}
