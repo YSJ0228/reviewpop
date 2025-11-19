@@ -10,13 +10,13 @@ import type { ButtonProps } from '@shared/components/Button/types';
 export interface ModalProps extends MantineModalProps {
   /** 모달을 열기 위한 트리거 요소 */
   children: ReactElement;
-  /** 모달 유형과 버튼 스타일을 함꼐 정의 */
+  /** 모달 유형과 버튼 스타일을 함께 결정 */
   variant?: 'confirm' | 'warning' | 'outline';
   // confirm : 신청, warning : 탈퇴, outline : 예약/신청 취소
   /** 프리셋을 부분적으로 덮어쓸 ModalContentTexts */
   texts?: Partial<ModalContentTexts>;
   /** 확인 버튼 클릭 시 실행될 비동기 함수 */
-  onClose: () => Promise<void>;
+  onConfirm: () => Promise<void>;
 }
 
 /**
