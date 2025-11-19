@@ -1,12 +1,12 @@
-export type MyCampaignStatus = 'applied' | 'selected' | 'registered' | 'completed' | 'rejected';
+export type MyCampaignStatus = 'applied' | 'selected' | 'registered' | 'completed' | 'rejected'; // 신청, 선정, 후기, 종료, 미선정
 
-export type MyCampaignVisitStatus = 'before' | 'scheduled' | 'visited';
+export type MyCampaignVisitStatus = 'before' | 'scheduled' | 'visited'; // 방문 전, 방문 예정, 방문 완료
 
 export type MyCampaignReviewStatus =
-  | 'notReviewed'
-  | 'reviewed'
-  | 'reviewPending'
-  | 'requiredForEditing';
+  | 'notReviewed' // 후기 미등록
+  | 'reviewed' // 후기 등록 완료
+  | 'reviewPending' // 후기 검토 중
+  | 'requiredForEditing'; // 후기 수정 요청
 
 export interface MyCampaign {
   id: string;

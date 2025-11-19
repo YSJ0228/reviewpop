@@ -1,9 +1,13 @@
 'use client';
 
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
+
 import { STATUS_LABELS } from '@entities/history/types/myCampaign.types';
+
 import { CampaignCard } from '../CampaignCard';
+
 import type { MyCampaignListProps } from './types';
+
 import styles from './style.module.scss';
 
 export function CampaignList({ status }: MyCampaignListProps) {
@@ -56,7 +60,7 @@ export function CampaignList({ status }: MyCampaignListProps) {
       aria-busy={isLoading}
     >
       {filteredCampaigns.map((campaign) => (
-        <CampaignCard key={campaign.id} campaign={campaign} />
+        <CampaignCard key={campaign.id} campaign={campaign} type={status} />
       ))}
     </div>
   );
