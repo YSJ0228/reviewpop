@@ -48,12 +48,30 @@
   }
 
   &__Content {
-    @include padding($all: 16);
-    @include flex($direction: row, $gap: 4);
-    width: 100%;
-    justify-content: space-between;
-    background: rgba(255, 255, 255, 0.16);
-    padding: 13px 16px;
+    &__Active {
+      width: 100%;
+      height: 72px;
+      @include flex($direction: row, $gap: 4);
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 13px 16px;
+    }
+    &__Closed {
+      width: 100%;
+      height: 72px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+      span {
+        color: #fff;
+        font-size: 18px;
+        letter-spacing: -0.36px;
+        font-weight: 700;
+      }
+    }
   }
 
   &__Recruitment {

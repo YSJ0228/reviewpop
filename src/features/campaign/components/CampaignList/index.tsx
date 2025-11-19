@@ -7,6 +7,7 @@ import styles from './style.module.scss';
 
 export function CampaignList({ status }: CampaignListProps) {
   const { data: campaigns, isLoading, error } = useCampaigns();
+  const now = new Date();
 
   const filteredCampaigns = filterCampaignsByStatus(campaigns, status);
 
@@ -52,9 +53,12 @@ export function CampaignList({ status }: CampaignListProps) {
       aria-label={`무슨무슨 체험 목록`}
       aria-busy={isLoading}
     >
-      {filteredCampaigns.map((campaign) => (
-        <CampaignCard key={campaign.id} campaign={campaign} />
-      ))}
+      {filteredCampaigns.map(
+        (campaign) =>
+          (status !== 'active' || campaign.schedule.applicationSchedule[1] > now.toISOString()) && (
+            <CampaignCard key={campaign.id} campaign={campaign} />
+          ),
+      )}
     </div>
   );
 }

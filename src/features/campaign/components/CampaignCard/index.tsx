@@ -35,28 +35,40 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
             <p className={styles.CampaignCard__Items}>{campaign.providedItems.join(' + ')}</p>
           </div>
-          <div className={styles.CampaignCard__Content}>
-            <div>
-              <div className={styles.CampaignCard__Recruitment}>
-                <span>
-                  <b>{diffInDays}일 남음</b>
-                </span>
-                <span>
-                  <b>{`신청 ${campaign.currentRecruitment}명`}</b>
-                  {`/${campaign.maxRecruitment}명`}
-                </span>
+          {campaign.status === 'active' && (
+            <div className={styles.CampaignCard__Content__Active}>
+              <div>
+                <div className={styles.CampaignCard__Recruitment}>
+                  <span>
+                    <b>{diffInDays}일 남음</b>
+                  </span>
+                  <span>
+                    <b>{`신청 ${campaign.currentRecruitment}명`}</b>
+                    {`/${campaign.maxRecruitment}명`}
+                  </span>
+                </div>
+                <div className={styles.CampaignCard__Meta}>
+                  <span>체험단 모집</span>
+                  <time dateTime={campaign.schedule.applicationSchedule[0]}>
+                    {applicationSchedule.join(' ~ ')}
+                  </time>
+                </div>
               </div>
-              <div className={styles.CampaignCard__Meta}>
-                <span>체험단 모집</span>
-                <time dateTime={campaign.schedule.applicationSchedule[0]}>
-                  {applicationSchedule.join(' ~ ')}
-                </time>
+              <div className={styles.CampaignCard__Button} aria-hidden={true}>
+                <IconArrowRight color="white" />
               </div>
             </div>
-            <div className={styles.CampaignCard__Button} aria-hidden={true}>
-              <IconArrowRight color="white" />
+          )}
+          {campaign.status === 'before_recruiting' && (
+            <div className={styles.CampaignCard__Content__Closed}>
+              <span>오픈까지 {}</span>
             </div>
-          </div>
+          )}
+          {campaign.status === 'closed' && (
+            <div className={styles.CampaignCard__Content__Closed}>
+              <span>종료된 체험</span>
+            </div>
+          )}
         </div>
       </article>
     </Link>

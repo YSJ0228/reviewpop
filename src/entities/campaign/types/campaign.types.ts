@@ -13,6 +13,7 @@
  * - closed: 마감 (모집 실패 등)
  */
 export type CampaignStatus =
+  | 'before_recruiting'
   | 'recruiting'
   | 'in_progress'
   | 'review_period'
@@ -21,6 +22,7 @@ export type CampaignStatus =
   | 'active';
 
 export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
+  before_recruiting: '모집 전',
   recruiting: '모집 중',
   in_progress: '진행 중',
   review_period: '리뷰 기간',
