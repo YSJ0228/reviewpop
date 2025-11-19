@@ -26,7 +26,7 @@ export default function Home() {
           {/* TODO: Banner 컴포넌트 추가 */}
           {/* TODO: CampaignFilter 컴포넌트 추가 */}
           <div className={styles.ListContainer}>
-            <CampaignList status="active" />
+            <CampaignList status="in_progress" />
             <CampaignList status="before_recruiting" />
             <CampaignList status="closed" />
           </div>

@@ -13,7 +13,7 @@ import styles from './style.module.scss';
 export function CampaignCard({ campaign }: CampaignCardProps) {
   const givenTime = campaign.schedule.applicationSchedule[1];
   const currentTime = now();
-  const diffInDays = diff(givenTime, currentTime, 'day');
+  const diffInDays = Math.max(0, diff(givenTime, currentTime, 'day'));
   const applicationSchedule = campaign.schedule.applicationSchedule.map((d) =>
     formatDate(d, 'MMDD_DDD_SHORT'),
   );
@@ -37,7 +37,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
             <p className={styles.CampaignCard__Items}>{campaign.providedItems.join(' + ')}</p>
           </div>
-          {campaign.status === 'active' && (
+          {campaign.status === 'in_progress' && (
             <div className={styles.CampaignCard__Content__Active}>
               <div>
                 <div className={styles.CampaignCard__Recruitment}>

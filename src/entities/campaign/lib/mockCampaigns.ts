@@ -31,11 +31,11 @@ const createSchedule = (
  * Campaign mock 데이터
  *
  * 상태 분포:
- * - active (진행 중): 5개
+ * - in_progress (진행 중): 5개
  * - closed (마감): 10개
  */
 export const mockCampaigns: Campaign[] = [
-  // Active 체험 (5개)
+  // in_progress 체험 (5개)
   {
     id: '1',
     title: '신제품 커피 체험단 모집',
@@ -63,7 +63,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 50,
     currentRecruitment: 47,
     selectedCount: 0,
-    points: 1000,
     createdAt: '2025-10-25T00:00:00Z',
   },
   {
@@ -92,7 +91,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 30,
     currentRecruitment: 28,
     selectedCount: 0,
-    points: 1500,
     createdAt: '2025-10-22T00:00:00Z',
   },
   {
@@ -103,7 +101,7 @@ export const mockCampaigns: Campaign[] = [
       '삼성전자의 최신 무선 이어폰을 체험해보세요. 탁월한 노이즈 캔슬링 기능과 고음질 사운드로 최상의 청음 경험을 제공합니다.',
     providedItems: ['무선 이어폰 1세트', '충전 케이스', '사이즈별 이어팁'],
     category: '전자제품' as CampaignCategory,
-    status: 'active' as CampaignStatus,
+    status: 'in_progress' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign3/800/600',
@@ -121,7 +119,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 40,
     currentRecruitment: 35,
     selectedCount: 0,
-    points: 2000,
     createdAt: '2025-10-19T00:00:00Z',
   },
   {
@@ -132,7 +129,7 @@ export const mockCampaigns: Campaign[] = [
       '종근당의 건강 보조 식품으로 활력 넘치는 하루를 시작하세요. 비타민과 미네랄이 풍부하게 함유된 프리미엄 건강식품입니다.',
     providedItems: ['건강 보조 식품 1개월분', '섭취 가이드'],
     category: '건강' as CampaignCategory,
-    status: 'active' as CampaignStatus,
+    status: 'in_progress' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign4/800/600',
@@ -150,7 +147,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 80,
     currentRecruitment: 58,
     selectedCount: 0,
-    points: 800,
     createdAt: '2025-10-14T00:00:00Z',
   },
   {
@@ -161,7 +157,7 @@ export const mockCampaigns: Campaign[] = [
       '애플의 최신 스마트워치를 가장 먼저 체험해보세요. 건강 관리부터 스마트한 일상까지, 손목 위의 작은 혁신을 경험하세요.',
     providedItems: ['스마트워치 1대', '충전 독', '스트랩 2종'],
     category: '전자제품' as CampaignCategory,
-    status: 'active' as CampaignStatus,
+    status: 'in_progress' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign5/800/600',
@@ -179,7 +175,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 20,
     currentRecruitment: 19,
     selectedCount: 0,
-    points: 3000,
     createdAt: '2025-10-09T00:00:00Z',
   },
 
@@ -210,7 +205,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 30,
     currentRecruitment: 25,
     selectedCount: 2,
-    points: 1200,
     createdAt: '2025-10-04T00:00:00Z',
   },
   {
@@ -239,7 +233,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 50,
     currentRecruitment: 42,
     selectedCount: 2,
-    points: 900,
     createdAt: '2025-10-02T00:00:00Z',
   },
   {
@@ -268,7 +261,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 30,
     currentRecruitment: 27,
     selectedCount: 2,
-    points: 2500,
     createdAt: '2025-09-29T00:00:00Z',
   },
   {
@@ -297,7 +289,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 20,
     currentRecruitment: 15,
     selectedCount: 1,
-    points: 1800,
     createdAt: '2025-09-27T00:00:00Z',
   },
   {
@@ -326,7 +317,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 100,
     currentRecruitment: 65,
     selectedCount: 2,
-    points: 700,
     createdAt: '2025-09-22T00:00:00Z',
   },
   {
@@ -355,7 +345,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 60,
     currentRecruitment: 53,
     selectedCount: 2,
-    points: 1000,
     createdAt: '2025-09-19T00:00:00Z',
   },
   {
@@ -384,7 +373,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 15,
     currentRecruitment: 12,
     selectedCount: 1,
-    points: 3500,
     createdAt: '2025-09-14T00:00:00Z',
   },
   {
@@ -413,7 +401,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 100,
     currentRecruitment: 100,
     selectedCount: 1,
-    points: 600,
     createdAt: '2025-09-04T00:00:00Z',
   },
   {
@@ -442,7 +429,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 30,
     currentRecruitment: 30,
     selectedCount: 1,
-    points: 2000,
     createdAt: '2025-08-30T00:00:00Z',
   },
   {
@@ -471,7 +457,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 150,
     currentRecruitment: 150,
     selectedCount: 1,
-    points: 500,
     createdAt: '2025-08-26T00:00:00Z',
   },
 ];
@@ -500,8 +485,8 @@ export function getCampaignsByCategory(category: CampaignCategory): Campaign[] {
 /**
  * 진행 중인 체험 목록 조회
  */
-export function getActiveCampaigns(): Campaign[] {
-  return getCampaignsByStatus('active');
+export function getInProgressCampaigns(): Campaign[] {
+  return getCampaignsByStatus('in_progress');
 }
 
 /**

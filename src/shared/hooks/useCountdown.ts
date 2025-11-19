@@ -1,5 +1,6 @@
-import { diff, now } from '@shared/lib/date';
 import { useEffect, useState } from 'react';
+
+import { diff, now } from '@shared/lib/date';
 
 export function useCountdown(targetDate: string) {
   const [timeLeft, setTimeLeft] = useState<number>(0);
