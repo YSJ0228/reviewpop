@@ -13,13 +13,25 @@ import type { IToastOptions } from './types';
 const ICON_SIZE = 24 as const;
 
 /**
+ * pop-ui/core의 toast 타입 정의
+ * @pop-ui/core에서 export된 toast의 실제 타입 구조
+ */
+type PopUiToast = typeof popUiToast;
+
+/**
+ * 확장된 Toast 타입
+ * pop-ui/core의 toast에 success와 error 메서드를 추가한 타입
+ */
+interface IExtendedToast extends PopUiToast {
+  success: (message: string, options?: Omit<IToastOptions, 'message' | 'icon'>) => void;
+  error: (message: string, options?: Omit<IToastOptions, 'message' | 'icon'>) => void;
+}
+
+/**
  * Toast 함수
  * pop-ui/core의 toast를 확장하여 success와 error 메서드를 추가합니다.
  */
-const toast = popUiToast as typeof popUiToast & {
-  success: (message: string, options?: Omit<IToastOptions, 'message' | 'icon'>) => void;
-  error: (message: string, options?: Omit<IToastOptions, 'message' | 'icon'>) => void;
-};
+const toast = popUiToast as IExtendedToast;
 
 /**
  * 성공 토스트를 표시합니다

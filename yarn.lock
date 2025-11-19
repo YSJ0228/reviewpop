@@ -761,7 +761,7 @@
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-8.3.8.tgz#92837596d91d0fc94051fe56841515a7c2241cae"
   integrity sha512-2YCUk5IWz+Ebi7VpbdscUz1MwulyaVPKr236ugMfpK0PFwsun4aBaLCAc8UeMGP0LtoSkuFvnsCPR4U6rhNfeQ==
 
-"@mantine/notifications@^8.3.6", "@mantine/notifications@^8.3.8":
+"@mantine/notifications@^8.3.6":
   version "8.3.8"
   resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-8.3.8.tgz#421f1ba3efdbe13f1c80d0a8d811bf9519382264"
   integrity sha512-AS3UGnHO8UGzLpxe4cUIVpwpCoGKplWhMGm6E2hJoHnO4Wg0h3HlsR7drFEnDOZhaOMyD6MD9tAeWZ2/7rnvrw==
