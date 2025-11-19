@@ -5,103 +5,109 @@
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-}
 
-.CampaignTabs__TabBar {
-  position: sticky;
-  background: #fff;
-  z-index: 9;
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.CampaignTabs__Tabs {
-  @include flex($align: center, $justify: space-around);
-  height: 48px;
-}
-
-.CampaignTabs__Tab {
-  position: relative;
-  flex: 1;
-  height: 100%;
-  background: none;
-  border: none;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--gray-700);
-  cursor: pointer;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: var(--gray-900);
-  }
-}
-
-.CampaignTabs__Tab--Active {
-  color: var(--primary-600);
-  font-weight: 600;
-}
-
-// 포커스 스타일 (접근성)
-.CampaignTabs__Tab:focus {
-  outline: 2px solid var(--primary-500);
-  outline-offset: -2px;
-  z-index: 1;
-}
-
-.CampaignTabs__Tab:focus:not(:focus-visible) {
-  outline: none;
-}
-
-.CampaignTabs__Tab:focus-visible {
-  outline: 2px solid var(--primary-500);
-  outline-offset: -2px;
-  z-index: 1;
-}
-
-// 키보드 네비게이션 시 추가 시각적 피드백
-.CampaignTabs__Tab:focus-visible::after {
-  content: '';
-  position: absolute;
-  inset: 4px;
-  border: 2px dashed var(--primary-300);
-  border-radius: 4px;
-  pointer-events: none;
-}
-
-.CampaignTabs__Indicator {
-  height: 2px;
-  background: var(--primary-600);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-.CampaignTabs__Swiper {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.CampaignTabs__Slide {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-
-  // 스크롤바 스타일링 (선택사항)
-  &::-webkit-scrollbar {
-    width: 6px;
+  &__TabBar {
+    position: sticky;
+    background: #fff;
+    z-index: 9;
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0 16px;
   }
 
-  &::-webkit-scrollbar-track {
-    background: transparent;
+  &__Tabs {
+    @include flex($align: center, $justify: space-around);
+    height: 44px;
   }
 
-  &::-webkit-scrollbar-thumb {
-    background: var(--gray-300);
-    border-radius: 3px;
-
+  &__Tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex: 1 0 0;
+    align-self: stretch;
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-700);
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.2s ease;
     &:hover {
-      background: var(--gray-400);
+      color: var(--gray-900);
+      font-weight: 600;
+    }
+
+    &--Active {
+      color: var(--gray-900);
+      font-weight: 700;
+    }
+
+    // 포커스 스타일 (접근성)
+    &:focus {
+      outline: 2px solid var(--primary-500);
+      outline-offset: -2px;
+      z-index: 1;
+
+      &:not(:focus-visible) {
+        outline: none;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-500);
+      outline-offset: -2px;
+      z-index: 1;
+
+      // 키보드 네비게이션 시 추가 시각적 피드백
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 4px;
+        border: 2px dashed var(--primary-300);
+        border-radius: 4px;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__Indicator {
+    height: 2px;
+    background: var(--gray-900);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  &__Swiper {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__Slide {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    // 스크롤바 스타일링 (선택사항)
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--gray-300);
+      border-radius: 3px;
+
+      &:hover {
+        background: var(--gray-400);
+      }
     }
   }
 }

@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 import { CampaignList } from '../CampaignList';
+import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
 import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '@entities/history/types/myCampaign.types';
 import type { TabKey } from '@entities/history/types/myCampaign.types';
 import styles from './style.module.scss';
@@ -17,7 +18,16 @@ export function CampaignTabs() {
   const router = useRouter();
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  // 캠페인 목록 훅에서 데이터를 가져와 탭별 카운트 계산
+  const { data: campaigns } = useMyCampaigns();
 
+  const counts = useMemo(() => {
+    const map: Record<TabKey, number> = {} as Record<TabKey, number>;
+    TAB_CONFIG.forEach((t) => {
+      map[t.key] = (campaigns || []).filter((c) => c.status === t.key).length;
+    });
+    return map;
+  }, [campaigns]);
   const currentTab = (searchParams.get('tab') as TabKey) || 'applied';
   const activeIndex = TAB_CONFIG.findIndex((tab) => tab.key === currentTab);
   const validIndex = activeIndex >= 0 ? activeIndex : 0;
@@ -110,7 +120,8 @@ export function CampaignTabs() {
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={tabClassName}
               >
-                {tab.label}
+                <span aria-hidden="true">{tab.label}</span>
+                <span aria-hidden="true">{counts[tab.key] ?? 0}</span>
               </button>
             );
           })}
