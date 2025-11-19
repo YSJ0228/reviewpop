@@ -33,7 +33,9 @@
   border-radius: 8px;
   font-weight: 600;
   font-size: 12px;
-  @include flex($justify: center, $align: center);
+  @include flex($justify: center, $align: center, $gap: 4);
+  color: var(--gray-800);
+  border-color: var(--gray-100);
 }
 .WebButton__Label {
   font-size: 14px;
@@ -53,12 +55,8 @@
   @include flex();
 }
 
+.WebButton__Button--Edit,
 .WebButton__Button--Copy {
-  color: var(--gray-800);
-  border-color: var(--gray-100);
-}
-
-.WebButton__Button--Edit {
   color: var(--gray-800);
   border-color: var(--gray-100);
 }
