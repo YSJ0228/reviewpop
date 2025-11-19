@@ -1,18 +1,18 @@
 @use '@/shared/styles/mixins' as *;
 
 .CampaignList {
-  @include flex($direction: column, $gap: 32);
   overflow-y: auto;
   min-height: 200px;
+  @include flex($direction: column, $gap: 32);
 }
 
 .CampaignList--Loading,
 .CampaignList--Error,
 .CampaignList--Empty {
-  @include flex($direction: column, $align: center, $justify: center);
   min-height: 400px;
-  @include padding($y: 40, $x: 20);
   text-align: center;
+  @include padding($y: 40, $x: 20);
+  @include flex($direction: column, $align: center, $justify: center);
 }
 
 .CampaignList--Loading {
@@ -43,9 +43,9 @@
   color: var(--error-500);
 
   p {
-    @include margin($all: 0);
     font-size: 15px;
     font-weight: 500;
+    @include margin($all: 0);
   }
 }
 
@@ -60,7 +60,7 @@
   color: var(--gray-500);
 
   p {
-    @include margin($all: 0);
     font-size: 15px;
+    @include margin($all: 0);
   }
 }

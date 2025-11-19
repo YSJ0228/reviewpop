@@ -45,7 +45,6 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['신제품 원두 200g', '브랜드 머그컵 1개'],
     category: '음료' as CampaignCategory,
     status: 'before_recruiting' as CampaignStatus,
-    //imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign1/800/600',
@@ -76,7 +75,6 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['프리미엄 에센스 30ml', '크림 15ml 샘플'],
     category: '뷰티' as CampaignCategory,
     status: 'before_recruiting' as CampaignStatus,
-    // imageUrl: 'https://picsum.photos/seed/campaign2/400/300',
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign2/800/600',
@@ -106,7 +104,6 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['무선 이어폰 1세트', '충전 케이스', '사이즈별 이어팁'],
     category: '전자제품' as CampaignCategory,
     status: 'active' as CampaignStatus,
-    // imageUrl: 'https://picsum.photos/seed/campaign3/400/300',
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign3/800/600',

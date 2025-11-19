@@ -1,3 +1,4 @@
+import { diff } from '@shared/lib/date';
 import { useEffect, useState } from 'react';
 
 export function useCountdown(targetDate: string) {
@@ -5,7 +6,9 @@ export function useCountdown(targetDate: string) {
   const now = new Date();
 
   useEffect(() => {
-    const timer = setInterval(() => {}, 1000);
+    const timer = setInterval(() => {
+      diff(targetDate, now, 'second');
+    }, 1000);
 
     return () => clearInterval(timer);
   }, [targetDate]);

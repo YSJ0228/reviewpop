@@ -36,7 +36,6 @@
     position: absolute;
     top: 8px;
     left: 8px;
-    @include padding($y: 2, $x: 6);
     border-radius: 6px;
     background: rgba(0 0 0 / 20%);
     backdrop-filter: blur(8px);
@@ -45,17 +44,18 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 1.5;
+    @include padding($y: 2, $x: 6);
   }
 
   &__Content {
     &__Active {
       width: 100%;
       height: 72px;
-      @include flex($direction: row, $gap: 4);
       justify-content: space-between;
       align-items: center;
       background: rgba(255, 255, 255, 0.16);
       padding: 13px 16px;
+      @include flex($direction: row, $gap: 4);
     }
     &__Closed {
       width: 100%;
@@ -105,10 +105,10 @@
   &__Brand {
     font-size: 14px;
     font-weight: 600;
-    @include margin($all: 0);
 
     color: #fff;
     line-height: 1.5;
+    @include margin($all: 0);
   }
 
   &__Title {
@@ -116,7 +116,6 @@
     font-weight: 700;
     color: #fff;
     line-height: 1.4;
-    @include margin($all: 0);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -124,6 +123,7 @@
     text-overflow: ellipsis;
     letter-spacing: -0.48px;
     margin-bottom: 4px;
+    @include margin($all: 0);
   }
 
   &__Items {
@@ -136,12 +136,12 @@
   }
 
   &__Meta {
-    @include flex($direction: row, $gap: 8);
     font-size: 12px;
     font-weight: 500;
     color: #fff;
     line-height: 1.5;
     letter-spacing: -0.24px;
     opacity: 0.7;
+    @include flex($direction: row, $gap: 8);
   }
 }
