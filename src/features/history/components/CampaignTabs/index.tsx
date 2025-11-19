@@ -1,13 +1,18 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
+
 import { CampaignList } from '../CampaignList';
 import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
 import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '@entities/history/types/myCampaign.types';
 import type { TabKey } from '@entities/history/types/myCampaign.types';
+
+import { IconArrowRight } from '@pop-ui/foundation';
+
 import styles from './style.module.scss';
 
 // Swiper CSS 임포트
@@ -28,6 +33,12 @@ export function CampaignTabs() {
     });
     return map;
   }, [campaigns]);
+
+  // '미선정' 상태 카운트 (TAB_CONFIG에 포함되어 있지 않으므로 별도 계산)
+  const rejectedCount = useMemo(() => {
+    return (campaigns || []).filter((c) => c.status === 'rejected').length;
+  }, [campaigns]);
+
   const currentTab = (searchParams.get('tab') as TabKey) || 'applied';
   const activeIndex = TAB_CONFIG.findIndex((tab) => tab.key === currentTab);
   const validIndex = activeIndex >= 0 ? activeIndex : 0;
@@ -159,6 +170,14 @@ export function CampaignTabs() {
               aria-label={STATUS_DESCRIPTIONS[tab.key]}
             >
               <CampaignList status={tab.key} />
+              <div className={styles.CampaignTabs__LinkContainer}>
+                {tab.key === 'applied' && rejectedCount > 0 && (
+                  <Link href="/campaign/rejected" className={styles.CampaignTabs__RejectedLink}>
+                    {'미선정 체험 내역'}
+                    <IconArrowRight size={16} color="#4A4A4A" />
+                  </Link>
+                )}
+              </div>
             </div>
           </SwiperSlide>
         ))}
