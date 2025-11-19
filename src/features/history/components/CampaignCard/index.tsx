@@ -17,7 +17,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             src={campaign.imageUrl}
             alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
             fill
-            sizes="88px"
+            sizes="(max-width: 768px) 88px, 88px"
             style={{ objectFit: 'cover' }}
           />
         </div>
@@ -26,15 +26,13 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
 
           <p className={styles.CampaignCard__Title}>{campaign.title}</p>
 
-          {type === 'rejected' && (
+          {type === 'rejected' && campaign.deadline && (
             <div className={styles.CampaignCard__Date}>
               <time dateTime={campaign.applicationDate}>
                 모집 {dayjs(campaign.applicationDate).format('MM.DD')}
               </time>
               <span> ~ </span>
-              {campaign.deadline && (
-                <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
-              )}
+              <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
               <span className={styles.CampaignCard__MaxRecruitment}>
                 {campaign.maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}명 선정
               </span>

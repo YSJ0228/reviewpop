@@ -5,6 +5,7 @@ import { filterCampaignsByStatus, useMyCampaigns } from '@entities/history/hooks
 import { CampaignCard } from '@features/history/components/CampaignCard';
 
 import styles from './style.module.scss';
+import { LoadingSpinner } from '@shared/components';
 
 export function RejectedList() {
   const { data: campaigns, isLoading, error } = useMyCampaigns();
@@ -16,7 +17,7 @@ export function RejectedList() {
   if (isLoading) {
     return (
       <div role="status" aria-live="polite" aria-label="미선정 체험 목록 로딩 중">
-        로딩중...
+        <LoadingSpinner />
       </div>
     );
   }
@@ -33,6 +34,7 @@ export function RejectedList() {
   if (rejectedCampaigns.length === 0) {
     return (
       <div role="status" aria-label="미선정 체험이 없습니다.">
+        {/* TODO: 빈 상태 UI 추가예정 */}
         <p>미선정 캠페인이 없습니다.</p>
       </div>
     );

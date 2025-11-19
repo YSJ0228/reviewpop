@@ -7,59 +7,64 @@
 }
 
 .CampaignCard {
-  @include flex($gap: 16);
-  width: 100%;
-  height: 120px;
   overflow: hidden;
   border-bottom: 1px solid var(--gray-50);
+  @include flex($gap: 16);
+  @include size($width: 100%, $height: 120);
   @include padding($y: 16);
 }
 
 .CampaignCard__ImageWrapper {
   position: relative;
-  width: 88px;
-  height: 88px;
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 8px;
+  @include size($width: 88, $height: 88);
 }
 
 .CampaignCard__Content {
   @include flex($direction: column, $gap: 4);
-  width: 224px;
-  height: 77px;
+  @include size($width: 224, $height: 77);
 }
 
 .CampaignCard__Brand {
-  font-size: 14px;
-  color: var(--gray-900);
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
+  @include font(
+    $size: 14,
+    $weight: 600,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-900)
+  );
 }
 
 .CampaignCard__Title {
-  font-size: 12px;
-  color: var(--gray-600);
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  line-height: 1.5;
+  @include font(
+    $size: 12,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
 }
 
 .CampaignCard__Date {
-  font-size: 12px;
-  color: var(--gray-600);
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  line-height: 1.5;
+  @include font(
+    $size: 12,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
   @include margin($top: 15);
 }
 
 .CampaignCard__MaxRecruitment {
-  font-size: 12px;
-  color: var(--gray-600);
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  line-height: 1.5;
+  @include font(
+    $size: 12,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
   @include margin($left: 4);
 }
