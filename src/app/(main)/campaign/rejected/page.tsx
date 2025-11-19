@@ -35,9 +35,11 @@ export default function RejectedCampaignsPage() {
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: RejectedList 컴포넌트 추가 */}
           <div className={styles.RejectedCampaignsPage__Header}>
-            <button onClick={handleBack} type="button" aria-label="뒤로 가기">
-              <IconArrowLeft />
-            </button>
+            <IconArrowLeft
+              onClick={handleBack}
+              aria-label="뒤로 가기"
+              className={styles.RejectedCampaignsPage__HeaderBackButton}
+            />
             <span className={styles.RejectedCampaignsPage__HeaderTitle}>미선정 체험 내역</span>
           </div>
           <RejectedList />

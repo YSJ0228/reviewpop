@@ -32,7 +32,9 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
                 모집 {dayjs(campaign.applicationDate).format('MM.DD')}
               </time>
               <span> ~ </span>
-              <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
+              {campaign.deadline && (
+                <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
+              )}
               <span className={styles.CampaignCard__MaxRecruitment}>
                 {campaign.maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}명 선정
               </span>
