@@ -4,12 +4,9 @@
  * dayjs를 활용한 타입 안전한 날짜 포맷팅 및 변환 함수들을 제공합니다.
  */
 
-import dayjs, { type Dayjs } from 'dayjs';
+import { type Dayjs } from 'dayjs';
 
-import 'dayjs/locale/ko';
-
-dayjs.locale('ko');
-
+import dayjs from './dayjs.config';
 /**
  * 날짜 포맷 상수
  *
