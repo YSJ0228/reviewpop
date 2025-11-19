@@ -25,7 +25,7 @@ function CancelReservationButton() {
         // 기본 preset에서 content만 덮어쓰기
         content: '다시 신청하려면 모집 기간 내에 가능합니다.',
       }}
-      onClose={handleCancelReservation}
+      onConfirm={handleCancelReservation}
     >
       <button>예약 취소</button>
     </Modal>
@@ -36,7 +36,7 @@ function CancelReservationButton() {
 ### variant 프리셋 활용
 
 ```typescript
-<Modal variant="warning" onClose={handleWithdraw}>
+<Modal variant="warning" onConfirm={handleWithdraw}>
   <span>탈퇴하기</span>
 </Modal>
 ```
@@ -52,7 +52,7 @@ function CancelReservationButton() {
     confirmButton: '신청 취소',
     cancelButton: '닫기',
   }}
-  onClose={handleCancel}
+  onConfirm={handleCancel}
 >
   <button>신청 취소</button>
 </Modal>
@@ -65,7 +65,7 @@ interface ModalProps extends MantineModalProps {
   children: ReactElement; // 모달을 열 트리거 요소
   variant?: 'confirm' | 'warning' | 'outline'; // 버튼 스타일 및 기본 문구 프리셋
   texts?: Partial<ModalContentTexts>; // title/content/confirmButton/cancelButton
-  onClose: () => Promise<void>; // 확인 버튼 클릭 시 실행 (성공 시 모달 닫힘)
+  onConfirm: () => Promise<void>; // 확인 버튼 클릭 시 실행 (성공 시 모달 닫힘)
 }
 ```
 
@@ -74,7 +74,7 @@ interface ModalProps extends MantineModalProps {
 - `children`에 전달한 요소가 트리거가 되며, 클릭 시 모달이 열립니다.
 - `variant`에 따라 `primary / warning / outline` 버튼 스타일과 기본 문구가 세팅됩니다.
 - `texts`에 전달한 필드만 프리셋 위에 덮어써 원하는 문구만 수정할 수 있습니다.
-- 확인 버튼은 `onClose` 비동기 함수를 await한 뒤 모달을 닫습니다.
+- 확인 버튼은 `onConfirm` 비동기 함수를 await한 뒤 모달을 닫습니다.
 - 취소 버튼은 항상 secondary 스타일이며 즉시 모달을 닫습니다.
 
 ## 🎨 스타일
