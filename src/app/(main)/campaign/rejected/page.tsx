@@ -1,9 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-
 import { useRouter } from 'next/navigation';
-
 import { IconArrowLeft } from '@pop-ui/foundation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';

@@ -1,8 +1,6 @@
-@use '../../../../shared/styles/mixins' as *;
+@use '@shared/styles/mixins' as *;
 
 .RejectedList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
+  @include flex($direction: column, $gap: 12);
+  @include size($width: 100%);
 }
