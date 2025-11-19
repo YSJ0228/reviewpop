@@ -2,18 +2,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IconArrowRight } from '@pop-ui/foundation';
 
-import { diff, formatDate } from '@shared/lib/date';
+import { diff, formatDate, now } from '@shared/lib/date';
 
 import type { CampaignCardProps } from './types';
+
+import { CampaignCountdown } from './CampaignCountdown';
 
 import styles from './style.module.scss';
 
 export function CampaignCard({ campaign }: CampaignCardProps) {
   const givenTime = campaign.schedule.applicationSchedule[1];
-  const currentTime = new Date();
+  const currentTime = now();
   const diffInDays = diff(givenTime, currentTime, 'day');
   const applicationSchedule = campaign.schedule.applicationSchedule.map((d) =>
-    formatDate(d, 'SHORT'),
+    formatDate(d, 'MMDD_DDD_SHORT'),
   );
 
   return (
@@ -60,8 +62,9 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             </div>
           )}
           {campaign.status === 'before_recruiting' && (
-            <div className={styles.CampaignCard__Content__Closed}>
-              <span>오픈까지 {}</span>
+            <div className={styles.CampaignCard__Content__Before}>
+              <span>오픈까지</span>
+              <CampaignCountdown targetDate={campaign.schedule.applicationSchedule[0]} />
             </div>
           )}
           {campaign.status === 'closed' && (

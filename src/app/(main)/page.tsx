@@ -15,7 +15,6 @@ import { CampaignList } from '@features/campaign';
  * TODO:
  * 1. [ ] Banner 컴포넌트 구현 (@shared/components/Banner)
  * 2. [ ] CampaignFilter 컴포넌트 구현 (@features/campaign/components/CampaignFilter)
- * 3. [ ] CampaignList 컴포넌트 구현 (@features/campaign/components/CampaignList)
  * 5. [ ] 필터 기능 구현 (카테고리, 지역, 상태 등)
  * 6. [ ] 무한 스크롤 또는 페이지네이션
  */

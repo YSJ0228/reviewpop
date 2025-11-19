@@ -4,10 +4,11 @@ import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/
 import { CampaignCard } from '../CampaignCard';
 import type { CampaignListProps } from './types';
 import styles from './style.module.scss';
+import { now } from '@shared/lib/date';
 
 export function CampaignList({ status }: CampaignListProps) {
   const { data: campaigns, isLoading, error } = useCampaigns();
-  const now = new Date();
+  const thisTime = now();
 
   const filteredCampaigns = filterCampaignsByStatus(campaigns, status);
 
@@ -55,7 +56,8 @@ export function CampaignList({ status }: CampaignListProps) {
     >
       {filteredCampaigns.map(
         (campaign) =>
-          (status !== 'active' || campaign.schedule.applicationSchedule[1] > now.toISOString()) && (
+          (status !== 'active' ||
+            campaign.schedule.applicationSchedule[1] > thisTime.toISOString()) && (
             <CampaignCard key={campaign.id} campaign={campaign} />
           ),
       )}

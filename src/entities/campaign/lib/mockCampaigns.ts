@@ -133,7 +133,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['건강 보조 식품 1개월분', '섭취 가이드'],
     category: '건강' as CampaignCategory,
     status: 'active' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign4/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign4/800/600',
       'https://picsum.photos/seed/campaign4-2/800/600',
@@ -162,7 +162,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['스마트워치 1대', '충전 독', '스트랩 2종'],
     category: '전자제품' as CampaignCategory,
     status: 'active' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign5/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign5/800/600',
       'https://picsum.photos/seed/campaign5-2/800/600',
@@ -193,7 +193,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['유기농 스킨케어 세트 (토너, 로션)', '마스크팩 5매'],
     category: '뷰티' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign6/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign6/800/600',
       'https://picsum.photos/seed/campaign6-2/800/600',
@@ -222,7 +222,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['프리미엄 쌀 4kg', '브랜드 레시피북'],
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign7/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign7/800/600',
       'https://picsum.photos/seed/campaign7-2/800/600',
@@ -251,7 +251,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['신상 운동화 1켤레', '스포츠 양말 2족'],
     category: '패션' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign8/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign8/800/600',
       'https://picsum.photos/seed/campaign8-2/800/600',
@@ -280,7 +280,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['스마트 플러그 2개', '스마트 전구 1개', '사용 설명서'],
     category: '가전' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign9/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign9/800/600',
       'https://picsum.photos/seed/campaign9-2/800/600',
@@ -309,7 +309,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['프리미엄 요거트 12개입 세트', '그래놀라 1봉'],
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign10/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign10/800/600',
       'https://picsum.photos/seed/campaign10-2/800/600',
@@ -338,7 +338,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['신제품 샴푸 500ml', '트리트먼트 200ml'],
     category: '뷰티' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign11/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign11/800/600',
       'https://picsum.photos/seed/campaign11-2/800/600',
@@ -367,7 +367,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['무선 청소기 1대', '교체용 필터', '다용도 브러쉬 3종'],
     category: '가전' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign12/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign12/800/600',
       'https://picsum.photos/seed/campaign12-2/800/600',
@@ -396,7 +396,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['프리미엄 초콜릿 세트', '고급 포장 상자'],
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign13/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign13/800/600',
       'https://picsum.photos/seed/campaign13-2/800/600',
@@ -425,7 +425,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['시그니처 향수 50ml', '미니어처 샘플 2종'],
     category: '향수' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign14/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign14/800/600',
       'https://picsum.photos/seed/campaign14-2/800/600',
@@ -454,7 +454,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['스마트폰 케이스 1개', '캐릭터 스티커 팩'],
     category: '액세서리' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign15/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign15/800/600',
       'https://picsum.photos/seed/campaign15-2/800/600',
