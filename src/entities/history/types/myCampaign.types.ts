@@ -73,9 +73,9 @@ export const STATUS_REVIEW_TITLES: Record<MyCampaignReviewStatus, string> = {
   requiredForEditing: '후기 수정 요청이 있어요',
 };
 
-// 캠페인 상세 정보 (Campaign 타입 확장)
+// 체험 상세 정보 (Campaign 타입 확장)
 export interface MyCampaignDetail extends MyCampaign {
-  description: string; // 캠페인 상세 설명
+  description: string; // 체험 상세 설명
   reviewMission: string[]; // 리뷰 미션 목록
   providedItems: string[]; // 제공 내역 -> 지우기
   maxRecruitment: number; // 최대 모집 인원

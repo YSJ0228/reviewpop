@@ -16,7 +16,7 @@ export function CampaignList({ status }: CampaignListProps) {
         className={styles['CampaignList--Loading']}
         role="status"
         aria-live="polite"
-        aria-label="캠페인 목록 로딩 중"
+        aria-label="체험 목록 로딩 중"
       >
         <div className={styles.CampaignList__Spinner} />
         <span>로딩 중...</span>

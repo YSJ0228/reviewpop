@@ -23,7 +23,7 @@ review/
 ```typescript
 interface Review {
   id: number; // 리뷰 ID
-  campaignId: string; // 캠페인 ID
+  campaignId: string; // 체험 ID
   userId: number; // 작성자 ID
   user: {
     // 작성자 정보
@@ -60,7 +60,7 @@ interface CreateReviewRequest {
 
 ```typescript
 interface ReviewFilterParams {
-  campaignId?: string; // 특정 캠페인의 리뷰만
+  campaignId?: string; // 특정 체험의 리뷰만
   userId?: number; // 특정 사용자의 리뷰만
   rating?: number; // 정확히 N점인 리뷰만
   minRating?: number; // N점 이상인 리뷰만
