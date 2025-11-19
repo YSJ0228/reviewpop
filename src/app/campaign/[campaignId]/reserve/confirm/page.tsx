@@ -25,7 +25,7 @@ export default function ReserveConfirmPage({ params }: { params: { campaignId: s
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: ReserveConfirm 컴포넌트 추가 */}
           <div className={styles.Placeholder}>
-            <p>캠페인 ID: {params.campaignId}</p>
+            <p>체험 ID: {params.campaignId}</p>
             <p>예약 정보 확인</p>
             <p className={styles.Todo}>
               features/reserve/components/ReserveConfirm 컴포넌트를 구현하세요

@@ -4,14 +4,14 @@ import { findMyCampaignById } from './mockMyCampaigns';
 function requireMyCampaign(id: string) {
   const campaign = findMyCampaignById(id);
   if (!campaign) {
-    throw new Error(`mockCampaigns에 ID가 ${id}인 캠페인이 없습니다.`);
+    throw new Error(`mockCampaigns에 ID가 ${id}인 체험이 없습니다.`);
   }
   return campaign;
 }
 
-// 캠페인 상세 정보 (mockCampaigns 확장)
+// 체험 상세 정보 (mockCampaigns 확장)
 export const mockMyCampaignDetails: Record<string, MyCampaignDetail> = {
-  // 각 캠페인별 상세 정보 생성
+  // 각 체험별 상세 정보 생성
   '1': {
     ...requireMyCampaign('1'),
     description:

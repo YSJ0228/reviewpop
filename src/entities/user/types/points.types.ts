@@ -15,13 +15,13 @@ export type PointTransactionType = 'earn' | 'spend' | 'expire' | 'refund';
  * 포인트 적립/차감 사유
  */
 export type PointReason =
-  | 'campaign_application' // 캠페인 신청
+  | 'campaign_application' // 체험 신청
   | 'review_write' // 리뷰 작성
   | 'review_photo' // 사진 리뷰 작성
   | 'referral' // 친구 추천
   | 'event' // 이벤트 참여
   | 'admin_grant' // 관리자 지급
-  | 'campaign_cancel' // 캠페인 취소 (환불)
+  | 'campaign_cancel' // 체험 취소 (환불)
   | 'expire' // 기간 만료
   | 'other'; // 기타
 
@@ -41,7 +41,7 @@ export interface PointTransaction {
   reason: PointReason;
   /** 거래 설명 */
   description: string;
-  /** 관련 캠페인 ID (옵션) */
+  /** 관련 체험 ID (옵션) */
   campaignId?: string;
   /** 관련 리뷰 ID (옵션) */
   reviewId?: string;
@@ -85,13 +85,13 @@ export const POINT_TRANSACTION_TYPE_LABELS: Record<PointTransactionType, string>
  * 포인트 사유별 레이블
  */
 export const POINT_REASON_LABELS: Record<PointReason, string> = {
-  campaign_application: '캠페인 신청',
+  campaign_application: '체험 신청',
   review_write: '리뷰 작성',
   review_photo: '사진 리뷰 작성',
   referral: '친구 추천',
   event: '이벤트 참여',
   admin_grant: '관리자 지급',
-  campaign_cancel: '캠페인 취소',
+  campaign_cancel: '체험 취소',
   expire: '포인트 만료',
   other: '기타',
 };

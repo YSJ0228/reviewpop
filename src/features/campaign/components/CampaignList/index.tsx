@@ -1,8 +1,11 @@
 'use client';
 
 import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/useCampaigns';
+
 import { CampaignCard } from '../CampaignCard';
+
 import type { CampaignListProps } from './types';
+
 import styles from './style.module.scss';
 
 export function CampaignList({ status }: CampaignListProps) {
@@ -16,7 +19,7 @@ export function CampaignList({ status }: CampaignListProps) {
         className={styles['CampaignList--Loading']}
         role="status"
         aria-live="polite"
-        aria-label="캠페인 목록 로딩 중"
+        aria-label="체험 목록 로딩 중"
       >
         <div className={styles.CampaignList__Spinner} />
         <span>로딩 중...</span>

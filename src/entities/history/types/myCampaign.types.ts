@@ -1,4 +1,4 @@
-export type MyCampaignStatus = 'applied' | 'selected' | 'registered' | 'completed';
+export type MyCampaignStatus = 'applied' | 'selected' | 'registered' | 'completed' | 'rejected';
 
 export interface MyCampaign {
   id: string;
@@ -27,6 +27,7 @@ export const STATUS_LABELS: Record<MyCampaignStatus, string> = {
   selected: '선정',
   registered: '등록',
   completed: '종료',
+  rejected: '미선정',
 };
 
 export const STATUS_DESCRIPTIONS: Record<MyCampaignStatus, string> = {
@@ -34,11 +35,12 @@ export const STATUS_DESCRIPTIONS: Record<MyCampaignStatus, string> = {
   selected: '선정된 캠페인',
   registered: '등록 완료된 캠페인',
   completed: '종료된 캠페인',
+  rejected: '미선정된 캠페인',
 };
 
-// 캠페인 상세 정보 (Campaign 타입 확장)
+// 체험 상세 정보 (Campaign 타입 확장)
 export interface MyCampaignDetail extends MyCampaign {
-  description: string; // 캠페인 상세 설명
+  description: string; // 체험 상세 설명
   reviewMission: string[]; // 리뷰 미션 목록
   providedItems: string[]; // 제공 내역
   maxRecruitment: number; // 최대 모집 인원
