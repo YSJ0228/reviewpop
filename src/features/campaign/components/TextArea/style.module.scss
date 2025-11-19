@@ -1,0 +1,16 @@
+@use '../../../../shared/styles/mixins' as *;
+
+.TextArea__Count {
+  @include flex($justify: flex-end);
+  @include margin($top: 8);
+}
+.TextArea__CurrentCount {
+  color: var(--gray-900);
+  font-size: 12px;
+  font-weight: 500;
+}
+.TextArea__MaxCount {
+  color: var(--gray-600);
+  font-size: 12px;
+  font-weight: 500;
+}
