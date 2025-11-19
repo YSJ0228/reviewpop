@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, MouseEvent } from 'react';
 import { ModalProps as MantineModalProps } from '@mantine/core';
 import type { ButtonProps } from '@shared/components/Button/types';
 
@@ -8,8 +8,8 @@ import type { ButtonProps } from '@shared/components/Button/types';
  * MantineModalProps를 상속받아 Mantine Modal의 모든 속성을 사용할 수 있습니다.
  */
 export interface ModalProps extends MantineModalProps {
-  /** 모달을 열기 위한 트리거 요소 */
-  children: ReactElement;
+  /** 모달을 열기 위한 트리거 요소 (onClick 핸들러가 있을 수 있음) */
+  children: ReactElement<{ onClick?: (e: MouseEvent) => void }>;
   /** 모달 유형과 버튼 스타일을 함께 결정 */
   variant?: 'confirm' | 'warning' | 'outline';
   // confirm : 신청, warning : 탈퇴, outline : 예약/신청 취소

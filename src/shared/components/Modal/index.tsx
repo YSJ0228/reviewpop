@@ -3,15 +3,15 @@ import { Modal as MantineModal } from '@mantine/core';
 import { Button, LoadingSpinner } from '@shared/components';
 import { ModalProps, VARIANT_MAP, MODAL_TEXTS_PRESET } from './types';
 import styles from './style.module.scss';
-import { useState } from 'react';
+import { cloneElement, useState } from 'react';
 
 export function Modal({ texts, variant = 'confirm', children, onConfirm }: ModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const buttonVariant = VARIANT_MAP[variant];
   // variant별 기본 텍스트 프리셋을 가져온 후, texts prop으로 부분적으로 덮어쓰기
   const modalTexts = { ...MODAL_TEXTS_PRESET[variant], ...texts };
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleConfirm = async () => {
     setIsLoading(true);
@@ -20,9 +20,19 @@ export function Modal({ texts, variant = 'confirm', children, onConfirm }: Modal
       close();
     } catch (error) {
       console.error('요청 실패:', error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
+
+  // children에 onClick 이벤트 주입 (기존 onClick 오버라이드)
+  const triggerElement = cloneElement(children, {
+    onClick: (e: React.MouseEvent) => {
+      e.preventDefault?.();
+      e.stopPropagation?.();
+      open();
+    },
+  });
 
   return (
     <>
@@ -54,7 +64,7 @@ export function Modal({ texts, variant = 'confirm', children, onConfirm }: Modal
         </div>
       </MantineModal>
 
-      <div onClick={open}>{children}</div>
+      {triggerElement}
     </>
   );
 }
