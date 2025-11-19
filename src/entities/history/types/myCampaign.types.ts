@@ -1,8 +1,9 @@
 export type MyCampaignStatus = 'applied' | 'selected' | 'registered' | 'completed' | 'rejected'; // 신청, 선정, 후기, 종료, 미선정
 
-export type MyCampaignVisitStatus = 'before' | 'scheduled' | 'visited'; // 방문 전, 방문 예정, 방문 완료
+export type MyCampaignScheduleStatus = 'before' | 'scheduled'; // 방문 전, 방문 예정,
 
 export type MyCampaignReviewStatus =
+  | 'visited' // 체험 완료
   | 'notReviewed' // 후기 미등록
   | 'reviewed' // 후기 등록 완료
   | 'reviewPending' // 후기 검토 중
@@ -11,20 +12,18 @@ export type MyCampaignReviewStatus =
 export interface MyCampaign {
   id: string;
   brand: string;
-  title?: string; // 추후 지우기
   imageUrl: string;
-  status: MyCampaignStatus;
-  applicationDate?: string;
-  announcement?: string;
-  providedItems?: string[];
-  deadline?: string; // 추후 지우기?
-  category?: string; // 추후 지우기
-  points?: number; /// 추후 지우기
-  recruitmentSchedule?: [string, string];
+  status: MyCampaignStatus; // 체험 상태
+  applicationDate?: string; // 신청일
+  announcementDate?: string; // 선정 발표일
+  providedItems?: string[]; // 제공 내역
+  deadline?: string; // 체험 예약 마감일
+  recruitmentSchedule?: [string, string]; // 방문 날짜와 시간
   maxRecruitment?: number; // 선정하는 인원
-  appliedAt?: [string, string];
-  visitStatus?: MyCampaignVisitStatus;
-  reviewStatus?: MyCampaignReviewStatus;
+  appliedAt?: [string, string]; // 체험 예약일과 시간
+  visitStatus?: MyCampaignScheduleStatus; // 방문 상태
+  reviewStatus?: MyCampaignReviewStatus; // 후기 상태
+  visitPeriod?: [string, string]; // 방문 마감 기간
 }
 
 export const TAB_CONFIG = [
@@ -53,13 +52,13 @@ export const STATUS_DESCRIPTIONS: Record<MyCampaignStatus, string> = {
   rejected: '미선정된 캠페인',
 };
 
-export const STATUS_VISIT: Record<MyCampaignVisitStatus, string> = {
+export const STATUS_VISIT: Record<MyCampaignScheduleStatus, string> = {
   before: '방문 전',
   scheduled: '방문 예정',
-  visited: '방문 완료',
 };
 
 export const STATUS_REVIEW: Record<MyCampaignReviewStatus, string> = {
+  visited: '체험 완료',
   notReviewed: '후기 미등록',
   reviewed: '체험 종료',
   reviewPending: '후기 등록 완료',
@@ -67,6 +66,7 @@ export const STATUS_REVIEW: Record<MyCampaignReviewStatus, string> = {
 };
 
 export const STATUS_REVIEW_TITLES: Record<MyCampaignReviewStatus, string> = {
+  visited: '체험 후기를 남겨주세요',
   notReviewed: '체험 후기를 남겨주세요',
   reviewed: '후기 등록이 완료됐어요',
   reviewPending: '작성한 후기를 검토중이에요',
