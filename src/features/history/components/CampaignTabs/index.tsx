@@ -11,7 +11,7 @@ import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
 import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '@entities/history/types/myCampaign.types';
 import type { TabKey } from '@entities/history/types/myCampaign.types';
 
-import { IconArrowRight } from '@pop-ui/foundation';
+import { IconChevronRight } from '@pop-ui/foundation';
 
 import styles from './style.module.scss';
 
@@ -174,7 +174,7 @@ export function CampaignTabs() {
                 {tab.key === 'applied' && rejectedCount > 0 && (
                   <Link href="/campaign/rejected" className={styles.CampaignTabs__RejectedLink}>
                     {'미선정 체험 내역'}
-                    <IconArrowRight size={16} color="#4A4A4A" />
+                    <IconChevronRight size={16} color="var(--color-gray-800)" />
                   </Link>
                 )}
               </div>

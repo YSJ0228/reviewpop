@@ -5,10 +5,11 @@
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  background: white;
 
   &__TabBar {
     position: sticky;
-    background: #fff;
+    background: white;
     z-index: 9;
     border-bottom: 1px solid var(--gray-100);
     padding: 0 16px;
@@ -123,17 +124,12 @@
     height: 30px;
     flex-shrink: 0;
 
-    color: var(--color-gray-800, #4a4a4a);
+    color: var(--gray-800, #4a4a4a);
     text-align: center;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
     letter-spacing: -0.24px;
-
-    &__Icon {
-      @include flex($align: center, $justify: center);
-      color: var(--color-gray-800, #4a4a4a);
-    }
   }
 }
