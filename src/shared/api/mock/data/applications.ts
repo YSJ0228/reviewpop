@@ -1,7 +1,7 @@
 /**
  * Mock 신청(Application) 데이터
  *
- * 사용자들의 캠페인 신청 내역을 관리합니다.
+ * 사용자들의 체험 신청 내역을 관리합니다.
  * 총 50개의 신청 데이터로 다양한 상태를 시뮬레이션합니다.
  */
 
@@ -560,7 +560,7 @@ export function getApplicationsByUserId(userId: string): Application[] {
 }
 
 /**
- * 캠페인별 신청 목록 조회
+ * 체험별 신청 목록 조회
  */
 export function getApplicationsByCampaignId(campaignId: string): Application[] {
   return mockApplications.filter((app) => app.campaignId === campaignId);
@@ -584,7 +584,7 @@ export function findApplicationById(id: string): Application | undefined {
 }
 
 /**
- * 특정 사용자의 특정 캠페인 신청 찾기
+ * 특정 사용자의 특정 체험 신청 찾기
  */
 export function findApplicationByUserAndCampaign(
   userId: string,

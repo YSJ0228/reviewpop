@@ -5,7 +5,7 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import styles from './page.module.scss';
 
 /**
- * 캠페인 신청 완료 페이지
+ * 체험 신청 완료 페이지
  * - 하단 탭: X
  * - 신청 완료 메시지 및 안내
  *
@@ -22,7 +22,7 @@ export default function CampaignApplyCompletePage({ params }: { params: { campai
         {/* TODO: ApplyComplete 컴포넌트 추가 */}
         <div className={styles.Placeholder}>
           <p>✅ 신청이 완료되었습니다!</p>
-          <p>캠페인 ID: {params.campaignId}</p>
+          <p>체험 ID: {params.campaignId}</p>
           <p className={styles.Todo}>
             features/campaign/components/ApplyComplete 컴포넌트를 구현하세요
           </p>

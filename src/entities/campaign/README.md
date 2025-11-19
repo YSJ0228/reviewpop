@@ -1,23 +1,23 @@
-# Campaign Entity (캠페인 엔티티)
+# Campaign Entity (체험 엔티티)
 
 ## 📌 이 Entity는 무엇인가요?
 
-**캠페인**에 대한 전역 타입 정의와 비즈니스 로직을 관리합니다.
+**체험**에 대한 전역 타입 정의와 비즈니스 로직을 관리합니다.
 
-앱 전체에서 사용되는 캠페인 관련 데이터 모델을 정의하며, 여러 Feature에서 공유하여 사용합니다.
+앱 전체에서 사용되는 체험 관련 데이터 모델을 정의하며, 여러 Feature에서 공유하여 사용합니다.
 
 ## 📁 폴더 구조
 
 ```
 campaign/
 ├── types/
-│   └── campaign.types.ts   # 캠페인 타입 정의
+│   └── campaign.types.ts   # 체험 타입 정의
 └── README.md
 ```
 
 ## 🎯 주요 타입
 
-### Campaign (캠페인 기본 정보)
+### Campaign (체험 기본 정보)
 
 ```typescript
 interface Campaign {
@@ -41,7 +41,7 @@ interface Campaign {
 }
 ```
 
-### CampaignDetail (캠페인 상세 정보)
+### CampaignDetail (체험 상세 정보)
 
 상세 페이지에서 필요한 추가 정보를 포함:
 
@@ -54,7 +54,7 @@ interface CampaignDetail extends Campaign {
 }
 ```
 
-### CampaignStatus (캠페인 상태)
+### CampaignStatus (체험 상태)
 
 ```typescript
 type CampaignStatus = 'recruiting' | 'in_progress' | 'completed' | 'closed';
@@ -65,9 +65,9 @@ type CampaignStatus = 'recruiting' | 'in_progress' | 'completed' | 'closed';
 - `completed`: 완료
 - `closed`: 종료
 
-### MyCampaign (나의 캠페인)
+### MyCampaign (나의 체험)
 
-나의 체험에서 사용하는 캠페인 정보:
+나의 체험에서 사용하는 체험 정보:
 
 ```typescript
 interface MyCampaign extends Campaign {
@@ -143,7 +143,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
 
 ## 🔗 사용하는 Feature
 
-- `features/campaign/` - 캠페인 목록, 상세, 신청
+- `features/campaign/` - 체험 목록, 상세, 신청
 - `features/history/` - 나의 체험 (MyCampaign 타입 사용)
 - `features/reserve/` - 예약 (Campaign 타입 참조)
 - `features/review/` - 후기 작성 (Campaign 타입 참조)

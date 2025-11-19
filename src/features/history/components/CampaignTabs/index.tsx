@@ -86,7 +86,7 @@ export function CampaignTabs() {
     <div className={styles.CampaignTabs}>
       {/* 탭 바 (sticky) */}
       <div className={styles.CampaignTabs__TabBar}>
-        <div className={styles.CampaignTabs__Tabs} role="tablist" aria-label="캠페인 상태별 탭">
+        <div className={styles.CampaignTabs__Tabs} role="tablist" aria-label="체험 상태별 탭">
           {TAB_CONFIG.map((tab, index) => {
             const tabClassName = [
               styles.CampaignTabs__Tab,
