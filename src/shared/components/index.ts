@@ -13,7 +13,7 @@ export { BottomNavigation } from './BottomNavigation';
 export { Banner } from './Banner';
 export { ImageViewer } from './ImageViewer';
 export { LoadingSpinner } from './LoadingSpinner';
-export { ToastProvider, toast, useToast } from './Toast';
+export { toast } from './Toast';
 
 // Types
 export type { ButtonProps } from './Button/types';

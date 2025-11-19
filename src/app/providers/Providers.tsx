@@ -4,6 +4,7 @@
  * 앱 전체에서 사용하는 Provider들을 모아둔 컴포넌트입니다.
  * - React Query
  * - MSW (Mock Service Worker)
+ * - PopUiProvider (Mantine Theme, Toast Notifications)
  * - 테마 초기화
  * - 사용자 정보 복원
  */
@@ -15,8 +16,8 @@ import { ReactNode, useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+import { PopUiProvider } from '@pop-ui/core';
 import { useUserStore } from '@entities/user';
-import { ToastProvider } from '@shared/components/Toast';
 import { env } from '@shared/config/env';
 
 interface ProvidersProps {
@@ -100,7 +101,7 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ToastProvider>
+      <PopUiProvider notificationPosition="bottom-center">
         {children}
 
         {/* React Query Devtools - 개발 환경에서만 표시 */}
@@ -111,7 +112,7 @@ export function Providers({ children }: ProvidersProps) {
             position="bottom"
           />
         )}
-      </ToastProvider>
+      </PopUiProvider>
     </QueryClientProvider>
   );
 }

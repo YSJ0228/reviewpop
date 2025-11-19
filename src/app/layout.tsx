@@ -1,3 +1,5 @@
+import '@pop-ui/core/styles.css';
+
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import '@shared/styles/globals.scss';
 import { fontClasses } from '@shared/styles/fonts';
