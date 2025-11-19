@@ -1,0 +1,7 @@
+@use '../../../../shared/styles/mixins' as *;
+
+.CampaignApplyCard {
+  background-color: var(--color-blue-50);
+  border-radius: 10px;
+  @include flex($direction: column);
+}
