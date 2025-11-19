@@ -1,6 +1,7 @@
 'use client';
 
 import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/useCampaigns';
+import { CAMPAIGN_STATUS_LABELS } from '@entities/campaign/types/campaign.types';
 import { now } from '@shared/lib/date';
 
 import { CampaignCard } from '../CampaignCard';
@@ -8,7 +9,6 @@ import { CampaignCard } from '../CampaignCard';
 import type { CampaignListProps } from './types';
 
 import styles from './style.module.scss';
-import { CAMPAIGN_STATUS_LABELS } from '@entities/campaign/types/campaign.types';
 
 export function CampaignList({ status }: CampaignListProps) {
   const { data: campaigns, isLoading, error } = useCampaigns();
