@@ -15,7 +15,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
         <div className={styles.CampaignCard__ImageWrapper}>
           <Image
             src={campaign.imageUrl}
-            alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
+            alt={`${campaign.brand} ${campaign.brand} 체험 이미지`}
             fill
             sizes="(max-width: 768px) 88px, 88px"
             style={{ objectFit: 'cover' }}
@@ -24,7 +24,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
         <div className={styles.CampaignCard__Content}>
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
 
-          <p className={styles.CampaignCard__Title}>{campaign.title}</p>
+          <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
 
           {type === 'rejected' && campaign.deadline && (
             <div className={styles.CampaignCard__Date}>
@@ -36,6 +36,23 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               <span className={styles.CampaignCard__MaxRecruitment}>
                 {campaign.maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}명 선정
               </span>
+            </div>
+          )}
+
+          {type === 'applied' && campaign.applicationDate && campaign.announcementDate && (
+            <div>
+              <div className={styles.CampaignCard__Date}>
+                <span>신청일 </span>
+                <time dateTime={campaign.applicationDate}>
+                  {dayjs(campaign.applicationDate).format('MM.DD')}
+                </time>
+              </div>
+              <div className={styles.CampaignCard__Date}>
+                <span>선정 발표일 </span>
+                <time dateTime={campaign.announcementDate}>
+                  {dayjs(campaign.announcementDate).format('MM.DD')}
+                </time>
+              </div>
             </div>
           )}
           {/* TODO: 추후 조건(applied, selected, registered, completed) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
