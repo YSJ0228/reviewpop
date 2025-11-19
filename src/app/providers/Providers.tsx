@@ -14,6 +14,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { MantineProvider } from '@mantine/core';
 
 import { useUserStore } from '@entities/user';
 import { env } from '@shared/config/env';
@@ -99,12 +100,18 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <MantineProvider>
+        {children}
 
-      {/* React Query Devtools - 개발 환경에서만 표시 */}
-      {env.isDev && (
-        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" position="bottom" />
-      )}
+        {/* React Query Devtools - 개발 환경에서만 표시 */}
+        {env.isDev && (
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition="bottom-right"
+            position="bottom"
+          />
+        )}
+      </MantineProvider>
     </QueryClientProvider>
   );
 }

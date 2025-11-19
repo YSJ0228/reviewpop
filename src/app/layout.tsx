@@ -4,7 +4,7 @@ import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';
 import '@mantine/core/styles.css';
 
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
+import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 
 import { Providers } from './providers/Providers';
 
@@ -23,9 +23,7 @@ export default function RootLayout({
       <body className={`${fontClasses}`}>
         <div className="AppContainer">
           <Providers>
-            <MantineProvider>
-              <ErrorBoundary>{children}</ErrorBoundary>
-            </MantineProvider>
+            <ErrorBoundary>{children}</ErrorBoundary>
           </Providers>
         </div>
       </body>
