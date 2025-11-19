@@ -17,7 +17,6 @@ export const TAB_CONFIG = [
   { key: 'selected' as const, label: '선정' },
   { key: 'registered' as const, label: '등록' },
   { key: 'completed' as const, label: '종료' },
-  { key: 'rejected' as const, label: '미선정' },
 ] as const;
 
 export type TabKey = (typeof TAB_CONFIG)[number]['key'];

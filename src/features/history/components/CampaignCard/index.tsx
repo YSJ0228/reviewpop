@@ -12,15 +12,15 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
       <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
-        <figure className={styles.CampaignCard__ImageWrapper}>
+        <div className={styles.CampaignCard__ImageWrapper}>
           <Image
             src={campaign.imageUrl}
             alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="88px"
             style={{ objectFit: 'cover' }}
           />
-        </figure>
+        </div>
         <div className={styles.CampaignCard__Content}>
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
 

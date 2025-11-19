@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { filterCampaignsByStatus, useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
 
 import { CampaignCard } from '@features/history/components/CampaignCard';
@@ -6,7 +8,10 @@ import styles from './style.module.scss';
 
 export function RejectedList() {
   const { data: campaigns, isLoading, error } = useMyCampaigns();
-  const rejectedCampaigns = filterCampaignsByStatus(campaigns, 'rejected');
+  const rejectedCampaigns = useMemo(
+    () => filterCampaignsByStatus(campaigns, 'rejected'),
+    [campaigns],
+  );
 
   if (isLoading) {
     return (
