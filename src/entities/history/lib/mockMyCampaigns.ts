@@ -173,6 +173,102 @@ export const mockMyCampaigns: MyCampaign[] = [
     category: '액세서리',
     points: 500,
   },
+  //미선정
+  {
+    id: '16',
+    brand: '그라운드 220',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    appliedAt: ['2025-11-25', '13:00'],
+    status: 'rejected',
+  },
+];
+
+export const mockMyCampaignImprovement: MyCampaign[] = [
+  //신청
+  {
+    id: '1',
+    brand: '그라운드 220',
+    announcement: '2025-11-20',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    status: 'applied',
+  },
+  //거절
+  {
+    id: '2',
+    brand: '그라운드 220',
+    recruitmentSchedule: ['2025-11-01', '2025-11-15'],
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    status: 'rejected',
+    maxRecruitment: 16,
+  },
+  //선정
+  {
+    id: '3',
+    brand: '그라운드 220',
+    visitStatus: 'before',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    status: 'selected',
+  },
+  {
+    id: '4',
+    brand: '그라운드 220',
+    visitStatus: 'scheduled',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    appliedAt: ['2025-11-25', '13:00'],
+    status: 'selected',
+  },
+  {
+    id: '5',
+    brand: '그라운드 220',
+    visitStatus: 'visited',
+    recruitmentSchedule: ['2025-11-01', '2025-11-15'],
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    status: 'selected',
+  },
+  //후기
+  {
+    id: '6',
+    brand: '그라운드 220',
+    reviewStatus: 'notReviewed',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    appliedAt: ['2025-11-25', '13:00'],
+    status: 'registered',
+  },
+  {
+    id: '7',
+    brand: '그라운드 220',
+    reviewStatus: 'reviewPending',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    appliedAt: ['2025-11-25', '13:00'],
+    status: 'registered',
+  },
+  {
+    id: '8',
+    brand: '그라운드 220',
+    reviewStatus: 'requiredForEditing',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    appliedAt: ['2025-11-25', '13:00'],
+    status: 'registered',
+  },
+  //종료
+  {
+    id: '9',
+    brand: '그라운드 220',
+    reviewStatus: 'reviewed',
+    providedItems: ['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험'],
+    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    appliedAt: ['2025-11-25', '13:00'],
+    status: 'completed',
+  },
 ];
 
 export function findMyCampaignById(id: string): MyCampaign | undefined {
