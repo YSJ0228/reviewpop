@@ -28,16 +28,17 @@
   }
 
   &__Input {
-    border-color: var(--gray-100);
+    border: 1px solid var(--gray-100);
     border-radius: 10px;
-    border-width: 1px;
     box-shadow: none;
-    border-style: solid;
     @include flex($align: center);
     @include padding($left: 16);
     @include size($height: 50, $width: 100%);
     &:focus {
       outline: none;
+    }
+    &Error {
+      border-color: var(--color-red-500);
     }
   }
 
