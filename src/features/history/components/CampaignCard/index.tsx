@@ -3,14 +3,15 @@ import Image from 'next/image';
 
 import dayjs from 'dayjs';
 
+import { Button } from '@pop-ui/core';
+import { IconWarningCircle } from '@pop-ui/foundation';
+
+import { CONSTANTS } from '@shared/config/constants';
+import { Colors } from '@shared/styles/colors';
+
 import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
-import { CONSTANTS } from '@shared/config/constants';
-import { Button } from '@pop-ui/core';
-import { IconWarningCircle } from '@pop-ui/foundation';
-import { Colors } from '@shared/styles/colors';
-import { formatDate } from '@shared/lib/date';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   return (
