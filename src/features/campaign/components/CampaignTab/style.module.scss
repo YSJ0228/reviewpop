@@ -1,0 +1,22 @@
+@use '@shared/styles/mixins' as *;
+
+.CampaignTab {
+  height: 36px;
+  border-radius: 99px;
+  border: 1px solid #2e90fa;
+  background: #eff8ff;
+
+  @include padding($y: 0, $x: 12);
+  @include flex($gap: 4, $justify: center, $align: center);
+
+  span {
+    color: #2e90fa;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.28px;
+  }
+
+  &[data-status='in_progress'] {
+  }
+}
