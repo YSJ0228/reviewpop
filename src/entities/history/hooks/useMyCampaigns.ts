@@ -40,13 +40,22 @@ export function calculateAnnouncementDate(campaign: MyCampaign): string {
   const announcementDate = new Date(campaign.announcementDate);
   if (isNaN(announcementDate.getTime())) return '';
 
-  const today = new Date();
-  // 날짜 비교를 위해 시간을 00:00:00으로 초기화
-  announcementDate.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
+  // ✅ 새로운 Date 객체를 생성하여 side effect 방지
+  const announcementDay = new Date(
+    announcementDate.getFullYear(),
+    announcementDate.getMonth(),
+    announcementDate.getDate(),
+  );
 
-  const diffTime = announcementDate.getTime() - today.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const today = new Date();
+  const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const diffTime = announcementDay.getTime() - todayDay.getTime();
+  // ✅ 양수는 Math.ceil, 음수는 Math.floor를 사용
+  const diffDays =
+    diffTime >= 0
+      ? Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+      : Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
   if (diffDays === 0) {
     return '곧 발표 예정';

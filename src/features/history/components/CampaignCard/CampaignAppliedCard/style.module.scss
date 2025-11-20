@@ -12,10 +12,8 @@
     $color: var(--gray-900)
   );
 
-  &__Text {
-  }
-
   &__Button {
+    cursor: pointer;
     color: var(--value-gray-600, #808080);
     text-align: center;
 
