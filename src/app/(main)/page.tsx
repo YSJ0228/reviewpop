@@ -3,10 +3,10 @@
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { CampaignTab } from '@features/campaign/components/CampaignTab';
+import { CampaignList } from '@features/campaign';
 
 import styles from './page.module.scss';
-import { CampaignList } from '@features/campaign';
-import { CampaignTab } from '@features/campaign/components/CampaignTab';
 
 /**
  * 홈 페이지 (체험 목록)
@@ -26,7 +26,7 @@ export default function Home() {
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: Banner 컴포넌트 추가 */}
           {/* TODO: CampaignFilter 컴포넌트 추가 */}
-          <CampaignTab status="in_progress" />
+          <CampaignTab />
           <div className={styles.ListContainer}>
             <CampaignList status="in_progress" />
             <CampaignList status="before_recruiting" />
