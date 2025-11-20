@@ -8,7 +8,7 @@ import type { MyCampaignCardProps } from './types';
 import styles from './style.module.scss';
 import { CONSTANTS } from '@shared/config/constants';
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
-import CampaignApplied from './CampaignAppliedCard/CampaignAppliedCard';
+import CampaignApplied from './CampaignAppliedCard';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   const announcementTitle = calculateAnnouncementDate(campaign);
