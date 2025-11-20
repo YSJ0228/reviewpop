@@ -75,12 +75,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
             <span className={styles.Page__MetaLabel}>카테고리</span>
             <span className={styles.Page__MetaValue}>{campaign.category}</span>
           </div>
-          {campaign.points && (
-            <div className={styles.Page__MetaItem}>
-              <span className={styles.Page__MetaLabel}>포인트</span>
-              <span className={styles.Page__MetaValue}>{campaign.points.toLocaleString()}P</span>
-            </div>
-          )}
         </div>
 
         {/* 모집 인원 */}
