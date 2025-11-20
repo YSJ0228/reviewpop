@@ -59,7 +59,7 @@ export function LabeledInput({
       <div className={styles.LabeledInput__InputSection}>
         <div className={styles.LabeledInput__InputMessage}>
           <div
-            className={`${styles.LabeledInput__InputBox} ${errorMsg && touched ? styles.LabeledInput__InputBoxError : ''}`}
+            className={`${styles.LabeledInput__InputBox} ${errorMsg && touched ? styles['LabeledInput__InputBox--Error'] : ''}`}
           >
             <input
               id={id}
@@ -70,12 +70,13 @@ export function LabeledInput({
               onFocus={() => setIsFocused(true)}
               onBlur={() => {
                 setTouched(true);
-                setTimeout(() => setIsFocused(false), 100);
+                setIsFocused(false);
               }}
             />
             {isFocused && value && (
               <button
                 type="button"
+                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => setValue('')}
                 className={styles.LabeledInput__ClearButton}
               >

@@ -34,7 +34,7 @@
     @include flex($align: center, $justify: space-between);
     @include padding($x: 16);
     @include size($height: 50, $width: 100%);
-    &Error {
+    &--Error {
       border-color: var(--color-red-500);
     }
   }
