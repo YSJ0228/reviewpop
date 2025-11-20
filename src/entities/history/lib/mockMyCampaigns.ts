@@ -69,6 +69,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     deadline: '2025-10-25',
     category: '뷰티',
     points: 1200,
+    visitStatus: true,
   },
   {
     id: '7',

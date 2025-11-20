@@ -10,6 +10,7 @@ export interface MyCampaign {
   deadline?: string;
   category?: string;
   points?: number;
+  visitStatus?: boolean;
 }
 
 export const TAB_CONFIG = [

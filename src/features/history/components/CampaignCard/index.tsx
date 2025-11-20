@@ -7,39 +7,82 @@ import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 import { CONSTANTS } from '@shared/config/constants';
+import { Button } from '@pop-ui/core';
+import { IconWarningCircle } from '@pop-ui/foundation';
+import { Colors } from '@shared/styles/colors';
+import { formatDate } from '@shared/lib/date';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
+      <div className={styles.CampaignCard__StatusLabel}>
+        <span>status label</span>
+      </div>
       <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
-        <div className={styles.CampaignCard__ImageWrapper}>
-          <Image
-            src={campaign.imageUrl}
-            alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
-            fill
-            sizes="(max-width: 768px) 88px, 88px"
-            style={{ objectFit: 'cover' }}
-          />
-        </div>
-        <div className={styles.CampaignCard__Content}>
-          <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
+        <div className={styles.CampaignCard__TopSection}>
+          <div className={styles.CampaignCard__ImageWrapper}>
+            <Image
+              src={campaign.imageUrl}
+              alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
+              fill
+              sizes="(max-width: 768px) 88px, 88px"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+          <div className={styles.CampaignCard__Content}>
+            {type === 'selected' && (
+              <div>
+                {campaign.visitStatus && (
+                  <span className={styles.CampaignCard__VisitDate}>9월 18일 수요일 오후 1:00</span>
+                )}
+                {!campaign.visitStatus && (
+                  <span className={styles.CampaignCard__SelectedText}>체험단에 선정되었어요🎉</span>
+                )}
+              </div>
+            )}
+            <span className={styles.CampaignCard__Brand}>{campaign.brand}</span>
+            <span className={styles.CampaignCard__Title}>{campaign.title}</span>
 
-          <p className={styles.CampaignCard__Title}>{campaign.title}</p>
-
-          {type === 'rejected' && campaign.deadline && (
-            <div className={styles.CampaignCard__Date}>
-              <time dateTime={campaign.applicationDate}>
-                모집 {dayjs(campaign.applicationDate).format('MM.DD')}
-              </time>
-              <span> ~ </span>
-              <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
-              <span className={styles.CampaignCard__MaxRecruitment}>
-                {campaign.maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}명 선정
-              </span>
-            </div>
-          )}
-          {/* TODO: 추후 조건(applied, selected, registered, completed) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
+            {type === 'rejected' && campaign.deadline && (
+              <div className={styles.CampaignCard__Date}>
+                <time dateTime={campaign.applicationDate}>
+                  모집 {dayjs(campaign.applicationDate).format('MM.DD')}
+                </time>
+                <span> ~ </span>
+                <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
+                <span className={styles.CampaignCard__MaxRecruitment}>
+                  {campaign.maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}명 선정
+                </span>
+              </div>
+            )}
+          </div>
         </div>
+        {/* 선정된 체험 이면서, 예약 상태가 아닌경우 (campaign.visitStatus === false)  */}
+        {type === 'selected' && (
+          <div>
+            {!campaign.visitStatus && (
+              <div className={styles.CampaignCard__ContentWrapper}>
+                <Button variant="primary" fullWidth radius={8}>
+                  <span className={styles.CampaignCard__PrimaryText}>
+                    체험 방문할 날짜를 설정해주세요.
+                  </span>
+                </Button>
+                <div className={styles.CampaignCard__WarningWrapper}>
+                  <IconWarningCircle color={Colors.COLOR_GRAY_400} size={12} />
+                  <span className={styles.CampaignCard__WarningText}>
+                    방문 가능 기간 내 예약을 안하면 선정이 취소돼요
+                  </span>
+                </div>
+              </div>
+            )}
+            {/* 선정된 체험이면서, 예약 상태 데이터가 있는 경우 (campaign.visitStatus === true) */}
+            {campaign.visitStatus && (
+              <Button variant="basic" fullWidth radius={8}>
+                <span className={styles.CampaignCard__BasicText}>체험 정보 및 후기 미션</span>
+              </Button>
+            )}
+          </div>
+        )}
       </article>
     </Link>
   );
