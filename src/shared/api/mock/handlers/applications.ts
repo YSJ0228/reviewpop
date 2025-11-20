@@ -1,7 +1,7 @@
 /**
  * Application 관련 MSW 핸들러
  *
- * 캠페인 신청 API 엔드포인트를 Mock으로 구현합니다.
+ * 체험 신청 API 엔드포인트를 Mock으로 구현합니다.
  */
 
 import { http, HttpResponse } from 'msw';
@@ -70,7 +70,7 @@ export const applicationHandlers = [
   }),
 
   /**
-   * 특정 캠페인의 신청 목록 조회 (관리자용)
+   * 특정 체험의 신청 목록 조회 (관리자용)
    * GET /api/campaigns/:campaignId/applications
    */
   http.get('/api/campaigns/:campaignId/applications', ({ params }) => {
@@ -81,7 +81,7 @@ export const applicationHandlers = [
       return HttpResponse.json(
         {
           success: false,
-          error: '캠페인을 찾을 수 없습니다.',
+          error: '체험을 찾을 수 없습니다.',
         } satisfies ApiResponse<never>,
         { status: 404 },
       );
@@ -96,31 +96,31 @@ export const applicationHandlers = [
   }),
 
   /**
-   * 캠페인 신청
+   * 체험 신청
    * POST /api/campaigns/:campaignId/apply
    */
   http.post('/api/campaigns/:campaignId/apply', async ({ params, request }) => {
     const campaignId = params.campaignId as string;
     const body = (await request.json()) as CreateApplicationRequest & { userId: string };
 
-    // 캠페인 존재 여부 확인
+    // 체험 존재 여부 확인
     const campaign = findCampaignById(campaignId);
     if (!campaign) {
       return HttpResponse.json(
         {
           success: false,
-          error: '캠페인을 찾을 수 없습니다.',
+          error: '체험을 찾을 수 없습니다.',
         } satisfies ApiResponse<never>,
         { status: 404 },
       );
     }
 
-    // 캠페인 상태 확인
+    // 체험 상태 확인
     if (campaign.status !== 'active') {
       return HttpResponse.json(
         {
           success: false,
-          error: '현재 신청할 수 없는 캠페인입니다.',
+          error: '현재 신청할 수 없는 체험입니다.',
         } satisfies ApiResponse<never>,
         { status: 400 },
       );
@@ -133,7 +133,7 @@ export const applicationHandlers = [
       return HttpResponse.json(
         {
           success: false,
-          error: '신청 마감된 캠페인입니다.',
+          error: '신청 마감된 체험입니다.',
         } satisfies ApiResponse<never>,
         { status: 400 },
       );
@@ -145,7 +145,7 @@ export const applicationHandlers = [
       return HttpResponse.json(
         {
           success: false,
-          error: '이미 신청한 캠페인입니다.',
+          error: '이미 신청한 체험입니다.',
         } satisfies ApiResponse<never>,
         { status: 400 },
       );
@@ -178,7 +178,7 @@ export const applicationHandlers = [
 
     mockApplications.push(newApplication);
 
-    // 캠페인 현재 신청 수 증가
+    // 체험 현재 신청 수 증가
     campaign.currentRecruitment += 1;
 
     return HttpResponse.json(
@@ -253,7 +253,7 @@ export const applicationHandlers = [
       updatedAt: toISO(),
     };
 
-    // 캠페인 현재 신청 수 감소
+    // 체험 현재 신청 수 감소
     const campaign = findCampaignById(application.campaignId);
     if (campaign && campaign.currentRecruitment > 0) {
       campaign.currentRecruitment -= 1;
@@ -306,7 +306,7 @@ export const applicationHandlers = [
       updatedAt: toISO(),
     };
 
-    // 선정된 경우 캠페인의 선정 수 증가
+    // 선정된 경우 체험의 선정 수 증가
     if (body.status === 'selected') {
       const campaign = findCampaignById(application.campaignId);
       if (campaign) {

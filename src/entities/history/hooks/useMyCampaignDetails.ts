@@ -7,7 +7,7 @@ interface CampaignDetailResponse {
 }
 
 /**
- * 캠페인 상세 정보를 가져오는 React Query 훅
+ * 체험 상세 정보를 가져오는 React Query 훅
  */
 export function useMyCampaignDetails(id: string) {
   return useQuery({
@@ -15,7 +15,7 @@ export function useMyCampaignDetails(id: string) {
     queryFn: async (): Promise<MyCampaignDetail> => {
       const response = await fetch(`/api/my-campaigns/${id}`);
       if (!response.ok) {
-        throw new Error('캠페인 상세 정보를 불러오는데 실패했습니다.');
+        throw new Error('체험 상세 정보를 불러오는데 실패했습니다.');
       }
       const json: CampaignDetailResponse = await response.json();
       return json.data;

@@ -8,11 +8,12 @@ import styles from './page.module.scss';
 import { LabeledInput } from '@shared/components/LabeledInput';
 import { WebButton } from '@shared/components/WebButton';
 import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
+import { TextArea } from '@features/campaign/components/TextArea';
 
 /**
- * 캠페인 신청 페이지
+ * 체험 신청 페이지
  * - 하단 탭: X
- * - 캠페인 신청 폼
+ * - 체험 신청 폼
  *
  * TODO:
  * 1. [ ] ApplyForm 컴포넌트 구현 (@features/campaign/components/ApplyForm)
@@ -47,16 +48,23 @@ export default function CampaignApplyPage({ params }: { params: { campaignId: st
               text={text}
               setText={setText}
               inputType="name"
+              isButton={false}
               placeholder="이름을 입력해주세요"
             />
             <LabeledInput
               label="전화번호"
               text={phone}
               setText={setPhone}
-              isButton={true}
-              isText={true}
-              inputType="url"
+              inputType="phone"
+              isButton={false}
               placeholder="01012345678"
+            />
+            <TextArea
+              label="전달하고 싶은 한마디(선택)"
+              maxTextCount={300}
+              text={''}
+              setText={() => {}}
+              placeholder="체험단에 선정되어야 할 이유가 있다면 알려주세요!"
             />
           </div>
         </Suspense>

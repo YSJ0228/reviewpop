@@ -4,6 +4,6 @@ export interface WebButtonProps {
   label: string;
   isConnected?: boolean;
   buttonType: TButtonType;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   text?: string;
 }

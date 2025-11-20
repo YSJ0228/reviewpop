@@ -99,7 +99,7 @@ export const reservationHandlers = [
       return HttpResponse.json(
         {
           success: false,
-          error: '이미 예약이 완료된 캠페인입니다.',
+          error: '이미 예약이 완료된 체험입니다.',
         } satisfies ApiResponse<never>,
         { status: 400 },
       );
