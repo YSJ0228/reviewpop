@@ -100,3 +100,15 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+// Mantine Modal의 스크롤 잠금 시 margin-right 제거
+// Mantine이 자동으로 추가하는 margin-right로 인한 레이아웃 밀림 방지
+html body[data-scroll-locked],
+body[data-scroll-locked] {
+  margin-right: 0 !important;
+}
+
+// Mantine이 사용하는 CSS 변수도 0으로 설정
+body[data-scroll-locked] {
+  --removed-body-scroll-bar-size: 0px !important;
+}
