@@ -1,0 +1,30 @@
+@use './utils' as *;
+
+// Font 믹스인
+// Named parameters로 필요한 font 속성만 선택적으로 지정 가능
+//
+// 사용 예시:
+//   @include font($size: 16, $weight: 600, $color: #000);
+//   @include font($size: 14, $line-height: 1.5);
+//   @include font($size: 18, $weight: 700, $color: #333, $line-height: 1.6, $letter-spacing: -0.02em);
+@mixin font($size: null, $weight: null, $color: null, $line-height: null, $letter-spacing: null) {
+  @if $size {
+    font-size: to-unit($size);
+  }
+
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $color {
+    color: $color;
+  }
+
+  @if $line-height {
+    line-height: $line-height;
+  }
+
+  @if $letter-spacing {
+    letter-spacing: $letter-spacing;
+  }
+}
