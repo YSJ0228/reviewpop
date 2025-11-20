@@ -31,11 +31,11 @@ const createSchedule = (
  * Campaign mock 데이터
  *
  * 상태 분포:
- * - active (진행 중): 5개
+ * - in_progress (진행 중): 5개
  * - closed (마감): 10개
  */
 export const mockCampaigns: Campaign[] = [
-  // Active 체험 (5개)
+  // in_progress 체험 (5개)
   {
     id: '1',
     title: '신제품 커피 체험단 모집',
@@ -44,26 +44,25 @@ export const mockCampaigns: Campaign[] = [
       '스타벅스의 신제품 커피를 가장 먼저 체험해보세요! 프리미엄 원두를 사용한 특별한 블렌드로, 부드러운 맛과 풍부한 향이 특징입니다.',
     providedItems: ['신제품 원두 200g', '브랜드 머그컵 1개'],
     category: '음료' as CampaignCategory,
-    status: 'active' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign1/400/300',
+    status: 'before_recruiting' as CampaignStatus,
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign1/800/600',
       'https://picsum.photos/seed/campaign1-2/800/600',
     ],
     schedule: createSchedule(
-      '2025-10-25T00:00:00Z',
-      '2025-11-15T23:59:59Z',
-      '2025-11-16T00:00:00Z',
-      '2025-11-18T23:59:59Z',
-      '2025-11-19T00:00:00Z',
-      '2025-12-07T23:59:59Z',
+      '2025-11-23T00:00:00Z',
+      '2025-11-30T23:59:59Z',
+      '2025-12-01T00:00:00Z',
+      '2025-12-03T23:59:59Z',
+      '2025-12-04T00:00:00Z',
+      '2025-12-20T23:59:59Z',
     ),
     location: '서울',
     address: '서울특별시 중구 세종대로 110',
     maxRecruitment: 50,
     currentRecruitment: 47,
     selectedCount: 0,
-    points: 1000,
     createdAt: '2025-10-25T00:00:00Z',
   },
   {
@@ -74,25 +73,24 @@ export const mockCampaigns: Campaign[] = [
       '설화수의 프리미엄 화장품 라인을 체험할 수 있는 특별한 기회! 한방 성분이 함유된 고급 스킨케어 제품으로 피부 본연의 아름다움을 찾아보세요.',
     providedItems: ['프리미엄 에센스 30ml', '크림 15ml 샘플'],
     category: '뷰티' as CampaignCategory,
-    status: 'active' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign2/400/300',
+    status: 'before_recruiting' as CampaignStatus,
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign2/800/600',
       'https://picsum.photos/seed/campaign2-2/800/600',
     ],
     schedule: createSchedule(
-      '2025-10-15T00:00:00Z',
-      '2025-11-10T23:59:59Z',
-      '2025-11-11T00:00:00Z',
-      '2025-11-13T23:59:59Z',
-      '2025-11-14T00:00:00Z',
+      '2025-11-24T00:00:00Z',
+      '2025-12-01T23:59:59Z',
+      '2025-12-02T00:00:00Z',
       '2025-12-04T23:59:59Z',
+      '2025-12-05T00:00:00Z',
+      '2025-12-21T23:59:59Z',
     ),
     location: '전국',
     maxRecruitment: 30,
     currentRecruitment: 28,
     selectedCount: 0,
-    points: 1500,
     createdAt: '2025-10-22T00:00:00Z',
   },
   {
@@ -103,25 +101,24 @@ export const mockCampaigns: Campaign[] = [
       '삼성전자의 최신 무선 이어폰을 체험해보세요. 탁월한 노이즈 캔슬링 기능과 고음질 사운드로 최상의 청음 경험을 제공합니다.',
     providedItems: ['무선 이어폰 1세트', '충전 케이스', '사이즈별 이어팁'],
     category: '전자제품' as CampaignCategory,
-    status: 'active' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign3/400/300',
+    status: 'in_progress' as CampaignStatus,
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign3/800/600',
       'https://picsum.photos/seed/campaign3-2/800/600',
     ],
     schedule: createSchedule(
-      '2025-10-10T00:00:00Z',
-      '2025-11-08T23:59:59Z',
-      '2025-11-09T00:00:00Z',
-      '2025-11-11T23:59:59Z',
-      '2025-11-12T00:00:00Z',
-      '2025-12-01T23:59:59Z',
+      '2025-11-01T00:00:00Z',
+      '2025-11-25T23:59:59Z',
+      '2025-11-26T00:00:00Z',
+      '2025-11-28T23:59:59Z',
+      '2025-11-29T00:00:00Z',
+      '2025-12-15T23:59:59Z',
     ),
     location: '전국',
     maxRecruitment: 40,
     currentRecruitment: 35,
     selectedCount: 0,
-    points: 2000,
     createdAt: '2025-10-19T00:00:00Z',
   },
   {
@@ -132,25 +129,24 @@ export const mockCampaigns: Campaign[] = [
       '종근당의 건강 보조 식품으로 활력 넘치는 하루를 시작하세요. 비타민과 미네랄이 풍부하게 함유된 프리미엄 건강식품입니다.',
     providedItems: ['건강 보조 식품 1개월분', '섭취 가이드'],
     category: '건강' as CampaignCategory,
-    status: 'active' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign4/400/300',
+    status: 'in_progress' as CampaignStatus,
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign4/800/600',
       'https://picsum.photos/seed/campaign4-2/800/600',
     ],
     schedule: createSchedule(
-      '2025-10-05T00:00:00Z',
-      '2025-11-05T23:59:59Z',
-      '2025-11-06T00:00:00Z',
-      '2025-11-08T23:59:59Z',
-      '2025-11-09T00:00:00Z',
+      '2025-11-05T00:00:00Z',
       '2025-11-26T23:59:59Z',
+      '2025-11-27T00:00:00Z',
+      '2025-11-29T23:59:59Z',
+      '2025-11-30T00:00:00Z',
+      '2025-12-16T23:59:59Z',
     ),
     location: '전국',
     maxRecruitment: 80,
     currentRecruitment: 58,
     selectedCount: 0,
-    points: 800,
     createdAt: '2025-10-14T00:00:00Z',
   },
   {
@@ -161,25 +157,24 @@ export const mockCampaigns: Campaign[] = [
       '애플의 최신 스마트워치를 가장 먼저 체험해보세요. 건강 관리부터 스마트한 일상까지, 손목 위의 작은 혁신을 경험하세요.',
     providedItems: ['스마트워치 1대', '충전 독', '스트랩 2종'],
     category: '전자제품' as CampaignCategory,
-    status: 'active' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign5/400/300',
+    status: 'in_progress' as CampaignStatus,
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign5/800/600',
       'https://picsum.photos/seed/campaign5-2/800/600',
     ],
     schedule: createSchedule(
-      '2025-09-30T00:00:00Z',
-      '2025-11-01T23:59:59Z',
-      '2025-11-02T00:00:00Z',
-      '2025-11-04T23:59:59Z',
-      '2025-11-05T00:00:00Z',
-      '2025-11-21T23:59:59Z',
+      '2025-11-10T00:00:00Z',
+      '2025-11-24T23:59:59Z',
+      '2025-11-25T00:00:00Z',
+      '2025-11-27T23:59:59Z',
+      '2025-11-28T00:00:00Z',
+      '2025-12-14T23:59:59Z',
     ),
     location: '전국',
     maxRecruitment: 20,
     currentRecruitment: 19,
     selectedCount: 0,
-    points: 3000,
     createdAt: '2025-10-09T00:00:00Z',
   },
 
@@ -193,7 +188,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['유기농 스킨케어 세트 (토너, 로션)', '마스크팩 5매'],
     category: '뷰티' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign6/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign6/800/600',
       'https://picsum.photos/seed/campaign6-2/800/600',
@@ -210,7 +205,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 30,
     currentRecruitment: 25,
     selectedCount: 2,
-    points: 1200,
     createdAt: '2025-10-04T00:00:00Z',
   },
   {
@@ -222,7 +216,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['프리미엄 쌀 4kg', '브랜드 레시피북'],
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign7/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign7/800/600',
       'https://picsum.photos/seed/campaign7-2/800/600',
@@ -239,7 +233,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 50,
     currentRecruitment: 42,
     selectedCount: 2,
-    points: 900,
     createdAt: '2025-10-02T00:00:00Z',
   },
   {
@@ -251,7 +244,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['신상 운동화 1켤레', '스포츠 양말 2족'],
     category: '패션' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign8/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign8/800/600',
       'https://picsum.photos/seed/campaign8-2/800/600',
@@ -268,7 +261,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 30,
     currentRecruitment: 27,
     selectedCount: 2,
-    points: 2500,
     createdAt: '2025-09-29T00:00:00Z',
   },
   {
@@ -280,7 +272,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['스마트 플러그 2개', '스마트 전구 1개', '사용 설명서'],
     category: '가전' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign9/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign9/800/600',
       'https://picsum.photos/seed/campaign9-2/800/600',
@@ -297,7 +289,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 20,
     currentRecruitment: 15,
     selectedCount: 1,
-    points: 1800,
     createdAt: '2025-09-27T00:00:00Z',
   },
   {
@@ -309,7 +300,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['프리미엄 요거트 12개입 세트', '그래놀라 1봉'],
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign10/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign10/800/600',
       'https://picsum.photos/seed/campaign10-2/800/600',
@@ -326,7 +317,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 100,
     currentRecruitment: 65,
     selectedCount: 2,
-    points: 700,
     createdAt: '2025-09-22T00:00:00Z',
   },
   {
@@ -338,7 +328,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['신제품 샴푸 500ml', '트리트먼트 200ml'],
     category: '뷰티' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign11/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign11/800/600',
       'https://picsum.photos/seed/campaign11-2/800/600',
@@ -355,7 +345,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 60,
     currentRecruitment: 53,
     selectedCount: 2,
-    points: 1000,
     createdAt: '2025-09-19T00:00:00Z',
   },
   {
@@ -367,7 +356,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['무선 청소기 1대', '교체용 필터', '다용도 브러쉬 3종'],
     category: '가전' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign12/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign12/800/600',
       'https://picsum.photos/seed/campaign12-2/800/600',
@@ -384,7 +373,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 15,
     currentRecruitment: 12,
     selectedCount: 1,
-    points: 3500,
     createdAt: '2025-09-14T00:00:00Z',
   },
   {
@@ -396,7 +384,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['프리미엄 초콜릿 세트', '고급 포장 상자'],
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign13/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign13/800/600',
       'https://picsum.photos/seed/campaign13-2/800/600',
@@ -413,7 +401,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 100,
     currentRecruitment: 100,
     selectedCount: 1,
-    points: 600,
     createdAt: '2025-09-04T00:00:00Z',
   },
   {
@@ -425,7 +412,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['시그니처 향수 50ml', '미니어처 샘플 2종'],
     category: '향수' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign14/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign14/800/600',
       'https://picsum.photos/seed/campaign14-2/800/600',
@@ -442,7 +429,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 30,
     currentRecruitment: 30,
     selectedCount: 1,
-    points: 2000,
     createdAt: '2025-08-30T00:00:00Z',
   },
   {
@@ -454,7 +440,7 @@ export const mockCampaigns: Campaign[] = [
     providedItems: ['스마트폰 케이스 1개', '캐릭터 스티커 팩'],
     category: '액세서리' as CampaignCategory,
     status: 'closed' as CampaignStatus,
-    imageUrl: 'https://picsum.photos/seed/campaign15/400/300',
+    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign15/800/600',
       'https://picsum.photos/seed/campaign15-2/800/600',
@@ -471,7 +457,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 150,
     currentRecruitment: 150,
     selectedCount: 1,
-    points: 500,
     createdAt: '2025-08-26T00:00:00Z',
   },
 ];
@@ -500,8 +485,8 @@ export function getCampaignsByCategory(category: CampaignCategory): Campaign[] {
 /**
  * 진행 중인 체험 목록 조회
  */
-export function getActiveCampaigns(): Campaign[] {
-  return getCampaignsByStatus('active');
+export function getInProgressCampaigns(): Campaign[] {
+  return getCampaignsByStatus('in_progress');
 }
 
 /**
