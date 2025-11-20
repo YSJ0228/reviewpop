@@ -14,22 +14,20 @@
   border-bottom: 1px solid var(--color-gray-200);
 
   &__Logo {
-    @include flex($align: center);
+    @include flex($align: center, $justify: center);
     height: 36px;
   }
 
   &__Notification {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    @include flex($align: center, $justify: center);
 
     &__Active {
       position: absolute;
       top: -2px;
       right: -2px;
-      width: 13px;
-      height: 13px;
+
+      @include size($width: 13px, $height: 13px);
       border-radius: 50%;
       display: flex;
       align-items: center;

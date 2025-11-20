@@ -21,7 +21,8 @@ export function Gnb({ notification = 0 }: IGnbProps) {
   return (
     <header className={styles.Gnb}>
       <Link href="/" className={styles.Gnb__Logo}>
-        <Image src="/images/Logo.svg" alt="로고 이미지" width={146} height={36} />
+        <Image src="/images/Logo-left.svg" alt="로고 이미지" width={99.412} height={13.645} />
+        <Image src="/images/Logo-right.svg" alt="로고 이미지" width={43.793} height={14} />
       </Link>
       <div className={pathname === '/profile' ? styles.Gnb__Right : ''}>
         <Link
