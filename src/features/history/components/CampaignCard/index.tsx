@@ -7,21 +7,25 @@ import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 import { CONSTANTS } from '@shared/config/constants';
+import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
+  const announcementTitle = calculateAnnouncementDate(campaign);
+  console.log('announcementTitle', announcementTitle);
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
-      <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
+      <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
         <div className={styles.CampaignCard__ImageWrapper}>
           <Image
             src={campaign.imageUrl}
-            alt={`${campaign.brand} ${campaign.brand} 체험 이미지`}
+            alt={`${campaign.brand} 체험 이미지`}
             fill
             sizes="(max-width: 768px) 88px, 88px"
             style={{ objectFit: 'cover' }}
           />
         </div>
         <div className={styles.CampaignCard__Content}>
+          <p>{announcementTitle}</p>
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
 
           <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>

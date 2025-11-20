@@ -33,3 +33,26 @@ export function filterCampaignsByStatus(
   if (!campaigns) return [];
   return campaigns.filter((campaign) => campaign.status === status);
 }
+
+export function calculateAnnouncementDate(campaign: MyCampaign): string {
+  if (!campaign.announcementDate) return '';
+
+  const announcementDate = new Date(campaign.announcementDate);
+  if (isNaN(announcementDate.getTime())) return '';
+
+  const today = new Date();
+  // 날짜 비교를 위해 시간을 00:00:00으로 초기화
+  announcementDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const diffTime = announcementDate.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
+    return '곧 발표 예정';
+  } else if (diffDays < 0) {
+    return '결과 대기중';
+  }
+
+  return `발표일까지 D-${diffDays}`;
+}

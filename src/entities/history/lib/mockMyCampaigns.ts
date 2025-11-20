@@ -28,7 +28,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign3/400/300',
     status: 'applied',
     applicationDate: '2025-11-09',
-    announcementDate: '2025-11-31',
+    announcementDate: '2025-11-11',
   },
   {
     id: '4',
@@ -37,7 +37,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign4/400/300',
     status: 'applied',
     applicationDate: '2025-11-01',
-    announcementDate: '2025-11-20',
+    announcementDate: '2025-11-12',
   },
   {
     id: '5',
@@ -46,7 +46,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign5/400/300',
     status: 'applied',
     applicationDate: '2025-11-02',
-    announcementDate: '2025-11-24',
+    announcementDate: '2025-11-20',
   },
   {
     id: '6',
