@@ -2,7 +2,7 @@
 
 .CampaignList {
   @include padding($x: 16);
-  @include flex($direction: column, $gap: 16);
+  @include flex($direction: column);
   overflow-y: auto;
   min-height: 200px;
 }

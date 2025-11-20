@@ -8,10 +8,11 @@ import type { MyCampaignCardProps } from './types';
 import styles from './style.module.scss';
 import { CONSTANTS } from '@shared/config/constants';
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
+import CampaignApplied from './CampaignAppliedCard/CampaignAppliedCard';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   const announcementTitle = calculateAnnouncementDate(campaign);
-  console.log('announcementTitle', announcementTitle);
+
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
       <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
@@ -25,7 +26,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
           />
         </div>
         <div className={styles.CampaignCard__Content}>
-          <p>{announcementTitle}</p>
+          {type === 'applied' && <CampaignApplied announcementTitle={announcementTitle} />}
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
 
           <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
@@ -43,22 +44,6 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             </div>
           )}
 
-          {type === 'applied' && campaign.applicationDate && campaign.announcementDate && (
-            <div>
-              <div className={styles.CampaignCard__Date}>
-                <span>신청일 </span>
-                <time dateTime={campaign.applicationDate}>
-                  {dayjs(campaign.applicationDate).format('MM.DD')}
-                </time>
-              </div>
-              <div className={styles.CampaignCard__Date}>
-                <span>선정 발표일 </span>
-                <time dateTime={campaign.announcementDate}>
-                  {dayjs(campaign.announcementDate).format('MM.DD')}
-                </time>
-              </div>
-            </div>
-          )}
           {/* TODO: 추후 조건(applied, selected, registered, completed) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
         </div>
       </article>

@@ -1,0 +1,36 @@
+@use '../../../../../shared/styles/mixins' as *;
+
+.CampaignAppliedTitle {
+  align-self: stretch;
+  @include flex($justify: space-between, $align: center);
+
+  @include font(
+    $size: 16,
+    $weight: 700,
+    $line-height: 1.5,
+    $letter-spacing: -0.32px,
+    $color: var(--gray-900)
+  );
+
+  &__Text {
+  }
+
+  &__Button {
+    color: var(--value-gray-600, #808080);
+    text-align: center;
+
+    border: none;
+    background-color: transparent;
+
+    @include size($height: 30px);
+    @include padding($x: 8);
+    @include font(
+      $size: 12,
+      $weight: 600,
+      $color: var(--gray-600),
+      $line-height: 1.5,
+      $letter-spacing: -0.24px
+    );
+    @include flex($justify: center, $align: center);
+  }
+}

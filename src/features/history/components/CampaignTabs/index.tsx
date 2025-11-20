@@ -8,7 +8,7 @@ import type { Swiper as SwiperType } from 'swiper';
 
 import { CampaignList } from '../CampaignList';
 import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
-import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '@entities/history/types/myCampaign.types';
+import { TAB_CONFIG } from '@entities/history/types/myCampaign.types';
 import type { TabKey } from '@entities/history/types/myCampaign.types';
 
 import { IconChevronRight } from '@pop-ui/foundation';
@@ -167,7 +167,7 @@ export function CampaignTabs() {
               aria-labelledby={`tab-${tab.key}`}
               id={`panel-${tab.key}`}
               tabIndex={0}
-              aria-label={STATUS_DESCRIPTIONS[tab.key]}
+              aria-label={tab.label}
             >
               <CampaignList status={tab.key} />
               <div className={styles.CampaignTabs__LinkContainer}>

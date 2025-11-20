@@ -44,14 +44,6 @@ export const STATUS_LABELS: Record<MyCampaignStatus, string> = {
   rejected: '미선정',
 };
 
-export const STATUS_DESCRIPTIONS: Record<MyCampaignStatus, string> = {
-  applied: '신청 대기 중인 캠페인',
-  selected: '선정된 캠페인',
-  registered: '등록 완료된 캠페인',
-  completed: '종료된 캠페인',
-  rejected: '미선정된 캠페인',
-};
-
 export const STATUS_VISIT: Record<MyCampaignScheduleStatus, string> = {
   before: '방문 전',
   scheduled: '방문 예정',
