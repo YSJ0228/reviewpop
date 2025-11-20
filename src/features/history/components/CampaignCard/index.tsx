@@ -16,11 +16,11 @@ import styles from './style.module.scss';
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
-      <div className={styles.CampaignCard__StatusLabel}>
+      <header className={styles.CampaignCard__StatusLabel}>
         <span>status label</span>
-      </div>
+      </header>
       <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
-        <div className={styles.CampaignCard__TopSection}>
+        <header className={styles.CampaignCard__TopSection}>
           <div className={styles.CampaignCard__ImageWrapper}>
             <Image
               src={campaign.imageUrl}
@@ -30,7 +30,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               style={{ objectFit: 'cover' }}
             />
           </div>
-          <div className={styles.CampaignCard__Content}>
+          <section className={styles.CampaignCard__Content}>
             {type === 'selected' && (
               <>
                 {campaign.visitStatus && (
@@ -44,8 +44,8 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
                 )}
               </>
             )}
-            <span className={styles.CampaignCard__Brand}>{campaign.brand}</span>
-            <span className={styles.CampaignCard__Title}>{campaign.title}</span>
+            <h3 className={styles.CampaignCard__Brand}>{campaign.brand}</h3>
+            <p className={styles.CampaignCard__Title}>{campaign.title}</p>
 
             {type === 'rejected' && campaign.deadline && (
               <div className={styles.CampaignCard__Date}>
@@ -59,13 +59,13 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
                 </span>
               </div>
             )}
-          </div>
-        </div>
+          </section>
+        </header>
         {/* 선정된 체험 이면서, 예약 상태가 아닌경우 (campaign.visitStatus === false)  */}
         {type === 'selected' && (
           <>
             {!campaign.visitStatus && (
-              <div className={styles.CampaignCard__ContentWrapper}>
+              <footer className={styles.CampaignCard__ContentWrapper}>
                 <Button
                   variant="primary"
                   fullWidth
@@ -84,7 +84,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
                     방문 가능 기간 내 예약을 안하면 선정이 취소돼요
                   </span>
                 </div>
-              </div>
+              </footer>
             )}
             {/* 선정된 체험이면서, 예약 상태 데이터가 있는 경우 (campaign.visitStatus === true) */}
             {campaign.visitStatus && (
