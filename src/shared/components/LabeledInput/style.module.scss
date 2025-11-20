@@ -27,19 +27,30 @@
     @include margin($top: 4);
   }
 
-  &__Input {
+  &__InputBox {
     border: 1px solid var(--gray-100);
     border-radius: 10px;
     box-shadow: none;
-    @include flex($align: center);
-    @include padding($left: 16);
+    @include flex($align: center, $justify: space-between);
+    @include padding($x: 16);
     @include size($height: 50, $width: 100%);
-    &:focus {
-      outline: none;
-    }
     &Error {
       border-color: var(--color-red-500);
     }
+  }
+  &__Input {
+    border: none;
+    @include size($height: 16, $width: 100%);
+    &:focus {
+      outline: none;
+    }
+  }
+  &__ClearButton {
+    background-color: var(--gray-200);
+    border-radius: 100%;
+    border: none;
+    @include size($width: 16, $height: 16);
+    @include flex($justify: center, $align: center);
   }
 
   &__Button {

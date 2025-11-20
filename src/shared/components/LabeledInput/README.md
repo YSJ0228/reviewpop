@@ -22,6 +22,7 @@ useInputValidate 훅을 이용해 타입(name, phone, url)에 따른 적절한 �
 ## 🔧 사용 예시
 
 ```tsx
+import { useState } from 'react';
 import { LabeledInput } from '@shared/components/LabeledInput';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
@@ -31,6 +32,7 @@ function Example() {
   const nameInput = useInputValidate('name');
   const phoneInput = useInputValidate('phone');
   const urlInput = useInputValidate('url');
+  const [confirmMsg, setConfirmMsg ]= useState<string>('')
 
   return (
     <LabeledInput
@@ -57,8 +59,8 @@ function Example() {
             errorMsg={urlInput.error}
             showButton
             showPreview
-            confirmMsg="블로그 주소가 확인되었어요"
-            onClick={() => console.log('확인 클릭')}
+            confirmMsg={confirmMsg}
+            onClick={() => setConfirmMsg("블로그 주소가 확인되었어요")}
           />
   );
 }

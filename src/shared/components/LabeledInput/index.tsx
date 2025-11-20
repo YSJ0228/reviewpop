@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import { IconClose } from '@pop-ui/foundation';
 
 import { LabeledInputProps } from './types';
 
@@ -43,6 +44,7 @@ export function LabeledInput({
 }: LabeledInputProps) {
   const id = useId();
   const [touched, setTouched] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState(false);
   return (
     <div className={styles.LabeledInput}>
       <label className={styles.LabeledInput__Label} htmlFor={id}>
@@ -56,14 +58,31 @@ export function LabeledInput({
       )}
       <div className={styles.LabeledInput__InputSection}>
         <div className={styles.LabeledInput__InputMessage}>
-          <input
-            id={id}
-            className={`${styles.LabeledInput__Input} ${errorMsg && touched ? styles.LabeledInput__InputError : ''}`}
-            placeholder={placeholder}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onBlur={() => setTouched(true)}
-          />
+          <div
+            className={`${styles.LabeledInput__InputBox} ${errorMsg && touched ? styles.LabeledInput__InputBoxError : ''}`}
+          >
+            <input
+              id={id}
+              className={styles.LabeledInput__Input}
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => {
+                setTouched(true);
+                setTimeout(() => setIsFocused(false), 100);
+              }}
+            />
+            {isFocused && value && (
+              <button
+                type="button"
+                onClick={() => setValue('')}
+                className={styles.LabeledInput__ClearButton}
+              >
+                <IconClose size={12} color="white" />
+              </button>
+            )}
+          </div>
           {confirmMsg && !errorMsg && (
             <span className={styles.LabeledInput__SuccessMsg}>{confirmMsg}</span>
           )}
@@ -71,6 +90,7 @@ export function LabeledInput({
         </div>
         {showButton && (
           <button
+            type="button"
             disabled={Boolean(errorMsg)}
             className={styles.LabeledInput__Button}
             onClick={onClick}
