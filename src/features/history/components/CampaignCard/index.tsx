@@ -32,14 +32,17 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
           </div>
           <div className={styles.CampaignCard__Content}>
             {type === 'selected' && (
-              <div>
+              <>
                 {campaign.visitStatus && (
-                  <span className={styles.CampaignCard__VisitDate}>9월 18일 수요일 오후 1:00</span>
+                  <span className={styles.CampaignCard__VisitDate}>
+                    {/* TODO: 실제 방문 날짜 데이터로 교체 필요 (예: campaign.visitDate) */}
+                    9월 18일 수요일 오후 1:00
+                  </span>
                 )}
                 {!campaign.visitStatus && (
                   <span className={styles.CampaignCard__SelectedText}>체험단에 선정되었어요🎉</span>
                 )}
-              </div>
+              </>
             )}
             <span className={styles.CampaignCard__Brand}>{campaign.brand}</span>
             <span className={styles.CampaignCard__Title}>{campaign.title}</span>
@@ -60,10 +63,17 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
         </div>
         {/* 선정된 체험 이면서, 예약 상태가 아닌경우 (campaign.visitStatus === false)  */}
         {type === 'selected' && (
-          <div>
+          <>
             {!campaign.visitStatus && (
               <div className={styles.CampaignCard__ContentWrapper}>
-                <Button variant="primary" fullWidth radius={8}>
+                <Button
+                  variant="primary"
+                  fullWidth
+                  radius={8}
+                  onClick={() => {
+                    // TODO: 구현 예정 (예약 페이지로 이동)
+                  }}
+                >
                   <span className={styles.CampaignCard__PrimaryText}>
                     체험 방문할 날짜를 설정해주세요.
                   </span>
@@ -78,11 +88,18 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             )}
             {/* 선정된 체험이면서, 예약 상태 데이터가 있는 경우 (campaign.visitStatus === true) */}
             {campaign.visitStatus && (
-              <Button variant="basic" fullWidth radius={8}>
+              <Button
+                variant="basic"
+                fullWidth
+                radius={8}
+                onClick={() => {
+                  // TODO: 구현 예정 (체험 상세 페이지로 이동)
+                }}
+              >
                 <span className={styles.CampaignCard__BasicText}>체험 정보 및 후기 미션</span>
               </Button>
             )}
-          </div>
+          </>
         )}
       </article>
     </Link>
