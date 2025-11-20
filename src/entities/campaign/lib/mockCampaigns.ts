@@ -31,11 +31,11 @@ const createSchedule = (
  * Campaign mock 데이터
  *
  * 상태 분포:
- * - in_progress (진행 중): 5개
- * - closed (마감): 10개
+ * - recruiting (진행 중): 5개
+ * - completed (마감): 10개
  */
 export const mockCampaigns: Campaign[] = [
-  // in_progress 체험 (5개)
+  // recruiting 체험 (5개)
   {
     id: '1',
     title: '신제품 커피 체험단 모집',
@@ -101,7 +101,7 @@ export const mockCampaigns: Campaign[] = [
       '삼성전자의 최신 무선 이어폰을 체험해보세요. 탁월한 노이즈 캔슬링 기능과 고음질 사운드로 최상의 청음 경험을 제공합니다.',
     providedItems: ['무선 이어폰 1세트', '충전 케이스', '사이즈별 이어팁'],
     category: '전자제품' as CampaignCategory,
-    status: 'in_progress' as CampaignStatus,
+    status: 'recruiting' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign3/800/600',
@@ -129,7 +129,7 @@ export const mockCampaigns: Campaign[] = [
       '종근당의 건강 보조 식품으로 활력 넘치는 하루를 시작하세요. 비타민과 미네랄이 풍부하게 함유된 프리미엄 건강식품입니다.',
     providedItems: ['건강 보조 식품 1개월분', '섭취 가이드'],
     category: '건강' as CampaignCategory,
-    status: 'in_progress' as CampaignStatus,
+    status: 'recruiting' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign4/800/600',
@@ -157,7 +157,7 @@ export const mockCampaigns: Campaign[] = [
       '애플의 최신 스마트워치를 가장 먼저 체험해보세요. 건강 관리부터 스마트한 일상까지, 손목 위의 작은 혁신을 경험하세요.',
     providedItems: ['스마트워치 1대', '충전 독', '스트랩 2종'],
     category: '전자제품' as CampaignCategory,
-    status: 'in_progress' as CampaignStatus,
+    status: 'recruiting' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign5/800/600',
@@ -178,7 +178,7 @@ export const mockCampaigns: Campaign[] = [
     createdAt: '2025-10-09T00:00:00Z',
   },
 
-  // Closed 체험 (10개) - 신청 마감되고 선정 완료
+  // Completed 체험 (10개) - 신정 후 리뷰까지 완료
   {
     id: '6',
     title: '유기농 화장품 체험단',
@@ -187,7 +187,7 @@ export const mockCampaigns: Campaign[] = [
       '이니스프리의 유기농 화장품으로 자연의 건강함을 피부에 전하세요. 제주 청정 자연에서 얻은 원료로 만든 순한 화장품입니다.',
     providedItems: ['유기농 스킨케어 세트 (토너, 로션)', '마스크팩 5매'],
     category: '뷰티' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign6/800/600',
@@ -215,7 +215,7 @@ export const mockCampaigns: Campaign[] = [
       'CJ제일제당의 프리미엄 쌀로 건강한 한 끼를 준비하세요. 국내산 최고급 쌀로 지은 밥의 차이를 느껴보세요.',
     providedItems: ['프리미엄 쌀 4kg', '브랜드 레시피북'],
     category: '식품' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign7/800/600',
@@ -243,7 +243,7 @@ export const mockCampaigns: Campaign[] = [
       '나이키의 신상 운동화로 스타일과 퍼포먼스를 동시에 잡으세요. 최신 쿠셔닝 기술이 적용된 프리미엄 러닝화입니다.',
     providedItems: ['신상 운동화 1켤레', '스포츠 양말 2족'],
     category: '패션' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign8/800/600',
@@ -271,7 +271,7 @@ export const mockCampaigns: Campaign[] = [
       'LG전자의 스마트 홈 기기로 집안을 더욱 편리하게 만드세요. IoT 기술이 적용된 차세대 홈 솔루션을 경험해보세요.',
     providedItems: ['스마트 플러그 2개', '스마트 전구 1개', '사용 설명서'],
     category: '가전' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign9/800/600',
@@ -299,7 +299,7 @@ export const mockCampaigns: Campaign[] = [
       '빙그레의 프리미엄 요거트로 건강한 아침을 시작하세요. 100% 국내산 원유로 만든 신선하고 진한 요거트입니다.',
     providedItems: ['프리미엄 요거트 12개입 세트', '그래놀라 1봉'],
     category: '식품' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign10/800/600',
@@ -327,7 +327,7 @@ export const mockCampaigns: Campaign[] = [
       '아모레퍼시픽의 신제품 샴푸로 건강한 모발을 가꾸세요. 두피 케어와 모발 영양을 동시에 잡은 프리미엄 헤어케어 제품입니다.',
     providedItems: ['신제품 샴푸 500ml', '트리트먼트 200ml'],
     category: '뷰티' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign11/800/600',
@@ -355,7 +355,7 @@ export const mockCampaigns: Campaign[] = [
       '다이슨의 무선 청소기로 집안 구석구석을 깨끗하게 청소하세요. 강력한 흡입력과 긴 배터리 수명이 특징인 프리미엄 청소기입니다.',
     providedItems: ['무선 청소기 1대', '교체용 필터', '다용도 브러쉬 3종'],
     category: '가전' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign12/800/600',
@@ -383,7 +383,7 @@ export const mockCampaigns: Campaign[] = [
       '페레로로쉐의 프리미엄 초콜릿으로 특별한 순간을 더욱 달콤하게 만드세요. 고급 헤이즐넛이 들어간 럭셔리 초콜릿입니다.',
     providedItems: ['프리미엄 초콜릿 세트', '고급 포장 상자'],
     category: '식품' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign13/800/600',
@@ -411,7 +411,7 @@ export const mockCampaigns: Campaign[] = [
       '조말론의 시그니처 향수로 당신만의 향기를 완성하세요. 영국 왕실이 사랑하는 럭셔리 프래그런스 브랜드입니다.',
     providedItems: ['시그니처 향수 50ml', '미니어처 샘플 2종'],
     category: '향수' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign14/800/600',
@@ -439,7 +439,7 @@ export const mockCampaigns: Campaign[] = [
       '카카오프렌즈의 귀여운 스마트폰 케이스로 개성을 표현하세요. 실용성과 디자인을 모두 갖춘 프리미엄 케이스입니다.',
     providedItems: ['스마트폰 케이스 1개', '캐릭터 스티커 팩'],
     category: '액세서리' as CampaignCategory,
-    status: 'closed' as CampaignStatus,
+    status: 'completed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
     imageUrls: [
       'https://picsum.photos/seed/campaign15/800/600',
@@ -485,13 +485,13 @@ export function getCampaignsByCategory(category: CampaignCategory): Campaign[] {
 /**
  * 진행 중인 체험 목록 조회
  */
-export function getInProgressCampaigns(): Campaign[] {
-  return getCampaignsByStatus('in_progress');
+export function getRecruitingCampaigns(): Campaign[] {
+  return getCampaignsByStatus('recruiting');
 }
 
 /**
  * 마감된 체험 목록 조회
  */
-export function getClosedCampaigns(): Campaign[] {
-  return getCampaignsByStatus('closed');
+export function getCompletedCampaigns(): Campaign[] {
+  return getCampaignsByStatus('completed');
 }

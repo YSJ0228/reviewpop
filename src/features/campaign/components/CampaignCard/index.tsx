@@ -37,7 +37,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
             <p className={styles.CampaignCard__Items}>{campaign.providedItems.join(' + ')}</p>
           </div>
-          {campaign.status === 'in_progress' && (
+          {campaign.status === 'recruiting' && (
             <div className={styles.CampaignCard__Content__Active}>
               <div>
                 <div className={styles.CampaignCard__Recruitment}>
@@ -67,7 +67,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
               <CampaignCountdown targetDate={campaign.schedule.applicationSchedule[0]} />
             </div>
           )}
-          {campaign.status === 'closed' && (
+          {campaign.status === 'completed' && (
             <div className={styles.CampaignCard__Content__Closed}>
               <span>종료된 체험</span>
             </div>

@@ -12,7 +12,7 @@
     position: sticky;
     height: 52px;
     background: #fff;
-    top: 56px; // TODO: 48px이어야함
+    top: 56px; // TODO: GNB가 48px이어야함
     z-index: 300;
     @include padding($y: 8);
     @include flex($gap: 8, $justify: center, $align: center);

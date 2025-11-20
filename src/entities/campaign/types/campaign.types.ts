@@ -30,6 +30,17 @@ export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
   closed: '마감',
 };
 
+export type CampaignTabKey = Extract<
+  CampaignStatus,
+  'recruiting' | 'before_recruiting' | 'completed'
+>;
+
+export const CampaignTabs: Record<CampaignTabKey, string> = {
+  recruiting: '지금 모집중인 체험',
+  before_recruiting: '공개 예정',
+  completed: '지난 체험',
+};
+
 /**
  * 체험 카테고리
  */

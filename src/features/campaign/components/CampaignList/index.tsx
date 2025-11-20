@@ -59,7 +59,7 @@ export function CampaignList({ status }: CampaignListProps) {
     >
       {filteredCampaigns
         .filter((campaign) => {
-          if (status !== 'in_progress') return true;
+          if (status !== 'recruiting') return true;
           return campaign.schedule.applicationSchedule[1] > thisTime.toISOString();
         })
         .map((campaign) => (
