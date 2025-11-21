@@ -39,16 +39,20 @@ export function filterCampaignsByStatus(
  */
 export function calculateAnnouncementDate(
   announcementDate: string | undefined,
-  currentDate: Date = new Date(), // 테스트를 위해 주입 가능하게
+  currentDate: Date = new Date(),
 ): string {
   if (!announcementDate) return '';
 
   const announcement = new Date(announcementDate);
   if (isNaN(announcement.getTime())) return '';
 
-  // UTC 기준으로 날짜만 비교
-  const announcementDay = new Date(announcement.toDateString());
-  const todayDay = new Date(currentDate.toDateString());
+  // UTC 기준으로 날짜 정규화
+  const announcementDay = new Date(
+    Date.UTC(announcement.getFullYear(), announcement.getMonth(), announcement.getDate()),
+  );
+  const todayDay = new Date(
+    Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()),
+  );
 
   const diffTime = announcementDay.getTime() - todayDay.getTime();
   const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));

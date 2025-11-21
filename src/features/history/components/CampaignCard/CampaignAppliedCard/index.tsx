@@ -17,7 +17,9 @@ export default function CampaignAppliedCard({ announcementStatus }: CampaignAppl
 
   return (
     <div className={styles.CampaignAppliedTitle} aria-label="신청 탭 개별 카드 타이틀">
-      <p className={styles.CampaignAppliedTitle__Text}>{announcementStatus}</p>
+      <p className={styles.CampaignAppliedTitle__Text} role="status" aria-live="polite">
+        {announcementStatus}
+      </p>
       <button
         className={styles.CampaignAppliedTitle__Button}
         onClick={handleCancelApplication}
