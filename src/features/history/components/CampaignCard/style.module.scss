@@ -4,67 +4,150 @@
   display: block;
   text-decoration: none;
   color: inherit;
+
+  //StatusLabel
+  .CampaignCard__StatusLabel {
+    @include font(
+      $size: 14,
+      $weight: 700,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
+
+  //CampaignCard
+  .CampaignCard {
+    overflow: hidden;
+    border-bottom: 1px solid var(--gray-50);
+    @include flex($direction: column, $gap: 16);
+    @include size($width: 100%, $height: auto);
+    @include padding($y: 16);
+
+    // TopSection: 이미지와 콘텐츠 영역
+    .CampaignCard__TopSection {
+      width: 100%;
+      @include flex($gap: 16, $align: flex-start);
+
+      .CampaignCard__ImageWrapper {
+        position: relative;
+        flex-shrink: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        @include size($width: 88, $height: 88);
+      }
+
+      .CampaignCard__Content {
+        @include flex($direction: column, $gap: 4);
+        @include size($width: 100%, $height: 77);
+
+        // Content 내부의 텍스트 요소들 - 방문 날짜
+        .CampaignCard__VisitDate {
+          @include font(
+            $size: 16,
+            $weight: 700,
+            $line-height: 1.5,
+            $letter-spacing: -0.02em,
+            $color: var(--color-blue-500)
+          );
+        }
+
+        .CampaignCard__SelectedText {
+          @include font(
+            $size: 16,
+            $weight: 700,
+            $line-height: 1.5,
+            $letter-spacing: -0.02em,
+            $color: var(--gray-900)
+          );
+        }
+
+        .CampaignCard__Brand {
+          @include font(
+            $size: 14,
+            $weight: 600,
+            $line-height: 1.5,
+            $letter-spacing: -0.02em,
+            $color: var(--gray-900)
+          );
+        }
+
+        .CampaignCard__Title {
+          @include font(
+            $size: 12,
+            $weight: 500,
+            $line-height: 1.5,
+            $letter-spacing: -0.02em,
+            $color: var(--gray-600)
+          );
+        }
+
+        // 미선정 체험 날짜 (추후 분리 예정)
+        .CampaignCard__Date {
+          @include font(
+            $size: 12,
+            $weight: 500,
+            $line-height: 1.5,
+            $letter-spacing: -0.02em,
+            $color: var(--gray-600)
+          );
+          @include margin($top: 15);
+
+          // 미선정 Date 내부의 MaxRecruitment
+          .CampaignCard__MaxRecruitment {
+            @include font(
+              $size: 12,
+              $weight: 500,
+              $line-height: 1.5,
+              $letter-spacing: -0.02em,
+              $color: var(--gray-600)
+            );
+            @include margin($left: 4);
+          }
+        }
+      }
+    }
+
+    // ContentWrapper: 선정된 체험 버튼과 경고 영역
+    .CampaignCard__ContentWrapper {
+      @include size($width: 100%);
+      @include flex($direction: column, $gap: 8);
+
+      .CampaignCard__WarningWrapper {
+        @include flex($align: center, $gap: 4, $justify: center);
+
+        .CampaignCard__WarningText {
+          @include font(
+            $size: 12,
+            $weight: 500,
+            $line-height: 1.5,
+            $letter-spacing: -0.02em,
+            $color: var(--gray-400)
+          );
+        }
+      }
+    }
+  }
 }
 
-.CampaignCard {
-  overflow: hidden;
-  border-bottom: 1px solid var(--gray-50);
-  @include flex($gap: 16);
-  @include size($width: 100%, $height: 120);
-  @include padding($y: 16);
-}
-
-.CampaignCard__ImageWrapper {
-  position: relative;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  @include size($width: 88, $height: 88);
-}
-
-.CampaignCard__Content {
-  @include flex($direction: column, $gap: 4);
-  @include size($width: 100%, $height: 77);
-}
-
-.CampaignCard__Brand {
+// CampaignCard 외부에서 직접 사용되는 텍스트 스타일들
+// (Button 내부의 span 등에서 사용)
+.CampaignCard__BasicText {
   @include font(
     $size: 14,
     $weight: 600,
     $line-height: 1.5,
     $letter-spacing: -0.02em,
-    $color: var(--gray-900)
+    $color: var(--gray-800)
   );
 }
 
-.CampaignCard__Title {
+.CampaignCard__PrimaryText {
   @include font(
-    $size: 12,
-    $weight: 500,
+    $size: 14,
+    $weight: 700,
     $line-height: 1.5,
     $letter-spacing: -0.02em,
-    $color: var(--gray-600)
+    $color: var(--color-white)
   );
-}
-
-.CampaignCard__Date {
-  @include font(
-    $size: 12,
-    $weight: 500,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--gray-600)
-  );
-  @include margin($top: 2);
-}
-
-.CampaignCard__MaxRecruitment {
-  @include font(
-    $size: 12,
-    $weight: 500,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--gray-600)
-  );
-  @include margin($left: 4);
 }
