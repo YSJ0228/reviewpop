@@ -1,12 +1,18 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
+
 import { CampaignList } from '../CampaignList';
-import { TAB_CONFIG, STATUS_DESCRIPTIONS } from '@entities/history/types/myCampaign.types';
+import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
+import { TAB_CONFIG } from '@entities/history/types/myCampaign.types';
 import type { TabKey } from '@entities/history/types/myCampaign.types';
+
+import { IconChevronRight } from '@pop-ui/foundation';
+
 import styles from './style.module.scss';
 
 // Swiper CSS 임포트
@@ -17,6 +23,21 @@ export function CampaignTabs() {
   const router = useRouter();
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  // 캠페인 목록 훅에서 데이터를 가져와 탭별 카운트 계산
+  const { data: campaigns } = useMyCampaigns();
+
+  const counts = useMemo(() => {
+    const map: Record<TabKey, number> = {} as Record<TabKey, number>;
+    TAB_CONFIG.forEach((t) => {
+      map[t.key] = (campaigns || []).filter((c) => c.status === t.key).length;
+    });
+    return map;
+  }, [campaigns]);
+
+  // '미선정' 상태 카운트 (TAB_CONFIG에 포함되어 있지 않으므로 별도 계산)
+  const rejectedCount = useMemo(() => {
+    return (campaigns || []).filter((c) => c.status === 'rejected').length;
+  }, [campaigns]);
 
   const currentTab = (searchParams.get('tab') as TabKey) || 'applied';
   const activeIndex = TAB_CONFIG.findIndex((tab) => tab.key === currentTab);
@@ -110,7 +131,8 @@ export function CampaignTabs() {
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={tabClassName}
               >
-                {tab.label}
+                <span aria-hidden="true">{tab.label}</span>
+                <span aria-hidden="true">{counts[tab.key] ?? 0}</span>
               </button>
             );
           })}
@@ -145,9 +167,17 @@ export function CampaignTabs() {
               aria-labelledby={`tab-${tab.key}`}
               id={`panel-${tab.key}`}
               tabIndex={0}
-              aria-label={STATUS_DESCRIPTIONS[tab.key]}
+              aria-label={tab.label}
             >
               <CampaignList status={tab.key} />
+              <div className={styles.CampaignTabs__LinkContainer}>
+                {tab.key === 'applied' && rejectedCount > 0 && (
+                  <Link href="/campaign/rejected" className={styles.CampaignTabs__RejectedLink}>
+                    {'미선정 체험 내역'}
+                    <IconChevronRight size={16} color="var(--color-gray-800)" />
+                  </Link>
+                )}
+              </div>
             </div>
           </SwiperSlide>
         ))}

@@ -7,7 +7,7 @@
 //   @include font($size: 16, $weight: 600, $color: #000);
 //   @include font($size: 14, $line-height: 1.5);
 //   @include font($size: 18, $weight: 700, $color: #333, $line-height: 1.6, $letter-spacing: -0.02em);
-@mixin font($size: null, $weight: null, $color: null, $line-height: null, $letter-spacing: null) {
+@mixin font($size: null, $weight: null, $color: null, $line-height: 1.5, $letter-spacing: -0.02em) {
   @if $size {
     font-size: to-unit($size);
   }
