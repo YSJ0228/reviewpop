@@ -32,6 +32,10 @@
     }
   }
 
+  &__Icon {
+    @include flex($align: center, $justify: center);
+  }
+
   &__Right {
     @include flex($justify: flex-end, $align: center, $gap: 16);
   }
