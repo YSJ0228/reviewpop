@@ -12,9 +12,16 @@ import type { IGnbProps } from './types';
 
 const MAX_BADGE_COUNT = 9;
 
+const ROUTES = {
+  PROFILE: '/profile',
+  SETTINGS: '/settings',
+  NOTIFICATIONS: '/notifications',
+} as const;
+
 export function Gnb({ notification = 0 }: IGnbProps) {
   const pathname = usePathname();
-  const showSetting = pathname === '/profile';
+
+  const showSetting = pathname === ROUTES.PROFILE;
 
   const validNotificationCount = useMemo(() => {
     return Math.max(0, Math.floor(notification));
@@ -23,12 +30,12 @@ export function Gnb({ notification = 0 }: IGnbProps) {
   return (
     <header className={styles.Gnb}>
       <Link href="/" className={styles.Gnb__Logo}>
-        <Image src="/images/Logo-left.svg" alt="로고 이미지" width={99.412} height={13.645} />
-        <Image src="/images/Logo-right.svg" alt="로고 이미지" width={43.793} height={14} />
+        <Image src="/images/Logo-left.svg" alt="로고 이미지" width={99} height={14} />
+        <Image src="/images/Logo-right.svg" alt="로고 이미지" width={44} height={14} />
       </Link>
       <div className={showSetting ? styles.Gnb__Right : undefined}>
         <Link
-          href="/notifications"
+          href={ROUTES.NOTIFICATIONS}
           className={styles.Gnb__Notification}
           aria-label={
             validNotificationCount > 0
@@ -46,7 +53,11 @@ export function Gnb({ notification = 0 }: IGnbProps) {
           )}
         </Link>
         {showSetting && (
-          <Link href="/settings" className={styles.Gnb__Setting} aria-label="설정 페이지로 이동">
+          <Link
+            href={ROUTES.SETTINGS}
+            className={styles.Gnb__Setting}
+            aria-label="설정 페이지로 이동"
+          >
             <IconSetting size={24} />
           </Link>
         )}
