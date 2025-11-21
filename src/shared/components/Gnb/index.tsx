@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -27,8 +26,7 @@ export function Gnb({ notification = 0 }: IGnbProps) {
   return (
     <header className={styles.Gnb}>
       <Link href="/" className={styles.Gnb__Logo}>
-        <Image src="/images/Logo-left.svg" alt="리뷰팝 로고" width={99} height={14} />
-        <Image src="/images/Logo-right.svg" alt="" width={44} height={14} />
+        <Image src="/images/Logo.svg" alt="리뷰팝 로고" width={148} height={36} />
       </Link>
       <div className={gnbIcon}>
         <Link
