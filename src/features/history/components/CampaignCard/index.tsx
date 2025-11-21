@@ -8,12 +8,16 @@ import { IconWarningCircle } from '@pop-ui/foundation';
 
 import { CONSTANTS } from '@shared/config/constants';
 import { Colors } from '@shared/styles/colors';
+import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
 
+import CampaignAppliedCard from './CampaignAppliedCard';
 import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
+  const announcementStatus = calculateAnnouncementDate(campaign.announcementDate);
+
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
       <header className={styles.CampaignCard__StatusLabel}>
@@ -31,6 +35,10 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             />
           </div>
           <section className={styles.CampaignCard__Content}>
+            {/* applied 타입: develop 브랜치의 CampaignAppliedCard 사용 */}
+            {type === 'applied' && <CampaignAppliedCard announcementStatus={announcementStatus} />}
+
+            {/* selected 타입: HEAD 브랜치의 로직 유지 */}
             {type === 'selected' && (
               <>
                 {campaign.visitStatus && (
@@ -44,9 +52,11 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
                 )}
               </>
             )}
+
             <h3 className={styles.CampaignCard__Brand}>{campaign.brand}</h3>
             <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
 
+            {/* rejected 타입: 양쪽 브랜치 모두 비슷하므로 하나로 통합 */}
             {type === 'rejected' && campaign.deadline && (
               <div className={styles.CampaignCard__Date}>
                 <time dateTime={campaign.applicationDate}>
@@ -61,9 +71,11 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             )}
           </section>
         </header>
-        {/* 선정된 체험 이면서, 예약 상태가 아닌경우 (campaign.visitStatus === false)  */}
+
+        {/* selected 타입: HEAD 브랜치의 버튼 로직 유지 */}
         {type === 'selected' && (
           <>
+            {/* 선정된 체험이면서, 예약 상태가 아닌경우 (campaign.visitStatus === false) */}
             {!campaign.visitStatus && (
               <footer className={styles.CampaignCard__ContentWrapper}>
                 <Button
@@ -101,6 +113,8 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             )}
           </>
         )}
+
+        {/* TODO: 추후 조건(applied, selected, registered, completed) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
       </article>
     </Link>
   );
