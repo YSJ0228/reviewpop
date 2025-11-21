@@ -3,6 +3,7 @@ import styles from './style.module.scss';
 export default function CampaignAppliedCard({ announcementTitle }: { announcementTitle: string }) {
   const handleCancelApplication = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     // TODO: API 연동 필요 - 신청 취소 API 호출
     // Issue: #XX (이슈 번호 추가)
     console.log('신청 취소:', announcementTitle);

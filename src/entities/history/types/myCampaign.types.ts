@@ -86,7 +86,7 @@ export interface MyCampaignReviewInfo extends MyCampaign {
 }
 
 export interface MyCampaignReviewModification extends MyCampaign {
-  modifyimageUrl?: string; // 수정 관련 이미지
+  modifyImageUrl?: string; // 수정 관련 이미지
   modificationRequests: string[]; // 후기 수정 사유 목록
   precautions: string[]; // 후기 작성 유의 사항
 }
