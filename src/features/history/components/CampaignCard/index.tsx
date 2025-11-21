@@ -7,24 +7,29 @@ import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 import { CONSTANTS } from '@shared/config/constants';
+import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
+import CampaignApplied from './CampaignAppliedCard';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
+  const announcementStatus = calculateAnnouncementDate(campaign.announcementDate);
+
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
-      <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
+      <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
         <div className={styles.CampaignCard__ImageWrapper}>
           <Image
             src={campaign.imageUrl}
-            alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
+            alt={`${campaign.brand} 체험 이미지`}
             fill
             sizes="(max-width: 768px) 88px, 88px"
             style={{ objectFit: 'cover' }}
           />
         </div>
         <div className={styles.CampaignCard__Content}>
+          {type === 'applied' && <CampaignApplied announcementStatus={announcementStatus} />}
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
 
-          <p className={styles.CampaignCard__Title}>{campaign.title}</p>
+          <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
 
           {type === 'rejected' && campaign.deadline && (
             <div className={styles.CampaignCard__Date}>
@@ -38,6 +43,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               </span>
             </div>
           )}
+
           {/* TODO: 추후 조건(applied, selected, registered, completed) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
         </div>
       </article>

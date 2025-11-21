@@ -42,7 +42,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '스타벅스',
     description:
       '스타벅스의 신제품 커피를 가장 먼저 체험해보세요! 프리미엄 원두를 사용한 특별한 블렌드로, 부드러운 맛과 풍부한 향이 특징입니다.',
-    providedItems: ['신제품 원두 200g', '브랜드 머그컵 1개'],
+    providedItems: '신제품 원두 200g + 브랜드 머그컵 1개',
     category: '음료' as CampaignCategory,
     status: 'before_recruiting' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
@@ -71,7 +71,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '설화수',
     description:
       '설화수의 프리미엄 화장품 라인을 체험할 수 있는 특별한 기회! 한방 성분이 함유된 고급 스킨케어 제품으로 피부 본연의 아름다움을 찾아보세요.',
-    providedItems: ['프리미엄 에센스 30ml', '크림 15ml 샘플'],
+    providedItems: '프리미엄 에센스 30ml + 크림 15ml 샘플',
     category: '뷰티' as CampaignCategory,
     status: 'before_recruiting' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
@@ -99,7 +99,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '삼성전자',
     description:
       '삼성전자의 최신 무선 이어폰을 체험해보세요. 탁월한 노이즈 캔슬링 기능과 고음질 사운드로 최상의 청음 경험을 제공합니다.',
-    providedItems: ['무선 이어폰 1세트', '충전 케이스', '사이즈별 이어팁'],
+    providedItems: '무선 이어폰 1세트 + 충전 케이스 + 사이즈별 이어팁',
     category: '전자제품' as CampaignCategory,
     status: 'in_progress' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
@@ -127,7 +127,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '종근당',
     description:
       '종근당의 건강 보조 식품으로 활력 넘치는 하루를 시작하세요. 비타민과 미네랄이 풍부하게 함유된 프리미엄 건강식품입니다.',
-    providedItems: ['건강 보조 식품 1개월분', '섭취 가이드'],
+    providedItems: '건강 보조 식품 1개월분 + 섭취 가이드',
     category: '건강' as CampaignCategory,
     status: 'in_progress' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
@@ -155,7 +155,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '애플',
     description:
       '애플의 최신 스마트워치를 가장 먼저 체험해보세요. 건강 관리부터 스마트한 일상까지, 손목 위의 작은 혁신을 경험하세요.',
-    providedItems: ['스마트워치 1대', '충전 독', '스트랩 2종'],
+    providedItems: '스마트워치 1대 + 충전 독 + 스트랩 2종',
     category: '전자제품' as CampaignCategory,
     status: 'in_progress' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
@@ -185,7 +185,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '이니스프리',
     description:
       '이니스프리의 유기농 화장품으로 자연의 건강함을 피부에 전하세요. 제주 청정 자연에서 얻은 원료로 만든 순한 화장품입니다.',
-    providedItems: ['유기농 스킨케어 세트 (토너, 로션)', '마스크팩 5매'],
+    providedItems: '유기농 스킨케어 세트 (토너, 로션) + 마스크팩 5매',
     category: '뷰티' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
@@ -213,7 +213,7 @@ export const mockCampaigns: Campaign[] = [
     brand: 'CJ제일제당',
     description:
       'CJ제일제당의 프리미엄 쌀로 건강한 한 끼를 준비하세요. 국내산 최고급 쌀로 지은 밥의 차이를 느껴보세요.',
-    providedItems: ['프리미엄 쌀 4kg', '브랜드 레시피북'],
+    providedItems: '프리미엄 쌀 4kg + 브랜드 레시피북',
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
@@ -241,7 +241,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '나이키',
     description:
       '나이키의 신상 운동화로 스타일과 퍼포먼스를 동시에 잡으세요. 최신 쿠셔닝 기술이 적용된 프리미엄 러닝화입니다.',
-    providedItems: ['신상 운동화 1켤레', '스포츠 양말 2족'],
+    providedItems: '신상 운동화 1켤레 + 스포츠 양말 2족',
     category: '패션' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
@@ -269,7 +269,7 @@ export const mockCampaigns: Campaign[] = [
     brand: 'LG전자',
     description:
       'LG전자의 스마트 홈 기기로 집안을 더욱 편리하게 만드세요. IoT 기술이 적용된 차세대 홈 솔루션을 경험해보세요.',
-    providedItems: ['스마트 플러그 2개', '스마트 전구 1개', '사용 설명서'],
+    providedItems: '스마트 플러그 2개 + 스마트 전구 1개 + 사용 설명서',
     category: '가전' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
@@ -297,7 +297,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '빙그레',
     description:
       '빙그레의 프리미엄 요거트로 건강한 아침을 시작하세요. 100% 국내산 원유로 만든 신선하고 진한 요거트입니다.',
-    providedItems: ['프리미엄 요거트 12개입 세트', '그래놀라 1봉'],
+    providedItems: '프리미엄 요거트 12개입 세트 + 그래놀라 1봉',
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
@@ -325,7 +325,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '아모레퍼시픽',
     description:
       '아모레퍼시픽의 신제품 샴푸로 건강한 모발을 가꾸세요. 두피 케어와 모발 영양을 동시에 잡은 프리미엄 헤어케어 제품입니다.',
-    providedItems: ['신제품 샴푸 500ml', '트리트먼트 200ml'],
+    providedItems: '신제품 샴푸 500ml + 트리트먼트 200ml',
     category: '뷰티' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
@@ -353,7 +353,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '다이슨',
     description:
       '다이슨의 무선 청소기로 집안 구석구석을 깨끗하게 청소하세요. 강력한 흡입력과 긴 배터리 수명이 특징인 프리미엄 청소기입니다.',
-    providedItems: ['무선 청소기 1대', '교체용 필터', '다용도 브러쉬 3종'],
+    providedItems: '무선 청소기 1대 + 교체용 필터 + 다용도 브러쉬 3종',
     category: '가전' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',
@@ -381,7 +381,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '페레로로쉐',
     description:
       '페레로로쉐의 프리미엄 초콜릿으로 특별한 순간을 더욱 달콤하게 만드세요. 고급 헤이즐넛이 들어간 럭셔리 초콜릿입니다.',
-    providedItems: ['프리미엄 초콜릿 세트', '고급 포장 상자'],
+    providedItems: '프리미엄 초콜릿 세트 + 고급 포장 상자',
     category: '식품' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-01.jpg',
@@ -409,7 +409,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '조말론',
     description:
       '조말론의 시그니처 향수로 당신만의 향기를 완성하세요. 영국 왕실이 사랑하는 럭셔리 프래그런스 브랜드입니다.',
-    providedItems: ['시그니처 향수 50ml', '미니어처 샘플 2종'],
+    providedItems: '시그니처 향수 50ml + 미니어처 샘플 2종',
     category: '향수' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-02.jpg',
@@ -437,7 +437,7 @@ export const mockCampaigns: Campaign[] = [
     brand: '카카오프렌즈',
     description:
       '카카오프렌즈의 귀여운 스마트폰 케이스로 개성을 표현하세요. 실용성과 디자인을 모두 갖춘 프리미엄 케이스입니다.',
-    providedItems: ['스마트폰 케이스 1개', '캐릭터 스티커 팩'],
+    providedItems: '스마트폰 케이스 1개 + 캐릭터 스티커 팩',
     category: '액세서리' as CampaignCategory,
     status: 'closed' as CampaignStatus,
     imageUrl: '/images/temp/CampaignCardImg-03.jpg',

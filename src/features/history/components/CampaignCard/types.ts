@@ -1,9 +1,6 @@
-import type { MyCampaign, MyCampaignDetail } from '@entities/history/types/myCampaign.types';
-
-export type TCampaignCardData = MyCampaign &
-  Partial<Pick<MyCampaignDetail, 'description' | 'maxRecruitment'>>;
+import type { MyCampaign, MyCampaignStatus } from '@entities/history/types/myCampaign.types';
 
 export interface MyCampaignCardProps {
-  campaign: TCampaignCardData;
-  type: 'rejected' | 'applied' | 'selected' | 'registered' | 'completed';
+  campaign: MyCampaign;
+  type: MyCampaignStatus;
 }
