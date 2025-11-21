@@ -14,6 +14,8 @@ const MAX_BADGE_COUNT = 9;
 
 export function Gnb({ notification = 0 }: IGnbProps) {
   const pathname = usePathname();
+  const showSetting = pathname === '/profile';
+
   const validNotificationCount = useMemo(() => {
     return Math.max(0, Math.floor(notification));
   }, [notification]);
@@ -24,7 +26,7 @@ export function Gnb({ notification = 0 }: IGnbProps) {
         <Image src="/images/Logo-left.svg" alt="로고 이미지" width={99.412} height={13.645} />
         <Image src="/images/Logo-right.svg" alt="로고 이미지" width={43.793} height={14} />
       </Link>
-      <div className={pathname === '/profile' ? styles.Gnb__Right : ''}>
+      <div className={showSetting ? styles.Gnb__Right : undefined}>
         <Link
           href="/notifications"
           className={styles.Gnb__Notification}
@@ -43,8 +45,8 @@ export function Gnb({ notification = 0 }: IGnbProps) {
             </span>
           )}
         </Link>
-        {pathname === '/profile' && (
-          <Link href="/settings" className={styles.Gnb__Setting}>
+        {showSetting && (
+          <Link href="/settings" className={styles.Gnb__Setting} aria-label="설정 페이지로 이동">
             <IconSetting size={24} />
           </Link>
         )}
