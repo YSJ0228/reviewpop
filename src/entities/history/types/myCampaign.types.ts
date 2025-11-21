@@ -38,6 +38,20 @@ export const STATUS_DESCRIPTIONS: Record<MyCampaignStatus, string> = {
   rejected: '미선정된 캠페인',
 };
 
+/**
+ * MyCampaignStatus → EmptyState variant 매핑
+ * rejected는 제외 (EmptyState 미표시)
+ */
+export const STATUS_EMPTY_MAP: Record<
+  Exclude<MyCampaignStatus, 'rejected'>,
+  'no-applied' | 'no-selected' | 'no-registered' | 'no-completed'
+> = {
+  applied: 'no-applied',
+  selected: 'no-selected',
+  registered: 'no-registered',
+  completed: 'no-completed',
+} as const;
+
 // 체험 상세 정보 (Campaign 타입 확장)
 export interface MyCampaignDetail extends MyCampaign {
   description: string; // 체험 상세 설명
