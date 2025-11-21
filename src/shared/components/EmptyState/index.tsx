@@ -6,10 +6,10 @@ import styles from './style.module.scss';
 
 export function EmptyState({ variant }: EmptyStateProps) {
   const config = EMPTY_STATE_MAP[variant];
-  const stateType = config.showButton ? 'WithButton' : 'NoButton';
-  const classNames = [styles.EmptyState, styles[`EmptyState--${stateType}`]]
-    .filter(Boolean)
-    .join(' ');
+  const stateTypeClass = config.showButton
+    ? styles['EmptyState--WithButton']
+    : styles['EmptyState--NoButton'];
+  const classNames = [styles.EmptyState, stateTypeClass].filter(Boolean).join(' ');
 
   return (
     <div className={classNames}>

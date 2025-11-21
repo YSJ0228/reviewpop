@@ -7,7 +7,7 @@
 
   // Elements
   &__Title {
-    @include margin($bottom: 24);
+    @include margin($bottom: 8);
     @include font($size: 16, $weight: 700);
   }
 
