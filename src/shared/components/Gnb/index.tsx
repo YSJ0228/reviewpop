@@ -22,9 +22,7 @@ export function Gnb({ notification = 0 }: IGnbProps) {
   const showSetting = pathname === PROFILE_PATH;
   const gnbIcon = showSetting ? styles.Gnb__Right : styles.Gnb__Icon;
 
-  const validNotificationCount = useMemo(() => {
-    return Math.max(0, Math.floor(notification));
-  }, [notification]);
+  const validNotificationCount = Math.max(0, Math.floor(notification));
 
   return (
     <header className={styles.Gnb}>
