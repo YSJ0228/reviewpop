@@ -34,34 +34,27 @@ export function filterCampaignsByStatus(
   return campaigns.filter((campaign) => campaign.status === status);
 }
 
-export function calculateAnnouncementDate(campaign: MyCampaign): string {
-  if (!campaign.announcementDate) return '';
+/**
+ * 발표일을 계산하는 헬퍼 함수
+ */
+export function calculateAnnouncementDate(
+  announcementDate: string | undefined,
+  currentDate: Date = new Date(), // 테스트를 위해 주입 가능하게
+): string {
+  if (!announcementDate) return '';
 
-  const announcementDate = new Date(campaign.announcementDate);
-  if (isNaN(announcementDate.getTime())) return '';
+  const announcement = new Date(announcementDate);
+  if (isNaN(announcement.getTime())) return '';
 
-  // ✅ 새로운 Date 객체를 생성하여 side effect 방지
-  const announcementDay = new Date(
-    announcementDate.getFullYear(),
-    announcementDate.getMonth(),
-    announcementDate.getDate(),
-  );
-
-  const today = new Date();
-  const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  // UTC 기준으로 날짜만 비교
+  const announcementDay = new Date(announcement.toDateString());
+  const todayDay = new Date(currentDate.toDateString());
 
   const diffTime = announcementDay.getTime() - todayDay.getTime();
-  // ✅ 양수는 Math.ceil, 음수는 Math.floor를 사용
-  const diffDays =
-    diffTime >= 0
-      ? Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-      : Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) {
-    return '곧 발표 예정';
-  } else if (diffDays < 0) {
-    return '결과 대기중';
-  }
+  if (diffDays === 0) return '곧 발표 예정';
+  if (diffDays < 0) return '결과 대기중';
 
   return `발표일까지 D-${diffDays}`;
 }

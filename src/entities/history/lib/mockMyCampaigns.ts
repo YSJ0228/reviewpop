@@ -46,7 +46,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign5/400/300',
     status: 'applied',
     applicationDate: '2025-11-02',
-    announcementDate: '2025-11-20',
+    announcementDate: '2025-11-21',
   },
   {
     id: '6',
@@ -64,7 +64,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign5/400/300',
     status: 'applied',
     applicationDate: '2025-11-12',
-    announcementDate: '2025-11-28',
+    announcementDate: '2025-11-30',
   },
 
   // 선정 상태 (4개)
