@@ -4,14 +4,11 @@ export default function CampaignAppliedCard({ announcementTitle }: { announcemen
   const handleCancelApplication = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: API 연동 필요 - 신청 취소 API 호출
-    // Issue: #XX (이슈 번호 추가)
-    console.log('신청 취소:', announcementTitle);
 
-    // 임시: 사용자에게 알림
-    if (window.confirm('정말 신청을 취소하시겠습니까?')) {
-      alert('API 연동 후 구현 예정입니다.');
-    }
+    // TODO: API 연동 필요
+    console.warn('신청 취소 기능 미구현:', announcementTitle);
+    // 임시로 기능이 준비 중임을 알림
+    alert('신청 취소 기능은 준비 중입니다.');
   };
 
   return (
