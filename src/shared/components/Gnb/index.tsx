@@ -11,17 +11,15 @@ import styles from './style.module.scss';
 import type { IGnbProps } from './types';
 
 const MAX_BADGE_COUNT = 9;
-
-const ROUTES = {
-  PROFILE: '/profile',
-  SETTINGS: '/settings',
-  NOTIFICATIONS: '/notifications',
-} as const;
+const ICON_SIZE = 24;
+const PROFILE_PATH = '/profile';
+const NOTIFICATIONS_PATH = '/notifications';
+const SETTINGS_PATH = '/settings';
 
 export function Gnb({ notification = 0 }: IGnbProps) {
   const pathname = usePathname();
 
-  const showSetting = pathname === ROUTES.PROFILE;
+  const showSetting = pathname === PROFILE_PATH;
 
   const validNotificationCount = useMemo(() => {
     return Math.max(0, Math.floor(notification));
@@ -35,7 +33,7 @@ export function Gnb({ notification = 0 }: IGnbProps) {
       </Link>
       <div className={showSetting ? styles.Gnb__Right : undefined}>
         <Link
-          href={ROUTES.NOTIFICATIONS}
+          href={NOTIFICATIONS_PATH}
           className={styles.Gnb__Notification}
           aria-label={
             validNotificationCount > 0
@@ -43,7 +41,7 @@ export function Gnb({ notification = 0 }: IGnbProps) {
               : '알림 페이지로 이동'
           }
         >
-          <IconNotification size={24} />
+          <IconNotification size={ICON_SIZE} />
           {validNotificationCount > 0 && (
             <span className={styles.Gnb__Notification__Active} aria-hidden="true">
               {validNotificationCount > MAX_BADGE_COUNT
@@ -54,11 +52,11 @@ export function Gnb({ notification = 0 }: IGnbProps) {
         </Link>
         {showSetting && (
           <Link
-            href={ROUTES.SETTINGS}
+            href={SETTINGS_PATH}
             className={styles.Gnb__Setting}
             aria-label="설정 페이지로 이동"
           >
-            <IconSetting size={24} />
+            <IconSetting size={ICON_SIZE} />
           </Link>
         )}
       </div>
