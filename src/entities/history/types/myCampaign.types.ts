@@ -76,10 +76,6 @@ export interface MyCampaignReservationInfo extends MyCampaign {
   };
 }
 
-export interface MyCampaignReservationCheck extends MyCampaignReservationInfo {
-  precautions: string[]; // 예약 유의 사항
-}
-
 export interface MyCampaignReviewInfo extends MyCampaign {
   description: string; // 캠페인 상세 설명
   reviewMission: string[]; // 리뷰 미션 목록
