@@ -20,6 +20,7 @@ export function Gnb({ notification = 0 }: IGnbProps) {
   const pathname = usePathname();
 
   const showSetting = pathname === PROFILE_PATH;
+  const rightClassName = [showSetting && styles.Gnb__Right].filter(Boolean).join(' ');
 
   const validNotificationCount = useMemo(() => {
     return Math.max(0, Math.floor(notification));
@@ -28,10 +29,10 @@ export function Gnb({ notification = 0 }: IGnbProps) {
   return (
     <header className={styles.Gnb}>
       <Link href="/" className={styles.Gnb__Logo}>
-        <Image src="/images/Logo-left.svg" alt="로고 이미지" width={99} height={14} />
-        <Image src="/images/Logo-right.svg" alt="로고 이미지" width={44} height={14} />
+        <Image src="/images/Logo-left.svg" alt="리뷰팝 로고" width={99} height={14} />
+        <Image src="/images/Logo-right.svg" alt="" width={44} height={14} />
       </Link>
-      <div className={showSetting ? styles.Gnb__Right : undefined}>
+      <div className={rightClassName}>
         <Link
           href={NOTIFICATIONS_PATH}
           className={styles.Gnb__Notification}
