@@ -6,6 +6,20 @@
   min-height: 100vh;
 
   // TODO: 실제 디자인에 맞게 스타일 수정
+  &__ApplyForm {
+    @include flex($direction: column, $gap: 16);
+    @include margin($top: 24);
+  }
+  &__ButtonBar {
+    position: fixed;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 100;
+
+    @include size($width: 100%, $max-width: 448);
+    @include padding($y: 16);
+    @include flex($justify: center);
+  }
 }
 
 .Placeholder {
@@ -27,9 +41,4 @@
   color: #999;
 
   // TODO: 개발 완료 후 제거
-}
-
-.CampaignApplyPage__ApplyForm {
-  @include flex($direction: column, $gap: 16);
-  @include margin($top: 24);
 }
