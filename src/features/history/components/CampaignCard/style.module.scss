@@ -39,7 +39,7 @@
 
       .CampaignCard__Content {
         @include flex($direction: column, $gap: 4);
-        @include size($width: 224, $height: 77);
+        @include size($width: 100%, $height: 77);
 
         // Content 내부의 텍스트 요소들 - 방문 날짜
         .CampaignCard__VisitDate {

@@ -20,9 +20,11 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
 
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
-      <header className={styles.CampaignCard__StatusLabel}>
-        <span>status label</span>
-      </header>
+      {type !== 'applied' && type !== 'rejected' && (
+        <header className={styles.CampaignCard__StatusLabel}>
+          <span>status label</span>
+        </header>
+      )}
       <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
         <header className={styles.CampaignCard__TopSection}>
           <div className={styles.CampaignCard__ImageWrapper}>
@@ -41,13 +43,13 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             {/* selected 타입: HEAD 브랜치의 로직 유지 */}
             {type === 'selected' && (
               <>
-                {campaign.visitStatus && (
+                {campaign.visitStatus === 'scheduled' && (
                   <span className={styles.CampaignCard__VisitDate}>
                     {/* TODO: 실제 방문 날짜 데이터로 교체 필요 (예: campaign.visitDate) */}
                     9월 18일 수요일 오후 1:00
                   </span>
                 )}
-                {!campaign.visitStatus && (
+                {campaign.visitStatus === 'before' && (
                   <span className={styles.CampaignCard__SelectedText}>체험단에 선정되었어요🎉</span>
                 )}
               </>
@@ -75,8 +77,8 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
         {/* selected 타입: HEAD 브랜치의 버튼 로직 유지 */}
         {type === 'selected' && (
           <>
-            {/* 선정된 체험이면서, 예약 상태가 아닌경우 (campaign.visitStatus === false) */}
-            {!campaign.visitStatus && (
+            {/* 선정된 체험이면서, 예약 상태가 아닌경우 (campaign.visitStatus === before) */}
+            {campaign.visitStatus === 'before' && (
               <footer className={styles.CampaignCard__ContentWrapper}>
                 <Button
                   variant="primary"
@@ -98,8 +100,8 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
                 </div>
               </footer>
             )}
-            {/* 선정된 체험이면서, 예약 상태 데이터가 있는 경우 (campaign.visitStatus === true) */}
-            {campaign.visitStatus && (
+            {/* 선정된 체험이면서, 예약 상태 데이터가 있는 경우 (campaign.visitStatus === scheduled) */}
+            {campaign.visitStatus === 'scheduled' && (
               <Button
                 variant="basic"
                 fullWidth
