@@ -1,15 +1,14 @@
 @use '@/shared/styles/mixins' as *;
 
 .Gnb {
+  @include padding($y: 0, $x: 16);
+  @include flex($align: center, $gap: 12, $justify: space-between);
   position: sticky;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 100;
+  z-index: 10;
   height: 48px;
-  @include padding($y: 0, $x: 16);
-  @include flex($align: center, $gap: 12);
-  justify-content: space-between;
   background: var(--color-white);
 
   &__Logo {
@@ -18,24 +17,18 @@
   }
 
   &__Notification {
-    position: relative;
     @include flex($align: center, $justify: center);
+    position: relative;
 
     &__Active {
+      @include size($width: 13px, $height: 13px);
+      @include flex($align: center, $justify: center);
+      @include font($size: 8px, $weight: 700, $line-height: 1, $color: var(--color-white));
       position: absolute;
       top: -2px;
       right: -2px;
-
-      @include size($width: 13px, $height: 13px);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background: var(--color-red-500);
-      color: var(--color-white);
-      font-size: 8px;
-      font-weight: 700;
-      line-height: 1;
     }
   }
 
