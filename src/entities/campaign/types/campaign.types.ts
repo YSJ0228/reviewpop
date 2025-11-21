@@ -105,7 +105,7 @@ export interface Campaign {
   /** 선정 인원 */
   selectedCount?: number;
 
-  providedItems: string[];
+  providedItems: string;
   /** 지급 포인트 */
   points?: number;
 

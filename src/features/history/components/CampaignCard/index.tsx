@@ -19,12 +19,12 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
       <header className={styles.CampaignCard__StatusLabel}>
         <span>status label</span>
       </header>
-      <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
+      <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
         <header className={styles.CampaignCard__TopSection}>
           <div className={styles.CampaignCard__ImageWrapper}>
             <Image
               src={campaign.imageUrl}
-              alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
+              alt={`${campaign.brand} 체험 이미지`}
               fill
               sizes="(max-width: 768px) 88px, 88px"
               style={{ objectFit: 'cover' }}
@@ -45,7 +45,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               </>
             )}
             <h3 className={styles.CampaignCard__Brand}>{campaign.brand}</h3>
-            <p className={styles.CampaignCard__Title}>{campaign.title}</p>
+            <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
 
             {type === 'rejected' && campaign.deadline && (
               <div className={styles.CampaignCard__Date}>
