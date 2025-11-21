@@ -11,7 +11,7 @@ import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaign
 import CampaignApplied from './CampaignAppliedCard';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
-  const announcementTitle = calculateAnnouncementDate(campaign.announcementDate);
+  const announcementStatus = calculateAnnouncementDate(campaign.announcementDate);
 
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
@@ -26,7 +26,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
           />
         </div>
         <div className={styles.CampaignCard__Content}>
-          {type === 'applied' && <CampaignApplied announcementTitle={announcementTitle} />}
+          {type === 'applied' && <CampaignApplied announcementStatus={announcementStatus} />}
           <p className={styles.CampaignCard__Brand}>{campaign.brand}</p>
 
           <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
