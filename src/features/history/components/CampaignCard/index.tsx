@@ -14,18 +14,19 @@ import CampaignAppliedCard from './CampaignAppliedCard';
 import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
+import { STATUS_VISIT } from '@entities/history/types/myCampaign.types';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   const announcementStatus = calculateAnnouncementDate(campaign.announcementDate);
 
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
-      {type !== 'applied' && type !== 'rejected' && (
-        <header className={styles.CampaignCard__StatusLabel}>
-          <span>status label</span>
-        </header>
-      )}
       <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
+        {type === 'selected' && campaign.visitStatus && (
+          <div className={styles.CampaignCard__StatusLabel}>
+            <span>{STATUS_VISIT[campaign.visitStatus]}</span>
+          </div>
+        )}
         <header className={styles.CampaignCard__TopSection}>
           <div className={styles.CampaignCard__ImageWrapper}>
             <Image
@@ -37,16 +38,15 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             />
           </div>
           <section className={styles.CampaignCard__Content}>
-            {/* applied 타입: develop 브랜치의 CampaignAppliedCard 사용 */}
+            {/* applied 타입 */}
             {type === 'applied' && <CampaignAppliedCard announcementStatus={announcementStatus} />}
 
-            {/* selected 타입: HEAD 브랜치의 로직 유지 */}
+            {/* selected 타입 */}
             {type === 'selected' && (
               <>
                 {campaign.visitStatus === 'scheduled' && (
                   <span className={styles.CampaignCard__VisitDate}>
-                    {/* TODO: 실제 방문 날짜 데이터로 교체 필요 (예: campaign.visitDate) */}
-                    9월 18일 수요일 오후 1:00
+                    {dayjs(campaign.recruitmentSchedule?.[0]).format('M월 D일 dddd A h:mm')}
                   </span>
                 )}
                 {campaign.visitStatus === 'before' && (
@@ -58,14 +58,16 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             <h3 className={styles.CampaignCard__Brand}>{campaign.brand}</h3>
             <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
 
-            {/* rejected 타입: 양쪽 브랜치 모두 비슷하므로 하나로 통합 */}
-            {type === 'rejected' && campaign.deadline && (
+            {/* rejected 타입 */}
+            {type === 'rejected' && campaign.recruitmentSchedule && (
               <div className={styles.CampaignCard__Date}>
-                <time dateTime={campaign.applicationDate}>
-                  모집 {dayjs(campaign.applicationDate).format('MM.DD')}
+                <time dateTime={campaign.recruitmentSchedule?.[0]}>
+                  모집 {dayjs(campaign.recruitmentSchedule?.[0]).format('MM.DD')}
                 </time>
                 <span> ~ </span>
-                <time dateTime={campaign.deadline}>{dayjs(campaign.deadline).format('MM.DD')}</time>
+                <time dateTime={campaign.recruitmentSchedule?.[1]}>
+                  {dayjs(campaign.recruitmentSchedule?.[1]).format('MM.DD')}
+                </time>
                 <span className={styles.CampaignCard__MaxRecruitment}>
                   {campaign.maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}명 선정
                 </span>
