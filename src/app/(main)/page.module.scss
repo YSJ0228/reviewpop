@@ -2,7 +2,7 @@
 
 .HomeContainer {
   min-height: 100vh;
-  @include padding($x: 16);
+  @include padding($x: 16, $bottom: 32);
 }
 
 .ListContainer {

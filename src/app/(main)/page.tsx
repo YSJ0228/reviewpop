@@ -12,11 +12,17 @@ import styles from './page.module.scss';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<CampaignTabKey>('recruiting');
+  const isScrolling = useRef(false);
   const recruitingRef = useRef<HTMLDivElement>(null);
   const beforeRecruitingRef = useRef<HTMLDivElement>(null);
   const completedRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (status: CampaignTabKey) => {
+    isScrolling.current = true;
+    setActiveTab(status);
+    setTimeout(() => {
+      isScrolling.current = false;
+    }, 500);
     if (status === 'recruiting')
       recruitingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (status === 'before_recruiting')
@@ -29,13 +35,15 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.target === recruitingRef.current) setActiveTab('recruiting');
-          if (entry.target === beforeRecruitingRef.current) setActiveTab('before_recruiting');
-          if (entry.target === completedRef.current) setActiveTab('completed');
+          if (entry.isIntersecting && !isScrolling.current) {
+            if (entry.target === recruitingRef.current) setActiveTab('recruiting');
+            if (entry.target === beforeRecruitingRef.current) setActiveTab('before_recruiting');
+            if (entry.target === completedRef.current) setActiveTab('completed');
+          }
         });
       },
       {
-        rootMargin: '-45% 0px -55% 0px',
+        rootMargin: '-100px 0px -55% 0px',
         threshold: 0,
       },
     );
