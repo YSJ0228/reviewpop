@@ -117,7 +117,8 @@ export interface Campaign {
   /** 선정 인원 */
   selectedCount?: number;
 
-  providedItems: string[];
+  /** 제공 상품 */
+  providedItems: string;
 
   // 생성일
   /** 생성일 (ISO 8601) */
