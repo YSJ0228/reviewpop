@@ -1,0 +1,167 @@
+// Enum 정의 ====================
+
+// 체험 상태
+Enum CampaignStatus {
+  "before_recruiting" [note: "모집 전"]
+  "recruiting" [note: "모집 중"]
+  "in_progress" [note: "선정 완료, 체험 진행 중"]
+  "review_period" [note: "리뷰 작성 중"]
+  "completed" [note: "체험 프로세스 종료"]
+  "closed" [note: "마감, 모집 실패"]
+}
+
+// 지원 상태
+Enum ApplicationStatus{
+    "pending" [note: "대기 중, 선정 결과 발표 전"]
+    "selected" 
+    "rejected" 
+    "cancelled"
+}
+
+// 체험 카테고리
+Enum CampaignCategory {
+  "음료"
+  "뷰티" 
+  "식품"
+  "전자제품"
+  "건강"
+  "패션"
+  "가전" 
+  "향수"
+  "액세서리"
+  "생활용품"
+  "기타"
+}
+
+// 내 체험 상태
+Enum MyCampaignStatus {
+    "applied" [note: "신청 완료, 대기 중"]
+    "selected" [note: "선정됨"]
+    "registered" [note: "리뷰 등록 완료, 검수 대기"] //review_submitted로 바꾸는 건 어떤지?
+    "completed" [note: "리뷰 검수 완료"]
+    "rejected" [note: "체험 미선정, 탈락"]
+}
+
+// 체험 유형
+Enum ExperienceType{
+  "delivery" [note: "배송형"]
+  "visit" [note: "방문형"]
+}
+
+// 리뷰 플랫폼
+Enum ReviewPlatform {
+  "naver_blog"
+  "other"
+}
+
+// Table 정의 ====================
+
+// 유저
+Table User {
+  id varchar [pk, note: "유저 ID"]
+  phoneNumber varchar [unique, not null]
+  blogAddress varchar [not null, note: "블로그 주소"]
+  name varchar [not null]
+  provider varchar [not null, note: "kakao, naver"]
+  createdAt datetime [default: `now()`, not null]
+  updatedAt datetime [not null]
+  
+  // 기존 User 타입에는 email, profileImage가 있었으나, 
+  // phoneNumber, blogAddress를 필수로 변경하고 불필요한 필드 제거
+}
+
+Table Campaign {
+  id varchar [pk, note: "체험 ID"]
+
+  // 기본 정보
+  title varchar [not null, note: "체험 제목"]
+  brand varchar [not null, note: "브랜드명"]
+
+  // 이미지
+  imageUrl varchar [not null, note: "썸네일 이미지 URL"] //thumbnail은 어떤지?
+  imageUrls json [note: "상세 이미지 URL 배열"] //detail_images는 어떤지?
+  description varchar [not null, note: "체험 설명"]
+  status CampaignStatus [not null, note: "체험 상태"]
+  category CampaignCategory [not null, note: "카테고리"]
+
+  // 진행 일정
+  // 기존 CampaignSchedule 객체를 Flatten하여 조회 성능 최적화
+  applicationStart datetime [not null, note: "체험단 모집 시작"] 
+  applicationEnd datetime [not null, note: "체험단 모집 종료"]
+  announcementStart datetime [not null, note: "당첨자 발표 시작"]
+  announcementEnd datetime [not null, note: "당첨자 발표 종료"]
+  reviewStart datetime [not null, note: "방문/후기 시작"]
+  reviewEnd datetime [not null, note: "방문/후기 종료"]
+
+  // 지역
+  location varchar [default: "전국", note: "지역 제한 (예: '서울', '전국')"]
+  address varchar [note: "체험 위치 상세 주소 (방문형 체험의 경우)"]
+
+  // 모집 정보
+  maxRecruitment int [not null, note: "총 모집 인원"]
+  currentRecruitment int [not null, note: "현재 신청 인원"]
+  selectedCount int [note: "선정 인원"]
+  providedItems varchar [not null, note: "제공 상품"]
+
+  // 체험 정보
+  estimatedValue int [note: "체험 상품의 예상 가치 (원 단위)"]
+  experienceType ExperienceType [not null, note: "체험 유형 (배송/방문)"]
+  keywords json [not null, note: "키워드/태그 목록"]
+
+  // visitReservation은 VisitReservation로 분리
+
+  reviewMission json [not null, note: "리뷰 미션 목록"]
+  reviewMissionNotice varchar [note: "리뷰 시 주의 사항"]
+
+  requirements json [note: "당첨 조건 목록"]
+  contactInfo varchar [note: "문의처"]
+  experiencePrecautions json [note: "체험 시 주의사항"] // 간단하게 precaution으로 변경?
+
+  createdAt datetime [not null, note: "생성일 (ISO 8601)"]
+  updatedAt datetime [not null, note: "수정일"]
+}
+
+// 배송 정보 분리는 어떤지??
+Table CampaignDeliveryInfo {
+    campaignId varchar [pk, ref: - Campaign.id]
+    shippingStartDate datetime [note: "배송 시작 예정일"]
+    carrier varchar [note: "택배사"]
+    notice text [note: "배송 관련 유의사항"]
+}
+
+// 방문 예약 정보
+Table VisitReservation {
+  campaignId varchar [pk, ref: - Campaign.id]
+  businessHours json
+  isReservationRequired boolean [default: true]
+  reservationMethod varchar
+  notice text
+}
+
+// 리뷰
+Table Review {
+  id int [pk, increment]
+  campaignId varchar [not null, ref: > Campaign.id]
+  userId varchar [not null, ref: > User.id]
+  
+  reviewUrl varchar [not null, note: "리뷰 주소"]
+
+  createdAt datetime [default: `now()`, not null]
+  updatedAt datetime [not null]
+}
+
+Table CampaignApplication { 
+    // 기존 MyCampaign, Application 타입을 대체
+    // User 테이블의 정보를 참조하되, 신청 시점의 유저 정보 스냅샷 저장
+    id int [pk, increment]
+    campaignId varchar [not null, ref: > Campaign.id]
+    userId varchar [not null, ref: > User.id , note: "User Table 참조"]
+    blogAddress varchar [note: "블로그 주소"]
+    name varchar [not null, note: "이름"]
+    phoneNumber varchar [not null, note: "휴대폰 번호"]
+    message text [note: "전달하고 싶은 한마디"]
+
+    status ApplicationStatus [not null, default: "pending"]
+    createdAt datetime [default: `now()`, not null]
+    updatedAt datetime [not null]
+}
