@@ -5,39 +5,39 @@
   "detailLevel": "All",
   "tablePositions": [
     {
-      "name": "User",
+      "name": "user",
       "schemaName": "public",
       "x": 16,
       "y": 1048
     },
     {
-      "name": "Campaign",
+      "name": "campaign",
       "schemaName": "public",
       "x": 16,
       "y": 16
     },
     {
-      "name": "CampaignDeliveryInfo",
+      "name": "campaign_delivery_info",
       "schemaName": "public",
-      "x": 600,
+      "x": 608,
       "y": 16
     },
     {
-      "name": "VisitReservation",
+      "name": "visit_reservation",
       "schemaName": "public",
-      "x": 600,
+      "x": 608,
       "y": 216
     },
     {
-      "name": "Review",
+      "name": "review",
       "schemaName": "public",
-      "x": 600,
+      "x": 608,
       "y": 456
     },
     {
-      "name": "CampaignApplication",
+      "name": "campaign_application",
       "schemaName": "public",
-      "x": 600,
+      "x": 608,
       "y": 728
     }
   ],
@@ -48,13 +48,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Campaign",
+      "firstTableName": "campaign",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "campaignId"
+        "campaign_id"
       ],
-      "secondTableName": "CampaignDeliveryInfo",
+      "secondTableName": "campaign_delivery_info",
       "secondSchemaName": "public",
       "secondRelation": "1",
       "checkPoints": []
@@ -63,13 +63,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Campaign",
+      "firstTableName": "campaign",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "campaignId"
+        "campaign_id"
       ],
-      "secondTableName": "VisitReservation",
+      "secondTableName": "visit_reservation",
       "secondSchemaName": "public",
       "secondRelation": "1",
       "checkPoints": []
@@ -78,13 +78,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Campaign",
+      "firstTableName": "campaign",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "campaignId"
+        "campaign_id"
       ],
-      "secondTableName": "Review",
+      "secondTableName": "review",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -93,13 +93,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "User",
+      "firstTableName": "user",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "userId"
+        "user_id"
       ],
-      "secondTableName": "Review",
+      "secondTableName": "review",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -108,13 +108,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "Campaign",
+      "firstTableName": "campaign",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "campaignId"
+        "campaign_id"
       ],
-      "secondTableName": "CampaignApplication",
+      "secondTableName": "campaign_application",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
@@ -123,13 +123,13 @@
       "firstFieldNames": [
         "id"
       ],
-      "firstTableName": "User",
+      "firstTableName": "user",
       "firstSchemaName": "public",
       "firstRelation": "1",
       "secondFieldNames": [
-        "userId"
+        "user_id"
       ],
-      "secondTableName": "CampaignApplication",
+      "secondTableName": "campaign_application",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
