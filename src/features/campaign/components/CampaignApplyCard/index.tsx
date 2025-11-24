@@ -3,8 +3,6 @@ import { CampaignApplyCardProps } from './types';
 import styles from './style.module.scss';
 
 export function CampaignApplyCard({ size = 'sm', brand, providedItems }: CampaignApplyCardProps) {
-  const itemsText = providedItems.join(' + ');
-
   const styleCard =
     size === 'sm'
       ? { height: 52, paddingTop: 8, paddingLeft: 16 }
@@ -22,7 +20,7 @@ export function CampaignApplyCard({ size = 'sm', brand, providedItems }: Campaig
   return (
     <div className={styles.CampaignApplyCard} style={styleCard}>
       <span style={styleBrand}>{brand}</span>
-      <span style={styleItems}>{itemsText}</span>
+      <span style={styleItems}>{providedItems}</span>
     </div>
   );
 }

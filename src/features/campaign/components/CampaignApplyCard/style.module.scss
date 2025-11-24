@@ -4,4 +4,5 @@
   background-color: var(--color-blue-50);
   border-radius: 10px;
   @include flex($direction: column);
+  @include size($width: 100%);
 }
