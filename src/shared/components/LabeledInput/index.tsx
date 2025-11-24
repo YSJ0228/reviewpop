@@ -67,9 +67,11 @@ export function LabeledInput({
               placeholder={placeholder}
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => {
+              onFocus={() => {
+                setIsFocused(true);
                 setTouched(true);
+              }}
+              onBlur={() => {
                 setIsFocused(false);
               }}
             />

@@ -11,34 +11,32 @@
     @include margin($top: 24);
   }
   &__ButtonBar {
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    box-sizing: border-box;
+    left: 0;
     z-index: 100;
 
     @include size($width: 100%, $max-width: 448);
-    @include padding($y: 16);
-    @include flex($justify: center);
+    @include padding($all: 16);
+    @include flex($justify: center, $align: center);
   }
-}
+  ul {
+    list-style: none;
+    padding-left: 0;
 
-.Placeholder {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
+    li {
+      position: relative;
+      padding-left: 25px;
 
-  min-height: 400px;
-
-  text-align: center;
-
-  // TODO: 개발 완료 후 제거
-}
-
-.Todo {
-  font-size: 14px;
-  color: #999;
-
-  // TODO: 개발 완료 후 제거
+      &::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 10px;
+        color: #999;
+      }
+    }
+  }
 }

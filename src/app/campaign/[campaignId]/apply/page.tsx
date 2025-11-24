@@ -1,22 +1,20 @@
 'use client';
 
 import { Suspense, use, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-
 import { LabeledInput } from '@shared/components/LabeledInput';
 import { WebButton } from '@shared/components/WebButton';
 import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
 import { TextArea } from '@features/campaign/components/TextArea';
-import { Button } from '@shared/components';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
 import styles from './page.module.scss';
-import { Drawer } from '@mantine/core';
 import { useCampaignDetails } from '@features/campaign';
 import { useDisclosure } from '@mantine/hooks';
-import { BottomSheet } from '@shared/components/BottomSheet';
+import { BlogBottomSheet } from '@features/campaign/components/BlogBottomSheet';
+import { CautionBottomSheet } from '@features/campaign/components/CautionBottomSheet';
+import { ButtonBar } from '@features/campaign/components/ButtonBar';
 
 /**
  * 체험 신청 페이지
@@ -43,14 +41,11 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
   const nameInput = useInputValidate('name');
   const phoneInput = useInputValidate('phone');
   const urlInput = useInputValidate('url');
-  const [buttonType, setButtonType] = useState<'connect' | 'edit'>('connect');
+  const [blogAddress, setBlogAddress] = useState<string>('');
 
   const [blogOpened, { open: blogOpen, close: blogClose }] = useDisclosure();
   const [cautionOpened, { open: cautionOpen, close: cautionClose }] = useDisclosure();
 
-  const [confirmMsg, setConfirmMsg] = useState<string>('');
-
-  const router = useRouter();
   return (
     <main className={styles.CampaignApplyPage}>
       <ErrorBoundary>
@@ -62,7 +57,12 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
             providedItems={campaign?.providedItems ?? ''}
           />
           <div className={styles.CampaignApplyPage__ApplyForm}>
-            <WebButton label="네이버 블로그 주소" buttonType={buttonType} onClick={blogOpen} />
+            <WebButton
+              label="네이버 블로그 주소"
+              buttonType="connect"
+              onClick={blogOpen}
+              text={blogAddress}
+            />
             <LabeledInput
               label="이름"
               placeholder="이름 입력"
@@ -86,36 +86,20 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
               placeholder="체험단에 선정되어야 할 이유가 있다면 알려주세요!"
             />
           </div>
-          <div className={styles.CampaignApplyPage__ButtonBar}>
-            <Button variant="primary" onClick={cautionOpen} fullWidth>
-              다음
-            </Button>
-          </div>
+          <ButtonBar
+            text="다음"
+            variant="primary"
+            onClick={cautionOpen}
+            disabled={!!urlInput.error || !!nameInput.error || !!phoneInput.error}
+          />
 
-          <BottomSheet opened={blogOpened} onClose={blogClose} title="블로그 아이디를 입력해주세요">
-            <LabeledInput
-              label="블로그 주소"
-              placeholder="네이버 블로그 아이디 입력"
-              value={urlInput.value}
-              setValue={urlInput.setValue}
-              errorMsg={urlInput.error}
-              showButton
-              showPreview
-              confirmMsg={confirmMsg}
-              onClick={() => setConfirmMsg('블로그 주소가 확인되었어요')}
-            />
-            <div className={styles.CampaignApplyPage__ButtonBar}>
-              <Button variant="primary" onClick={blogClose} fullWidth>
-                저장
-              </Button>
-            </div>
-          </BottomSheet>
-
-          <BottomSheet
-            opened={cautionOpened}
-            onClose={cautionClose}
-            title="체험단 참여 시 주의사항을 확인해주세요"
-          ></BottomSheet>
+          <BlogBottomSheet
+            opened={blogOpened}
+            onClose={blogClose}
+            input={urlInput}
+            setBlogAddress={setBlogAddress}
+          />
+          <CautionBottomSheet opened={cautionOpened} onClose={cautionClose} />
         </Suspense>
       </ErrorBoundary>
     </main>

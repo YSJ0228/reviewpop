@@ -1,5 +1,6 @@
 'use client';
 import { use } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { Button } from '@shared/components';
@@ -8,7 +9,6 @@ import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCa
 import { useCampaignDetails } from '@features/campaign';
 
 import styles from './page.module.scss';
-import { useRouter } from 'next/navigation';
 
 /**
  * 체험 신청 완료 페이지
@@ -56,7 +56,7 @@ export default function CampaignApplyCompletePage({ params }: CampaignApplyCompl
             }}
             fullWidth
           >
-            신청 내역
+            신청 내역 보기
           </Button>
         </div>
       </ErrorBoundary>
