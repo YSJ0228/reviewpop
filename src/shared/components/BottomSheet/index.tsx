@@ -1,33 +1,43 @@
 import { Drawer } from '@mantine/core';
 
-import { Button } from '../Button';
-
 import { BottomSheetProps } from './types';
 
 import styles from './style.module.scss';
 
-export function BottomSheet({ onClose, onClick, title }: BottomSheetProps) {
+export function BottomSheet({
+  opened,
+  onClose,
+  title,
+  children,
+  titleSize = 20,
+  height = 560,
+  withCloseButton = true,
+}: BottomSheetProps) {
   return (
     <Drawer
-      opened
+      opened={opened}
       position="bottom"
       onClose={onClose}
+      withCloseButton={withCloseButton}
       styles={{
         content: {
-          maxWidth: 448,
           width: '100%',
           margin: '0 auto',
-          borderTopLeftRadius: '20px',
-          borderTopRightRadius: '20px',
+          borderTopLeftRadius: '16px',
+          borderTopRightRadius: '16px',
+          height,
+        },
+        header: {
+          paddingBottom: 8,
         },
       }}
-      title={title}
     >
-      <div className={styles.BottomSheet__ButtonBar}>
-        <Button variant="primary" onClick={onClick} fullWidth>
-          저장
-        </Button>
-      </div>
+      {title && (
+        <h1 className={styles.BottomSheet__Title} style={{ fontSize: `${titleSize}px` }}>
+          {title}
+        </h1>
+      )}
+      <div className={styles.BottomSheet__Body}>{children}</div>
     </Drawer>
   );
 }

@@ -1,5 +1,11 @@
+import { ReactNode } from 'react';
+
 export interface BottomSheetProps {
-  onClick: () => void;
   onClose: () => void;
-  title: string;
+  opened: boolean;
+  title?: string;
+  children?: ReactNode;
+  titleSize?: number;
+  height?: number;
+  withCloseButton?: boolean;
 }
