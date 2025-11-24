@@ -11,12 +11,16 @@
     border-radius: 12px;
     border: 1px solid var(--color-gray-100);
     @include font(
-      $size: 16px,
+      $size: 14px,
       $line-height: 150%,
       $weight: 500,
       $letter-spacing: -0.28px,
       $color: var(--color-gray-900)
     );
+
+    span {
+      @include font($weight: 700);
+    }
 
     &__Title {
       @include flex($align: center, $gap: 16px);
@@ -37,29 +41,53 @@
         }
 
         p {
-          @include font($size: 14px, $color: var(--color-gray-600));
+          @include font($color: var(--color-gray-600));
         }
       }
     }
 
     &__Address {
-      @include flex($direction: column, $align: flex-start, $gap: 8px);
-    }
+      @include flex($direction: column, $align: flex-start, $gap: 3px);
 
-    &__Booker {
-      @include flex($direction: column, $align: flex-start, $gap: 8px);
-    }
+      &__Detail {
+        width: 100%;
+        @include flex($align: center, $justify: space-between, $gap: 8px);
 
-    &__Visitor {
-      @include flex($direction: column, $align: flex-start, $gap: 8px);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        button {
+          @include size($width: 30px, $height: 30px);
+          @include flex($align: center, $justify: center);
+          cursor: pointer;
+          aspect-ratio: 1/1;
+          border-radius: 6px;
+          border: 1px solid var(--color-gray-100);
+          background: var(--color-white);
+        }
+      }
     }
 
     &__Date {
-      @include flex($direction: column, $align: flex-start, $gap: 8px);
+      @include flex($direction: column, $align: flex-start, $gap: 4px);
+    }
+    &__Booker {
+      @include flex($direction: column, $align: flex-start, $gap: 4px);
+    }
+
+    &__Visitor {
+      @include flex($direction: column, $align: flex-start, $gap: 4px);
     }
   }
 
   &__Precautions {
     @include flex($direction: column, $align: flex-start, $gap: 8px);
   }
+}
+
+.BorderBottom {
+  align-self: stretch;
+  @include padding($bottom: 16px);
+  border-bottom: 1px solid var(--color-gray-100);
 }
