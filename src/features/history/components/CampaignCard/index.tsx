@@ -45,7 +45,10 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               <>
                 {campaign.visitStatus === 'scheduled' && (
                   <span className={styles.CampaignCard__VisitDate}>
-                    {dayjs(campaign.recruitmentSchedule?.[0]).format('M월 D일 dddd A h:mm')}
+                    {campaign.appliedAt &&
+                      dayjs(`${campaign.appliedAt[0]} ${campaign.appliedAt[1]}`).format(
+                        'M월 D일 dddd A h:mm',
+                      )}
                   </span>
                 )}
                 {campaign.visitStatus === 'before' && (

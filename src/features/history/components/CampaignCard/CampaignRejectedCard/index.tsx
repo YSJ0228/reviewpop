@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 
 import { CONSTANTS } from '@shared/config/constants';
+import { HISTORY_MESSAGES } from '@features/history/constants';
 
 import type { CampaignRejectedCardProps } from './types';
 
 import styles from './style.module.scss';
-import { HISTORY_MESSAGES } from '@features/history/constants';
 
 /**
  * 미선정 체험 카드 컴포넌트
@@ -18,6 +18,7 @@ export function CampaignRejectedCard({
   maxRecruitment,
 }: CampaignRejectedCardProps) {
   if (!recruitmentSchedule) {
+    //TODO: 빈 상태 UI 추가 예정
     return null;
   }
 

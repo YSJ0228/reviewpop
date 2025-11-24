@@ -18,18 +18,25 @@ export function CampaignSelectedCard({
   onReservationClick,
   onReviewMissionClick,
 }: CampaignSelectedCardProps) {
+  // TODO: 방문 날짜 설정 버튼 클릭 핸들러
+  const handleReservationClick = () => {
+    return () => {
+      onReservationClick?.();
+    };
+  };
+
+  // TODO: 리뷰 미션 버튼 클릭 핸들러
+  const handleReviewMissionClick = () => {
+    return () => {
+      onReviewMissionClick?.();
+    };
+  };
+
   // 방문 전 상태: 예약 날짜 설정 버튼 + 경고 메시지
   if (visitStatus === 'before') {
     return (
       <footer className={styles.CampaignSelectedCard__ContentWrapper}>
-        <Button
-          variant="primary"
-          fullWidth
-          radius={8}
-          onClick={() => {
-            onReservationClick?.();
-          }}
-        >
+        <Button variant="primary" fullWidth radius={8} onClick={handleReservationClick}>
           <span className={styles.CampaignSelectedCard__PrimaryText}>
             {HISTORY_MESSAGES.SET_VISIT_DATE}
           </span>
@@ -47,14 +54,7 @@ export function CampaignSelectedCard({
   // 방문 예정 상태: 리뷰 미션 버튼
   if (visitStatus === 'scheduled') {
     return (
-      <Button
-        variant="basic"
-        fullWidth
-        radius={8}
-        onClick={() => {
-          onReviewMissionClick?.();
-        }}
-      >
+      <Button variant="basic" fullWidth radius={8} onClick={handleReviewMissionClick}>
         <span className={styles.CampaignSelectedCard__BasicText}>
           {HISTORY_MESSAGES.REVIEW_MISSION}
         </span>
