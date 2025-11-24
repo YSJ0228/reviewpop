@@ -1,12 +1,19 @@
 'use client';
 
 import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/useCampaigns';
+import { CAMPAIGN_STATUS_LABELS } from '@entities/campaign/types/campaign.types';
+import { now } from '@shared/lib/date';
+
 import { CampaignCard } from '../CampaignCard';
+
 import type { CampaignListProps } from './types';
+
 import styles from './style.module.scss';
 
 export function CampaignList({ status }: CampaignListProps) {
   const { data: campaigns, isLoading, error } = useCampaigns();
+  const thisTime = now();
+  const statusTitle = CAMPAIGN_STATUS_LABELS[status];
 
   const filteredCampaigns = filterCampaignsByStatus(campaigns, status);
 
@@ -16,7 +23,7 @@ export function CampaignList({ status }: CampaignListProps) {
         className={styles['CampaignList--Loading']}
         role="status"
         aria-live="polite"
-        aria-label="캠페인 목록 로딩 중"
+        aria-label="체험 목록 로딩 중"
       >
         <div className={styles.CampaignList__Spinner} />
         <span>로딩 중...</span>
@@ -35,7 +42,6 @@ export function CampaignList({ status }: CampaignListProps) {
     );
   }
 
-  // TODO: 추후 조건 및 문구 수정
   if (filteredCampaigns.length === 0) {
     return (
       <div className={styles['CampaignList--Empty']} role="status" aria-label={`체험이 없습니다`}>
@@ -44,17 +50,21 @@ export function CampaignList({ status }: CampaignListProps) {
     );
   }
 
-  //TODO: 추후 조건 및 문구 수정
   return (
     <div
       className={styles.CampaignList}
       role="feed"
-      aria-label={`무슨무슨 체험 목록`}
+      aria-label={`${statusTitle} 체험 목록`}
       aria-busy={isLoading}
     >
-      {filteredCampaigns.map((campaign) => (
-        <CampaignCard key={campaign.id} campaign={campaign} />
-      ))}
+      {filteredCampaigns
+        .filter((campaign) => {
+          if (status !== 'in_progress') return true;
+          return campaign.schedule.applicationSchedule[1] > thisTime.toISOString();
+        })
+        .map((campaign) => (
+          <CampaignCard key={campaign.id} campaign={campaign} />
+        ))}
     </div>
   );
 }

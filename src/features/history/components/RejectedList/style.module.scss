@@ -1,0 +1,6 @@
+@use '@shared/styles/mixins' as *;
+
+.RejectedList {
+  @include flex($direction: column, $gap: 12);
+  @include size($width: 100%);
+}

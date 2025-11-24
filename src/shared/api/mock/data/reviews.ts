@@ -2,7 +2,7 @@
  * Mock 리뷰 데이터
  *
  * 테스트 및 개발용 가짜 리뷰 데이터입니다.
- * 총 50개의 리뷰로 다양한 캠페인과 사용자 평가를 시뮬레이션합니다.
+ * 총 50개의 리뷰로 다양한 체험과 사용자 평가를 시뮬레이션합니다.
  */
 
 import type { Review } from '@entities/review/types/review.types';
@@ -25,9 +25,9 @@ function getUserInfo(userId: string) {
 /**
  * 리뷰 Mock 데이터
  *
- * 캠페인별 분포:
- * - 완료된 캠페인 (13, 14, 15): 각 10개씩
- * - 배송 완료된 캠페인 (9, 10, 11): 각 5-7개씩
+ * 체험별 분포:
+ * - 완료된 체험 (13, 14, 15): 각 10개씩
+ * - 배송 완료된 체험 (9, 10, 11): 각 5-7개씩
  */
 export const mockReviews: Review[] = [
   // Campaign #13 리뷰 (10개) - 프리미엄 초콜릿
@@ -712,7 +712,7 @@ export const mockReviews: Review[] = [
 ];
 
 /**
- * 캠페인별 리뷰 조회
+ * 체험별 리뷰 조회
  */
 export function getReviewsByCampaignId(campaignId: string): Review[] {
   return mockReviews.filter((review) => review.campaignId === campaignId);

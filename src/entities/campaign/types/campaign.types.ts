@@ -1,11 +1,12 @@
 /**
- * 캠페인 엔티티 타입 정의
+ * 체험 엔티티 타입 정의
  *
  * 프로젝트 전체에서 사용하는 표준 Campaign 타입입니다.
  */
 
 /**
- * 캠페인 상태
+ * 체험 상태
+ * - before_recruiting: 모집 전
  * - recruiting: 모집 중
  * - in_progress: 진행 중 (선정 완료, 체험 진행 중)
  * - review_period: 리뷰 작성 기간
@@ -13,24 +14,24 @@
  * - closed: 마감 (모집 실패 등)
  */
 export type CampaignStatus =
+  | 'before_recruiting'
   | 'recruiting'
   | 'in_progress'
   | 'review_period'
   | 'completed'
-  | 'closed'
-  | 'active';
+  | 'closed';
 
 export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
+  before_recruiting: '모집 전',
   recruiting: '모집 중',
   in_progress: '진행 중',
   review_period: '리뷰 기간',
   completed: '완료',
   closed: '마감',
-  active: '진행 중',
 };
 
 /**
- * 캠페인 카테고리
+ * 체험 카테고리
  */
 export type CampaignCategory =
   | '음료' // food & beverage
@@ -67,12 +68,12 @@ export interface CampaignSchedule {
 }
 
 /**
- * 캠페인 기본 정보
+ * 체험 기본 정보
  */
 export interface Campaign {
-  /** 캠페인 ID */
+  /** 체험 ID */
   id: string;
-  /** 캠페인 제목 */
+  /** 체험 제목 */
   title: string;
   /** 브랜드명 */
   brand: string;
@@ -81,9 +82,9 @@ export interface Campaign {
   imageUrl: string;
   /** 상세 이미지 URL 배열 */
   imageUrls?: string[];
-  /** 캠페인 설명 */
+  /** 체험 설명 */
   description: string;
-  /** 캠페인 상태 */
+  /** 체험 상태 */
   status: CampaignStatus;
   /** 카테고리 */
   category: CampaignCategory;
@@ -94,7 +95,7 @@ export interface Campaign {
   // 지역 (선택 사항)
   /** 지역 제한 (예: "서울", "전국") */
   location?: string;
-  /** 상세 주소 (방문형 캠페인의 경우) */
+  /** 상세 주소 (방문형 체험의 경우) */
   address?: string;
 
   // 모집 정보
@@ -105,9 +106,8 @@ export interface Campaign {
   /** 선정 인원 */
   selectedCount?: number;
 
-  providedItems: string[];
-  /** 지급 포인트 */
-  points?: number;
+  /** 제공 상품 */
+  providedItems: string;
 
   // 생성일
   /** 생성일 (ISO 8601) */
@@ -119,7 +119,7 @@ type TimeString = string;
 type DailyHours = [TimeString, TimeString] | 'closed';
 
 /**
- * 캠페인 상세 정보
+ * 체험 상세 정보
  * (목록에서는 필요 없지만 상세 페이지에서 필요한 정보)
  */
 
@@ -173,7 +173,7 @@ export interface CampaignDetail extends Campaign {
 }
 
 /**
- * 캠페인 필터
+ * 체험 필터
  */
 export interface CampaignFilters {
   category?: CampaignCategory;
@@ -185,7 +185,7 @@ export interface CampaignFilters {
 }
 
 /**
- * 캠페인 신청 데이터
+ * 체험 신청 데이터
  */
 export interface CampaignApplyData {
   campaignId: string;

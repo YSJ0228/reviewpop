@@ -21,7 +21,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       <div className={styles.Page}>
         <PageHeader showBackButton />
         <div className={styles.Page__Loading}>
-          <p>캠페인 정보를 불러오는 중...</p>
+          <p>체험 정보를 불러오는 중...</p>
         </div>
       </div>
     );
@@ -32,7 +32,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       <div className={styles.Page}>
         <PageHeader showBackButton />
         <div className={styles.Page__Error}>
-          <p>캠페인 정보를 불러올 수 없습니다.</p>
+          <p>체험 정보를 불러올 수 없습니다.</p>
         </div>
       </div>
     );
@@ -75,12 +75,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
             <span className={styles.Page__MetaLabel}>카테고리</span>
             <span className={styles.Page__MetaValue}>{campaign.category}</span>
           </div>
-          {campaign.points && (
-            <div className={styles.Page__MetaItem}>
-              <span className={styles.Page__MetaLabel}>포인트</span>
-              <span className={styles.Page__MetaValue}>{campaign.points.toLocaleString()}P</span>
-            </div>
-          )}
         </div>
 
         {/* 모집 인원 */}
@@ -99,9 +93,9 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         </div>
       </section>
 
-      {/* 캠페인 소개 */}
+      {/* 체험 소개 */}
       <section className={styles.Page__Section}>
-        <h2 className={styles.Page__SectionTitle}>캠페인 소개</h2>
+        <h2 className={styles.Page__SectionTitle}>체험 소개</h2>
         <p className={styles.Page__Description}>{campaign.description}</p>
       </section>
 
@@ -120,13 +114,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       {/* 제공 내역 */}
       <section className={styles.Page__Section}>
         <h2 className={styles.Page__SectionTitle}>제공 내역</h2>
-        <ul className={styles.Page__List}>
-          {campaign.providedItems.map((item, index) => (
-            <li key={index} className={styles.Page__ListItem}>
-              {item}
-            </li>
-          ))}
-        </ul>
+        <p className={styles.Page__ListItem}>{campaign.providedItems}</p>
       </section>
 
       {/* 배송 정보 */}

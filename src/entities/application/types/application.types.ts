@@ -1,5 +1,5 @@
 /**
- * Application (캠페인 신청) 엔티티 타입 정의
+ * Application (체험 신청) 엔티티 타입 정의
  */
 
 /**
@@ -12,14 +12,14 @@
 export type ApplicationStatus = 'pending' | 'selected' | 'rejected' | 'cancelled';
 
 /**
- * 캠페인 신청 정보
+ * 체험 신청 정보
  */
 export interface Application {
   /** 신청 ID */
   id: string;
   /** 사용자 ID */
   userId: string;
-  /** 캠페인 ID */
+  /** 체험 ID */
   campaignId: string;
   /** 신청 상태 */
   status: ApplicationStatus;
@@ -45,7 +45,7 @@ export interface Application {
  * 신청 생성 요청 데이터
  */
 export interface CreateApplicationRequest {
-  /** 캠페인 ID */
+  /** 체험 ID */
   campaignId: string;
   /** 신청 메시지 */
   message?: string;
