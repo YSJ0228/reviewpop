@@ -17,6 +17,7 @@ import styles from './style.module.scss';
 
 // Swiper CSS 임포트
 import 'swiper/css';
+import { ROUTES } from '@shared/config/routes';
 
 export function CampaignTabs() {
   const searchParams = useSearchParams();
@@ -172,7 +173,7 @@ export function CampaignTabs() {
               <CampaignList status={tab.key} />
               <div className={styles.CampaignTabs__LinkContainer}>
                 {tab.key === 'applied' && rejectedCount > 0 && (
-                  <Link href="/campaign/rejected" className={styles.CampaignTabs__RejectedLink}>
+                  <Link href={ROUTES.MY_REJECTED} className={styles.CampaignTabs__RejectedLink}>
                     {'미선정 체험 내역'}
                     <IconChevronRight size={16} color="var(--color-gray-800)" />
                   </Link>

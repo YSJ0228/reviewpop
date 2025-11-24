@@ -1,0 +1,40 @@
+@use '@/shared/styles/mixins' as *;
+
+.CampaignSelectedCard__ContentWrapper {
+  @include size($width: 100%);
+  @include flex($direction: column, $gap: 8);
+
+  .CampaignSelectedCard__WarningWrapper {
+    @include flex($align: center, $gap: 4, $justify: center);
+
+    .CampaignSelectedCard__WarningText {
+      @include font(
+        $size: 12,
+        $weight: 500,
+        $line-height: 1.5,
+        $letter-spacing: -0.02em,
+        $color: var(--gray-400)
+      );
+    }
+  }
+}
+
+.CampaignSelectedCard__BasicText {
+  @include font(
+    $size: 14,
+    $weight: 600,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-800)
+  );
+}
+
+.CampaignSelectedCard__PrimaryText {
+  @include font(
+    $size: 14,
+    $weight: 700,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--color-white)
+  );
+}

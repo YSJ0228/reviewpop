@@ -4,7 +4,7 @@ interface CampaignAppliedCardProps {
   announcementStatus: string;
 }
 
-export default function CampaignAppliedCard({ announcementStatus }: CampaignAppliedCardProps) {
+export function CampaignAppliedCard({ announcementStatus }: CampaignAppliedCardProps) {
   const handleCancelApplication = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
