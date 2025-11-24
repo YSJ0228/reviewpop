@@ -12,6 +12,7 @@
 
   width: 100%;
   height: 100%;
+  aspect-ratio: 1;
   overflow: hidden;
 
   cursor: pointer;
@@ -25,12 +26,24 @@
   &:active {
     transform: scale(0.98);
   }
+
+  &--empty {
+    background-color: #e7e7e7;
+    cursor: default;
+    pointer-events: none;
+
+    &:active {
+      transform: none;
+    }
+  }
 }
 
 .Image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .ViewAllButton {

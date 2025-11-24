@@ -36,7 +36,6 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const prevIsOpenRef = useRef(isOpen);
 
-  // ESC 키 이벤트 처리
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -46,7 +45,6 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
 
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown);
-      // 스크롤 방지
       document.body.style.overflow = 'hidden';
     }
 
@@ -56,11 +54,9 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
     };
   }, [isOpen, onClose]);
 
-  // 모달이 닫혔다가 다시 열릴 때 currentSlide를 initialIndex로 초기화
-  // 모달이 열릴 때 즉시 카운터를 표시하기 위해 필요
+  // 모달이 다시 열릴 때 currentSlide를 initialIndex로 초기화 (카운터 즉시 표시)
   useEffect(() => {
     if (isOpen && !prevIsOpenRef.current) {
-      // 모달이 열릴 때만 초기화하므로 성능 영향 최소화
       setCurrentSlide(initialIndex);
     }
     prevIsOpenRef.current = isOpen;
@@ -74,7 +70,6 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
     }
   }, [swiperInstance, initialIndex, isOpen]);
 
-  // 슬라이드 변경 핸들러
   const handleSlideChange = (swiper: SwiperType) => {
     setCurrentSlide(swiper.activeIndex);
   };
@@ -83,23 +78,18 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
 
   return (
     <div className={styles.ImageViewer}>
-      {/* 배경 오버레이 */}
       <div className={styles.Overlay} onClick={onClose} />
 
-      {/* 헤더 */}
       <div className={styles.Header}>
-        {/* 이미지 카운터 */}
         <div className={styles.Counter}>
           {currentSlide + 1} / {images.length}
         </div>
 
-        {/* 닫기 버튼 */}
         <button className={styles.CloseButton} onClick={onClose} aria-label="닫기">
           ✕
         </button>
       </div>
 
-      {/* 이미지 컨테이너 */}
       <div className={styles.ImageContainer}>
         <Swiper
           modules={[Zoom, Navigation]}
