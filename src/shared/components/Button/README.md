@@ -62,9 +62,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 크기 규칙:
 
-- **small**: 32px 높이, 14px 폰트
-- **medium**: 44px 높이, 16px 폰트 (기본)
-- **large**: 52px 높이, 18px 폰트
+- **small**: 40px 높이, 14px 폰트, 8px border-radius
+- **medium**: 50px 높이, 16px 폰트 (기본)
+- **large**: 60px 높이, 18px 폰트
 
 `fullWidth`를 사용하면 버튼이 부모 요소 너비를 모두 차지합니다.
 
