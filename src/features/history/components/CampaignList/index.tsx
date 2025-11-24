@@ -40,16 +40,9 @@ export function CampaignList({ status }: MyCampaignListProps) {
     );
   }
 
+  // 빈 목록인 경우 null 반환 (EmptyState는 CampaignTabs에서 처리)
   if (filteredCampaigns.length === 0) {
-    return (
-      <div
-        className={styles['CampaignList--Empty']}
-        role="status"
-        aria-label={`${STATUS_LABELS[status]} 상태의 체험이 없습니다`}
-      >
-        <p>해당 상태의 체험이 없습니다.</p>
-      </div>
-    );
+    return null;
   }
 
   return (

@@ -49,6 +49,20 @@ export const STATUS_VISIT: Record<MyCampaignScheduleStatus, string> = {
   scheduled: '방문 예정',
 };
 
+/**
+ * MyCampaignStatus → EmptyState variant 매핑
+ * rejected는 제외 (EmptyState 미표시)
+ */
+export const STATUS_EMPTY_MAP: Record<
+  Exclude<MyCampaignStatus, 'rejected'>,
+  'no-applied' | 'no-selected' | 'no-registered' | 'no-completed'
+> = {
+  applied: 'no-applied',
+  selected: 'no-selected',
+  registered: 'no-registered',
+  completed: 'no-completed',
+} as const;
+
 export const STATUS_REVIEW: Record<MyCampaignReviewStatus, string> = {
   visited: '체험 완료',
   notReviewed: '후기 미등록',
