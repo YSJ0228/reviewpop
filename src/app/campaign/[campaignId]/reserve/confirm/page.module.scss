@@ -5,9 +5,6 @@
 
   min-height: 100vh;
   @include flex($direction: column, $align: center);
-
-  // TODO: 실제 디자인에 맞게 스타일 수정
-
   &__Loading,
   &__Error {
     @include flex($direction: column, $align: center, $justify: center);

@@ -11,34 +11,46 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
 
   useEffect(() => {
     setReservationData(mockReservationData);
-  }, [reservationData, campaignId, router]);
+  }, [reservationData, campaignId, router, setReservationData]);
 
   if (!reservationData) return null;
 
   return (
     <div className={styles.ReserveConfirm}>
       <div className={styles.ReserveConfirm__Info}>
-        <h3>배송지 정보</h3>
-        <p>
-          <strong>받는 분:</strong> {reservationData.bookerName}
-        </p>
-        <p>
-          <strong>연락처:</strong> {reservationData.bookerPhone}
-        </p>
-        <p>
-          <strong>주소:</strong> {reservationData.address}
-        </p>
-        <p>
-          <strong>방문 인원:</strong> {reservationData.visitorCounter}
-        </p>
-        <p>
-          <strong>방문 날짜:</strong> {reservationData.visitDate}
-        </p>
-        <p>
-          <strong>방문 시간:</strong> {reservationData.visitTime}
-        </p>
+        <div className={styles.ReserveConfirm__Info__Title}>
+          <img
+            src={reservationData.thumbnailUrl}
+            alt="예약한 체험 이미지"
+            width={150}
+            height={150}
+          />
+          <div className={styles.ReserveConfirm__Info__Title__Text}>
+            <h3>{reservationData.brand}</h3>
+            <p>{reservationData.providedItem}</p>
+          </div>
+        </div>
+        <div className={styles.ReserveConfirm__Info__Address}>
+          <span>주소</span>
+          <p>{reservationData.address}</p>
+          <p>{reservationData.bookerPhone}</p>
+          <button>네이버 블로그</button>
+        </div>
+        <div className={styles.ReserveConfirm__Info__Booker}>
+          <span>예약자 정보</span>
+          <p>{reservationData.bookerName}</p>
+        </div>
+        <div className={styles.ReserveConfirm__Info__Visitor}>
+          <span>방문 인원</span>
+          <p>{reservationData.visitorCounter}</p>
+        </div>
+        <div className={styles.ReserveConfirm__Info__Date}>
+          <span>날짜</span>
+          <p>{reservationData.visitDate}</p>
+          <p>{reservationData.visitTime}</p>
+        </div>
       </div>
-      <div>
+      <div className={styles.ReserveConfirm__Precautions}>
         <h3>예약 유의 사항</h3>
         {reservationData.precautions.map((precaution, index) => (
           <p key={index}>{precaution}</p>

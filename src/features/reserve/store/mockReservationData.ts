@@ -11,6 +11,7 @@ export const mockReservationData: ReservationData = {
   campaignId: '3',
   brand: '삼성전자',
   providedItem: '무선 이어폰 1세트 + 충전 케이스 + 사이즈별 이어팁',
+  thumbnailUrl: 'https://picsum.photos/seed/campaign3/800/600',
 
   // --- 예약자가 입력했다고 가정한 값 ---
   userId: 'USR-7001', // 가상의 사용자 ID

@@ -26,7 +26,9 @@ export interface ReservationData {
   campaignId: string;
   /** 사용자 ID */
   userId: string;
-  /** 브랜드명 */
+  /** 예약한 체험 이미지 URL */
+  thumbnailUrl: string;
+  /** 예약한 체험 브랜드명 */
   brand: string;
   /** 제공 상품 */
   providedItem: string;
