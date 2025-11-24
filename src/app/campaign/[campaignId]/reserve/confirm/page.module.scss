@@ -1,11 +1,24 @@
 @use '@shared/styles/mixins' as *;
 
 .ReserveConfirmPage {
-  @include padding($y: 20, $x: 16);
+  @include padding($x: 16);
 
   min-height: 100vh;
 
   // TODO: 실제 디자인에 맞게 스타일 수정
+
+  &__Loading,
+  &__Error {
+    @include flex($direction: column, $align: center, $justify: center);
+    min-height: 400px;
+    @include padding($y: 40, $x: 20);
+    text-align: center;
+
+    p {
+      font-size: 16px;
+      color: var(--color-gray-600);
+    }
+  }
 }
 
 .Placeholder {
