@@ -15,6 +15,7 @@ export { ImageViewer, ImageGallery } from './ImageViewer';
 export { LoadingSpinner } from './LoadingSpinner';
 export { ToastProvider, toast, useToast } from './Toast';
 export { Modal } from './Modal';
+export { EmptyState } from './EmptyState';
 
 // Types
 export type { ButtonProps } from './Button/types';
