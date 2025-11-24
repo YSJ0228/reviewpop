@@ -45,7 +45,11 @@
 }
 
 .PageHeader__Title {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 112px);
+
   font-size: 18px;
   font-weight: 600;
   color: var(--color-gray-900);
