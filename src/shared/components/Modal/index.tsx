@@ -1,9 +1,10 @@
+import { cloneElement, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal as MantineModal } from '@mantine/core';
 import { Button, LoadingSpinner } from '@shared/components';
-import { ModalProps, VARIANT_MAP, MODAL_TEXTS_PRESET } from './types';
+import { ModalProps } from './types';
+import { VARIANT_MAP, MODAL_TEXTS_PRESET } from './constants';
 import styles from './style.module.scss';
-import { cloneElement, useState } from 'react';
 
 export function Modal({ texts, variant = 'confirm', children, onConfirm }: ModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
@@ -38,7 +39,6 @@ export function Modal({ texts, variant = 'confirm', children, onConfirm }: Modal
     <>
       <MantineModal
         opened={opened}
-        // @ts-expect-error - Mantine Modal v8의 타입 정의 문제로 인해 onClose가 타입에 포함되지 않았지만 실제로는 필수 prop입니다
         onClose={close}
         withCloseButton={false}
         centered
@@ -58,6 +58,7 @@ export function Modal({ texts, variant = 'confirm', children, onConfirm }: Modal
             onClick={handleConfirm}
             variant={buttonVariant}
             disabled={isLoading}
+            size="medium"
           >
             {isLoading ? <LoadingSpinner size="small" color="white" /> : modalTexts.confirmButton}
           </Button>
