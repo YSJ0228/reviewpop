@@ -6,6 +6,9 @@ import { HISTORY_MESSAGES } from '@features/history/constants';
 import type { CampaignSelectedCardProps } from './types';
 
 import styles from './style.module.scss';
+import { BottomSheet } from '@shared/components/BottomSheet';
+
+import { useDisclosure } from '@mantine/hooks';
 
 /**
  * 선정된 체험 카드의 액션 영역 컴포넌트
@@ -13,19 +16,21 @@ import styles from './style.module.scss';
  * @param onReservationClick - 예약 날짜 설정 버튼 클릭 핸들러
  * @param onReviewMissionClick - 리뷰 미션 버튼 클릭 핸들러
  */
-export function CampaignSelectedCard({
-  visitStatus,
-  onReservationClick,
-  onReviewMissionClick,
-}: CampaignSelectedCardProps) {
+export function CampaignSelectedCard({ visitStatus }: CampaignSelectedCardProps) {
+  const [opened, { open, close }] = useDisclosure(false);
+
   // TODO: 방문 날짜 설정 버튼 클릭 핸들러
-  const handleReservationClick = () => {
-    onReservationClick?.();
+  const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    open();
   };
 
   // TODO: 리뷰 미션 버튼 클릭 핸들러
-  const handleReviewMissionClick = () => {
-    onReviewMissionClick?.();
+  const handleReviewMissionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    open();
   };
 
   // 방문 전 상태: 예약 날짜 설정 버튼 + 경고 메시지
@@ -50,11 +55,16 @@ export function CampaignSelectedCard({
   // 방문 예정 상태: 리뷰 미션 버튼
   if (visitStatus === 'scheduled') {
     return (
-      <Button variant="basic" fullWidth radius={8} onClick={handleReviewMissionClick}>
-        <span className={styles.CampaignSelectedCard__BasicText}>
-          {HISTORY_MESSAGES.REVIEW_MISSION}
-        </span>
-      </Button>
+      <>
+        <Button variant="basic" fullWidth radius={8} onClick={handleReviewMissionClick}>
+          <span className={styles.CampaignSelectedCard__BasicText}>
+            {HISTORY_MESSAGES.REVIEW_MISSION}
+          </span>
+        </Button>
+        <BottomSheet opened={opened} onClose={close} title="설정" titleSize={22} height={500}>
+          <p>여기에 원하는 내용을 넣으세요.</p>
+        </BottomSheet>
+      </>
     );
   }
 
