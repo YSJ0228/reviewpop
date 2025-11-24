@@ -2,8 +2,7 @@
 
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
 
-import { STATUS_LABELS, STATUS_EMPTY_MAP } from '@entities/history/types/myCampaign.types';
-import { EmptyState } from '@shared/components';
+import { STATUS_LABELS } from '@entities/history/types/myCampaign.types';
 
 import { CampaignCard } from '../CampaignCard';
 
@@ -41,12 +40,9 @@ export function CampaignList({ status }: MyCampaignListProps) {
     );
   }
 
+  // 빈 목록인 경우 null 반환 (EmptyState는 CampaignTabs에서 처리)
   if (filteredCampaigns.length === 0) {
-    if (status === 'rejected') {
-      return null;
-    }
-
-    return <EmptyState variant={STATUS_EMPTY_MAP[status]} />;
+    return null;
   }
 
   return (

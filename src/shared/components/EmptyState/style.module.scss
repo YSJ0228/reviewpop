@@ -17,8 +17,8 @@
   }
 
   &--WithButton {
-    position: absolute;
-    top: 25vh;
+    min-height: 400px;
+    @include flex($direction: column, $align: center, $justify: center);
     .EmptyState__Description {
       @include margin($bottom: 16);
       @include font($weight: 600);
