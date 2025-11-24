@@ -35,7 +35,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           <div className={styles.CampaignCard__Header}>
             <span className={styles.CampaignCard__Brand}>{campaign.brand}</span>
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
-            <p className={styles.CampaignCard__Items}>{campaign.providedItems.join(' + ')}</p>
+            <p className={styles.CampaignCard__Items}>{campaign.providedItems}</p>
           </div>
           {campaign.status === 'in_progress' && (
             <div className={styles.CampaignCard__Content__Active}>

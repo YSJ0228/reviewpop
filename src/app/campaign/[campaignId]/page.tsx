@@ -114,13 +114,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       {/* 제공 내역 */}
       <section className={styles.Page__Section}>
         <h2 className={styles.Page__SectionTitle}>제공 내역</h2>
-        <ul className={styles.Page__List}>
-          {campaign.providedItems.map((item, index) => (
-            <li key={index} className={styles.Page__ListItem}>
-              {item}
-            </li>
-          ))}
-        </ul>
+        <p className={styles.Page__ListItem}>{campaign.providedItems}</p>
       </section>
 
       {/* 배송 정보 */}
