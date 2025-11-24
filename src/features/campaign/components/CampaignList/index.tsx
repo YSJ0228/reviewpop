@@ -2,13 +2,14 @@
 
 import { useCampaigns, filterCampaignsByStatus } from '@entities/campaign/hooks/useCampaigns';
 import { CAMPAIGN_STATUS_LABELS } from '@entities/campaign/types/campaign.types';
-import { now } from '@shared/lib/date';
+import { diff, now } from '@shared/lib/date';
 
 import { CampaignCard } from '../CampaignCard';
 
 import type { CampaignListProps } from './types';
 
 import styles from './style.module.scss';
+import dayjs from 'dayjs';
 
 export function CampaignList({ status }: CampaignListProps) {
   const { data: campaigns, isLoading, error } = useCampaigns();
@@ -42,6 +43,7 @@ export function CampaignList({ status }: CampaignListProps) {
     );
   }
 
+  // TODO: 이후 EmptyState로 수정
   if (filteredCampaigns.length === 0) {
     return (
       <div className={styles['CampaignList--Empty']} role="status" aria-label={`체험이 없습니다`}>
@@ -57,14 +59,34 @@ export function CampaignList({ status }: CampaignListProps) {
       aria-label={`${statusTitle} 체험 목록`}
       aria-busy={isLoading}
     >
-      {filteredCampaigns
-        .filter((campaign) => {
-          if (status !== 'recruiting') return true;
-          return campaign.schedule.applicationSchedule[1] > thisTime.toISOString();
-        })
-        .map((campaign) => (
-          <CampaignCard key={campaign.id} campaign={campaign} />
-        ))}
+      {status === 'before_recruiting' &&
+        filteredCampaigns
+          .sort((a, b) =>
+            diff(a.schedule.applicationSchedule[0], b.schedule.applicationSchedule[0]),
+          )
+          .map((campaign) => <CampaignCard key={campaign.id} campaign={campaign} />)}
+      {status === 'completed' &&
+        filteredCampaigns
+          .sort((a, b) =>
+            diff(
+              b.schedule.winnerAnnouncementSchedule[1],
+              a.schedule.winnerAnnouncementSchedule[1],
+            ),
+          )
+          .map((campaign) => <CampaignCard key={campaign.id} campaign={campaign} />)}
+      {status === 'recruiting' &&
+        filteredCampaigns
+          .filter((campaign) => {
+            return campaign.schedule.applicationSchedule[1] > thisTime.toISOString();
+          })
+          .sort((a, b) => {
+            return (
+              diff(a.schedule.applicationSchedule[1], b.schedule.applicationSchedule[1]) ||
+              a.currentRecruitment - b.currentRecruitment ||
+              b.maxRecruitment - a.maxRecruitment
+            );
+          })
+          .map((campaign) => <CampaignCard key={campaign.id} campaign={campaign} />)}
     </div>
   );
 }
