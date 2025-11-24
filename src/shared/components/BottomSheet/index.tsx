@@ -33,11 +33,11 @@ export function BottomSheet({
       }}
     >
       {title && (
-        <h1 className={styles.BottomSheet__Title} style={{ fontSize: `${titleSize}px` }}>
+        <h2 className={styles.BottomSheet__Title} style={{ fontSize: `${titleSize}px` }}>
           {title}
-        </h1>
+        </h2>
       )}
-      <div className={styles.BottomSheet__Body}>{children}</div>
+      <div>{children}</div>
     </Drawer>
   );
 }

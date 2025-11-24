@@ -5,7 +5,6 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 
 import styles from './page.module.scss';
-import { BottomSheet } from '@shared/components/BottomSheet';
 
 /**
  * 체험 신청 페이지
@@ -23,14 +22,7 @@ export default function CampaignApplyPage({ params }: { params: { campaignId: st
   return (
     <main className={styles.CampaignApplyPage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
-          {/* TODO: ApplyForm 컴포넌트 추가 */}
-          <BottomSheet
-            onClick={() => {}}
-            onClose={() => {}}
-            title="블로그 아이디를 입력해주세요"
-          ></BottomSheet>
-        </Suspense>
+        <Suspense fallback={<div>로딩 중...</div>}>{/* TODO: ApplyForm 컴포넌트 추가 */}</Suspense>
       </ErrorBoundary>
     </main>
   );
