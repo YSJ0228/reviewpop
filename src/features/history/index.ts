@@ -1,7 +1,7 @@
 /**
  * History Feature Public API
  *
- * 캠페인 히스토리 관련 기능을 외부에 노출하는 Public API입니다.
+ * 체험 히스토리 관련 기능을 외부에 노출하는 Public API입니다.
  */
 
 // Components

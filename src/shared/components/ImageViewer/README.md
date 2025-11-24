@@ -147,6 +147,6 @@ const [currentSlide, setCurrentSlide] = useState(initialIndex);
 
 ## 🔗 사용 위치
 
-- 캠페인 이미지 목록 (`/campaign/[id]/images`)
-- 캠페인 상세 페이지 (`/campaign/[id]`)
+- 체험 이미지 목록 (`/campaign/[id]/images`)
+- 체험 상세 페이지 (`/campaign/[id]`)
 - 후기 이미지 (선택적)

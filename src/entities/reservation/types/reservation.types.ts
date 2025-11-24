@@ -20,7 +20,7 @@ export interface Reservation {
   id: string;
   /** 사용자 ID */
   userId: string;
-  /** 캠페인 ID */
+  /** 체험 ID */
   campaignId: string;
   /** 신청 ID (선정된 신청과 연결) */
   applicationId: string;
@@ -69,7 +69,7 @@ export interface Reservation {
  * 예약 생성 요청 데이터
  */
 export interface CreateReservationRequest {
-  /** 캠페인 ID */
+  /** 체험 ID */
   campaignId: string;
   /** 수령인 이름 */
   recipientName: string;

@@ -10,7 +10,7 @@ import type { User } from '@entities/user/types/user.types';
 export interface Review {
   /** 리뷰 ID */
   id: number;
-  /** 캠페인 ID */
+  /** 체험 ID */
   campaignId: string;
   /** 작성자 ID */
   userId: string;
@@ -34,7 +34,7 @@ export interface Review {
  * 리뷰 작성 요청 데이터
  */
 export interface CreateReviewRequest {
-  /** 캠페인 ID */
+  /** 체험 ID */
   campaignId: string;
   /** 평점 (1-5) */
   rating: number;
@@ -51,7 +51,7 @@ export interface CreateReviewRequest {
  * GET /api/reviews?campaignId=1&rating=5&minRating=4
  */
 export interface ReviewFilterParams extends Record<string, unknown> {
-  /** 특정 캠페인의 리뷰만 필터링 */
+  /** 특정 체험의 리뷰만 필터링 */
   campaignId?: string;
   /** 특정 사용자의 리뷰만 필터링 */
   userId?: string;

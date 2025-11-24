@@ -59,7 +59,7 @@ function Page() {
 ### 메시지 표시
 
 ```typescript
-<LoadingSpinner message="캠페인 목록을 불러오는 중..." />
+<LoadingSpinner message="체험 목록을 불러오는 중..." />
 ```
 
 ## 📝 Props

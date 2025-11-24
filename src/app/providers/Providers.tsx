@@ -14,6 +14,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { MantineProvider } from '@mantine/core';
 
 import { useUserStore } from '@entities/user';
 import { ToastProvider } from '@shared/components/Toast';
@@ -100,18 +101,20 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ToastProvider>
-        {children}
+      <MantineProvider>
+        <ToastProvider>
+          {children}
 
-        {/* React Query Devtools - 개발 환경에서만 표시 */}
-        {env.isDev && (
-          <ReactQueryDevtools
-            initialIsOpen={false}
-            buttonPosition="bottom-right"
-            position="bottom"
-          />
-        )}
-      </ToastProvider>
+          {/* React Query Devtools - 개발 환경에서만 표시 */}
+          {env.isDev && (
+            <ReactQueryDevtools
+              initialIsOpen={false}
+              buttonPosition="bottom-right"
+              position="bottom"
+            />
+          )}
+        </ToastProvider>
+      </MantineProvider>
     </QueryClientProvider>
   );
 }
