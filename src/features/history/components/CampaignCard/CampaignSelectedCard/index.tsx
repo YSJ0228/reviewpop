@@ -20,16 +20,12 @@ export function CampaignSelectedCard({
 }: CampaignSelectedCardProps) {
   // TODO: 방문 날짜 설정 버튼 클릭 핸들러
   const handleReservationClick = () => {
-    return () => {
-      onReservationClick?.();
-    };
+    onReservationClick?.();
   };
 
   // TODO: 리뷰 미션 버튼 클릭 핸들러
   const handleReviewMissionClick = () => {
-    return () => {
-      onReviewMissionClick?.();
-    };
+    onReviewMissionClick?.();
   };
 
   // 방문 전 상태: 예약 날짜 설정 버튼 + 경고 메시지
