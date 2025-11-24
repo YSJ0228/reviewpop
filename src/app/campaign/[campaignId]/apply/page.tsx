@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, use, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
@@ -14,6 +14,9 @@ import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
 import styles from './page.module.scss';
 import { Drawer } from '@mantine/core';
+import { useCampaignDetails } from '@features/campaign';
+import { useDisclosure } from '@mantine/hooks';
+import { BottomSheet } from '@shared/components/BottomSheet';
 
 /**
  * 체험 신청 페이지
@@ -27,13 +30,23 @@ import { Drawer } from '@mantine/core';
  * 4. [ ] 신청 완료 시 /campaign/[id]/apply/complete로 리다이렉트
  * 5. [ ] 에러 처리 (이미 신청한 경우, 마감된 경우 등)
  */
-export default function CampaignApplyPage({ params }: { params: { campaignId: string } }) {
+interface CampaignApplyPageProps {
+  params: Promise<{
+    campaignId: string;
+  }>;
+}
+
+export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
+  const { campaignId } = use(params);
+  const { data: campaign } = useCampaignDetails(campaignId);
+
   const nameInput = useInputValidate('name');
   const phoneInput = useInputValidate('phone');
   const urlInput = useInputValidate('url');
   const [buttonType, setButtonType] = useState<'connect' | 'edit'>('connect');
-  const [isBlogDrawer, setIsBlogDrawer] = useState<boolean>(false);
-  const [isCautionDrawer, setIsCautionDrawer] = useState<boolean>(false);
+
+  const [blogOpened, { open: blogOpen, close: blogClose }] = useDisclosure();
+  const [cautionOpened, { open: cautionOpen, close: cautionClose }] = useDisclosure();
 
   const [confirmMsg, setConfirmMsg] = useState<string>('');
 
@@ -44,16 +57,12 @@ export default function CampaignApplyPage({ params }: { params: { campaignId: st
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: ApplyForm 컴포넌트 추가 */}
           <CampaignApplyCard
-            brand="그라운드 220"
+            brand={campaign?.brand ?? ''}
             size="sm"
-            providedItems={['티셔츠 2개 제작 체험', '하이볼 2잔 무료 체험']}
+            providedItems={campaign?.providedItems ?? ''}
           />
           <div className={styles.CampaignApplyPage__ApplyForm}>
-            <WebButton
-              label="네이버 블로그 주소"
-              buttonType={buttonType}
-              onClick={() => setIsBlogDrawer(true)}
-            />
+            <WebButton label="네이버 블로그 주소" buttonType={buttonType} onClick={blogOpen} />
             <LabeledInput
               label="이름"
               placeholder="이름 입력"
@@ -78,59 +87,35 @@ export default function CampaignApplyPage({ params }: { params: { campaignId: st
             />
           </div>
           <div className={styles.CampaignApplyPage__ButtonBar}>
-            <Button variant="primary" onClick={() => setIsCautionDrawer(true)} fullWidth>
+            <Button variant="primary" onClick={cautionOpen} fullWidth>
               다음
             </Button>
           </div>
-          {isBlogDrawer && (
-            <Drawer
-              opened
-              position="bottom"
-              radius="xl"
-              onClose={() => setIsBlogDrawer(false)}
-              styles={{
-                content: {
-                  maxWidth: 448,
-                  width: '100%',
-                  margin: '0 auto',
-                },
-              }}
-              title="블로그 아이디를 입력해주세요"
-            >
-              <LabeledInput
-                label="블로그 주소"
-                placeholder="네이버 블로그 아이디 입력"
-                value={urlInput.value}
-                setValue={urlInput.setValue}
-                errorMsg={urlInput.error}
-                showButton
-                showPreview
-                confirmMsg={confirmMsg}
-                onClick={() => setConfirmMsg('블로그 주소가 확인되었어요')}
-              />
-              <div className={styles.CampaignApplyPage__ButtonBar}>
-                <Button variant="primary" onClick={() => setIsBlogDrawer(true)} fullWidth>
-                  저장
-                </Button>
-              </div>
-            </Drawer>
-          )}
-          {isCautionDrawer && (
-            <Drawer
-              opened
-              position="bottom"
-              onClose={() => setIsCautionDrawer(false)}
-              radius="xl"
-              styles={{
-                content: {
-                  maxWidth: 448,
-                  width: '100%',
-                  margin: '0 auto',
-                },
-              }}
-              title="체험단 참여 시 주의사항을 확인해주세요"
-            ></Drawer>
-          )}
+
+          <BottomSheet opened={blogOpened} onClose={blogClose} title="블로그 아이디를 입력해주세요">
+            <LabeledInput
+              label="블로그 주소"
+              placeholder="네이버 블로그 아이디 입력"
+              value={urlInput.value}
+              setValue={urlInput.setValue}
+              errorMsg={urlInput.error}
+              showButton
+              showPreview
+              confirmMsg={confirmMsg}
+              onClick={() => setConfirmMsg('블로그 주소가 확인되었어요')}
+            />
+            <div className={styles.CampaignApplyPage__ButtonBar}>
+              <Button variant="primary" onClick={blogClose} fullWidth>
+                저장
+              </Button>
+            </div>
+          </BottomSheet>
+
+          <BottomSheet
+            opened={cautionOpened}
+            onClose={cautionClose}
+            title="체험단 참여 시 주의사항을 확인해주세요"
+          ></BottomSheet>
         </Suspense>
       </ErrorBoundary>
     </main>
