@@ -8,7 +8,7 @@ import { CampaignTabProps } from './types';
 
 import styles from './style.module.scss';
 
-export function CampaignTab({ onTabClick, selectedTab }: CampaignTabProps) {
+export function CampaignTab({ onTabClick, selectedTab, campaignExists }: CampaignTabProps) {
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const ICONS: Record<CampaignTabKey, string> = {
     recruiting: '/images/icons/IcoNotice.svg',
@@ -36,20 +36,22 @@ export function CampaignTab({ onTabClick, selectedTab }: CampaignTabProps) {
       {Object.entries(CampaignTabs).map(([status, label]) => {
         const key = status as CampaignTabKey;
 
-        return (
-          <button
-            className={styles.CampaignTab}
-            data-selected={status === selectedTab}
-            key={key}
-            onClick={() => handleSelect(key)}
-            ref={(el) => {
-              tabRefs.current[key] = el;
-            }}
-          >
-            <Image src={ICONS[key]} width={20} height={20} alt={`${label} 아이콘`} />
-            <span>{label}</span>
-          </button>
-        );
+        if (campaignExists[key]) {
+          return (
+            <button
+              className={styles.CampaignTab}
+              data-selected={status === selectedTab}
+              key={key}
+              onClick={() => handleSelect(key)}
+              ref={(el) => {
+                tabRefs.current[key] = el;
+              }}
+            >
+              <Image src={ICONS[key]} width={20} height={20} alt={`${label} 아이콘`} />
+              <span>{label}</span>
+            </button>
+          );
+        }
       })}
     </div>
   );
