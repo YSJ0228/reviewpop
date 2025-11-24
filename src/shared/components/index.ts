@@ -11,7 +11,7 @@ export { ErrorBoundary } from './ErrorBoundary';
 export { PageHeader } from './PageHeader';
 export { BottomNavigation } from './BottomNavigation';
 export { Banner } from './Banner';
-export { ImageViewer } from './ImageViewer';
+export { ImageViewer, ImageGallery } from './ImageViewer';
 export { LoadingSpinner } from './LoadingSpinner';
 export { ToastProvider, toast, useToast } from './Toast';
 
@@ -21,3 +21,4 @@ export type { InputProps } from './Input/types';
 export type { ErrorBoundaryProps } from './ErrorBoundary/types';
 export type { PageHeaderProps } from './PageHeader/types';
 export type { IToastOptions, TToastInput } from './Toast/types';
+export type { ImageGalleryProps } from './ImageViewer';
