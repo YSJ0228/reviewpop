@@ -104,7 +104,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign9/400/300',
     status: 'registered',
     reviewStatus: 'visited',
-    recruitmentSchedule: ['2025-11-12', '14:00'],
+    appliedAt: ['2025-11-12', '14:00'],
     visitPeriod: ['2025-11-8', '2025-11-23'],
   },
   {
@@ -114,7 +114,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign10/400/300',
     status: 'registered',
     reviewStatus: 'notReviewed',
-    recruitmentSchedule: ['2025-10-28', '16:00'],
+    appliedAt: ['2025-10-28', '16:00'],
     visitPeriod: ['2025-10-20', '2025-11-05'],
   },
   {
@@ -124,7 +124,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign11/400/300',
     status: 'registered',
     reviewStatus: 'reviewPending',
-    recruitmentSchedule: ['2025-11-15', '11:00'],
+    appliedAt: ['2025-11-15', '11:00'],
   },
   {
     id: '14',
@@ -133,7 +133,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     imageUrl: 'https://picsum.photos/seed/campaign12/400/300',
     status: 'registered',
     reviewStatus: 'requiredForEditing',
-    recruitmentSchedule: ['2025-11-18', '09:00'],
+    appliedAt: ['2025-11-18', '09:00'],
   },
 
   // 종료 상태 (3개)
@@ -143,7 +143,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     providedItems: '초콜릿 세트 + 초콜릿 만들기 체험',
     imageUrl: 'https://picsum.photos/seed/campaign13/400/300',
     status: 'completed',
-    recruitmentSchedule: ['2025-09-10', '17:00'],
+    appliedAt: ['2025-09-10', '17:00'],
   },
   {
     id: '16',
@@ -151,7 +151,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     providedItems: '신제품 향수 세트 + 맞춤형 향수 제작 체험',
     imageUrl: 'https://picsum.photos/seed/campaign14/400/300',
     status: 'completed',
-    recruitmentSchedule: ['2025-10-20', '12:00'],
+    appliedAt: ['2025-10-20', '12:00'],
   },
   {
     id: '17',
@@ -159,7 +159,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     providedItems: '한정판 피규어 + 굿즈 세트',
     imageUrl: 'https://picsum.photos/seed/campaign15/400/300',
     status: 'completed',
-    recruitmentSchedule: ['2025-11-15', '10:00'],
+    appliedAt: ['2025-11-15', '10:00'],
   },
 ];
 

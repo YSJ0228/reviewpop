@@ -5,7 +5,7 @@ import { filterCampaignsByStatus, useMyCampaigns } from '@entities/history/hooks
 import { CampaignCard } from '@features/history/components/CampaignCard';
 
 import styles from './style.module.scss';
-import { LoadingSpinner } from '@shared/components';
+import { EmptyState, LoadingSpinner } from '@shared/components';
 
 export function RejectedList() {
   const { data: campaigns, isLoading, error } = useMyCampaigns();
@@ -35,7 +35,7 @@ export function RejectedList() {
     return (
       <div role="status" aria-label="미선정 체험이 없습니다.">
         {/* TODO: 빈 상태 UI 추가예정 */}
-        <p>미선정 캠페인이 없습니다.</p>
+        <EmptyState variant="no-selected" />
       </div>
     );
   }

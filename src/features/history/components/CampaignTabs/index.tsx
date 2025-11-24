@@ -7,9 +7,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { CampaignList } from '../CampaignList';
-import { useMyCampaigns } from '@entities/history/hooks/useMyCampaigns';
-import { TAB_CONFIG } from '@entities/history/types/myCampaign.types';
+import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
+import { TAB_CONFIG, STATUS_EMPTY_MAP } from '@entities/history/types/myCampaign.types';
 import type { TabKey } from '@entities/history/types/myCampaign.types';
+import { EmptyState } from '@shared/components';
 
 import { IconChevronRight } from '@pop-ui/foundation';
 
@@ -17,6 +18,7 @@ import styles from './style.module.scss';
 
 // Swiper CSS 임포트
 import 'swiper/css';
+import { ROUTES } from '@shared/config/routes';
 
 export function CampaignTabs() {
   const searchParams = useSearchParams();
@@ -160,27 +162,33 @@ export function CampaignTabs() {
         className={styles.CampaignTabs__Swiper}
         allowTouchMove={true}
       >
-        {TAB_CONFIG.map((tab) => (
-          <SwiperSlide key={tab.key} className={styles.CampaignTabs__Slide}>
-            <div
-              role="tabpanel"
-              aria-labelledby={`tab-${tab.key}`}
-              id={`panel-${tab.key}`}
-              tabIndex={0}
-              aria-label={tab.label}
-            >
-              <CampaignList status={tab.key} />
-              <div className={styles.CampaignTabs__LinkContainer}>
-                {tab.key === 'applied' && rejectedCount > 0 && (
-                  <Link href="/campaign/rejected" className={styles.CampaignTabs__RejectedLink}>
-                    {'미선정 체험 내역'}
-                    <IconChevronRight size={16} color="var(--color-gray-800)" />
-                  </Link>
-                )}
+        {TAB_CONFIG.map((tab) => {
+          const filteredCampaigns = filterCampaignsByStatus(campaigns, tab.key);
+          const isEmpty = filteredCampaigns.length === 0;
+
+          return (
+            <SwiperSlide key={tab.key} className={styles.CampaignTabs__Slide}>
+              <div
+                role="tabpanel"
+                aria-labelledby={`tab-${tab.key}`}
+                id={`panel-${tab.key}`}
+                tabIndex={0}
+                aria-label={tab.label}
+              >
+                <CampaignList status={tab.key} />
+                <div className={styles.CampaignTabs__LinkContainer}>
+                  {tab.key === 'applied' && rejectedCount > 0 && (
+                    <Link href={ROUTES.MY_REJECTED} className={styles.CampaignTabs__RejectedLink}>
+                      {'미선정 체험 내역'}
+                      <IconChevronRight size={16} color="var(--color-gray-800)" />
+                    </Link>
+                  )}
+                </div>
+                {isEmpty && <EmptyState variant={STATUS_EMPTY_MAP[tab.key]} />}
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );
