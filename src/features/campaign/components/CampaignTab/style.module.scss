@@ -1,0 +1,49 @@
+@use '@shared/styles/mixins' as *;
+
+.CampaignTab {
+  height: 36px;
+  border-radius: 99px;
+  cursor: pointer;
+  @include padding($y: 0, $x: 12);
+  @include flex($gap: 4, $justify: center, $align: center);
+  @include font($size: 14, $line-height: 150%, $letter-spacing: -0.28);
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &__Wrapper {
+    position: sticky;
+    height: 52px;
+    overflow-x: scroll;
+    background: #fff;
+    top: 48px;
+    z-index: 300;
+    margin-left: -16px;
+    margin-right: -16px;
+    @include padding($y: 8, $x: 16);
+    @include flex($gap: 8, $justify: flex-start, $align: center);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &[data-selected='true'] {
+    background: #eff8ff;
+    border: 1px solid #2e90fa;
+
+    span {
+      color: #2e90fa;
+      @include font($weight: 700);
+    }
+  }
+
+  &[data-selected='false'] {
+    background: #ffffff;
+    border: 1px solid #e7e7e7;
+
+    span {
+      color: #4a4a4a;
+      @include font($weight: 600);
+    }
+  }
+}

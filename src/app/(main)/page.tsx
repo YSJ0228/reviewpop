@@ -1,34 +1,73 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-
-import styles from './page.module.scss';
+import { CampaignTab } from '@features/campaign/components/CampaignTab';
 import { CampaignList } from '@features/campaign';
 
-/**
- * 홈 페이지 (체험 목록)
- * - 하단 탭: O
- * - 전체 체험 목록 + 필터 + 배너
- *
- * TODO:
- * 1. [ ] Banner 컴포넌트 구현 (@shared/components/Banner)
- * 2. [ ] CampaignFilter 컴포넌트 구현 (@features/campaign/components/CampaignFilter)
- * 5. [ ] 필터 기능 구현 (카테고리, 지역, 상태 등)
- * 6. [ ] 무한 스크롤 또는 페이지네이션
- */
+import { CampaignTabKey } from '@entities/campaign/types/campaign.types';
+
+import styles from './page.module.scss';
+
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<CampaignTabKey>('recruiting');
+  const isScrolling = useRef(false);
+  const recruitingRef = useRef<HTMLDivElement>(null);
+  const beforeRecruitingRef = useRef<HTMLDivElement>(null);
+  const completedRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = (status: CampaignTabKey) => {
+    isScrolling.current = true;
+    setActiveTab(status);
+    setTimeout(() => {
+      isScrolling.current = false;
+    }, 500);
+    if (status === 'recruiting')
+      recruitingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (status === 'before_recruiting')
+      beforeRecruitingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (status === 'completed')
+      completedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isScrolling.current) {
+            if (entry.target === recruitingRef.current) setActiveTab('recruiting');
+            if (entry.target === beforeRecruitingRef.current) setActiveTab('before_recruiting');
+            if (entry.target === completedRef.current) setActiveTab('completed');
+          }
+        });
+      },
+      {
+        rootMargin: '-100px 0px -55% 0px',
+        threshold: 0,
+      },
+    );
+
+    if (recruitingRef.current) observer.observe(recruitingRef.current);
+    if (beforeRecruitingRef.current) observer.observe(beforeRecruitingRef.current);
+    if (completedRef.current) observer.observe(completedRef.current);
+  }, []);
+
   return (
     <main className={styles.HomeContainer}>
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
-          {/* TODO: Banner 컴포넌트 추가 */}
-          {/* TODO: CampaignFilter 컴포넌트 추가 */}
+          <CampaignTab selectedTab={activeTab} onTabClick={handleScroll} />
           <div className={styles.ListContainer}>
-            <CampaignList status="in_progress" />
-            <CampaignList status="before_recruiting" />
-            <CampaignList status="closed" />
+            <div ref={recruitingRef} className={styles.ScrollSection}>
+              <CampaignList status="recruiting" />
+            </div>
+            <div ref={beforeRecruitingRef} className={styles.ScrollSection}>
+              <CampaignList status="before_recruiting" />
+            </div>
+            <div ref={completedRef} className={styles.ScrollSection}>
+              <CampaignList status="completed" />
+            </div>
           </div>
         </Suspense>
       </ErrorBoundary>

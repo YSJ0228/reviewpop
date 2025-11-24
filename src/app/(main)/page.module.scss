@@ -1,11 +1,14 @@
 @use '@shared/styles/mixins' as *;
 
 .HomeContainer {
-  @include padding($y: 20, $x: 16);
-
   min-height: 100vh;
+  @include padding($x: 16, $bottom: 32);
 }
 
 .ListContainer {
   @include flex($direction: column, $gap: 32);
+}
+
+.ScrollSection {
+  scroll-margin-top: calc(48px + 52px);
 }
