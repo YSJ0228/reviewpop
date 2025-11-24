@@ -5,6 +5,7 @@ import { Suspense, use } from 'react';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { PageHeader } from '@shared/components';
 import { useCampaignDetails } from '@features/campaign';
+import { ReserveConfirm } from '@features/reserve/components/ReserveConfirm';
 
 import styles from './page.module.scss';
 
@@ -27,7 +28,6 @@ interface ReserveConfirmPageProps {
 
 export default function ReserveConfirmPage({ params }: ReserveConfirmPageProps) {
   const { campaignId } = use(params);
-
   const { data: campaign, isLoading, error } = useCampaignDetails(campaignId);
 
   if (isLoading) {
@@ -57,6 +57,7 @@ export default function ReserveConfirmPage({ params }: ReserveConfirmPageProps) 
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
           <PageHeader showBackButton title={'예약 정보 확인'} />
+          <ReserveConfirm campaignId={campaignId} />
         </Suspense>
       </ErrorBoundary>
     </main>

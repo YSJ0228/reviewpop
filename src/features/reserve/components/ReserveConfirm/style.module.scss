@@ -1,0 +1,14 @@
+@use '@shared/styles/mixins' as *;
+
+.ReserveConfirm {
+  @include flex($direction: column, $align: flex-start, $gap: 24px);
+  width: 328px;
+
+  &__Info {
+    @include flex($direction: column, $align: flex-start, $gap: 16px);
+    @include padding($all: 16px);
+    align-self: stretch;
+    border-radius: 12px;
+    border: 1px solid var(--color-gray-100);
+  }
+}

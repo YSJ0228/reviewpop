@@ -4,6 +4,7 @@
   @include padding($x: 16);
 
   min-height: 100vh;
+  @include flex($direction: column, $align: center);
 
   // TODO: 실제 디자인에 맞게 스타일 수정
 
