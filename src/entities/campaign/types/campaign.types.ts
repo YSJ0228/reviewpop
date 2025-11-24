@@ -61,6 +61,15 @@ export type ReviewPlatform = 'naver_blog' | 'other';
  */
 export type DateRange = [string, string];
 
+/**
+ * 지역명
+ * 시/도, 시/군/구
+ */
+interface Location {
+  sido: string;
+  sigungu: string;
+}
+
 export interface CampaignSchedule {
   applicationSchedule: DateRange;
   winnerAnnouncementSchedule: DateRange;
@@ -93,8 +102,8 @@ export interface Campaign {
   schedule: CampaignSchedule;
 
   // 지역 (선택 사항)
-  /** 지역 제한 (예: "서울", "전국") */
-  location?: string;
+  /** 지역 제한, {시} {구} (예: "서울 강남구", 기본값: "전국") */
+  location?: Location;
   /** 상세 주소 (방문형 체험의 경우) */
   address?: string;
 
