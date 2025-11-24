@@ -18,7 +18,7 @@ export interface MyCampaign extends MyCampaignInfo {
   applicationDate?: string; // 신청일
   announcementDate?: string; // 선정 발표일
   deadline?: string; // 체험 예약 마감일
-  recruitmentSchedule?: [string, string]; // 방문 날짜와 시간
+  recruitmentSchedule?: [string, string]; // 모집 기간 (시작일, 종료일)
   maxRecruitment?: number; // 선정하는 인원
   appliedAt?: [string, string]; // 체험 예약일과 시간
   visitStatus?: MyCampaignScheduleStatus; // 방문 상태
