@@ -8,15 +8,15 @@ import type { ModalVariant } from './constants';
  * MantineModalProps를 상속받아 Mantine Modal의 모든 속성을 사용할 수 있습니다.
  */
 export interface ModalProps extends Omit<MantineModalProps, 'onClose' | 'opened'> {
-  /** 모달을 열기 위한 트리거 요소 (onClick 핸들러가 있을 수 있음) */
-  children: ReactElement<{ onClick?: (e: MouseEvent) => void }>;
+  /** 모달을 열기 위한 트리거 요소 */
+  trigger: ReactElement;
+  /** 확인 버튼 클릭 시 실행될 핸들러 */
+  onConfirm: () => void | Promise<void>;
   /** 모달 유형과 버튼 스타일을 함께 결정 */
   variant?: ModalVariant;
   // confirm : 신청, warning : 탈퇴, outline : 예약/신청 취소
   /** 프리셋을 부분적으로 덮어쓸 ModalContentTexts */
   texts?: Partial<ModalContentTexts>;
-  /** 확인 버튼 클릭 시 실행될 비동기 함수 */
-  onConfirm: () => void;
 }
 
 /**

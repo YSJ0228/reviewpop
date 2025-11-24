@@ -1,4 +1,4 @@
-import { cloneElement, useState } from 'react';
+import { useState, cloneElement } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal as MantineModal } from '@mantine/core';
 import { Button, LoadingSpinner } from '@shared/components';
@@ -6,7 +6,7 @@ import { ModalProps } from './types';
 import { VARIANT_MAP, MODAL_TEXTS_PRESET } from './constants';
 import styles from './style.module.scss';
 
-export function Modal({ texts, variant = 'confirm', children, onConfirm }: ModalProps) {
+export function Modal({ texts, variant = 'confirm', trigger, onConfirm }: ModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,15 +25,6 @@ export function Modal({ texts, variant = 'confirm', children, onConfirm }: Modal
       setIsLoading(false);
     }
   };
-
-  // children에 onClick 이벤트 주입 (기존 onClick 오버라이드)
-  const triggerElement = cloneElement(children, {
-    onClick: (e: React.MouseEvent) => {
-      e.preventDefault?.();
-      e.stopPropagation?.();
-      open();
-    },
-  });
 
   return (
     <>
@@ -65,7 +56,9 @@ export function Modal({ texts, variant = 'confirm', children, onConfirm }: Modal
         </div>
       </MantineModal>
 
-      {triggerElement}
+      {cloneElement(trigger as React.ReactElement<{ onClick?: React.MouseEventHandler }>, {
+        onClick: open,
+      })}
     </>
   );
 }
