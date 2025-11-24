@@ -18,7 +18,6 @@ export function CampaignRejectedCard({
   maxRecruitment,
 }: CampaignRejectedCardProps) {
   if (!recruitmentSchedule) {
-    //TODO: 빈 상태 UI 추가 예정
     return null;
   }
 
