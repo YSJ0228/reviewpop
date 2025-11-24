@@ -62,3 +62,24 @@ export interface ReviewFilterParams extends Record<string, unknown> {
   /** 검색어 (제목, 내용에서 검색) */
   searchQuery?: string;
 }
+
+/**
+ * 블로그 리뷰 데이터
+ */
+export interface BlogReview {
+  id: string;
+  /** 체험 ID */
+  campaignId: string;
+  /** 썸네일 이미지 URL */
+  thumbnail: string;
+  /** 리뷰 제목 */
+  title: string;
+  /** 리뷰 본문 요약 */
+  article: string;
+  /** 블로그 글 링크 */
+  url: string;
+  /** 블로거 닉네임 */
+  author: string;
+  /** 작성일 */
+  date: string;
+}
