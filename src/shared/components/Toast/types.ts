@@ -5,11 +5,6 @@ export interface IToastOptions {
   id?: string;
   icon?: ReactNode;
   autoClose?: number | false;
-  fitContent?: boolean;
 }
 
 export type TToastInput = string | IToastOptions;
-
-export interface ToastProviderProps {
-  children: ReactNode;
-}
