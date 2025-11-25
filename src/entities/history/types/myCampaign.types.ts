@@ -18,7 +18,7 @@ export interface MyCampaign extends MyCampaignInfo {
   applicationDate?: string; // 신청일
   announcementDate?: string; // 선정 발표일
   deadline?: string; // 체험 예약 마감일
-  recruitmentSchedule?: [string, string]; // 방문 날짜와 시간
+  recruitmentSchedule?: [string, string]; // 모집 기간 (시작일, 종료일)
   maxRecruitment?: number; // 선정하는 인원
   appliedAt?: [string, string]; // 체험 예약일과 시간
   visitStatus?: MyCampaignScheduleStatus; // 방문 상태
@@ -48,6 +48,20 @@ export const STATUS_VISIT: Record<MyCampaignScheduleStatus, string> = {
   before: '방문 전',
   scheduled: '방문 예정',
 };
+
+/**
+ * MyCampaignStatus → EmptyState variant 매핑
+ * rejected는 제외 (EmptyState 미표시)
+ */
+export const STATUS_EMPTY_MAP: Record<
+  Exclude<MyCampaignStatus, 'rejected'>,
+  'no-applied' | 'no-selected' | 'no-registered' | 'no-completed'
+> = {
+  applied: 'no-applied',
+  selected: 'no-selected',
+  registered: 'no-registered',
+  completed: 'no-completed',
+} as const;
 
 export const STATUS_REVIEW: Record<MyCampaignReviewStatus, string> = {
   visited: '체험 완료',

@@ -49,6 +49,9 @@ export const ROUTES = {
   /** 회원가입 페이지 */
   SIGNUP: '/signup',
 
+  /** 미선정 체험 내역 페이지 */
+  MY_REJECTED: '/my/rejected',
+
   /** OAuth 콜백 */
   AUTH_CALLBACK: {
     /** 카카오 콜백 */

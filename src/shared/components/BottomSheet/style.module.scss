@@ -1,0 +1,8 @@
+@use '../../../shared/styles/mixins' as *;
+
+.BottomSheet {
+  &__Title {
+    @include font($weight: 700, $color: #333);
+    @include margin($bottom: 24);
+  }
+}
