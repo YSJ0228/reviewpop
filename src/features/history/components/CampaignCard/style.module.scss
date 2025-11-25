@@ -81,73 +81,7 @@
             $color: var(--gray-600)
           );
         }
-
-        // 미선정 체험 날짜 (추후 분리 예정)
-        .CampaignCard__Date {
-          @include font(
-            $size: 12,
-            $weight: 500,
-            $line-height: 1.5,
-            $letter-spacing: -0.02em,
-            $color: var(--gray-600)
-          );
-          @include margin($top: 15);
-
-          // 미선정 Date 내부의 MaxRecruitment
-          .CampaignCard__MaxRecruitment {
-            @include font(
-              $size: 12,
-              $weight: 500,
-              $line-height: 1.5,
-              $letter-spacing: -0.02em,
-              $color: var(--gray-600)
-            );
-            @include margin($left: 4);
-          }
-        }
-      }
-    }
-
-    // ContentWrapper: 선정된 체험 버튼과 경고 영역
-    .CampaignCard__ContentWrapper {
-      @include size($width: 100%);
-      @include flex($direction: column, $gap: 8);
-
-      .CampaignCard__WarningWrapper {
-        @include flex($align: center, $gap: 4, $justify: center);
-
-        .CampaignCard__WarningText {
-          @include font(
-            $size: 12,
-            $weight: 500,
-            $line-height: 1.5,
-            $letter-spacing: -0.02em,
-            $color: var(--gray-400)
-          );
-        }
       }
     }
   }
-}
-
-// CampaignCard 외부에서 직접 사용되는 텍스트 스타일들
-// (Button 내부의 span 등에서 사용)
-.CampaignCard__BasicText {
-  @include font(
-    $size: 14,
-    $weight: 600,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--gray-800)
-  );
-}
-
-.CampaignCard__PrimaryText {
-  @include font(
-    $size: 14,
-    $weight: 700,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--color-white)
-  );
 }

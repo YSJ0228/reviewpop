@@ -1,36 +1,19 @@
 @use '@shared/styles/mixins' as *;
 
 .RejectedCampaignsPage {
-  min-height: 100vh;
   @include padding($y: 20, $x: 16);
 
-  &__Header {
-    position: relative;
-    @include flex($gap: 4, $align: center);
-    @include size($width: 100%, $height: 48);
-  }
+  min-height: 100vh;
 
-  &__HeaderTitle {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    @include font(
-      $size: 16,
-      $weight: 700,
-      $color: var(--gray-900),
-      $line-height: 1.5,
-      $letter-spacing: -0.02em
-    );
-  }
-
-  &__HeaderBackButton {
-    cursor: pointer;
-    @include flex($align: center, $justify: center);
-  }
+  // TODO: 실제 디자인에 맞게 스타일 수정
 }
 
 .Placeholder {
-  @include flex($direction: column, $gap: 12, $align: center, $justify: center);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
 
   min-height: 400px;
 
