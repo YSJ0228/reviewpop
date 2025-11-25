@@ -62,12 +62,18 @@ function CancelReservationButton() {
 
 ```typescript
 interface ModalProps extends Omit<MantineModalProps, 'onClose' | 'opened'> {
-  trigger: ReactElement; // 모달을 열 트리거 요소 (반드시 React Element여야 함)
-  variant?: 'confirm' | 'warning' | 'outline'; // 버튼 스타일 및 기본 문구 프리셋
-  texts?: Partial<ModalContentTexts>; // title/content/confirmButton/cancelButton
-  onConfirm: () => void | Promise<void>; // 확인 버튼 클릭 시 실행 (성공 시 모달 닫힘)
+  /** 모달을 열기 위한 트리거 요소 */
+  trigger: ReactElement;
+  /** 확인 버튼 클릭 시 실행될 핸들러 */
+  onConfirm: () => void | Promise<void>;
+  /** 모달 유형과 버튼 스타일을 함께 결정 */
+  variant?: ModalVariant;
+  /** 프리셋을 부분적으로 덮어쓸 ModalContentTexts */
+  texts?: Partial<ModalContentTexts>;
 }
 ```
+
+`ModalProps`는 `MantineModalProps`를 상속받으므로, `closeOnClickOutside`, `size` 등 Mantine Modal의 모든 props를 사용할 수 있습니다.
 
 ## 📋 동작 방식
 

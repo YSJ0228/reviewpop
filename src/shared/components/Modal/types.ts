@@ -1,4 +1,4 @@
-import { ReactElement, MouseEvent } from 'react';
+import { ReactElement } from 'react';
 import { ModalProps as MantineModalProps } from '@mantine/core';
 import type { ModalVariant } from './constants';
 
