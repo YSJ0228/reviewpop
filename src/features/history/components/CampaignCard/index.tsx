@@ -81,7 +81,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
 
       {/* selected 타입 - Link 밖으로 분리*/}
       {type === 'selected' && campaign.visitStatus && (
-        <CampaignSelectedCard visitStatus={campaign.visitStatus} />
+        <CampaignSelectedCard campaign={campaign} visitStatus={campaign.visitStatus} />
       )}
     </>
   );

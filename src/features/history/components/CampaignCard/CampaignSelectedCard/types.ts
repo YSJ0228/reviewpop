@@ -1,7 +1,9 @@
-import type { MyCampaignScheduleStatus } from '@entities/history/types/myCampaign.types';
+import type {
+  MyCampaign,
+  MyCampaignScheduleStatus,
+} from '@entities/history/types/myCampaign.types';
 
 export interface CampaignSelectedCardProps {
+  campaign: MyCampaign;
   visitStatus: MyCampaignScheduleStatus;
-  onReservationClick?: () => void;
-  onReviewMissionClick?: () => void;
 }

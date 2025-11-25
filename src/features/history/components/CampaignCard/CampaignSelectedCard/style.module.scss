@@ -38,3 +38,41 @@
     $color: var(--color-white)
   );
 }
+
+.CampaignSelectedCard__BottomSheetContent {
+  @include flex($direction: column, $gap: 24);
+}
+
+.CampaignSelectedCard__BottomSheetContent--Section {
+  @include flex($direction: column, $gap: 24);
+
+  h3 {
+    @include font(
+      $size: 18,
+      $weight: 700,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
+}
+
+.CampaignSelectedCard__SectionItem {
+  @include font(
+    $size: 16,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--color-blue-500)
+  );
+}
+
+.CampaignSelectedCard__Description {
+  @include font(
+    $size: 14,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
+}
