@@ -13,6 +13,8 @@ export { BottomNavigation } from './BottomNavigation';
 export { Banner } from './Banner';
 export { ImageViewer } from './ImageViewer';
 export { LoadingSpinner } from './LoadingSpinner';
+export { Modal } from './Modal';
+export { EmptyState } from './EmptyState';
 export { toast } from './Toast';
 
 // Types

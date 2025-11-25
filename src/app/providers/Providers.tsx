@@ -15,6 +15,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { MantineProvider } from '@mantine/core';
 
 import { PopUiProvider } from '@pop-ui/core';
 import { useUserStore } from '@entities/user';
@@ -101,18 +102,19 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PopUiProvider notificationPosition="bottom-center">
-        {children}
-
-        {/* React Query Devtools - 개발 환경에서만 표시 */}
-        {env.isDev && (
-          <ReactQueryDevtools
-            initialIsOpen={false}
-            buttonPosition="bottom-right"
-            position="bottom"
-          />
-        )}
-      </PopUiProvider>
+      <MantineProvider>
+        <PopUiProvider notificationPosition="bottom-center">
+          {children}
+          {/* React Query Devtools - 개발 환경에서만 표시 */}
+          {env.isDev && (
+            <ReactQueryDevtools
+              initialIsOpen={false}
+              buttonPosition="bottom-right"
+              position="bottom"
+            />
+          )}
+        </PopUiProvider>
+      </MantineProvider>
     </QueryClientProvider>
   );
 }

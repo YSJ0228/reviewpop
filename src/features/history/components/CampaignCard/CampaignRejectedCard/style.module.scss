@@ -1,0 +1,23 @@
+@use '@/shared/styles/mixins' as *;
+
+.CampaignRejectedCard__Date {
+  @include font(
+    $size: 12,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
+  @include margin($top: 15);
+
+  .CampaignRejectedCard__MaxRecruitment {
+    @include font(
+      $size: 12,
+      $weight: 500,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-600)
+    );
+    @include margin($left: 4);
+  }
+}

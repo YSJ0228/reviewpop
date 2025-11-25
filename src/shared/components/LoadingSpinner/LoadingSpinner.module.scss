@@ -36,12 +36,23 @@
   height: 100%;
 
   border: 3px solid #f3f3f3;
-  border-top: 3px solid var(--color-blue-500, #3498db);
   border-radius: 50%;
 
   animation: spin 1s linear infinite;
 
-  // TODO: 디자인 시스템에 맞게 색상 수정
+  &.Circle--Primary {
+    border-top: 3px solid var(--color-blue-500);
+  }
+
+  &.Circle--White {
+    border: 3px solid transparent;
+    border-top: 3px solid var(--color-white);
+    opacity: 0.8;
+  }
+
+  &.Circle--Gray {
+    border-top: 3px solid var(--color-gray-500);
+  }
 }
 
 @keyframes spin {
