@@ -36,15 +36,14 @@ export function LabeledInput({
   label,
   showPreview = false,
   showButton = false,
-  value,
-  setValue,
-  errorMsg,
+  input,
   onClick,
   confirmMsg,
 }: LabeledInputProps) {
   const id = useId();
   const [touched, setTouched] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState(false);
+  const { value, setValue, errorMsg } = input;
   return (
     <div className={styles.LabeledInput}>
       <label className={styles.LabeledInput__Label} htmlFor={id}>

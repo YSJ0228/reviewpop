@@ -24,10 +24,8 @@ export function getValidationError(type: InputType, value: string): string {
   return '';
 }
 
-export function useInputValidate(type: InputType) {
-  const [value, setValue] = useState<string>('');
-
-  const error = getValidationError(type, value);
-
-  return { value, setValue, error };
+export function useInputValidate(type: InputType, initial?: string) {
+  const [value, setValue] = useState<string>(initial ?? '');
+  const errorMsg = getValidationError(type, value);
+  return { value, setValue, errorMsg };
 }

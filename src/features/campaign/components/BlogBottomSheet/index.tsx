@@ -2,20 +2,21 @@ import { useState } from 'react';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { LabeledInput } from '@shared/components/LabeledInput';
+import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
-import { BlogBottomSheetProps } from './types';
 import { ButtonBar } from '../ButtonBar';
 
-export function BlogBottomSheet({ opened, onClose, input, setBlogAddress }: BlogBottomSheetProps) {
+import { BlogBottomSheetProps } from './types';
+
+export function BlogBottomSheet({ opened, onClose, blog, setBlog }: BlogBottomSheetProps) {
+  const urlInput = useInputValidate('url', blog);
   const [confirmMsg, setConfirmMsg] = useState<string>('');
   return (
     <BottomSheet opened={opened} onClose={onClose} title="블로그 아이디를 입력해주세요">
       <LabeledInput
         label="블로그 주소"
         placeholder="네이버 블로그 아이디 입력"
-        value={input.value}
-        setValue={input.setValue}
-        errorMsg={input.error}
+        input={urlInput}
         showButton
         showPreview
         confirmMsg={confirmMsg}
@@ -25,9 +26,9 @@ export function BlogBottomSheet({ opened, onClose, input, setBlogAddress }: Blog
         variant="primary"
         onClick={() => {
           onClose();
-          setBlogAddress(`blog.naver.com/${input.value}`);
+          setBlog(`blog.naver.com/${urlInput.value}`);
         }}
-        disabled={!!input.error}
+        disabled={!!urlInput.errorMsg}
         text="저장"
       />
     </BottomSheet>

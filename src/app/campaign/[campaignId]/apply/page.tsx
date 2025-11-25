@@ -1,20 +1,14 @@
 'use client';
 
-import { Suspense, use, useState } from 'react';
+import { Suspense, use } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-import { LabeledInput } from '@shared/components/LabeledInput';
-import { WebButton } from '@shared/components/WebButton';
 import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
-import { TextArea } from '@features/campaign/components/TextArea';
-import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
+import { useCampaignDetails } from '@features/campaign';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
+import { ApplyForm } from '@features/campaign/components/ApplyForm';
 
 import styles from './page.module.scss';
-import { useCampaignDetails } from '@features/campaign';
-import { useDisclosure } from '@mantine/hooks';
-import { BlogBottomSheet } from '@features/campaign/components/BlogBottomSheet';
-import { CautionBottomSheet } from '@features/campaign/components/CautionBottomSheet';
-import { ButtonBar } from '@features/campaign/components/ButtonBar';
 
 /**
  * 체험 신청 페이지
@@ -36,16 +30,25 @@ interface CampaignApplyPageProps {
 
 export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
   const { campaignId } = use(params);
-  const { data: campaign } = useCampaignDetails(campaignId);
+  const {
+    data: campaign,
+    isLoading: isLoadingCampaign,
+    error: errorCampaign,
+  } = useCampaignDetails(campaignId);
+  const { data: user, isLoading: isLoadingUser, error: errorUser } = useUserInfo('kakao-1001'); //수정 예정
 
-  const nameInput = useInputValidate('name');
-  const phoneInput = useInputValidate('phone');
-  const urlInput = useInputValidate('url');
-  const [text, setText] = useState<string>('');
-  const [blogAddress, setBlogAddress] = useState<string>('');
+  //로딩 처리
+  if (isLoadingCampaign || isLoadingUser) {
+    return <div>로딩 중...</div>;
+  }
 
-  const [blogOpened, { open: blogOpen, close: blogClose }] = useDisclosure();
-  const [cautionOpened, { open: cautionOpen, close: cautionClose }] = useDisclosure();
+  // 에러 처리
+  if (errorCampaign) {
+    return <div>캠페인 정보를 불러오는 중 오류가 발생했습니다.</div>;
+  }
+  if (errorUser) {
+    return <div>사용자 정보를 불러오는 중 오류가 발생했습니다.</div>;
+  }
 
   return (
     <main className={styles.CampaignApplyPage}>
@@ -57,50 +60,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
             size="sm"
             providedItems={campaign?.providedItems ?? ''}
           />
-          <div className={styles.CampaignApplyPage__ApplyForm}>
-            <WebButton
-              label="네이버 블로그 주소"
-              buttonType="connect"
-              onClick={blogOpen}
-              text={blogAddress}
-            />
-            <LabeledInput
-              label="이름"
-              placeholder="이름 입력"
-              value={nameInput.value}
-              setValue={nameInput.setValue}
-              errorMsg={nameInput.error}
-            />
-            <LabeledInput
-              label="전화번호"
-              placeholder="01012345678"
-              value={phoneInput.value}
-              setValue={phoneInput.setValue}
-              errorMsg={phoneInput.error}
-            />
-
-            <TextArea
-              label="전달하고 싶은 한마디(선택)"
-              maxTextCount={300}
-              text={text}
-              setText={setText}
-              placeholder="체험단에 선정되어야 할 이유가 있다면 알려주세요!"
-            />
-          </div>
-          <ButtonBar
-            text="다음"
-            variant="primary"
-            onClick={cautionOpen}
-            disabled={!!urlInput.error || !!nameInput.error || !!phoneInput.error}
-          />
-
-          <BlogBottomSheet
-            opened={blogOpened}
-            onClose={blogClose}
-            input={urlInput}
-            setBlogAddress={setBlogAddress}
-          />
-          <CautionBottomSheet opened={cautionOpened} onClose={cautionClose} />
+          <ApplyForm user={user} />
         </Suspense>
       </ErrorBoundary>
     </main>
