@@ -1,0 +1,28 @@
+@use '../../../../shared/styles/mixins' as *;
+
+.ProfileInfo {
+  @include flex($gap: 24, $direction: column);
+}
+.ProfileInfo__Name {
+  color: var(--gray-900);
+  font-weight: 700;
+  font-size: 20px;
+}
+.ProfileInfo__Info {
+  @include flex($direction: row, $gap: 40);
+}
+
+.ProfileInfo__Detail {
+  @include flex($direction: column, $gap: 4);
+}
+
+.ProfileInfo__DetailTitle {
+  color: var(--gray-600);
+  font-weight: 500;
+  font-size: 14px;
+}
+.ProfileInfo__DetailValue {
+  color: var(--gray-900);
+  font-weight: 700;
+  font-size: 18px;
+}
