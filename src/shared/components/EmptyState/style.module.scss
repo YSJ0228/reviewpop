@@ -1,0 +1,36 @@
+@use '../../../shared/styles/mixins' as *;
+
+.EmptyState {
+  text-align: center;
+  @include size($width: 100%);
+  color: var(--gray-400);
+
+  // Elements
+  &__Title {
+    @include margin($bottom: 8);
+    @include font($size: 16, $weight: 700);
+  }
+
+  &__Description {
+    @include font($size: 14, $weight: 500);
+    white-space: pre-line;
+  }
+
+  &--WithButton {
+    min-height: 400px;
+    @include flex($direction: column, $align: center, $justify: center);
+    .EmptyState__Description {
+      @include margin($bottom: 16);
+      @include font($weight: 600);
+    }
+  }
+
+  &--NoButton {
+    @include padding($y: 16);
+
+    .EmptyState__Description {
+      @include margin($bottom: 0);
+      @include font($weight: 500);
+    }
+  }
+}

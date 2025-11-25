@@ -8,10 +8,10 @@
   gap: 8px;
   border: none;
   border-radius: 10px;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  padding: 0 20px;
+  @include font($weight: 600);
+  @include padding($x: 20);
 
   // 비활성화 상태
   &:disabled {
@@ -33,24 +33,26 @@
 
 // 크기 변형
 .Button--Small {
-  font-size: 14px;
-  height: 32px;
+  border-radius: 8px;
+  @include size($height: 40);
+  @include font($size: 14);
+  @include padding($x: 12);
 }
 
 .Button--Medium {
-  font-size: 16px;
-  height: 44px;
+  @include size($height: 50);
+  @include font($size: 16);
 }
 
 .Button--Large {
-  font-size: 18px;
-  height: 52px;
+  @include size($height: 60);
+  @include font($size: 18);
 }
 
 // 스타일 변형
 .Button--Primary {
   background-color: var(--primary-500);
-  color: #fff;
+  @include font($color: var(--color-white));
 
   &:not(:disabled):hover {
     background-color: var(--primary-600);
@@ -58,9 +60,9 @@
 }
 
 .Button--Secondary {
-  background-color: white;
+  background-color: var(--color-white);
   border: 1px solid var(--gray-100);
-  color: var(--gray-800);
+  @include font($color: var(--gray-800));
 
   &:not(:disabled):hover {
     background-color: var(--gray-50);
@@ -68,9 +70,9 @@
 }
 
 .Button--Outline {
-  background-color: white;
+  background-color: var(--color-white);
   border: 1px solid var(--gray-100);
-  color: var(--error-500);
+  @include font($color: var(--error-500));
 
   &:not(:disabled):hover {
     background-color: var(--gray-50);
@@ -79,7 +81,7 @@
 
 .Button--Warning {
   background-color: var(--error-500);
-  color: white;
+  @include font($color: var(--color-white));
 
   &:not(:disabled):hover {
     background-color: var(--error-800);
@@ -88,5 +90,5 @@
 
 // 전체 너비
 .Button--FullWidth {
-  width: 100%;
+  @include size($width: 100%);
 }

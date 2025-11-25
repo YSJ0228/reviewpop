@@ -5,7 +5,7 @@ interface CampaignAppliedCardProps {
   announcementStatus: string;
 }
 
-export default function CampaignAppliedCard({ announcementStatus }: CampaignAppliedCardProps) {
+export function CampaignAppliedCard({ announcementStatus }: CampaignAppliedCardProps) {
   const handleCancelApplication = () => {
     // TODO: API 연동 필요
     console.warn('신청 취소 기능 미구현:', announcementStatus);
