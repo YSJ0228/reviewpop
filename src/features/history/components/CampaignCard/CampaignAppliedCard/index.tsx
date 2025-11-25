@@ -22,9 +22,13 @@ export default function CampaignAppliedCard({ announcementStatus }: CampaignAppl
         variant="outline"
         onConfirm={handleCancelApplication}
         trigger={
-          <button className={styles.CampaignAppliedTitle__Button} aria-label="체험 신청 취소">
+          <span
+            role="button"
+            className={styles.CampaignAppliedTitle__Button}
+            aria-label="체험 신청 취소"
+          >
             신청취소
-          </button>
+          </span>
         }
       />
     </div>

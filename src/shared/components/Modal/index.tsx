@@ -14,13 +14,6 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
   // variant별 기본 텍스트 프리셋 가져온 후, texts prop으로 부분적으로 덮어쓰기
   const modalTexts = { ...MODAL_TEXTS_PRESET[variant], ...texts };
 
-  // 이벤트 버블링 방지 헬퍼
-  const preventBubbling = (callback: () => void | Promise<void>) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    callback();
-  };
-
   const handleConfirm = async () => {
     setIsLoading(true);
     try {
@@ -35,13 +28,12 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
 
   return (
     <>
-      {/* 
-        Mantine Modal은 Portal을 사용하므로 DOM 트리 상에서는 분리되어 있지만,
-        React Event 트리 상에서는 자식으로 취급되어 이벤트가 버블링됩니다.
-        Link 컴포넌트 내부에서 사용 시 페이지 이동을 방지하기 위해 
-        빈 div로 감싸서 버블링되는 이벤트를 차단합니다.
-      */}
-      <div onClick={(e) => e.stopPropagation()}>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
+      >
         <MantineModal
           opened={opened}
           onClose={close}
@@ -56,16 +48,12 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
           <div className={styles.Modal__Title}>{modalTexts.title}</div>
           <div className={styles.Modal__Text}>{modalTexts.content}</div>
           <div className={styles.Modal__Buttons}>
-            <Button
-              onClick={preventBubbling(close)}
-              variant="secondary"
-              className={styles.Modal__Button}
-            >
+            <Button onClick={close} variant="secondary" className={styles.Modal__Button}>
               {modalTexts.cancelButton}
             </Button>
             <Button
               className={styles.Modal__Button}
-              onClick={preventBubbling(handleConfirm)}
+              onClick={handleConfirm}
               variant={buttonVariant}
               disabled={isLoading}
               size="medium"
@@ -75,9 +63,14 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
           </div>
         </MantineModal>
       </div>
-
       {cloneElement(trigger as React.ReactElement<{ onClick?: React.MouseEventHandler }>, {
-        onClick: preventBubbling(open),
+        onClick: (e: React.MouseEvent) => {
+          // 모달 트리거가 다른 클릭 가능한 요소 내부에 있을 수 있으므로
+          // 이벤트 전파를 중단하여 의도하지 않은 동작 방지
+          e.stopPropagation();
+          e.preventDefault();
+          open();
+        },
       })}
     </>
   );

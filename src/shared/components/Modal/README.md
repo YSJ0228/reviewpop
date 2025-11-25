@@ -44,7 +44,7 @@ function CancelReservationButton() {
 
 ### 모든 문구를 직접 전달
 
-```typescript
+````typescript
 <Modal
   variant="outline"
   texts={{
@@ -56,8 +56,6 @@ function CancelReservationButton() {
   trigger={<button>신청 취소</button>}
   onConfirm={handleCancel}
 />
-```
-
 ## 📝 Props
 
 ```typescript
@@ -77,12 +75,96 @@ interface ModalProps extends Omit<MantineModalProps, 'onClose' | 'opened'> {
 
 ## 📋 동작 방식
 
-- `trigger`에 전달한 React Element가 트리거가 되며, 클릭 시 모달이 열립니다.
-- `trigger`는 반드시 `ReactElement` 타입이어야 합니다 (문자열이나 숫자는 불가).
-- `variant`에 따라 `primary / warning / outline` 버튼 스타일과 기본 문구가 세팅됩니다.
-- `texts`에 전달한 필드만 프리셋 위에 덮어써 원하는 문구만 수정할 수 있습니다.
-- 확인 버튼은 `onConfirm` 비동기 함수를 await한 뒤 모달을 닫습니다.
-- 취소 버튼은 항상 secondary 스타일이며 즉시 모달을 닫습니다.
+Modal 컴포넌트는 **2단계 이벤트 버블링 방지 전략**을 사용하여 Link 내부에서도 안전하게 동작합니다.
+
+### 1단계: Trigger 클릭 시
+`trigger` 요소에 주입되는 `onClick` 핸들러에서:
+```tsx
+e.stopPropagation(); // 상위 요소(Link 등)로 이벤트 전파 차단
+e.preventDefault();   // 기본 동작 방지
+open();              // 모달 열기
+```
+
+### 2단계: Portal 이벤트 보호
+Mantine Modal은 Portal을 사용하지만, **React Event Tree** 상에서는 여전히 부모-자식 관계가 유지되어 이벤트가 버블링됩니다. 이를 방지하기 위해 Modal을 감싸는 wrapper div에서 모든 클릭 이벤트를 차단합니다.
+
+```tsx
+<div onClick={(e) => { e.stopPropagation(); e.preventDefault(); }}>
+  <MantineModal>...</MantineModal>
+</div>
+```
+
+이로 인해:
+- ✅ Trigger 클릭 → Link 이동 안 됨
+- ✅ 모달 버튼 클릭 → Link 이동 안 됨
+- ✅ 모달 오버레이 클릭 → Link 이동 안 됨
+
+### 전체 흐름
+1. **Trigger 렌더링**: `cloneElement`로 trigger에 `onClick` 핸들러 주입
+2. **Trigger 클릭**: 이벤트 전파 차단 + 모달 열기
+3. **모달 동작**: Portal 내부 이벤트도 wrapper가 보호
+4. **확인/취소**:
+   - **확인**: `onConfirm` 실행 → 성공 시 모달 닫힘
+   - **취소**: 모달 즉시 닫힘
+
+> [!IMPORTANT]
+> **Link 내부에서 사용 시 주의사항**
+> `Link`(`<a>`) 태그 내부에서 모달을 사용할 경우, `trigger` 요소로 `<button>`을 사용하면 **유효하지 않은 HTML**이 됩니다 (Hydration Error 발생 가능).
+>
+> **해결책**: `<span role="button">`을 사용하여 웹 표준을 준수하면서 버튼처럼 동작하게 만드세요.
+> ```tsx
+> <Modal
+>   trigger={<span role="button" className="btn-style">신청 취소</span>}
+>   onConfirm={handleCancel}
+> />
+> ```
+
+## 💡 사용 예시
+
+### Link 내부에서 사용 시 (권장 패턴)
+```tsx
+<Link href="/campaign/123">
+  <div className="card">
+    <h2>상품명</h2>
+    <Modal
+      variant="outline"
+      onConfirm={handleCancel}
+      trigger={
+        <span role="button" className={styles.CancelButton}>
+          신청 취소
+        </span>
+      }
+    />
+  </div>
+</Link>
+```
+
+### 일반적인 경우
+```tsx
+<Modal
+  variant="confirm"
+  texts={{
+    title: '정말 삭제하시겠습니까?',
+    content: '삭제된 데이터는 복구할 수 없습니다.',
+  }}
+  trigger={<Button>삭제</Button>}
+  onConfirm={handleDelete}
+/>
+```
+
+### 모든 프리셋 Variant 활용
+```tsx
+// 확인 (파란색 버튼)
+<Modal variant="confirm" trigger={<span>신청하기</span>} onConfirm={handleApply} />
+
+// 경고 (빨간색 버튼)
+<Modal variant="warning" trigger={<span>탈퇴하기</span>} onConfirm={handleWithdraw} />
+
+// 아웃라인 (회색 테두리 버튼)
+<Modal variant="outline" trigger={<span>취소</span>} onConfirm={handleCancel} />
+```
+
+
 
 ## 🎨 스타일
 
@@ -95,3 +177,4 @@ interface ModalProps extends Omit<MantineModalProps, 'onClose' | 'opened'> {
 - 신청 및 신청/예약 취소 확인 모달
 - 탈퇴, 위험 동작 경고
 - 기타 확인이 필요한 곳에서 공통 UX 제공
+````
