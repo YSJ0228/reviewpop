@@ -467,6 +467,60 @@ export const mockCampaigns: Campaign[] = [
     createdAt: '2025-09-04T00:00:00Z',
   },
   {
+    id: '16',
+    brand: '추가된 캠페인 1',
+    title: '무한 스크롤 테스트용 1',
+    providedItems: '테스트 아이템',
+    description: '테스트 설명',
+    category: '기타' as CampaignCategory, // Added category to match Campaign type
+    status: 'completed' as CampaignStatus,
+    location: {
+      sido: '서울',
+      sigungu: '강남구',
+    },
+    imageUrl: 'https://picsum.photos/seed/campaign16/800/600',
+    imageUrls: ['https://picsum.photos/seed/campaign16/800/600'],
+    schedule: createSchedule(
+      '2025-08-10T00:00:00+09:00',
+      '2025-08-20T00:00:00+09:00',
+      '2025-08-21T00:00:00+09:00',
+      '2025-08-23T00:00:00+09:00',
+      '2025-08-24T00:00:00+09:00', // Added a missing schedule step
+      '2025-09-05T00:00:00+09:00',
+    ),
+    maxRecruitment: 5,
+    currentRecruitment: 5,
+    selectedCount: 0, // Added selectedCount
+    createdAt: '2025-08-01T00:00:00Z', // Added createdAt
+  },
+  {
+    id: '17',
+    brand: '추가된 캠페인 2',
+    title: '무한 스크롤 테스트용 2',
+    providedItems: '테스트 아이템',
+    description: '테스트 설명',
+    category: '기타' as CampaignCategory, // Added category to match Campaign type
+    status: 'completed' as CampaignStatus,
+    location: {
+      sido: '서울',
+      sigungu: '서초구',
+    },
+    imageUrl: 'https://picsum.photos/seed/campaign17/800/600',
+    imageUrls: ['https://picsum.photos/seed/campaign17/800/600'],
+    schedule: createSchedule(
+      '2025-08-05T00:00:00+09:00',
+      '2025-08-15T00:00:00+09:00',
+      '2025-08-16T00:00:00+09:00',
+      '2025-08-18T00:00:00+09:00',
+      '2025-08-19T00:00:00+09:00', // Added a missing schedule step
+      '2025-08-31T00:00:00+09:00',
+    ),
+    maxRecruitment: 5,
+    currentRecruitment: 5,
+    selectedCount: 0, // Added selectedCount
+    createdAt: '2025-07-28T00:00:00Z', // Added createdAt
+  },
+  {
     id: '14',
     title: '고급 향수 리뷰어',
     brand: '조말론',
