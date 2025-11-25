@@ -8,37 +8,61 @@
       "name": "user",
       "schemaName": "public",
       "x": 16,
-      "y": 1048
+      "y": 16
     },
     {
       "name": "campaign",
       "schemaName": "public",
       "x": 16,
-      "y": 16
+      "y": 344
     },
     {
       "name": "campaign_delivery_info",
       "schemaName": "public",
       "x": 608,
-      "y": 16
+      "y": 1392
     },
     {
       "name": "visit_reservation",
       "schemaName": "public",
       "x": 608,
-      "y": 216
+      "y": 1624
+    },
+    {
+      "name": "reservation_available",
+      "schemaName": "public",
+      "x": 608,
+      "y": 1960
     },
     {
       "name": "review",
       "schemaName": "public",
       "x": 608,
-      "y": 456
+      "y": 56
     },
     {
       "name": "campaign_application",
       "schemaName": "public",
       "x": 608,
-      "y": 728
+      "y": 352
+    },
+    {
+      "name": "review_request",
+      "schemaName": "public",
+      "x": 1176,
+      "y": 16
+    },
+    {
+      "name": "user_reservation",
+      "schemaName": "public",
+      "x": 608,
+      "y": 752
+    },
+    {
+      "name": "notification",
+      "schemaName": "public",
+      "x": 608,
+      "y": 1024
     }
   ],
   "tableGroupCollapseStates": [],
@@ -84,6 +108,21 @@
       "secondFieldNames": [
         "campaign_id"
       ],
+      "secondTableName": "reservation_available",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "campaign",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "campaign_id"
+      ],
       "secondTableName": "review",
       "secondSchemaName": "public",
       "secondRelation": "*",
@@ -130,6 +169,96 @@
         "user_id"
       ],
       "secondTableName": "campaign_application",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "user",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "user_id"
+      ],
+      "secondTableName": "review_request",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "review",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "review_id"
+      ],
+      "secondTableName": "review_request",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "campaign",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "campaign_id"
+      ],
+      "secondTableName": "user_reservation",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "user",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "user_id"
+      ],
+      "secondTableName": "user_reservation",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "campaign",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "campaign_id"
+      ],
+      "secondTableName": "notification",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "user",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "user_id"
+      ],
+      "secondTableName": "notification",
       "secondSchemaName": "public",
       "secondRelation": "*",
       "checkPoints": []
