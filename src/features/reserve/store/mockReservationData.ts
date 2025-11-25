@@ -21,11 +21,9 @@ export const mockReservationData: ReservationData = {
   visitTime: '11:00', // HH:MM
   address: '서울시 마포구 월드컵로 250 2층',
   visitorCounter: 1, // 방문 인원
-  precautions: `
-    <ul>
-      <li>예약 당일에는 날짜 변경이 불가능하며, 취소 후 가능 날짜에 다시 예약만 가능합니다.</li>
-      <li>예약 후 노쇼 발생 시 이후 이용에 패널티가 있습니다.</li>
-      <li>후기 작성안하면 다 물어내야합니다.</li>
-    </ul>
-  `,
+  precautions: [
+    '예약 당일에는 날짜 변경이 불가능하며, 취소 후 가능 날짜에 다시 예약만 가능합니다.',
+    '예약 후 노쇼 발생 시 이후 이용에 패널티가 있습니다.',
+    '후기 작성안하면 다 물어내야합니다.',
+  ],
 };

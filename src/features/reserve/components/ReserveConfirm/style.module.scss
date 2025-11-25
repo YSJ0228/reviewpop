@@ -98,19 +98,14 @@
       @include font($weight: 600);
     }
 
-    &__Text {
-      @include flex($direction: column, $align: flex-start, $gap: 2px);
-      padding: 16px 8px;
+    ul {
+      list-style: disc;
+      margin: 0;
+      padding: 16px 8px 16px 24px;
       align-self: stretch;
       border-radius: 12px;
       border-bottom: 1px solid #f6f6f6;
       background: var(--color-gray-25);
-
-      ul {
-        list-style: disc;
-        padding-left: 20px;
-        margin: 0;
-      }
     }
   }
 }
