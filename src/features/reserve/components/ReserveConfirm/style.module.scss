@@ -26,7 +26,6 @@
       @include flex($align: center, $gap: 16px);
 
       img {
-        @include size($width: 88px, $height: 88px);
         aspect-ratio: 1/1;
         border-radius: 8px;
         background: var(--color-gray-100);

@@ -20,7 +20,12 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     <div className={styles.ReserveConfirm}>
       <div className={styles.ReserveConfirm__Info}>
         <div className={styles.ReserveConfirm__Info__Title}>
-          <img src={reservationData.thumbnailUrl} alt="예약한 체험 이미지" />
+          <Image
+            src={reservationData.thumbnailUrl}
+            alt="예약한 체험 이미지"
+            width={88}
+            height={88}
+          />
           <div className={styles.ReserveConfirm__Info__Title__Text}>
             <h3>{reservationData.brand}</h3>
             <p>{reservationData.providedItem}</p>
