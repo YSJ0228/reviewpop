@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { IconCopy } from '@pop-ui/foundation';
 
 import styles from './ImageGallery.module.scss';
 
@@ -77,40 +79,21 @@ export function ImageGallery({
           >
             {image ? (
               <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={image} alt={`이미지 ${index + 1}`} className={styles.Image} />
+                <Image
+                  src={image}
+                  alt={`이미지 ${index + 1}`}
+                  fill
+                  className={styles.Image}
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={90}
+                />
                 {showViewAllButton && (
                   <button
                     className={styles.ViewAllButton}
                     onClick={handleViewAllClick}
                     aria-label="전체 이미지 보기"
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="3"
-                        y="3"
-                        width="8"
-                        height="8"
-                        rx="2"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      />
-                      <rect
-                        x="9"
-                        y="9"
-                        width="8"
-                        height="8"
-                        rx="2"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      />
-                    </svg>
+                    <IconCopy size={20} />
                   </button>
                 )}
               </>

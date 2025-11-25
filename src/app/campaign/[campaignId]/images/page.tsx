@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { use, useState, useMemo } from 'react';
 
 import { PageHeader } from '@shared/components/PageHeader';
@@ -72,11 +73,13 @@ export default function CampaignImagesPage({ params }: CampaignImagesPageProps) 
         <div className={styles.GalleryGrid}>
           {images.map((image, index) => (
             <div key={index} className={styles.GalleryItem} onClick={() => handleImageClick(index)}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={image}
                 alt={`${campaign.title} 이미지 ${index + 1}`}
+                fill
                 className={styles.GalleryImage}
+                sizes="(max-width: 768px) 50vw, 25vw"
+                quality={90}
               />
             </div>
           ))}

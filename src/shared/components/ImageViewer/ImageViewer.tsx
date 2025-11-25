@@ -36,23 +36,31 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const prevIsOpenRef = useRef(isOpen);
 
+  // ESC 키 이벤트 처리
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
-    }
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);
+
+  // 스크롤 잠금 처리 (모달이 닫힐 때만 복원)
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
 
   // 모달이 다시 열릴 때 currentSlide를 initialIndex로 초기화 (카운터 즉시 표시)
   useEffect(() => {
@@ -97,6 +105,11 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
             maxRatio: 3,
             minRatio: 1,
           }}
+          // @ts-expect-error - Swiper v12에서 lazy 옵션은 타입 정의에 없지만 실제로 동작함
+          lazy={{
+            loadPrevNext: true,
+            loadPrevNextAmount: 2,
+          }}
           navigation={true}
           initialSlide={initialIndex}
           onSwiper={setSwiperInstance}
@@ -111,11 +124,12 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
               <div className="swiper-zoom-container">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={image}
+                  data-src={image}
+                  className={`swiper-lazy ${styles.Image}`}
                   alt={`이미지 ${index + 1}`}
-                  className={styles.Image}
                   draggable={false}
                 />
+                <div className="swiper-lazy-preloader"></div>
               </div>
             </SwiperSlide>
           ))}
