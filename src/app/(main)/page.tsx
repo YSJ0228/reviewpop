@@ -4,7 +4,11 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { CampaignTab } from '@features/campaign/components/CampaignTab';
-import { CampaignList } from '@features/campaign';
+import {
+  BeforeRecruitingCampaignList,
+  RecruitingCampaignList,
+  CompletedCampaignList,
+} from '@features/campaign';
 
 import { filterCampaignsByStatus, useCampaigns } from '@entities/campaign/hooks/useCampaigns';
 import { CampaignTabKey } from '@entities/campaign/types/campaign.types';
@@ -18,6 +22,7 @@ export default function Home() {
   const recruitingRef = useRef<HTMLDivElement>(null);
   const beforeRecruitingRef = useRef<HTMLDivElement>(null);
   const completedRef = useRef<HTMLDivElement>(null);
+  const SCROLL_ANIMATION_DURATION = 500;
 
   const filteredCampaigns = {
     recruiting: filterCampaignsByStatus(campaigns, 'recruiting'),
@@ -26,9 +31,9 @@ export default function Home() {
   };
 
   const campaignExists = {
-    recruiting: filterCampaignsByStatus(campaigns, 'recruiting').length > 0,
-    before_recruiting: filterCampaignsByStatus(campaigns, 'before_recruiting').length > 0,
-    completed: filterCampaignsByStatus(campaigns, 'completed').length > 0,
+    recruiting: filteredCampaigns.recruiting.length > 0,
+    before_recruiting: filteredCampaigns.before_recruiting.length > 0,
+    completed: filteredCampaigns.completed.length > 0,
   };
 
   const handleScroll = (status: CampaignTabKey) => {
@@ -36,7 +41,7 @@ export default function Home() {
     setActiveTab(status);
     setTimeout(() => {
       isScrolling.current = false;
-    }, 500);
+    }, SCROLL_ANIMATION_DURATION);
     if (status === 'recruiting')
       recruitingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (status === 'before_recruiting')
@@ -62,9 +67,13 @@ export default function Home() {
       },
     );
 
-    if (recruitingRef.current) observer.observe(recruitingRef.current);
-    if (beforeRecruitingRef.current) observer.observe(beforeRecruitingRef.current);
-    if (completedRef.current) observer.observe(completedRef.current);
+    const refs = [recruitingRef.current, beforeRecruitingRef.current, completedRef.current];
+    refs.forEach((ref) => ref && observer.observe(ref));
+
+    return () => {
+      refs.forEach((ref) => ref && observer.unobserve(ref));
+      observer.disconnect();
+    };
   }, [isLoading]);
 
   if (isLoading) {
@@ -102,22 +111,34 @@ export default function Home() {
             campaignExists={campaignExists}
           />
           <div className={styles.ListContainer}>
-            <div ref={recruitingRef} className={styles.ScrollSection}>
-              <CampaignList status="recruiting" filteredCampaigns={filteredCampaigns.recruiting} />
-            </div>
-            {campaignExists.before_recruiting && (
-              <div ref={beforeRecruitingRef} className={styles.ScrollSection}>
-                <CampaignList
-                  status="before_recruiting"
-                  filteredCampaigns={filteredCampaigns.before_recruiting}
-                />
-              </div>
-            )}
-            {campaignExists.completed && (
-              <div ref={completedRef} className={styles.ScrollSection}>
-                <CampaignList status="completed" filteredCampaigns={filteredCampaigns.completed} />
-              </div>
-            )}
+            <section
+              ref={recruitingRef}
+              id="recruiting"
+              className={styles.ScrollSection}
+              data-observer-id="recruiting"
+            >
+              <RecruitingCampaignList filteredCampaigns={filteredCampaigns.recruiting} />
+            </section>
+
+            <section
+              ref={beforeRecruitingRef}
+              id="before_recruiting"
+              className={styles.ScrollSection}
+              data-observer-id="before_recruiting"
+            >
+              <BeforeRecruitingCampaignList
+                filteredCampaigns={filteredCampaigns.before_recruiting}
+              />
+            </section>
+
+            <section
+              ref={completedRef}
+              id="completed"
+              className={styles.ScrollSection}
+              data-observer-id="completed"
+            >
+              <CompletedCampaignList filteredCampaigns={filteredCampaigns.completed} />
+            </section>
           </div>
         </Suspense>
       </ErrorBoundary>

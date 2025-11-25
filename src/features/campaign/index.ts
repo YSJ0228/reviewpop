@@ -5,8 +5,9 @@
  */
 
 // Components
-export { CampaignCard } from './components/CampaignCard';
-export { CampaignList } from './components/CampaignList';
+export { BeforeRecruitingCampaignList } from './components/CampaignList/BeforeRecruitingCampaignList';
+export { RecruitingCampaignList } from './components/CampaignList/RecruitingCampaignList';
+export { CompletedCampaignList } from './components/CampaignList/CompletedCampaignList';
 
 // Hooks
 export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
