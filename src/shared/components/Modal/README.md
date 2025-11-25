@@ -1,16 +1,16 @@
-# Modal (커스텀 확인 모달)
+# Modal
 
 ## 📌 컴포넌트 설명
 
-Mantine `Modal`을 래핑하여 확인/취소 액션을 간편하게 구성하는 컴포넌트입니다. 트리거 요소를 클릭하면 모달이 열리고, variant에 따라 버튼 스타일과 기본 문구 프리셋이 적용됩니다. 필요한 문구는 `texts`로 부분 오버라이드할 수 있습니다.
+Mantine `Modal`을 래핑한 확인/취소 액션 모달 컴포넌트입니다. 트리거 요소를 클릭하면 모달이 열리고, variant에 따라 버튼 스타일과 기본 문구 프리셋이 적용됩니다. 필요한 문구는 `texts`로 부분 오버라이드할 수 있습니다.
 
 ## 🎯 주요 기능
 
-- Mantine `Modal` 기반의 공통 확인 모달 제공
-- `variant`에 따른 버튼 스타일 및 문구 프리셋
-- `texts` prop으로 제목·내용·버튼 문구 부분 덮어쓰기
-- 확인 버튼에 비동기 핸들러 연결
+- `variant` 기반 버튼 스타일 및 문구 프리셋 (confirm, warning, outline)
+- `texts` prop으로 문구 부분 커스터마이징
+- 비동기 `onConfirm` 핸들러 지원
 - 모달 외부/취소 버튼으로 닫기 처리
+- Link 내부 사용 시 이벤트 버블링 자동 차단
 
 ## 🔧 사용 예시
 
@@ -25,10 +25,9 @@ function CancelReservationButton() {
         // 기본 preset에서 content만 덮어쓰기
         content: '다시 신청하려면 모집 기간 내에 가능합니다.',
       }}
+      trigger={<button>예약 취소</button>}
       onConfirm={handleCancelReservation}
-    >
-      <button>예약 취소</button>
-    </Modal>
+    />
   );
 }
 ```
@@ -36,9 +35,11 @@ function CancelReservationButton() {
 ### variant 프리셋 활용
 
 ```typescript
-<Modal variant="warning" onConfirm={handleWithdraw}>
-  <span>탈퇴하기</span>
-</Modal>
+<Modal
+  variant="warning"
+  trigger={<span>탈퇴하기</span>}
+  onConfirm={handleWithdraw}
+/>
 ```
 
 ### 모든 문구를 직접 전달
@@ -52,39 +53,61 @@ function CancelReservationButton() {
     confirmButton: '신청 취소',
     cancelButton: '닫기',
   }}
+  trigger={<button>신청 취소</button>}
   onConfirm={handleCancel}
->
-  <button>신청 취소</button>
-</Modal>
+/>
+```
+
+### Link 내부에서 사용
+
+> `Link`(`<a>`) 태그 내부에서는 `trigger`로 `<button>`을 사용할 수 없습니다 (Hydration Error).
+> `<span role="button">`을 사용하세요.
+
+```tsx
+<Link href="/detail">
+  <div className="card">
+    <h2>상품명</h2>
+    <Modal variant="outline" trigger={<span role="button">취소</span>} onConfirm={handleCancel} />
+  </div>
+</Link>
+```
+
+### Variant 종류
+
+```tsx
+// 확인 (--primary 색상)
+<Modal variant="confirm" trigger={<span>신청</span>} onConfirm={handleApply} />
+
+// 경고 (--danger 색상)
+<Modal variant="warning" trigger={<span>탈퇴</span>} onConfirm={handleWithdraw} />
+
+// 아웃라인 (--gray 색상)
+<Modal variant="outline" trigger={<span>취소</span>} onConfirm={handleCancel} />
 ```
 
 ## 📝 Props
 
 ```typescript
-interface ModalProps extends MantineModalProps {
-  children: ReactElement; // 모달을 열 트리거 요소
-  variant?: 'confirm' | 'warning' | 'outline'; // 버튼 스타일 및 기본 문구 프리셋
-  texts?: Partial<ModalContentTexts>; // title/content/confirmButton/cancelButton
-  onConfirm: () => Promise<void>; // 확인 버튼 클릭 시 실행 (성공 시 모달 닫힘)
+interface ModalProps extends Omit<MantineModalProps, 'onClose' | 'opened'> {
+  /** 모달을 열기 위한 트리거 요소 */
+  trigger: ReactElement;
+  /** 확인 버튼 클릭 시 실행될 핸들러 */
+  onConfirm: () => void | Promise<void>;
+  /** 모달 유형과 텍스트 프리셋, 버튼 스타일을 함께 결정 */
+  variant?: ModalVariant;
+  // confirm : 신청, warning : 탈퇴, outline : 예약/신청 취소
+  /** 텍스트 프리셋을 부분적으로 덮어쓸 ModalContentTexts */
+  texts?: Partial<ModalContentTexts>;
 }
 ```
 
-## 📋 동작 방식
+`MantineModalProps`를 상속받으므로 `closeOnClickOutside`, `size` 등 Mantine Modal 옵션 사용 가능합니다.
 
-- `children`에 전달한 요소가 트리거가 되며, 클릭 시 모달이 열립니다.
-- `variant`에 따라 `primary / warning / outline` 버튼 스타일과 기본 문구가 세팅됩니다.
-- `texts`에 전달한 필드만 프리셋 위에 덮어써 원하는 문구만 수정할 수 있습니다.
-- 확인 버튼은 `onConfirm` 비동기 함수를 await한 뒤 모달을 닫습니다.
-- 취소 버튼은 항상 secondary 스타일이며 즉시 모달을 닫습니다.
+## 🔒 이벤트 버블링 처리
 
-## 🎨 스타일
+Link 내부에서 안전하게 동작하도록 2단계 방어:
 
-- 폭 288px, 16px 라운드, 화이트 배경 + 그림자
-- 제목/본문은 중앙 정렬, 확인/취소 버튼은 가로로 배치
-- 버튼 높이 50px, 동일한 너비를 갖도록 flex 적용
+1. **Trigger 클릭**: `stopPropagation` + `preventDefault`로 상위 Link 이벤트 차단
+2. **Portal 보호**: Mantine Modal을 wrapper div로 감싸서 React Event Tree 버블링 차단
 
-## 🔗 사용 위치
-
-- 신청 및 신청/예약 취소 확인 모달
-- 탈퇴, 위험 동작 경고
-- 기타 확인이 필요한 곳에서 공통 UX 제공
+결과적으로 모든 모달 상호작용(trigger 클릭, 버튼 클릭, 오버레이 클릭)에서 Link 이동이 발생하지 않습니다.
