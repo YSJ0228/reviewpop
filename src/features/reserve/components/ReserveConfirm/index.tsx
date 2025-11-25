@@ -1,5 +1,6 @@
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { useReservationStore } from '@features/reserve/store/reservationStore';
@@ -70,6 +71,12 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
       </div>
       <div>
         <button onClick={() => alert('예약 확정 API 호출 예정')}>예약 확정하기</button>
+        <p>
+          {'버튼을 클릭하면 '}
+          <span>{'예약 유의사항,'}</span>
+          <Link href="">{'개인정보 수집 이용 동의,'}</Link>
+          {'개인정보 제3자 (판매자) 제공에 동의하시는 것입니다.'}
+        </p>
       </div>
     </div>
   );
