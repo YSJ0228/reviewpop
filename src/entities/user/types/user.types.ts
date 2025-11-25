@@ -14,6 +14,10 @@ export interface User {
   email: string;
   /** 이름 */
   name: string;
+  /** 이름 */
+  phone: string;
+  /** 이름 */
+  blog: string;
   /** 프로필 이미지 URL */
   profileImage: string | null;
   /** OAuth Provider */
