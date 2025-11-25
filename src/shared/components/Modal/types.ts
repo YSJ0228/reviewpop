@@ -12,10 +12,9 @@ export interface ModalProps extends Omit<MantineModalProps, 'onClose' | 'opened'
   trigger: ReactElement;
   /** 확인 버튼 클릭 시 실행될 핸들러 */
   onConfirm: () => void | Promise<void>;
-  /** 모달 유형과 버튼 스타일을 함께 결정 */
+  /** 모달 유형과 텍스트 프리셋, 버튼 스타일을 함께 결정 */
   variant?: ModalVariant;
-  // confirm : 신청, warning : 탈퇴, outline : 예약/신청 취소
-  /** 프리셋을 부분적으로 덮어쓸 ModalContentTexts */
+  /** 텍스트 프리셋을 부분적으로 덮어쓸 ModalContentTexts */
   texts?: Partial<ModalContentTexts>;
 }
 

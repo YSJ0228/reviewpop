@@ -28,6 +28,15 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
 
   return (
     <>
+      {cloneElement(trigger as React.ReactElement<{ onClick?: React.MouseEventHandler }>, {
+        onClick: (e: React.MouseEvent) => {
+          // 모달 트리거가 다른 클릭 가능한 요소 내부에 있을 수 있으므로
+          // 이벤트 전파를 중단하여 의도하지 않은 동작 방지
+          e.stopPropagation();
+          e.preventDefault();
+          open();
+        },
+      })}
       <div
         onClick={(e) => {
           e.stopPropagation();
@@ -63,15 +72,6 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
           </div>
         </MantineModal>
       </div>
-      {cloneElement(trigger as React.ReactElement<{ onClick?: React.MouseEventHandler }>, {
-        onClick: (e: React.MouseEvent) => {
-          // 모달 트리거가 다른 클릭 가능한 요소 내부에 있을 수 있으므로
-          // 이벤트 전파를 중단하여 의도하지 않은 동작 방지
-          e.stopPropagation();
-          e.preventDefault();
-          open();
-        },
-      })}
     </>
   );
 }
