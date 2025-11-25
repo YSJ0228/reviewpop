@@ -53,7 +53,7 @@ export interface Reservation {
   updatedAt: string;
 
   /** 예약 유의 사항 */
-  precautions?: string[];
+  precautions?: string;
 }
 
 /**

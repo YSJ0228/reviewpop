@@ -45,7 +45,7 @@ export interface ReservationData {
   /** 방문 인원 */
   visitorCounter: number;
   /** 유의사항 */
-  precautions: string[];
+  precautions: string;
 }
 
 interface ReservationState {

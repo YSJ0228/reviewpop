@@ -8,7 +8,7 @@
   &__Loading,
   &__Error {
     @include flex($direction: column, $align: center, $justify: center);
-    min-height: 400px;
+    min-width: 360px;
     @include padding($y: 40, $x: 20);
     text-align: center;
 
@@ -17,25 +17,4 @@
       color: var(--color-gray-600);
     }
   }
-}
-
-.Placeholder {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 400px;
-
-  text-align: center;
-
-  // TODO: 개발 완료 후 제거
-}
-
-.Todo {
-  font-size: 14px;
-  color: #999;
-
-  // TODO: 개발 완료 후 제거
 }

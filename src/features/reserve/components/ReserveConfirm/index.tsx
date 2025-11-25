@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useEffect } from 'react';
+
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 import { mockReservationData } from '@features/reserve/store/mockReservationData';
 import styles from './style.module.scss';
@@ -56,10 +57,16 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
         </div>
       </div>
       <div className={styles.ReserveConfirm__Precautions}>
-        <h3>예약 유의 사항</h3>
-        {reservationData.precautions.map((precaution, index) => (
-          <p key={index}>{precaution}</p>
-        ))}
+        <div className={styles.ReserveConfirm__Precautions__Title}>
+          <button type="button">
+            <Image src="/images/CheckCircle.svg" alt="체크" width={18} height={18} />
+          </button>
+          <h3>예약 유의 사항</h3>
+        </div>
+        <div
+          className={styles.ReserveConfirm__Precautions__Text}
+          dangerouslySetInnerHTML={{ __html: reservationData.precautions || '' }}
+        />
       </div>
       <div>
         <button onClick={() => alert('예약 확정 API 호출 예정')}>예약 확정하기</button>
