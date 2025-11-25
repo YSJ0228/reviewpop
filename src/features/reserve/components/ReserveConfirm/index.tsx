@@ -69,12 +69,12 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
           ))}
         </ul>
       </div>
-      <div>
-        <button onClick={() => alert('예약 확정 API 호출 예정')}>예약 확정하기</button>
+      <div className={styles.ReserveConfirm__Button}>
+        <button onClick={() => alert('예약 확정 API 호출 예정')}>동의하고 예약하기</button>
         <p>
           {'버튼을 클릭하면 '}
-          <span>{'예약 유의사항,'}</span>
-          <Link href="">{'개인정보 수집 이용 동의,'}</Link>
+          <ins>{'예약 유의사항, '}</ins>
+          <ins>{'개인정보 수집 이용 동의, '}</ins>
           {'개인정보 제3자 (판매자) 제공에 동의하시는 것입니다.'}
         </p>
       </div>
