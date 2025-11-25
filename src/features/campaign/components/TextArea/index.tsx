@@ -17,7 +17,12 @@ export function TextArea({ label, maxTextCount, placeholder, text, setText }: Te
         }}
         placeholder={placeholder}
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          const value = e.target.value;
+          if (value.length <= maxTextCount) {
+            setText(value);
+          }
+        }}
         radius={10}
         styles={{
           label: {

@@ -41,6 +41,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
   const nameInput = useInputValidate('name');
   const phoneInput = useInputValidate('phone');
   const urlInput = useInputValidate('url');
+  const [text, setText] = useState<string>('');
   const [blogAddress, setBlogAddress] = useState<string>('');
 
   const [blogOpened, { open: blogOpen, close: blogClose }] = useDisclosure();
@@ -81,8 +82,8 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
             <TextArea
               label="전달하고 싶은 한마디(선택)"
               maxTextCount={300}
-              text={''}
-              setText={() => {}}
+              text={text}
+              setText={setText}
               placeholder="체험단에 선정되어야 할 이유가 있다면 알려주세요!"
             />
           </div>

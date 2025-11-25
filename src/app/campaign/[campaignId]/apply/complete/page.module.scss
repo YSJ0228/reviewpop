@@ -4,13 +4,4 @@
   min-height: 100vh;
   @include padding($y: 20, $x: 16);
   @include flex($direction: column, $gap: 24, $align: center, $justify: center);
-  &__ButtonBar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    @include size($width: 100%);
-    @include padding($all: 16);
-    @include flex($justify: center, $align: center);
-  }
 }

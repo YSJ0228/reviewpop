@@ -3,10 +3,10 @@ import { use } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-import { Button } from '@shared/components';
 import { ConfirmationCard } from '@shared/components/ConfirmationCard';
 import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
 import { useCampaignDetails } from '@features/campaign';
+import { ButtonBar } from '@features/campaign/components/ButtonBar';
 
 import styles from './page.module.scss';
 
@@ -48,17 +48,13 @@ export default function CampaignApplyCompletePage({ params }: CampaignApplyCompl
           brand={campaign?.brand ?? ''}
           providedItems={campaign?.providedItems ?? ''}
         />
-        <div className={styles.CampaignApplyCompletePage__ButtonBar}>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              router.push('/my');
-            }}
-            fullWidth
-          >
-            신청 내역 보기
-          </Button>
-        </div>
+        <ButtonBar
+          text="신청 내역 보기"
+          variant="secondary"
+          onClick={() => {
+            router.push('/my');
+          }}
+        />
       </ErrorBoundary>
     </main>
   );
