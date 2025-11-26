@@ -39,6 +39,7 @@ export function LabeledInput({
   input,
   onClick,
   confirmMsg,
+  setConfirmMsg,
 }: LabeledInputProps) {
   const id = useId();
   const [touched, setTouched] = useState<boolean>(false);
@@ -65,7 +66,10 @@ export function LabeledInput({
               className={styles.LabeledInput__Input}
               placeholder={placeholder}
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => {
+                setValue(e.target.value);
+                setConfirmMsg('');
+              }}
               onFocus={() => {
                 setIsFocused(true);
                 setTouched(true);

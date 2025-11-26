@@ -1,8 +1,34 @@
-@use '../../../../shared/styles/mixins' as *;
+@use '@shared/styles/mixins' as *;
 
 .CampaignApplyCard {
   background-color: var(--color-blue-50);
   border-radius: 10px;
   @include flex($direction: column);
   @include size($width: 100%);
+
+  &.Small {
+    @include size($height: 52);
+    @include padding($top: 8, $left: 16);
+
+    .Brand {
+      @include font($size: 12, $weight: 600, $color: #333333);
+    }
+
+    .Items {
+      @include font($size: 12, $weight: 500, $color: #808080);
+    }
+  }
+
+  &.Large {
+    @include size($height: 103);
+    @include flex($justify: center, $align: center, $gap: 8);
+
+    .Brand {
+      @include font($size: 16, $weight: 700, $color: #4a4a4a);
+    }
+
+    .Items {
+      @include font($size: 14, $weight: 500, $color: #4a4a4a);
+    }
+  }
 }

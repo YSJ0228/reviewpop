@@ -1,15 +1,18 @@
-import { LabeledInput } from '@shared/components/LabeledInput';
-import { WebButton } from '@shared/components/WebButton';
-import { TextArea } from '../TextArea';
-
-import styles from './style.module.scss';
-import { ButtonBar } from '../ButtonBar';
-import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
+
+import { LabeledInput } from '@shared/components/LabeledInput';
+import { WebButton } from '@shared/components/WebButton';
+
+import { TextArea } from '../TextArea';
+import { ButtonBar } from '../ButtonBar';
+import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 import { BlogBottomSheet } from '../BlogBottomSheet';
 import { CautionBottomSheet } from '../CautionBottomSheet';
+
 import { ApplyFormProps } from './types';
+
+import styles from './style.module.scss';
 
 export function ApplyForm({ user }: ApplyFormProps) {
   const nameInput = useInputValidate('name', user?.name ?? '');

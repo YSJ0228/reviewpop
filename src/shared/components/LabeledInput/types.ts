@@ -19,4 +19,6 @@ export interface LabeledInputProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /** 버튼 클릭 후 주소 유효함을 확인하는 메세지 */
   confirmMsg?: string;
+  /** 확인 메세지 변경 핸들러*/
+  setConfirmMsg: (v: string) => void;
 }

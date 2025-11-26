@@ -14,9 +14,9 @@ export interface User {
   email: string;
   /** 이름 */
   name: string;
-  /** 이름 */
+  /** 전화번호 */
   phone: string;
-  /** 이름 */
+  /** 블로그 주소 */
   blog: string;
   /** 프로필 이미지 URL */
   profileImage: string | null;
