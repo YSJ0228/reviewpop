@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Colors } from '@shared/styles/colors';
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { Button } from '@shared/components';
-import { HISTORY_MESSAGES } from '@features/history/constants';
+import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
 import { useCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
 
 import type { CampaignSelectedCardProps } from './types';
@@ -18,7 +18,8 @@ import styles from './style.module.scss';
  */
 export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelectedCardProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  const bottomSheetData = useCampaignBottomSheetData(campaign.id);
+
+  const bottomSheetData = useCampaignBottomSheetData(campaign.id, visitStatus === 'scheduled');
 
   const router = useRouter();
 
@@ -44,13 +45,18 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
   if (visitStatus === 'before') {
     return (
       <footer className={styles.CampaignSelectedCard__ContentWrapper}>
-        <Button variant="primary" fullWidth radius={8} onClick={handleReservationClick}>
+        <Button
+          variant="primary"
+          fullWidth
+          radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
+          onClick={handleReservationClick}
+        >
           <span className={styles.CampaignSelectedCard__PrimaryText}>
             {HISTORY_MESSAGES.SET_VISIT_DATE}
           </span>
         </Button>
         <div className={styles.CampaignSelectedCard__WarningWrapper}>
-          <IconWarningCircle color={Colors.COLOR_GRAY_400} size={12} />
+          <IconWarningCircle color={Colors.COLOR_GRAY_400} size={HISTORY_UI.WARNING_ICON_SIZE} />
           <span className={styles.CampaignSelectedCard__WarningText}>
             {HISTORY_MESSAGES.RESERVATION_WARNING}
           </span>
@@ -63,53 +69,63 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
   if (visitStatus === 'scheduled') {
     return (
       <>
-        <Button variant="secondary" fullWidth radius={8} onClick={handleReviewMissionClick}>
+        <Button
+          variant="secondary"
+          fullWidth
+          radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
+          onClick={handleReviewMissionClick}
+        >
           <span className={styles.CampaignSelectedCard__BasicText}>
             {HISTORY_MESSAGES.REVIEW_MISSION}
           </span>
         </Button>
-        <BottomSheet
-          opened={opened}
-          onClose={close}
-          height={560}
-          footer={
-            <Button variant="secondary" fullWidth onClick={handleCampaignDetailClick}>
-              <span>체험 상세보기</span>
-            </Button>
-          }
-        >
-          <div className={styles.CampaignSelectedCard__BottomSheetContent}>
-            <section
-              aria-label="제공 혜택 내용"
-              className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
-            >
-              <div className={styles.CampaignSelectedCard__SectionContent}>
-                <h3>제공 혜택</h3>
-                <p className={styles.CampaignSelectedCard__SectionItem}>
-                  {bottomSheetData?.providedItems}
+        {opened && (
+          <BottomSheet
+            opened={opened}
+            onClose={close}
+            height={HISTORY_UI.BOTTOM_SHEET_HEIGHT}
+            footer={
+              <Button variant="secondary" fullWidth onClick={handleCampaignDetailClick}>
+                <span>체험 상세보기</span>
+              </Button>
+            }
+          >
+            <div className={styles.CampaignSelectedCard__BottomSheetContent}>
+              <section
+                aria-label="제공 혜택 내용"
+                className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
+              >
+                <div className={styles.CampaignSelectedCard__SectionContent}>
+                  <h3>제공 혜택</h3>
+                  <p className={styles.CampaignSelectedCard__SectionItem}>
+                    {bottomSheetData?.providedItems || '제공 혜택 정보가 없습니다.'}
+                  </p>
+                </div>
+                <p className={styles.CampaignSelectedCard__Description}>
+                  {bottomSheetData?.description}
                 </p>
-              </div>
-              <p className={styles.CampaignSelectedCard__Description}>
-                {bottomSheetData?.description}
-              </p>
-            </section>
-            <section
-              aria-label="후기 미션 내용"
-              className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
-            >
-              <div className={styles.CampaignSelectedCard__SectionContent}>
-                <h3>후기 미션</h3>
-                <ul className={styles.CampaignSelectedCard__MissionList}>
-                  {bottomSheetData?.reviewMission.map((mission) => (
-                    <li key={mission} className={styles.CampaignSelectedCard__MissionItem}>
-                      {mission}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          </div>
-        </BottomSheet>
+              </section>
+              <section
+                aria-label="후기 미션 내용"
+                className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
+              >
+                <div className={styles.CampaignSelectedCard__SectionContent}>
+                  <h3>후기 미션</h3>
+                  <ul className={styles.CampaignSelectedCard__MissionList}>
+                    {bottomSheetData?.reviewMission.map((mission, index) => (
+                      <li
+                        key={`mission-${index}`}
+                        className={styles.CampaignSelectedCard__MissionItem}
+                      >
+                        {mission}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+            </div>
+          </BottomSheet>
+        )}
       </>
     );
   }

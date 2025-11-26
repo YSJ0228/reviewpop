@@ -38,7 +38,10 @@ export function Button({
     .join(' ');
 
   // radius가 제공되면 인라인 스타일로 적용
-  const inlineStyle = radius !== undefined ? { ...style, borderRadius: `${radius}px` } : style;
+  const inlineStyle =
+    radius !== undefined
+      ? { ...style, borderRadius: `${Math.max(0, radius)}px` } // 음수 방지
+      : style;
 
   return (
     <button className={classNames} style={inlineStyle} {...props}>
