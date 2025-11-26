@@ -1,0 +1,29 @@
+@use '@shared/styles/mixins' as *;
+
+.ReservePrecautions {
+  @include flex($direction: column, $align: flex-start, $gap: 8px);
+
+  &__Title {
+    @include flex($align: center, $gap: 8px);
+  }
+
+  button {
+    @include flex($align: center, $justify: center);
+    border: none;
+    background: none;
+  }
+
+  h3 {
+    @include font($weight: 600);
+  }
+
+  ul {
+    @include padding($y: 16px, $right: 8px, $left: 24px);
+    list-style: disc;
+    margin: 0;
+    align-self: stretch;
+    border-radius: 12px;
+    border-bottom: 1px solid #f6f6f6;
+    background: var(--color-gray-25);
+  }
+}

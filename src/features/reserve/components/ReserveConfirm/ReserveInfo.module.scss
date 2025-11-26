@@ -1,0 +1,72 @@
+@use '@shared/styles/mixins' as *;
+
+.ReserveInfo {
+  @include flex($direction: column, $align: flex-start, $gap: 16px);
+  @include padding($all: 16px);
+  align-self: stretch;
+  border-radius: 12px;
+  border: 1px solid var(--color-gray-100);
+
+  span {
+    @include font($weight: 700);
+  }
+
+  &__Title {
+    @include flex($align: center, $gap: 16px);
+
+    img {
+      aspect-ratio: 1/1;
+      border-radius: 8px;
+      background: var(--color-gray-100);
+    }
+
+    &__Text {
+      @include flex($direction: column, $align: flex-start, $gap: 4px, $justify: center);
+      align-self: stretch;
+
+      p {
+        @include font($color: var(--color-gray-600));
+      }
+    }
+  }
+
+  &__Address {
+    @include flex($direction: column, $align: flex-start, $gap: 3px);
+
+    &__Detail {
+      width: 100%;
+      @include flex($align: center, $justify: space-between, $gap: 8px);
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      button {
+        @include size($width: 30px, $height: 30px);
+        @include flex($align: center, $justify: center);
+        cursor: pointer;
+        aspect-ratio: 1/1;
+        border-radius: 6px;
+        border: 1px solid var(--color-gray-100);
+        background: var(--color-white);
+      }
+    }
+  }
+
+  &__Date {
+    @include flex($direction: column, $align: flex-start, $gap: 4px);
+  }
+  &__Booker {
+    @include flex($direction: column, $align: flex-start, $gap: 4px);
+  }
+
+  &__Visitor {
+    @include flex($direction: column, $align: flex-start, $gap: 4px);
+  }
+}
+
+.BorderBottom {
+  align-self: stretch;
+  @include padding($bottom: 16px);
+  border-bottom: 1px solid var(--color-gray-100);
+}
