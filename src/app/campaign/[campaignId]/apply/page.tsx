@@ -1,6 +1,6 @@
 'use client';
 import { Suspense, use } from 'react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ApplyForm } from '@features/campaign/components/ApplyForm';
@@ -29,6 +29,7 @@ interface CampaignApplyPageProps {
 
 export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
   const { campaignId } = use(params);
+  const router = useRouter();
   const {
     data: campaign,
     isLoading: isLoadingCampaign,
@@ -46,7 +47,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
     return <div>캠페인 정보를 불러오는 중 오류가 발생했습니다.</div>;
   }
   if (errorUser) {
-    redirect(`/campaign/${campaignId}`);
+    router.push(`/campaign/${campaignId}`);
   }
 
   return (
