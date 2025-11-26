@@ -113,3 +113,10 @@ body[data-scroll-locked] {
 body[data-scroll-locked] {
   --removed-body-scroll-bar-size: 0px !important;
 }
+
+// Toast 위치 조정: BNB 위에 표시되도록
+/* stylelint-disable selector-class-pattern */
+.mantine-Notifications-root[data-position*='bottom'] {
+  bottom: calc(60px + env(safe-area-inset-bottom)) !important;
+}
+/* stylelint-enable selector-class-pattern */
