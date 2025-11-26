@@ -1,0 +1,23 @@
+@use '@shared/styles/mixins' as *;
+
+.CampaignContents {
+  @include padding($top: 16, $x: 16, $bottom: 16);
+  background: var(--color-white);
+}
+
+.Title {
+  @include font($size: 16, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-900);
+  @include margin($top: 0, $bottom: 8);
+}
+
+.Description {
+  @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-600);
+  @include margin($bottom: 12);
+
+  p {
+    @include margin($all: 0);
+    white-space: pre-line;
+  }
+}

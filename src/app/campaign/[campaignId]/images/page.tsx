@@ -1,38 +1,99 @@
 'use client';
 
-import { Suspense } from 'react';
+import Image from 'next/image';
+import { use, useState, useMemo } from 'react';
 
-import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { PageHeader } from '@shared/components/PageHeader';
+import { ImageViewer } from '@shared/components/ImageViewer';
+import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 
 import styles from './page.module.scss';
 
 /**
  * 체험 이미지 목록 페이지
- * - 하단 탭: X
- * - 체험의 전체 이미지 목록 표시
+ * - 체험의 전체 이미지 목록을 그리드로 표시
  * - 이미지 클릭 시 전체화면 모달 뷰어 표시
- *
- * TODO:
- * 1. [ ] ImageGallery 컴포넌트 구현 (@features/campaign/components/ImageGallery)
- * 2. [ ] ImageViewer 모달 연동 (@shared/components/ImageViewer)
- * 3. [ ] 체험 이미지 API 연동
- * 4. [ ] Swiper를 사용한 이미지 뷰어 구현
  */
-export default function CampaignImagesPage({ params }: { params: { campaignId: string } }) {
+interface CampaignImagesPageProps {
+  params: Promise<{
+    campaignId: string;
+  }>;
+}
+
+export default function CampaignImagesPage({ params }: CampaignImagesPageProps) {
+  const { campaignId } = use(params);
+  const { data: campaign, isLoading, error } = useCampaignDetails(campaignId);
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+
+  const images = useMemo(() => {
+    if (!campaign) return [];
+    if (campaign.imageUrls && campaign.imageUrls.length > 0) {
+      return campaign.imageUrls;
+    }
+    if (campaign.imageUrl) {
+      return [campaign.imageUrl];
+    }
+    return [];
+  }, [campaign]);
+
+  const handleImageClick = (index: number) => {
+    setViewerIndex(index);
+  };
+
+  const handleCloseViewer = () => {
+    setViewerIndex(null);
+  };
+
+  if (isLoading) {
+    return (
+      <div>
+        <PageHeader showBackButton />
+        <div className={styles.Loading}>
+          <p>이미지를 불러오는 중...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !campaign || images.length === 0) {
+    return (
+      <div>
+        <PageHeader showBackButton />
+        <div className={styles.Empty}>
+          <p>이미지를 불러올 수 없습니다.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <main className={styles.CampaignImagesPage}>
-      <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
-          {/* TODO: ImageGallery 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
-            <p>체험 ID: {params.campaignId}</p>
-            <p>전체 이미지 목록</p>
-            <p className={styles.Todo}>
-              features/campaign/components/ImageGallery 컴포넌트를 구현하세요
-            </p>
-          </div>
-        </Suspense>
-      </ErrorBoundary>
-    </main>
+    <div>
+      <PageHeader showBackButton />
+      <main className={styles.CampaignImagesPage}>
+        <div className={styles.GalleryGrid}>
+          {images.map((image, index) => (
+            <div key={index} className={styles.GalleryItem} onClick={() => handleImageClick(index)}>
+              <Image
+                src={image}
+                alt={`${campaign.title} 이미지 ${index + 1}`}
+                fill
+                className={styles.GalleryImage}
+                sizes="(max-width: 768px) 50vw, 25vw"
+                quality={90}
+              />
+            </div>
+          ))}
+        </div>
+      </main>
+
+      {viewerIndex !== null && (
+        <ImageViewer
+          images={images}
+          initialIndex={viewerIndex}
+          isOpen={true}
+          onClose={handleCloseViewer}
+        />
+      )}
+    </div>
   );
 }

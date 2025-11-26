@@ -7,11 +7,11 @@
   z-index: 9999;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 
   width: 100%;
   height: 100%;
+  background-color: #fff;
 }
 
 .Overlay {
@@ -22,69 +22,161 @@
   width: 100%;
   height: 100%;
 
-  background-color: rgb(0 0 0 / 90%);
+  background-color: transparent;
+  pointer-events: none;
 }
 
-.Content {
+.Header {
   position: relative;
-  z-index: 1;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-
-  // TODO: 실제 이미지 뷰어 스타일
-}
-
-.CloseButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   z-index: 2;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  height: 60px;
+  padding: 0 20px;
 
-  font-size: 24px;
-  color: white;
-
-  cursor: pointer;
-  background-color: rgb(0 0 0 / 50%);
-  border: none;
-  border-radius: 50%;
-
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: rgb(0 0 0 / 70%);
-  }
+  background-color: #fff;
 }
 
-.Placeholder {
+.ImageContainer {
+  position: relative;
+  flex: 1;
+
   display: flex;
-  flex-direction: column;
-  gap: 12px;
   align-items: center;
   justify-content: center;
 
-  padding: 40px;
-
-  text-align: center;
-  color: white;
-
-  // TODO: 개발 완료 후 제거
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
 }
 
-.Todo {
-  font-size: 14px;
-  color: #ccc;
+.Swiper {
+  width: 100%;
+  height: 100%;
 
-  // TODO: 개발 완료 후 제거
+  /* stylelint-disable selector-class-pattern */
+  :global(.swiper-slide) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.swiper-zoom-container) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  // 네비게이션 화살표 스타일
+  :global(.swiper-button-next),
+  :global(.swiper-button-prev) {
+    color: #333;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(255 255 255 / 80%);
+    border-radius: 50%;
+
+    &::after {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    &:hover {
+      background-color: rgba(255 255 255 / 90%);
+    }
+  }
+
+  :global(.swiper-button-next) {
+    right: 20px;
+  }
+
+  :global(.swiper-button-prev) {
+    left: 20px;
+  }
+
+  // 모바일에서 화살표 숨기기 (터치 제스처 사용)
+  @media (max-width: 768px) {
+    :global(.swiper-button-next),
+    :global(.swiper-button-prev) {
+      display: none;
+    }
+  }
+  /* stylelint-enable selector-class-pattern */
+}
+
+.Slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.Image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.Counter {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  text-align: center;
+}
+
+.CloseButton {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  z-index: 2;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  font-size: 24px;
+  font-weight: 400;
+  color: #000;
+
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  // 모바일에서 더 큰 터치 영역
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+    right: 16px;
+  }
+}
+
+// 헤더 내부의 닫기 버튼
+.Header .CloseButton {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
 }

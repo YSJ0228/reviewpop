@@ -1,10 +1,14 @@
 'use client';
 
-import { use } from 'react';
+import { use, useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { PageHeader } from '@shared/components/PageHeader';
+import { ImageGallery, ImageViewer } from '@shared/components/ImageViewer';
+import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusBar';
+import { CampaignContents } from '@features/campaign/components/CampaignContents';
+import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
-import { CAMPAIGN_STATUS_LABELS } from '@entities/campaign/types/campaign.types';
 import styles from './page.module.scss';
 interface CampaignDetailPageProps {
   params: Promise<{
@@ -14,7 +18,32 @@ interface CampaignDetailPageProps {
 
 export default function CampaignDetailPage({ params }: CampaignDetailPageProps) {
   const { campaignId } = use(params);
+  const router = useRouter();
   const { data: campaign, isLoading, error } = useCampaignDetails(campaignId);
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+
+  const images = useMemo(() => {
+    if (!campaign) return [];
+    if (campaign.imageUrls && campaign.imageUrls.length > 0) {
+      return campaign.imageUrls;
+    }
+    if (campaign.imageUrl) {
+      return [campaign.imageUrl];
+    }
+    return [];
+  }, [campaign]);
+
+  const handleImageClick = (index: number) => {
+    setViewerIndex(index);
+  };
+
+  const handleViewAllClick = () => {
+    router.push(`/campaign/${campaignId}/images`);
+  };
+
+  const handleCloseViewer = () => {
+    setViewerIndex(null);
+  };
 
   if (isLoading) {
     return (
@@ -42,18 +71,34 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
     <div className={styles.Page}>
       <PageHeader showBackButton />
 
-      {/* 메인 이미지 */}
-      <div className={styles.Page__ImageWrapper}>
-        <img src={campaign.imageUrl} alt={`${campaign.brand} ${campaign.title}`} />
-        <div
-          className={styles.Page__Badge}
-          aria-label={`상태: ${CAMPAIGN_STATUS_LABELS[campaign.status]}`}
-        >
-          {CAMPAIGN_STATUS_LABELS[campaign.status]}
-        </div>
+      <div className={styles.Page__ImageSection}>
+        <ImageGallery
+          images={images}
+          maxDisplay={4}
+          onImageClick={handleImageClick}
+          onViewAllClick={handleViewAllClick}
+        />
       </div>
 
-      {/* 기본 정보 */}
+      {viewerIndex !== null && (
+        <ImageViewer
+          images={images}
+          initialIndex={viewerIndex}
+          isOpen={true}
+          onClose={handleCloseViewer}
+        />
+      )}
+
+      <div className={styles.Page__StatusBarSection}>
+        <CampaignStatusBar campaign={campaign} />
+      </div>
+
+      <CampaignContents campaign={campaign} />
+
+      <div className={styles.Page__ValueSection}>
+        <CampaignValue campaign={campaign} />
+      </div>
+
       <section className={styles.Page__Section}>
         <p className={styles.Page__Brand}>{campaign.brand}</p>
         <h1 className={styles.Page__Title}>{campaign.title}</h1>

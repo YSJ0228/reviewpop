@@ -30,6 +30,17 @@ export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
   closed: '마감',
 };
 
+export type CampaignTabKey = Extract<
+  CampaignStatus,
+  'recruiting' | 'before_recruiting' | 'completed'
+>;
+
+export const CampaignTabs: Record<CampaignTabKey, string> = {
+  recruiting: '지금 모집중인 체험',
+  before_recruiting: '공개 예정',
+  completed: '지난 체험',
+};
+
 /**
  * 체험 카테고리
  */
@@ -60,6 +71,15 @@ export type ReviewPlatform = 'naver_blog' | 'other';
  * ISO(8601)
  */
 export type DateRange = [string, string];
+
+/**
+ * 지역명
+ * 시/도, 시/군/구
+ */
+interface Location {
+  sido: string;
+  sigungu: string;
+}
 
 export interface CampaignSchedule {
   applicationSchedule: DateRange;
@@ -93,8 +113,8 @@ export interface Campaign {
   schedule: CampaignSchedule;
 
   // 지역 (선택 사항)
-  /** 지역 제한 (예: "서울", "전국") */
-  location?: string;
+  /** 지역 제한, {시} {구} (예: "서울 강남구", 기본값: "전국") */
+  location?: Location;
   /** 상세 주소 (방문형 체험의 경우) */
   address?: string;
 
