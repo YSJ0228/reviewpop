@@ -21,3 +21,5 @@ export type {
 } from '@entities/campaign/types/campaign.types';
 export type { CampaignCardProps } from './components/CampaignCard/types';
 export type { CampaignListProps } from './components/CampaignList/types';
+export type { CampaignContentsProps } from './components/CampaignContents';
+export type { CampaignValueProps } from './components/CampaignValue';
