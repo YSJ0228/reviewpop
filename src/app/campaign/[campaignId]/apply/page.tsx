@@ -1,12 +1,10 @@
 'use client';
-
 import { Suspense, use } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
-import { useCampaignDetails } from '@features/campaign';
-import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { ApplyForm } from '@features/campaign/components/ApplyForm';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
+import { useCampaignDetails } from '@features/history';
 
 import styles from './page.module.scss';
 
@@ -35,7 +33,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
     isLoading: isLoadingCampaign,
     error: errorCampaign,
   } = useCampaignDetails(campaignId);
-  const { data: user, isLoading: isLoadingUser, error: errorUser } = useUserInfo('kakao-1001'); //수정 예정
+  const { data: user, isLoading: isLoadingUser, error: errorUser } = useUserInfo();
 
   //로딩 처리
   if (isLoadingCampaign || isLoadingUser) {
@@ -55,12 +53,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: ApplyForm 컴포넌트 추가 */}
-          <CampaignApplyCard
-            brand={campaign?.brand ?? ''}
-            size="sm"
-            providedItems={campaign?.providedItems ?? ''}
-          />
-          <ApplyForm user={user} />
+          <ApplyForm campaign={campaign} user={user} />
         </Suspense>
       </ErrorBoundary>
     </main>

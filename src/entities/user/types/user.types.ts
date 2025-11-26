@@ -15,9 +15,9 @@ export interface User {
   /** 이름 */
   name: string;
   /** 전화번호 */
-  phone: string;
+  phone?: string;
   /** 블로그 주소 */
-  blog: string;
+  blog?: string;
   /** 프로필 이미지 URL */
   profileImage: string | null;
   /** OAuth Provider */

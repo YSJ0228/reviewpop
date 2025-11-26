@@ -9,11 +9,11 @@ interface UserResponse {
 /**
  * 유저 정보를 가져오는 React Query 훅
  */
-export function useUserInfo(id: string) {
+export function useUserInfo() {
   return useQuery({
-    queryKey: ['user', id],
+    queryKey: ['user'],
     queryFn: async (): Promise<User> => {
-      const response = await fetch(`/api/users/${id}`);
+      const response = await fetch('/api/auth/me', { credentials: 'include' });
       if (!response.ok) {
         throw new Error('유저 정보를 가져올 수 없습니다.');
       }

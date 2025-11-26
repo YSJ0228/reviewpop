@@ -3,18 +3,19 @@ import { useDisclosure } from '@mantine/hooks';
 
 import { LabeledInput } from '@shared/components/LabeledInput';
 import { WebButton } from '@shared/components/WebButton';
+import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
 import { TextArea } from '../TextArea';
 import { ButtonBar } from '../ButtonBar';
-import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 import { BlogBottomSheet } from '../BlogBottomSheet';
 import { CautionBottomSheet } from '../CautionBottomSheet';
+import { CampaignApplyCard } from '../CampaignApplyCard';
 
 import { ApplyFormProps } from './types';
 
 import styles from './style.module.scss';
 
-export function ApplyForm({ user }: ApplyFormProps) {
+export function ApplyForm({ campaign, user }: ApplyFormProps) {
   const nameInput = useInputValidate('name', user?.name ?? '');
   const phoneInput = useInputValidate('phone', user?.phone ?? '');
 
@@ -26,6 +27,11 @@ export function ApplyForm({ user }: ApplyFormProps) {
 
   return (
     <div>
+      <CampaignApplyCard
+        size="sm"
+        brand={campaign?.brand ?? ''}
+        providedItems={campaign?.providedItems ?? ''}
+      />
       <div className={styles.ApplyForm}>
         <WebButton label="네이버 블로그 주소" buttonType="connect" onClick={blogOpen} text={blog} />
         <LabeledInput label="이름" placeholder="이름 입력" input={nameInput} />
