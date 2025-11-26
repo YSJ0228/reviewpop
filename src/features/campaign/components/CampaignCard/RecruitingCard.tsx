@@ -6,11 +6,9 @@ import { diff, formatDate, now } from '@shared/lib/date';
 
 import type { CampaignCardProps } from './types';
 
-import { CampaignCountdown } from './CampaignCountdown';
-
 import styles from './style.module.scss';
 
-export function CampaignCard({ campaign }: CampaignCardProps) {
+export function RecruitingCard({ campaign }: CampaignCardProps) {
   const givenTime = campaign.schedule.applicationSchedule[1];
   const currentTime = now();
   const diffInDays = Math.max(0, diff(givenTime, currentTime, 'day'));
@@ -29,7 +27,7 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           style={{ objectFit: 'cover' }}
         />
         <div className={styles.CampaignCard__Badge} aria-label={`상태: ${campaign.location}`}>
-          {campaign.location}
+          {campaign.location ? `${campaign.location.sido} ${campaign.location.sigungu}` : '전국'}
         </div>
         <div className={styles.CampaignCard__Wrapper}>
           <div className={styles.CampaignCard__Header}>
@@ -37,41 +35,28 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
             <p className={styles.CampaignCard__Items}>{campaign.providedItems}</p>
           </div>
-          {campaign.status === 'in_progress' && (
-            <div className={styles.CampaignCard__Content__Active}>
-              <div>
-                <div className={styles.CampaignCard__Recruitment}>
-                  <span>
-                    <b>{diffInDays}일 남음</b>
-                  </span>
-                  <span>
-                    <b>{`신청 ${campaign.currentRecruitment}명`}</b>
-                    {`/${campaign.maxRecruitment}명`}
-                  </span>
-                </div>
-                <div className={styles.CampaignCard__Meta}>
-                  <span>체험단 모집</span>
-                  <time dateTime={campaign.schedule.applicationSchedule[0]}>
-                    {applicationSchedule.join(' ~ ')}
-                  </time>
-                </div>
+          <div className={styles.CampaignCard__Content__Active}>
+            <div>
+              <div className={styles.CampaignCard__Recruitment}>
+                <span>
+                  <b>{diffInDays ? `${diffInDays}일 남음` : '오늘 마감'}</b>
+                </span>
+                <span>
+                  <b>{`신청 ${campaign.currentRecruitment}명`}</b>
+                  {`/${campaign.maxRecruitment}명`}
+                </span>
               </div>
-              <div className={styles.CampaignCard__Button} aria-hidden={true}>
-                <IconArrowRight color="white" />
+              <div className={styles.CampaignCard__Meta}>
+                <span>체험단 모집</span>
+                <time dateTime={campaign.schedule.applicationSchedule[0]}>
+                  {applicationSchedule.join(' ~ ')}
+                </time>
               </div>
             </div>
-          )}
-          {campaign.status === 'before_recruiting' && (
-            <div className={styles.CampaignCard__Content__Before}>
-              <span>오픈까지</span>
-              <CampaignCountdown targetDate={campaign.schedule.applicationSchedule[0]} />
+            <div className={styles.CampaignCard__Button} aria-hidden={true}>
+              <IconArrowRight color="white" />
             </div>
-          )}
-          {campaign.status === 'closed' && (
-            <div className={styles.CampaignCard__Content__Closed}>
-              <span>종료된 체험</span>
-            </div>
-          )}
+          </div>
         </div>
       </article>
     </Link>

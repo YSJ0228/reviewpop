@@ -116,7 +116,7 @@ export const applicationHandlers = [
     }
 
     // 체험 상태 확인
-    if (campaign.status !== 'in_progress') {
+    if (campaign.status !== 'recruiting') {
       return HttpResponse.json(
         {
           success: false,

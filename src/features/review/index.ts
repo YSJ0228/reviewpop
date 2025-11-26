@@ -18,6 +18,8 @@ export {
   reviewKeys,
 } from './hooks/useReviews';
 
+export { useBlogReviews } from './hooks/useBlogReviews';
+
 // API
 export {
   getReviews,
