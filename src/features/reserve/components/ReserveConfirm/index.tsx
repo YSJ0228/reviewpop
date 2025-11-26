@@ -39,8 +39,6 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     });
   };
 
-  if (!reservationData) return null;
-
   return (
     <div className={styles.ReserveConfirm}>
       <div className={styles.ReserveConfirm__Content}>
