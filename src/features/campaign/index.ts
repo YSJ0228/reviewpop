@@ -8,6 +8,7 @@
 export { CampaignCard } from './components/CampaignCard';
 export { CampaignList } from './components/CampaignList';
 export { CampaignContents } from './components/CampaignContents';
+export { CampaignValue } from './components/CampaignValue';
 
 // Hooks
 export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
@@ -22,3 +23,4 @@ export type {
 export type { CampaignCardProps } from './components/CampaignCard/types';
 export type { CampaignListProps } from './components/CampaignList/types';
 export type { CampaignContentsProps } from './components/CampaignContents';
+export type { CampaignValueProps } from './components/CampaignValue';
