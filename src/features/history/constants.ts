@@ -18,3 +18,13 @@ export const HISTORY_MESSAGES = {
   UNKNOWN_ERROR: '알 수 없는 오류가 발생했습니다.',
   NO_REJECTED_CAMPAIGNS: '미선정 캠페인이 없습니다.',
 } as const;
+
+/** 나의 체험에서 사용되는 매직넘버 관련 상수 */
+export const HISTORY_UI = {
+  /** 버튼 border radius */
+  BUTTON_RADIUS_MEDIUM: 8,
+  /** 바텀시트 높이 */
+  BOTTOM_SHEET_HEIGHT: 560,
+  /** 경고 아이콘 크기 */
+  WARNING_ICON_SIZE: 12,
+} as const;

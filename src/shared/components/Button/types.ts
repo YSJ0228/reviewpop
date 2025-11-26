@@ -15,4 +15,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large';
   /** 전체 너비 사용 여부 */
   fullWidth?: boolean;
+  /** 버튼 모서리 둥글기 */
+  radius?: number;
 }
