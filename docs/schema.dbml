@@ -12,11 +12,11 @@ Enum campaign_status {
 
 // 지원 상태
 Enum application_status {
-    "pending" [note: "대기 중, 선정 결과 발표 전"]
-    "selected" [note: "체험 선정 됨"] 
-    "rejected" [note: "지원 거절 됨"] 
-    "completed" [note: "체험 완료"]
-    "cancelled" [note: "체험이 사라짐, 정원 미달 등"]
+  "pending" [note: "대기 중, 선정 결과 발표 전"]
+  "selected" [note: "체험 선정 됨"] 
+  "rejected" [note: "지원 거절 됨"] 
+  "completed" [note: "체험 완료"]
+  "cancelled" [note: "체험이 사라짐, 정원 미달 등"]
 }
 
 Enum review_status {
@@ -69,7 +69,7 @@ Enum notification_type {
 
 // 유저
 Table user {
-  id varchar [pk, note: "유저 ID"]
+  id int [pk, note: "유저 ID"]
   phone_number varchar [unique, not null]
   blog_address varchar [not null, note: "블로그 주소"]
   name varchar [not null]
@@ -79,7 +79,12 @@ Table user {
 }
 
 Table campaign {
-  id varchar [pk, note: "체험 ID"]
+  indexes {
+    status
+    (status, application_start)
+    created_at
+  }
+  id int [pk, note: "체험 ID"]
 
   // 기본 정보
   title varchar [not null, note: "체험 제목"]
@@ -127,18 +132,10 @@ Table campaign {
   updated_at datetime [not null, note: "수정일"]
 }
 
-Table campaign_delivery_info {
-  id int [pk, increment]
-    campaign_id varchar [pk, ref: - campaign.id]
-    shipping_start_date datetime [note: "배송 시작 예정일"]
-    carrier varchar [note: "택배사"]
-    notice text [note: "배송 관련 유의사항"]
-}
-
 // 방문 예약 정보
 Table visit_reservation {
   id int [pk, increment]
-  campaign_id varchar [ref: - campaign.id]
+  campaign_id int [ref: - campaign.id]
   business_hours json
   is_reservation_required boolean [default: true]
   reservation_method varchar
@@ -150,15 +147,19 @@ Table visit_reservation {
 // 방문 가능 시간
 Table reservation_available {
   id int [pk, increment]
-  campaign_id varchar [ref: > campaign.id]
+  campaign_id int [ref: > campaign.id]
   schedule datetime [not null]
 }
 
 // 리뷰
 Table review {
+  indexes {
+    (user_id, campaign_id)
+    status
+  }
   id int [pk, increment]
-  campaign_id varchar [not null, ref: > campaign.id]
-  user_id varchar [not null, ref: > user.id]
+  campaign_id int [not null, ref: > campaign.id]
+  user_id int [not null, ref: > user.id]
 
   status review_status [not null]
   
@@ -169,26 +170,31 @@ Table review {
 }
 
 Table campaign_application { 
-    // 기존 MyCampaign, Application 타입을 대체
-    // User 테이블의 정보를 참조하되, 신청 시점의 유저 정보 스냅샷 저장
-    id int [pk, increment]
-    campaign_id varchar [not null, ref: > campaign.id]
-    user_id varchar [not null, ref: > user.id , note: "User Table 참조"]
-    blog_address varchar [note: "블로그 주소"]
-    name varchar [not null, note: "이름"]
-    phone_number varchar [not null, note: "휴대폰 번호"]
-    message text [note: "전달하고 싶은 한마디"]
+  // 기존 MyCampaign, Application 타입을 대체
+  // User 테이블의 정보를 참조하되, 신청 시점의 유저 정보 스냅샷 저장
+  indexes {
+    (user_id, campaign_id) [unique]
+    status
+  }
 
-    status application_status [not null, default: "pending"]
-    created_at datetime [default: `now()`, not null]
-    updated_at datetime
+  id int [pk, increment]
+  campaign_id int [not null, ref: > campaign.id]
+  user_id int [not null, ref: > user.id , note: "User Table 참조"]
+  blog_address varchar [note: "블로그 주소"]
+  name varchar [not null, note: "이름"]
+  phone_number varchar [not null, note: "휴대폰 번호"]
+  message text [note: "전달하고 싶은 한마디"]
+
+  status application_status [not null, default: "pending"]
+  created_at datetime [default: `now()`, not null]
+  updated_at datetime
 }
 
  // 수정 요청
  Table review_request {
   id int [pk, increment]
-  user_id varchar [ref: > user.id]
-  review_id varchar [ref: > review.id]
+  user_id int [ref: > user.id]
+  review_id int [ref: > review.id]
   image_urls json
   content text [not null]
   precaution json [not null]
@@ -197,8 +203,9 @@ Table campaign_application {
  // 유저 체험 예약
 Table user_reservation {
   id int [pk, increment]
-  campaign_id varchar [not null, ref: > campaign.id]
-  user_id varchar [not null, ref: > user.id]
+  campaign_id int [not null, ref: > campaign.id]
+  user_id int [not null, ref: > user.id]
+  reservation_available_id int [ref: > reservation_available.id]
   reservation_date datetime [not null]
   person_count int [not null]
   status user_reservation_status [not null]
@@ -207,8 +214,8 @@ Table user_reservation {
  // 알림
  Table notification {
   id int [pk, increment]
-  campaign_id varchar [ref: > campaign.id]
-  user_id varchar [not null, ref: > user.id]
+  campaign_id int [ref: > campaign.id]
+  user_id int [not null, ref: > user.id]
   is_watched boolean [not null]
   title varchar [not null]
   content text [not null]

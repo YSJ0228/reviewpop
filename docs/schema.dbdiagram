@@ -14,25 +14,19 @@
       "name": "campaign",
       "schemaName": "public",
       "x": 16,
-      "y": 344
-    },
-    {
-      "name": "campaign_delivery_info",
-      "schemaName": "public",
-      "x": 608,
-      "y": 1392
+      "y": 312
     },
     {
       "name": "visit_reservation",
       "schemaName": "public",
       "x": 608,
-      "y": 1624
+      "y": 1360
     },
     {
       "name": "reservation_available",
       "schemaName": "public",
       "x": 608,
-      "y": 1960
+      "y": 352
     },
     {
       "name": "review",
@@ -44,45 +38,30 @@
       "name": "campaign_application",
       "schemaName": "public",
       "x": 608,
-      "y": 352
+      "y": 592
     },
     {
       "name": "review_request",
       "schemaName": "public",
-      "x": 1176,
+      "x": 1160,
       "y": 16
     },
     {
       "name": "user_reservation",
       "schemaName": "public",
-      "x": 608,
-      "y": 752
+      "x": 1160,
+      "y": 280
     },
     {
       "name": "notification",
       "schemaName": "public",
       "x": 608,
-      "y": 1024
+      "y": 992
     }
   ],
   "tableGroupCollapseStates": [],
   "stickyNoteLayouts": [],
   "referencePaths": [
-    {
-      "firstFieldNames": [
-        "id"
-      ],
-      "firstTableName": "campaign",
-      "firstSchemaName": "public",
-      "firstRelation": "1",
-      "secondFieldNames": [
-        "campaign_id"
-      ],
-      "secondTableName": "campaign_delivery_info",
-      "secondSchemaName": "public",
-      "secondRelation": "1",
-      "checkPoints": []
-    },
     {
       "firstFieldNames": [
         "id"
@@ -227,6 +206,21 @@
       "firstRelation": "1",
       "secondFieldNames": [
         "user_id"
+      ],
+      "secondTableName": "user_reservation",
+      "secondSchemaName": "public",
+      "secondRelation": "*",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "id"
+      ],
+      "firstTableName": "reservation_available",
+      "firstSchemaName": "public",
+      "firstRelation": "1",
+      "secondFieldNames": [
+        "reservation_available_id"
       ],
       "secondTableName": "user_reservation",
       "secondSchemaName": "public",
