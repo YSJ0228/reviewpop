@@ -6,7 +6,7 @@ import { findCampaignById, mockCampaignDetails } from '@entities/campaign/lib';
  * @param enabled - 데이터 조회 활성화 여부 (기본값: true) (방문 전 상태인 경우 false)
  * @returns 바텀시트에 필요한 Campaign 데이터
  */
-export function useCampaignBottomSheetData(campaignId: string, enabled: boolean = true) {
+export function getCampaignBottomSheetData(campaignId: string, enabled: boolean = true) {
   // enabled가 false이면 데이터 조회를 건너뜀
   if (!enabled) {
     return null;

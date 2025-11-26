@@ -6,7 +6,7 @@ import { Colors } from '@shared/styles/colors';
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { Button } from '@shared/components';
 import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
-import { useCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
+import { getCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
 
 import type { CampaignSelectedCardProps } from './types';
 
@@ -19,7 +19,7 @@ import styles from './style.module.scss';
 export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelectedCardProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const bottomSheetData = useCampaignBottomSheetData(campaign.id, visitStatus === 'scheduled');
+  const bottomSheetData = getCampaignBottomSheetData(campaign.id, visitStatus === 'scheduled');
 
   const router = useRouter();
 
