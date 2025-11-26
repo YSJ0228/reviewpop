@@ -5,8 +5,9 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 10;
   min-width: 360px;
+  width: 100%;
   @include flex($align: center, $gap: 12);
   height: 56px;
   @include padding($y: 0, $x: 16);
