@@ -1,3 +1,5 @@
+import '@pop-ui/core/styles.css';
+
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';

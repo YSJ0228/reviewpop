@@ -18,6 +18,13 @@
   }
 }
 
+.Page__ImageSection {
+  position: relative;
+  width: 100%;
+  @include padding($y: 16, $x: 24);
+  background: var(--color-white);
+}
+
 .Page__ImageWrapper {
   position: relative;
   width: 100%;
@@ -36,12 +43,14 @@
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 1;
   @include padding($y: 8, $x: 16);
   background: rgb(0 0 0 / 85%);
   color: var(--color-white);
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
+  pointer-events: none;
 }
 
 .Page__Section {
