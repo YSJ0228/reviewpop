@@ -68,7 +68,7 @@ export function LabeledInput({
               value={value}
               onChange={(e) => {
                 setValue(e.target.value);
-                setConfirmMsg('');
+                if (setConfirmMsg) setConfirmMsg('');
               }}
               onFocus={() => {
                 setIsFocused(true);

@@ -1,4 +1,4 @@
-export type InputType = {
+type TInputType = {
   value: string;
   setValue: (v: string) => void;
   errorMsg: string;
@@ -14,11 +14,11 @@ export interface LabeledInputProps {
   /** URL 확인 버튼 표시 여부 */
   showButton?: boolean;
   /** 현재 입력값, 입력값 변경 핸들러, 에러 메세지*/
-  input: InputType;
+  input: TInputType;
   /** 버튼 클릭 시 동작(블로그 주소에만 사용) */
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /** 버튼 클릭 후 주소 유효함을 확인하는 메세지 */
   confirmMsg?: string;
   /** 확인 메세지 변경 핸들러*/
-  setConfirmMsg: (v: string) => void;
+  setConfirmMsg?: (v: string) => void;
 }
