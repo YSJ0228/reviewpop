@@ -1,15 +1,16 @@
-import { Button } from '@pop-ui/core';
 import { IconWarningCircle } from '@pop-ui/foundation';
+import { useDisclosure } from '@mantine/hooks';
+import { useRouter } from 'next/navigation';
 
 import { Colors } from '@shared/styles/colors';
+import { BottomSheet } from '@shared/components/BottomSheet';
+import { Button } from '@shared/components';
 import { HISTORY_MESSAGES } from '@features/history/constants';
+import { useCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
+
 import type { CampaignSelectedCardProps } from './types';
 
 import styles from './style.module.scss';
-import { BottomSheet } from '@shared/components/BottomSheet';
-
-import { useDisclosure } from '@mantine/hooks';
-import { useCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
 
 /**
  * 선정된 체험 카드의 액션 영역 컴포넌트
@@ -17,8 +18,13 @@ import { useCampaignBottomSheetData } from '@features/history/hooks/useCampaignB
  */
 export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelectedCardProps) {
   const [opened, { open, close }] = useDisclosure(false);
-
   const bottomSheetData = useCampaignBottomSheetData(campaign.id);
+
+  const router = useRouter();
+
+  const handleCampaignDetailClick = () => {
+    router.push(`/campaign/${campaign.id}`);
+  };
 
   // TODO: 방문 날짜 설정 버튼 클릭 핸들러
   const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,36 +63,50 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
   if (visitStatus === 'scheduled') {
     return (
       <>
-        <Button variant="basic" fullWidth radius={8} onClick={handleReviewMissionClick}>
+        <Button variant="secondary" fullWidth radius={8} onClick={handleReviewMissionClick}>
           <span className={styles.CampaignSelectedCard__BasicText}>
             {HISTORY_MESSAGES.REVIEW_MISSION}
           </span>
         </Button>
-        <BottomSheet opened={opened} onClose={close} height={512}>
+        <BottomSheet
+          opened={opened}
+          onClose={close}
+          height={560}
+          footer={
+            <Button variant="secondary" fullWidth onClick={handleCampaignDetailClick}>
+              <span>체험 상세보기</span>
+            </Button>
+          }
+        >
           <div className={styles.CampaignSelectedCard__BottomSheetContent}>
             <section
               aria-label="제공 혜택 내용"
               className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
             >
-              <h3>제공 혜택</h3>
-              <p className={styles.CampaignSelectedCard__SectionItem}>
-                {bottomSheetData?.providedItems}
-              </p>
+              <div className={styles.CampaignSelectedCard__SectionContent}>
+                <h3>제공 혜택</h3>
+                <p className={styles.CampaignSelectedCard__SectionItem}>
+                  {bottomSheetData?.providedItems}
+                </p>
+              </div>
               <p className={styles.CampaignSelectedCard__Description}>
                 {bottomSheetData?.description}
               </p>
             </section>
             <section
               aria-label="후기 미션 내용"
-              className={styles.CampaignSelectedCard__BottomSheetContent__Section}
+              className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
             >
-              <h3>후기 미션</h3>
-              <ul>
-                {bottomSheetData?.reviewMission.map((mission) => (
-                  <li key={mission}>{mission}</li>
-                ))}
-              </ul>
-              <p>{bottomSheetData?.reviewMissionNotice}</p>
+              <div className={styles.CampaignSelectedCard__SectionContent}>
+                <h3>후기 미션</h3>
+                <ul className={styles.CampaignSelectedCard__MissionList}>
+                  {bottomSheetData?.reviewMission.map((mission) => (
+                    <li key={mission} className={styles.CampaignSelectedCard__MissionItem}>
+                      {mission}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </section>
           </div>
         </BottomSheet>

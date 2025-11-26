@@ -39,12 +39,28 @@
   );
 }
 
+// Drawer content 요소를 기준으로 버튼 위치 조정
+.CampaignSelectedCard__BottomSheetContentWrapper {
+  position: relative;
+}
+
+.CampaignSelectedCard__BottomSheetWrapper {
+  @include flex($direction: column);
+  height: 100%;
+}
+
 .CampaignSelectedCard__BottomSheetContent {
+  overflow-y: auto;
   @include flex($direction: column, $gap: 24);
 }
 
 .CampaignSelectedCard__BottomSheetContent--Section {
-  @include flex($direction: column, $gap: 24);
+  @include flex($direction: column, $gap: 8);
+
+  &:first-child {
+    border-bottom: 1px solid var(--gray-50);
+    padding-bottom: 24px;
+  }
 
   h3 {
     @include font(
@@ -57,13 +73,17 @@
   }
 }
 
+.CampaignSelectedCard__SectionContent {
+  @include flex($direction: column, $gap: 24);
+}
+
 .CampaignSelectedCard__SectionItem {
   @include font(
     $size: 16,
-    $weight: 500,
+    $weight: 700,
     $line-height: 1.5,
     $letter-spacing: -0.02em,
-    $color: var(--color-blue-500)
+    $color: var(--gray-900)
   );
 }
 
@@ -75,4 +95,20 @@
     $letter-spacing: -0.02em,
     $color: var(--gray-600)
   );
+}
+
+.CampaignSelectedCard__MissionList {
+  padding-left: 20px;
+  list-style: disc;
+  @include flex($direction: column, $gap: 8);
+
+  .CampaignSelectedCard__MissionItem {
+    @include font(
+      $size: 14,
+      $weight: 500,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
 }
