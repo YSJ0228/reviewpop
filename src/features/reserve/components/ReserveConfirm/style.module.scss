@@ -1,7 +1,7 @@
 @use '@shared/styles/mixins' as *;
 
 .ReserveConfirm {
-  @include flex($direction: column, $align: flex-start, $gap: 24px);
+  @include flex($direction: column, $align: flex-start, $gap: 16px);
 
   @include font(
     $size: 14px,
@@ -13,5 +13,9 @@
 
   h3 {
     @include font($size: 16px, $weight: 700, $letter-spacing: -0.32px);
+  }
+
+  &__Content {
+    @include flex($direction: column, $align: flex-start, $gap: 24px);
   }
 }

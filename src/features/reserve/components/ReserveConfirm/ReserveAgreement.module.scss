@@ -3,28 +3,12 @@
 .ReserveAgreement {
   @include flex($direction: column, $align: flex-start, $gap: 8px);
 
-  background: var(--value-gray-white, #fff);
+  @include padding($top: 16px);
+  border-top: 1px solid var(--color-gray-50);
+  background: var(--color-white);
 
-  @include padding($top: 8px);
-  button {
-    @include padding($x: 20px);
-    @include flex($align: center, $justify: center);
-    height: 50px;
-    align-self: stretch;
-
-    border: none;
-    border-radius: 10px;
-    background: var(--value-aqua-500, #0fd3d8);
-
-    @include font(
-      $size: 16px,
-      $weight: 700,
-      $letter-spacing: -0.32px,
-      $line-height: 150%,
-      $color: var(--color-white)
-    );
-
-    text-align: center;
+  &__Button {
+    @include font($size: 16px, $weight: 700, $letter-spacing: -0.32px);
   }
 
   p {

@@ -53,7 +53,39 @@ export interface Reservation {
   updatedAt: string;
 
   /** 예약 유의 사항 */
-  precautions?: string;
+  precautions?: string[];
+}
+
+/**
+ * 예약 생성 요청 DTO
+ */
+export interface CreateReservationRequest {
+  campaignId: string;
+  userId: string;
+  visitors: number;
+  booker: string;
+  phoneNumber: string;
+  reservedAt: {
+    date: string;
+    hour: string;
+  };
+  precautions?: string[];
+}
+
+/**
+ *  예약 수정 요청 DTO
+ */
+export interface UpdateReservationRequest {
+  campaignId: string;
+  userId: string;
+  visitors: number;
+  booker: string;
+  phoneNumber: string;
+  reservedAt: {
+    date: string;
+    hour: string;
+  };
+  precautions?: string[];
 }
 
 /**

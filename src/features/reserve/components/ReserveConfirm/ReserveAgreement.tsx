@@ -1,3 +1,4 @@
+import { Button } from '@shared/components/Button';
 import styles from './ReserveAgreement.module.scss';
 
 interface ReserveAgreementProps {
@@ -7,7 +8,14 @@ interface ReserveAgreementProps {
 export function ReserveAgreement({ onConfirm }: ReserveAgreementProps) {
   return (
     <div className={styles.ReserveAgreement}>
-      <button onClick={onConfirm}>동의하고 예약하기</button>
+      <Button
+        fullWidth
+        size="large"
+        onClick={onConfirm}
+        className={styles.ReserveAgreement__Button}
+      >
+        동의하고 예약하기
+      </Button>
       <p>
         {'버튼을 클릭하면 '}
         <ins>{'예약 유의사항, '}</ins>
