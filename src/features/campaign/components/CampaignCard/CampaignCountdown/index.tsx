@@ -1,6 +1,7 @@
 'use client';
 
 import { useCountdown } from '@shared/hooks/useCountdown';
+import { formatDate } from '@shared/lib/date';
 
 export function CampaignCountdown({ targetDate }: { targetDate: string }) {
   const totalSeconds = useCountdown(targetDate);
@@ -12,5 +13,11 @@ export function CampaignCountdown({ targetDate }: { targetDate: string }) {
     .toString()
     .padStart(2, '0');
 
-  return <span>{`${hours}:${minutes}:${seconds}`}</span>;
+  return (
+    <span>
+      {Number(hours) >= 24
+        ? `${formatDate(targetDate, 'MMDD_LONG')} 오픈`
+        : `오픈까지 ${hours}:${minutes}:${seconds}`}
+    </span>
+  );
 }

@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 
 import { PageHeader } from '@shared/components/PageHeader';
 import { ImageGallery, ImageViewer } from '@shared/components/ImageViewer';
+import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusBar';
+import { CampaignContents } from '@features/campaign/components/CampaignContents';
+import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import styles from './page.module.scss';
 interface CampaignDetailPageProps {
@@ -85,6 +88,16 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
           onClose={handleCloseViewer}
         />
       )}
+
+      <div className={styles.Page__StatusBarSection}>
+        <CampaignStatusBar campaign={campaign} />
+      </div>
+
+      <CampaignContents campaign={campaign} />
+
+      <div className={styles.Page__ValueSection}>
+        <CampaignValue campaign={campaign} />
+      </div>
 
       <section className={styles.Page__Section}>
         <p className={styles.Page__Brand}>{campaign.brand}</p>
