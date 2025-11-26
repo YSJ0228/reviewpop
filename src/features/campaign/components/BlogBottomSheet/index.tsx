@@ -9,7 +9,7 @@ import { ButtonBar } from '../ButtonBar';
 import { BlogBottomSheetProps } from './types';
 
 export function BlogBottomSheet({ opened, onClose, blog, setBlog }: BlogBottomSheetProps) {
-  const urlInput = useInputValidate('url', blog?.replace('blog.naver.com/', ''));
+  const urlInput = useInputValidate('url', blog?.replace('blog.naver.com/', '') ?? '');
   const [confirmMsg, setConfirmMsg] = useState<string>('');
   return (
     <BottomSheet opened={opened} onClose={onClose} title="블로그 아이디를 입력해주세요">

@@ -137,15 +137,16 @@ export const authHandlers = [
       );
     }
 
-    // 사용자 정보 반환
-    const user = {
-      id: payload.userId,
-      email: payload.email,
-      name: payload.name,
-      profileImage: null, // JWT에는 프로필 이미지가 없으므로
-      provider: payload.provider,
-      createdAt: fromUnix(payload.iat).toISOString(),
-    };
+    // // 사용자 정보 반환
+    // const user = {
+    //   id: payload.userId,
+    //   email: payload.email,
+    //   name: payload.name,
+    //   profileImage: null, // JWT에는 프로필 이미지가 없으므로
+    //   provider: payload.provider,
+    //   createdAt: fromUnix(payload.iat).toISOString(),
+    // };
+    const user = mockUsers.find((u) => u.id === payload.userId);
 
     return HttpResponse.json({
       success: true,

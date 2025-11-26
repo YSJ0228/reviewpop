@@ -27,8 +27,8 @@ export function CautionBottomSheet({ opened, onClose }: CautionBottomSheetProps)
     <BottomSheet opened={opened} onClose={onClose} title="체험단 참여 시 주의사항을 확인해주세요">
       <h2 className={styles.CautionBottomSheet__SubTitle}>체험단 참여 시 주의사항</h2>
       <ul className={styles.CautionBottomSheet__Caution}>
-        {notices.map((text, i) => (
-          <li key={i}>{text}</li>
+        {notices.map((text) => (
+          <li key={text}>{text}</li>
         ))}
       </ul>
 

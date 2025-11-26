@@ -1,5 +1,6 @@
 'use client';
 import { Suspense, use } from 'react';
+import { redirect } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ApplyForm } from '@features/campaign/components/ApplyForm';
@@ -45,7 +46,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
     return <div>캠페인 정보를 불러오는 중 오류가 발생했습니다.</div>;
   }
   if (errorUser) {
-    return <div>사용자 정보를 불러오는 중 오류가 발생했습니다.</div>;
+    redirect(`/campaign/${campaignId}`);
   }
 
   return (
