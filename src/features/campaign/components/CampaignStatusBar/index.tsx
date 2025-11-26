@@ -20,31 +20,26 @@ export interface CampaignStatusBarProps {
  */
 export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
   // 남은 시간 계산
-  const { remainingDays, remainingHours } = useMemo(() => {
+  const { remainingDays, remainingTimeText } = useMemo(() => {
     const deadline = campaign.schedule.applicationSchedule[1];
     const currentTime = now();
     const hours = diff(deadline, currentTime, 'hour');
     const days = Math.max(0, Math.floor(hours / 24));
 
+    let timeText: string;
+    if (hours <= 0) {
+      timeText = '마감됨';
+    } else if (hours <= 24) {
+      timeText = '오늘 마감';
+    } else {
+      timeText = `${days}일 남음`;
+    }
+
     return {
       remainingDays: days,
-      remainingHours: hours,
+      remainingTimeText: timeText,
     };
   }, [campaign.schedule.applicationSchedule]);
-
-  const remainingTimeText = useMemo(() => {
-    // 마감이 지난 경우
-    if (remainingHours <= 0) {
-      return '마감됨';
-    }
-
-    // 24시간 이하일 때 "오늘 마감" 표시
-    if (remainingHours <= 24) {
-      return '오늘 마감';
-    }
-
-    return `${remainingDays}일 남음`;
-  }, [remainingDays, remainingHours]);
 
   // 선정 확률 높음 배지 표시 조건: 1일 남음 시점부터 신청자 수가 모집 인원의 50% 미만일 때
   const shouldShowHighProbabilityBadge = useMemo(() => {
