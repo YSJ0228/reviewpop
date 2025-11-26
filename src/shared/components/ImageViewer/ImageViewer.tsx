@@ -105,11 +105,6 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
             maxRatio: 3,
             minRatio: 1,
           }}
-          // @ts-expect-error - Swiper v12에서 lazy 옵션은 타입 정의에 없지만 실제로 동작함
-          lazy={{
-            loadPrevNext: true,
-            loadPrevNextAmount: 2,
-          }}
           navigation={true}
           initialSlide={initialIndex}
           onSwiper={setSwiperInstance}
@@ -124,12 +119,11 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
               <div className="swiper-zoom-container">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  data-src={image}
-                  className={`swiper-lazy ${styles.Image}`}
+                  src={image}
+                  className={styles.Image}
                   alt={`이미지 ${index + 1}`}
                   draggable={false}
                 />
-                <div className="swiper-lazy-preloader"></div>
               </div>
             </SwiperSlide>
           ))}
