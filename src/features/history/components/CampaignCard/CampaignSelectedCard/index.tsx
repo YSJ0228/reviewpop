@@ -69,16 +69,18 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
   if (visitStatus === 'scheduled') {
     return (
       <>
-        <Button
-          variant="secondary"
-          fullWidth
-          radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
-          onClick={handleReviewMissionClick}
-        >
-          <span className={styles.CampaignSelectedCard__BasicText}>
-            {HISTORY_MESSAGES.REVIEW_MISSION}
-          </span>
-        </Button>
+        <footer className={styles.CampaignSelectedCard__ContentWrapper}>
+          <Button
+            variant="secondary"
+            fullWidth
+            radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
+            onClick={handleReviewMissionClick}
+          >
+            <span className={styles.CampaignSelectedCard__BasicText}>
+              {HISTORY_MESSAGES.REVIEW_MISSION}
+            </span>
+          </Button>
+        </footer>
         {opened && (
           <BottomSheet
             opened={opened}
