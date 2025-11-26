@@ -14,11 +14,19 @@ export interface CampaignContentsProps {
  * - 체험 설명
  */
 export function CampaignContents({ campaign }: CampaignContentsProps) {
+  const hasProvidedItems = campaign.providedItems.trim();
+  const hasDescription = campaign.description.trim();
+
+  // 표시할 내용이 없으면 아무것도 렌더링하지 않음
+  if (!hasProvidedItems && !hasDescription) {
+    return null;
+  }
+
   return (
     <section className={styles.CampaignContents}>
-      {campaign.providedItems && <h2 className={styles.Title}>{campaign.providedItems}</h2>}
+      {hasProvidedItems && <h2 className={styles.Title}>{campaign.providedItems}</h2>}
 
-      {campaign.description && (
+      {hasDescription && (
         <div className={styles.Description}>
           <p>{campaign.description}</p>
         </div>
