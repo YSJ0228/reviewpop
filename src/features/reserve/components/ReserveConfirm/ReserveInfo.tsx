@@ -1,6 +1,9 @@
 import Image from 'next/image';
-import styles from './ReserveInfo.module.scss';
+
 import { ReservationData } from '@features/reserve/store/reservationStore';
+import { handleNaverMapClick } from '@shared/lib/naverMap';
+
+import styles from './ReserveInfo.module.scss';
 
 interface ReserveInfoProps {
   reservationData: ReservationData;
@@ -20,7 +23,7 @@ export function ReserveInfo({ reservationData }: ReserveInfoProps) {
         <span>주소</span>
         <div className={styles.ReserveInfo__Address__Detail}>
           <p>{reservationData.address}</p>
-          <button>
+          <button type="button" onClick={() => handleNaverMapClick(reservationData.address)}>
             <Image src="/images/NaverMap.png" alt="네이버 맵" width={20} height={20} />
           </button>
         </div>
