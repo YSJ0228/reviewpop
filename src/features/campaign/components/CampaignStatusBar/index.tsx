@@ -19,47 +19,52 @@ export interface CampaignStatusBarProps {
  * - 선정 확률 배지 표시
  */
 export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
+  const deadline = campaign.schedule.applicationSchedule[1];
+
   // 남은 시간 계산
-  const remainingDays = useMemo(() => {
-    const deadline = campaign.schedule.applicationSchedule[1];
+  const { remainingTimeText } = useMemo(() => {
     const currentTime = now();
-    return Math.max(0, diff(deadline, currentTime, 'day'));
-  }, [campaign.schedule.applicationSchedule]);
+    const hours = diff(deadline, currentTime, 'hour');
+    const days = diff(deadline, currentTime, 'day');
 
-  const remainingTimeText = useMemo(() => {
-    const deadline = campaign.schedule.applicationSchedule[1];
-    const currentTime = now();
-    const remainingHours = diff(deadline, currentTime, 'hour');
-
-    // 24시간 이하일 때 "오늘 마감" 표시
-    if (remainingHours <= 24 && remainingHours > 0) {
-      return '오늘 마감';
+    let timeText: string;
+    if (hours <= 0) {
+      timeText = '마감됨';
+    } else if (hours <= 24) {
+      timeText = '오늘 마감';
+    } else {
+      timeText = `${Math.max(0, days)}일 남음`;
     }
 
-    return `${remainingDays}일 남음`;
-  }, [campaign.schedule.applicationSchedule, remainingDays]);
+    return {
+      remainingTimeText: timeText,
+    };
+  }, [deadline]);
 
-  // 선정 확률 높음 배지 표시 조건: 1일 남음 시점부터 신청자 수가 모집 인원의 50% 미만일 때
+  // 선정 확률 높음 배지 표시 조건: 24시간 이하 남았을 때 신청자 수가 모집 인원의 50% 미만일 때
   const shouldShowHighProbabilityBadge = useMemo(() => {
-    if (campaign.maxRecruitment === 0) return false;
+    if (campaign.maxRecruitment === 0 || campaign.maxRecruitment < 0) return false;
 
-    // 남은 일수가 1일 이하인지 확인
-    if (remainingDays > 1) return false;
+    // 남은 시간이 24시간 이하인지 확인
+    const hours = diff(deadline, now(), 'hour');
+    if (hours > 24 || hours <= 0) return false;
 
     // 신청자 수가 모집 인원의 50% 미만인지 확인
     const ratio = campaign.currentRecruitment / campaign.maxRecruitment;
     return ratio < 0.5;
-  }, [remainingDays, campaign.currentRecruitment, campaign.maxRecruitment]);
+  }, [deadline, campaign.currentRecruitment, campaign.maxRecruitment]);
 
   return (
-    <div className={styles.CampaignStatusBar}>
+    <div className={styles.CampaignStatusBar} role="status" aria-live="polite">
       <span className={styles.RemainingTime}>{remainingTimeText}</span>
       <span className={styles.ApplicantCount}>
         신청 {campaign.currentRecruitment}명
         <span className={styles.ApplicantCount__Total}>/{campaign.maxRecruitment}명</span>
       </span>
       {shouldShowHighProbabilityBadge && (
-        <span className={styles.SelectionProbabilityBadge}>선정 확률 높음</span>
+        <span className={styles.SelectionProbabilityBadge} role="status">
+          선정 확률 높음
+        </span>
       )}
     </div>
   );
