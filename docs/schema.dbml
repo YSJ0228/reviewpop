@@ -135,10 +135,10 @@ Table campaign {
 // 방문 예약 정보
 Table visit_reservation {
   id int [pk, increment]
-  campaign_id int [ref: - campaign.id]
+  campaign_id int [unique, ref: - campaign.id]
   business_hours json
   is_reservation_required boolean [default: true]
-  reservation_method varchar
+  reservation_method varchar [not null]
   max_person_count int
   notice text [not null]
   precaution json [not null]
@@ -198,6 +198,8 @@ Table campaign_application {
   image_urls json
   content text [not null]
   precaution json [not null]
+  created_at datetime [default: `now()`, not null]
+  updated_at datetime
  }
 
  // 유저 체험 예약
