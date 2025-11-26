@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { Reservation, CreateReservationRequest } from '@entities/reservation';
+import { CreateReservationRequest, UpdateReservationRequest } from '@entities/reservation';
 import {
   createReservation,
   getReservation,
@@ -26,7 +26,8 @@ export const useGetReservation = (campaignId: string, userId: string, applicatio
 // 예약 수정 hook
 export const useUpdateReservation = (campaignId: string, userId: string, applicationId: string) => {
   return useMutation({
-    mutationFn: (data: Reservation) => updateReservation(campaignId, userId, applicationId, data),
+    mutationFn: (data: UpdateReservationRequest) =>
+      updateReservation(campaignId, userId, applicationId, data),
   });
 };
 

@@ -1,7 +1,11 @@
 import { apiClient } from '@shared/api/client';
 import { ApiResponse, unwrapApiResponse } from '@shared/api/types/common.types';
 
-import { Reservation, CreateReservationRequest } from '@entities/reservation';
+import {
+  Reservation,
+  CreateReservationRequest,
+  UpdateReservationRequest,
+} from '@entities/reservation';
 
 // 예약 생성 API
 export const createReservation = async (data: CreateReservationRequest) => {
@@ -31,7 +35,7 @@ export const updateReservation = async (
   campaignId: string,
   userId: string,
   applicationId: string,
-  data: Reservation,
+  data: UpdateReservationRequest,
 ) => {
   const response = await apiClient.put<ApiResponse<Reservation>>(
     `/campaigns/${campaignId}/reservations`,
