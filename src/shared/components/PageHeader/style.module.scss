@@ -45,11 +45,13 @@
 }
 
 .PageHeader__Title {
-  flex: 1;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-gray-900);
+  @include font($size: 18px, $weight: 600, $color: var(--color-gray-900));
   @include margin($all: 0);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 112px);
+  pointer-events: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
