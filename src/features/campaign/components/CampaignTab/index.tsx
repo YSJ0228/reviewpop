@@ -36,7 +36,7 @@ export function CampaignTab({ onTabClick, selectedTab, campaignExists }: Campaig
       {Object.entries(CampaignTabs).map(([status, label]) => {
         const key = status as CampaignTabKey;
 
-        if (campaignExists[key]) {
+        if (campaignExists[key] || key === 'recruiting') {
           return (
             <button
               className={styles.CampaignTab}

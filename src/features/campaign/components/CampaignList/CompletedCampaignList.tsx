@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { diff } from '@shared/lib/date';
 
 import { CompletedCard } from '../CampaignCard/CompletedCard';
@@ -7,8 +9,12 @@ import type { CampaignListProps } from './types';
 import styles from './style.module.scss';
 
 export function CompletedCampaignList({ filteredCampaigns }: Omit<CampaignListProps, 'status'>) {
-  const sortedCampaigns = filteredCampaigns.sort((a, b) =>
-    diff(b.schedule.winnerAnnouncementSchedule[1], a.schedule.winnerAnnouncementSchedule[1]),
+  const sortedCampaigns = useMemo(
+    () =>
+      filteredCampaigns.sort((a, b) =>
+        diff(b.schedule.winnerAnnouncementSchedule[1], a.schedule.winnerAnnouncementSchedule[1]),
+      ),
+    [filteredCampaigns],
   );
 
   return (

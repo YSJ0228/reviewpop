@@ -1,7 +1,8 @@
 'use client';
 
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 
+import { EmptyState } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { CampaignTab } from '@features/campaign/components/CampaignTab';
 import {
@@ -24,11 +25,14 @@ export default function Home() {
   const completedRef = useRef<HTMLDivElement>(null);
   const SCROLL_ANIMATION_DURATION = 500;
 
-  const filteredCampaigns = {
-    recruiting: filterCampaignsByStatus(campaigns, 'recruiting'),
-    before_recruiting: filterCampaignsByStatus(campaigns, 'before_recruiting'),
-    completed: filterCampaignsByStatus(campaigns, 'completed'),
-  };
+  const filteredCampaigns = useMemo(
+    () => ({
+      recruiting: filterCampaignsByStatus(campaigns, 'recruiting'),
+      before_recruiting: filterCampaignsByStatus(campaigns, 'before_recruiting'),
+      completed: filterCampaignsByStatus(campaigns, 'completed'),
+    }),
+    [campaigns],
+  );
 
   const campaignExists = {
     recruiting: filteredCampaigns.recruiting.length > 0,
@@ -117,28 +121,35 @@ export default function Home() {
               className={styles.ScrollSection}
               data-observer-id="recruiting"
             >
-              <RecruitingCampaignList filteredCampaigns={filteredCampaigns.recruiting} />
+              {filteredCampaigns.recruiting.length === 0 ? (
+                <EmptyState variant="no-opened" />
+              ) : (
+                <RecruitingCampaignList filteredCampaigns={filteredCampaigns.recruiting} />
+              )}
             </section>
 
-            <section
-              ref={beforeRecruitingRef}
-              id="before_recruiting"
-              className={styles.ScrollSection}
-              data-observer-id="before_recruiting"
-            >
-              <BeforeRecruitingCampaignList
-                filteredCampaigns={filteredCampaigns.before_recruiting}
-              />
-            </section>
-
-            <section
-              ref={completedRef}
-              id="completed"
-              className={styles.ScrollSection}
-              data-observer-id="completed"
-            >
-              <CompletedCampaignList filteredCampaigns={filteredCampaigns.completed} />
-            </section>
+            {filteredCampaigns.before_recruiting.length !== 0 && (
+              <section
+                ref={beforeRecruitingRef}
+                id="before_recruiting"
+                className={styles.ScrollSection}
+                data-observer-id="before_recruiting"
+              >
+                <BeforeRecruitingCampaignList
+                  filteredCampaigns={filteredCampaigns.before_recruiting}
+                />
+              </section>
+            )}
+            {filteredCampaigns.completed.length !== 0 && (
+              <section
+                ref={completedRef}
+                id="completed"
+                className={styles.ScrollSection}
+                data-observer-id="completed"
+              >
+                <CompletedCampaignList filteredCampaigns={filteredCampaigns.completed} />
+              </section>
+            )}
           </div>
         </Suspense>
       </ErrorBoundary>
