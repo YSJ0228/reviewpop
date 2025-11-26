@@ -25,6 +25,12 @@
   background: var(--color-white);
 }
 
+.Page__StatusBarSection {
+  width: 100%;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
 .Page__ImageWrapper {
   position: relative;
   width: 100%;
