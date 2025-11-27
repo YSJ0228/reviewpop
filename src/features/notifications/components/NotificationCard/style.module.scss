@@ -1,0 +1,24 @@
+.Notification {
+  display: flex;
+  padding: 16px;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+
+  &__Wrapper {
+    flex-direction: column;
+    flex: 1 0 0;
+    &__Header {
+      justify-content: space-between;
+    }
+    &__Content {
+      color: var(--value-gray-700, #666);
+      font-family: Pretendard;
+      font-size: var(--font-size-14, 14px);
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.28px;
+    }
+  }
+}

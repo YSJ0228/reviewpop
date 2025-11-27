@@ -1,6 +1,8 @@
 @use '@/shared/styles/mixins' as *;
 
 .CampaignSelectedCard__ContentWrapper {
+  border-bottom: 1px solid var(--gray-50);
+  padding-bottom: 16px;
   @include size($width: 100%);
   @include flex($direction: column, $gap: 8);
 
@@ -37,16 +39,6 @@
     $letter-spacing: -0.02em,
     $color: var(--color-white)
   );
-}
-
-// Drawer content 요소를 기준으로 버튼 위치 조정
-.CampaignSelectedCard__BottomSheetContentWrapper {
-  position: relative;
-}
-
-.CampaignSelectedCard__BottomSheetWrapper {
-  @include flex($direction: column);
-  height: 100%;
 }
 
 .CampaignSelectedCard__BottomSheetContent {

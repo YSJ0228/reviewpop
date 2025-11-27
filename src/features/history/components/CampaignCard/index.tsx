@@ -20,7 +20,10 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
 
   return (
     <>
-      <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
+      <Link
+        href={`/campaign/${campaign.id}`}
+        className={`${styles.CampaignCard__Link} ${type === 'selected' ? styles['CampaignCard__Link--NoBorder'] : ''}`}
+      >
         <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
           {type === 'selected' && campaign.visitStatus && (
             <div className={styles.CampaignCard__StatusLabel}>
