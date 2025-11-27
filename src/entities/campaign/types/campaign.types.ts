@@ -4,8 +4,6 @@
  * 프로젝트 전체에서 사용하는 표준 Campaign 타입입니다.
  */
 
-import { ApplicationStatus } from '@entities/application';
-
 /**
  * 체험 상태
  * - before_recruiting: 모집 전
@@ -128,6 +126,8 @@ export interface Campaign {
   /** 제공 상품 */
   providedItems: string;
 
+  reservationPrecaution: string[]; // 예약 페이지, 예약 시 유의사항 (ex. 후기 작성안하면 다 물어내야합니다)
+
   // 생성일
   /** 생성일 (ISO 8601) */
   createdAt: string;
@@ -203,19 +203,4 @@ export interface CampaignDetail extends Campaign {
 //   sortBy?: 'latest' | 'deadline' | 'popular';
 //   page?: number;
 //   limit?: number;
-// }
-
-/**
- * 체험 신청 데이터
- */
-export interface CampaignApplyData {
-  campaignId: string;
-  userId: string;
-  blogAddress: string;
-  name: string;
-  phoneNumber: string;
-  message?: string;
-  status: ApplicationStatus;
-  createdAt: string;
-  updatedAt: string;
-}
+//}

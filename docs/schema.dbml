@@ -14,7 +14,7 @@ Enum campaign_status {
 Enum application_status {
   "pending" [note: "대기 중, 선정 결과 발표 전"]
   "selected" [note: "체험 선정 됨"] 
-  "rejected" [note: "지원 거절 됨"] 
+  "rejected" [note: "지원 거절 됨, 미선정, 짤림"] 
   "completed" [note: "체험 완료"]
   "cancelled" [note: "체험이 사라짐, 정원 미달 등"]
 }

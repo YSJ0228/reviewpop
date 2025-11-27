@@ -19,43 +19,43 @@
     {
       "name": "visit_reservation",
       "schemaName": "public",
-      "x": 608,
+      "x": 592,
       "y": 1120
     },
     {
       "name": "reservation_available",
       "schemaName": "public",
-      "x": 608,
-      "y": 1455.0501601592784
+      "x": 592,
+      "y": 1456
     },
     {
       "name": "review",
       "schemaName": "public",
-      "x": 608,
+      "x": 592,
       "y": 56
     },
     {
       "name": "campaign_application",
       "schemaName": "public",
-      "x": 608,
+      "x": 592,
       "y": 352
     },
     {
       "name": "review_request",
       "schemaName": "public",
-      "x": 1160,
+      "x": 1144,
       "y": 16
     },
     {
       "name": "user_reservation",
       "schemaName": "public",
-      "x": 1160,
+      "x": 1144,
       "y": 344
     },
     {
       "name": "notification",
       "schemaName": "public",
-      "x": 608,
+      "x": 592,
       "y": 752
     }
   ],
