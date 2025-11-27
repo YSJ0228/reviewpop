@@ -5,43 +5,43 @@
 /**
  * 예약 정보
  */
-export interface Reservation {
-  id: string;
-  userId: string;
-  campaignId: string;
-  applicationId: string;
-  status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
-  recipientName: string;
-  recipientPhone: string;
-  address: string;
-  addressDetail?: string;
-  postalCode: string;
-  deliveryMemo?: string;
-  reservedAt: string;
-  confirmedAt?: string;
-  shippedAt?: string;
-  deliveredAt?: string;
-  cancelledAt?: string;
-  trackingNumber?: string;
-  courier?: string;
-  createdAt: string;
-  updatedAt: string;
-}
+// export interface Reservation {
+//   id: string;
+//   userId: string;
+//   campaignId: string;
+//   applicationId: string;
+//   status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
+//   recipientName: string;
+//   recipientPhone: string;
+//   address: string;
+//   addressDetail?: string;
+//   postalCode: string;
+//   deliveryMemo?: string;
+//   reservedAt: string;
+//   confirmedAt?: string;
+//   shippedAt?: string;
+//   deliveredAt?: string;
+//   cancelledAt?: string;
+//   trackingNumber?: string;
+//   courier?: string;
+//   createdAt: string;
+//   updatedAt: string;
+// }
 
-export interface CreateReservationRequest {
-  recipientName: string;
-  recipientPhone: string;
-  address: string;
-  addressDetail?: string;
-  postalCode: string;
-  deliveryMemo?: string;
-}
+// export interface CreateReservationRequest {
+//   recipientName: string;
+//   recipientPhone: string;
+//   address: string;
+//   addressDetail?: string;
+//   postalCode: string;
+//   deliveryMemo?: string;
+// }
 
-export interface UpdateReservationRequest extends Partial<CreateReservationRequest> {
-  status?: Reservation['status'];
-  trackingNumber?: string;
-  courier?: string;
-}
+// export interface UpdateReservationRequest extends Partial<CreateReservationRequest> {
+//   status?: Reservation['status'];
+//   trackingNumber?: string;
+//   courier?: string;
+// }
 
 // 브레이크 타임???????
 export interface ReservationDisable {

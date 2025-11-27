@@ -142,7 +142,7 @@ export const applicationHandlers = [
 
     // 중복 신청 확인
     const existingApplication = findApplicationByUserAndCampaign(body.userId, campaignId);
-    if (existingApplication && existingApplication.applicationStatus !== 'cancelled') {
+    if (existingApplication && existingApplication.status !== 'cancelled') {
       return HttpResponse.json(
         {
           success: false,
@@ -167,7 +167,7 @@ export const applicationHandlers = [
     const newApplication: Application = {
       userId: body.userId,
       campaignId,
-      applicationStatus: 'pending',
+      status: 'pending',
       reviewStatus: 'before',
       isReservated: false,
       blogAddress: `https://blog.naver.com/${body.userId}`, // Mock
@@ -238,7 +238,7 @@ export const applicationHandlers = [
   //   }
 
   //   // 대기 중인 신청만 취소 가능
-  //   if (application.applicationStatus !== 'pending') {
+  //   if (application.status !== 'pending') {
   //     return HttpResponse.json(
   //       {
   //         success: false,
@@ -251,7 +251,7 @@ export const applicationHandlers = [
   //   // 신청 취소 처리
   //   mockApplications[applicationIndex] = {
   //     ...application,
-  //     applicationStatus: 'cancelled',
+  //     status: 'cancelled',
   //     // cancelledAt: toISO(), // 필드 제거됨
   //     updatedAt: toISO(),
   //   };
@@ -292,7 +292,7 @@ export const applicationHandlers = [
   //   const application = mockApplications[applicationIndex];
 
   //   // 대기 중인 신청만 상태 변경 가능
-  //   if (application.applicationStatus !== 'pending') {
+  //   if (application.status !== 'pending') {
   //     return HttpResponse.json(
   //       {
   //         success: false,
@@ -305,7 +305,7 @@ export const applicationHandlers = [
   //   // 신청 상태 변경
   //   mockApplications[applicationIndex] = {
   //     ...application,
-  //     applicationStatus: body.status,
+  //     status: body.status,
   //     // decidedAt: toISO(), // 필드 제거됨
   //     updatedAt: toISO(),
   //   };

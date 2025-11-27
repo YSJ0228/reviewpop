@@ -45,33 +45,3 @@ export interface ReviewRequest {
   content: string;
   precaution: string[];
 }
-
-/**
- * 리뷰 데이터
- */
-export interface Review {
-  id: number;
-  campaignId: string;
-  userId: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    profileImage: string;
-  };
-  rating: number;
-  title: string;
-  content: string;
-  images: string[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CreateReviewRequest {
-  campaignId: string;
-  userId: string;
-  rating: number;
-  title: string;
-  content: string;
-  images?: string[];
-}

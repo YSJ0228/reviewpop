@@ -21,12 +21,10 @@ export interface User {
   blogAddress?: string;
   /** 이메일 */
   email: string;
-  /** 프로필 이미지 URL */
-  profileImage?: string | null;
   /** 가입일 */
-  createdAt?: string;
+  createdAt: string;
   /** OAuth Provider(naver, kakao) */
-  provider?: OAuthProvider;
+  provider: OAuthProvider;
 }
 export interface UserCampaign {
   campaign: Campaign;

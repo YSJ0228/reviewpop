@@ -34,7 +34,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1001',
     campaignId: '1',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1001'),
@@ -45,7 +45,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1001',
     campaignId: '1',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1001'),
@@ -56,7 +56,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1002',
     campaignId: '1',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1002'),
@@ -67,7 +67,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2001',
     campaignId: '1',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2001'),
@@ -77,7 +77,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1006',
     campaignId: '1',
-    applicationStatus: 'cancelled',
+    status: 'cancelled',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1006'),
@@ -89,7 +89,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1002',
     campaignId: '2',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1002'),
@@ -100,7 +100,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1004',
     campaignId: '2',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1004'),
@@ -111,7 +111,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2003',
     campaignId: '2',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2003'),
@@ -121,7 +121,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1008',
     campaignId: '2',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1008'),
@@ -133,7 +133,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2001',
     campaignId: '3',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2001'),
@@ -144,7 +144,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1003',
     campaignId: '3',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1003'),
@@ -154,7 +154,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2002',
     campaignId: '3',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2002'),
@@ -165,7 +165,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1005',
     campaignId: '3',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1005'),
@@ -175,7 +175,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2004',
     campaignId: '3',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2004'),
@@ -185,7 +185,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1007',
     campaignId: '3',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1007'),
@@ -197,7 +197,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1001',
     campaignId: '4',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1001'),
@@ -208,7 +208,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2005',
     campaignId: '4',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2005'),
@@ -218,7 +218,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1001',
     campaignId: '4',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1001'),
@@ -228,7 +228,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1006',
     campaignId: '4',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1006'),
@@ -238,7 +238,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2006',
     campaignId: '4',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2006'),
@@ -250,7 +250,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1002',
     campaignId: '5',
-    applicationStatus: 'pending',
+    status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1002'),
@@ -261,7 +261,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2002',
     campaignId: '5',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2002'),
@@ -272,7 +272,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1003',
     campaignId: '5',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1003'),
@@ -282,7 +282,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1009',
     campaignId: '5',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1009'),
@@ -294,7 +294,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2001',
     campaignId: '6',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2001'),
@@ -304,7 +304,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1004',
     campaignId: '6',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1004'),
@@ -314,7 +314,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2003',
     campaignId: '6',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2003'),
@@ -326,7 +326,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1001',
     campaignId: '7',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1001'),
@@ -336,7 +336,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1002',
     campaignId: '7',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1002'),
@@ -346,7 +346,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2001',
     campaignId: '7',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2001'),
@@ -356,7 +356,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1007',
     campaignId: '7',
-    applicationStatus: 'cancelled',
+    status: 'cancelled',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1007'),
@@ -368,7 +368,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1002',
     campaignId: '8',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1002'),
@@ -378,7 +378,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1005',
     campaignId: '8',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1005'),
@@ -388,7 +388,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2004',
     campaignId: '8',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2004'),
@@ -400,7 +400,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1001',
     campaignId: '9',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1001'),
@@ -410,7 +410,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2005',
     campaignId: '9',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2005'),
@@ -422,7 +422,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2001',
     campaignId: '10',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2001'),
@@ -432,7 +432,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1006',
     campaignId: '10',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1006'),
@@ -442,7 +442,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2006',
     campaignId: '10',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2006'),
@@ -454,7 +454,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1001',
     campaignId: '11',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1001'),
@@ -464,7 +464,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1008',
     campaignId: '11',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1008'),
@@ -474,7 +474,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2007',
     campaignId: '11',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2007'),
@@ -486,7 +486,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1009',
     campaignId: '12',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1009'),
@@ -496,7 +496,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2008',
     campaignId: '12',
-    applicationStatus: 'cancelled',
+    status: 'cancelled',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2008'),
@@ -508,7 +508,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1002',
     campaignId: '13',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1002'),
@@ -518,7 +518,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1002',
     campaignId: '14',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1002'),
@@ -528,7 +528,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'naver-2001',
     campaignId: '15',
-    applicationStatus: 'selected',
+    status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('naver-2001'),
@@ -538,7 +538,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1003',
     campaignId: '13',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1003'),
@@ -548,7 +548,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1004',
     campaignId: '14',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1004'),
@@ -558,7 +558,7 @@ export const mockApplications: Application[] = [
   {
     userId: 'kakao-1005',
     campaignId: '15',
-    applicationStatus: 'rejected',
+    status: 'rejected',
     reviewStatus: 'before',
     isReservated: false,
     ...getUserInfo('kakao-1005'),
@@ -586,11 +586,9 @@ export function getApplicationsByCampaignId(campaignId: string): Application[] {
  */
 export function getApplicationsByStatus(
   userId: string,
-  status: Application['applicationStatus'],
+  status: Application['status'],
 ): Application[] {
-  return mockApplications.filter(
-    (app) => app.userId === userId && app.applicationStatus === status,
-  );
+  return mockApplications.filter((app) => app.userId === userId && app.status === status);
 }
 
 /**
