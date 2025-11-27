@@ -5,4 +5,11 @@
  */
 
 // Types
-export type { Review } from './types/review.types';
+export type {
+  CreateReview,
+  BlogReview,
+  BlogReviews,
+  ReviewRequest,
+  Review,
+  CreateReviewRequest,
+} from './types/review.types';

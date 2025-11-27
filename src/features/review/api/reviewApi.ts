@@ -6,36 +6,9 @@
 
 import { apiClient } from '@shared/api/client';
 import { ApiResponse, unwrapApiResponse } from '@shared/api/types/common.types';
+import { Review, CreateReviewRequest } from '@entities/review/types/review.types';
 
-/**
- * 리뷰 타입
- */
-export interface Review {
-  id: number;
-  campaignId: string;
-  userId: number;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
-  rating: number;
-  title: string;
-  content: string;
-  images: string[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-/**
- * 리뷰 작성 요청 데이터
- */
-export interface CreateReviewRequest {
-  campaignId: string;
-  rating: number;
-  title: string;
-  content: string;
-}
+export type { Review, CreateReviewRequest };
 
 /**
  * 리뷰 목록 조회

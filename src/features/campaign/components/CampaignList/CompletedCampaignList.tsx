@@ -12,7 +12,7 @@ export function CompletedCampaignList({ filteredCampaigns }: Omit<CampaignListPr
   const sortedCampaigns = useMemo(
     () =>
       filteredCampaigns.sort((a, b) =>
-        diff(b.schedule.winnerAnnouncementSchedule[1], a.schedule.winnerAnnouncementSchedule[1]),
+        diff(b.schedule.winnerAnnouncement.end, a.schedule.winnerAnnouncement.end),
       ),
     [filteredCampaigns],
   );

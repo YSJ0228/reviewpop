@@ -6,7 +6,6 @@
 
 import { http, HttpResponse } from 'msw';
 
-import type { CreateReviewRequest, ReviewFilterParams } from '@entities/review/types/review.types';
 import type { ApiResponse } from '@shared/api/types/common.types';
 import { toISO } from '@shared/lib/date';
 
@@ -14,6 +13,17 @@ import { mockReviews } from '../data/reviews';
 import { mockUsers } from '../data/users';
 import { applyFilters } from '../utils/filter';
 import { paginate } from '../utils/paginate';
+import type { CreateReviewRequest, Review } from '@entities/review';
+
+// ReviewFilterParams는 로컬에서 정의하거나 any로 처리 (mock 유틸리티가 유연함)
+interface ReviewFilterParams {
+  campaignId?: string;
+  userId?: string;
+  rating?: number;
+  minRating?: number;
+  searchQuery?: string;
+  [key: string]: unknown;
+}
 
 const ITEMS_PER_PAGE = 10; // 백엔드 고정값
 
@@ -78,22 +88,26 @@ export const reviewHandlers = [
   http.post('/api/reviews', async ({ request }) => {
     const body = (await request.json()) as CreateReviewRequest;
 
-    const newReview = {
+    const newReview: Review = {
       id: mockReviews.length + 1,
-      ...body,
-      userId: '1',
+      campaignId: body.campaignId,
+      userId: body.userId,
+      rating: body.rating,
+      title: body.title,
+      content: body.content,
+      images: body.images || [],
       user: {
         id: mockUsers[0].id,
         name: mockUsers[0].name,
         email: mockUsers[0].email,
-        profileImage: mockUsers[0].profileImage,
+        profileImage: mockUsers[0].profileImage || '',
       },
-      images: [],
       createdAt: toISO(),
       updatedAt: toISO(),
     };
 
-    mockReviews.push(newReview);
+    // Mock DB에 추가 (메모리 상)
+    mockReviews.unshift(newReview);
 
     return HttpResponse.json({
       success: true,

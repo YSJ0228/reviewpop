@@ -6,7 +6,7 @@
  */
 
 import type { Review } from '@entities/review/types/review.types';
-import { mockUsers, findUserById } from './users';
+import { findUserById } from './users';
 
 /**
  * 사용자 정보 헬퍼 함수
@@ -18,7 +18,7 @@ function getUserInfo(userId: string) {
     id: user.id,
     name: user.name,
     email: user.email,
-    profileImage: user.profileImage,
+    profileImage: user.profileImage || '',
   };
 }
 

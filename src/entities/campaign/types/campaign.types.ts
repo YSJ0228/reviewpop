@@ -1,3 +1,5 @@
+import { DateRange } from '@shared/types/date.types';
+
 /**
  * 체험 엔티티 타입 정의
  *
@@ -14,30 +16,28 @@
  * - closed: 마감 (모집 실패 등)
  */
 export type CampaignStatus =
-  | 'before_recruiting'
+  | 'beforeRecruiting'
   | 'recruiting'
-  | 'in_progress'
-  // | 'review_period'
+  | 'inProgress'
   | 'completed'
   | 'closed';
 
 export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
-  before_recruiting: '모집 전',
+  beforeRecruiting: '모집 전',
   recruiting: '모집 중',
-  in_progress: '진행 중',
-  // review_period: '리뷰 기간',
+  inProgress: '진행 중',
   completed: '완료',
   closed: '마감',
 };
 
 export type CampaignTabKey = Extract<
   CampaignStatus,
-  'recruiting' | 'before_recruiting' | 'completed'
+  'recruiting' | 'beforeRecruiting' | 'completed'
 >;
 
 export const CampaignTabs: Record<CampaignTabKey, string> = {
   recruiting: '지금 모집중인 체험',
-  before_recruiting: '공개 예정',
+  beforeRecruiting: '공개 예정',
   completed: '지난 체험',
 };
 
@@ -45,7 +45,7 @@ export const CampaignTabs: Record<CampaignTabKey, string> = {
  * 체험 카테고리
  */
 export type CampaignCategory =
-  | '음료' // food & beverage
+  | '음료' // beverage
   | '뷰티' // beauty & cosmetics
   | '식품' // food
   | '전자제품' // electronics
@@ -56,21 +56,6 @@ export type CampaignCategory =
   | '액세서리' // accessories
   | '생활용품' // lifestyle
   | '기타'; // other
-
-/**
- * 체험 유형
- */
-//export type ExperienceType = 'delivery' | 'visit';
-
-/**
- * 후기 플랫폼
- */
-//export type ReviewPlatform = 'naver_blog' | 'other';
-
-/**
- * ISO(8601)
- */
-export type DateRange = { start: string; end: string };
 export interface CampaignSchedule {
   application: DateRange;
   winnerAnnouncement: DateRange;
@@ -124,19 +109,14 @@ export interface Campaign {
   selectedCount?: number;
 
   /** 제공 상품 */
-  providedItems: string;
+  providedItem: string;
 
   reservationPrecaution: string[]; // 예약 페이지, 예약 시 유의사항 (ex. 후기 작성안하면 다 물어내야합니다)
-
-  // 생성일
-  /** 생성일 (ISO 8601) */
-  createdAt: string;
-  updatedAt: string;
 }
 
 /** 09:00 등 */
 type TimeString = string;
-type DailyHours = [TimeString, TimeString] | 'closed';
+type DailyHours = { start: TimeString; end: TimeString } | 'closed';
 
 /**
  * 체험 상세 정보
@@ -145,7 +125,7 @@ type DailyHours = [TimeString, TimeString] | 'closed';
 
 //TODO: 디자인 변경 - 각 요일별로 시간출력
 export interface VisitReservation {
-  /** 영업시간 */
+  /** 영업시간 [일, 월, 화, 수, 목, 금, 토]*/
   businessHours: [
     DailyHours,
     DailyHours,
@@ -168,8 +148,6 @@ export interface CampaignDetail extends Campaign {
   // 체험 정보
   /** 체험 상품의 예상 가치 (원 단위) */
   estimatedValue?: number;
-  /** 체험 유형 (배송/방문/둘 다) */
-  //experienceType: ExperienceType;
   /** 키워드/태그 목록 */
   keywords: string[];
 
@@ -179,28 +157,8 @@ export interface CampaignDetail extends Campaign {
   reviewMission: string[];
   /** 주의 사항 */
   reviewMissionNotice?: string;
-
-  /** 배송 정보 */
-  // deliveryInfo?: {
-  //   shippingDate?: string;
-  //   trackingNumber?: string;
-  // };
   /** 당첨 조건 목록 */
   requirements?: string[];
-  /** 문의처 */
-  // contactInfo?: string;
   /** 체험 시 주의사항 */
   precautions?: string[];
 }
-
-/**
- * 체험 필터
- */
-// export interface CampaignFilters {
-//   category?: CampaignCategory;
-//   status?: CampaignStatus;
-//   location?: string;
-//   sortBy?: 'latest' | 'deadline' | 'popular';
-//   page?: number;
-//   limit?: number;
-//}

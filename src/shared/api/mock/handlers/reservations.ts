@@ -17,9 +17,7 @@ import { toISO } from '@shared/lib/date';
 import {
   mockReservations,
   getReservationsByUserId,
-  getReservationsByCampaignId,
   findReservationById,
-  findReservationByApplicationId,
 } from '../data/reservations';
 
 export const reservationHandlers = [
@@ -27,7 +25,7 @@ export const reservationHandlers = [
    * 예약 목록 조회 (나의 예약)
    * GET /api/reservations
    */
-  http.get('/api/reservations', ({ request, cookies }) => {
+  http.get('/api/reservations', ({ request }) => {
     const url = new URL(request.url);
     const userId = url.searchParams.get('userId');
 

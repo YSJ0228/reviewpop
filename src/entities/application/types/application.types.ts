@@ -33,7 +33,7 @@ export interface Application {
   name: string;
   phoneNumber: string;
   message?: string;
-  applicationStatus: ApplicationStatus;
+  status: ApplicationStatus;
   reviewStatus: ReviewStatus;
   isReservated: boolean;
   createdAt: string;

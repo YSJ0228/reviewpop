@@ -13,20 +13,20 @@ type UserCampaignStatus = 'reservation' | 'review' | 'plan';
 export interface User {
   /** 사용자 ID */
   id: string;
-  /** 이메일 */
-  email: string;
   /** 연락처 */
-  phoneNumber: string;
+  phoneNumber?: string;
   /** 이름 */
   name: string;
   /** 블로그 주소 */
-  blogAddress: string;
+  blogAddress?: string;
+  /** 이메일 */
+  email: string;
+  /** 프로필 이미지 URL */
+  profileImage?: string | null;
+  /** 가입일 */
+  createdAt?: string;
   /** OAuth Provider(naver, kakao) */
   provider?: OAuthProvider;
-  /** 생성일 */
-  createdAt: string;
-  /** 수정일 */
-  updatedAt: string;
 }
 export interface UserCampaign {
   campaign: Campaign;

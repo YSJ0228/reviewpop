@@ -12,7 +12,7 @@ export function BeforeRecruitingCampaignList({
   return (
     <div className={styles.CampaignList} role="feed" aria-label="오픈 예정 체험 목록">
       {filteredCampaigns
-        .sort((a, b) => diff(a.schedule.applicationSchedule[0], b.schedule.applicationSchedule[0]))
+        .sort((a, b) => diff(a.schedule.application.start, b.schedule.application.start))
         .map((campaign) => (
           <BeforeRecruitingCard key={campaign.id} campaign={campaign} />
         ))}
