@@ -15,6 +15,7 @@ import { filterCampaignsByStatus, useCampaigns } from '@entities/campaign/hooks/
 import { CampaignTabKey } from '@entities/campaign/types/campaign.types';
 
 import styles from './page.module.scss';
+import { Loader } from '@mantine/core';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<CampaignTabKey>('recruiting');
@@ -88,8 +89,7 @@ export default function Home() {
         aria-live="polite"
         aria-label="체험 목록 로딩 중"
       >
-        <div className={styles.CampaignList__Spinner} />
-        <span>로딩 중...</span>
+        <Loader />
       </div>
     );
   }

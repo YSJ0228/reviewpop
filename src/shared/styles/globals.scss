@@ -71,7 +71,6 @@ html,
 body {
   max-width: 100dvw;
   min-height: 100dvh;
-  //overflow-x: hidden;
   background: #fff;
 }
 
@@ -83,6 +82,7 @@ body {
 }
 
 .AppContainer {
+  min-width: 360px;
   max-width: 480px;
   width: 100%;
   min-height: 100vh;
