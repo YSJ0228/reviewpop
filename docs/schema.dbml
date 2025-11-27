@@ -5,7 +5,7 @@ Enum campaign_status {
   "before_recruiting" [note: "모집 전"]
   "recruiting" [note: "모집 중"]
   "in_progress" [note: "선정 완료, 체험 진행 중"]
-  "review_period" [note: "리뷰 작성 중"]
+  //"review_period" [note: "리뷰 작성 중"]
   "completed" [note: "체험 프로세스 종료"]
   "closed" [note: "마감, 모집 실패"]
 }
@@ -47,16 +47,16 @@ Enum campaign_category {
 }
 
 // 체험 유형
-Enum experience_type {
-  "delivery" [note: "배송형"]
-  "visit" [note: "방문형"]
-}
+//Enum experience_type {
+//  "delivery" [note: "배송형"]
+//  "visit" [note: "방문형"]
+//}
 
 // 리뷰 플랫폼
-Enum review_platform {
-  "naver_blog"
-  "other"
-}
+//Enum review_platform {
+//  "naver_blog"
+//  "other"
+//}
 
 // 알림 타입
 Enum notification_type {

@@ -4,6 +4,8 @@
  * 프로젝트 전체에서 사용하는 표준 Campaign 타입입니다.
  */
 
+import { ApplicationStatus } from '@entities/application';
+
 /**
  * 체험 상태
  * - before_recruiting: 모집 전
@@ -17,7 +19,7 @@ export type CampaignStatus =
   | 'before_recruiting'
   | 'recruiting'
   | 'in_progress'
-  | 'review_period'
+  // | 'review_period'
   | 'completed'
   | 'closed';
 
@@ -25,7 +27,7 @@ export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
   before_recruiting: '모집 전',
   recruiting: '모집 중',
   in_progress: '진행 중',
-  review_period: '리뷰 기간',
+  // review_period: '리뷰 기간',
   completed: '완료',
   closed: '마감',
 };
@@ -60,17 +62,22 @@ export type CampaignCategory =
 /**
  * 체험 유형
  */
-export type ExperienceType = 'delivery' | 'visit';
+//export type ExperienceType = 'delivery' | 'visit';
 
 /**
  * 후기 플랫폼
  */
-export type ReviewPlatform = 'naver_blog' | 'other';
+//export type ReviewPlatform = 'naver_blog' | 'other';
 
 /**
  * ISO(8601)
  */
-export type DateRange = [string, string];
+export type DateRange = { start: string; end: string };
+export interface CampaignSchedule {
+  application: DateRange;
+  winnerAnnouncement: DateRange;
+  review: DateRange;
+}
 
 /**
  * 지역명
@@ -81,27 +88,19 @@ interface Location {
   sigungu: string;
 }
 
-export interface CampaignSchedule {
-  applicationSchedule: DateRange;
-  winnerAnnouncementSchedule: DateRange;
-  reviewSchedule: DateRange;
-}
-
 /**
  * 체험 기본 정보
  */
 export interface Campaign {
-  /** 체험 ID */
   id: string;
-  /** 체험 제목 */
   title: string;
-  /** 브랜드명 */
   brand: string;
+
   // 이미지
   /** 썸네일 이미지 URL */
-  imageUrl: string;
+  thumbnail: string;
   /** 상세 이미지 URL 배열 */
-  imageUrls?: string[];
+  detailImages?: string[];
   /** 체험 설명 */
   description: string;
   /** 체험 상태 */
@@ -112,11 +111,11 @@ export interface Campaign {
   // 진행 일정
   schedule: CampaignSchedule;
 
-  // 지역 (선택 사항)
+  // 지역
   /** 지역 제한, {시} {구} (예: "서울 강남구", 기본값: "전국") */
-  location?: Location;
-  /** 상세 주소 (방문형 체험의 경우) */
-  address?: string;
+  location: Location;
+  /** 상세 주소 */
+  address: string;
 
   // 모집 정보
   /** 총 모집 인원 */
@@ -132,6 +131,7 @@ export interface Campaign {
   // 생성일
   /** 생성일 (ISO 8601) */
   createdAt: string;
+  updatedAt: string;
 }
 
 /** 09:00 등 */
@@ -143,7 +143,7 @@ type DailyHours = [TimeString, TimeString] | 'closed';
  * (목록에서는 필요 없지만 상세 페이지에서 필요한 정보)
  */
 
-//TODO: 예약, 방문 관련 더 추가
+//TODO: 디자인 변경 - 각 요일별로 시간출력
 export interface VisitReservation {
   /** 영업시간 */
   businessHours: [
@@ -156,6 +156,7 @@ export interface VisitReservation {
     DailyHours,
   ];
   /** 예약 유무 */
+  // TODO: boolean? string?
   isReservationRequired: boolean;
   /** 예약 방법 */
   reservationMethod?: string;
@@ -168,7 +169,7 @@ export interface CampaignDetail extends Campaign {
   /** 체험 상품의 예상 가치 (원 단위) */
   estimatedValue?: number;
   /** 체험 유형 (배송/방문/둘 다) */
-  experienceType: ExperienceType;
+  //experienceType: ExperienceType;
   /** 키워드/태그 목록 */
   keywords: string[];
 
@@ -180,38 +181,41 @@ export interface CampaignDetail extends Campaign {
   reviewMissionNotice?: string;
 
   /** 배송 정보 */
-  deliveryInfo?: {
-    shippingDate?: string;
-    trackingNumber?: string;
-  };
+  // deliveryInfo?: {
+  //   shippingDate?: string;
+  //   trackingNumber?: string;
+  // };
   /** 당첨 조건 목록 */
   requirements?: string[];
   /** 문의처 */
-  contactInfo?: string;
+  // contactInfo?: string;
   /** 체험 시 주의사항 */
-  experiencePrecautions?: string[];
+  precautions?: string[];
 }
 
 /**
  * 체험 필터
  */
-export interface CampaignFilters {
-  category?: CampaignCategory;
-  status?: CampaignStatus;
-  location?: string;
-  sortBy?: 'latest' | 'deadline' | 'popular';
-  page?: number;
-  limit?: number;
-}
+// export interface CampaignFilters {
+//   category?: CampaignCategory;
+//   status?: CampaignStatus;
+//   location?: string;
+//   sortBy?: 'latest' | 'deadline' | 'popular';
+//   page?: number;
+//   limit?: number;
+// }
 
 /**
  * 체험 신청 데이터
  */
 export interface CampaignApplyData {
   campaignId: string;
-  message?: string; // 신청 메시지
-  // TODO: 추가 신청 필드
-  // - SNS 계정
-  // - 신청 동기
-  // etc.
+  userId: string;
+  blogAddress: string;
+  name: string;
+  phoneNumber: string;
+  message?: string;
+  status: ApplicationStatus;
+  createdAt: string;
+  updatedAt: string;
 }

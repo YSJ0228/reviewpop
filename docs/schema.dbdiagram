@@ -20,13 +20,13 @@
       "name": "visit_reservation",
       "schemaName": "public",
       "x": 608,
-      "y": 1360
+      "y": 1120
     },
     {
       "name": "reservation_available",
       "schemaName": "public",
-      "x": 16,
-      "y": 1698
+      "x": 608,
+      "y": 1455.0501601592784
     },
     {
       "name": "review",
@@ -38,25 +38,25 @@
       "name": "campaign_application",
       "schemaName": "public",
       "x": 608,
-      "y": 592
+      "y": 352
     },
     {
       "name": "review_request",
       "schemaName": "public",
-      "x": 275.18505859375,
-      "y": 1698
+      "x": 1160,
+      "y": 16
     },
     {
       "name": "user_reservation",
       "schemaName": "public",
-      "x": 520.27880859375,
-      "y": 1698
+      "x": 1160,
+      "y": 344
     },
     {
       "name": "notification",
       "schemaName": "public",
-      "x": 889.884765625,
-      "y": 1698
+      "x": 608,
+      "y": 752
     }
   ],
   "tableGroupCollapseStates": [],
