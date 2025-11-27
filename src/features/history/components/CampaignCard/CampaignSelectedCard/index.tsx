@@ -42,93 +42,88 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
   };
 
   return (
-    <>
-      <footer className={styles.CampaignSelectedCard__ContentWrapper}>
-        {visitStatus === 'before' && (
-          <>
-            <Button
-              variant="primary"
-              fullWidth
-              radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
-              onClick={handleReservationClick}
+    <footer className={styles.CampaignSelectedCard__ContentWrapper}>
+      {visitStatus === 'before' && (
+        <>
+          <Button
+            variant="primary"
+            fullWidth
+            radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
+            onClick={handleReservationClick}
+          >
+            <span className={styles.CampaignSelectedCard__PrimaryText}>
+              {HISTORY_MESSAGES.SET_VISIT_DATE}
+            </span>
+          </Button>
+          <div className={styles.CampaignSelectedCard__WarningWrapper}>
+            <IconWarningCircle color={Colors.COLOR_GRAY_400} size={HISTORY_UI.WARNING_ICON_SIZE} />
+            <span className={styles.CampaignSelectedCard__WarningText}>
+              {HISTORY_MESSAGES.RESERVATION_WARNING}
+            </span>
+          </div>
+        </>
+      )}
+      {visitStatus === 'scheduled' && (
+        <>
+          <Button
+            variant="secondary"
+            fullWidth
+            radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
+            onClick={handleReviewMissionClick}
+          >
+            <span className={styles.CampaignSelectedCard__BasicText}>
+              {HISTORY_MESSAGES.REVIEW_MISSION}
+            </span>
+          </Button>
+          {opened && (
+            <BottomSheet
+              opened={opened}
+              onClose={close}
+              height={HISTORY_UI.BOTTOM_SHEET_HEIGHT}
+              footer={
+                <Button variant="secondary" fullWidth onClick={handleCampaignDetailClick}>
+                  <span>{HISTORY_MESSAGES.VIEW_CAMPAIGN_DETAIL}</span>
+                </Button>
+              }
             >
-              <span className={styles.CampaignSelectedCard__PrimaryText}>
-                {HISTORY_MESSAGES.SET_VISIT_DATE}
-              </span>
-            </Button>
-            <div className={styles.CampaignSelectedCard__WarningWrapper}>
-              <IconWarningCircle
-                color={Colors.COLOR_GRAY_400}
-                size={HISTORY_UI.WARNING_ICON_SIZE}
-              />
-              <span className={styles.CampaignSelectedCard__WarningText}>
-                {HISTORY_MESSAGES.RESERVATION_WARNING}
-              </span>
-            </div>
-          </>
-        )}
-        {visitStatus === 'scheduled' && (
-          <>
-            <Button
-              variant="secondary"
-              fullWidth
-              radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
-              onClick={handleReviewMissionClick}
-            >
-              <span className={styles.CampaignSelectedCard__BasicText}>
-                {HISTORY_MESSAGES.REVIEW_MISSION}
-              </span>
-            </Button>
-            {opened && (
-              <BottomSheet
-                opened={opened}
-                onClose={close}
-                height={HISTORY_UI.BOTTOM_SHEET_HEIGHT}
-                footer={
-                  <Button variant="secondary" fullWidth onClick={handleCampaignDetailClick}>
-                    <span>체험 상세보기</span>
-                  </Button>
-                }
-              >
-                <div className={styles.CampaignSelectedCard__BottomSheetContent}>
-                  <section
-                    aria-label="제공 혜택 내용"
-                    className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
-                  >
-                    <div className={styles.CampaignSelectedCard__SectionContent}>
-                      <h3>제공 혜택</h3>
-                      <p className={styles.CampaignSelectedCard__SectionItem}>
-                        {bottomSheetData?.providedItems || '제공 혜택 정보가 없습니다.'}
-                      </p>
-                    </div>
-                    <p className={styles.CampaignSelectedCard__Description}>
-                      {bottomSheetData?.description}
+              <div className={styles.CampaignSelectedCard__BottomSheetContent}>
+                <section
+                  aria-label="제공 혜택 내용"
+                  className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
+                >
+                  <div className={styles.CampaignSelectedCard__SectionContent}>
+                    <h3>제공 혜택</h3>
+                    <p className={styles.CampaignSelectedCard__SectionItem}>
+                      {bottomSheetData?.providedItems || '제공 혜택 정보가 없습니다.'}
                     </p>
-                  </section>
-                  <section
-                    aria-label="후기 미션 내용"
-                    className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
-                  >
-                    <div className={styles.CampaignSelectedCard__SectionContent}>
-                      <h3>후기 미션</h3>
-                      <ul className={styles.CampaignSelectedCard__MissionList}>
-                        {bottomSheetData?.reviewMission.map((mission, index) => (
-                          <li
-                            key={`mission-${index}`}
-                            className={styles.CampaignSelectedCard__MissionItem}
-                          >
-                            {mission}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </section>
-                </div>
-              </BottomSheet>
-            )}
-          </>
-        )}
-      </footer>
-    </>
+                  </div>
+                  <p className={styles.CampaignSelectedCard__Description}>
+                    {bottomSheetData?.description}
+                  </p>
+                </section>
+                <section
+                  aria-label="후기 미션 내용"
+                  className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
+                >
+                  <div className={styles.CampaignSelectedCard__SectionContent}>
+                    <h3>후기 미션</h3>
+                    <ul className={styles.CampaignSelectedCard__MissionList}>
+                      {bottomSheetData?.reviewMission.map((mission, index) => (
+                        <li
+                          key={`${campaign.id}-mission-${index}`}
+                          className={styles.CampaignSelectedCard__MissionItem}
+                        >
+                          {mission}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+              </div>
+            </BottomSheet>
+          )}
+        </>
+      )}
+    </footer>
   );
 }
