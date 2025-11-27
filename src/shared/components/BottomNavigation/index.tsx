@@ -2,7 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+
 import { NAV_ITEMS } from './constants';
+
 import styles from './style.module.scss';
 
 export function BottomNavigation() {
@@ -12,7 +14,7 @@ export function BottomNavigation() {
     <nav className={styles.BottomNavigation}>
       {NAV_ITEMS.map(({ label, path, icon: Icon }) => {
         const isActive = pathname === path;
-        const iconColor = isActive ? 'var(--primary-500)' : 'var(--gray-500)';
+        const iconColor = isActive ? 'var(--gray-900)' : 'var(--gray-400)';
 
         const itemClassName = [
           styles.BottomNavigation__Item,
@@ -23,7 +25,7 @@ export function BottomNavigation() {
 
         return (
           <Link key={path} href={path} className={itemClassName}>
-            <Icon size={24} color={iconColor} />
+            <Icon size={28} color={iconColor} />
             <span>{label}</span>
           </Link>
         );
