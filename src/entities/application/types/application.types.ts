@@ -2,7 +2,7 @@
  * Application (체험 신청) 엔티티 타입 정의
  */
 
-import { Campaign, CampaignDetail } from '@features/campaign';
+import { CampaignDetail } from '@features/campaign';
 
 /**
  * 신청 상태
@@ -31,7 +31,10 @@ export type ReviewStatus =
 
 export interface Application {
   campaign: CampaignDetail;
+
   name: string;
+  blogAddress: string;
+  phoneNumber: string;
 
   status: ApplicationStatus;
   reviewStatus: ReviewStatus;
