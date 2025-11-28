@@ -12,6 +12,13 @@ import {
 export const useReserve = () => {
   return useMutation({
     mutationFn: (data: PostReservation) => createReservation(data),
+    onSuccess: () => {
+      // 성공 토스트 메시지
+      // 페이지 이동
+    },
+    onError: (error) => {
+      console.error('예약 생성 실패:', error);
+    },
   });
 };
 

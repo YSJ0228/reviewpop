@@ -53,14 +53,7 @@
     }
   }
 
-  &__Date {
-    @include flex($direction: column, $align: flex-start, $gap: 4px);
-  }
-  &__Booker {
-    @include flex($direction: column, $align: flex-start, $gap: 4px);
-  }
-
-  &__Visitor {
+  &__Content {
     @include flex($direction: column, $align: flex-start, $gap: 4px);
   }
 }
