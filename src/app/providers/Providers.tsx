@@ -15,7 +15,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, createTheme, Loader } from '@mantine/core';
 
 import { PopUiProvider } from '@pop-ui/core';
 import { useUserStore } from '@entities/user';
@@ -24,6 +24,16 @@ import { env } from '@shared/config/env';
 interface ProvidersProps {
   children: ReactNode;
 }
+
+const theme = createTheme({
+  components: {
+    Loader: Loader.extend({
+      defaultProps: {
+        color: 'var(--primary-500)',
+      },
+    }),
+  },
+});
 
 /**
  * React Query Client 생성
@@ -102,7 +112,7 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider>
+      <MantineProvider theme={theme}>
         <PopUiProvider notificationPosition="bottom-center">
           {children}
           {/* React Query Devtools - 개발 환경에서만 표시 */}

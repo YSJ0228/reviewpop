@@ -1,6 +1,8 @@
 @use '@/shared/styles/mixins' as *;
 
 .CampaignSelectedCard__ContentWrapper {
+  border-bottom: 1px solid var(--gray-50);
+  padding-bottom: 16px;
   @include size($width: 100%);
   @include flex($direction: column, $gap: 8);
 
@@ -37,4 +39,68 @@
     $letter-spacing: -0.02em,
     $color: var(--color-white)
   );
+}
+
+.CampaignSelectedCard__BottomSheetContent {
+  overflow-y: auto;
+  @include flex($direction: column, $gap: 24);
+}
+
+.CampaignSelectedCard__BottomSheetContent--Section {
+  @include flex($direction: column, $gap: 8);
+
+  &:first-child {
+    border-bottom: 1px solid var(--gray-50);
+    padding-bottom: 24px;
+  }
+
+  h3 {
+    @include font(
+      $size: 18,
+      $weight: 700,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
+}
+
+.CampaignSelectedCard__SectionContent {
+  @include flex($direction: column, $gap: 24);
+}
+
+.CampaignSelectedCard__SectionItem {
+  @include font(
+    $size: 16,
+    $weight: 700,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-900)
+  );
+}
+
+.CampaignSelectedCard__Description {
+  @include font(
+    $size: 14,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
+}
+
+.CampaignSelectedCard__MissionList {
+  padding-left: 20px;
+  list-style: disc;
+  @include flex($direction: column, $gap: 8);
+
+  .CampaignSelectedCard__MissionItem {
+    @include font(
+      $size: 14,
+      $weight: 500,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
 }

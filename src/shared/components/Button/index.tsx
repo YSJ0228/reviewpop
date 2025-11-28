@@ -7,18 +7,19 @@ import styles from './style.module.scss';
  * 프로젝트 전체에서 사용하는 기본 버튼 컴포넌트입니다.
  *
  * @example
- * ```tsx
+ *
  * <Button variant="primary" size="medium" onClick={handleClick}>
  *   클릭하세요
  * </Button>
- * ```
- */
+ *  */
 export function Button({
   children,
   variant = 'primary',
   size = 'medium',
   fullWidth = false,
   className = '',
+  radius,
+  style,
   ...props
 }: ButtonProps) {
   // variant와 size를 파스칼 케이스 BEM 형식으로 변환
@@ -36,8 +37,14 @@ export function Button({
     .filter(Boolean)
     .join(' ');
 
+  // radius가 제공되면 인라인 스타일로 적용
+  const inlineStyle =
+    radius !== undefined
+      ? { ...style, borderRadius: `${Math.max(0, radius)}px` } // 음수 방지
+      : style;
+
   return (
-    <button className={classNames} {...props}>
+    <button className={classNames} style={inlineStyle} {...props}>
       {children}
     </button>
   );
