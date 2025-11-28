@@ -18,7 +18,7 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     (state) => state.reservationData ?? mockReservationData,
   );
   const router = useRouter();
-  const { mutate: createReservation } = useReserve();
+  const { mutate: createReservation } = useReserve(campaignId);
   const { data: campaign } = useCampaignDetails(campaignId);
   const { data: user } = useUserInfo();
   const { data: application } = useApplicationDetails(campaignId, user?.id ?? '');
@@ -26,22 +26,12 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   if (!reservationData || !campaign || !application) return null;
 
   const handleConfirm = () => {
-    createReservation(
-      {
-        campaignId: reservationData.campaignId,
-        applicationId: reservationData.applicationId,
-        personCount: reservationData.personCounter,
-        date: reservationData.date,
-      },
-      {
-        onSuccess: () => {
-          router.push(`/campaign/${campaignId}/reserve/complete`);
-        },
-        onError: (error) => {
-          alert('예약 생성에 실패했습니다.' + error);
-        },
-      },
-    );
+    createReservation({
+      campaignId: reservationData.campaignId,
+      applicationId: reservationData.applicationId,
+      personCount: reservationData.personCounter,
+      date: reservationData.date,
+    });
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-
+import { toast } from '@shared/components';
 import { PostReservation } from '@entities/reservation';
 import {
   createReservation,
@@ -7,17 +7,20 @@ import {
   updateReservation,
   deleteReservation,
 } from '../api/reserveApi';
+import { useRouter } from 'next/navigation';
 
 // 예약 생성 hook
-export const useReserve = () => {
+export const useReserve = (campaignId: string) => {
+  const router = useRouter();
   return useMutation({
     mutationFn: (data: PostReservation) => createReservation(data),
     onSuccess: () => {
-      // 성공 토스트 메시지
+      toast.success('예약이 완료되었습니다.');
       // 페이지 이동
+      router.push(`/campaign/${campaignId}/reserve/confirm`);
     },
-    onError: (error) => {
-      console.error('예약 생성 실패:', error);
+    onError: () => {
+      toast.error('예약 생성에 실패했습니다.');
     },
   });
 };
