@@ -10,10 +10,12 @@ export function SettingList({
   path,
   titleColor = 'var(--gray-900)',
   isIcon = true,
+  onClick,
 }: SettingListProps) {
   const router = useRouter();
-  const handleClick = () => {
-    if (path) {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (onClick) onClick(e);
+    else if (path) {
       router.push(path);
     }
   };

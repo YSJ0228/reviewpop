@@ -1,6 +1,7 @@
 import { SettingList } from '../SettingList';
 
 import styles from './style.module.scss';
+import { Modal } from '@shared/components';
 
 export function Settings() {
   return (
@@ -18,7 +19,25 @@ export function Settings() {
       <div className={styles.Settings__Gap}></div>
       <div className={styles.Settings__Section}>
         <SettingList title="로그아웃" isIcon={false} />
-        <SettingList title="탈퇴하기" isIcon={false} titleColor="var(--error-500)" />
+        <Modal
+          variant="warning"
+          texts={{
+            title: '정말 탈퇴하시겠어요?',
+            content: '탈퇴 시 체험단 신청 내역과 후기 기록이 모두 삭제되며 복구할 수 없습니다.',
+          }}
+          trigger={
+            <SettingList
+              title="탈퇴하기"
+              isIcon={false}
+              titleColor="var(--error-500)"
+              onClick={() => {}}
+            />
+          }
+          onConfirm={() => {
+            // TODO: 탈퇴 처리 로직
+            console.log('탈퇴 처리 실행');
+          }}
+        />
       </div>
     </div>
   );
