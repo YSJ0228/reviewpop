@@ -47,7 +47,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
     return <div>캠페인 정보를 불러오는 중 오류가 발생했습니다.</div>;
   }
   if (errorUser) {
-    router.push(`/campaign/${campaignId}`);
+    return <div>유저 정보를 불러오는 중 오류가 발생했습니다.</div>;
   }
 
   return (
