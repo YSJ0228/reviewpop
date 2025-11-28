@@ -56,6 +56,21 @@
             padding: 4px;
             cursor: pointer;
             @include flex($align: center, $justify: center);
+
+            transition: background-color 0.2s ease;
+
+            &:hover {
+              background-color: var(--gray-50);
+            }
+
+            &:active {
+              background-color: var(--gray-100);
+            }
+
+            &:focus-visible {
+              outline: 2px solid var(--color-blue-500);
+              outline-offset: 2px;
+            }
           }
         }
 
@@ -101,63 +116,4 @@
       }
     }
   }
-}
-// BottomSheet 메뉴 스타일
-.CampaignCard__BottomSheetMenu {
-  @include flex($direction: column, $gap: 8);
-
-  @include padding($bottom: 32);
-
-  .CampaignCard__Divider {
-    border-bottom: 1px solid var(--gray-50);
-  }
-
-  .CampaignCard__MenuButton {
-    width: 100%;
-    height: 50px;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    @include padding($y: 8, $x: 8);
-    @include font(
-      $size: 16,
-      $weight: 400,
-      $line-height: 1.5,
-      $letter-spacing: -0.02em,
-      $color: var(--gray-900)
-    );
-    @include flex($justify: space-between, $align: center, $gap: 8);
-  }
-
-  .CampaignCard__MenuButtonText {
-    @include font(
-      $size: 16,
-      $weight: 600,
-      $line-height: 1.5,
-      $letter-spacing: -0.02em,
-      $color: var(--gray-900)
-    );
-  }
-}
-
-.CampaignCard__MenuButtonDangerText {
-  @include font(
-    $size: 16,
-    $weight: 600,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--color-red-500)
-  );
-}
-
-.CampaignCard__WarningMessage {
-  @include padding($y: 8, $x: 8);
-  @include font(
-    $size: 14,
-    $weight: 500,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--gray-800)
-  );
 }

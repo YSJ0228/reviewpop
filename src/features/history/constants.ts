@@ -34,4 +34,8 @@ export const HISTORY_UI = {
   BOTTOM_SHEET_HEIGHT: 560,
   /** 경고 아이콘 크기 */
   WARNING_ICON_SIZE: 12,
+  /** 예약 관리 메뉴 높이 */
+  RESERVATION_MENU_HEIGHT: 148,
+  /** 예약 관리 메뉴 경고 메시지 높이 */
+  RESERVATION_MENU_TODAY: 156,
 } as const;
