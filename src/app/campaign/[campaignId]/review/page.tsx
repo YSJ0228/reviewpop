@@ -1,18 +1,15 @@
 'use client';
 
+import { use } from 'react';
+
+import ReviewCard from '@entities/review/ui/ReviewCard';
 import { useBlogReviews } from '@features/review/hooks/useBlogReviews';
 
+import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
+
 import styles from './page.module.scss';
-import { use } from 'react';
-import ReviewCard from '@entities/review/ui/ReviewCard';
 
-interface CampaignDetailPageProps {
-  params: Promise<{
-    campaignId: string;
-  }>;
-}
-
-export default function ReviewSection({ params }: CampaignDetailPageProps) {
+export default function CampaignReviewPage({ params }: CampaignDetailPageProps) {
   const { campaignId } = use(params);
   const { data: blogReviews } = useBlogReviews(campaignId);
   return (

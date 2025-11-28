@@ -11,12 +11,9 @@ import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
 import ReviewSection from '@features/campaign/components/ReviewSection';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
+import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
+
 import styles from './page.module.scss';
-interface CampaignDetailPageProps {
-  params: Promise<{
-    campaignId: string;
-  }>;
-}
 
 export default function CampaignDetailPage({ params }: CampaignDetailPageProps) {
   const { campaignId } = use(params);
