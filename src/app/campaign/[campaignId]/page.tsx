@@ -9,6 +9,7 @@ import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusB
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
+import ReviewSection from '@features/campaign/components/ReviewSection';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import styles from './page.module.scss';
 interface CampaignDetailPageProps {
@@ -96,6 +97,8 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       <div className={styles.Page__ValueSection}>
         <CampaignValue campaign={campaign} />
       </div>
+
+      {campaign.status === 'completed' && <ReviewSection campaignId={campaign.id} />}
 
       <CampaignInfoSection campaign={campaign} />
 
