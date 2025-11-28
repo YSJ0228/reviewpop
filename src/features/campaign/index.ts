@@ -5,8 +5,12 @@
  */
 
 // Components
-export { CampaignCard } from './components/CampaignCard';
-export { CampaignList } from './components/CampaignList';
+export { BeforeRecruitingCampaignList } from './components/CampaignList/BeforeRecruitingCampaignList';
+export { RecruitingCampaignList } from './components/CampaignList/RecruitingCampaignList';
+export { CompletedCampaignList } from './components/CampaignList/CompletedCampaignList';
+export { CampaignContents } from './components/CampaignContents';
+export { CampaignValue } from './components/CampaignValue';
+export { CampaignInfoSection } from './components/CampaignInfoSection';
 
 // Hooks
 export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
@@ -20,3 +24,6 @@ export type {
 } from '@entities/campaign/types/campaign.types';
 export type { CampaignCardProps } from './components/CampaignCard/types';
 export type { CampaignListProps } from './components/CampaignList/types';
+export type { CampaignContentsProps } from './components/CampaignContents';
+export type { CampaignValueProps } from './components/CampaignValue';
+export type { CampaignInfoSectionProps } from './components/CampaignInfoSection';

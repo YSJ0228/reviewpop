@@ -7,7 +7,7 @@ import { IconNotification, IconSetting } from '@pop-ui/foundation';
 
 import styles from './style.module.scss';
 
-import type { IGnbProps } from './types';
+import type { GnbProps } from './types';
 
 const MAX_BADGE_COUNT = 9;
 const ICON_SIZE = 24;
@@ -15,7 +15,7 @@ const PROFILE_PATH = '/profile';
 const NOTIFICATIONS_PATH = '/notifications';
 const SETTINGS_PATH = '/settings';
 
-export function Gnb({ notification = 0 }: IGnbProps) {
+export function Gnb({ notification = 0 }: GnbProps) {
   const pathname = usePathname();
 
   const showSetting = pathname === PROFILE_PATH;

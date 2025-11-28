@@ -74,7 +74,7 @@ function ProfileInfo() {
 
   return (
     <div>
-      <img src={profile?.imageUrl} alt="프로필" />
+      <img src={profile?.profileImage} alt="프로필" />
       <h2>{profile?.name}</h2>
       <p>{profile?.email}</p>
     </div>

@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 
-export interface IToastOptions {
+export interface ToastOptions {
   message: string;
   id?: string;
   icon?: ReactNode;
   autoClose?: number | false;
 }
 
-export type TToastInput = string | IToastOptions;
+export type ToastInput = string | ToastOptions;

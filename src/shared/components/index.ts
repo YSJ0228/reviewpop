@@ -22,5 +22,5 @@ export type { ButtonProps } from './Button/types';
 export type { InputProps } from './Input/types';
 export type { ErrorBoundaryProps } from './ErrorBoundary/types';
 export type { PageHeaderProps } from './PageHeader/types';
-export type { IToastOptions, TToastInput } from './Toast/types';
+export type { ToastOptions, ToastInput } from './Toast/types';
 export type { ImageGalleryProps } from './ImageViewer';

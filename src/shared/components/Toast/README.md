@@ -108,10 +108,10 @@ toast.error('저장에 실패했습니다', {
 
 ---
 
-## 옵션 (IToastOptions)
+## 옵션 (ToastOptions)
 
 ```tsx
-interface IToastOptions {
+interface ToastOptions {
   message: string; // 필수: 표시할 메시지
   id?: string; // 선택: 토스트 ID (같은 ID로 업데이트 가능)
   icon?: ReactNode; // 선택: 커스텀 아이콘 (기본 토스트에서만 사용)
@@ -372,7 +372,7 @@ toast.clean();
 
 6. **타입**: TypeScript를 사용하는 경우, 타입은 `@shared/components`에서 import할 수 있습니다:
    ```tsx
-   import type { IToastOptions, TToastInput } from '@shared/components';
+   import type { ToastOptions, ToastInput } from '@shared/components';
    ```
 
 ---

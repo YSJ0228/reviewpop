@@ -2,7 +2,10 @@
  * User 관련 타입 정의
  */
 
+import { Campaign } from '@features/campaign';
 import type { OAuthProvider } from '@shared/types/auth.types';
+
+type UserCampaignStatus = 'reservation' | 'review' | 'plan';
 
 /**
  * 사용자 정보
@@ -10,18 +13,29 @@ import type { OAuthProvider } from '@shared/types/auth.types';
 export interface User {
   /** 사용자 ID */
   id: string;
-  /** 이메일 */
-  email: string;
+  /** 연락처 */
+  phoneNumber?: string;
   /** 이름 */
   name: string;
-  /** 전화번호 */
-  phoneNumber: string;
-  /** 프로필 이미지 URL */
-  profileImage: string | null;
-  /** OAuth Provider */
-  provider?: OAuthProvider;
-  /** 생성일 */
+  /** 블로그 주소 */
+  blogAddress?: string;
+  /** 이메일 */
+  email: string;
+  /** 가입일 */
   createdAt: string;
+  /** OAuth Provider(naver, kakao) */
+  provider: OAuthProvider;
+}
+export interface UserCampaign {
+  campaign: Campaign;
+  status: UserCampaignStatus;
+  date?: string;
+}
+
+export interface UserCampaigns {
+  participatedCampaigns: number;
+  enrolledReviews: number;
+  campaigns: UserCampaign[];
 }
 
 /**

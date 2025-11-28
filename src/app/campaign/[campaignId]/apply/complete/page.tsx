@@ -1,6 +1,12 @@
 'use client';
+import { use } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { ConfirmationCard } from '@shared/components/ConfirmationCard';
+import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
+import { useCampaignDetails } from '@features/campaign';
+import { ButtonBar } from '@features/campaign/components/ButtonBar';
 
 import styles from './page.module.scss';
 
@@ -15,18 +21,40 @@ import styles from './page.module.scss';
  * 3. [ ] "나의 체험으로 이동" 버튼 추가
  * 4. [ ] "홈으로 이동" 버튼 추가
  */
-export default function CampaignApplyCompletePage({ params }: { params: { campaignId: string } }) {
+interface CampaignApplyCompletePageProps {
+  params: Promise<{
+    campaignId: string;
+  }>;
+}
+
+export default function CampaignApplyCompletePage({ params }: CampaignApplyCompletePageProps) {
+  const { campaignId } = use(params);
+  const { data: campaign } = useCampaignDetails(campaignId);
+
+  const router = useRouter();
+  const today = '2000-01-01';
+
   return (
     <main className={styles.CampaignApplyCompletePage}>
       <ErrorBoundary>
         {/* TODO: ApplyComplete 컴포넌트 추가 */}
-        <div className={styles.Placeholder}>
-          <p>✅ 신청이 완료되었습니다!</p>
-          <p>체험 ID: {params.campaignId}</p>
-          <p className={styles.Todo}>
-            features/campaign/components/ApplyComplete 컴포넌트를 구현하세요
-          </p>
-        </div>
+
+        <ConfirmationCard
+          type="application"
+          date={new Date(campaign?.schedule.winnerAnnouncement.start ?? today)}
+        />
+        <CampaignApplyCard
+          size="lg"
+          brand={campaign?.brand ?? ''}
+          providedItems={campaign?.providedItem ?? ''}
+        />
+        <ButtonBar
+          text="신청 내역 보기"
+          variant="secondary"
+          onClick={() => {
+            router.push('/my');
+          }}
+        />
       </ErrorBoundary>
     </main>
   );
