@@ -17,7 +17,6 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   const reservationData = useReservationStore(
     (state) => state.reservationData ?? mockReservationData,
   );
-  const router = useRouter();
   const { mutate: createReservation } = useReserve(campaignId);
   const { data: campaign } = useCampaignDetails(campaignId);
   const { data: user } = useUserInfo();
