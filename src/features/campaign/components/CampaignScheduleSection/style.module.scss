@@ -1,0 +1,110 @@
+@use '@shared/styles/mixins' as *;
+
+.CampaignScheduleSection {
+  @include flex($direction: column);
+  width: 100%;
+  @include padding($y: 24, $x: 16);
+  background: var(--color-white);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    background-color: var(--color-gray-50);
+  }
+}
+
+.Title {
+  @include font($size: 16, $weight: 700, $line-height: 1.5, $letter-spacing: -2%);
+  color: var(--color-gray-900);
+  @include margin($bottom: 16);
+}
+
+.TimelineContainer {
+  @include flex($align: flex-start, $gap: 12);
+}
+
+.TimelineColumn {
+  @include flex($direction: column, $align: center, $gap: 0);
+  flex-shrink: 0;
+  width: 24px;
+  padding-top: 7px;
+}
+
+.TimelineItem {
+  @include flex($direction: column, $align: center, $gap: 2);
+  position: relative;
+  min-height: 22px;
+
+  &:last-child {
+    .Connector {
+      display: none;
+    }
+  }
+}
+
+.Marker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-gray-300);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.MarkerActive {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-aqua-500);
+}
+
+.Connector {
+  width: 2px;
+  min-height: 22.5px;
+  background-color: var(--color-gray-200);
+  margin-bottom: 3px;
+}
+
+.ContentColumn {
+  @include flex($direction: column);
+  flex: 1;
+  gap: 12px;
+}
+
+.Content {
+  @include flex($align: center, $justify: space-between);
+  flex: 1;
+  min-height: 22px;
+}
+
+.Label {
+  @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -2%);
+  color: var(--color-gray-600);
+}
+
+.LabelPast {
+  color: var(--color-gray-500);
+}
+
+.LabelActive {
+  @include font($size: 14, $weight: 600, $line-height: 1.5, $letter-spacing: -2%);
+  color: var(--color-aqua-500);
+}
+
+.DateRange {
+  @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -2%);
+  color: var(--color-gray-600);
+}
+
+.DateRangePast {
+  color: var(--color-gray-500);
+}
+
+.DateRangeActive {
+  @include font($size: 14, $weight: 600, $line-height: 1.5, $letter-spacing: -2%);
+  color: var(--color-aqua-500);
+}
