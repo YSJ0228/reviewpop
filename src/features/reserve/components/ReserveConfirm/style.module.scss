@@ -17,5 +17,6 @@
 
   &__Content {
     @include flex($direction: column, $align: flex-start, $gap: 24px);
+    width: 100%;
   }
 }
