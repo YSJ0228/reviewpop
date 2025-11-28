@@ -6,6 +6,6 @@ import { ReservationData } from './reservationStore';
 export const mockReservationData: ReservationData = {
   campaignId: '3',
   applicationId: 'APP-12345', // 가상의 신청 ID
-  personCounter: 1,
+  personCount: 1,
   date: '2025-12-05T11:00:00',
 };

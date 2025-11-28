@@ -44,7 +44,7 @@ export function ReserveInfo({ campaign, application, reservation }: ReserveInfoP
       </div>
       <div className={`${styles.ReserveInfo__Content} ${styles.BorderBottom}`}>
         <span>방문 인원</span>
-        <p>{reservation.personCounter} 명</p>
+        <p>{reservation.personCount} 명</p>
       </div>
       <div className={styles.ReserveInfo__Content}>
         <span>예약자 정보</span>

@@ -35,7 +35,7 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     createReservation({
       campaignId: reservationData.campaignId,
       applicationId: reservationData.applicationId,
-      personCount: reservationData.personCounter,
+      personCount: reservationData.personCount,
       date: reservationData.date,
     });
   };

@@ -28,7 +28,7 @@ export interface ReservationData {
   /** 신청 ID */
   applicationId: string;
   /** 방문 인원 */
-  personCounter: number;
+  personCount: number;
   /** 방문 날짜 (ISO 8601 string: YYYY-MM-DDTHH:mm:ss) */
   date: string;
 }
