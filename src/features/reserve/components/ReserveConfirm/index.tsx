@@ -22,6 +22,9 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(
     campaignId,
     user?.id ?? '',
+    {
+      enabled: !!user?.id,
+    },
   );
 
   if (isCampaignLoading || isUserLoading || isApplicationLoading) {
