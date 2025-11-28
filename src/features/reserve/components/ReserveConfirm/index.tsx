@@ -4,6 +4,7 @@ import { mockReservationData } from '@features/reserve/store/mockReservationData
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
+import { LoadingSpinner } from '@shared/components';
 
 import { ReserveInfo } from './ReserveInfo';
 import { ReservePrecautions } from './ReservePrecautions';
@@ -16,11 +17,19 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     (state) => state.reservationData ?? mockReservationData,
   );
   const { mutate: createReservation } = useReserve(campaignId);
-  const { data: campaign } = useCampaignDetails(campaignId);
-  const { data: user } = useUserInfo();
-  const { data: application } = useApplicationDetails(campaignId, user?.id ?? '');
+  const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
+  const { data: user, isLoading: isUserLoading } = useUserInfo();
+  const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(
+    campaignId,
+    user?.id ?? '',
+  );
 
-  if (!reservationData || !campaign || !application) return null;
+  if (isCampaignLoading || isUserLoading || isApplicationLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!reservationData || !campaign || !application)
+    return <div>필요한 정보를 불러올 수 없습니다.</div>;
 
   const handleConfirm = () => {
     createReservation({

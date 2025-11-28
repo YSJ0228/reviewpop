@@ -7,7 +7,7 @@
 
 import type { Application } from '@entities/application';
 import { mockCampaignDetails } from '@entities/campaign/lib/mockCampaignDetails';
-import { mockUsers } from './users';
+// import { mockUsers } from './users';
 
 // /**
 //  * 사용자 정보 헬퍼 함수
@@ -51,19 +51,19 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-28T09:00:00Z',
   },
   {
-    userId: 'kakao-1001',
-    campaign: getCampaign('1'),
+    userId: 'kakao-1002',
+    campaign: getCampaign('2'),
     status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
-    name: '박민수',
+    name: '박민주',
     blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
     createdAt: '2025-10-28T10:30:00Z',
   },
   {
     userId: 'kakao-1002',
-    campaign: getCampaign('1'),
+    campaign: getCampaign('2'),
     status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
