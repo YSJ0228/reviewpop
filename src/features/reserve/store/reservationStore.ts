@@ -20,32 +20,17 @@ import { create } from 'zustand';
 
 /**
  * 예약 정보 데이터 구조
+ * 사용자가 선택한 예약 정보만 관리합니다.
  */
 export interface ReservationData {
   /** 캠페인 ID */
   campaignId: string;
-  /** 사용자 ID */
-  userId: string;
-  /** 예약한 체험 이미지 URL */
-  thumbnailUrl: string;
-  /** 예약한 체험 브랜드명 */
-  brand: string;
-  /** 제공 상품 */
-  providedItem: string;
-  /** 예약자 이름 */
-  bookerName: string;
-  /** 예약자 연락처 */
-  bookerPhone: string;
-  /** 방문 날짜 */
-  visitDate: string;
-  /** 방문 시간 */
-  visitTime: string;
-  /** 주소 */
-  address: string;
+  /** 신청 ID */
+  applicationId: string;
   /** 방문 인원 */
-  visitorCounter: number;
-  /** 유의사항 */
-  precautions: string[];
+  personCounter: number;
+  /** 방문 날짜 (ISO 8601 string: YYYY-MM-DDTHH:mm:ss) */
+  date: string;
 }
 
 interface ReservationState {
@@ -69,8 +54,9 @@ export const useReservationStore = create<ReservationStore>((set) => ({
   // 초기 상태
   reservationData: null,
 
-  // Actions
+  // 설정 (정보 저장)
   setReservationData: (data) => set({ reservationData: data }),
 
+  // 초기화
   resetReservationData: () => set({ reservationData: null }),
 }));

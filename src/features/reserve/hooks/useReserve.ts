@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { CreateReservationRequest, UpdateReservationRequest } from '@entities/reservation';
+import { PostReservation } from '@entities/reservation';
 import {
   createReservation,
   getReservation,
@@ -11,29 +11,28 @@ import {
 // 예약 생성 hook
 export const useReserve = () => {
   return useMutation({
-    mutationFn: (data: CreateReservationRequest) => createReservation(data),
+    mutationFn: (data: PostReservation) => createReservation(data),
   });
 };
 
 // 예약 조회 hook
-export const useGetReservation = (campaignId: string, userId: string, applicationId: string) => {
+export const useGetReservation = (campaignId: string, applicationId: string) => {
   return useQuery({
-    queryKey: ['reservation', campaignId, userId, applicationId],
-    queryFn: () => getReservation(campaignId, userId, applicationId),
+    queryKey: ['reservation', campaignId, applicationId],
+    queryFn: () => getReservation(campaignId, applicationId),
   });
 };
 
 // 예약 수정 hook
-export const useUpdateReservation = (campaignId: string, userId: string, applicationId: string) => {
+export const useUpdateReservation = (campaignId: string, applicationId: string) => {
   return useMutation({
-    mutationFn: (data: UpdateReservationRequest) =>
-      updateReservation(campaignId, userId, applicationId, data),
+    mutationFn: (data: PostReservation) => updateReservation(campaignId, applicationId, data),
   });
 };
 
 // 예약 취소 hook
-export const useDeleteReservation = (campaignId: string, userId: string, applicationId: string) => {
+export const useDeleteReservation = (campaignId: string, applicationId: string) => {
   return useMutation({
-    mutationFn: () => deleteReservation(campaignId, userId, applicationId),
+    mutationFn: () => deleteReservation(campaignId, applicationId),
   });
 };
