@@ -52,7 +52,7 @@ export const mockApplications: MockApplication[] = [
   },
   {
     userId: 'kakao-1002',
-    campaign: getCampaign('2'),
+    campaign: getCampaign('1'),
     status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
@@ -63,7 +63,7 @@ export const mockApplications: MockApplication[] = [
   },
   {
     userId: 'kakao-1002',
-    campaign: getCampaign('2'),
+    campaign: getCampaign('1'),
     status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
@@ -327,7 +327,7 @@ export const mockApplications: MockApplication[] = [
   {
     userId: 'naver-2001',
     campaign: getCampaign('6'),
-    status: 'selected',
+    status: 'reviewed', // 후기 탭
     reviewStatus: 'before',
     isReservated: false,
     name: '한소라',
@@ -338,7 +338,7 @@ export const mockApplications: MockApplication[] = [
   {
     userId: 'kakao-1004',
     campaign: getCampaign('6'),
-    status: 'selected',
+    status: 'completed', // 종료 탭
     reviewStatus: 'before',
     isReservated: false,
     name: '강유나',
