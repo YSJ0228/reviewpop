@@ -7,7 +7,7 @@ interface UserResponse {
 }
 
 /**
- * 유저 정보를 가져오는 React Query 훅
+ * 유저 기본 정보를 가져오는 React Query 훅
  */
 export function useUserInfo() {
   return useQuery({

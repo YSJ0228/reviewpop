@@ -71,5 +71,6 @@ export const ROUTES = {
       KAKAO: '/api/auth/social/kakao',
       NAVER: '/api/auth/social/naver',
     },
+    PROFILE: '/api/auth/profile',
   },
 } as const;

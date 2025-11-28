@@ -35,6 +35,7 @@ export const DATE_FORMATS = {
   MMDD_DDD_LONG: 'M월 D일 (ddd)',
   MMDD_DDDD_SHORT: 'MM.DD dddd',
   MMDD_DDDD_LONG: 'M월 D일 dddd',
+  FULL_SHORT: 'YY.MM.DD (ddd) A h시 mm분',
 } as const;
 
 /**

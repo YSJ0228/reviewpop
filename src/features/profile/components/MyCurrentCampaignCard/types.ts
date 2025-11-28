@@ -1,6 +1,5 @@
+import { UserCampaign } from '@entities/user/types/user.types';
+
 export interface MyCurrentCampaignCardProps {
-  brand: string;
-  providedItems: string;
-  state: 'reservation' | 'plan' | 'review';
-  visit?: string;
+  userCampaign: UserCampaign;
 }

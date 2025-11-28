@@ -19,6 +19,7 @@
     color: var(--gray-900);
     font-size: 14px;
     font-weight: 600;
+    height: 21px;
   }
   &__Items {
     color: var(--gray-600);
@@ -27,5 +28,8 @@
   }
   &__State {
     @include flex($justify: space-between, $align: center);
+  }
+  &__Date {
+    @include font($color: #808080, $weight: 500, $size: 14);
   }
 }

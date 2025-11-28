@@ -1,0 +1,8 @@
+@use '@shared/styles/mixins' as *;
+
+.MyProfile {
+  &__DividingLine {
+    border: 0.5px solid #f6f6f6;
+    @include margin($y: 24);
+  }
+}

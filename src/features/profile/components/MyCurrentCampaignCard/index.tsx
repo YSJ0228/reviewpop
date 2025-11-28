@@ -1,4 +1,8 @@
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { IconChevronRight } from '@pop-ui/foundation';
+
+import { formatDate } from '@shared/lib/date';
 
 import { MyCampaignState } from '../MyCampaignState';
 
@@ -6,29 +10,40 @@ import { MyCurrentCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 
-export function MyCurrentCampaignCard({
-  brand,
-  providedItems,
-  state,
-  visit,
-}: MyCurrentCampaignCardProps) {
+export function MyCurrentCampaignCard({ userCampaign }: MyCurrentCampaignCardProps) {
+  const { campaign, status, date } = userCampaign;
+  const router = useRouter();
+  const handleClick = () => {
+    if (status === 'plan') {
+      router.push(`/campaign/${campaign.id}`);
+    } else if (status === 'reservation') {
+      router.push(`campaign/${campaign.id}/reserve`);
+    } else {
+      router.push(`campaign/${campaign.id}/review/write`);
+    }
+  };
   return (
-    <div className={styles.MyCurrentCampaignCard}>
+    <div className={styles.MyCurrentCampaignCard} onClick={handleClick}>
       <div className={styles.MyCurrentCampaignCard__BrandInfo}>
-        <div
-          style={{ width: 60, height: 60, backgroundColor: 'var(--gray-100)', borderRadius: 8 }}
-        ></div>{' '}
-        {/* 이미지로 변환 */}
+        <Image
+          src={campaign.thumbnail}
+          width={60}
+          height={60}
+          alt="체험 썸네일"
+          style={{ borderRadius: 8 }}
+        />
         <div className={styles.MyCurrentCampaignCard__Text}>
-          <span className={styles.MyCurrentCampaignCard__Brand}>{brand}</span>
-          <span className={styles.MyCurrentCampaignCard__Items}>{providedItems}</span>
+          <span className={styles.MyCurrentCampaignCard__Brand}>{campaign.brand}</span>
+          <span className={styles.MyCurrentCampaignCard__Items}>{campaign.providedItem}</span>
         </div>
       </div>
       <div className={styles.MyCurrentCampaignCard__Line}></div>
       <div className={styles.MyCurrentCampaignCard__State}>
-        <MyCampaignState type={state} />
-        {state === 'plan' ? (
-          <span>{visit}</span>
+        <MyCampaignState type={status} />
+        {status === 'plan' ? (
+          <span className={styles.MyCurrentCampaignCard__Date}>
+            {date && formatDate(date, 'FULL_SHORT')}
+          </span>
         ) : (
           <IconChevronRight color="var(--gray-400)" size={16} />
         )}

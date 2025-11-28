@@ -9,13 +9,8 @@ export function MyCurrentCampaignList({ campaigns }: MyCurrentCampaignListProps)
       <h2 className={styles.MyCurrentCampaignList__Title}>내 체험단 현황</h2>
       <div className={styles.MyCurrentCampaignList__CampaignCards}>
         {campaigns.length > 0 ? (
-          campaigns.map((campaign) => (
-            <MyCurrentCampaignCard
-              brand={campaign.brand}
-              providedItems={campaign.providedItems}
-              state="plan"
-              key={campaign.id}
-            />
+          campaigns.map((campaign, idx) => (
+            <MyCurrentCampaignCard key={idx} userCampaign={campaign} />
           ))
         ) : (
           <EmptyState variant="no-applied" />

@@ -1,10 +1,5 @@
-type Campaign = {
-  id: string;
-  brand: string;
-  providedItems: string;
-  state: 'reservation' | 'plan' | 'review';
-};
+import { UserCampaign } from '@entities/user/types/user.types';
 
 export interface MyCurrentCampaignListProps {
-  campaigns: Campaign[];
+  campaigns: UserCampaign[];
 }

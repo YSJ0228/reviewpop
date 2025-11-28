@@ -14,6 +14,7 @@ import type { LoginRequest } from '@entities/user/types/user.types';
 import type { ApiResponse } from '@shared/api/types/common.types';
 import { mockUsers } from '../data/users';
 import { findKakaoUserByToken } from '../data/oauth';
+import { mockUserCampaigns } from '../data/userCampaigns';
 
 export const authHandlers = [
   /**
@@ -151,6 +152,14 @@ export const authHandlers = [
     return HttpResponse.json({
       success: true,
       data: user,
+    });
+  }),
+
+  http.get(ROUTES.API.PROFILE, () => {
+    const userCampaign = mockUserCampaigns;
+    return HttpResponse.json({
+      success: true,
+      data: userCampaign,
     });
   }),
 
