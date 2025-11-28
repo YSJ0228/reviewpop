@@ -42,11 +42,11 @@
 }
 
 .Title {
-  @include font($size: 14, $weight: 600, $line-height: 1.5, $letter-spacing: -2%);
+  @include font($size: 14, $weight: 600, $line-height: 1.5, $letter-spacing: -0.02em);
   color: var(--color-gray-900);
 }
 
 .Description {
-  @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -2%);
+  @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -0.02em);
   color: var(--color-gray-600);
 }
