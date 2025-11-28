@@ -2,6 +2,7 @@
 
 .ReservePrecautions {
   @include flex($direction: column, $align: flex-start, $gap: 8px);
+  width: 100%;
 
   &__Title {
     @include flex($align: center, $gap: 8px);
