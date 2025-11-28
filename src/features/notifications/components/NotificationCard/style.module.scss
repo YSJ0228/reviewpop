@@ -1,0 +1,58 @@
+@use '@shared/styles/mixins' as *;
+.Notification {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  @include padding($y: 16, $x: 16);
+
+  &__Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+
+    &__Header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
+        color: var(--value-gray-400, #b0b0b0);
+        font-size: var(--font-size-12, 12px);
+        font-weight: 600;
+      }
+
+      span {
+        color: var(--value-gray-400, #b0b0b0);
+        font-size: var(--font-size-12, 12px);
+        font-weight: 500;
+        line-height: 150%; /* 18px */
+        letter-spacing: -0.24px;
+      }
+    }
+    &__Content {
+      color: var(--value-gray-700, #666);
+      font-size: var(--font-size-14, 14px);
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.28px;
+    }
+  }
+
+  &--New {
+    background: var(--value-blue-50, #eff8ff);
+
+    .Notification__Wrapper {
+      &__Header {
+        h3 {
+          color: var(--value-blue-500, #2e90fa);
+        }
+      }
+      &__Content {
+        color: var(--value-gray-900, #333);
+        font-weight: 600;
+      }
+    }
+  }
+}

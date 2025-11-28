@@ -94,7 +94,7 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
                   <div className={styles.CampaignSelectedCard__SectionContent}>
                     <h3>제공 혜택</h3>
                     <p className={styles.CampaignSelectedCard__SectionItem}>
-                      {bottomSheetData?.providedItems || '제공 혜택 정보가 없습니다.'}
+                      {bottomSheetData?.providedItem || '제공 혜택 정보가 없습니다.'}
                     </p>
                   </div>
                   <p className={styles.CampaignSelectedCard__Description}>

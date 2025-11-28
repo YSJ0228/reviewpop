@@ -13,7 +13,7 @@ export function getCampaignBottomSheetData(campaignId: string, enabled: boolean 
   }
 
   const campaign = findCampaignById(campaignId);
-  const campaignDetail = mockCampaignDetails[campaignId];
+  const campaignDetail = mockCampaignDetails.find((c) => c.id === campaignId);
 
   if (!campaign) {
     return null;
@@ -21,7 +21,7 @@ export function getCampaignBottomSheetData(campaignId: string, enabled: boolean 
 
   return {
     // 제공 혜택에 필요한 데이터(Campaign)
-    providedItems: campaign.providedItems,
+    providedItem: campaign.providedItem,
     description: campaign.description,
 
     // 후기 미션에 필요한 데이터 (CampaignDetail)
