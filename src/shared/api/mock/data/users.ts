@@ -14,6 +14,8 @@ export const mockUsers: User[] = [
     email: 'park.minsoo@kakao.com',
     name: '박민수',
     provider: 'kakao',
+    phoneNumber: '01011112222',
+    blogAddress: 'blog.naver.com/reviewpop',
     createdAt: '2024-02-01T00:00:00Z',
   },
   {
