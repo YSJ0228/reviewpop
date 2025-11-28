@@ -17,7 +17,7 @@ export const useReserve = (campaignId: string) => {
     onSuccess: () => {
       toast.success('예약이 완료되었습니다.');
       // 페이지 이동
-      router.push(`/campaign/${campaignId}/reserve/confirm`);
+      router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: () => {
       toast.error('예약 생성에 실패했습니다.');
