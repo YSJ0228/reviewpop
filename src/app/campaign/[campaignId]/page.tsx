@@ -10,6 +10,7 @@ import { CampaignContents } from '@features/campaign/components/CampaignContents
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
+import { CampaignRequirementsSection } from '@features/campaign/components/CampaignRequirementsSection';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import styles from './page.module.scss';
 interface CampaignDetailPageProps {
@@ -102,50 +103,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <CampaignScheduleSection campaign={campaign} />
 
-      <section className={styles.Page__Section}>
-        <p className={styles.Page__Brand}>{campaign.brand}</p>
-        <h1 className={styles.Page__Title}>{campaign.title}</h1>
-
-        <div className={styles.Page__Meta}>
-          <div className={styles.Page__MetaItem}>
-            <span className={styles.Page__MetaLabel}>신청일</span>
-            <span className={styles.Page__MetaValue}>
-              {formatDate(campaign.schedule.application.start)}
-            </span>
-          </div>
-          <div className={styles.Page__MetaItem}>
-            <span className={styles.Page__MetaLabel}>마감일</span>
-            <span className={styles.Page__MetaValue}>
-              {formatDate(campaign.schedule.application.end)}
-            </span>
-          </div>
-          <div className={styles.Page__MetaItem}>
-            <span className={styles.Page__MetaLabel}>카테고리</span>
-            <span className={styles.Page__MetaValue}>{campaign.category}</span>
-          </div>
-        </div>
-
-        {/* 모집 인원 */}
-        <div className={styles.Page__Recruitment}>
-          <div className={styles.Page__RecruitmentBar}>
-            <div
-              className={styles.Page__RecruitmentProgress}
-              style={{
-                width: `${(campaign.currentRecruitment / campaign.maxRecruitment) * 100}%`,
-              }}
-            />
-          </div>
-          <p className={styles.Page__RecruitmentText}>
-            <strong>{campaign.currentRecruitment}</strong> / {campaign.maxRecruitment}명 신청
-          </p>
-        </div>
-      </section>
-
-      {/* 체험 소개 */}
-      <section className={styles.Page__Section}>
-        <h2 className={styles.Page__SectionTitle}>체험 소개</h2>
-        <p className={styles.Page__Description}>{campaign.description}</p>
-      </section>
+      <CampaignRequirementsSection campaign={campaign} />
 
       {/* 리뷰 미션 */}
       <section className={styles.Page__Section}>
@@ -167,20 +125,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       {/* 배송 정보 */}
 
-      {/* 신청 조건 */}
-      {campaign.requirements && campaign.requirements.length > 0 && (
-        <section className={styles.Page__Section}>
-          <h2 className={styles.Page__SectionTitle}>신청 조건</h2>
-          <ul className={styles.Page__List}>
-            {campaign.requirements.map((requirement, index) => (
-              <li key={index} className={styles.Page__ListItem}>
-                {requirement}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {/* 주의사항 */}
       {campaign.precautions && campaign.precautions.length > 0 && (
         <section className={`${styles.Page__Section} ${styles['Page__Section--Notice']}`}>
@@ -196,12 +140,4 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       )}
     </div>
   );
-}
-
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
 }
