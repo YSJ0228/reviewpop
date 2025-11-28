@@ -31,7 +31,10 @@ export type ReviewStatus =
 
 export interface Application {
   campaign: CampaignDetail;
+
   name: string;
+  blogAddress: string;
+  phoneNumber: string;
 
   status: ApplicationStatus;
   reviewStatus: ReviewStatus;
