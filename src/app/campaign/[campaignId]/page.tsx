@@ -9,6 +9,7 @@ import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusB
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
+import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import styles from './page.module.scss';
 interface CampaignDetailPageProps {
@@ -98,6 +99,8 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       </div>
 
       <CampaignInfoSection campaign={campaign} />
+
+      <CampaignScheduleSection campaign={campaign} />
 
       <section className={styles.Page__Section}>
         <p className={styles.Page__Brand}>{campaign.brand}</p>
