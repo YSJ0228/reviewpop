@@ -84,7 +84,7 @@ export const mockMyCampaigns: MyCampaign[] = [
     thumbnail: 'https://picsum.photos/seed/campaign7/400/300',
     status: 'selected',
     visitStatus: 'scheduled',
-    appliedAt: ['2025-11-27', '15:00'],
+    appliedAt: ['2025-11-28', '17:00'],
   },
   {
     id: '10',

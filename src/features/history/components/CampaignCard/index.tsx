@@ -3,20 +3,50 @@ import Image from 'next/image';
 
 import dayjs from 'dayjs';
 
+import { useDisclosure } from '@mantine/hooks';
+import { IconKebap } from '@pop-ui/foundation';
+
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
 import { STATUS_VISIT } from '@entities/history/types/myCampaign.types';
+
+import { HISTORY_MESSAGES } from '@features/history/constants';
+import { useReservationActions } from '@features/history/hooks/useReservationActions';
+
+import { Colors } from '@shared/styles/colors';
 
 import { CampaignAppliedCard } from './CampaignAppliedCard';
 import { CampaignRejectedCard } from './CampaignRejectedCard';
 import { CampaignSelectedCard } from './CampaignSelectedCard';
+import { ReservationBottomSheet } from './ReservationBottomSheet';
 
 import type { MyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
-import { HISTORY_MESSAGES } from '@features/history/constants';
 
 export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   const announcementStatus = calculateAnnouncementDate(campaign.announcementDate);
+  const [isOpen, { open, close }] = useDisclosure(false);
+
+  const { handleChangeDate, handleCancelReservation } = useReservationActions(campaign.id);
+
+  // 카드 케밥 버튼 클릭 핸들러
+  const handleKebapClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    open();
+  };
+
+  // 예약 날짜 변경 핸들러
+  const handleChangeDateClick = () => {
+    handleChangeDate();
+    close();
+  };
+
+  // 예약 취소 핸들러
+  const handleCancelReservationClick = async () => {
+    await handleCancelReservation();
+    close();
+  };
 
   return (
     <>
@@ -50,12 +80,24 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               {type === 'selected' && (
                 <>
                   {campaign.visitStatus === 'scheduled' && (
-                    <span className={styles.CampaignCard__VisitDate}>
-                      {campaign.appliedAt &&
-                        dayjs(`${campaign.appliedAt[0]} ${campaign.appliedAt[1]}`).format(
-                          'M월 D일 dddd A h:mm',
-                        )}
-                    </span>
+                    <div className={styles.CampaignCard__VisitDateWrapper}>
+                      <span className={styles.CampaignCard__VisitDate}>
+                        {campaign.appliedAt &&
+                          dayjs(`${campaign.appliedAt[0]} ${campaign.appliedAt[1]}`).format(
+                            'M월 D일 dddd A h:mm',
+                          )}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleKebapClick}
+                        className={styles.CampaignCard__KebapButton}
+                        aria-label="예약 관리 메뉴 열기"
+                        aria-expanded={isOpen}
+                        aria-haspopup="dialog"
+                      >
+                        <IconKebap size={20} color={Colors.COLOR_GRAY_600} />
+                      </button>
+                    </div>
                   )}
                   {campaign.visitStatus === 'before' && (
                     <span className={styles.CampaignCard__SelectedText}>
@@ -78,13 +120,24 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             </section>
           </header>
 
-          {/* TODO: 추후 조건(applied, selected, registered, completed) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
+          {/* TODO: 추후 조건(탭 별) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
         </article>
       </Link>
 
       {/* selected 타입 - Link 밖으로 분리*/}
       {type === 'selected' && campaign.visitStatus && (
         <CampaignSelectedCard campaign={campaign} visitStatus={campaign.visitStatus} />
+      )}
+
+      {/* 예약 옵션 BottomSheet */}
+      {type === 'selected' && campaign.visitStatus === 'scheduled' && (
+        <ReservationBottomSheet
+          appliedAt={campaign.appliedAt}
+          isOpen={isOpen}
+          onClose={close}
+          onDateChange={handleChangeDateClick}
+          onCancel={handleCancelReservationClick}
+        />
       )}
     </>
   );

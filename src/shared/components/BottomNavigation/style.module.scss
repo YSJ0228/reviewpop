@@ -14,7 +14,7 @@
   background: var(--color-white);
   border-top: 1px solid #f6f6f6;
   @include padding($x: 20, $bottom: env(safe-area-inset-bottom));
-  z-index: 1000;
+  z-index: var(--z-sticky);
 }
 
 .BottomNavigation__Item {
