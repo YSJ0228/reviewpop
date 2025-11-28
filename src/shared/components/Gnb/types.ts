@@ -1,4 +1,4 @@
-export interface IGnbProps {
+export interface GnbProps {
   /**
    * 알림 개수
    * - 음수는 0으로 처리됨

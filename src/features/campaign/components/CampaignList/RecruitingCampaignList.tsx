@@ -14,11 +14,11 @@ export function RecruitingCampaignList({ filteredCampaigns }: Omit<CampaignListP
   const sortedCampaigns = useMemo(() => {
     return filteredCampaigns
       .filter((campaign) => {
-        return campaign.schedule.applicationSchedule[1] > thisTime.toISOString();
+        return campaign.schedule.application.end > thisTime.toISOString();
       })
       .sort(
         (a, b) =>
-          diff(a.schedule.applicationSchedule[1], b.schedule.applicationSchedule[1]) ||
+          diff(a.schedule.application.end, b.schedule.application.end) ||
           a.currentRecruitment - b.currentRecruitment ||
           b.maxRecruitment - a.maxRecruitment,
       );

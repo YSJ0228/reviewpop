@@ -1,12 +1,12 @@
-import { TButtonType } from './types';
+import { ButtonType } from './types';
 
-type TButtonConfigItem = {
+type ButtonConfigItem = {
   image: string;
   label: string;
   class: string;
 };
 
-export const BUTTON_CONFIG: Record<TButtonType, TButtonConfigItem> = {
+export const BUTTON_CONFIG: Record<ButtonType, ButtonConfigItem> = {
   copy: {
     image: '',
     label: '복사',

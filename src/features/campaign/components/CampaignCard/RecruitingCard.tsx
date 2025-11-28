@@ -9,18 +9,19 @@ import type { CampaignCardProps } from './types';
 import styles from './style.module.scss';
 
 export function RecruitingCard({ campaign }: CampaignCardProps) {
-  const givenTime = campaign.schedule.applicationSchedule[1];
+  const givenTime = campaign.schedule.application.end;
   const currentTime = now();
   const diffInDays = Math.max(0, diff(givenTime, currentTime, 'day'));
-  const applicationSchedule = campaign.schedule.applicationSchedule.map((d) =>
-    formatDate(d, 'MMDD_DDD_SHORT'),
-  );
+  const applicationSchedule = [
+    campaign.schedule.application.start,
+    campaign.schedule.application.end,
+  ].map((d) => formatDate(d, 'MMDD_DDD_SHORT'));
 
   return (
     <Link href={`/campaign/${campaign.id}`} className={styles.CampaignCard__Link}>
       <article className={styles.CampaignCard} aria-label={`${campaign.brand} ${campaign.title}`}>
         <Image
-          src={campaign.imageUrl}
+          src={campaign.thumbnail}
           alt={`${campaign.brand} ${campaign.title} 체험 이미지`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -33,7 +34,7 @@ export function RecruitingCard({ campaign }: CampaignCardProps) {
           <div className={styles.CampaignCard__Header}>
             <span className={styles.CampaignCard__Brand}>{campaign.brand}</span>
             <h3 className={styles.CampaignCard__Title}>{campaign.title}</h3>
-            <p className={styles.CampaignCard__Items}>{campaign.providedItems}</p>
+            <p className={styles.CampaignCard__Items}>{campaign.providedItem}</p>
           </div>
           <div className={styles.CampaignCard__Content__Active}>
             <div>
@@ -48,7 +49,7 @@ export function RecruitingCard({ campaign }: CampaignCardProps) {
               </div>
               <div className={styles.CampaignCard__Meta}>
                 <span>체험단 모집</span>
-                <time dateTime={campaign.schedule.applicationSchedule[0]}>
+                <time dateTime={campaign.schedule.application.start}>
                   {applicationSchedule.join(' ~ ')}
                 </time>
               </div>
