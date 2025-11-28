@@ -18,16 +18,31 @@ interface ScheduleItem {
   isPast: boolean;
 }
 
+const SCHEDULE_CONFIG = [
+  { key: 'application' as const, label: '체험단 모집' },
+  { key: 'winnerAnnouncement' as const, label: '당첨자 발표' },
+  { key: 'review' as const, label: '방문/후기 등록' },
+] as const;
+
 /**
  * 날짜 범위를 MM.DD(요일) 형식으로 포맷팅
  * 시작일과 종료일이 같으면 하나의 날짜만 표시
  */
 function formatDateRange(start: DateInput, end: DateInput): string {
-  const startDate = dayjs(start).startOf('day');
-  const endDate = dayjs(end).startOf('day');
+  const startDate = dayjs(start);
+  const endDate = dayjs(end);
+
+  // 날짜 유효성 검증
+  if (!startDate.isValid() || !endDate.isValid()) {
+    console.error('Invalid date provided:', { start, end });
+    return '-';
+  }
+
+  const startDateNormalized = startDate.startOf('day');
+  const endDateNormalized = endDate.startOf('day');
 
   // 시작일과 종료일이 같은 날이면 하나만 표시
-  if (startDate.isSame(endDate, 'day')) {
+  if (startDateNormalized.isSame(endDateNormalized, 'day')) {
     return formatDate(start, 'MMDD_DDD_SHORT');
   }
 
@@ -47,8 +62,12 @@ function getScheduleItemStatus(dateRange: { start: string; end: string }) {
   // 마감일이 지난 경우
   const isPast = now.isAfter(end);
 
-  // 현재 기간에 해당하는 경우
-  const isActive = !now.isBefore(start, 'day') && !now.isAfter(end, 'day');
+  // 현재 기간에 해당하는 경우 (시작일 포함, 종료일 포함)
+  // isSameOrAfter: now가 start와 같거나 이후인지 확인
+  // isSameOrBefore: now가 end와 같거나 이전인지 확인
+  const isSameOrAfter = now.isSame(start, 'day') || now.isAfter(start);
+  const isSameOrBefore = now.isSame(end, 'day') || now.isBefore(end);
+  const isActive = isSameOrAfter && isSameOrBefore;
 
   return { isPast, isActive };
 }
@@ -62,23 +81,11 @@ function getScheduleItemStatus(dateRange: { start: string; end: string }) {
 export function CampaignScheduleSection({ campaign }: CampaignScheduleSectionProps) {
   const { schedule } = campaign;
 
-  const scheduleItems: ScheduleItem[] = [
-    {
-      label: '체험단 모집',
-      dateRange: schedule.application,
-      ...getScheduleItemStatus(schedule.application),
-    },
-    {
-      label: '당첨자 발표',
-      dateRange: schedule.winnerAnnouncement,
-      ...getScheduleItemStatus(schedule.winnerAnnouncement),
-    },
-    {
-      label: '방문/후기 등록',
-      dateRange: schedule.review,
-      ...getScheduleItemStatus(schedule.review),
-    },
-  ];
+  const scheduleItems: ScheduleItem[] = SCHEDULE_CONFIG.map(({ key, label }) => ({
+    label,
+    dateRange: schedule[key],
+    ...getScheduleItemStatus(schedule[key]),
+  }));
 
   return (
     <div className={styles.CampaignScheduleSection}>
