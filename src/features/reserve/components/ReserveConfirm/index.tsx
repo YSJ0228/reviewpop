@@ -1,5 +1,3 @@
-import { useRouter } from 'next/navigation';
-
 import { useReserve } from '@features/reserve/hooks/useReserve';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 import { mockReservationData } from '@features/reserve/store/mockReservationData';
