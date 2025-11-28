@@ -20,6 +20,10 @@ export const HISTORY_MESSAGES = {
 
   // 바텀시트에서 활용되는 메시지
   VIEW_CAMPAIGN_DETAIL: '체험 상세 보기',
+  CHANGE_RESERVATION_DATE: '예약 날짜 변경',
+  CANCEL_RESERVATION: '예약 취소',
+  CANCEL_RESERVATION_TODAY_NOT_ALLOWED:
+    '예약 당일에는 날짜 변경이 불가능하며, 취소 후 예약 가능한 날짜에 다시 예약만 가능합니다.',
 } as const;
 
 /** 나의 체험에서 사용되는 매직넘버 관련 상수 */
