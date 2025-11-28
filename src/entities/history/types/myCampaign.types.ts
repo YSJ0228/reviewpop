@@ -105,13 +105,7 @@ import { Application } from '@entities/application/types/application.types';
 
 /**
  * MyCampaignList 내 체험 정보
- * date - 체험
  */
-// export interface MyCampaign extends Application {
-//   date?: string;
-//   reservationDate?: string;
-// }
-
 export interface MyCampaignList {
   applications: Application[];
 }
