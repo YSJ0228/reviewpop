@@ -1,10 +1,11 @@
 import { IconCalendar } from '@pop-ui/foundation';
 
-import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
-import { useIsTodayReservation } from '@features/history/hooks/useIsTodayReservation';
-import { Colors } from '@shared/styles/colors';
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { Modal } from '@shared/components';
+import { Colors } from '@shared/styles/colors';
+
+import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
+import { useIsTodayReservation } from '@features/history/hooks/useIsTodayReservation';
 
 import type { ReservationBottomSheetProps } from './type';
 

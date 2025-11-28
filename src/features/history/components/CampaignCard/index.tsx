@@ -45,6 +45,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
   // 예약 취소 핸들러
   const handleCancelReservationClick = async () => {
     await handleCancelReservation();
+    close();
   };
 
   return (
