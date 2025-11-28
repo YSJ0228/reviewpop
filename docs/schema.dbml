@@ -5,17 +5,30 @@ Enum campaign_status {
   "before_recruiting" [note: "모집 전"]
   "recruiting" [note: "모집 중"]
   "in_progress" [note: "선정 완료, 체험 진행 중"]
-  "review_period" [note: "리뷰 작성 중"]
+  //"review_period" [note: "리뷰 작성 중"]
   "completed" [note: "체험 프로세스 종료"]
   "closed" [note: "마감, 모집 실패"]
 }
 
 // 지원 상태
 Enum application_status {
-    "pending" [note: "대기 중, 선정 결과 발표 전"]
-    "selected" 
-    "rejected" 
-    "cancelled"
+  "pending" [note: "대기 중, 선정 결과 발표 전"]
+  "selected" [note: "체험 선정 됨"] 
+  "rejected" [note: "지원 거절 됨, 미선정, 짤림"] 
+  "completed" [note: "체험 완료"]
+  "cancelled" [note: "체험이 사라짐, 정원 미달 등"]
+}
+
+Enum review_status {
+    "pending" [note: "리뷰 검토 중"]
+    "requested" [note: "리뷰 수정 요청"]
+    "completed" [note: "리뷰 승인 완료"]
+}
+
+// 유저 체험 방문 상태
+Enum user_reservation_status {
+  "before_visited" [note: "방문 전"]
+  "visited" [note: "방문 완료"]
 }
 
 // 체험 카테고리
@@ -33,59 +46,58 @@ Enum campaign_category {
   "기타"
 }
 
-// 내 체험 상태
-Enum my_campaign_status {
-    "applied" [note: "신청 완료, 대기 중"]
-    "selected" [note: "선정됨"]
-    "registered" [note: "리뷰 등록 완료, 검수 대기"] //review_submitted로 바꾸는 건 어떤지?
-    "completed" [note: "리뷰 검수 완료"]
-    "rejected" [note: "체험 미선정, 탈락"]
-}
-
 // 체험 유형
-Enum experience_type {
-  "delivery" [note: "배송형"]
-  "visit" [note: "방문형"]
-}
+//Enum experience_type {
+//  "delivery" [note: "배송형"]
+//  "visit" [note: "방문형"]
+//}
 
 // 리뷰 플랫폼
-Enum review_platform {
-  "naver_blog"
-  "other"
+//Enum review_platform {
+//  "naver_blog"
+//  "other"
+//}
+
+// 알림 타입
+Enum notification_type {
+  "default"
+  "schedule"
+  "edit"
 }
 
 // Table 정의 ====================
 
 // 유저
 Table user {
-  id varchar [pk, note: "유저 ID"]
+  id int [pk, note: "유저 ID"]
   phone_number varchar [unique, not null]
   blog_address varchar [not null, note: "블로그 주소"]
   name varchar [not null]
   provider varchar [not null, note: "kakao, naver"]
   created_at datetime [default: `now()`, not null]
   updated_at datetime [not null]
-  
-  // 기존 User 타입에는 email, profileImage가 있었으나, 
-  // phoneNumber, blogAddress를 필수로 변경하고 불필요한 필드 제거
 }
 
 Table campaign {
-  id varchar [pk, note: "체험 ID"]
+  indexes {
+    status
+    (status, application_start)
+    created_at
+  }
+  id int [pk, note: "체험 ID"]
 
   // 기본 정보
   title varchar [not null, note: "체험 제목"]
   brand varchar [not null, note: "브랜드명"]
 
   // 이미지
-  image_url varchar [not null, note: "썸네일 이미지 URL"] //thumbnail은 어떤지?
-  image_urls json [note: "상세 이미지 URL 배열"] //detail_images는 어떤지?
+  thumbnail varchar [not null, note: "썸네일 이미지 URL"]
+  detail_images json [note: "상세 이미지 URL 배열"]
   description varchar [not null, note: "체험 설명"]
   status campaign_status [not null, note: "체험 상태"]
   category campaign_category [not null, note: "카테고리"]
 
   // 진행 일정
-  // 기존 CampaignSchedule 객체를 Flatten하여 조회 성능 최적화
   application_start datetime [not null, note: "체험단 모집 시작"] 
   application_end datetime [not null, note: "체험단 모집 종료"]
   announcement_start datetime [not null, note: "당첨자 발표 시작"]
@@ -108,41 +120,48 @@ Table campaign {
   experience_type experience_type [not null, note: "체험 유형 (배송/방문)"]
   keywords json [not null, note: "키워드/태그 목록"]
 
-  // visitReservation은 VisitReservation로 분리
-
+  // 리뷰 미션
   review_mission json [not null, note: "리뷰 미션 목록"]
   review_mission_notice varchar [note: "리뷰 시 주의 사항"]
 
   requirements json [note: "당첨 조건 목록"]
   contact_info varchar [note: "문의처"]
-  experience_precautions json [note: "체험 시 주의사항"] // 간단하게 precaution으로 변경?
+  precautions json [note: "체험 시 주의사항"]
 
   created_at datetime [not null, note: "생성일 (ISO 8601)"]
   updated_at datetime [not null, note: "수정일"]
 }
 
-// 배송 정보 분리는 어떤지??
-Table campaign_delivery_info {
-    campaign_id varchar [pk, ref: - campaign.id]
-    shipping_start_date datetime [note: "배송 시작 예정일"]
-    carrier varchar [note: "택배사"]
-    notice text [note: "배송 관련 유의사항"]
-}
-
 // 방문 예약 정보
 Table visit_reservation {
-  campaign_id varchar [pk, ref: - campaign.id]
+  id int [pk, increment]
+  campaign_id int [unique, ref: - campaign.id]
   business_hours json
   is_reservation_required boolean [default: true]
-  reservation_method varchar
-  notice text
+  reservation_method varchar [not null]
+  max_person_count int
+  notice text [not null]
+  precaution json [not null]
+}
+
+// 방문 가능 시간
+Table reservation_available {
+  id int [pk, increment]
+  campaign_id int [ref: > campaign.id]
+  schedule datetime [not null]
 }
 
 // 리뷰
 Table review {
+  indexes {
+    (user_id, campaign_id)
+    status
+  }
   id int [pk, increment]
-  campaign_id varchar [not null, ref: > campaign.id]
-  user_id varchar [not null, ref: > user.id]
+  campaign_id int [not null, ref: > campaign.id]
+  user_id int [not null, ref: > user.id]
+
+  status review_status [not null]
   
   review_url varchar [not null, note: "리뷰 주소"]
 
@@ -151,17 +170,58 @@ Table review {
 }
 
 Table campaign_application { 
-    // 기존 MyCampaign, Application 타입을 대체
-    // User 테이블의 정보를 참조하되, 신청 시점의 유저 정보 스냅샷 저장
-    id int [pk, increment]
-    campaign_id varchar [not null, ref: > campaign.id]
-    user_id varchar [not null, ref: > user.id , note: "User Table 참조"]
-    blog_address varchar [note: "블로그 주소"]
-    name varchar [not null, note: "이름"]
-    phone_number varchar [not null, note: "휴대폰 번호"]
-    message text [note: "전달하고 싶은 한마디"]
+  // 기존 MyCampaign, Application 타입을 대체
+  // User 테이블의 정보를 참조하되, 신청 시점의 유저 정보 스냅샷 저장
+  indexes {
+    (user_id, campaign_id) [unique]
+    status
+  }
 
-    status application_status [not null, default: "pending"]
-    created_at datetime [default: `now()`, not null]
-    updated_at datetime [not null]
+  id int [pk, increment]
+  campaign_id int [not null, ref: > campaign.id]
+  user_id int [not null, ref: > user.id , note: "User Table 참조"]
+  blog_address varchar [note: "블로그 주소"]
+  name varchar [not null, note: "이름"]
+  phone_number varchar [not null, note: "휴대폰 번호"]
+  message text [note: "전달하고 싶은 한마디"]
+
+  status application_status [not null, default: "pending"]
+  created_at datetime [default: `now()`, not null]
+  updated_at datetime
 }
+
+ // 수정 요청
+ Table review_request {
+  id int [pk, increment]
+  user_id int [ref: > user.id]
+  review_id int [ref: > review.id]
+  image_urls json
+  content text [not null]
+  precaution json [not null]
+  created_at datetime [default: `now()`, not null]
+  updated_at datetime
+ }
+
+ // 유저 체험 예약
+Table user_reservation {
+  id int [pk, increment]
+  campaign_id int [not null, ref: > campaign.id]
+  user_id int [not null, ref: > user.id]
+  reservation_available_id int [ref: > reservation_available.id]
+  reservation_date datetime [not null]
+  person_count int [not null]
+  status user_reservation_status [not null]
+}
+
+ // 알림
+ Table notification {
+  id int [pk, increment]
+  campaign_id int [ref: > campaign.id]
+  user_id int [not null, ref: > user.id]
+  is_watched boolean [not null]
+  title varchar [not null]
+  content text [not null]
+  type notification_type
+  created_at datetime [default: `now()`, not null]
+  updated_at datetime
+ }

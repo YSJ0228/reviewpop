@@ -45,6 +45,7 @@ export function WebButton({
   isConnected = false,
 }: WebButtonProps) {
   const id = useId();
+  if (text) buttonType = 'edit';
   return (
     <div>
       <div className={styles.WebButton__LabelBox}>

@@ -1,19 +1,27 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
+import { Zoom, Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/zoom';
+import 'swiper/css/navigation';
 
 import styles from './ImageViewer.module.scss';
 
 /**
  * 이미지 뷰어 모달 (전체화면)
  *
- * TODO:
- * 1. [ ] Swiper를 사용한 이미지 슬라이더 구현
- * 2. [ ] 줌 인/아웃 기능
- * 3. [ ] 닫기 버튼
- * 4. [ ] 이미지 카운터 표시 (1/10 등)
- * 5. [ ] ESC 키로 닫기
- * 6. [ ] 배경 클릭 시 닫기
+ * 기능:
+ * - Swiper를 사용한 이미지 슬라이더
+ * - 줌 인/아웃 기능 (더블 탭 또는 핀치 제스처)
+ * - 좌우 화살표 네비게이션
+ * - 이미지 카운터 표시 (1/10 등)
+ * - ESC 키로 닫기
+ * - 배경 클릭 시 닫기
+ * - 닫기 버튼
  */
 
 interface ImageViewerProps {
@@ -24,46 +32,102 @@ interface ImageViewerProps {
 }
 
 export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: ImageViewerProps) {
+  const [currentSlide, setCurrentSlide] = useState(initialIndex);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const prevIsOpenRef = useRef(isOpen);
+
   // ESC 키 이벤트 처리
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      // 스크롤 방지
-      document.body.style.overflow = 'hidden';
-    }
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  // 스크롤 잠금 처리 (모달이 닫힐 때만 복원)
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
+
+  // 모달이 다시 열릴 때 currentSlide를 initialIndex로 초기화 (카운터 즉시 표시)
+  useEffect(() => {
+    if (isOpen && !prevIsOpenRef.current) {
+      setCurrentSlide(initialIndex);
+    }
+    prevIsOpenRef.current = isOpen;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  // Swiper 인스턴스가 변경되거나 initialIndex가 변경될 때 슬라이드 이동
+  useEffect(() => {
+    if (swiperInstance && isOpen) {
+      swiperInstance.slideTo(initialIndex, 0);
+    }
+  }, [swiperInstance, initialIndex, isOpen]);
+
+  const handleSlideChange = (swiper: SwiperType) => {
+    setCurrentSlide(swiper.activeIndex);
+  };
+
+  if (!isOpen || images.length === 0) return null;
 
   return (
     <div className={styles.ImageViewer}>
-      {/* 배경 오버레이 */}
       <div className={styles.Overlay} onClick={onClose} />
 
-      {/* 이미지 뷰어 컨텐츠 */}
-      <div className={styles.Content}>
-        {/* TODO: Swiper 이미지 슬라이더 구현 */}
-        <div className={styles.Placeholder}>
-          <p>이미지 뷰어 모달</p>
-          <p className={styles.Todo}>Swiper를 사용하여 이미지 뷰어를 구현하세요</p>
-          <p className={styles.Todo}>총 {images.length}개 이미지</p>
+      <div className={styles.Header}>
+        <div className={styles.Counter}>
+          {currentSlide + 1} / {images.length}
         </div>
 
-        {/* 닫기 버튼 */}
         <button className={styles.CloseButton} onClick={onClose} aria-label="닫기">
           ✕
         </button>
+      </div>
+
+      <div className={styles.ImageContainer}>
+        <Swiper
+          modules={[Zoom, Navigation]}
+          zoom={{
+            maxRatio: 3,
+            minRatio: 1,
+          }}
+          navigation={true}
+          initialSlide={initialIndex}
+          onSwiper={setSwiperInstance}
+          onSlideChange={handleSlideChange}
+          className={styles.Swiper}
+          spaceBetween={0}
+          slidesPerView={1}
+          allowTouchMove={true}
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={index} className={styles.Slide}>
+              <div className="swiper-zoom-container">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={image}
+                  className={styles.Image}
+                  alt={`이미지 ${index + 1}`}
+                  draggable={false}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

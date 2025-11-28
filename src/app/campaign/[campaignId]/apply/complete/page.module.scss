@@ -1,32 +1,7 @@
 @use '@shared/styles/mixins' as *;
 
 .CampaignApplyCompletePage {
-  @include padding($y: 20, $x: 16);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   min-height: 100vh;
-
-  // TODO: 실제 디자인에 맞게 스타일 수정
-}
-
-.Placeholder {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-
-  text-align: center;
-
-  // TODO: 개발 완료 후 제거
-}
-
-.Todo {
-  font-size: 14px;
-  color: #999;
-
-  // TODO: 개발 완료 후 제거
+  @include padding($y: 20, $x: 16);
+  @include flex($direction: column, $gap: 24, $align: center, $justify: center);
 }

@@ -17,13 +17,8 @@ export { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails'
 export type {
   MyCampaign,
   MyCampaignStatus,
-  MyCampaignDetail,
   TabKey,
 } from '@entities/history/types/myCampaign.types';
-export {
-  STATUS_LABELS,
-  STATUS_DESCRIPTIONS,
-  TAB_CONFIG,
-} from '@entities/history/types/myCampaign.types';
+export { STATUS_LABELS, TAB_CONFIG } from '@entities/history/types/myCampaign.types';
 export type { MyCampaignCardProps } from './components/CampaignCard/types';
 export type { MyCampaignListProps } from './components/CampaignList/types';

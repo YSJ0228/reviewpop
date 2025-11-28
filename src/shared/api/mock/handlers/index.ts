@@ -5,12 +5,12 @@
  */
 
 import { authHandlers } from './auth';
-import { reviewHandlers } from './reviews';
+// import { reviewHandlers } from './reviews';
 import { kakaoOAuthHandlers } from './oauth/kakao';
 import { myCampaignHandlers } from '@entities/history/api/myMock';
 import { campaignHandlers } from '@entities/campaign/api/mock';
-import { applicationHandlers } from './applications';
-import { reservationHandlers } from './reservations';
+// import { applicationHandlers } from './applications';
+// import { reservationHandlers } from './reservations';
 
 /**
  * 모든 MSW 핸들러
@@ -19,10 +19,10 @@ import { reservationHandlers } from './reservations';
  */
 export const handlers = [
   ...kakaoOAuthHandlers, // OAuth 핸들러 (외부 도메인)
-  ...reviewHandlers,
+  // ...reviewHandlers,
   ...authHandlers,
   ...campaignHandlers,
   ...myCampaignHandlers,
-  ...applicationHandlers,
-  ...reservationHandlers,
+  // ...applicationHandlers,
+  // ...reservationHandlers,
 ];

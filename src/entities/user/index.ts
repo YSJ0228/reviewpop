@@ -8,7 +8,7 @@
 export { useUserStore } from './store/userStore';
 
 // Types
-export type { User } from './types/user.types';
+export type { User as User } from './types/user.types';
 export type {
   PointTransaction,
   PointSummary,

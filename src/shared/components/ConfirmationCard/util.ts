@@ -2,7 +2,7 @@ import dayjs from '@shared/lib/dayjs.config';
 
 import { formatDate, type DateInput } from '@shared/lib/date';
 
-import type { TConfirmationCardType } from './type';
+import type { ConfirmationCardType } from './type';
 
 import { ERROR_MESSAGES, SUB_MESSAGES } from './constants';
 
@@ -16,7 +16,7 @@ import { ERROR_MESSAGES, SUB_MESSAGES } from './constants';
  * @param type - 카드 타입 ('reservation' | 'application')
  * @returns 포맷팅된 날짜 텍스트와 결과 텍스트를 포함한 객체
  */
-export function formatDateForConfirmationCard(date: DateInput, type: TConfirmationCardType) {
+export function formatDateForConfirmationCard(date: DateInput, type: ConfirmationCardType) {
   const dayjsDate = dayjs(date);
 
   if (!dayjsDate.isValid()) {
