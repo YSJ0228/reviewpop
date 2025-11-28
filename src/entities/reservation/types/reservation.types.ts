@@ -58,9 +58,18 @@ export interface ReservationDisableTimes {
   disabled: string[]; // 안되는 시간만 date()
 }
 
+/** 체험 예약하기 */
 export interface PostReservation {
   campaignId: string;
   applicationId: string;
   personCount: number;
   date: string;
+}
+
+/** 본인이 한 예약정보 받기 */
+export interface Reservation {
+  campaignId: string;
+  date: string;
+  personCount: number;
+  isVisited: boolean;
 }

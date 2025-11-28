@@ -6,7 +6,7 @@
 
 // Types
 export type {
-  CreateReview,
+  PostReview as CreateReview,
   BlogReview,
   BlogReviews,
   ReviewRequest,

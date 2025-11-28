@@ -5,7 +5,7 @@
 /**
  * 후기 생성
  */
-export interface CreateReview {
+export interface PostReview {
   /** 체험 ID */
   campaignId: string;
   /** 작성자 ID */
@@ -41,7 +41,7 @@ export interface BlogReview {
 }
 
 export interface ReviewRequest {
-  images?: string[];
+  images?: string;
   content: string;
   precaution: string[];
 }

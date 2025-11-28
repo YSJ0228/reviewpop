@@ -2,6 +2,8 @@
  * Application (체험 신청) 엔티티 타입 정의
  */
 
+import { Campaign, CampaignDetail } from '@features/campaign';
+
 /**
  * 신청 상태
  * - pending: 대기 중 (선정 결과 발표 전)
@@ -27,25 +29,23 @@ export type ReviewStatus =
  * 체험 신청 데이터
  */
 
-// TODO: 이건 post인지 get인지?
 export interface Application {
-  campaignId: string;
-  userId: string;
-  blogAddress: string;
+  campaign: CampaignDetail;
   name: string;
-  phoneNumber: string;
-  message?: string;
+
   status: ApplicationStatus;
   reviewStatus: ReviewStatus;
   isReservated: boolean;
+
   createdAt: string;
-  updatedAt: string;
 }
 
-/** 유저가 한 예약 */
-export interface Reservation {
+export interface PostApplication {
   campaignId: string;
-  date: string;
-  personCount: number;
-  isVisited: boolean;
+
+  name: string;
+  blogAddress: string;
+  phoneNumber: string;
+
+  message?: string;
 }
