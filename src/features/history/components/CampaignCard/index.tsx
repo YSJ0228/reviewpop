@@ -63,7 +63,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
           <header className={styles.CampaignCard__TopSection}>
             <div className={styles.CampaignCard__ImageWrapper}>
               <Image
-                src={campaign.imageUrl}
+                src={campaign.thumbnail}
                 alt={`${campaign.brand} 체험 이미지`}
                 fill
                 sizes="(max-width: 768px) 88px, 88px"
@@ -108,7 +108,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               )}
 
               <h3 className={styles.CampaignCard__Brand}>{campaign.brand}</h3>
-              <p className={styles.CampaignCard__Title}>{campaign.providedItems}</p>
+              <p className={styles.CampaignCard__Title}>{campaign.providedItem}</p>
 
               {/* rejected 타입 */}
               {type === 'rejected' && (

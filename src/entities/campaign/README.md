@@ -26,8 +26,8 @@ interface Campaign {
   description: string;
   category: CampaignCategory;
   status: CampaignStatus;
-  thumbnailUrl: string;
-  imageUrls: string[];
+  thumbnail: string;
+  detailImages: string[];
   startDate: string;
   endDate: string;
   applicationDeadline: string;
@@ -70,11 +70,11 @@ type CampaignStatus = 'recruiting' | 'in_progress' | 'completed' | 'closed';
 나의 체험에서 사용하는 체험 정보:
 
 ```typescript
-interface MyCampaign extends Campaign {
-  applicationDate: string;
-  applicationStatus: 'pending' | 'selected' | 'rejected';
-  reservationDate?: string;
-  reviewSubmitted?: boolean;
+interface MyCampaign extends MyCampaignInfo {
+  status: MyCampaignStatus;
+  applicationDate?: string;
+  visitStatus?: MyCampaignScheduleStatus;
+  reviewStatus?: MyCampaignReviewStatus;
 }
 ```
 

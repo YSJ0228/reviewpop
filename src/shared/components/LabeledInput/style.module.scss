@@ -76,17 +76,16 @@
     font-size: 14px;
     font-weight: 500;
     color: var(--color-blue-500);
-    @include margin($top: 8);
   }
 
   &__ErrorMsg {
     font-size: 14px;
     font-weight: 500;
     color: var(--color-red-500);
-    @include margin($top: 8);
   }
 
   &__InputMessage {
     @include size($width: 100%);
+    @include flex($direction: column, $gap: 8);
   }
 }

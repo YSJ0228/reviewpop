@@ -37,7 +37,6 @@ export async function getSession(): Promise<User | null> {
       id: payload.userId,
       email: payload.email,
       name: payload.name,
-      profileImage: null, // JWT에는 프로필 이미지가 없음
       provider: payload.provider,
       createdAt: fromUnix(payload.iat).toISOString(),
     };

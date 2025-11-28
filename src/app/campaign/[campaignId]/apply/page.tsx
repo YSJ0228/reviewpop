@@ -1,8 +1,11 @@
 'use client';
-
-import { Suspense } from 'react';
+import { Suspense, use } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { ApplyForm } from '@features/campaign/components/ApplyForm';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
+import { useCampaignDetails } from '@features/history';
 
 import styles from './page.module.scss';
 
@@ -18,11 +21,42 @@ import styles from './page.module.scss';
  * 4. [ ] 신청 완료 시 /campaign/[id]/apply/complete로 리다이렉트
  * 5. [ ] 에러 처리 (이미 신청한 경우, 마감된 경우 등)
  */
-export default function CampaignApplyPage({ params }: { params: { campaignId: string } }) {
+interface CampaignApplyPageProps {
+  params: Promise<{
+    campaignId: string;
+  }>;
+}
+
+export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
+  const { campaignId } = use(params);
+  const router = useRouter();
+  const {
+    data: campaign,
+    isLoading: isLoadingCampaign,
+    error: errorCampaign,
+  } = useCampaignDetails(campaignId);
+  const { data: user, isLoading: isLoadingUser, error: errorUser } = useUserInfo();
+
+  //로딩 처리
+  if (isLoadingCampaign || isLoadingUser) {
+    return <div>로딩 중...</div>;
+  }
+
+  // 에러 처리
+  if (errorCampaign) {
+    return <div>캠페인 정보를 불러오는 중 오류가 발생했습니다.</div>;
+  }
+  if (errorUser) {
+    return <div>유저 정보를 불러오는 중 오류가 발생했습니다.</div>;
+  }
+
   return (
     <main className={styles.CampaignApplyPage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>{/* TODO: ApplyForm 컴포넌트 추가 */}</Suspense>
+        <Suspense fallback={<div>로딩 중...</div>}>
+          {/* TODO: ApplyForm 컴포넌트 추가 */}
+          <ApplyForm campaign={campaign} user={user} />
+        </Suspense>
       </ErrorBoundary>
     </main>
   );

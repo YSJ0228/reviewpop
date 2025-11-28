@@ -23,13 +23,13 @@ import { Banner } from '@shared/components/Banner';
 const banners = [
   {
     id: '1',
-    imageUrl: '/images/banner1.jpg',
+    image: '/images/banner1.jpg',
     linkUrl: '/campaign/123',
     alt: '첫 번째 배너',
   },
   {
     id: '2',
-    imageUrl: '/images/banner2.jpg',
+    image: '/images/banner2.jpg',
     linkUrl: '/campaign/456',
     alt: '두 번째 배너',
   },
@@ -62,7 +62,7 @@ function HomePage() {
 ```typescript
 interface BannerItem {
   id: string;
-  imageUrl: string;
+  image: string;
   linkUrl?: string; // 선택적
   alt: string;
 }
@@ -109,7 +109,7 @@ import 'swiper/css/pagination';
 >
   {items.map((item) => (
     <SwiperSlide key={item.id}>
-      <img src={item.imageUrl} alt={item.alt} />
+      <img src={item.image} alt={item.alt} />
     </SwiperSlide>
   ))}
 </Swiper>

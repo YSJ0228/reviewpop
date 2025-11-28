@@ -13,7 +13,7 @@ export const campaignHandlers = [
   // 체험 상세 조회
   http.get('/api/campaigns/:id', ({ params }) => {
     const { id } = params;
-    const campaign = mockCampaignDetails[String(id)];
+    const campaign = mockCampaignDetails.find((c) => c.id === String(id));
 
     if (!campaign) {
       return HttpResponse.json(

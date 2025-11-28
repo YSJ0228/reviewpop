@@ -19,7 +19,7 @@ export interface CampaignStatusBarProps {
  * - 선정 확률 배지 표시
  */
 export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
-  const deadline = campaign.schedule.applicationSchedule[1];
+  const deadline = campaign.schedule.application.end;
 
   // 남은 시간 계산
   const { remainingTimeText } = useMemo(() => {
