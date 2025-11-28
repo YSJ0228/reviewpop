@@ -27,13 +27,10 @@ export default function CampaignImagesPage({ params }: CampaignImagesPageProps) 
 
   const images = useMemo(() => {
     if (!campaign) return [];
-    if (campaign.imageUrls && campaign.imageUrls.length > 0) {
-      return campaign.imageUrls;
+    if (campaign.detailImages && campaign.detailImages.length > 0) {
+      return campaign.detailImages;
     }
-    if (campaign.imageUrl) {
-      return [campaign.imageUrl];
-    }
-    return [];
+    return [campaign.thumbnail];
   }, [campaign]);
 
   const handleImageClick = (index: number) => {

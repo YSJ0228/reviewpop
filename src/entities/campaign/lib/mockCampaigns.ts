@@ -12,7 +12,10 @@ import type {
   CampaignSchedule,
 } from '@entities/campaign/types/campaign.types';
 
-const toRange = (start: string, end: string): [string, string] => [start, end];
+const toRange = (start: string, end: string): { start: string; end: string } => ({
+  start,
+  end,
+});
 
 const createSchedule = (
   applicationStart: string,
@@ -22,9 +25,9 @@ const createSchedule = (
   reviewStart: string,
   reviewEnd: string,
 ): CampaignSchedule => ({
-  applicationSchedule: toRange(applicationStart, applicationEnd),
-  winnerAnnouncementSchedule: toRange(winnerStart, winnerEnd),
-  reviewSchedule: toRange(reviewStart, reviewEnd),
+  application: toRange(applicationStart, applicationEnd),
+  winnerAnnouncement: toRange(winnerStart, winnerEnd),
+  review: toRange(reviewStart, reviewEnd),
 });
 
 /**
@@ -42,11 +45,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '스타벅스',
     description:
       '스타벅스의 신제품 커피를 가장 먼저 체험해보세요! 프리미엄 원두를 사용한 특별한 블렌드로, 부드러운 맛과 풍부한 향이 특징입니다.',
-    providedItems: '신제품 원두 200g + 브랜드 머그컵 1개',
+    providedItem: '신제품 원두 200g + 브랜드 머그컵 1개',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '음료' as CampaignCategory,
-    status: 'before_recruiting' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
-    imageUrls: [
+    status: 'beforeRecruiting' as CampaignStatus,
+    thumbnail: '/images/temp/CampaignCardImg-01.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign1/800/600',
       'https://picsum.photos/seed/campaign1-2/800/600',
       'https://picsum.photos/seed/campaign1-3/800/600',
@@ -69,7 +73,6 @@ export const mockCampaigns: Campaign[] = [
     maxRecruitment: 50,
     currentRecruitment: 47,
     selectedCount: 0,
-    createdAt: '2025-10-25T00:00:00Z',
   },
   {
     id: '2',
@@ -77,11 +80,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '설화수',
     description:
       '설화수의 프리미엄 화장품 라인을 체험할 수 있는 특별한 기회! 한방 성분이 함유된 고급 스킨케어 제품으로 피부 본연의 아름다움을 찾아보세요.',
-    providedItems: '프리미엄 에센스 30ml + 크림 15ml 샘플',
+    providedItem: '프리미엄 에센스 30ml + 크림 15ml 샘플',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '뷰티' as CampaignCategory,
-    status: 'before_recruiting' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
-    imageUrls: [
+    status: 'beforeRecruiting' as CampaignStatus,
+    thumbnail: '/images/temp/CampaignCardImg-02.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign2/800/600',
       'https://picsum.photos/seed/campaign2-2/800/600',
       'https://picsum.photos/seed/campaign2-3/800/600',
@@ -99,8 +103,9 @@ export const mockCampaigns: Campaign[] = [
     ),
     maxRecruitment: 30,
     currentRecruitment: 28,
+    location: { sido: '서울', sigungu: '강남구' },
+    address: '서울특별시 강남구 도산대로 45길 6',
     selectedCount: 0,
-    createdAt: '2025-10-22T00:00:00Z',
   },
   {
     id: '3',
@@ -108,11 +113,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '삼성전자',
     description:
       '삼성전자의 최신 무선 이어폰을 체험해보세요. 탁월한 노이즈 캔슬링 기능과 고음질 사운드로 최상의 청음 경험을 제공합니다.',
-    providedItems: '무선 이어폰 1세트 + 충전 케이스 + 사이즈별 이어팁',
+    providedItem: '무선 이어폰 1세트 + 충전 케이스 + 사이즈별 이어팁',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '전자제품' as CampaignCategory,
     status: 'recruiting' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-03.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign3/800/600',
       'https://picsum.photos/seed/campaign3-2/800/600',
       'https://picsum.photos/seed/campaign3-3/800/600',
@@ -134,8 +140,9 @@ export const mockCampaigns: Campaign[] = [
     ),
     maxRecruitment: 40,
     currentRecruitment: 35,
+    location: { sido: '경기', sigungu: '수원시' },
+    address: '경기도 수원시 영통구 삼성로 129',
     selectedCount: 0,
-    createdAt: '2025-10-19T00:00:00Z',
   },
   {
     id: '4',
@@ -143,11 +150,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '종근당',
     description:
       '종근당의 건강 보조 식품으로 활력 넘치는 하루를 시작하세요. 비타민과 미네랄이 풍부하게 함유된 프리미엄 건강식품입니다.',
-    providedItems: '건강 보조 식품 1개월분 + 섭취 가이드',
+    providedItem: '건강 보조 식품 1개월분 + 섭취 가이드',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '건강' as CampaignCategory,
     status: 'recruiting' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-01.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign4/800/600',
       'https://picsum.photos/seed/campaign4-2/800/600',
       'https://picsum.photos/seed/campaign4-3/800/600',
@@ -163,10 +171,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-12-18T23:59:59+09:00',
     ),
     location: { sido: '경기', sigungu: '성남시' },
+    address: '경기도 성남시 분당구 판교역로 235',
     maxRecruitment: 80,
     currentRecruitment: 58,
     selectedCount: 0,
-    createdAt: '2025-10-14T00:00:00Z',
   },
   {
     id: '5',
@@ -174,11 +182,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '애플',
     description:
       '애플의 최신 스마트워치를 가장 먼저 체험해보세요. 건강 관리부터 스마트한 일상까지, 손목 위의 작은 혁신을 경험하세요.',
-    providedItems: '스마트워치 1대 + 충전 독 + 스트랩 2종',
+    providedItem: '스마트워치 1대 + 충전 독 + 스트랩 2종',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '전자제품' as CampaignCategory,
     status: 'recruiting' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-02.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign5/800/600',
       'https://picsum.photos/seed/campaign5-2/800/600',
       'https://picsum.photos/seed/campaign5-3/800/600',
@@ -196,10 +205,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-12-25T23:59:59+09:00',
     ),
     location: { sido: '서울', sigungu: '강남구' },
+    address: '서울특별시 강남구 영동대로 513',
     maxRecruitment: 20,
     currentRecruitment: 19,
     selectedCount: 0,
-    createdAt: '2025-10-09T00:00:00Z',
   },
 
   // Completed 체험 (10개) - 신정 후 리뷰까지 완료
@@ -209,11 +218,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '이니스프리',
     description:
       '이니스프리의 유기농 화장품으로 자연의 건강함을 피부에 전하세요. 제주 청정 자연에서 얻은 원료로 만든 순한 화장품입니다.',
-    providedItems: '유기농 스킨케어 세트 (토너, 로션) + 마스크팩 5매',
+    providedItem: '유기농 스킨케어 세트 (토너, 로션) + 마스크팩 5매',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '뷰티' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-03.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign6/800/600',
       'https://picsum.photos/seed/campaign6-2/800/600',
       'https://picsum.photos/seed/campaign6-3/800/600',
@@ -236,10 +246,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-12-10T23:59:59+09:00',
     ),
     location: { sido: '제주', sigungu: '제주시' },
+    address: '제주특별자치도 제주시 서광로 123',
     maxRecruitment: 30,
     currentRecruitment: 25,
     selectedCount: 2,
-    createdAt: '2025-10-04T00:00:00Z',
   },
   {
     id: '7',
@@ -247,11 +257,12 @@ export const mockCampaigns: Campaign[] = [
     brand: 'CJ제일제당',
     description:
       'CJ제일제당의 프리미엄 쌀로 건강한 한 끼를 준비하세요. 국내산 최고급 쌀로 지은 밥의 차이를 느껴보세요.',
-    providedItems: '프리미엄 쌀 4kg + 브랜드 레시피북',
+    providedItem: '프리미엄 쌀 4kg + 브랜드 레시피북',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '식품' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-01.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign7/800/600',
       'https://picsum.photos/seed/campaign7-2/800/600',
       'https://picsum.photos/seed/campaign7-3/800/600',
@@ -269,8 +280,9 @@ export const mockCampaigns: Campaign[] = [
     ),
     maxRecruitment: 50,
     currentRecruitment: 42,
+    location: { sido: '서울', sigungu: '중구' },
+    address: '서울특별시 중구 동호로 330',
     selectedCount: 2,
-    createdAt: '2025-10-02T00:00:00Z',
   },
   {
     id: '8',
@@ -278,11 +290,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '나이키',
     description:
       '나이키의 신상 운동화로 스타일과 퍼포먼스를 동시에 잡으세요. 최신 쿠셔닝 기술이 적용된 프리미엄 러닝화입니다.',
-    providedItems: '신상 운동화 1켤레 + 스포츠 양말 2족',
+    providedItem: '신상 운동화 1켤레 + 스포츠 양말 2족',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '패션' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-02.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign8/800/600',
       'https://picsum.photos/seed/campaign8-2/800/600',
       'https://picsum.photos/seed/campaign8-3/800/600',
@@ -301,10 +314,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-11-11T23:59:59+09:00',
     ),
     location: { sido: '부산', sigungu: '해운대구' },
+    address: '부산광역시 해운대구 센텀남대로 35',
     maxRecruitment: 30,
     currentRecruitment: 27,
     selectedCount: 2,
-    createdAt: '2025-09-29T00:00:00Z',
   },
   {
     id: '9',
@@ -312,11 +325,12 @@ export const mockCampaigns: Campaign[] = [
     brand: 'LG전자',
     description:
       'LG전자의 스마트 홈 기기로 집안을 더욱 편리하게 만드세요. IoT 기술이 적용된 차세대 홈 솔루션을 경험해보세요.',
-    providedItems: '스마트 플러그 2개 + 스마트 전구 1개 + 사용 설명서',
+    providedItem: '스마트 플러그 2개 + 스마트 전구 1개 + 사용 설명서',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '가전' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-03.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign9/800/600',
       'https://picsum.photos/seed/campaign9-2/800/600',
       'https://picsum.photos/seed/campaign9-3/800/600',
@@ -332,10 +346,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-11-09T23:59:59+09:00',
     ),
     location: { sido: '서울', sigungu: '영등포구' },
+    address: '서울특별시 영등포구 여의대로 128',
     maxRecruitment: 20,
     currentRecruitment: 15,
     selectedCount: 1,
-    createdAt: '2025-09-27T00:00:00Z',
   },
   {
     id: '10',
@@ -343,11 +357,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '빙그레',
     description:
       '빙그레의 프리미엄 요거트로 건강한 아침을 시작하세요. 100% 국내산 원유로 만든 신선하고 진한 요거트입니다.',
-    providedItems: '프리미엄 요거트 12개입 세트 + 그래놀라 1봉',
+    providedItem: '프리미엄 요거트 12개입 세트 + 그래놀라 1봉',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '식품' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-01.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign10/800/600',
       'https://picsum.photos/seed/campaign10-2/800/600',
       'https://picsum.photos/seed/campaign10-3/800/600',
@@ -366,8 +381,9 @@ export const mockCampaigns: Campaign[] = [
     ),
     maxRecruitment: 100,
     currentRecruitment: 65,
+    location: { sido: '경기', sigungu: '남양주시' },
+    address: '경기도 남양주시 다산순환로 20',
     selectedCount: 2,
-    createdAt: '2025-09-22T00:00:00Z',
   },
   {
     id: '11',
@@ -375,11 +391,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '아모레퍼시픽',
     description:
       '아모레퍼시픽의 신제품 샴푸로 건강한 모발을 가꾸세요. 두피 케어와 모발 영양을 동시에 잡은 프리미엄 헤어케어 제품입니다.',
-    providedItems: '신제품 샴푸 500ml + 트리트먼트 200ml',
+    providedItem: '신제품 샴푸 500ml + 트리트먼트 200ml',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '뷰티' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-02.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign11/800/600',
       'https://picsum.photos/seed/campaign11-2/800/600',
       'https://picsum.photos/seed/campaign11-3/800/600',
@@ -396,10 +413,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-11-01T23:59:59+09:00',
     ),
     location: { sido: '인천', sigungu: '연수구' },
+    address: '인천광역시 연수구 송도국제대로 123',
     maxRecruitment: 60,
     currentRecruitment: 53,
     selectedCount: 2,
-    createdAt: '2025-09-19T00:00:00Z',
   },
   {
     id: '12',
@@ -407,11 +424,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '다이슨',
     description:
       '다이슨의 무선 청소기로 집안 구석구석을 깨끗하게 청소하세요. 강력한 흡입력과 긴 배터리 수명이 특징인 프리미엄 청소기입니다.',
-    providedItems: '무선 청소기 1대 + 교체용 필터 + 다용도 브러쉬 3종',
+    providedItem: '무선 청소기 1대 + 교체용 필터 + 다용도 브러쉬 3종',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '가전' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-03.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign12/800/600',
       'https://picsum.photos/seed/campaign12-2/800/600',
       'https://picsum.photos/seed/campaign12-3/800/600',
@@ -431,10 +449,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-10-27T23:59:59+09:00',
     ),
     location: { sido: '서울', sigungu: '용산구' },
+    address: '서울특별시 용산구 한강대로 23길 55',
     maxRecruitment: 15,
     currentRecruitment: 12,
     selectedCount: 1,
-    createdAt: '2025-09-14T00:00:00Z',
   },
   {
     id: '13',
@@ -442,11 +460,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '페레로로쉐',
     description:
       '페레로로쉐의 프리미엄 초콜릿으로 특별한 순간을 더욱 달콤하게 만드세요. 고급 헤이즐넛이 들어간 럭셔리 초콜릿입니다.',
-    providedItems: '프리미엄 초콜릿 세트 + 고급 포장 상자',
+    providedItem: '프리미엄 초콜릿 세트 + 고급 포장 상자',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '식품' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-01.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-01.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign13/800/600',
       'https://picsum.photos/seed/campaign13-2/800/600',
       'https://picsum.photos/seed/campaign13-3/800/600',
@@ -463,8 +482,9 @@ export const mockCampaigns: Campaign[] = [
     ),
     maxRecruitment: 100,
     currentRecruitment: 100,
+    location: { sido: '서울', sigungu: '서초구' },
+    address: '서울특별시 서초구 강남대로 123',
     selectedCount: 1,
-    createdAt: '2025-09-04T00:00:00Z',
   },
   {
     id: '14',
@@ -472,11 +492,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '조말론',
     description:
       '조말론의 시그니처 향수로 당신만의 향기를 완성하세요. 영국 왕실이 사랑하는 럭셔리 프래그런스 브랜드입니다.',
-    providedItems: '시그니처 향수 50ml + 미니어처 샘플 2종',
+    providedItem: '시그니처 향수 50ml + 미니어처 샘플 2종',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '향수' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-02.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-02.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign14/800/600',
       'https://picsum.photos/seed/campaign14-2/800/600',
       'https://picsum.photos/seed/campaign14-3/800/600',
@@ -494,10 +515,10 @@ export const mockCampaigns: Campaign[] = [
       '2025-10-12T23:59:59+09:00',
     ),
     location: { sido: '서울', sigungu: '성동구' },
+    address: '서울특별시 성동구 아차산로 123',
     maxRecruitment: 30,
     currentRecruitment: 30,
     selectedCount: 1,
-    createdAt: '2025-08-30T00:00:00Z',
   },
   {
     id: '15',
@@ -505,11 +526,12 @@ export const mockCampaigns: Campaign[] = [
     brand: '카카오프렌즈',
     description:
       '카카오프렌즈의 귀여운 스마트폰 케이스로 개성을 표현하세요. 실용성과 디자인을 모두 갖춘 프리미엄 케이스입니다.',
-    providedItems: '스마트폰 케이스 1개 + 캐릭터 스티커 팩',
+    providedItem: '스마트폰 케이스 1개 + 캐릭터 스티커 팩',
+    reservationPrecaution: ['예약 시 유의사항입니다.'],
     category: '액세서리' as CampaignCategory,
     status: 'completed' as CampaignStatus,
-    imageUrl: '/images/temp/CampaignCardImg-03.jpg',
-    imageUrls: [
+    thumbnail: '/images/temp/CampaignCardImg-03.jpg',
+    detailImages: [
       'https://picsum.photos/seed/campaign15/800/600',
       'https://picsum.photos/seed/campaign15-2/800/600',
       'https://picsum.photos/seed/campaign15-3/800/600',
@@ -531,8 +553,9 @@ export const mockCampaigns: Campaign[] = [
     ),
     maxRecruitment: 150,
     currentRecruitment: 150,
+    location: { sido: '경기', sigungu: '성남시' },
+    address: '경기도 성남시 분당구 판교역로 123',
     selectedCount: 1,
-    createdAt: '2025-08-26T00:00:00Z',
   },
 ];
 

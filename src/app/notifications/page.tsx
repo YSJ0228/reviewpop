@@ -1,0 +1,21 @@
+'use client';
+
+import { Loader } from '@mantine/core';
+
+import NotificationList from '@features/notifications/components/NotificationList';
+import { useNotifications } from '@entities/notification/model/useNotifications';
+
+import styles from './page.module.scss';
+
+export default function NotificationsPage() {
+  const { newNotifications, oldNotifications, isLoading } = useNotifications();
+
+  if (isLoading) return <Loader />;
+  return (
+    <div className={styles.Notification}>
+      <NotificationList notifications={newNotifications} />
+      <h2>지난 알림</h2>
+      <NotificationList notifications={oldNotifications} />
+    </div>
+  );
+}

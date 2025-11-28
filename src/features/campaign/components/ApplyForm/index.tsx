@@ -17,10 +17,10 @@ import styles from './style.module.scss';
 
 export function ApplyForm({ campaign, user }: ApplyFormProps) {
   const nameInput = useInputValidate('name', user?.name ?? '');
-  const phoneInput = useInputValidate('phone', user?.phone ?? '');
+  const phoneInput = useInputValidate('phone', user?.phoneNumber ?? '');
 
   const [text, setText] = useState<string>('');
-  const [blog, setBlog] = useState<string>(user?.blog ?? '');
+  const [blog, setBlog] = useState<string>(user?.blogAddress ?? '');
 
   const [blogOpened, { open: blogOpen, close: blogClose }] = useDisclosure();
   const [cautionOpened, { open: cautionOpen, close: cautionClose }] = useDisclosure();
@@ -30,7 +30,7 @@ export function ApplyForm({ campaign, user }: ApplyFormProps) {
       <CampaignApplyCard
         size="sm"
         brand={campaign?.brand ?? ''}
-        providedItems={campaign?.providedItems ?? ''}
+        providedItems={campaign?.providedItem ?? ''}
       />
       <div className={styles.ApplyForm}>
         <WebButton label="네이버 블로그 주소" buttonType="connect" onClick={blogOpen} text={blog} />

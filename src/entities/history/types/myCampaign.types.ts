@@ -1,6 +1,6 @@
 import { Campaign } from '@entities/campaign/types/campaign.types';
 
-export type MyCampaignInfo = Pick<Campaign, 'id' | 'brand' | 'imageUrl' | 'providedItems'>;
+export type MyCampaignInfo = Pick<Campaign, 'id' | 'brand' | 'thumbnail' | 'providedItem'>;
 
 export type MyCampaignStatus = 'applied' | 'selected' | 'registered' | 'completed' | 'rejected'; // 신청, 선정, 후기, 종료, 미선정
 
@@ -100,7 +100,7 @@ export interface MyCampaignReviewInfo extends MyCampaign {
 }
 
 export interface MyCampaignReviewModification extends MyCampaign {
-  modifyImageUrl?: string; // 수정 관련 이미지
+  modificationImage?: string; // 수정 관련 이미지
   modificationRequests: string[]; // 후기 수정 사유 목록
   precautions: string[]; // 후기 작성 유의 사항
 }

@@ -12,7 +12,7 @@ export function CampaignTab({ onTabClick, selectedTab, campaignExists }: Campaig
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const ICONS: Record<CampaignTabKey, string> = {
     recruiting: '/images/icons/IcoNotice.svg',
-    before_recruiting: '/images/icons/IcoTime.svg',
+    beforeRecruiting: '/images/icons/IcoTime.svg',
     completed: '/images/icons/IcoList.svg',
   };
 

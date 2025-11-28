@@ -15,6 +15,7 @@ import { filterCampaignsByStatus, useCampaigns } from '@entities/campaign/hooks/
 import { CampaignTabKey } from '@entities/campaign/types/campaign.types';
 
 import styles from './page.module.scss';
+import { Loader } from '@mantine/core';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<CampaignTabKey>('recruiting');
@@ -28,7 +29,7 @@ export default function Home() {
   const filteredCampaigns = useMemo(
     () => ({
       recruiting: filterCampaignsByStatus(campaigns, 'recruiting'),
-      before_recruiting: filterCampaignsByStatus(campaigns, 'before_recruiting'),
+      beforeRecruiting: filterCampaignsByStatus(campaigns, 'beforeRecruiting'),
       completed: filterCampaignsByStatus(campaigns, 'completed'),
     }),
     [campaigns],
@@ -36,7 +37,7 @@ export default function Home() {
 
   const campaignExists = {
     recruiting: filteredCampaigns.recruiting.length > 0,
-    before_recruiting: filteredCampaigns.before_recruiting.length > 0,
+    beforeRecruiting: filteredCampaigns.beforeRecruiting.length > 0,
     completed: filteredCampaigns.completed.length > 0,
   };
 
@@ -48,7 +49,7 @@ export default function Home() {
     }, SCROLL_ANIMATION_DURATION);
     if (status === 'recruiting')
       recruitingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    if (status === 'before_recruiting')
+    if (status === 'beforeRecruiting')
       beforeRecruitingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (status === 'completed')
       completedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -60,7 +61,7 @@ export default function Home() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isScrolling.current) {
             if (entry.target === recruitingRef.current) setActiveTab('recruiting');
-            if (entry.target === beforeRecruitingRef.current) setActiveTab('before_recruiting');
+            if (entry.target === beforeRecruitingRef.current) setActiveTab('beforeRecruiting');
             if (entry.target === completedRef.current) setActiveTab('completed');
           }
         });
@@ -88,8 +89,7 @@ export default function Home() {
         aria-live="polite"
         aria-label="체험 목록 로딩 중"
       >
-        <div className={styles.CampaignList__Spinner} />
-        <span>로딩 중...</span>
+        <Loader />
       </div>
     );
   }
@@ -128,17 +128,17 @@ export default function Home() {
               )}
             </section>
 
-            {filteredCampaigns.before_recruiting.length !== 0 && (
-              <section
+            {filteredCampaigns.beforeRecruiting.length !== 0 && (
+              <div
+                id="beforeRecruiting"
                 ref={beforeRecruitingRef}
-                id="before_recruiting"
                 className={styles.ScrollSection}
-                data-observer-id="before_recruiting"
+                data-observer-id="beforeRecruiting"
               >
                 <BeforeRecruitingCampaignList
-                  filteredCampaigns={filteredCampaigns.before_recruiting}
+                  filteredCampaigns={filteredCampaigns.beforeRecruiting}
                 />
-              </section>
+              </div>
             )}
             {filteredCampaigns.completed.length !== 0 && (
               <section

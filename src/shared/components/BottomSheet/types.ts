@@ -9,6 +9,8 @@ export interface BottomSheetProps {
   title?: string;
   /** 바텀시트 내부에 렌더링될 컨텐츠 */
   children?: ReactNode;
+  /** 바텀시트 하단에 표시될 푸터 컨텐츠 (선택사항) */
+  footer?: ReactNode;
   /** 제목 폰트 크기 (기본값: 20px) */
   titleSize?: number;
   /** 바텀시트 전체 높이 (기본값: 560px) */

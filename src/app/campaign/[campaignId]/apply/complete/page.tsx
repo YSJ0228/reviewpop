@@ -41,12 +41,12 @@ export default function CampaignApplyCompletePage({ params }: CampaignApplyCompl
 
         <ConfirmationCard
           type="application"
-          date={new Date(campaign?.schedule.winnerAnnouncementSchedule[0] ?? today)}
+          date={new Date(campaign?.schedule.winnerAnnouncement.start ?? today)}
         />
         <CampaignApplyCard
           size="lg"
           brand={campaign?.brand ?? ''}
-          providedItems={campaign?.providedItems ?? ''}
+          providedItems={campaign?.providedItem ?? ''}
         />
         <ButtonBar
           text="신청 내역 보기"

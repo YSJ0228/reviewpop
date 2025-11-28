@@ -14,7 +14,7 @@ import styles from './Banner.module.scss';
 
 interface BannerItem {
   id: string;
-  imageUrl: string;
+  image: string;
   linkUrl?: string;
   alt: string;
 }
