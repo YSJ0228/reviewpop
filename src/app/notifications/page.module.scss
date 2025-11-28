@@ -1,2 +1,12 @@
+@use '@shared/styles/mixins' as *;
+
 .Notification {
+  h2 {
+    color: var(--value-gray-900, #333);
+    font-size: var(--font-size-14, 14px);
+    font-weight: 700;
+    line-height: 150%; /* 21px */
+    letter-spacing: -0.28px;
+    @include padding($top: 16, $x: 16);
+  }
 }

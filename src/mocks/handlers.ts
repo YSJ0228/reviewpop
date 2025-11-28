@@ -12,6 +12,8 @@ import { campaignHandlers } from '@entities/campaign/api/mock';
 import { applicationHandlers } from '@shared/api/mock/handlers/applications';
 // import { reservationHandlers } from '@shared/api/mock/handlers/reservations';
 
+import { notificationHandlers } from '@entities/notification/api/mock';
+
 /**
  * 모든 MSW 핸들러
  *
@@ -25,4 +27,5 @@ export const handlers = [
   ...myCampaignHandlers,
   ...applicationHandlers,
   // ...reservationHandlers,
+  ...notificationHandlers,
 ];
