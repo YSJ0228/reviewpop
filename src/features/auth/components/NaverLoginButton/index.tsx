@@ -1,5 +1,5 @@
 /**
- * 카카오 로그인 버튼 컴포넌트
+ * 네이버 로그인 버튼 컴포넌트
  */
 
 'use client';
@@ -18,7 +18,7 @@ import type { KakaoLoginButtonProps } from './types';
 
 import styles from './style.module.scss';
 
-export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
+export function NaverLoginButton({ className }: KakaoLoginButtonProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get('redirect');
@@ -65,12 +65,12 @@ export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
     window.location.href = kakaoAuthUrl.toString();
   };
 
-  const buttonClassName = [styles.KakaoLoginButton, className].filter(Boolean).join(' ');
+  const buttonClassName = [styles.NaverLoginButton, className].filter(Boolean).join(' ');
 
   return (
     <Button onClick={handleKakaoLogin} className={buttonClassName}>
-      <Image src={'/images/icons/IcoKakao.svg'} width={18} height={18} alt="카카오 로고" />
-      <span>카카오로 계속하기</span>
+      <Image src={'/images/icons/IcoNaver.svg'} width={18} height={18} alt="카카오 로고" />
+      <span>네이버로 계속하기</span>
     </Button>
   );
 }
