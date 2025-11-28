@@ -10,6 +10,7 @@ import { CampaignContents } from '@features/campaign/components/CampaignContents
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
 import ReviewSection from '@features/campaign/components/ReviewSection';
+import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
 
@@ -98,6 +99,8 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       {campaign.status === 'completed' && <ReviewSection campaignId={campaign.id} />}
 
       <CampaignInfoSection campaign={campaign} />
+
+      <CampaignScheduleSection campaign={campaign} />
 
       <section className={styles.Page__Section}>
         <p className={styles.Page__Brand}>{campaign.brand}</p>

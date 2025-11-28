@@ -20,6 +20,10 @@ export const HISTORY_MESSAGES = {
 
   // 바텀시트에서 활용되는 메시지
   VIEW_CAMPAIGN_DETAIL: '체험 상세 보기',
+  CHANGE_RESERVATION_DATE: '예약 날짜 변경',
+  CANCEL_RESERVATION: '예약 취소',
+  CANCEL_RESERVATION_TODAY_NOT_ALLOWED:
+    '예약 당일에는 날짜 변경이 불가능하며, 취소 후 예약 가능한 날짜에 다시 예약만 가능합니다.',
 } as const;
 
 /** 나의 체험에서 사용되는 매직넘버 관련 상수 */
@@ -30,4 +34,8 @@ export const HISTORY_UI = {
   BOTTOM_SHEET_HEIGHT: 560,
   /** 경고 아이콘 크기 */
   WARNING_ICON_SIZE: 12,
+  /** 예약 관리 메뉴 높이 */
+  RESERVATION_MENU_HEIGHT: 148,
+  /** 예약 관리 메뉴 경고 메시지 높이 */
+  RESERVATION_MENU_TODAY: 156,
 } as const;

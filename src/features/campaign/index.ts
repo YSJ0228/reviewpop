@@ -11,6 +11,7 @@ export { CompletedCampaignList } from './components/CampaignList/CompletedCampai
 export { CampaignContents } from './components/CampaignContents';
 export { CampaignValue } from './components/CampaignValue';
 export { CampaignInfoSection } from './components/CampaignInfoSection';
+export { CampaignScheduleSection } from './components/CampaignScheduleSection';
 
 // Hooks
 export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
@@ -27,3 +28,4 @@ export type { CampaignListProps } from './components/CampaignList/types';
 export type { CampaignContentsProps } from './components/CampaignContents';
 export type { CampaignValueProps } from './components/CampaignValue';
 export type { CampaignInfoSectionProps } from './components/CampaignInfoSection';
+export type { CampaignScheduleSectionProps } from './components/CampaignScheduleSection';
