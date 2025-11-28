@@ -1,8 +1,4 @@
 /**
- * Reservation (예약) 엔티티 타입 정의
- */
-
-/**
  * 예약 정보
  */
 // export interface Reservation {
