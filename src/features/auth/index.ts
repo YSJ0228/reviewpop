@@ -6,6 +6,8 @@
 
 // Components
 export { KakaoLoginButton } from './components/KakaoLoginButton';
+export { NaverLoginButton } from './components/NaverLoginButton';
 
 // Types
 export type { KakaoLoginButtonProps } from './components/KakaoLoginButton/types';
+// export type { KakaoLoginButtonProps } from './components/KakaoLoginButton/types';
