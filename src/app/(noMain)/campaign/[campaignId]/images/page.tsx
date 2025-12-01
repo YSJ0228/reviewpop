@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { use, useState, useMemo } from 'react';
 
-import { PageHeader } from '@shared/components/PageHeader';
 import { ImageViewer } from '@shared/components/ImageViewer';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
