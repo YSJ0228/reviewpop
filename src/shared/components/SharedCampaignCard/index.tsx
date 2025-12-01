@@ -22,10 +22,20 @@ export function SharedCampaignCard({
   onClick,
   className,
 }: SharedCampaignCardProps) {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <article
-      className={`${styles.SharedCampaignCard} ${className || ''}`}
+      className={`${styles.SharedCampaignCard} ${className || ''} ${onClick ? styles['SharedCampaignCard--Clickable'] : ''}`}
       onClick={onClick}
+      onKeyDown={onClick ? handleKeyDown : undefined}
+      role={onClick ? 'button' : 'article'}
+      tabIndex={onClick ? 0 : undefined}
       aria-label={`${brand} 체험 카드`}
     >
       {statusLabel && statusLabel}
