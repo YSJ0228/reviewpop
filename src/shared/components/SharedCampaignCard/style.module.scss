@@ -1,6 +1,6 @@
 @use '@/shared/styles/mixins' as *;
 
-.CampaignCard {
+.SharedCampaignCard {
   overflow: hidden;
   @include flex($direction: column, $gap: 16);
   @include size($width: 100%, $height: auto);
@@ -11,7 +11,7 @@
     width: 100%;
     @include flex($gap: 16, $align: flex-start);
 
-    .CampaignCard__ImageWrapper {
+    .SharedCampaignCard__ImageWrapper {
       position: relative;
       flex-shrink: 0;
       overflow: hidden;
@@ -19,13 +19,13 @@
       @include size($width: 88, $height: 88);
     }
 
-    .CampaignCard__Content {
+    .SharedCampaignCard__Content {
       @include flex($direction: column, $gap: 4);
       @include size($height: 77);
       flex: 1;
       min-width: 0;
 
-      .CampaignCard__Brand {
+      .SharedCampaignCard__Brand {
         @include font(
           $size: 14,
           $weight: 600,
@@ -35,7 +35,7 @@
         );
       }
 
-      .CampaignCard__Title {
+      .SharedCampaignCard__Title {
         @include font(
           $size: 12,
           $weight: 500,

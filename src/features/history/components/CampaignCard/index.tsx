@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CampaignCard as SharedCampaignCard } from '@shared/components';
+import { SharedCampaignCard } from '@shared/components';
 
 import dayjs from 'dayjs';
 
