@@ -2,7 +2,7 @@
 
 .ReserveComplete {
   @include flex($direction: column, $gap: 24px);
-  @include padding($all: 20px);
+  @include padding($all: 0);
   padding-bottom: 100px; // 하단 버튼 공간 확보
 
   &__Message {
@@ -22,6 +22,7 @@
   &__Buttons {
     @include flex($direction: column, $gap: 8px);
     margin-top: auto;
+    @include padding($y: 16px);
   }
 
   &__Button {
