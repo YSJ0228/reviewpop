@@ -48,12 +48,17 @@ function parseBusinessHours(
  * - 예약 방법
  */
 export function CampaignVisitReservation({ campaign }: CampaignVisitReservationProps) {
-  const { visitReservation } = campaign;
+  const { visitReservation, status } = campaign;
 
   const businessHoursInfo = useMemo(
     () => (visitReservation ? parseBusinessHours(visitReservation.businessHours) : []),
     [visitReservation],
   );
+
+  // 종료된 캠페인에서는 방문 및 예약 섹션을 표시하지 않음
+  if (status === 'completed' || status === 'closed') {
+    return null;
+  }
 
   if (!visitReservation) {
     return null;

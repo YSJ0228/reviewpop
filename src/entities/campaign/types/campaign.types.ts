@@ -151,7 +151,7 @@ export interface CampaignDetail extends Campaign {
   /** 키워드/태그 목록 */
   keywords: string[];
 
-  visitReservation: VisitReservation;
+  visitReservation?: VisitReservation;
 
   /** 리뷰 미션 목록 */
   reviewMission: string[];

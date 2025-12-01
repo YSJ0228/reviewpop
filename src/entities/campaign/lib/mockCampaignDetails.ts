@@ -108,7 +108,7 @@ export const mockCampaignDetails: CampaignDetail[] = [
     keywords: ['이어폰', '삼성전자', '노이즈캔슬링'],
     visitReservation: {
       businessHours: defaultBusinessHours,
-      isReservationRequired: false,
+      isReservationRequired: true,
       visitReservationNotice: '삼성 디지털프라자 홍대점 방문 수령',
     },
     reviewMission: [
@@ -147,7 +147,7 @@ export const mockCampaignDetails: CampaignDetail[] = [
         { start: '10:00', end: '20:00' }, // Fri
         { start: '10:00', end: '20:00' }, // Sat
       ],
-      isReservationRequired: false,
+      isReservationRequired: true,
       visitReservationNotice: '종근당 건강 팝업스토어(성수) 방문 수령',
     },
     reviewMission: [
@@ -225,7 +225,7 @@ export const mockCampaignDetails: CampaignDetail[] = [
         'closed', // Fri
         { start: '11:00', end: '20:00' }, // Sat
       ],
-      isReservationRequired: false,
+      isReservationRequired: true,
       visitReservationNotice: '이니스프리 제주 하우스 방문 체험',
     },
     reviewMission: [
@@ -292,7 +292,7 @@ export const mockCampaignDetails: CampaignDetail[] = [
     keywords: ['운동화', '나이키', '러닝'],
     visitReservation: {
       businessHours: defaultBusinessHours,
-      isReservationRequired: false,
+      isReservationRequired: true,
       visitReservationNotice: '나이키 강남 플래그십 스토어 방문 수령',
     },
     reviewMission: [
@@ -366,7 +366,7 @@ export const mockCampaignDetails: CampaignDetail[] = [
         { start: '07:00', end: '23:00' }, // Fri
         { start: '07:00', end: '23:00' }, // Sat
       ],
-      isReservationRequired: false,
+      isReservationRequired: true,
       visitReservationNotice: '빙그레 팝업 카페 방문 시식 및 수령',
     },
     reviewMission: [
@@ -478,7 +478,7 @@ export const mockCampaignDetails: CampaignDetail[] = [
         { start: '10:30', end: '20:30' }, // Fri
         { start: '10:30', end: '20:30' }, // Sat
       ],
-      isReservationRequired: false,
+      isReservationRequired: true,
       visitReservationNotice: '백화점 식품관 팝업 스토어 방문 수령',
     },
     reviewMission: [
@@ -552,7 +552,7 @@ export const mockCampaignDetails: CampaignDetail[] = [
         { start: '11:00', end: '22:30' }, // Fri
         { start: '11:00', end: '22:30' }, // Sat
       ],
-      isReservationRequired: false,
+      isReservationRequired: true,
       visitReservationNotice: '카카오프렌즈 강남 플래그십 스토어 방문 수령',
     },
     reviewMission: [
