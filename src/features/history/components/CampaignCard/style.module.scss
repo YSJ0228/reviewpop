@@ -10,17 +10,6 @@
     border-bottom: none;
   }
 
-  //StatusLabel
-  .CampaignCard__StatusLabel {
-    @include font(
-      $size: 14,
-      $weight: 700,
-      $line-height: 1.5,
-      $letter-spacing: -0.02em,
-      $color: var(--gray-900)
-    );
-  }
-
   // Content 내부의 텍스트 요소들 - 방문 날짜 (Flattened)
   .CampaignCard__VisitDateWrapper {
     width: 100%;
@@ -61,6 +50,16 @@
   }
 
   .CampaignCard__SelectedText {
+    @include font(
+      $size: 16,
+      $weight: 700,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
+
+  .CampaignStatusLabel {
     @include font(
       $size: 16,
       $weight: 700,
