@@ -171,12 +171,23 @@ export const applicationHandlers = [
     //   );
     // }
 
+    function generateRandomId(length = 5) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
     // 새 신청 생성
     const newApplication: Application = {
+      id: generateRandomId(),
       campaign: getCampaign(campaignId),
       userId: body.userId,
       name: body.name,
       phoneNumber: body.phoneNumber,
+      blogAddress: body.blogAddress,
       status: 'pending',
       reviewStatus: 'before',
       isReservated: false,

@@ -5,11 +5,17 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
+
 import { CONSTANTS } from '@shared/config/constants';
 import { ROUTES } from '@shared/config/routes';
+import { Button } from '@shared/components';
 import { toUnix, toUTCString, now } from '@shared/lib/date';
-import type { KakaoLoginButtonProps } from './types';
+
 import { generateState } from './utils';
+
+import type { KakaoLoginButtonProps } from './types';
+
 import styles from './style.module.scss';
 
 export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
@@ -62,19 +68,9 @@ export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
   const buttonClassName = [styles.KakaoLoginButton, className].filter(Boolean).join(' ');
 
   return (
-    <button onClick={handleKakaoLogin} className={buttonClassName}>
-      <svg
-        className={styles.KakaoLoginButton__Icon}
-        viewBox="0 0 20 20"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M10 0C4.477 0 0 3.58 0 8C0 10.9 2.175 13.432 5.309 14.648L4.286 18.428C4.198 18.744 4.528 19.002 4.813 18.832L9.467 15.988C9.642 15.996 9.82 16 10 16C15.523 16 20 12.42 20 8C20 3.58 15.523 0 10 0Z"
-          fill="currentColor"
-        />
-      </svg>
-      카카오 로그인
-    </button>
+    <Button onClick={handleKakaoLogin} className={buttonClassName}>
+      <Image src={'/images/icons/IcoKakao.svg'} width={18} height={18} alt="카카오 로고" />
+      <span>카카오로 계속하기</span>
+    </Button>
   );
 }

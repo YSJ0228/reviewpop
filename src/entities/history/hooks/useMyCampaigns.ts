@@ -1,23 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import type { MyCampaign, MyCampaignStatus } from '@entities/history/types/myCampaign.types';
-
-interface MyCampaignsResponse {
-  data: MyCampaign[];
-  success: boolean;
-}
+import type { Application, ApplicationStatus } from '@entities/application';
+import type { IMyCampaignsResponse } from '../api/mockMyCampaign.types';
 
 /**
- * 체험 목록을 가져오는 React Query 훅
+ * 체험 신청 목록을 가져오는 React Query 훅
+ * @param userId - 조회할 사용자 ID (기본값: 'kakao-1002')
  */
-export function useMyCampaigns() {
+export function useMyCampaigns(userId: string = 'kakao-1002') {
   return useQuery({
-    queryKey: ['campaigns'],
-    queryFn: async (): Promise<MyCampaign[]> => {
-      const response = await fetch('/api/my-campaigns');
+    queryKey: ['my-applications', userId],
+    queryFn: async (): Promise<Application[]> => {
+      const response = await fetch(`/api/my-campaigns?userId=${userId}`);
       if (!response.ok) {
         throw new Error('체험 목록을 불러오는데 실패했습니다.');
       }
-      const json: MyCampaignsResponse = await response.json();
+      const json: IMyCampaignsResponse = await response.json();
       return json.data;
     },
   });
@@ -27,11 +24,11 @@ export function useMyCampaigns() {
  * 특정 상태의 체험만 필터링하는 헬퍼 함수
  */
 export function filterCampaignsByStatus(
-  campaigns: MyCampaign[] | undefined,
-  status: MyCampaignStatus,
-): MyCampaign[] {
-  if (!campaigns) return [];
-  return campaigns.filter((campaign) => campaign.status === status);
+  applications: Application[] | undefined,
+  status: ApplicationStatus,
+): Application[] {
+  if (!applications) return [];
+  return applications.filter((app) => app.status === status);
 }
 
 /**

@@ -1,0 +1,63 @@
+@use '@shared/styles/mixins' as *;
+
+.CampaignInfoSection {
+  @include flex($direction: column);
+  width: 100%;
+  @include padding($y: 24, $x: 16);
+  background: var(--color-white);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    background-color: var(--color-gray-50);
+  }
+}
+
+.InfoItem {
+  @include flex($align: flex-start, $gap: 12);
+  @include margin($bottom: 16);
+
+  &:last-child {
+    @include margin($bottom: 0);
+  }
+}
+
+.Icon {
+  @include flex($align: center, $justify: center);
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+}
+
+.IconLocation {
+  background-color: var(--color-gray-50);
+}
+
+.IconShop {
+  background-color: var(--color-blue-50);
+}
+
+.IconBlog {
+  background-color: var(--color-gray-100);
+}
+
+.Content {
+  @include flex($direction: column, $gap: 4);
+  flex: 1;
+}
+
+.Title {
+  @include font($size: 14, $weight: 600, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-900);
+}
+
+.Description {
+  @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-600);
+}

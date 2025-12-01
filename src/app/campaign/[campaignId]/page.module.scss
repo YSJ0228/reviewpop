@@ -2,7 +2,6 @@
 
 .Page {
   min-height: 100vh;
-  background: var(--color-gray-50);
 }
 
 .Page__Loading,
@@ -28,13 +27,23 @@
 .Page__StatusBarSection {
   width: 100%;
   background: var(--color-white);
-  border-bottom: 1px solid var(--color-gray-200);
 }
 
 .Page__ValueSection {
   width: 100%;
-  @include padding($y: 0, $x: 16, $bottom: 16);
+  @include padding($y: 0, $x: 16, $bottom: 24);
   background: var(--color-white);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    background-color: var(--color-gray-50);
+  }
 }
 
 .Page__ImageWrapper {

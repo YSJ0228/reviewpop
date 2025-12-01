@@ -4,71 +4,38 @@
 
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import Image from 'next/image';
+
 import { KakaoLoginButton } from '@features/auth';
+import { NaverLoginButton } from '@features/auth';
+
 import styles from './page.module.scss';
 
 function LoginContent() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get('error');
-  const redirect = searchParams.get('redirect');
-
-  // 에러 메시지 매핑
-  const errorMessages: Record<string, string> = {
-    oauth_failed: '소셜 로그인에 실패했습니다.',
-    invalid_code: '잘못된 인증 코드입니다.',
-    invalid_state: '유효하지 않은 요청입니다.',
-    auth_failed: '인증에 실패했습니다.',
-    server_error: '서버 오류가 발생했습니다.',
-  };
-
   return (
     <main className={styles.LoginPage}>
       <div className={styles.LoginPage__Card}>
         {/* 로고/타이틀 */}
-        <h1 className={styles.LoginPage__Title}>리뷰팝</h1>
+        <Image src={'/images/LogoVer.svg'} width={194} height={68} alt="데이트팝 체험단 로고" />
+        <p className={styles.LoginPage__Subtitle}>
+          데이트팝과는 또 다른, 체험을 위한 공간이에요.
+          <br />
+          간편 가입으로 시작해보세요!
+        </p>
 
-        <p className={styles.LoginPage__Subtitle}>소셜 로그인으로 간편하게 시작하세요</p>
-
-        {/* 에러 메시지 */}
-        {error && (
-          <div className={`${styles.LoginPage__Alert} ${styles['LoginPage__Alert--Error']}`}>
-            {errorMessages[error] || '로그인 중 오류가 발생했습니다.'}
-          </div>
-        )}
-
-        {/* 리다이렉트 안내 */}
-        {redirect && !error && (
-          <div className={`${styles.LoginPage__Alert} ${styles['LoginPage__Alert--Info']}`}>
-            로그인 후 이전 페이지로 돌아갑니다
-          </div>
-        )}
+        {/* 회원가입 강조 */}
+        <Image src={'/images/QuickLogin.svg'} width={194} height={68} alt="데이트팝 체험단 로고" />
 
         {/* 소셜 로그인 버튼들 */}
         <div className={styles.LoginPage__Actions}>
           <KakaoLoginButton />
-
-          {/* 네이버 로그인 버튼 (추후 추가) */}
-          <button disabled className={styles.LoginPage__NaverButton}>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M10 0C4.477 0 0 4.477 0 10C0 15.523 4.477 20 10 20C15.523 20 20 15.523 20 10C20 4.477 15.523 0 10 0Z"
-                fill="white"
-              />
-            </svg>
-            네이버 로그인 (준비중)
-          </button>
+          <NaverLoginButton />
         </div>
-
-        {/* 개발 환경 안내 */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className={styles.LoginPage__DevInfo}>
-            🔧 개발 환경: Mock OAuth를 사용합니다
-            <br />
-            버튼 클릭 시 자동으로 로그인됩니다
-          </div>
-        )}
+      </div>
+      <div className={styles.LoginPage__Info}>
+        가입 시 <a>개인정보 수집 이용 동의</a>, <a>개인정보 제3자 (판매자) 제공</a>에 동의하시는
+        것입니다
       </div>
     </main>
   );

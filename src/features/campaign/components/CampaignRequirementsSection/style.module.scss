@@ -1,0 +1,48 @@
+@use '@shared/styles/mixins' as *;
+
+.CampaignRequirementsSection {
+  @include flex($direction: column);
+  width: 100%;
+  @include padding($y: 24, $x: 16);
+  background: var(--color-white);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    background-color: var(--color-gray-50);
+  }
+}
+
+.Title {
+  @include font($size: 16, $weight: 700, $line-height: 1.5, $letter-spacing: -2%);
+  color: var(--color-gray-900);
+  @include margin($bottom: 12);
+}
+
+.RequirementsList {
+  @include flex($direction: column);
+  list-style: none;
+  @include padding($all: 0);
+  @include margin($all: 0);
+  gap: 8px;
+}
+
+.RequirementItem {
+  position: relative;
+  @include padding($left: 16);
+  @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-900);
+
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-gray-600);
+    font-weight: 400;
+  }
+}

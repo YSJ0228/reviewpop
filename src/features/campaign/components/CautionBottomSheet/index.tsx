@@ -3,7 +3,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Checkbox } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
-import { useApplyCampaign } from '@entities/application/hooks/usePostApplication';
+import { usePostApplication } from '@entities/application/hooks/usePostApplication';
 
 import { ButtonBar } from '../ButtonBar';
 
@@ -23,7 +23,7 @@ export function CautionBottomSheet({ opened, onClose, formData }: CautionBottomS
   const [checked, setChecked] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
-  const { mutate } = useApplyCampaign();
+  const { mutate } = usePostApplication();
   const handleClick = () => {
     mutate(
       {

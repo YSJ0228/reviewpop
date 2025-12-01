@@ -5,6 +5,10 @@
   background-color: var(--color-white);
   @include size($max-width: 288);
 
+  &__Wrapper {
+    display: contents;
+  }
+
   &__Body {
     text-align: center;
     box-shadow: 0px 4px 16px 0px #0000001f;

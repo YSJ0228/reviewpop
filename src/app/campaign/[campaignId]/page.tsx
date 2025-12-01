@@ -8,13 +8,16 @@ import { ImageGallery, ImageViewer } from '@shared/components/ImageViewer';
 import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusBar';
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
+import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
+import ReviewSection from '@features/campaign/components/ReviewSection';
+import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
+import { CampaignRequirementsSection } from '@features/campaign/components/CampaignRequirementsSection';
+import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
+import { CampaignAdditionalNotice } from '@features/campaign/components/CampaignAdditionalNotice';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
+import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
+
 import styles from './page.module.scss';
-interface CampaignDetailPageProps {
-  params: Promise<{
-    campaignId: string;
-  }>;
-}
 
 export default function CampaignDetailPage({ params }: CampaignDetailPageProps) {
   const { campaignId } = use(params);
@@ -96,50 +99,26 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         <CampaignValue campaign={campaign} />
       </div>
 
-      <section className={styles.Page__Section}>
-        <p className={styles.Page__Brand}>{campaign.brand}</p>
-        <h1 className={styles.Page__Title}>{campaign.title}</h1>
+      {campaign.status === 'completed' && <ReviewSection campaignId={campaign.id} />}
 
-        <div className={styles.Page__Meta}>
-          <div className={styles.Page__MetaItem}>
-            <span className={styles.Page__MetaLabel}>신청일</span>
-            <span className={styles.Page__MetaValue}>
-              {formatDate(campaign.schedule.application.start)}
-            </span>
-          </div>
-          <div className={styles.Page__MetaItem}>
-            <span className={styles.Page__MetaLabel}>마감일</span>
-            <span className={styles.Page__MetaValue}>
-              {formatDate(campaign.schedule.application.end)}
-            </span>
-          </div>
-          <div className={styles.Page__MetaItem}>
-            <span className={styles.Page__MetaLabel}>카테고리</span>
-            <span className={styles.Page__MetaValue}>{campaign.category}</span>
-          </div>
-        </div>
+      <CampaignInfoSection campaign={campaign} />
 
-        {/* 모집 인원 */}
-        <div className={styles.Page__Recruitment}>
-          <div className={styles.Page__RecruitmentBar}>
-            <div
-              className={styles.Page__RecruitmentProgress}
-              style={{
-                width: `${(campaign.currentRecruitment / campaign.maxRecruitment) * 100}%`,
-              }}
-            />
-          </div>
-          <p className={styles.Page__RecruitmentText}>
-            <strong>{campaign.currentRecruitment}</strong> / {campaign.maxRecruitment}명 신청
-          </p>
-        </div>
-      </section>
+      <CampaignScheduleSection campaign={campaign} />
 
-      {/* 체험 소개 */}
-      <section className={styles.Page__Section}>
-        <h2 className={styles.Page__SectionTitle}>체험 소개</h2>
-        <p className={styles.Page__Description}>{campaign.description}</p>
-      </section>
+      <CampaignRequirementsSection campaign={campaign} />
+
+      <CampaignVisitReservation campaign={campaign} />
+
+      {/* 방문 및 예약 추가 안내사항 (종료된 캠페인이 아닐 때만 표시) */}
+      {(() => {
+        const notice =
+          campaign.status !== 'completed' &&
+          campaign.status !== 'closed' &&
+          campaign.visitReservation?.visitReservationNotice
+            ? campaign.visitReservation.visitReservationNotice
+            : null;
+        return notice && <CampaignAdditionalNotice content={notice} />;
+      })()}
 
       {/* 리뷰 미션 */}
       <section className={styles.Page__Section}>
@@ -153,6 +132,11 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         </ul>
       </section>
 
+      {/* 후기 미션 안내 추가 안내사항 */}
+      {campaign.reviewMissionNotice && (
+        <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
+      )}
+
       {/* 제공 내역 */}
       <section className={styles.Page__Section}>
         <h2 className={styles.Page__SectionTitle}>제공 내역</h2>
@@ -160,20 +144,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       </section>
 
       {/* 배송 정보 */}
-
-      {/* 신청 조건 */}
-      {campaign.requirements && campaign.requirements.length > 0 && (
-        <section className={styles.Page__Section}>
-          <h2 className={styles.Page__SectionTitle}>신청 조건</h2>
-          <ul className={styles.Page__List}>
-            {campaign.requirements.map((requirement, index) => (
-              <li key={index} className={styles.Page__ListItem}>
-                {requirement}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
 
       {/* 주의사항 */}
       {campaign.precautions && campaign.precautions.length > 0 && (
@@ -190,12 +160,4 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       )}
     </div>
   );
-}
-
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
 }

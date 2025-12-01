@@ -41,6 +41,6 @@ async function applyCampaign(payload: ApplyCampaignPayload): Promise<ApplyRespon
   return json.data!;
 }
 
-export function useApplyCampaign() {
+export function usePostApplication() {
   return useMutation({ mutationFn: applyCampaign });
 }

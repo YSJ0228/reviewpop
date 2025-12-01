@@ -30,6 +30,7 @@ export function BottomSheet({
           borderTopLeftRadius: '16px',
           borderTopRightRadius: '16px',
           height,
+          zIndex: 'var(--z-bottomsheet)',
           ...(hasFooter && {
             display: 'flex',
             flexDirection: 'column',

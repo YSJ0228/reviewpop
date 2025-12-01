@@ -1,31 +1,21 @@
-@use '../../../../shared/styles/mixins' as *;
+@use '@shared/styles/mixins' as *;
 
 .KakaoLoginButton {
-  background-color: #fee500;
-  color: #000000;
-  border: none;
-  border-radius: 8px;
-  @include padding($y: 12, $x: 24);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
+  background: #f9e001;
+
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: opacity 0.2s;
+  height: 50px;
 
-  &:hover {
-    opacity: 0.9;
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  @include padding($y: 12, $left: 24, $right: 46);
+  @include font($size: 16, $weight: 700, $color: #333);
+  @include flex($align: center, $justify: space-between, $gap: 8);
+
+  span {
+    width: 100%;
   }
-
-  &:active {
-    opacity: 0.8;
-  }
-}
-
-.KakaoLoginButton__Icon {
-  width: 20px;
-  height: 20px;
 }
