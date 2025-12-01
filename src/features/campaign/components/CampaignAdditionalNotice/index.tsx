@@ -3,7 +3,6 @@
 import styles from './style.module.scss';
 
 export interface CampaignAdditionalNoticeProps {
-  /** 추가 안내사항 내용 (문자열 또는 문자열 배열) */
   content: string | string[];
 }
 

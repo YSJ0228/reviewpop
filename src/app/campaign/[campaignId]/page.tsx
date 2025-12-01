@@ -109,7 +109,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <CampaignVisitReservation campaign={campaign} />
 
-      {/* 방문 예약 관련 추가 안내사항 */}
+      {/* 방문 및 예약 추가 안내사항 */}
       {campaign.visitReservation?.visitReservationNotice && (
         <CampaignAdditionalNotice content={campaign.visitReservation.visitReservationNotice} />
       )}
@@ -126,7 +126,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         </ul>
       </section>
 
-      {/* 리뷰 미션 관련 추가 안내사항 */}
+      {/* 후기 미션 안내 추가 안내사항 */}
       {campaign.reviewMissionNotice && (
         <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
       )}
