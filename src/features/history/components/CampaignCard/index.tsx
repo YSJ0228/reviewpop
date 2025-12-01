@@ -7,7 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconKebap } from '@pop-ui/foundation';
 
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
-import { STATUS_VISIT } from '@entities/history/types/myCampaign.types';
+import { STATUS_VISIT } from '@features/history/constants';
 
 import { HISTORY_MESSAGES } from '@features/history/constants';
 import { useReservationActions } from '@features/history/hooks/useReservationActions';
