@@ -67,6 +67,39 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
     close();
   };
 
+  // Top Content 렌더링 함수
+  const getTopContent = () => {
+    if (type === CARD_TYPES.PENDING) {
+      return <CampaignAppliedCard announcementStatus={announcementStatus} />;
+    }
+
+    if (type === CARD_TYPES.SELECTED && visitStatus === 'scheduled') {
+      return (
+        <div className={styles.CampaignCard__VisitDateWrapper}>
+          <span className={styles.CampaignCard__VisitDate}>
+            {appliedAt && dayjs(`${appliedAt[0]} ${appliedAt[1]}`).format('M월 D일 dddd A h:mm')}
+          </span>
+          <button
+            type="button"
+            onClick={handleKebapClick}
+            className={styles.CampaignCard__KebapButton}
+            aria-label="예약 관리 메뉴 열기"
+            aria-expanded={isOpen}
+            aria-haspopup="dialog"
+          >
+            <IconKebap size={20} color={Colors.COLOR_GRAY_600} />
+          </button>
+        </div>
+      );
+    }
+
+    if (type === CARD_TYPES.SELECTED && visitStatus === 'before') {
+      return <span className={styles.CampaignCard__SelectedText}>{HISTORY_MESSAGES.SELECTED}</span>;
+    }
+
+    return undefined;
+  };
+
   return (
     <>
       <Link
@@ -85,30 +118,7 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
               </div>
             ) : undefined
           }
-          topContent={
-            type === CARD_TYPES.PENDING ? (
-              <CampaignAppliedCard announcementStatus={announcementStatus} />
-            ) : type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' ? (
-              <div className={styles.CampaignCard__VisitDateWrapper}>
-                <span className={styles.CampaignCard__VisitDate}>
-                  {appliedAt &&
-                    dayjs(`${appliedAt[0]} ${appliedAt[1]}`).format('M월 D일 dddd A h:mm')}
-                </span>
-                <button
-                  type="button"
-                  onClick={handleKebapClick}
-                  className={styles.CampaignCard__KebapButton}
-                  aria-label="예약 관리 메뉴 열기"
-                  aria-expanded={isOpen}
-                  aria-haspopup="dialog"
-                >
-                  <IconKebap size={20} color={Colors.COLOR_GRAY_600} />
-                </button>
-              </div>
-            ) : type === CARD_TYPES.SELECTED && visitStatus === 'before' ? (
-              <span className={styles.CampaignCard__SelectedText}>{HISTORY_MESSAGES.SELECTED}</span>
-            ) : undefined
-          }
+          topContent={getTopContent()}
           bottomContent={
             type === CARD_TYPES.REJECTED ? (
               <CampaignRejectedCard
