@@ -1,9 +1,16 @@
 import { SettingList } from '../SettingList';
 
-import styles from './style.module.scss';
 import { Modal } from '@shared/components';
 
+import styles from './style.module.scss';
+
 export function Settings() {
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+  };
   return (
     <div>
       <div className={styles.Settings__Section}>
@@ -18,7 +25,7 @@ export function Settings() {
       </div>
       <div className={styles.Settings__Gap}></div>
       <div className={styles.Settings__Section}>
-        <SettingList title="로그아웃" isIcon={false} />
+        <SettingList title="로그아웃" isIcon={false} onClick={handleLogout} path="login" />
         <Modal
           variant="warning"
           texts={{

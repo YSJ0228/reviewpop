@@ -15,7 +15,7 @@ export function SettingList({
   const router = useRouter();
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (onClick) onClick(e);
-    else if (path) {
+    if (path) {
       router.push(path);
     }
   };
