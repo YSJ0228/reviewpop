@@ -7,6 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconKebap } from '@pop-ui/foundation';
 
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
+
 import { CARD_TYPES, STATUS_VISIT } from '@features/history/constants';
 
 import { HISTORY_MESSAGES } from '@features/history/constants';
@@ -128,23 +129,23 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
             ) : undefined
           }
         />
+
+        {/* selected 타입 - Link 밖으로 분리*/}
+        {type === CARD_TYPES.SELECTED && visitStatus && (
+          <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
+        )}
+
+        {/* 예약 옵션 BottomSheet */}
+        {type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' && (
+          <ReservationBottomSheet
+            appliedAt={appliedAt}
+            isOpen={isOpen}
+            onClose={close}
+            onDateChange={handleChangeDateClick}
+            onCancel={handleCancelReservationClick}
+          />
+        )}
       </Link>
-
-      {/* selected 타입 - Link 밖으로 분리*/}
-      {type === CARD_TYPES.SELECTED && visitStatus && (
-        <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
-      )}
-
-      {/* 예약 옵션 BottomSheet */}
-      {type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' && (
-        <ReservationBottomSheet
-          appliedAt={appliedAt}
-          isOpen={isOpen}
-          onClose={close}
-          onDateChange={handleChangeDateClick}
-          onCancel={handleCancelReservationClick}
-        />
-      )}
     </>
   );
 }
