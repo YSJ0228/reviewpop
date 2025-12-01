@@ -28,7 +28,9 @@ export default function ReserveCompletePage({ params }: ReserveCompletePageProps
   const router = useRouter();
   const { campaignId } = use(params);
   const reservationData = useReservationStore(
-    (state) => state.reservationData ?? mockReservationData,
+    (state) =>
+      state.reservationData ??
+      (process.env.NODE_ENV === 'development' ? mockReservationData : null),
   );
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isUserLoading } = useUserInfo();
@@ -46,7 +48,7 @@ export default function ReserveCompletePage({ params }: ReserveCompletePageProps
 
   if (!reservationData || !campaign || !application) {
     return (
-      <div className={styles.Placeholder}>
+      <div className={styles.ReserveCompletePage__Error}>
         <p>예약 정보를 불러올 수 없습니다.</p>
       </div>
     );
