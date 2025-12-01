@@ -23,14 +23,18 @@ export type ApplicationStatus =
 
 /**
  * 리뷰 상태
- * before  후기 작성 전
- * pending  후기 검토 중
- * requested  수정 요청
+ * - visited: 체험 완료 (방문 예약 날짜 익일에 자동 변경)
+ * - notReviewed: 방문 완료 (후기 작성 전)
+ * - reviewPending: 후기 검토 (후기 등록 완료, 검토 중)
+ * - requiredForEditing: 후기 수정 요청
+ * - reviewed: 체험 종료 (후기 등록 완료, 종료 탭에서 사용)
  */
 export type ReviewStatus =
-  | 'before' // 후기 작성 전
-  | 'pending' // 후기 검토 중
-  | 'requested'; // 수정 요청
+  | 'visited' // 체험 완료
+  | 'notReviewed' // 방문 완료
+  | 'reviewPending' // 후기 검토
+  | 'requiredForEditing' // 후기 수정 요청
+  | 'reviewed'; // 체험 종료 (종료 탭)
 
 /**
  * 체험 신청 데이터 조회
@@ -46,7 +50,7 @@ export interface Application {
   phoneNumber: string;
 
   status: ApplicationStatus;
-  reviewStatus: ReviewStatus;
+  reviewStatus?: ReviewStatus; // 옵셔널로 변경 (현재 후기/종료 외에도 목데이터로 들어가있어서 오류남.)
   isReservated: boolean;
 
   createdAt: string;

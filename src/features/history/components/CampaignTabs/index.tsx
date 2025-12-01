@@ -5,20 +5,21 @@ import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
+import 'swiper/css';
 
-import { CampaignList } from '../CampaignList';
+import { IconChevronRight, IconWarningCircle } from '@pop-ui/foundation';
+
+import { EmptyState } from '@shared/components';
+import { ROUTES } from '@shared/config/routes';
+
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
 import { TAB_CONFIG, STATUS_EMPTY_MAP } from '@features/history/constants';
-import type { TabKey } from '@features/history/constants';
-import { EmptyState } from '@shared/components';
 
-import { IconChevronRight } from '@pop-ui/foundation';
+import type { TabKey } from '@features/history/constants';
+
+import { CampaignList } from '../CampaignList';
 
 import styles from './style.module.scss';
-
-// Swiper CSS 임포트
-import 'swiper/css';
-import { ROUTES } from '@shared/config/routes';
 
 export function CampaignTabs() {
   const searchParams = useSearchParams();
@@ -31,7 +32,21 @@ export function CampaignTabs() {
   const counts = useMemo(() => {
     const map: Record<TabKey, number> = {} as Record<TabKey, number>;
     TAB_CONFIG.forEach((t) => {
-      map[t.key] = (campaigns || []).filter((c) => c.status === t.key).length;
+      if (t.key === 'reviewed') {
+        // reviewed 탭: status가 'reviewed'이거나, campaign.status가 'closed'이고 reviewStatus가 'notReviewed'인 경우
+        map[t.key] = (campaigns || []).filter((c) => {
+          if (c.status === 'reviewed') return true;
+          if (c.campaign.status === 'closed' && c.reviewStatus === 'notReviewed') return true;
+          return false;
+        }).length;
+      } else if (t.key === 'completed') {
+        // completed 탭: status가 'completed'이고 reviewStatus가 'reviewed'인 경우만
+        map[t.key] = (campaigns || []).filter((c) => {
+          return c.status === 'completed' && c.reviewStatus === 'reviewed';
+        }).length;
+      } else {
+        map[t.key] = (campaigns || []).filter((c) => c.status === t.key).length;
+      }
     });
     return map;
   }, [campaigns]);
@@ -39,6 +54,13 @@ export function CampaignTabs() {
   // '미선정' 상태 카운트 (TAB_CONFIG에 포함되어 있지 않으므로 별도 계산)
   const rejectedCount = useMemo(() => {
     return (campaigns || []).filter((c) => c.status === 'rejected').length;
+  }, [campaigns]);
+
+  // 후기 미등록 체험 존재 여부 확인
+  const hasUnreviewedClosedCampaigns = useMemo(() => {
+    return (campaigns || []).some(
+      (c) => c.campaign.status === 'closed' && c.reviewStatus === 'notReviewed',
+    );
   }, [campaigns]);
 
   const currentTab = (searchParams.get('tab') as TabKey) || 'pending';
@@ -165,6 +187,7 @@ export function CampaignTabs() {
         {TAB_CONFIG.map((tab) => {
           const filteredCampaigns = filterCampaignsByStatus(campaigns, tab.key);
           const isEmpty = filteredCampaigns.length === 0;
+          const showWarning = tab.key === 'reviewed' && hasUnreviewedClosedCampaigns;
 
           return (
             <SwiperSlide key={tab.key} className={styles.CampaignTabs__Slide}>
@@ -175,6 +198,14 @@ export function CampaignTabs() {
                 tabIndex={0}
                 aria-label={tab.label}
               >
+                {/* 경고 메시지 - 탭 상단 */}
+                {showWarning && (
+                  <div className={styles.CampaignTabs__WarningBanner} role="alert">
+                    <IconWarningCircle size={12} color="var(--color-red-500)" />
+                    <span>후기 등록이 안된 체험이 있어요</span>
+                  </div>
+                )}
+
                 <CampaignList status={tab.key} />
                 <div className={styles.CampaignTabs__LinkContainer}>
                   {tab.key === 'pending' && rejectedCount > 0 && (
