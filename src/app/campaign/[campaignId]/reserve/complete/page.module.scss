@@ -1,32 +1,20 @@
 @use '@shared/styles/mixins' as *;
 
 .ReserveCompletePage {
-  @include padding($y: 20, $x: 16);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  @include padding($x: 16);
+  min-width: 360px;
   min-height: 100vh;
+  @include flex($direction: column);
 
-  // TODO: 실제 디자인에 맞게 스타일 수정
-}
+  &__Loading,
+  &__Error {
+    @include flex($direction: column, $align: center, $justify: center);
+    @include padding($y: 40, $x: 20);
+    text-align: center;
 
-.Placeholder {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-
-  text-align: center;
-
-  // TODO: 개발 완료 후 제거
-}
-
-.Todo {
-  font-size: 14px;
-  color: #999;
-
-  // TODO: 개발 완료 후 제거
+    p {
+      font-size: 16px;
+      color: var(--color-gray-600);
+    }
+  }
 }
