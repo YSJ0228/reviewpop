@@ -7,7 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconKebap } from '@pop-ui/foundation';
 
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
-import { STATUS_VISIT } from '@features/history/constants';
+import { CARD_TYPES, STATUS_VISIT } from '@features/history/constants';
 
 import { HISTORY_MESSAGES } from '@features/history/constants';
 import { useReservationActions } from '@features/history/hooks/useReservationActions';
@@ -71,24 +71,24 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
     <>
       <Link
         href={`/campaign/${campaign.id}`}
-        className={`${styles.CampaignCard__Link} ${type === 'selected' ? styles['CampaignCard__Link--NoBorder'] : ''}`}
+        className={`${styles.CampaignCard__Link} ${type === CARD_TYPES.SELECTED ? styles['CampaignCard__Link--NoBorder'] : ''}`}
       >
         <SharedCampaignCard
           thumbnail={campaign.thumbnail}
           brand={campaign.brand}
           title={campaign.providedItem}
-          className={`${styles.CampaignCard} ${type === 'selected' ? styles['CampaignCard--NoBorder'] : ''}`}
+          className={`${styles.CampaignCard} ${type === CARD_TYPES.SELECTED ? styles['CampaignCard--NoBorder'] : ''}`}
           statusLabel={
-            type === 'selected' && visitStatus ? (
+            type === CARD_TYPES.SELECTED && visitStatus ? (
               <div className={styles.CampaignCard__StatusLabel}>
                 <p>{STATUS_VISIT[visitStatus]}</p>
               </div>
             ) : undefined
           }
           topContent={
-            type === 'pending' ? (
+            type === CARD_TYPES.PENDING ? (
               <CampaignAppliedCard announcementStatus={announcementStatus} />
-            ) : type === 'selected' && visitStatus === 'scheduled' ? (
+            ) : type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' ? (
               <div className={styles.CampaignCard__VisitDateWrapper}>
                 <span className={styles.CampaignCard__VisitDate}>
                   {appliedAt &&
@@ -105,12 +105,12 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
                   <IconKebap size={20} color={Colors.COLOR_GRAY_600} />
                 </button>
               </div>
-            ) : type === 'selected' && visitStatus === 'before' ? (
+            ) : type === CARD_TYPES.SELECTED && visitStatus === 'before' ? (
               <span className={styles.CampaignCard__SelectedText}>{HISTORY_MESSAGES.SELECTED}</span>
             ) : undefined
           }
           bottomContent={
-            type === 'rejected' ? (
+            type === CARD_TYPES.REJECTED ? (
               <CampaignRejectedCard
                 recruitmentSchedule={recruitmentSchedule}
                 maxRecruitment={campaign.maxRecruitment}
@@ -121,12 +121,12 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
       </Link>
 
       {/* selected 타입 - Link 밖으로 분리*/}
-      {type === 'selected' && visitStatus && (
+      {type === CARD_TYPES.SELECTED && visitStatus && (
         <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
       )}
 
       {/* 예약 옵션 BottomSheet */}
-      {type === 'selected' && visitStatus === 'scheduled' && (
+      {type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' && (
         <ReservationBottomSheet
           appliedAt={appliedAt}
           isOpen={isOpen}

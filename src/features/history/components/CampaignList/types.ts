@@ -1,5 +1,5 @@
-import type { ApplicationStatus } from '@entities/application';
+import type { TCardType } from '@features/history/constants';
 
 export interface IMyCampaignListProps {
-  status: ApplicationStatus;
+  status: TCardType;
 }

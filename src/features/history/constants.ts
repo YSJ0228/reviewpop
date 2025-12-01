@@ -60,6 +60,16 @@ export const APPLICATION_STATUS_LABELS: Record<ApplicationStatus, string> = {
   cancelled: '취소',
 };
 
+export const CARD_TYPES = {
+  PENDING: 'pending',
+  SELECTED: 'selected',
+  REJECTED: 'rejected',
+  REVIEWED: 'reviewed',
+  COMPLETED: 'completed',
+} as const;
+
+export type TCardType = (typeof CARD_TYPES)[keyof typeof CARD_TYPES];
+
 export const STATUS_EMPTY_MAP: Record<
   Exclude<ApplicationStatus, 'rejected' | 'cancelled'>,
   'no-applied' | 'no-selected' | 'no-registered' | 'no-completed'

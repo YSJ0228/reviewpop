@@ -1,6 +1,7 @@
-import type { Application, ApplicationStatus } from '@entities/application';
+import type { Application } from '@entities/application';
+import type { TCardType } from '@features/history/constants';
 
 export interface IMyCampaignCardProps {
   application: Application;
-  type: ApplicationStatus;
+  type: TCardType;
 }
