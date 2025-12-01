@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { use } from 'react';
 
+import { Button } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { LoadingSpinner, PageHeader } from '@shared/components';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
@@ -50,6 +51,8 @@ export default function ReserveCompletePage({ params }: ReserveCompletePageProps
     return (
       <div className={styles.ReserveCompletePage__Error}>
         <p>예약 정보를 불러올 수 없습니다.</p>
+        <p>페이지를 새로고침하거나 다시 시도해 주세요.</p>
+        <Button onClick={() => router.push('/my?tab=selected')}>내 예약 목록으로 이동</Button>
       </div>
     );
   }

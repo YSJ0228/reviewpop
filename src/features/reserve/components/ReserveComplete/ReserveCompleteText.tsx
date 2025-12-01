@@ -12,9 +12,7 @@ export function ReserveCompleteText({ date }: { date: string }) {
       <IconCheckCircle size={ICON_SIZES} color={ColorAqua500} />
       <div className={styles.ReserveCompleteText__Content}>
         <h2>{COMPLETE_TEXT}</h2>
-        <p>
-          {formatDate(date, 'MMDD_DDDD_LONG')} {formatDate(date, 'TIME_WITH_AMPM')}
-        </p>
+        <p>{formatDate(date, 'MMDD_DDDD_LONG_WITH_TIME')}</p>
       </div>
     </div>
   );

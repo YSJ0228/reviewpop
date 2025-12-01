@@ -22,6 +22,7 @@ import dayjs from './dayjs.config';
  * - MMDD_DDD_LONG: M월 D일 (월)
  * - MMDD_DDDD_SHORT: MM.DD 월요일
  * - MMDD_DDDD_LONG: M월 D일 월요일
+ * - MMDD_DDDD_LONG_WITH_TIME: M월 D일 월요일 A h:mm
  * - TIME: 시간
  * - TIME_WITH_AMPM: 시간 (오전/오후)
  */
@@ -37,6 +38,7 @@ export const DATE_FORMATS = {
   MMDD_DDD_LONG: 'M월 D일 (ddd)',
   MMDD_DDDD_SHORT: 'MM.DD dddd',
   MMDD_DDDD_LONG: 'M월 D일 dddd',
+  MMDD_DDDD_LONG_WITH_TIME: 'M월 D일 dddd A h:mm',
   TIME: 'HH:mm',
   TIME_WITH_AMPM: 'A h:mm',
 } as const;

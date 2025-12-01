@@ -3,7 +3,7 @@ import { Button } from '@shared/components';
 
 import styles from './style.module.scss';
 
-export function ReserveCompleteActions({ campaignId }: { campaignId: string }) {
+export function ReserveCompleteAction({ campaignId }: { campaignId: string }) {
   return (
     <div className={styles.ReserveComplete__Buttons}>
       <Link href={`/campaign/${campaignId}`}>

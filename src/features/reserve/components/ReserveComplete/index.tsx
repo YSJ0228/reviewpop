@@ -4,7 +4,7 @@ import { Application } from '@entities/application/types/application.types';
 import { ReservationData } from '@features/reserve/store/reservationStore';
 
 import { ReserveCompleteText } from './ReserveCompleteText';
-import { ReserveCompleteActions } from './ReserveCompleteAction';
+import { ReserveCompleteAction } from './ReserveCompleteAction';
 
 import styles from './style.module.scss';
 
@@ -34,7 +34,7 @@ export function ReserveComplete({ campaign, application, reservation }: IReserve
         </CampaignInfoList.Item>
       </CampaignInfoList.Main>
 
-      <ReserveCompleteActions campaignId={campaign.id} />
+      <ReserveCompleteAction campaignId={campaign.id} />
     </div>
   );
 }
