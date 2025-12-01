@@ -17,6 +17,7 @@ export { toast } from './Toast';
 export { Modal } from './Modal';
 export { EmptyState } from './EmptyState';
 export { SharedCampaignCard } from './SharedCampaignCard';
+export { CampaignInfoList } from './CampaignInfoList';
 
 // Types
 export type { ButtonProps } from './Button/types';

@@ -4,9 +4,9 @@ import { mockReservationData } from '@features/reserve/store/mockReservationData
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { LoadingSpinner } from '@shared/components';
+import { LoadingSpinner, CampaignInfoList } from '@shared/components';
+import { formatDate } from '@shared/lib/date';
 
-import { ReserveInfo } from './ReserveInfo';
 import { ReservePrecautions } from './ReservePrecautions';
 import { ReserveAgreement } from './ReserveAgreement';
 
@@ -46,7 +46,25 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   return (
     <div className={styles.ReserveConfirm}>
       <div className={styles.ReserveConfirm__Content}>
-        <ReserveInfo campaign={campaign} application={application} reservation={reservationData} />
+        <CampaignInfoList.Main>
+          <CampaignInfoList.Header
+            thumbnail={campaign.thumbnail}
+            brand={campaign.brand}
+            title={campaign.providedItem}
+          />
+          <CampaignInfoList.AddressItem address={campaign.address} />
+          <CampaignInfoList.Item label="날짜">
+            <p>{formatDate(reservationData.date, 'SHORT')}</p>
+            <p>{formatDate(reservationData.date, 'TIME')}</p>
+          </CampaignInfoList.Item>
+          <CampaignInfoList.Item label="방문 인원">
+            <p>{reservationData.personCount} 명</p>
+          </CampaignInfoList.Item>
+          <CampaignInfoList.Item label="예약자 정보" isLast>
+            <p>{application.name}</p>
+            <p>{application.phoneNumber}</p>
+          </CampaignInfoList.Item>
+        </CampaignInfoList.Main>
         <ReservePrecautions precautions={campaign.reservationPrecaution} />
       </div>
       <ReserveAgreement onConfirm={handleConfirm} />
