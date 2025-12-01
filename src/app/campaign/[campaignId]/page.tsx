@@ -12,6 +12,7 @@ import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoS
 import ReviewSection from '@features/campaign/components/ReviewSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { CampaignRequirementsSection } from '@features/campaign/components/CampaignRequirementsSection';
+import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
 
@@ -104,6 +105,8 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       <CampaignScheduleSection campaign={campaign} />
 
       <CampaignRequirementsSection campaign={campaign} />
+
+      <CampaignVisitReservation campaign={campaign} />
 
       {/* 리뷰 미션 */}
       <section className={styles.Page__Section}>
