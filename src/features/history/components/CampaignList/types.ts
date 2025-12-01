@@ -1,5 +1,5 @@
-import type { MyCampaignStatus } from '@entities/history/types/myCampaign.types';
+import type { TCardType } from '@features/history/constants';
 
-export interface MyCampaignListProps {
-  status: MyCampaignStatus;
+export interface IMyCampaignListProps {
+  status: TCardType;
 }

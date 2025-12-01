@@ -8,8 +8,8 @@ import type { Swiper as SwiperType } from 'swiper';
 
 import { CampaignList } from '../CampaignList';
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
-import { TAB_CONFIG, STATUS_EMPTY_MAP } from '@entities/history/types/myCampaign.types';
-import type { TabKey } from '@entities/history/types/myCampaign.types';
+import { TAB_CONFIG, STATUS_EMPTY_MAP } from '@features/history/constants';
+import type { TabKey } from '@features/history/constants';
 import { EmptyState } from '@shared/components';
 
 import { IconChevronRight } from '@pop-ui/foundation';
@@ -41,14 +41,14 @@ export function CampaignTabs() {
     return (campaigns || []).filter((c) => c.status === 'rejected').length;
   }, [campaigns]);
 
-  const currentTab = (searchParams.get('tab') as TabKey) || 'applied';
+  const currentTab = (searchParams.get('tab') as TabKey) || 'pending';
   const activeIndex = TAB_CONFIG.findIndex((tab) => tab.key === currentTab);
   const validIndex = activeIndex >= 0 ? activeIndex : 0;
 
   // URL에 탭이 없거나 잘못된 경우 기본값으로 리다이렉트
   useEffect(() => {
     if (!searchParams.get('tab') || activeIndex < 0) {
-      router.replace('/my?tab=applied', { scroll: false });
+      router.replace('/my?tab=pending', { scroll: false });
     }
   }, [searchParams, activeIndex, router]);
 
@@ -177,7 +177,7 @@ export function CampaignTabs() {
               >
                 <CampaignList status={tab.key} />
                 <div className={styles.CampaignTabs__LinkContainer}>
-                  {tab.key === 'applied' && rejectedCount > 0 && (
+                  {tab.key === 'pending' && rejectedCount > 0 && (
                     <Link href={ROUTES.MY_REJECTED} className={styles.CampaignTabs__RejectedLink}>
                       {'미선정 체험 내역'}
                       <IconChevronRight size={16} color="var(--color-gray-800)" />

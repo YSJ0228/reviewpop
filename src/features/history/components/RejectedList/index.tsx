@@ -42,8 +42,8 @@ export function RejectedList() {
 
   return (
     <div className={styles.RejectedList} role="feed" aria-label="미선정 체험 목록">
-      {rejectedCampaigns.map((campaign) => (
-        <CampaignCard key={campaign.id} campaign={campaign} type="rejected" />
+      {rejectedCampaigns.map((application) => (
+        <CampaignCard key={application.campaign.id} application={application} type="rejected" />
       ))}
     </div>
   );

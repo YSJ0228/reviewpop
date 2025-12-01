@@ -1,9 +1,7 @@
-import type {
-  MyCampaign,
-  MyCampaignScheduleStatus,
-} from '@entities/history/types/myCampaign.types';
+import type { CampaignDetail } from '@entities/campaign/types/campaign.types';
+import type { VisitStatus } from '@features/history/constants';
 
 export interface CampaignSelectedCardProps {
-  campaign: MyCampaign;
-  visitStatus: MyCampaignScheduleStatus;
+  campaign: CampaignDetail;
+  visitStatus: VisitStatus;
 }
