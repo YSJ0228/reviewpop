@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { Application, ApplicationStatus } from '@entities/application';
-import type { MyCampaignsResponse } from '../api/mockMyCampaign.types';
+import type { IMyCampaignsResponse } from '../api/mockMyCampaign.types';
 
 /**
  * 체험 신청 목록을 가져오는 React Query 훅
@@ -14,7 +14,7 @@ export function useMyCampaigns(userId: string = 'kakao-1002') {
       if (!response.ok) {
         throw new Error('체험 목록을 불러오는데 실패했습니다.');
       }
-      const json: MyCampaignsResponse = await response.json();
+      const json: IMyCampaignsResponse = await response.json();
       return json.data;
     },
   });

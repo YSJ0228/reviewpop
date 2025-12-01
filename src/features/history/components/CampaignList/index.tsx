@@ -2,7 +2,7 @@
 
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
 
-import { STATUS_LABELS } from '@features/history/constants';
+import { APPLICATION_STATUS_LABELS } from '@features/history/constants';
 
 import { CampaignCard } from '../CampaignCard';
 
@@ -49,7 +49,7 @@ export function CampaignList({ status }: IMyCampaignListProps) {
     <div
       className={styles.CampaignList}
       role="feed"
-      aria-label={`${STATUS_LABELS[status]} 체험 목록`}
+      aria-label={`${APPLICATION_STATUS_LABELS[status]} 체험 목록`}
       aria-busy={isLoading}
     >
       {filteredCampaigns.map((application) => (

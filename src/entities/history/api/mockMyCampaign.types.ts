@@ -1,6 +1,6 @@
 import { Application } from '@entities/application/types/application.types';
 
-export interface MyCampaignsResponse {
+export interface IMyCampaignsResponse {
   data: Application[];
   success: boolean;
 }

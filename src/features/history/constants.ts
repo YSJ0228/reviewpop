@@ -51,7 +51,7 @@ export const TAB_CONFIG = [
 
 export type TabKey = (typeof TAB_CONFIG)[number]['key'];
 
-export const STATUS_LABELS: Record<ApplicationStatus, string> = {
+export const APPLICATION_STATUS_LABELS: Record<ApplicationStatus, string> = {
   pending: '신청',
   selected: '선정',
   rejected: '미선정',

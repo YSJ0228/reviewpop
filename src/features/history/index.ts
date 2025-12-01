@@ -15,6 +15,6 @@ export { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails'
 
 // Types
 export type { TabKey } from './constants';
-export { STATUS_LABELS, TAB_CONFIG } from './constants';
+export { APPLICATION_STATUS_LABELS, TAB_CONFIG } from './constants';
 export type { IMyCampaignCardProps } from './components/CampaignCard/types';
 export type { IMyCampaignListProps } from './components/CampaignList/types';
