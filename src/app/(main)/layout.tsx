@@ -1,12 +1,5 @@
-import { BottomNavigation } from '@shared/components/BottomNavigation';
-import { Gnb } from '@shared/components/Gnb';
+import { GlobalMainNavigation } from '@shared/components';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <Gnb />
-      <div style={{ paddingBottom: 'calc(60px + env(safe-area-inset-bottom))' }}>{children}</div>
-      <BottomNavigation />
-    </>
-  );
+  return <GlobalMainNavigation>{children}</GlobalMainNavigation>;
 }

@@ -10,6 +10,7 @@ interface PageHeaderConfig {
   onBack?: () => void;
   onX?: () => void;
   isVisible?: boolean;
+  showBottomNavigation?: boolean;
 }
 
 export function usePageHeader(config: PageHeaderConfig = {}) {
@@ -23,5 +24,11 @@ export function usePageHeader(config: PageHeaderConfig = {}) {
       resetHeader();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config.title, config.showBackButton, config.showXButton, config.isVisible]);
+  }, [
+    config.title,
+    config.showBackButton,
+    config.showXButton,
+    config.isVisible,
+    config.showBottomNavigation,
+  ]);
 }

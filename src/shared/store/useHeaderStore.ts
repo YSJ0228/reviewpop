@@ -6,6 +6,7 @@ interface HeaderState {
   showBackButton: boolean;
   showXButton: boolean;
   isVisible: boolean;
+  showBottomNavigation: boolean;
   rightAction: ReactNode | null;
   onBack: (() => void) | null;
   onX: (() => void) | null;
@@ -21,7 +22,8 @@ const initialState: HeaderState = {
   title: '',
   showBackButton: true,
   showXButton: false,
-  isVisible: false, // 기본적으로 숨김 (Main 페이지 등에서 안 보이게)
+  isVisible: false,
+  showBottomNavigation: true, // 기본적으로 GNB 표시
   rightAction: null,
   onBack: null,
   onX: null,
@@ -34,7 +36,7 @@ export const useHeaderStore = create<HeaderState & HeaderActions>((set) => ({
     set((state) => ({
       ...state,
       ...config,
-      isVisible: true, // 설정하면 자동으로 보임
+      isVisible: true,
     })),
 
   resetHeader: () => set(initialState),
