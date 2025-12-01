@@ -16,8 +16,15 @@ export function CampaignAdditionalNotice({ content }: CampaignAdditionalNoticePr
     return null;
   }
 
-  // 문자열 배열로 정규화
-  const contentLines = Array.isArray(content) ? content : content.split('\n').filter(Boolean);
+  // 문자열 배열로 정규화 (빈 문자열 및 공백만 있는 줄 제거)
+  const contentLines = Array.isArray(content)
+    ? content.filter((line) => line.trim())
+    : content.split('\n').filter((line) => line.trim());
+
+  // 정규화 후에도 빈 배열이면 렌더링하지 않음
+  if (contentLines.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.CampaignAdditionalNotice}>

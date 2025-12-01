@@ -677,14 +677,14 @@ export const mockApplications: Application[] = [
 /**
  * 사용자별 신청 목록 조회
  */
-export function getApplicationsByUserId(userId: string): MockApplication[] {
+export function getApplicationsByUserId(userId: string): Application[] {
   return mockApplications.filter((app) => app.userId === userId);
 }
 
 /**
  * 체험별 신청 목록 조회
  */
-export function getApplicationsByCampaignId(campaignId: string): MockApplication[] {
+export function getApplicationsByCampaignId(campaignId: string): Application[] {
   return mockApplications.filter((app) => app.campaign.id === campaignId);
 }
 

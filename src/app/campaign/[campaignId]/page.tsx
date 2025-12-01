@@ -109,10 +109,16 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <CampaignVisitReservation campaign={campaign} />
 
-      {/* 방문 및 예약 추가 안내사항 */}
-      {campaign.visitReservation?.visitReservationNotice && (
-        <CampaignAdditionalNotice content={campaign.visitReservation.visitReservationNotice} />
-      )}
+      {/* 방문 및 예약 추가 안내사항 (종료된 캠페인이 아닐 때만 표시) */}
+      {(() => {
+        const notice =
+          campaign.status !== 'completed' &&
+          campaign.status !== 'closed' &&
+          campaign.visitReservation?.visitReservationNotice
+            ? campaign.visitReservation.visitReservationNotice
+            : null;
+        return notice && <CampaignAdditionalNotice content={notice} />;
+      })()}
 
       {/* 리뷰 미션 */}
       <section className={styles.Page__Section}>
