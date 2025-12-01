@@ -35,7 +35,7 @@ export function ReserveComplete({ campaign, application, reservation }: ReserveC
       </CampaignInfoList.Main>
 
       <div className={styles.ReserveComplete__Buttons}>
-        <Link href={`/campaign/${campaign.id}`} style={{ width: '100%' }}>
+        <Link href={`/campaign/${campaign.id}`} className={styles.ReserveComplete__Link}>
           <Button
             fullWidth
             variant="outline"
