@@ -19,12 +19,31 @@ import { CampaignRejectedCard } from './CampaignRejectedCard';
 import { CampaignSelectedCard } from './CampaignSelectedCard';
 import { ReservationBottomSheet } from './ReservationBottomSheet';
 
-import type { MyCampaignCardProps } from './types';
+import type { IMyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 
-export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
-  const announcementStatus = calculateAnnouncementDate(campaign.announcementDate);
+export function CampaignCard({ application, type }: IMyCampaignCardProps) {
+  const { campaign } = application;
+  const { schedule } = campaign;
+
+  const announcementDate = schedule.winnerAnnouncement.start;
+  const announcementStatus = calculateAnnouncementDate(announcementDate);
+
+  const visitStatus = application.isReservated ? 'scheduled' : 'before';
+
+  const appliedAt = application.reservationDate
+    ? ([
+        dayjs(application.reservationDate).format('YYYY-MM-DD'),
+        dayjs(application.reservationDate).format('HH:mm'),
+      ] as [string, string])
+    : undefined;
+
+  const recruitmentSchedule = [schedule.application.start, schedule.application.end] as [
+    string,
+    string,
+  ];
+
   const [isOpen, { open, close }] = useDisclosure(false);
 
   const { handleChangeDate, handleCancelReservation } = useReservationActions(campaign.id);
@@ -55,9 +74,9 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
         className={`${styles.CampaignCard__Link} ${type === 'selected' ? styles['CampaignCard__Link--NoBorder'] : ''}`}
       >
         <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
-          {type === 'selected' && campaign.visitStatus && (
+          {type === 'selected' && visitStatus && (
             <div className={styles.CampaignCard__StatusLabel}>
-              <p>{STATUS_VISIT[campaign.visitStatus]}</p>
+              <p>{STATUS_VISIT[visitStatus]}</p>
             </div>
           )}
           <header className={styles.CampaignCard__TopSection}>
@@ -72,20 +91,18 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
             </div>
             <section className={styles.CampaignCard__Content}>
               {/* applied 타입 */}
-              {type === 'applied' && (
+              {type === 'pending' && (
                 <CampaignAppliedCard announcementStatus={announcementStatus} />
               )}
 
               {/* selected 타입 */}
               {type === 'selected' && (
                 <>
-                  {campaign.visitStatus === 'scheduled' && (
+                  {visitStatus === 'scheduled' && (
                     <div className={styles.CampaignCard__VisitDateWrapper}>
                       <span className={styles.CampaignCard__VisitDate}>
-                        {campaign.appliedAt &&
-                          dayjs(`${campaign.appliedAt[0]} ${campaign.appliedAt[1]}`).format(
-                            'M월 D일 dddd A h:mm',
-                          )}
+                        {appliedAt &&
+                          dayjs(`${appliedAt[0]} ${appliedAt[1]}`).format('M월 D일 dddd A h:mm')}
                       </span>
                       <button
                         type="button"
@@ -99,7 +116,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
                       </button>
                     </div>
                   )}
-                  {campaign.visitStatus === 'before' && (
+                  {visitStatus === 'before' && (
                     <span className={styles.CampaignCard__SelectedText}>
                       {HISTORY_MESSAGES.SELECTED}
                     </span>
@@ -113,7 +130,7 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
               {/* rejected 타입 */}
               {type === 'rejected' && (
                 <CampaignRejectedCard
-                  recruitmentSchedule={campaign.recruitmentSchedule}
+                  recruitmentSchedule={recruitmentSchedule}
                   maxRecruitment={campaign.maxRecruitment}
                 />
               )}
@@ -125,14 +142,14 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
       </Link>
 
       {/* selected 타입 - Link 밖으로 분리*/}
-      {type === 'selected' && campaign.visitStatus && (
-        <CampaignSelectedCard campaign={campaign} visitStatus={campaign.visitStatus} />
+      {type === 'selected' && visitStatus && (
+        <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
       )}
 
       {/* 예약 옵션 BottomSheet */}
-      {type === 'selected' && campaign.visitStatus === 'scheduled' && (
+      {type === 'selected' && visitStatus === 'scheduled' && (
         <ReservationBottomSheet
-          appliedAt={campaign.appliedAt}
+          appliedAt={appliedAt}
           isOpen={isOpen}
           onClose={close}
           onDateChange={handleChangeDateClick}

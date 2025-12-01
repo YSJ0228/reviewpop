@@ -1,6 +1,6 @@
-import type { MyCampaign, MyCampaignStatus } from '@entities/history/types/myCampaign.types';
+import type { Application, ApplicationStatus } from '@entities/application';
 
-export interface MyCampaignCardProps {
-  campaign: MyCampaign;
-  type: MyCampaignStatus;
+export interface IMyCampaignCardProps {
+  application: Application;
+  type: ApplicationStatus;
 }

@@ -14,11 +14,7 @@ export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
 export { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 
 // Types
-export type {
-  MyCampaign,
-  MyCampaignStatus,
-  TabKey,
-} from '@entities/history/types/myCampaign.types';
-export { STATUS_LABELS, TAB_CONFIG } from '@entities/history/types/myCampaign.types';
-export type { MyCampaignCardProps } from './components/CampaignCard/types';
-export type { MyCampaignListProps } from './components/CampaignList/types';
+export type { TabKey } from './constants';
+export { STATUS_LABELS, TAB_CONFIG } from './constants';
+export type { IMyCampaignCardProps } from './components/CampaignCard/types';
+export type { IMyCampaignListProps } from './components/CampaignList/types';
