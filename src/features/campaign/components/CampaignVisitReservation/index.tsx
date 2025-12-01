@@ -1,5 +1,7 @@
 'use client';
 
+import { useMemo } from 'react';
+
 import type { CampaignDetail, VisitReservation } from '@entities/campaign/types/campaign.types';
 
 import styles from './style.module.scss';
@@ -16,6 +18,12 @@ const WEEKDAY_NAMES = ['일', '월', '화', '수', '목', '금', '토'] as const
 function parseBusinessHours(
   businessHours: VisitReservation['businessHours'],
 ): Array<{ day: string; startTime?: string; endTime?: string; isClosed: boolean }> {
+  // 런타임 검증: businessHours는 항상 7개 요소를 가져야함
+  if (businessHours.length !== 7) {
+    console.warn('businessHours should have exactly 7 elements');
+    return [];
+  }
+
   return businessHours.map((hours, dayIndex) => {
     if (hours === 'closed') {
       return {
@@ -42,11 +50,14 @@ function parseBusinessHours(
 export function CampaignVisitReservation({ campaign }: CampaignVisitReservationProps) {
   const { visitReservation } = campaign;
 
+  const businessHoursInfo = useMemo(
+    () => (visitReservation ? parseBusinessHours(visitReservation.businessHours) : []),
+    [visitReservation],
+  );
+
   if (!visitReservation) {
     return null;
   }
-
-  const businessHoursInfo = parseBusinessHours(visitReservation.businessHours);
 
   return (
     <div className={styles.CampaignVisitReservation}>
