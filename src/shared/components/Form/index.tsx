@@ -29,7 +29,7 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
     name: nameInput.value,
     phoneNumber: phoneInput.value,
     blogAddress: blog,
-    textArea: text,
+    message: text,
   };
 
   const handleClick = () => {

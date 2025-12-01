@@ -2,7 +2,7 @@ export type FormDataType = {
   name: string;
   phoneNumber: string;
   blogAddress: string;
-  textArea?: string;
+  message?: string;
 };
 
 export interface FormProps {

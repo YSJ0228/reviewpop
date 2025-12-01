@@ -1,6 +1,6 @@
 @use '@shared/styles/mixins' as *;
 
-.ReserveInfo {
+.CampaignInfoList {
   @include flex($direction: column, $align: flex-start, $gap: 16px);
   @include padding($all: 16px);
   align-self: stretch;
@@ -11,23 +11,37 @@
     @include font($weight: 700);
   }
 
-  &__Title {
-    @include flex($align: center, $gap: 16px);
+  &__Card {
+    padding: 0;
+  }
 
-    img {
-      aspect-ratio: 1/1;
-      border-radius: 8px;
-      background: var(--color-gray-100);
-    }
+  &__CardContent {
+    justify-content: center;
+    height: 100%;
+  }
 
-    &__Text {
-      @include flex($direction: column, $align: flex-start, $gap: 4px, $justify: center);
-      align-self: stretch;
+  &__CardBrand {
+    @include font(
+      $size: 16px,
+      $weight: 700,
+      $line-height: 1.5,
+      $letter-spacing: -0.32px,
+      $color: var(--color-gray-900)
+    );
+  }
 
-      p {
-        @include font($color: var(--color-gray-600));
-      }
-    }
+  &__CardHeader {
+    align-items: center;
+  }
+
+  &__CardTitle {
+    @include font(
+      $size: 14px,
+      $weight: 500,
+      $line-height: 1.5,
+      $letter-spacing: -0.28px,
+      $color: var(--color-gray-600)
+    );
   }
 
   &__Address {

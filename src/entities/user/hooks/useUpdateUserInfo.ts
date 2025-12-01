@@ -41,9 +41,6 @@ export function useUpdateUserInfo() {
     onSuccess: (updatedUser: User) => {
       // 1) user 캐시 즉시 업데이트 (옵티미스틱 UX)
       queryClient.setQueryData(['user'], updatedUser);
-
-      // 2) 서버 데이터 다시 패칭 — MSW에서도 작동함
-      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 }

@@ -11,7 +11,7 @@ interface UserCampaignResponse {
  */
 export function useUserProfile() {
   return useQuery({
-    queryKey: ['user'],
+    queryKey: ['user', 'profile'],
     queryFn: async (): Promise<UserCampaigns> => {
       const response = await fetch('/api/auth/profile', { credentials: 'include' });
       if (!response.ok) {

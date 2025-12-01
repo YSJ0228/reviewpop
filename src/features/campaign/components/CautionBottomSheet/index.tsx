@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { Checkbox } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
@@ -24,10 +24,12 @@ export function CautionBottomSheet({ opened, onClose, formData }: CautionBottomS
   const router = useRouter();
   const pathname = usePathname();
   const { mutate } = usePostApplication();
+  const params = useParams();
+  const campaignId = params.campaignId as string;
   const handleClick = () => {
     mutate(
       {
-        campaignId: pathname.split('/')[2],
+        campaignId,
         userId: 'kakao-1001',
         ...formData,
       },

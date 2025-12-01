@@ -11,6 +11,7 @@ import { Form } from '@shared/components/Form';
 import { useUpdateUserInfo } from '@entities/user/hooks/useUpdateUserInfo';
 import { FormDataType } from '@shared/components/Form/types';
 import { useRouter } from 'next/navigation';
+import { LoadingSpinner } from '@shared/components';
 
 /**
  * 설정 페이지
@@ -30,14 +31,20 @@ export default function UserPage() {
   const router = useRouter();
 
   const handleSave = (formData: FormDataType) => {
-    updateUser.mutate(formData);
-    router.push('/settings');
+    updateUser.mutate(formData, {
+      onSuccess: () => {
+        router.push('/settings');
+      },
+      onError: (error) => {
+        alert('정보 수정에 실패했습니다: ' + error.message);
+      },
+    });
   };
 
   return (
     <main className={styles.UserPage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={<LoadingSpinner />}>
           <Form onClick={handleSave} showTextArea={false} />
         </Suspense>
       </ErrorBoundary>

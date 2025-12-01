@@ -6,6 +6,7 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 
 import styles from './page.module.scss';
 import { Settings } from '@features/profile/components/Settings';
+import { LoadingSpinner } from '@shared/components';
 
 /**
  * 설정 페이지
@@ -24,15 +25,9 @@ export default function SettingsPage() {
   return (
     <main className={styles.SettingsPage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={<LoadingSpinner />}>
           {/* TODO: Settings 컴포넌트 추가 */}
           <Settings />
-          {/* <div className={styles.Placeholder}>
-            <p>설정</p>
-            <p className={styles.Todo}>
-              features/profile/components/Settings 컴포넌트를 구현하세요
-            </p>
-          </div> */}
         </Suspense>
       </ErrorBoundary>
     </main>
