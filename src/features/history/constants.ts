@@ -1,3 +1,5 @@
+import type { ApplicationStatus } from '@entities/application';
+
 export const HISTORY_MESSAGES = {
   // 신청탭에서 활용되는 메시지
   CANCEL_APPLICATION: '신청취소',
@@ -38,4 +40,65 @@ export const HISTORY_UI = {
   RESERVATION_MENU_HEIGHT: 148,
   /** 예약 관리 메뉴 경고 메시지 높이 */
   RESERVATION_MENU_TODAY: 156,
+} as const;
+
+export const TAB_CONFIG = [
+  { key: 'pending' as const, label: '신청' },
+  { key: 'selected' as const, label: '선정' },
+  { key: 'reviewed' as const, label: '후기' },
+  { key: 'completed' as const, label: '종료' },
+] as const;
+
+export type TabKey = (typeof TAB_CONFIG)[number]['key'];
+
+export const APPLICATION_STATUS_LABELS: Record<ApplicationStatus, string> = {
+  pending: '신청',
+  selected: '선정',
+  rejected: '미선정',
+  reviewed: '후기',
+  completed: '종료',
+  cancelled: '취소',
+};
+
+export const CARD_TYPES = {
+  PENDING: 'pending',
+  SELECTED: 'selected',
+  REJECTED: 'rejected',
+  REVIEWED: 'reviewed',
+  COMPLETED: 'completed',
+} as const;
+
+export type TCardType = (typeof CARD_TYPES)[keyof typeof CARD_TYPES];
+
+export const STATUS_EMPTY_MAP: Record<
+  Exclude<ApplicationStatus, 'rejected' | 'cancelled'>,
+  'no-applied' | 'no-selected' | 'no-registered' | 'no-completed'
+> = {
+  pending: 'no-applied',
+  selected: 'no-selected',
+  reviewed: 'no-registered',
+  completed: 'no-completed',
+} as const;
+
+export const STATUS_VISIT = {
+  before: '방문 전',
+  scheduled: '방문 예정',
+} as const;
+
+export type VisitStatus = keyof typeof STATUS_VISIT;
+
+export const STATUS_REVIEW = {
+  visited: '체험 완료',
+  notReviewed: '후기 미등록',
+  reviewed: '체험 종료',
+  reviewPending: '후기 등록 완료',
+  requiredForEditing: '후기 등록 완료',
+} as const;
+
+export const STATUS_REVIEW_TITLES = {
+  visited: '체험 후기를 남겨주세요',
+  notReviewed: '체험 후기를 남겨주세요',
+  reviewed: '후기 등록이 완료됐어요',
+  reviewPending: '작성한 후기를 검토중이에요',
+  requiredForEditing: '후기 수정 요청이 있어요',
 } as const;

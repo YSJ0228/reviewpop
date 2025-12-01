@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { SharedCampaignCard } from '@shared/components';
 
 import dayjs from 'dayjs';
 
@@ -7,7 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconKebap } from '@pop-ui/foundation';
 
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
-import { STATUS_VISIT } from '@entities/history/types/myCampaign.types';
+import { CARD_TYPES, STATUS_VISIT } from '@features/history/constants';
 
 import { HISTORY_MESSAGES } from '@features/history/constants';
 import { useReservationActions } from '@features/history/hooks/useReservationActions';
@@ -19,12 +19,31 @@ import { CampaignRejectedCard } from './CampaignRejectedCard';
 import { CampaignSelectedCard } from './CampaignSelectedCard';
 import { ReservationBottomSheet } from './ReservationBottomSheet';
 
-import type { MyCampaignCardProps } from './types';
+import type { IMyCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 
-export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
-  const announcementStatus = calculateAnnouncementDate(campaign.announcementDate);
+export function CampaignCard({ application, type }: IMyCampaignCardProps) {
+  const { campaign } = application;
+  const { schedule } = campaign;
+
+  const announcementDate = schedule.winnerAnnouncement.start;
+  const announcementStatus = calculateAnnouncementDate(announcementDate);
+
+  const visitStatus = application.isReservated ? 'scheduled' : 'before';
+
+  const appliedAt = application.reservationDate
+    ? ([
+        dayjs(application.reservationDate).format('YYYY-MM-DD'),
+        dayjs(application.reservationDate).format('HH:mm'),
+      ] as [string, string])
+    : undefined;
+
+  const recruitmentSchedule = [schedule.application.start, schedule.application.end] as [
+    string,
+    string,
+  ];
+
   const [isOpen, { open, close }] = useDisclosure(false);
 
   const { handleChangeDate, handleCancelReservation } = useReservationActions(campaign.id);
@@ -48,91 +67,78 @@ export function CampaignCard({ campaign, type }: MyCampaignCardProps) {
     close();
   };
 
+  // Top Content 렌더링 함수
+  const getTopContent = () => {
+    if (type === CARD_TYPES.PENDING) {
+      return <CampaignAppliedCard announcementStatus={announcementStatus} />;
+    }
+
+    if (type === CARD_TYPES.SELECTED && visitStatus === 'scheduled') {
+      return (
+        <div className={styles.CampaignCard__VisitDateWrapper}>
+          <span className={styles.CampaignCard__VisitDate}>
+            {appliedAt && dayjs(`${appliedAt[0]} ${appliedAt[1]}`).format('M월 D일 dddd A h:mm')}
+          </span>
+          <button
+            type="button"
+            onClick={handleKebapClick}
+            className={styles.CampaignCard__KebapButton}
+            aria-label="예약 관리 메뉴 열기"
+            aria-expanded={isOpen}
+            aria-haspopup="dialog"
+          >
+            <IconKebap size={20} color={Colors.COLOR_GRAY_600} />
+          </button>
+        </div>
+      );
+    }
+
+    if (type === CARD_TYPES.SELECTED && visitStatus === 'before') {
+      return <span className={styles.CampaignCard__SelectedText}>{HISTORY_MESSAGES.SELECTED}</span>;
+    }
+
+    return undefined;
+  };
+
   return (
     <>
       <Link
         href={`/campaign/${campaign.id}`}
-        className={`${styles.CampaignCard__Link} ${type === 'selected' ? styles['CampaignCard__Link--NoBorder'] : ''}`}
+        className={`${styles.CampaignCard__Link} ${type === CARD_TYPES.SELECTED ? styles['CampaignCard__Link--NoBorder'] : ''}`}
       >
-        <article className={styles.CampaignCard} aria-label={`${campaign.brand}`}>
-          {type === 'selected' && campaign.visitStatus && (
-            <div className={styles.CampaignCard__StatusLabel}>
-              <p>{STATUS_VISIT[campaign.visitStatus]}</p>
-            </div>
-          )}
-          <header className={styles.CampaignCard__TopSection}>
-            <div className={styles.CampaignCard__ImageWrapper}>
-              <Image
-                src={campaign.thumbnail}
-                alt={`${campaign.brand} 체험 이미지`}
-                fill
-                sizes="(max-width: 768px) 88px, 88px"
-                style={{ objectFit: 'cover' }}
+        <SharedCampaignCard
+          thumbnail={campaign.thumbnail}
+          brand={campaign.brand}
+          title={campaign.providedItem}
+          className={`${styles.CampaignCard} ${type === CARD_TYPES.SELECTED ? styles['CampaignCard--NoBorder'] : ''}`}
+          statusLabel={
+            type === CARD_TYPES.SELECTED && visitStatus ? (
+              <div className={styles.CampaignCard__StatusLabel}>
+                <p>{STATUS_VISIT[visitStatus]}</p>
+              </div>
+            ) : undefined
+          }
+          topContent={getTopContent()}
+          bottomContent={
+            type === CARD_TYPES.REJECTED ? (
+              <CampaignRejectedCard
+                recruitmentSchedule={recruitmentSchedule}
+                maxRecruitment={campaign.maxRecruitment}
               />
-            </div>
-            <section className={styles.CampaignCard__Content}>
-              {/* applied 타입 */}
-              {type === 'applied' && (
-                <CampaignAppliedCard announcementStatus={announcementStatus} />
-              )}
-
-              {/* selected 타입 */}
-              {type === 'selected' && (
-                <>
-                  {campaign.visitStatus === 'scheduled' && (
-                    <div className={styles.CampaignCard__VisitDateWrapper}>
-                      <span className={styles.CampaignCard__VisitDate}>
-                        {campaign.appliedAt &&
-                          dayjs(`${campaign.appliedAt[0]} ${campaign.appliedAt[1]}`).format(
-                            'M월 D일 dddd A h:mm',
-                          )}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={handleKebapClick}
-                        className={styles.CampaignCard__KebapButton}
-                        aria-label="예약 관리 메뉴 열기"
-                        aria-expanded={isOpen}
-                        aria-haspopup="dialog"
-                      >
-                        <IconKebap size={20} color={Colors.COLOR_GRAY_600} />
-                      </button>
-                    </div>
-                  )}
-                  {campaign.visitStatus === 'before' && (
-                    <span className={styles.CampaignCard__SelectedText}>
-                      {HISTORY_MESSAGES.SELECTED}
-                    </span>
-                  )}
-                </>
-              )}
-
-              <h3 className={styles.CampaignCard__Brand}>{campaign.brand}</h3>
-              <p className={styles.CampaignCard__Title}>{campaign.providedItem}</p>
-
-              {/* rejected 타입 */}
-              {type === 'rejected' && (
-                <CampaignRejectedCard
-                  recruitmentSchedule={campaign.recruitmentSchedule}
-                  maxRecruitment={campaign.maxRecruitment}
-                />
-              )}
-            </section>
-          </header>
-
-          {/* TODO: 추후 조건(탭 별) 관련해 논의 후 추가 필요 (구조 변경 가능성 높음) */}
-        </article>
+            ) : undefined
+          }
+        />
       </Link>
 
       {/* selected 타입 - Link 밖으로 분리*/}
-      {type === 'selected' && campaign.visitStatus && (
-        <CampaignSelectedCard campaign={campaign} visitStatus={campaign.visitStatus} />
+      {type === CARD_TYPES.SELECTED && visitStatus && (
+        <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
       )}
 
       {/* 예약 옵션 BottomSheet */}
-      {type === 'selected' && campaign.visitStatus === 'scheduled' && (
+      {type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' && (
         <ReservationBottomSheet
-          appliedAt={campaign.appliedAt}
+          appliedAt={appliedAt}
           isOpen={isOpen}
           onClose={close}
           onDateChange={handleChangeDateClick}

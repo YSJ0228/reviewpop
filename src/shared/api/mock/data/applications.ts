@@ -25,9 +25,6 @@ function getCampaign(id: string) {
   return campaign;
 }
 
-// Mock 데이터에서 사용할 확장 타입 (userId 포함)
-export type MockApplication = Application & { userId: string };
-
 /**
  * Application mock 데이터
  *
@@ -37,9 +34,10 @@ export type MockApplication = Application & { userId: string };
  * - rejected (거절): 약 12개
  * - cancelled (취소): 약 3개
  */
-export const mockApplications: MockApplication[] = [
+export const mockApplications: Application[] = [
   // Campaign #1 신청 (5명)
   {
+    id: 'app-1',
     userId: 'kakao-1001',
     campaign: getCampaign('1'),
     status: 'pending',
@@ -51,8 +49,9 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-28T09:00:00Z',
   },
   {
+    id: 'app-2',
     userId: 'kakao-1002',
-    campaign: getCampaign('2'),
+    campaign: getCampaign('1'),
     status: 'pending',
     reviewStatus: 'before',
     isReservated: false,
@@ -62,8 +61,9 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-28T10:30:00Z',
   },
   {
+    id: 'app-3',
     userId: 'kakao-1002',
-    campaign: getCampaign('2'),
+    campaign: getCampaign('1'),
     status: 'selected',
     reviewStatus: 'before',
     isReservated: false,
@@ -73,6 +73,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-29T14:00:00Z',
   },
   {
+    id: 'app-4',
     userId: 'naver-2001',
     campaign: getCampaign('1'),
     status: 'rejected',
@@ -84,6 +85,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-30T11:00:00Z',
   },
   {
+    id: 'app-5',
     userId: 'kakao-1006',
     campaign: getCampaign('1'),
     status: 'cancelled',
@@ -97,6 +99,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #2 신청 (4명)
   {
+    id: 'app-6',
     userId: 'kakao-1002',
     campaign: getCampaign('2'),
     status: 'pending',
@@ -108,6 +111,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-25T15:00:00Z',
   },
   {
+    id: 'app-7',
     userId: 'kakao-1004',
     campaign: getCampaign('2'),
     status: 'selected',
@@ -119,6 +123,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-26T10:00:00Z',
   },
   {
+    id: 'app-8',
     userId: 'naver-2003',
     campaign: getCampaign('2'),
     status: 'selected',
@@ -130,6 +135,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-26T16:00:00Z',
   },
   {
+    id: 'app-9',
     userId: 'kakao-1008',
     campaign: getCampaign('2'),
     status: 'rejected',
@@ -143,6 +149,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #3 신청 (6명)
   {
+    id: 'app-10',
     userId: 'naver-2001',
     campaign: getCampaign('3'),
     status: 'pending',
@@ -154,6 +161,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-22T11:00:00Z',
   },
   {
+    id: 'app-11',
     userId: 'kakao-1003',
     campaign: getCampaign('3'),
     status: 'pending',
@@ -165,6 +173,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-22T13:00:00Z',
   },
   {
+    id: 'app-12',
     userId: 'naver-2002',
     campaign: getCampaign('3'),
     status: 'selected',
@@ -176,6 +185,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-23T10:00:00Z',
   },
   {
+    id: 'app-13',
     userId: 'kakao-1005',
     campaign: getCampaign('3'),
     status: 'selected',
@@ -187,6 +197,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-23T14:00:00Z',
   },
   {
+    id: 'app-14',
     userId: 'naver-2004',
     campaign: getCampaign('3'),
     status: 'rejected',
@@ -198,6 +209,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-24T08:00:00Z',
   },
   {
+    id: 'app-15',
     userId: 'kakao-1007',
     campaign: getCampaign('3'),
     status: 'rejected',
@@ -209,6 +221,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-24T11:00:00Z',
   },
   {
+    id: 'app-16',
     userId: 'kakao-1001',
     campaign: getCampaign('3'),
     status: 'selected',
@@ -222,6 +235,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #4 신청 (5명)
   {
+    id: 'app-17',
     userId: 'kakao-1001',
     campaign: getCampaign('4'),
     status: 'pending',
@@ -233,6 +247,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-18T10:00:00Z',
   },
   {
+    id: 'app-18',
     userId: 'naver-2005',
     campaign: getCampaign('4'),
     status: 'pending',
@@ -244,6 +259,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-19T09:00:00Z',
   },
   {
+    id: 'app-19',
     userId: 'kakao-1001',
     campaign: getCampaign('4'),
     status: 'selected',
@@ -255,6 +271,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-19T14:00:00Z',
   },
   {
+    id: 'app-20',
     userId: 'kakao-1006',
     campaign: getCampaign('4'),
     status: 'selected',
@@ -266,6 +283,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-20T11:00:00Z',
   },
   {
+    id: 'app-21',
     userId: 'naver-2006',
     campaign: getCampaign('4'),
     status: 'rejected',
@@ -279,6 +297,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #5 신청 (4명)
   {
+    id: 'app-22',
     userId: 'kakao-1002',
     campaign: getCampaign('5'),
     status: 'pending',
@@ -290,6 +309,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-13T10:00:00Z',
   },
   {
+    id: 'app-23',
     userId: 'naver-2002',
     campaign: getCampaign('5'),
     status: 'selected',
@@ -301,6 +321,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-14T09:00:00Z',
   },
   {
+    id: 'app-24',
     userId: 'kakao-1003',
     campaign: getCampaign('5'),
     status: 'rejected',
@@ -312,6 +333,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-15T11:00:00Z',
   },
   {
+    id: 'app-25',
     userId: 'kakao-1009',
     campaign: getCampaign('5'),
     status: 'rejected',
@@ -325,9 +347,10 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #6 신청 (3명)
   {
+    id: 'app-26',
     userId: 'naver-2001',
     campaign: getCampaign('6'),
-    status: 'selected',
+    status: 'reviewed', // 후기 탭
     reviewStatus: 'before',
     isReservated: false,
     name: '한소라',
@@ -336,9 +359,10 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-08T10:00:00Z',
   },
   {
+    id: 'app-27',
     userId: 'kakao-1004',
     campaign: getCampaign('6'),
-    status: 'selected',
+    status: 'completed', // 종료 탭
     reviewStatus: 'before',
     isReservated: false,
     name: '강유나',
@@ -347,6 +371,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-09T11:00:00Z',
   },
   {
+    id: 'app-28',
     userId: 'naver-2003',
     campaign: getCampaign('6'),
     status: 'rejected',
@@ -360,6 +385,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #7 신청 (4명)
   {
+    id: 'app-29',
     userId: 'kakao-1001',
     campaign: getCampaign('7'),
     status: 'selected',
@@ -371,6 +397,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-04T09:00:00Z',
   },
   {
+    id: 'app-30',
     userId: 'kakao-1002',
     campaign: getCampaign('7'),
     status: 'selected',
@@ -382,6 +409,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-04T14:00:00Z',
   },
   {
+    id: 'app-31',
     userId: 'naver-2001',
     campaign: getCampaign('7'),
     status: 'rejected',
@@ -393,6 +421,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-05T10:00:00Z',
   },
   {
+    id: 'app-32',
     userId: 'kakao-1007',
     campaign: getCampaign('7'),
     status: 'cancelled',
@@ -406,6 +435,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #8 신청 (3명)
   {
+    id: 'app-33',
     userId: 'kakao-1002',
     campaign: getCampaign('8'),
     status: 'selected',
@@ -417,6 +447,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-03T10:00:00Z',
   },
   {
+    id: 'app-34',
     userId: 'kakao-1005',
     campaign: getCampaign('8'),
     status: 'selected',
@@ -428,6 +459,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-03T13:00:00Z',
   },
   {
+    id: 'app-35',
     userId: 'naver-2004',
     campaign: getCampaign('8'),
     status: 'rejected',
@@ -441,6 +473,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #9 신청 (2명)
   {
+    id: 'app-36',
     userId: 'kakao-1001',
     campaign: getCampaign('9'),
     status: 'selected',
@@ -452,6 +485,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-10-02T10:00:00Z',
   },
   {
+    id: 'app-37',
     userId: 'naver-2005',
     campaign: getCampaign('9'),
     status: 'rejected',
@@ -465,6 +499,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #10 신청 (3명)
   {
+    id: 'app-38',
     userId: 'naver-2001',
     campaign: getCampaign('10'),
     status: 'selected',
@@ -476,6 +511,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-26T10:00:00Z',
   },
   {
+    id: 'app-39',
     userId: 'kakao-1006',
     campaign: getCampaign('10'),
     status: 'selected',
@@ -487,6 +523,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-27T11:00:00Z',
   },
   {
+    id: 'app-40',
     userId: 'naver-2006',
     campaign: getCampaign('10'),
     status: 'rejected',
@@ -500,6 +537,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #11 신청 (3명)
   {
+    id: 'app-41',
     userId: 'kakao-1001',
     campaign: getCampaign('11'),
     status: 'selected',
@@ -511,6 +549,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-23T10:00:00Z',
   },
   {
+    id: 'app-42',
     userId: 'kakao-1008',
     campaign: getCampaign('11'),
     status: 'selected',
@@ -522,6 +561,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-24T11:00:00Z',
   },
   {
+    id: 'app-43',
     userId: 'naver-2007',
     campaign: getCampaign('11'),
     status: 'rejected',
@@ -535,6 +575,7 @@ export const mockApplications: MockApplication[] = [
 
   // Campaign #12 신청 (2명)
   {
+    id: 'app-44',
     userId: 'kakao-1009',
     campaign: getCampaign('12'),
     status: 'selected',
@@ -546,6 +587,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-18T10:00:00Z',
   },
   {
+    id: 'app-45',
     userId: 'naver-2008',
     campaign: getCampaign('12'),
     status: 'cancelled',
@@ -559,6 +601,7 @@ export const mockApplications: MockApplication[] = [
 
   // 추가 신청 (Campaign #13, #14, #15)
   {
+    id: 'app-46',
     userId: 'kakao-1002',
     campaign: getCampaign('13'),
     status: 'selected',
@@ -570,6 +613,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-08T10:00:00Z',
   },
   {
+    id: 'app-47',
     userId: 'kakao-1002',
     campaign: getCampaign('14'),
     status: 'selected',
@@ -581,6 +625,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-03T10:00:00Z',
   },
   {
+    id: 'app-48',
     userId: 'naver-2001',
     campaign: getCampaign('15'),
     status: 'selected',
@@ -592,6 +637,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-08-29T10:00:00Z',
   },
   {
+    id: 'app-49',
     userId: 'kakao-1003',
     campaign: getCampaign('13'),
     status: 'rejected',
@@ -603,6 +649,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-09T11:00:00Z',
   },
   {
+    id: 'app-50',
     userId: 'kakao-1004',
     campaign: getCampaign('14'),
     status: 'rejected',
@@ -614,6 +661,7 @@ export const mockApplications: MockApplication[] = [
     createdAt: '2025-09-04T11:00:00Z',
   },
   {
+    id: 'app-51',
     userId: 'kakao-1005',
     campaign: getCampaign('15'),
     status: 'rejected',
@@ -646,7 +694,7 @@ export function getApplicationsByCampaignId(campaignId: string): MockApplication
 export function getApplicationsByStatus(
   userId: string,
   status: Application['status'],
-): MockApplication[] {
+): Application[] {
   return mockApplications.filter((app) => app.userId === userId && app.status === status);
 }
 
@@ -656,7 +704,7 @@ export function getApplicationsByStatus(
 export function findApplicationByUserAndCampaign(
   userId: string,
   campaignId: string,
-): MockApplication | undefined {
+): Application | undefined {
   return mockApplications.find((app) => app.userId === userId && app.campaign.id === campaignId);
 }
 

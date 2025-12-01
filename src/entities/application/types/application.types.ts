@@ -9,10 +9,17 @@ import { CampaignDetail } from '@features/campaign';
  * - pending: 대기 중 (선정 결과 발표 전)
  * - selected: 선정됨
  * - rejected: 거절됨
- * - completed: 체험 완료
+ * - reviewed: 후기 작성 상태 (방문 완료 후 후기 작성 대기 ~ 후기 수정 요청까지)
+ * - completed: 체험 완료(후기 승인 완료)
  * - cancelled: 체험이 사라짐
  */
-export type ApplicationStatus = 'pending' | 'selected' | 'rejected' | 'completed' | 'cancelled';
+export type ApplicationStatus =
+  | 'pending'
+  | 'selected'
+  | 'rejected'
+  | 'reviewed'
+  | 'completed'
+  | 'cancelled';
 
 /**
  * 리뷰 상태
@@ -26,10 +33,12 @@ export type ReviewStatus =
   | 'requested'; // 수정 요청
 
 /**
- * 체험 신청 데이터
+ * 체험 신청 데이터 조회
  */
 
 export interface Application {
+  id: string;
+  userId: string;
   campaign: CampaignDetail;
 
   name: string;
@@ -41,8 +50,12 @@ export interface Application {
   isReservated: boolean;
 
   createdAt: string;
+  reservationDate?: string;
 }
 
+/**
+ * 체험 신청 데이터 생성
+ */
 export interface PostApplication {
   campaignId: string;
 

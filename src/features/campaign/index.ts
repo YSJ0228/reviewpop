@@ -13,6 +13,7 @@ export { CampaignValue } from './components/CampaignValue';
 export { CampaignInfoSection } from './components/CampaignInfoSection';
 export { CampaignScheduleSection } from './components/CampaignScheduleSection';
 export { CampaignRequirementsSection } from './components/CampaignRequirementsSection';
+export { CampaignVisitReservation } from './components/CampaignVisitReservation';
 
 // Hooks
 export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
@@ -31,3 +32,4 @@ export type { CampaignValueProps } from './components/CampaignValue';
 export type { CampaignInfoSectionProps } from './components/CampaignInfoSection';
 export type { CampaignScheduleSectionProps } from './components/CampaignScheduleSection';
 export type { CampaignRequirementsSectionProps } from './components/CampaignRequirementsSection';
+export type { CampaignVisitReservationProps } from './components/CampaignVisitReservation';

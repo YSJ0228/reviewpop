@@ -38,6 +38,7 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
         },
       })}
       <div
+        className={styles.Modal__Wrapper}
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();

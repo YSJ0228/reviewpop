@@ -1,7 +1,7 @@
 @use '@/shared/styles/mixins' as *;
 
 .CampaignAppliedTitle {
-  align-self: stretch;
+  width: 100%;
   @include flex($justify: space-between, $align: center);
 
   @include font(

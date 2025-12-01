@@ -16,6 +16,7 @@ export { LoadingSpinner } from './LoadingSpinner';
 export { toast } from './Toast';
 export { Modal } from './Modal';
 export { EmptyState } from './EmptyState';
+export { SharedCampaignCard } from './SharedCampaignCard';
 
 // Types
 export type { ButtonProps } from './Button/types';
