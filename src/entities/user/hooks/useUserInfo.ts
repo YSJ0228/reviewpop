@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { User } from '../types/user.types';
 
 interface UserResponse {
@@ -10,7 +10,7 @@ interface UserResponse {
  * 유저 기본 정보를 가져오는 React Query 훅
  */
 export function useUserInfo() {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['user'],
     queryFn: async (): Promise<User> => {
       const response = await fetch('/api/auth/me', { credentials: 'include' });

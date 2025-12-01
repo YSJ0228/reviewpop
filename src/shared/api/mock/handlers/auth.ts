@@ -155,6 +155,39 @@ export const authHandlers = [
     });
   }),
 
+  http.patch(ROUTES.API.ME, async ({ request }) => {
+    const body = (await request.json()) as {
+      name?: string;
+      phoneNumber?: string;
+      blogAddress?: string;
+    };
+
+    // 실제라면 JWT의 userId로 찾지만, 지금은 mockUsers 활용
+    const user = mockUsers.find((u) => u.id === 'kakao-1001');
+    if (!user) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: {
+            code: 'USER_NOT_FOUND',
+            message: '사용자를 찾을 수 없습니다.',
+          },
+        },
+        { status: 404 },
+      );
+    }
+
+    // 업데이트
+    if (body.name !== undefined) user.name = body.name;
+    if (body.phoneNumber !== undefined) user.phoneNumber = body.phoneNumber;
+    if (body.blogAddress !== undefined) user.blogAddress = body.blogAddress;
+
+    return HttpResponse.json({
+      success: true,
+      data: user,
+    });
+  }),
+
   http.get(ROUTES.API.PROFILE, () => {
     const userCampaign = mockUserCampaigns;
     return HttpResponse.json({
