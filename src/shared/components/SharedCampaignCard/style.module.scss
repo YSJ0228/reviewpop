@@ -6,44 +6,43 @@
   @include size($width: 100%, $height: auto);
   @include padding($y: 16);
 
-  // TopSection: 이미지와 콘텐츠 영역
   &__TopSection {
     width: 100%;
     @include flex($gap: 16, $align: flex-start);
+  }
 
-    .SharedCampaignCard__ImageWrapper {
-      position: relative;
-      flex-shrink: 0;
-      overflow: hidden;
-      border-radius: 8px;
-      @include size($width: 88, $height: 88);
-    }
+  &__ImageWrapper {
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    @include size($width: 88, $height: 88);
+  }
 
-    .SharedCampaignCard__Content {
-      @include flex($direction: column, $gap: 4);
-      @include size($height: 77);
-      flex: 1;
-      min-width: 0;
+  &__Content {
+    @include flex($direction: column, $gap: 4);
+    @include size($height: 77);
+    flex: 1;
+    min-width: 0;
+  }
 
-      .SharedCampaignCard__Brand {
-        @include font(
-          $size: 14,
-          $weight: 600,
-          $line-height: 1.5,
-          $letter-spacing: -0.02em,
-          $color: var(--gray-900)
-        );
-      }
+  &__Brand {
+    @include font(
+      $size: 14,
+      $weight: 600,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
 
-      .SharedCampaignCard__Title {
-        @include font(
-          $size: 12,
-          $weight: 500,
-          $line-height: 1.5,
-          $letter-spacing: -0.02em,
-          $color: var(--gray-600)
-        );
-      }
-    }
+  &__Title {
+    @include font(
+      $size: 12,
+      $weight: 500,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-600)
+    );
   }
 }

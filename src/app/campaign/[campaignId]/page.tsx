@@ -13,6 +13,7 @@ import ReviewSection from '@features/campaign/components/ReviewSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { CampaignRequirementsSection } from '@features/campaign/components/CampaignRequirementsSection';
 import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
+import { CampaignAdditionalNotice } from '@features/campaign/components/CampaignAdditionalNotice';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
 
@@ -108,6 +109,17 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <CampaignVisitReservation campaign={campaign} />
 
+      {/* 방문 및 예약 추가 안내사항 (종료된 캠페인이 아닐 때만 표시) */}
+      {(() => {
+        const notice =
+          campaign.status !== 'completed' &&
+          campaign.status !== 'closed' &&
+          campaign.visitReservation?.visitReservationNotice
+            ? campaign.visitReservation.visitReservationNotice
+            : null;
+        return notice && <CampaignAdditionalNotice content={notice} />;
+      })()}
+
       {/* 리뷰 미션 */}
       <section className={styles.Page__Section}>
         <h2 className={styles.Page__SectionTitle}>리뷰 미션</h2>
@@ -119,6 +131,11 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
           ))}
         </ul>
       </section>
+
+      {/* 후기 미션 안내 추가 안내사항 */}
+      {campaign.reviewMissionNotice && (
+        <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
+      )}
 
       {/* 제공 내역 */}
       <section className={styles.Page__Section}>
