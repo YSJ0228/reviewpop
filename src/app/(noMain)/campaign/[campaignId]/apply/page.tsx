@@ -6,6 +6,7 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ApplyForm } from '@features/campaign/components/ApplyForm';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { useCampaignDetails } from '@features/history';
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
 
@@ -36,6 +37,11 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
     error: errorCampaign,
   } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isLoadingUser, error: errorUser } = useUserInfo();
+
+  usePageHeader({
+    showBackButton: true,
+    title: '체험단 신청',
+  });
 
   //로딩 처리
   if (isLoadingCampaign || isLoadingUser) {

@@ -27,8 +27,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
   usePageHeader({
     showBackButton: true,
-    showXButton: false,
-    isVisible: true,
   });
 
   const images = useMemo(() => {

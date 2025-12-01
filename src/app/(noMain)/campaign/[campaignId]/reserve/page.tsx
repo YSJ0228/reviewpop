@@ -3,7 +3,7 @@
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 import styles from './page.module.scss';
 
 /**
@@ -20,6 +20,11 @@ import styles from './page.module.scss';
  * 5. [ ] 예약 확인 페이지로 이동 (/campaign/[id]/reserve/confirm)
  */
 export default function CampaignReservePage({ params }: { params: { campaignId: string } }) {
+  usePageHeader({
+    showBackButton: true,
+    title: '체험 방문 예약',
+  });
+
   return (
     <main className={styles.CampaignReservePage}>
       <ErrorBoundary>

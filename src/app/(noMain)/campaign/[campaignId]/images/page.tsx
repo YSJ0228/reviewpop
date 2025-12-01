@@ -6,7 +6,7 @@ import { use, useState, useMemo } from 'react';
 import { PageHeader } from '@shared/components/PageHeader';
 import { ImageViewer } from '@shared/components/ImageViewer';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
-
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 import styles from './page.module.scss';
 
 /**
@@ -24,6 +24,10 @@ export default function CampaignImagesPage({ params }: CampaignImagesPageProps) 
   const { campaignId } = use(params);
   const { data: campaign, isLoading, error } = useCampaignDetails(campaignId);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+
+  usePageHeader({
+    showBackButton: true,
+  });
 
   const images = useMemo(() => {
     if (!campaign) return [];
@@ -44,7 +48,6 @@ export default function CampaignImagesPage({ params }: CampaignImagesPageProps) 
   if (isLoading) {
     return (
       <div>
-        <PageHeader showBackButton />
         <div className={styles.Loading}>
           <p>이미지를 불러오는 중...</p>
         </div>
@@ -55,7 +58,6 @@ export default function CampaignImagesPage({ params }: CampaignImagesPageProps) 
   if (error || !campaign || images.length === 0) {
     return (
       <div>
-        <PageHeader showBackButton />
         <div className={styles.Empty}>
           <p>이미지를 불러올 수 없습니다.</p>
         </div>
@@ -65,7 +67,6 @@ export default function CampaignImagesPage({ params }: CampaignImagesPageProps) 
 
   return (
     <div>
-      <PageHeader showBackButton />
       <main className={styles.CampaignImagesPage}>
         <div className={styles.GalleryGrid}>
           {images.map((image, index) => (

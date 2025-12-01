@@ -7,12 +7,19 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
 
+import { usePageHeader } from '@shared/hooks/usePageHeader';
+
 import { KakaoLoginButton } from '@features/auth';
 import { NaverLoginButton } from '@features/auth';
 
 import styles from './page.module.scss';
 
 function LoginContent() {
+  usePageHeader({
+    showBackButton: false,
+    showXButton: true,
+  });
+
   return (
     <main className={styles.LoginPage}>
       <div className={styles.LoginPage__Card}>

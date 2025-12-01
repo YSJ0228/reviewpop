@@ -3,6 +3,7 @@
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
 
@@ -20,6 +21,11 @@ import styles from './page.module.scss';
  * 6. [ ] 앱 정보 (버전, 이용약관, 개인정보처리방침)
  */
 export default function SettingsPage() {
+  usePageHeader({
+    showBackButton: true,
+    title: '설정',
+  });
+
   return (
     <main className={styles.SettingsPage}>
       <ErrorBoundary>

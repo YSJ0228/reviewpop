@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { IconChevronLeft, IconClose } from '@pop-ui/foundation';
+import { IconArrowLeft, IconClose } from '@pop-ui/foundation';
 
 import type { PageHeaderProps } from './types';
 import styles from './style.module.scss';
@@ -33,7 +33,7 @@ export function PageHeader({
           className={styles.PageHeader__BackButton}
           aria-label="뒤로 가기"
         >
-          <IconChevronLeft />
+          <IconArrowLeft />
         </button>
       )}
       {title && <h1 className={styles.PageHeader__Title}>{title}</h1>}
