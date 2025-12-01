@@ -4,11 +4,12 @@ import { formatDate } from '@shared/lib/date';
 import styles from './ReserveCompleteText.module.scss';
 
 const COMPLETE_TEXT = '체험단 방문 예약이 완료 되었어요!';
+const ICON_SIZES = 48;
 
 export function ReserveCompleteText({ date }: { date: string }) {
   return (
     <div className={styles.ReserveCompleteText}>
-      <IconCheckCircle size={48} color={ColorAqua500} />
+      <IconCheckCircle size={ICON_SIZES} color={ColorAqua500} />
       <div className={styles.ReserveCompleteText__Content}>
         <h2>{COMPLETE_TEXT}</h2>
         <p>

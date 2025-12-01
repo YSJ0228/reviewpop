@@ -1,20 +1,20 @@
-import Link from 'next/link';
-
-import { CampaignInfoList, Button } from '@shared/components';
-
+import { CampaignInfoList } from '@shared/components';
 import { CampaignDetail } from '@entities/campaign/types/campaign.types';
 import { Application } from '@entities/application/types/application.types';
 import { ReservationData } from '@features/reserve/store/reservationStore';
+
 import { ReserveCompleteText } from './ReserveCompleteText';
+import { ReserveCompleteActions } from './ReserveCompleteAction';
+
 import styles from './style.module.scss';
 
-interface ReserveCompleteProps {
+interface IReserveCompleteProps {
   campaign: CampaignDetail;
   application: Application;
   reservation: ReservationData;
 }
 
-export function ReserveComplete({ campaign, application, reservation }: ReserveCompleteProps) {
+export function ReserveComplete({ campaign, application, reservation }: IReserveCompleteProps) {
   return (
     <div className={styles.ReserveComplete}>
       <ReserveCompleteText date={reservation.date} />
@@ -34,18 +34,7 @@ export function ReserveComplete({ campaign, application, reservation }: ReserveC
         </CampaignInfoList.Item>
       </CampaignInfoList.Main>
 
-      <div className={styles.ReserveComplete__Buttons}>
-        <Link href={`/campaign/${campaign.id}`} className={styles.ReserveComplete__Link}>
-          <Button
-            fullWidth
-            variant="outline"
-            size="large"
-            className={styles.ReserveComplete__Button}
-          >
-            체험 상세 보기
-          </Button>
-        </Link>
-      </div>
+      <ReserveCompleteActions campaignId={campaign.id} />
     </div>
   );
 }

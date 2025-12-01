@@ -34,7 +34,7 @@ export function PageHeader({
       {showXButton && (
         <button
           type="button"
-          onClick={handleXButton}
+          onClick={handleXButton ?? (() => {})}
           className={styles.PageHeader__BackButton}
           aria-label="닫기"
         >
