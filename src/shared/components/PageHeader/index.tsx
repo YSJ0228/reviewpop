@@ -10,12 +10,18 @@ export function PageHeader({
   title,
   showBackButton = true,
   showXButton = false,
-  handleXButton,
+  onBack,
+  onX,
+  rightAction,
 }: PageHeaderProps) {
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    if (onBack) {
+      onBack();
+    } else {
+      router.back();
+    }
   };
 
   return (
@@ -34,13 +40,14 @@ export function PageHeader({
       {showXButton && (
         <button
           type="button"
-          onClick={handleXButton ?? (() => {})}
+          onClick={onX}
           className={styles.PageHeader__BackButton}
           aria-label="닫기"
         >
           <IconClose />
         </button>
       )}
+      {rightAction && <div className={styles.PageHeader__RightAction}>{rightAction}</div>}
     </header>
   );
 }

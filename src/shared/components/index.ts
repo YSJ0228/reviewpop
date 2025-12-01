@@ -18,6 +18,7 @@ export { Modal } from './Modal';
 export { EmptyState } from './EmptyState';
 export { SharedCampaignCard } from './SharedCampaignCard';
 export { CampaignInfoList } from './CampaignInfoList';
+export { GlobalPageHeader } from './GlobalPageHeader';
 
 // Types
 export type { ButtonProps } from './Button/types';
