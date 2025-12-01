@@ -13,7 +13,7 @@ import { EmptyState } from '@shared/components';
 import { ROUTES } from '@shared/config/routes';
 
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
-import { TAB_CONFIG, STATUS_EMPTY_MAP } from '@features/history/constants';
+import { TAB_CONFIG, STATUS_EMPTY_MAP, HISTORY_MESSAGES } from '@features/history/constants';
 
 import type { TabKey } from '@features/history/constants';
 
@@ -32,21 +32,7 @@ export function CampaignTabs() {
   const counts = useMemo(() => {
     const map: Record<TabKey, number> = {} as Record<TabKey, number>;
     TAB_CONFIG.forEach((t) => {
-      if (t.key === 'reviewed') {
-        // reviewed 탭: status가 'reviewed'이거나, campaign.status가 'closed'이고 reviewStatus가 'notReviewed'인 경우
-        map[t.key] = (campaigns || []).filter((c) => {
-          if (c.status === 'reviewed') return true;
-          if (c.campaign.status === 'closed' && c.reviewStatus === 'notReviewed') return true;
-          return false;
-        }).length;
-      } else if (t.key === 'completed') {
-        // completed 탭: status가 'completed'이고 reviewStatus가 'reviewed'인 경우만
-        map[t.key] = (campaigns || []).filter((c) => {
-          return c.status === 'completed' && c.reviewStatus === 'reviewed';
-        }).length;
-      } else {
-        map[t.key] = (campaigns || []).filter((c) => c.status === t.key).length;
-      }
+      map[t.key] = filterCampaignsByStatus(campaigns, t.key).length;
     });
     return map;
   }, [campaigns]);
@@ -202,7 +188,7 @@ export function CampaignTabs() {
                 {showWarning && (
                   <div className={styles.CampaignTabs__WarningBanner} role="alert">
                     <IconWarningCircle size={12} color="var(--color-red-500)" />
-                    <span>후기 등록이 안된 체험이 있어요</span>
+                    <span>{HISTORY_MESSAGES.UNREGISTERED_REVIEW_WARNING}</span>
                   </div>
                 )}
 
@@ -210,7 +196,7 @@ export function CampaignTabs() {
                 <div className={styles.CampaignTabs__LinkContainer}>
                   {tab.key === 'pending' && rejectedCount > 0 && (
                     <Link href={ROUTES.MY_REJECTED} className={styles.CampaignTabs__RejectedLink}>
-                      {'미선정 체험 내역'}
+                      {HISTORY_MESSAGES.REJECTED_HISTORY}
                       <IconChevronRight size={16} color="var(--color-gray-800)" />
                     </Link>
                   )}

@@ -18,6 +18,16 @@ export const HISTORY_MESSAGES = {
   // 선정탭에서 활용되는 메시지
   VISITED: '방문',
 
+  // 후기탭에서 활용되는 메시지
+  BLOG_REVIEW_EXAMPLE: '블로그 후기 예시',
+  REGISTER_REVIEW: '후기등록',
+  MY_REVIEW: '내가 작성한 후기',
+  EDIT_REQUEST_CONTENT: '수정 요청 내용',
+  REREGISTER_REVIEW: '후기 재등록',
+  MY_BLOG_REVIEW: '내 블로그 후기',
+  REVIEW_NOT_REGISTERED_WARNING: '후기 작성이 안되면 다음 체험 참여가 불가능 해요',
+  UNREGISTERED_REVIEW_WARNING: '후기 등록이 안된 체험이 있어요',
+
   // 에러 관련 메시지
   LOAD_FAILED: '데이터를 불러오는데 실패했습니다.',
   UNKNOWN_ERROR: '알 수 없는 오류가 발생했습니다.',
@@ -104,4 +114,5 @@ export const STATUS_REVIEW_TITLES = {
   reviewed: '체험 종료',
   reviewPending: '후기 등록 완료',
   requiredForEditing: '후기 등록 완료',
+  closed: '체험 종료', // 체험이 종료되었지만 후기 미등록인 경우
 } as const;

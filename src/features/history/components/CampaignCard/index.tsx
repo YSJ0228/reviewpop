@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import dayjs from 'dayjs';
 
 import { useDisclosure } from '@mantine/hooks';
 import { IconKebap } from '@pop-ui/foundation';
 
 import { SharedCampaignCard } from '@shared/components';
 import { Colors } from '@shared/styles/colors';
+import dayjs from '@shared/lib/dayjs.config';
 
 import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
 import { CARD_TYPES, STATUS_REVIEW, HISTORY_MESSAGES } from '@features/history/constants';
@@ -141,31 +141,32 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
             ) : undefined
           }
         />
+      </Link>
 
-        {/* selected 타입 - Link 밖으로 분리*/}
-        {type === CARD_TYPES.SELECTED && visitStatus && (
-          <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
-        )}
+      {/* selected 타입 - Link 밖으로 분리 */}
+      {type === CARD_TYPES.SELECTED && visitStatus && (
+        <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
+      )}
 
-        {(type === CARD_TYPES.REVIEWED || type === CARD_TYPES.COMPLETED) &&
-          application.reviewStatus && (
-            <CampaignReviewedCard
-              reviewStatus={application.reviewStatus!}
-              campaignStatus={campaign.status}
-            />
-          )}
-
-        {/* 예약 옵션 BottomSheet */}
-        {type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' && (
-          <ReservationBottomSheet
-            appliedAt={appliedAt}
-            isOpen={isOpen}
-            onClose={close}
-            onDateChange={handleChangeDateClick}
-            onCancel={handleCancelReservationClick}
+      {/* reviewed/completed 타입 - Link 밖으로 분리 */}
+      {(type === CARD_TYPES.REVIEWED || type === CARD_TYPES.COMPLETED) &&
+        application.reviewStatus && (
+          <CampaignReviewedCard
+            reviewStatus={application.reviewStatus!}
+            campaignStatus={campaign.status}
           />
         )}
-      </Link>
+
+      {/* 예약 옵션 BottomSheet */}
+      {type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' && (
+        <ReservationBottomSheet
+          appliedAt={appliedAt}
+          isOpen={isOpen}
+          onClose={close}
+          onDateChange={handleChangeDateClick}
+          onCancel={handleCancelReservationClick}
+        />
+      )}
     </>
   );
 }

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { Button } from '@shared/components';
 
-import { HISTORY_UI } from '@features/history/constants';
+import { HISTORY_UI, HISTORY_MESSAGES } from '@features/history/constants';
 
 import type { CampaignReviewedCardProps } from './type';
 
@@ -29,6 +29,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
         {reviewStatus === 'notReviewed' && (
           <>
             <div className={styles.CampaignReviewedCard__Buttons}>
+              {/* TODO: 블로그 후기 예시 버튼 클릭 시 */}
               <Button
                 variant="secondary"
                 fullWidth
@@ -37,7 +38,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
               >
                 <span className={styles['CampaignReviewedCard__ButtonText--BlogTip']}>
                   <span className={styles['CampaignReviewedCard__ButtonText--Secondary']}>
-                    블로그 후기 예시
+                    {HISTORY_MESSAGES.BLOG_REVIEW_EXAMPLE}
                   </span>
                   <Image
                     src={'/images/icons/IcoBlogTip.svg'}
@@ -47,6 +48,8 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
                   />
                 </span>
               </Button>
+
+              {/* TODO: 후기 등록 버튼 클릭 시 후기 등록 페이지로 이동 */}
               <Button
                 variant="primary"
                 fullWidth
@@ -54,14 +57,15 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
                 size="small"
               >
                 <span className={styles['CampaignReviewedCard__ButtonText--Primary']}>
-                  후기등록
+                  {HISTORY_MESSAGES.REGISTER_REVIEW}
                 </span>
               </Button>
             </div>
+
             {/* 체험이 종료되었지만 후기 미등록인 경우 경고 메시지 표시 */}
             {isClosedNotReviewed && (
               <p className={styles.CampaignReviewedCard__Warning}>
-                후기 작성이 안되면 다음 체험 참여가 불가능 해요
+                {HISTORY_MESSAGES.REVIEW_NOT_REGISTERED_WARNING}
               </p>
             )}
           </>
@@ -69,6 +73,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
 
         {/* 후기 검토 중 */}
         {reviewStatus === 'reviewPending' && (
+          // TODO: 내가 작성한 후기 버튼 클릭 시
           <Button
             variant="secondary"
             fullWidth
@@ -76,7 +81,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
             size="small"
           >
             <span className={styles['CampaignReviewedCard__ButtonText--Secondary']}>
-              내가 작성한 후기
+              {HISTORY_MESSAGES.MY_REVIEW}
             </span>
           </Button>
         )}
@@ -84,6 +89,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
         {/* 후기 수정 요청 */}
         {reviewStatus === 'requiredForEditing' && (
           <>
+            {/* TODO: 수정 요청 내용 버튼 클릭 시 */}
             <Button
               variant="secondary"
               fullWidth
@@ -91,9 +97,11 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
               size="small"
             >
               <span className={styles['CampaignReviewedCard__ButtonText--Secondary']}>
-                수정 요청 내용
+                {HISTORY_MESSAGES.EDIT_REQUEST_CONTENT}
               </span>
             </Button>
+
+            {/* TODO: 후기 재등록 버튼 클릭 시 */}
             <Button
               variant="primary"
               fullWidth
@@ -101,7 +109,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
               size="small"
             >
               <span className={styles['CampaignReviewedCard__ButtonText--Primary']}>
-                후기 재등록
+                {HISTORY_MESSAGES.REREGISTER_REVIEW}
               </span>
             </Button>
           </>
@@ -109,6 +117,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
 
         {/* 후기 등록 완료 */}
         {reviewStatus === 'reviewed' && (
+          // TODO: 내 블로그 후기 버튼 클릭 시
           <Button
             variant="secondary"
             fullWidth
@@ -116,7 +125,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
             size="small"
           >
             <span className={styles['CampaignReviewedCard__ButtonText--Secondary']}>
-              내 블로그 후기
+              {HISTORY_MESSAGES.MY_BLOG_REVIEW}
             </span>
           </Button>
         )}

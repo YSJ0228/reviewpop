@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from '@shared/lib/dayjs.config';
 
 import {
   CARD_TYPES,
@@ -41,7 +41,7 @@ export function CampaignStatusLabel({
     // 체험이 종료되었지만 후기 미등록인 경우 "체험 종료" 표시
     const statusTitle =
       reviewStatus === 'notReviewed' && campaignStatus === 'closed'
-        ? '체험 종료'
+        ? STATUS_REVIEW_TITLES.closed
         : STATUS_REVIEW_TITLES[reviewStatus];
 
     return (
