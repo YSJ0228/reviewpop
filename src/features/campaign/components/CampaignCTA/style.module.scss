@@ -1,0 +1,22 @@
+@use '@shared/styles/mixins' as *;
+
+.CTA__Container {
+  position: fixed;
+  bottom: 0;
+  z-index: var(--z-cta);
+  background: #fff;
+  width: 100%;
+
+  @include flex($direction: column, $align: center, $justify: center, $gap: 8);
+  @include padding($all: 16);
+
+  span {
+    color: #2e90fa;
+    @include font($size: 14, $weight: 600);
+  }
+}
+
+.CTA__ButtonWrapper {
+  width: 100%;
+  @include flex($direction: row, $align: center, $justify: center, $gap: 8);
+}
