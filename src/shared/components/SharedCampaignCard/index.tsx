@@ -23,7 +23,11 @@ export function SharedCampaignCard({
   className,
 }: SharedCampaignCardProps) {
   return (
-    <article className={`${styles.SharedCampaignCard} ${className || ''}`} onClick={onClick}>
+    <article
+      className={`${styles.SharedCampaignCard} ${className || ''}`}
+      onClick={onClick}
+      aria-label={`${brand} 체험 카드`}
+    >
       {statusLabel && statusLabel}
       <header className={styles.SharedCampaignCard__TopSection}>
         <div className={styles.SharedCampaignCard__ImageWrapper}>
