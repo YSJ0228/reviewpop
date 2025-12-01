@@ -3,6 +3,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Checkbox } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
+import { useApplyCampaign } from '@entities/application/hooks/usePostApplication';
 
 import { ButtonBar } from '../ButtonBar';
 
@@ -18,10 +19,29 @@ const notices = [
   '공지사항 미숙지 후 지원하실 경우 선발에 영향을 줄 수 있습니다.',
 ] as const;
 
-export function CautionBottomSheet({ opened, onClose }: CautionBottomSheetProps) {
+export function CautionBottomSheet({ opened, onClose, formData }: CautionBottomSheetProps) {
   const [checked, setChecked] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { mutate } = useApplyCampaign();
+  const handleClick = () => {
+    mutate(
+      {
+        campaignId: pathname.split('/')[2],
+        userId: 'kakao-1001',
+        ...formData,
+      },
+      {
+        onSuccess: () => {
+          router.push(`${pathname}/complete`);
+        },
+        onError: (error) => {
+          // 필요하면 error 객체로 상세 처리 가능
+          alert(error.message);
+        },
+      },
+    );
+  };
 
   return (
     <BottomSheet opened={opened} onClose={onClose} title="체험단 참여 시 주의사항을 확인해주세요">
@@ -40,14 +60,7 @@ export function CautionBottomSheet({ opened, onClose }: CautionBottomSheetProps)
         />{' '}
         <span className={styles.CautionBottomSheet__AgreeText}>모두 동의합니다.</span>
       </div>
-      <ButtonBar
-        text="신청하기"
-        onClick={() => {
-          router.push(`${pathname}/complete`);
-        }}
-        variant="primary"
-        disabled={!checked}
-      />
+      <ButtonBar text="신청하기" onClick={handleClick} variant="primary" disabled={!checked} />
     </BottomSheet>
   );
 }

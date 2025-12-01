@@ -30,9 +30,10 @@ export type ReviewStatus =
  */
 
 export interface Application {
+  userId: string;
   campaign: CampaignDetail;
   name: string;
-
+  phoneNumber: string;
   status: ApplicationStatus;
   reviewStatus: ReviewStatus;
   isReservated: boolean;

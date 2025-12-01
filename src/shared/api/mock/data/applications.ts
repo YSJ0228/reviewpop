@@ -16,17 +16,15 @@ function getUserInfo(userId: string) {
   const user = mockUsers.find((u) => u.id === userId);
   return {
     name: user?.name || '사용자',
+    phoneNumber: user?.phoneNumber || '010-0000-0000',
   };
 }
 
-function getCampaign(id: string) {
+export function getCampaign(id: string) {
   const campaign = mockCampaignDetails.find((c) => c.id === id);
   if (!campaign) throw new Error(`Campaign ${id} not found`);
   return campaign;
 }
-
-// Mock 데이터에서 사용할 확장 타입 (userId 포함)
-export type MockApplication = Application & { userId: string };
 
 /**
  * Application mock 데이터
@@ -37,7 +35,7 @@ export type MockApplication = Application & { userId: string };
  * - rejected (거절): 약 12개
  * - cancelled (취소): 약 3개
  */
-export const mockApplications: MockApplication[] = [
+export const mockApplications: Application[] = [
   // Campaign #1 신청 (5명)
   {
     userId: 'kakao-1001',
@@ -518,14 +516,14 @@ export const mockApplications: MockApplication[] = [
 /**
  * 사용자별 신청 목록 조회
  */
-export function getApplicationsByUserId(userId: string): MockApplication[] {
+export function getApplicationsByUserId(userId: string): Application[] {
   return mockApplications.filter((app) => app.userId === userId);
 }
 
 /**
  * 체험별 신청 목록 조회
  */
-export function getApplicationsByCampaignId(campaignId: string): MockApplication[] {
+export function getApplicationsByCampaignId(campaignId: string): Application[] {
   return mockApplications.filter((app) => app.campaign.id === campaignId);
 }
 
@@ -535,7 +533,7 @@ export function getApplicationsByCampaignId(campaignId: string): MockApplication
 export function getApplicationsByStatus(
   userId: string,
   status: Application['status'],
-): MockApplication[] {
+): Application[] {
   return mockApplications.filter((app) => app.userId === userId && app.status === status);
 }
 
@@ -545,6 +543,6 @@ export function getApplicationsByStatus(
 export function findApplicationByUserAndCampaign(
   userId: string,
   campaignId: string,
-): MockApplication | undefined {
+): Application | undefined {
   return mockApplications.find((app) => app.userId === userId && app.campaign.id === campaignId);
 }

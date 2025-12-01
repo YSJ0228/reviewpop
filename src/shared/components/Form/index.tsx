@@ -31,6 +31,7 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
     blogAddress: blog,
     textArea: text,
   };
+
   const handleClick = () => {
     if (onClick) {
       onClick(formData);

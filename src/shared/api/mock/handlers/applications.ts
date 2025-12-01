@@ -7,7 +7,7 @@
 import { http, HttpResponse } from 'msw';
 
 import type { ApiResponse } from '@shared/api/types/common.types';
-import type { Application, PostApplication } from '@entities/application';
+import type { Application } from '@entities/application';
 import { toISO } from '@shared/lib/date';
 
 import {
@@ -15,8 +15,10 @@ import {
   getApplicationsByUserId,
   getApplicationsByCampaignId,
   findApplicationByUserAndCampaign,
+  getCampaign,
 } from '../data/applications';
 import { findCampaignById } from '@entities/campaign/lib';
+import { getCacheControlHeader } from 'next/dist/server/lib/cache-control';
 
 export const applicationHandlers = [
   /**
@@ -99,92 +101,101 @@ export const applicationHandlers = [
    * 체험 신청
    * POST /api/campaigns/:campaignId/apply
   //  */
-  // http.post('/api/campaigns/:campaignId/apply', async ({ params, request }) => {
-  //   const campaignId = params.campaignId as string;
-  //   // CreateApplicationRequest가 주석 처리되었으므로 필요한 필드만 정의
-  //   const body = (await request.json()) as { userId: string; message?: string };
+  http.post('/api/campaigns/:campaignId/apply', async ({ params, request }) => {
+    const campaignId = params.campaignId as string;
+    // CreateApplicationRequest가 주석 처리되었으므로 필요한 필드만 정의
+    const body = (await request.json()) as {
+      userId: string;
+      name: string;
+      phoneNumber: string;
+      blogAddress: string;
+      message?: string;
+    };
 
-  //   // 체험 존재 여부 확인
-  //   const campaign = findCampaignById(campaignId);
-  //   if (!campaign) {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '체험을 찾을 수 없습니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 404 },
-  //     );
-  //   }
+    // 체험 존재 여부 확인
+    const campaign = findCampaignById(campaignId);
+    if (!campaign) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '체험을 찾을 수 없습니다.',
+        } satisfies ApiResponse<never>,
+        { status: 404 },
+      );
+    }
 
-  //   // 체험 상태 확인
-  //   if (campaign.status !== 'recruiting') {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '현재 신청할 수 없는 체험입니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 400 },
-  //     );
-  //   }
+    // 체험 상태 확인
+    if (campaign.status !== 'recruiting') {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '현재 신청할 수 없는 체험입니다.',
+        } satisfies ApiResponse<never>,
+        { status: 400 },
+      );
+    }
 
-  //   // 신청 마감일 확인
-  //   const now = new Date();
-  //   const deadline = new Date(campaign.schedule.application.end);
-  //   if (now > deadline) {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '신청 마감된 체험입니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 400 },
-  //     );
-  //   }
+    // // 신청 마감일 확인
+    // const now = new Date();
+    // const deadline = new Date(campaign.schedule.application.end);
+    // if (now > deadline) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: '신청 마감된 체험입니다.',
+    //     } satisfies ApiResponse<never>,
+    //     { status: 400 },
+    //   );
+    // }
 
-  //   // 중복 신청 확인
-  //   const existingApplication = findApplicationByUserAndCampaign(body.userId, campaignId);
-  //   if (existingApplication && existingApplication.status !== 'cancelled') {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '이미 신청한 체험입니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 400 },
-  //     );
-  //   }
+    // 중복 신청 확인
+    const existingApplication = findApplicationByUserAndCampaign(body.userId, campaignId);
+    if (existingApplication && existingApplication.status !== 'cancelled') {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '이미 신청한 체험입니다.',
+        } satisfies ApiResponse<never>,
+        { status: 400 },
+      );
+    }
 
-  //   // 모집 인원 확인
-  //   if (campaign.currentRecruitment >= campaign.maxRecruitment) {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '모집 인원이 마감되었습니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 400 },
-  //     );
-  //   }
+    // // 모집 인원 확인
+    // if (campaign.currentRecruitment >= campaign.maxRecruitment) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: '모집 인원이 마감되었습니다.',
+    //     } satisfies ApiResponse<never>,
+    //     { status: 400 },
+    //   );
+    // }
 
-  //   // 새 신청 생성
-  //   const newApplication: PostApplication = {
-  //     campaignId,
-  //     blogAddress: `https://blog.naver.com/${body.userId}`, // Mock
-  //     name: '사용자', // Mock
-  //     phoneNumber: '010-1234-5678', // Mock
-  //     message: body.message,
-  //   };
+    // 새 신청 생성
+    const newApplication: Application = {
+      campaign: getCampaign(campaignId),
+      userId: body.userId,
+      name: body.name,
+      phoneNumber: body.phoneNumber,
+      status: 'pending',
+      reviewStatus: 'before',
+      isReservated: false,
+      createdAt: '2025-10-28T09:00:00Z',
+    };
 
-  //   mockApplications.push(newApplication);
+    mockApplications.push(newApplication);
 
-  //   // 체험 현재 신청 수 증가
-  //   campaign.currentRecruitment += 1;
+    // 체험 현재 신청 수 증가
+    campaign.currentRecruitment += 1;
 
-  //   return HttpResponse.json(
-  //     {
-  //       success: true,
-  //       data: newApplication,
-  //     } satisfies ApiResponse<Application>,
-  //     { status: 201 },
-  //   );
-  // }),
+    return HttpResponse.json(
+      {
+        success: true,
+        data: newApplication,
+      } satisfies ApiResponse<Application>,
+      { status: 201 },
+    );
+  }),
 
   /**
    * 신청 취소
