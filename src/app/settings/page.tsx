@@ -1,9 +1,7 @@
-'use client';
-
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { HeaderConfig } from '@shared/components/HeaderConfig';
 
 import styles from './page.module.scss';
 
@@ -21,13 +19,9 @@ import styles from './page.module.scss';
  * 6. [ ] 앱 정보 (버전, 이용약관, 개인정보처리방침)
  */
 export default function SettingsPage() {
-  usePageHeader({
-    showBackButton: true,
-    title: '설정',
-  });
-
   return (
     <main className={styles.SettingsPage}>
+      <HeaderConfig title="설정" showBackButton />
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: Settings 컴포넌트 추가 */}

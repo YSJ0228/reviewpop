@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useHeaderStore } from '@shared/store/useHeaderStore';
 import { ReactNode } from 'react';
 
-interface PageHeaderConfig {
+export interface PageHeaderConfig {
   title?: string;
   showBackButton?: boolean;
   showXButton?: boolean;

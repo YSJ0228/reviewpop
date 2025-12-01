@@ -20,6 +20,7 @@ export { SharedCampaignCard } from './SharedCampaignCard';
 export { CampaignInfoList } from './CampaignInfoList';
 export { GlobalPageHeader } from './GlobalPageHeader';
 export { GlobalMainNavigation } from './GlobalMainNavigation';
+export { HeaderConfig } from './HeaderConfig';
 
 // Types
 export type { ButtonProps } from './Button/types';
