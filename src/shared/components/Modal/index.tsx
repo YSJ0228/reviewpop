@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, cloneElement } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal as MantineModal } from '@mantine/core';
