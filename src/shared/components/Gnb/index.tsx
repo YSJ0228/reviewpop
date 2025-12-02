@@ -15,11 +15,10 @@ const PROFILE_PATH = '/profile';
 const NOTIFICATIONS_PATH = '/notifications';
 const SETTINGS_PATH = '/settings';
 
-export function Gnb({ notification = 0 }: GnbProps) {
+export function Gnb({ notification = 0, setting = false }: GnbProps) {
   const pathname = usePathname();
-
   const showSetting = pathname === PROFILE_PATH;
-  const gnbIcon = showSetting ? styles.Gnb__Right : styles.Gnb__Icon;
+  const gnbIcon = setting || showSetting ? styles.Gnb__Right : styles.Gnb__Icon;
 
   const validNotificationCount = Math.max(0, Math.floor(notification));
 
@@ -47,7 +46,7 @@ export function Gnb({ notification = 0 }: GnbProps) {
             </span>
           )}
         </Link>
-        {showSetting && (
+        {(setting || showSetting) && (
           <Link
             href={SETTINGS_PATH}
             className={styles.Gnb__Setting}

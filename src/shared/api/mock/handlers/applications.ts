@@ -189,7 +189,6 @@ export const applicationHandlers = [
       phoneNumber: body.phoneNumber,
       blogAddress: body.blogAddress,
       status: 'pending',
-      reviewStatus: 'before',
       isReservated: false,
       createdAt: '2025-10-28T09:00:00Z',
     };

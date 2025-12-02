@@ -1,6 +1,10 @@
+import { ReactNode } from 'react';
+
 export interface PageHeaderProps {
   title?: string;
   showBackButton?: boolean;
   showXButton?: boolean;
-  handleXButton?: () => void;
+  onBack?: () => void;
+  onX?: () => void;
+  rightAction?: ReactNode;
 }
