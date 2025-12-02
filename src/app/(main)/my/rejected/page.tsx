@@ -1,9 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import { useRouter } from 'next/navigation';
-import { IconArrowLeft } from '@pop-ui/foundation';
-
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 
 import { RejectedList } from '@features/history/components/RejectedList';
@@ -21,25 +19,16 @@ import styles from './page.module.scss';
  * 4. [ ] 체험 카드 클릭 시 상세 페이지 이동
  */
 export default function RejectedCampaignsPage() {
-  const router = useRouter();
-
-  const handleBack = () => {
-    router.back();
-  };
+  usePageHeader({
+    showBackButton: true,
+    title: '미선정 체험 내역',
+    showBottomNavigation: false,
+  });
 
   return (
     <main className={styles.RejectedCampaignsPage}>
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
-          {/* TODO: RejectedList 컴포넌트 추가 */}
-          <div className={styles.RejectedCampaignsPage__Header}>
-            <IconArrowLeft
-              onClick={handleBack}
-              aria-label="뒤로 가기"
-              className={styles.RejectedCampaignsPage__HeaderBackButton}
-            />
-            <span className={styles.RejectedCampaignsPage__HeaderTitle}>미선정 체험 내역</span>
-          </div>
           <RejectedList />
         </Suspense>
       </ErrorBoundary>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { IconChevronLeft, IconClose } from '@pop-ui/foundation';
+import { IconArrowLeft, IconClose } from '@pop-ui/foundation';
 
 import type { PageHeaderProps } from './types';
 import styles from './style.module.scss';
@@ -10,12 +10,18 @@ export function PageHeader({
   title,
   showBackButton = true,
   showXButton = false,
-  handleXButton,
+  onBack,
+  onX,
+  rightAction,
 }: PageHeaderProps) {
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    if (onBack) {
+      onBack();
+    } else {
+      router.back();
+    }
   };
 
   return (
@@ -27,20 +33,21 @@ export function PageHeader({
           className={styles.PageHeader__BackButton}
           aria-label="뒤로 가기"
         >
-          <IconChevronLeft />
+          <IconArrowLeft />
         </button>
       )}
       {title && <h1 className={styles.PageHeader__Title}>{title}</h1>}
       {showXButton && (
         <button
           type="button"
-          onClick={handleXButton ?? (() => {})}
+          onClick={onX || (() => router.back())}
           className={styles.PageHeader__BackButton}
           aria-label="닫기"
         >
           <IconClose />
         </button>
       )}
+      {rightAction && <div className={styles.PageHeader__RightAction}>{rightAction}</div>}
     </header>
   );
 }

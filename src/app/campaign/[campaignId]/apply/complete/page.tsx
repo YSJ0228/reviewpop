@@ -7,6 +7,7 @@ import { ConfirmationCard } from '@shared/components/ConfirmationCard';
 import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
 import { useCampaignDetails } from '@features/campaign';
 import { ButtonBar } from '@features/campaign/components/ButtonBar';
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
 
@@ -33,6 +34,11 @@ export default function CampaignApplyCompletePage({ params }: CampaignApplyCompl
 
   const router = useRouter();
   const today = '2000-01-01';
+
+  usePageHeader({
+    showBackButton: false,
+    showXButton: true,
+  });
 
   return (
     <main className={styles.CampaignApplyCompletePage}>

@@ -3,7 +3,7 @@
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 import styles from './page.module.scss';
 
 /**
@@ -21,6 +21,13 @@ import styles from './page.module.scss';
  * 6. [ ] 제출 완료 시 나의 체험 또는 체험 상세로 이동
  */
 export default function ReviewWritePage({ params }: { params: { campaignId: string } }) {
+  usePageHeader({
+    showBackButton: true,
+    title: '체험 후기 등록',
+    showXButton: false,
+    isVisible: true,
+  });
+
   return (
     <main className={styles.ReviewWritePage}>
       <ErrorBoundary>

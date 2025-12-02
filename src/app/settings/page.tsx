@@ -1,8 +1,7 @@
-'use client';
-
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { HeaderConfig } from '@shared/components/HeaderConfig';
 
 import styles from './page.module.scss';
 
@@ -22,6 +21,7 @@ import styles from './page.module.scss';
 export default function SettingsPage() {
   return (
     <main className={styles.SettingsPage}>
+      <HeaderConfig title="설정" showBackButton />
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
           {/* TODO: Settings 컴포넌트 추가 */}
