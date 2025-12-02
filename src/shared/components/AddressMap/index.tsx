@@ -62,7 +62,9 @@ export function AddressMap({
 }: AddressMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<NaverMap | null>(null);
-  const eventListenersRef = useRef<Array<{ target: NaverMap; event: string }>>([]);
+  const eventListenersRef = useRef<Array<{ target: NaverMap; event: string; listener: unknown }>>(
+    [],
+  );
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(null);
 
@@ -100,13 +102,14 @@ export function AddressMap({
 
       // 이벤트 리스너 등록
       if (window.naver.maps.Event) {
-        window.naver.maps.Event.addListener(map, 'idle', handleCopyrightHide);
-        eventListenersRef.current.push({ target: map, event: 'idle' });
+        const idleListener = window.naver.maps.Event.addListener(map, 'idle', handleCopyrightHide);
+        eventListenersRef.current.push({ target: map, event: 'idle', listener: idleListener });
 
-        window.naver.maps.Event.addListener(map, 'click', () => {
+        const clickHandler = () => {
           handleNaverMapClick(address);
-        });
-        eventListenersRef.current.push({ target: map, event: 'click' });
+        };
+        const clickListener = window.naver.maps.Event.addListener(map, 'click', clickHandler);
+        eventListenersRef.current.push({ target: map, event: 'click', listener: clickListener });
       }
 
       // 마커 생성
@@ -171,8 +174,10 @@ export function AddressMap({
     // cleanup: 이벤트 리스너 제거
     return () => {
       if (window.naver?.maps?.Event && mapInstanceRef.current) {
-        eventListenersRef.current.forEach(({ target, event }) => {
-          window.naver.maps.Event?.removeListener?.(target, event);
+        eventListenersRef.current.forEach(({ target, event, listener }) => {
+          if (window.naver.maps.Event?.removeListener && listener) {
+            window.naver.maps.Event.removeListener(target, event, listener);
+          }
         });
         eventListenersRef.current = [];
       }

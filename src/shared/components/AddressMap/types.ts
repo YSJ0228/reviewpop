@@ -78,8 +78,8 @@ declare global {
           };
         };
         Event?: {
-          addListener: (target: NaverMap, event: string, handler: () => void) => void;
-          removeListener?: (target: NaverMap, event: string) => void;
+          addListener: (target: NaverMap, event: string, handler: () => void) => unknown;
+          removeListener?: (target: NaverMap, event: string, listener: unknown) => void;
         };
       };
     };
