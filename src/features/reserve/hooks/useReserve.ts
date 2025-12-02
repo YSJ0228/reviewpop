@@ -17,15 +17,12 @@ export const useReserve = (campaignId: string) => {
   return useMutation({
     mutationFn: (data: PostReservation) => createReservation(data),
     onSuccess: () => {
-      toast.success('예약이 완료되었습니다.');
       // 관련 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: ['reservation', campaignId] });
       queryClient.invalidateQueries({ queryKey: ['campaigns', campaignId] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: (error: Error) => {
-      const message = error.message || '예약 생성에 실패했습니다.';
-      toast.error(message);
       console.error('예약 생성 실패:', error);
     },
   });
