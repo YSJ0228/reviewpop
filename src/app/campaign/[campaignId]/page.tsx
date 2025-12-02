@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { PageHeader } from '@shared/components/PageHeader';
 import { ImageGallery, ImageViewer } from '@shared/components/ImageViewer';
+import { AddressMap } from '@shared/components';
 import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusBar';
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
@@ -119,6 +120,8 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
             : null;
         return notice && <CampaignAdditionalNotice content={notice} />;
       })()}
+
+      {campaign.address && <AddressMap placeName={campaign.brand} address={campaign.address} />}
 
       {/* 리뷰 미션 */}
       <section className={styles.Page__Section}>

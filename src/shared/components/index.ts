@@ -17,6 +17,7 @@ export { toast } from './Toast';
 export { Modal } from './Modal';
 export { EmptyState } from './EmptyState';
 export { SharedCampaignCard } from './SharedCampaignCard';
+export { AddressMap } from './AddressMap';
 
 // Types
 export type { ButtonProps } from './Button/types';
@@ -25,3 +26,4 @@ export type { ErrorBoundaryProps } from './ErrorBoundary/types';
 export type { PageHeaderProps } from './PageHeader/types';
 export type { ToastOptions, ToastInput } from './Toast/types';
 export type { ImageGalleryProps } from './ImageViewer';
+export type { AddressMapProps } from './AddressMap';
