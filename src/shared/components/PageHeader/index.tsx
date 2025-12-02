@@ -37,10 +37,10 @@ export function PageHeader({
         </button>
       )}
       {title && <h1 className={styles.PageHeader__Title}>{title}</h1>}
-      {showXButton && onX && (
+      {showXButton && (
         <button
           type="button"
-          onClick={onX}
+          onClick={onX || (() => router.back())}
           className={styles.PageHeader__BackButton}
           aria-label="닫기"
         >

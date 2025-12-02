@@ -1,11 +1,13 @@
 /**
  * 로그인 페이지
  */
+'use client';
 
 import { Suspense } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-import { HeaderConfig } from '@shared/components/HeaderConfig';
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import { KakaoLoginButton } from '@features/auth';
 import { NaverLoginButton } from '@features/auth';
@@ -13,9 +15,17 @@ import { NaverLoginButton } from '@features/auth';
 import styles from './page.module.scss';
 
 function LoginContent() {
+  const router = useRouter();
+  usePageHeader({
+    showBackButton: false,
+    showXButton: true,
+    onX: () => {
+      router.push('/');
+    },
+  });
+
   return (
     <main className={styles.LoginPage}>
-      <HeaderConfig showBackButton={false} showXButton />
       <div className={styles.LoginPage__Card}>
         {/* 로고/타이틀 */}
         <Image src={'/images/LogoVer.svg'} width={194} height={68} alt="데이트팝 체험단 로고" />

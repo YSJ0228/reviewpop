@@ -22,7 +22,13 @@ function MyPageContent() {
   );
 }
 
+import { usePageHeader } from '@shared/hooks/usePageHeader';
+
 export default function MyPage() {
+  usePageHeader({
+    showBottomNavigation: true,
+  });
+
   return (
     <Suspense
       fallback={

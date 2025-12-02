@@ -1,7 +1,7 @@
 @use '@shared/styles/mixins' as *;
 
 .PageHeader {
-  @include size($width: 100%, $height: 56px, $min-width: 360px);
+  @include size($width: 100%, $height: 48px, $min-width: 360px);
   @include flex($align: center, $gap: 12);
   @include padding($y: 0, $x: 16);
   position: sticky;

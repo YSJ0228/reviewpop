@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { use } from 'react';
+import { use, useEffect } from 'react';
 
 import { Button } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
@@ -28,6 +28,8 @@ export default function ReserveCompletePage({ params }: ReserveCompletePageProps
       state.reservationData ??
       (process.env.NODE_ENV === 'development' ? mockReservationData : null),
   );
+  const resetReservationData = useReservationStore((state) => state.resetReservationData);
+
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isUserLoading } = useUserInfo();
   const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(
@@ -47,6 +49,12 @@ export default function ReserveCompletePage({ params }: ReserveCompletePageProps
     showXButton: true,
     onX: handleXButton,
   });
+
+  useEffect(() => {
+    return () => {
+      resetReservationData();
+    };
+  }, [resetReservationData]);
 
   if (isCampaignLoading || isUserLoading || isApplicationLoading) {
     return <LoadingSpinner />;
