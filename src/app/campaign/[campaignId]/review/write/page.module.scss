@@ -3,8 +3,8 @@
 .ReviewWritePage {
   @include padding($x: 16);
   min-width: 360px;
-  min-height: 100vh;
-  @include flex($direction: column);
+  min-height: 90vh;
+  @include flex($direction: column, $justify: space-between);
 
   &__Loading,
   &__Error {

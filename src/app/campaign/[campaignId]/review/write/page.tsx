@@ -14,6 +14,9 @@ import { useApplicationDetails } from '@entities/application/hooks/useApplicatio
 
 import styles from './page.module.scss';
 
+import { useCreateReview } from '@features/review/hooks/useReview';
+import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
+
 interface ReviewWritePageProps {
   params: Promise<{ campaignId: string }>;
 }
@@ -38,6 +41,12 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
     isVisible: true,
   });
 
+  const { mutate: createReview, isPending } = useCreateReview(
+    campaign?.id ?? '',
+    application?.userId ?? '',
+  );
+  const reviewLinkInput = useInputValidate('blogUrl');
+
   if (isCampaignLoading || isUserLoading || isApplicationLoading) {
     return <LoadingSpinner />;
   }
@@ -52,11 +61,31 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
     );
   }
 
+  const handleSubmit = () => {
+    if (!reviewLinkInput.value || reviewLinkInput.errorMsg) return;
+
+    createReview({
+      campaignId: campaign.id,
+      userId: application.userId,
+      reviewUrl: reviewLinkInput.value,
+    });
+  };
+
   return (
     <main className={styles.ReviewWritePage}>
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
-          <ReviewForm campaign={campaign} application={application} />
+          <ReviewForm
+            campaign={campaign}
+            application={application}
+            reviewLinkInput={reviewLinkInput}
+          />
+          <Button
+            onClick={handleSubmit}
+            disabled={Boolean(reviewLinkInput.errorMsg) || !reviewLinkInput.value || isPending}
+          >
+            {isPending ? '등록 중...' : '후기 등록'}
+          </Button>
         </Suspense>
       </ErrorBoundary>
     </main>
