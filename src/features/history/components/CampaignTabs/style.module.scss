@@ -133,3 +133,20 @@
     letter-spacing: -0.24px;
   }
 }
+
+.CampaignTabs__WarningBanner {
+  height: 30px;
+  background-color: var(--color-red-50);
+  border-radius: 6px;
+  margin: 16px 16px 0 16px;
+  @include padding($x: 12, $y: 12);
+  @include flex($gap: 6, $align: center, $justify: center);
+
+  @include font(
+    $size: 12,
+    $weight: 600,
+    $line-height: 1.5,
+    $letter-spacing: -0.01em,
+    $color: var(--color-red-500)
+  );
+}

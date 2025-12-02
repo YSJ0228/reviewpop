@@ -1,22 +1,21 @@
 import Link from 'next/link';
-import { SharedCampaignCard } from '@shared/components';
-
-import dayjs from 'dayjs';
 
 import { useDisclosure } from '@mantine/hooks';
 import { IconKebap } from '@pop-ui/foundation';
 
-import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
-import { CARD_TYPES, STATUS_VISIT } from '@features/history/constants';
-
-import { HISTORY_MESSAGES } from '@features/history/constants';
-import { useReservationActions } from '@features/history/hooks/useReservationActions';
-
+import { SharedCampaignCard } from '@shared/components';
 import { Colors } from '@shared/styles/colors';
+import dayjs from '@shared/lib/dayjs.config';
+
+import { calculateAnnouncementDate } from '@entities/history/hooks/useMyCampaigns';
+import { CARD_TYPES, STATUS_REVIEW, HISTORY_MESSAGES } from '@features/history/constants';
+import { useReservationActions } from '@features/history/hooks/useReservationActions';
 
 import { CampaignAppliedCard } from './CampaignAppliedCard';
 import { CampaignRejectedCard } from './CampaignRejectedCard';
+import { CampaignReviewedCard } from './CampaignReviewedCard';
 import { CampaignSelectedCard } from './CampaignSelectedCard';
+import { CampaignStatusLabel } from './CampaignStatusLabel';
 import { ReservationBottomSheet } from './ReservationBottomSheet';
 
 import type { IMyCampaignCardProps } from './types';
@@ -97,9 +96,21 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
       return <span className={styles.CampaignCard__SelectedText}>{HISTORY_MESSAGES.SELECTED}</span>;
     }
 
+    if (
+      (type === CARD_TYPES.REVIEWED || type === CARD_TYPES.COMPLETED) &&
+      application.reviewStatus
+    ) {
+      return (
+        <div className={styles.CampaignStatusLabel} aria-label="후기 상태 라벨">
+          <span>{STATUS_REVIEW[application.reviewStatus]}</span>
+        </div>
+      );
+    }
+
     return undefined;
   };
 
+  // 컴포넌트의 return 문
   return (
     <>
       <Link
@@ -112,11 +123,13 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
           title={campaign.providedItem}
           className={`${styles.CampaignCard} ${type === CARD_TYPES.SELECTED ? styles['CampaignCard--NoBorder'] : ''}`}
           statusLabel={
-            type === CARD_TYPES.SELECTED && visitStatus ? (
-              <div className={styles.CampaignCard__StatusLabel}>
-                <p>{STATUS_VISIT[visitStatus]}</p>
-              </div>
-            ) : undefined
+            <CampaignStatusLabel
+              type={type}
+              visitStatus={visitStatus}
+              reviewStatus={application.reviewStatus}
+              reservationDate={application.reservationDate}
+              campaignStatus={campaign.status}
+            />
           }
           topContent={getTopContent()}
           bottomContent={
@@ -130,10 +143,19 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
         />
       </Link>
 
-      {/* selected 타입 - Link 밖으로 분리*/}
+      {/* selected 타입 - Link 밖으로 분리 */}
       {type === CARD_TYPES.SELECTED && visitStatus && (
         <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
       )}
+
+      {/* reviewed/completed 타입 - Link 밖으로 분리 */}
+      {(type === CARD_TYPES.REVIEWED || type === CARD_TYPES.COMPLETED) &&
+        application.reviewStatus && (
+          <CampaignReviewedCard
+            reviewStatus={application.reviewStatus!}
+            campaignStatus={campaign.status}
+          />
+        )}
 
       {/* 예약 옵션 BottomSheet */}
       {type === CARD_TYPES.SELECTED && visitStatus === 'scheduled' && (
