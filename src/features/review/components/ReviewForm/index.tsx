@@ -6,6 +6,7 @@ import { CampaignInfoList } from '@shared/components';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 import { ReviewFormLink } from './ReviewFormLink';
 import styles from './style.module.scss';
+import { useCreateReview } from '@features/review/hooks/useReview';
 
 interface ReviewFormProps {
   campaign: CampaignDetail;
@@ -13,11 +14,22 @@ interface ReviewFormProps {
 }
 
 export function ReviewForm({ campaign, application }: ReviewFormProps) {
+  const { mutate: createReview, isPending } = useCreateReview(campaign.id, application.userId);
   const reviewLinkInput = useInputValidate('blogUrl');
 
   const visitDate = application.reservationDate
     ? formatDate(application.reservationDate, 'MMDD_DDDD_LONG_WITH_TIME')
     : '';
+
+  const handleSubmit = () => {
+    if (!reviewLinkInput.value || reviewLinkInput.errorMsg) return;
+
+    createReview({
+      campaignId: campaign.id,
+      userId: application.userId,
+      reviewUrl: reviewLinkInput.value,
+    });
+  };
 
   return (
     <div className={styles.ReviewForm}>
@@ -35,8 +47,11 @@ export function ReviewForm({ campaign, application }: ReviewFormProps) {
 
         <ReviewFormLink input={reviewLinkInput} />
       </div>
-      <Button onClick={() => {}} disabled={Boolean(reviewLinkInput.errorMsg)}>
-        후기 등록
+      <Button
+        onClick={handleSubmit}
+        disabled={Boolean(reviewLinkInput.errorMsg) || !reviewLinkInput.value || isPending}
+      >
+        {isPending ? '등록 중...' : '후기 등록'}
       </Button>
     </div>
   );
