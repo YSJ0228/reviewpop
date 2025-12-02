@@ -12,9 +12,9 @@ export { CampaignContents } from './components/CampaignContents';
 export { CampaignValue } from './components/CampaignValue';
 export { CampaignInfoSection } from './components/CampaignInfoSection';
 export { CampaignScheduleSection } from './components/CampaignScheduleSection';
-export { CampaignRequirementsSection } from './components/CampaignRequirementsSection';
 export { CampaignVisitReservation } from './components/CampaignVisitReservation';
 export { CampaignAdditionalNotice } from './components/CampaignAdditionalNotice';
+export { BulletListSection } from './components/BulletListSection';
 
 // Hooks
 export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
@@ -32,6 +32,6 @@ export type { CampaignContentsProps } from './components/CampaignContents';
 export type { CampaignValueProps } from './components/CampaignValue';
 export type { CampaignInfoSectionProps } from './components/CampaignInfoSection';
 export type { CampaignScheduleSectionProps } from './components/CampaignScheduleSection';
-export type { CampaignRequirementsSectionProps } from './components/CampaignRequirementsSection';
 export type { CampaignVisitReservationProps } from './components/CampaignVisitReservation';
 export type { CampaignAdditionalNoticeProps } from './components/CampaignAdditionalNotice';
+export type { BulletListSectionProps } from './components/BulletListSection';
