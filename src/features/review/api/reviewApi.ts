@@ -30,20 +30,14 @@ export async function getReviewById(id: number) {
  * 리뷰 작성
  */
 export async function createReview(campaignId: string, userId: string, data: PostReview) {
-  const response = await apiClient.post<ApiResponse<PostReview>>(
-    `/reviews/${campaignId}/${userId}`,
-    data,
-  );
+  const response = await apiClient.post<ApiResponse<PostReview>>('/reviews', data);
   return unwrapApiResponse(response.data);
 }
 
 /**
  * 리뷰 수정
  */
-export async function updateReview(campaignId: string, userId: string, data: Partial<PostReview>) {
-  const response = await apiClient.patch<ApiResponse<PostReview>>(
-    `/reviews/${campaignId}/${userId}`,
-    data,
-  );
+export async function updateReview(id: string, data: Partial<PostReview>) {
+  const response = await apiClient.patch<ApiResponse<PostReview>>(`/reviews/${id}`, data);
   return unwrapApiResponse(response.data);
 }

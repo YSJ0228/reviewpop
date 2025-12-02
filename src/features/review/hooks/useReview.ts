@@ -26,10 +26,10 @@ export const useCreateReview = (campaignId: string, userId: string) => {
 };
 
 // 리뷰 재등록 hook
-export const useUpdateReview = (campaignId: string, userId: string) => {
+export const useUpdateReview = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: PostReview) => updateReview(campaignId, userId, data),
+    mutationFn: (data: PostReview) => updateReview(id, data),
     onSuccess: () => {
       toast.success('후기가 재등록되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
