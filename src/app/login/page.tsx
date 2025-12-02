@@ -1,11 +1,13 @@
 /**
  * 로그인 페이지
  */
-
 'use client';
 
 import { Suspense } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import { KakaoLoginButton } from '@features/auth';
 import { NaverLoginButton } from '@features/auth';
@@ -13,6 +15,15 @@ import { NaverLoginButton } from '@features/auth';
 import styles from './page.module.scss';
 
 function LoginContent() {
+  const router = useRouter();
+  usePageHeader({
+    showBackButton: false,
+    showXButton: true,
+    onX: () => {
+      router.push('/');
+    },
+  });
+
   return (
     <main className={styles.LoginPage}>
       <div className={styles.LoginPage__Card}>

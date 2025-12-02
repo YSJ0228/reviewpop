@@ -3,11 +3,14 @@
 .Gnb {
   @include padding($y: 0, $x: 16);
   @include flex($align: center, $gap: 12, $justify: space-between);
-  position: sticky;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 10;
+  z-index: 100;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
   height: 48px;
   background: var(--color-white);
 

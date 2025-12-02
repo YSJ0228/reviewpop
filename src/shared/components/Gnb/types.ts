@@ -7,4 +7,9 @@ export interface GnbProps {
    * @default 0
    */
   notification?: number;
+  /**
+   * 설정 버튼 표시 여부
+   * @default false
+   */
+  setting?: boolean;
 }

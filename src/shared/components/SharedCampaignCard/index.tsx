@@ -1,16 +1,7 @@
 import Image from 'next/image';
-import styles from './style.module.scss';
 
-interface SharedCampaignCardProps {
-  thumbnail: string;
-  brand: string;
-  title: string;
-  topContent?: React.ReactNode;
-  bottomContent?: React.ReactNode;
-  statusLabel?: React.ReactNode;
-  onClick?: () => void;
-  className?: string;
-}
+import { ISharedCampaignCardProps } from './type';
+import styles from './style.module.scss';
 
 export function SharedCampaignCard({
   thumbnail,
@@ -21,7 +12,11 @@ export function SharedCampaignCard({
   statusLabel,
   onClick,
   className,
-}: SharedCampaignCardProps) {
+  titleClassName,
+  contentClassName,
+  brandClassName,
+  topSectionClassName,
+}: ISharedCampaignCardProps) {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (onClick && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
@@ -39,7 +34,7 @@ export function SharedCampaignCard({
       aria-label={`${brand} 체험 카드`}
     >
       {statusLabel && statusLabel}
-      <header className={styles.SharedCampaignCard__TopSection}>
+      <header className={`${styles.SharedCampaignCard__TopSection} ${topSectionClassName || ''}`}>
         <div className={styles.SharedCampaignCard__ImageWrapper}>
           <Image
             src={thumbnail}
@@ -49,10 +44,10 @@ export function SharedCampaignCard({
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <section className={styles.SharedCampaignCard__Content}>
+        <section className={`${styles.SharedCampaignCard__Content} ${contentClassName || ''}`}>
           {topContent}
-          <h3 className={styles.SharedCampaignCard__Brand}>{brand}</h3>
-          <p className={styles.SharedCampaignCard__Title}>{title}</p>
+          <h3 className={`${styles.SharedCampaignCard__Brand} ${brandClassName || ''}`}>{brand}</h3>
+          <p className={`${styles.SharedCampaignCard__Title} ${titleClassName || ''}`}>{title}</p>
           {bottomContent}
         </section>
       </header>

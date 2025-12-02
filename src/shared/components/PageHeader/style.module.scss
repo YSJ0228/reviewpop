@@ -1,59 +1,56 @@
-@use '../../../shared/styles/mixins' as *;
+@use '@shared/styles/mixins' as *;
 
 .PageHeader {
+  @include size($width: 100%, $height: 48px, $min-width: 360px);
+  @include flex($align: center, $gap: 12);
+  @include padding($y: 0, $x: 16);
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 10;
-  min-width: 360px;
-  width: 100%;
-  @include flex($align: center, $gap: 12);
-  height: 56px;
-  @include padding($y: 0, $x: 16);
   background: var(--color-white);
-}
 
-.PageHeader__BackButton {
-  @include flex($align: center, $justify: center);
-  width: 40px;
-  height: 40px;
-  @include padding($all: 0);
-  background: none;
-  border: none;
-  border-radius: 8px;
-  color: var(--color-gray-900);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  &__BackButton {
+    @include flex($align: center, $justify: center);
+    @include size($width: 40px, $height: 40px);
+    @include padding($all: 0);
+    background: none;
+    border: none;
+    border-radius: 8px;
+    color: var(--color-gray-900);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 
-  &:hover {
-    background: var(--color-gray-100);
+    &:hover {
+      background: var(--color-gray-100);
+    }
+
+    &:active {
+      background: var(--color-gray-200);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-blue-500);
+      outline-offset: 2px;
+    }
   }
 
-  &:active {
-    background: var(--color-gray-200);
+  &__Title {
+    @include font($size: 18px, $weight: 600, $color: var(--color-gray-900));
+    @include margin($all: 0);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: calc(100% - 112px);
+    pointer-events: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--color-blue-500);
-    outline-offset: 2px;
+  &.HasXButton {
+    @include flex($justify: flex-end, $align: center);
+    align-self: stretch;
   }
-
-  svg {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-.PageHeader__Title {
-  @include font($size: 18px, $weight: 600, $color: var(--color-gray-900));
-  @include margin($all: 0);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: calc(100% - 112px);
-  pointer-events: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }

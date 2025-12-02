@@ -1,33 +1,83 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { use, useEffect } from 'react';
+
+import { Button } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { LoadingSpinner } from '@shared/components';
+import { useReservationStore } from '@features/reserve/store/reservationStore';
+import { mockReservationData } from '@features/reserve/store/mockReservationData';
+import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
+import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
+import { ReserveComplete } from '@features/reserve/components/ReserveComplete';
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
 
-/**
- * 예약 완료 페이지
- * - 하단 탭: X
- * - 예약 완료 메시지 및 예약 정보 확인
- *
- * TODO:
- * 1. [ ] ReserveComplete 컴포넌트 구현 (@features/reserve/components/ReserveComplete)
- * 2. [ ] 예약 정보 요약 표시 (예약 번호, 날짜, 시간, 장소)
- * 3. [ ] "나의 체험으로 이동" 버튼 추가
- * 4. [ ] "홈으로 이동" 버튼 추가
- * 5. [ ] 캘린더에 추가 기능 (선택적)
- */
-export default function ReserveCompletePage({ params }: { params: { campaignId: string } }) {
+interface ReserveCompletePageProps {
+  params: Promise<{ campaignId: string }>;
+}
+
+export default function ReserveCompletePage({ params }: ReserveCompletePageProps) {
+  const router = useRouter();
+  const { campaignId } = use(params);
+  const reservationData = useReservationStore(
+    (state) =>
+      state.reservationData ??
+      (process.env.NODE_ENV === 'development' ? mockReservationData : null),
+  );
+  const resetReservationData = useReservationStore((state) => state.resetReservationData);
+
+  const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
+  const { data: user, isLoading: isUserLoading } = useUserInfo();
+  const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(
+    campaignId,
+    user?.id ?? '',
+    {
+      enabled: !!user?.id,
+    },
+  );
+
+  const handleXButton = () => {
+    router.push('/my?tab=selected');
+  };
+
+  usePageHeader({
+    showBackButton: false,
+    showXButton: true,
+    onX: handleXButton,
+  });
+
+  useEffect(() => {
+    return () => {
+      resetReservationData();
+    };
+  }, [resetReservationData]);
+
+  if (isCampaignLoading || isUserLoading || isApplicationLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!reservationData || !campaign || !application) {
+    return (
+      <div className={styles.ReserveCompletePage__Error}>
+        <p>예약 정보를 불러올 수 없습니다.</p>
+        <p>페이지를 새로고침하거나 다시 시도해 주세요.</p>
+        <Button onClick={() => router.push('/my?tab=selected')}>내 예약 목록으로 이동</Button>
+      </div>
+    );
+  }
+
   return (
     <main className={styles.ReserveCompletePage}>
       <ErrorBoundary>
-        {/* TODO: ReserveComplete 컴포넌트 추가 */}
-        <div className={styles.Placeholder}>
-          <p>✅ 예약이 완료되었습니다!</p>
-          <p>체험 ID: {params.campaignId}</p>
-          <p className={styles.Todo}>
-            features/reserve/components/ReserveComplete 컴포넌트를 구현하세요
-          </p>
-        </div>
+        <ReserveComplete
+          campaign={campaign}
+          application={application}
+          reservation={reservationData}
+        />
       </ErrorBoundary>
     </main>
   );

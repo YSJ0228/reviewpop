@@ -1,18 +1,31 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { IconArrowLeft, IconClose } from '@pop-ui/foundation';
+
 import type { PageHeaderProps } from './types';
 import styles from './style.module.scss';
 
-export function PageHeader({ title, showBackButton = true }: PageHeaderProps) {
+export function PageHeader({
+  title,
+  showBackButton = true,
+  showXButton = false,
+  onBack,
+  onX,
+  rightAction,
+}: PageHeaderProps) {
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    if (onBack) {
+      onBack();
+    } else {
+      router.back();
+    }
   };
 
   return (
-    <header className={styles.PageHeader}>
+    <header className={`${styles.PageHeader} ${showXButton ? styles.HasXButton : ''}`}>
       {showBackButton && (
         <button
           type="button"
@@ -20,25 +33,21 @@ export function PageHeader({ title, showBackButton = true }: PageHeaderProps) {
           className={styles.PageHeader__BackButton}
           aria-label="뒤로 가기"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              d="M15 18L9 12L15 6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <IconArrowLeft />
         </button>
       )}
       {title && <h1 className={styles.PageHeader__Title}>{title}</h1>}
+      {showXButton && (
+        <button
+          type="button"
+          onClick={onX || (() => router.back())}
+          className={styles.PageHeader__BackButton}
+          aria-label="닫기"
+        >
+          <IconClose />
+        </button>
+      )}
+      {rightAction && <div className={styles.PageHeader__RightAction}>{rightAction}</div>}
     </header>
   );
 }

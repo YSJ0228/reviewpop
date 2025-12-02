@@ -32,7 +32,6 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'rejected',
-    reviewStatus: 'before',
     isReservated: false,
     createdAt: '2025-11-05T10:00:00Z',
   },
@@ -67,7 +66,6 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'pending',
-    reviewStatus: 'before',
     isReservated: false,
     createdAt: '2025-11-25T09:00:00Z',
   },
@@ -102,7 +100,6 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'selected',
-    reviewStatus: 'before',
     isReservated: false,
     createdAt: '2025-11-09T14:00:00Z',
   },
@@ -137,13 +134,12 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'selected',
-    reviewStatus: 'before',
     isReservated: true,
     reservationDate: '2025-11-28T14:00:00',
     createdAt: '2025-10-25T09:00:00Z',
   },
 
-  // 4. 후기 - 작성 전 (Review - Before)
+  // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
   {
     id: 'mock-4',
     userId: 'kakao-1002',
@@ -173,10 +169,82 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed',
-    reviewStatus: 'before',
+    reviewStatus: 'notReviewed',
     isReservated: true,
     reservationDate: '2025-11-15T10:00:00',
     createdAt: '2025-11-05T11:00:00Z',
+  },
+
+  // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
+  {
+    id: 'mock-4-1',
+    userId: 'kakao-1002',
+    campaign: {
+      id: '4-1',
+      title: '올리브영 스킨케어 세트 (체험완료)',
+      brand: '올리브영',
+      thumbnail: 'https://picsum.photos/seed/campaign4-1/400/300',
+      description: '체험이 완료되었습니다. 후기를 작성해주세요.',
+      status: 'inProgress',
+      category: '뷰티',
+      schedule: {
+        application: { start: '2025-11-01', end: '2025-11-10' },
+        winnerAnnouncement: { start: '2025-11-12', end: '2025-11-12' },
+        review: { start: '2025-11-15', end: '2025-11-30' },
+      },
+      location: { sido: '서울', sigungu: '강남구' },
+      address: '올리브영 강남점',
+      maxRecruitment: 20,
+      currentRecruitment: 80,
+      providedItem: '스킨케어 세트',
+      reservationPrecaution: [],
+      keywords: ['뷰티', '스킨케어'],
+      reviewMission: ['사용 후기 필수'],
+    },
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/user1',
+    phoneNumber: '010-1234-5678',
+    status: 'reviewed',
+    reviewStatus: 'visited', // 체험 완료 (예약 날짜 익일)
+    isReservated: true,
+    reservationDate: '2025-11-14T14:00:00', // 어제 날짜 (익일 기준)
+    createdAt: '2025-11-05T11:00:00Z',
+  },
+
+  // 4-2. 후기 - 체험이 종료되었지만 후기 미등록 (Review - Closed but Not Reviewed)
+  {
+    id: 'mock-4-2',
+    userId: 'kakao-1002',
+    campaign: {
+      id: '4-2',
+      title: '그라운드 220 티셔츠 제작 체험 (종료/후기미등록)',
+      brand: '그라운드 220',
+      thumbnail: 'https://picsum.photos/seed/campaign4-2/400/300',
+      description: '체험이 종료되었지만 후기를 작성하지 않았습니다.',
+      status: 'closed', // 체험 종료
+      category: '패션',
+      schedule: {
+        application: { start: '2025-09-01', end: '2025-09-10' },
+        winnerAnnouncement: { start: '2025-09-12', end: '2025-09-12' },
+        review: { start: '2025-09-15', end: '2025-09-30' },
+      },
+      location: { sido: '서울', sigungu: '강남구' },
+      address: '그라운드 220 강남점',
+      maxRecruitment: 20,
+      currentRecruitment: 80,
+      providedItem: '티셔츠 2개 제작 체험 + 하이볼 2잔 무료 체험',
+      reservationPrecaution: [],
+      keywords: ['패션', '티셔츠'],
+      reviewMission: ['제작 과정 촬영'],
+    },
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/user1',
+    phoneNumber: '010-1234-5678',
+    status: 'reviewed', // 후기 탭에 표시되도록
+    reviewStatus: 'notReviewed', // 후기 미등록 상태
+    isReservated: true,
+    reservationDate: '2025-09-18T13:00:00', // 체험 종료일
+    createdAt: '2025-09-05T10:00:00Z',
   },
 
   // 5. 후기 - 검토 중 (Review - Pending)
@@ -209,7 +277,7 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed',
-    reviewStatus: 'pending',
+    reviewStatus: 'reviewPending', // 후기 검토 중
     isReservated: true,
     reservationDate: '2025-10-22T14:00:00',
     createdAt: '2025-10-10T15:00:00Z',
@@ -245,13 +313,13 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed',
-    reviewStatus: 'requested',
+    reviewStatus: 'requiredForEditing', // 후기 수정 요청
     isReservated: true,
     reservationDate: '2025-10-25T11:00:00',
     createdAt: '2025-10-08T09:00:00Z',
   },
 
-  // 7. 완료 (Completed)
+  // 7. 완료 (Completed) - 종료 탭
   {
     id: 'mock-7',
     userId: 'kakao-1002',
@@ -281,7 +349,7 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'completed',
-    reviewStatus: 'pending', // 완료 상태에서는 reviewStatus가 큰 의미 없거나 pending/approved 상태일 것임
+    reviewStatus: 'reviewed', // 체험 종료 (종료 탭)
     isReservated: true,
     reservationDate: '2025-09-20T13:00:00',
     createdAt: '2025-09-05T10:00:00Z',
