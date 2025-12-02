@@ -37,7 +37,11 @@ export function CampaignStatusLabel({
   }
 
   // REVIEWED 또는 COMPLETED 타입일 때 후기 상태 및 방문 날짜 표시
-  if ((type === CARD_TYPES.REVIEWED || type === CARD_TYPES.COMPLETED) && reviewStatus) {
+  // reviewStatus가 옵셔널이므로 타입 가드 추가
+  if (
+    (type === CARD_TYPES.REVIEWED || type === CARD_TYPES.COMPLETED) &&
+    reviewStatus !== undefined
+  ) {
     // 체험이 종료되었지만 후기 미등록인 경우 "체험 종료" 표시
     const statusTitle =
       reviewStatus === 'notReviewed' && campaignStatus === 'closed'
