@@ -328,7 +328,7 @@ export const mockApplications: Application[] = [
     status: 'reviewed',
     reviewStatus: 'visited', // 체험 완료 (예약 날짜 익일)
     isReservated: true,
-    reservationDate: '2025-10-14T10:00:00', // 예약 날짜 (익일 기준)
+    reservationDate: '2025-10-14T10:00:00',
     name: '한소라',
     blogAddress: 'https://blog.naver.com/naver-2001',
     phoneNumber: '010-1234-5678',
