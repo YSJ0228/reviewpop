@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { ReviewForm } from '@features/review/components/ReviewForm';
 import styles from './page.module.scss';
 
 /**
@@ -32,14 +33,7 @@ export default function ReviewWritePage({ params }: { params: { campaignId: stri
     <main className={styles.ReviewWritePage}>
       <ErrorBoundary>
         <Suspense fallback={<div>로딩 중...</div>}>
-          {/* TODO: ReviewForm 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
-            <p>체험 ID: {params.campaignId}</p>
-            <p>체험 후기 작성</p>
-            <p className={styles.Todo}>
-              features/review/components/ReviewForm 컴포넌트를 구현하세요
-            </p>
-          </div>
+          <ReviewForm />
         </Suspense>
       </ErrorBoundary>
     </main>

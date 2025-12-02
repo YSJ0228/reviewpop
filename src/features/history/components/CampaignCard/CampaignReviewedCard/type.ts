@@ -4,4 +4,6 @@ import type { ReviewStatus } from '@entities/application';
 export interface CampaignReviewedCardProps {
   reviewStatus: ReviewStatus | undefined;
   campaignStatus: CampaignStatus | undefined;
+  campaignId: string;
+  applicationId: string;
 }
