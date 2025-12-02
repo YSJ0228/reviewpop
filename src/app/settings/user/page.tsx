@@ -1,18 +1,15 @@
 'use client';
 
 import { Suspense } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-
-import styles from './page.module.scss';
-
 import { Form } from '@shared/components/Form';
 import { useUpdateUserInfo } from '@entities/user/hooks/useUpdateUserInfo';
 import { FormDataType } from '@shared/components/Form/types';
-import { useRouter } from 'next/navigation';
 import { LoadingSpinner } from '@shared/components';
 
+import styles from './page.module.scss';
 /**
  * 설정 페이지
  * - 하단 탭: X

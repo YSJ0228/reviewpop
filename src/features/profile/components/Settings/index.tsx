@@ -1,6 +1,7 @@
-import { SettingList } from '../SettingList';
-
 import { Modal } from '@shared/components';
+import { ROUTES } from '@shared/config/routes';
+
+import { SettingList } from '../SettingList';
 
 import styles from './style.module.scss';
 
@@ -14,7 +15,7 @@ export function Settings() {
   return (
     <div>
       <div className={styles.Settings__Section}>
-        <SettingList title="개인정보" path="settings/user" />
+        <SettingList title="개인정보" path={ROUTES.SETTING_USER} />
         <SettingList title="자주 묻는 질문" />
         <SettingList title="1:1 문의" />
       </div>
@@ -25,7 +26,7 @@ export function Settings() {
       </div>
       <div className={styles.Settings__Gap}></div>
       <div className={styles.Settings__Section}>
-        <SettingList title="로그아웃" isIcon={false} onClick={handleLogout} path="login" />
+        <SettingList title="로그아웃" isIcon={false} onClick={handleLogout} path={ROUTES.LOGIN} />
         <Modal
           variant="warning"
           texts={{
@@ -37,7 +38,7 @@ export function Settings() {
               title="탈퇴하기"
               isIcon={false}
               titleColor="var(--error-500)"
-              onClick={() => {}}
+              onClick={handleLogout}
             />
           }
           onConfirm={() => {

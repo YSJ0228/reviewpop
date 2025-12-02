@@ -39,8 +39,8 @@ export function useUpdateUserInfo() {
 
     // 성공하면 캐시에 반영
     onSuccess: (updatedUser: User) => {
-      // 1) user 캐시 즉시 업데이트 (옵티미스틱 UX)
       queryClient.setQueryData(['user'], updatedUser);
+      queryClient.invalidateQueries({ queryKey: ['user', 'profile'] });
     },
   });
 }

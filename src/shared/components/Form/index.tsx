@@ -6,6 +6,7 @@ import { ButtonBar } from '@features/campaign/components/ButtonBar';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 import { BlogBottomSheet } from '@features/campaign/components/BlogBottomSheet';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
+import { CautionBottomSheet } from '@features/campaign/components/CautionBottomSheet';
 
 import { LabeledInput } from '../LabeledInput';
 import { WebButton } from '../WebButton';
@@ -13,7 +14,6 @@ import { WebButton } from '../WebButton';
 import { FormProps } from './types';
 
 import styles from './style.module.scss';
-import { CautionBottomSheet } from '@features/campaign/components/CautionBottomSheet';
 
 export function Form({ onClick, showTextArea = true, buttonText = '확인' }: FormProps) {
   const { data: user } = useUserInfo();

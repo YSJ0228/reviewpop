@@ -49,6 +49,9 @@ export const ROUTES = {
   /** 회원가입 페이지 */
   SIGNUP: '/signup',
 
+  /** 개인정보 페이지 */
+  SETTING_USER: '/settings/user',
+
   /** 미선정 체험 내역 페이지 */
   MY_REJECTED: '/my/rejected',
 
