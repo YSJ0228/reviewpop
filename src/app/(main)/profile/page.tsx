@@ -7,8 +7,8 @@ export default async function ProfilePage() {
   const user = await requireAuth(ROUTES.PROFILE);
 
   return (
-    <main style={{ padding: '16px' }}>
-      <MyProfile user={user} />
+    <main style={{ padding: '16px', paddingTop: '64px' }}>
+      <MyProfile />
     </main>
   );
 }

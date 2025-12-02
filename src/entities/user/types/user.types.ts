@@ -33,6 +33,7 @@ export interface UserCampaign {
 }
 
 export interface UserCampaigns {
+  name: string;
   participatedCampaigns: number;
   enrolledReviews: number;
   campaigns: UserCampaign[];

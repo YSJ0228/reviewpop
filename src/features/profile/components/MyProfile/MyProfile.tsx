@@ -7,14 +7,13 @@ import { ProfileInfo } from '../ProfileInfo';
 
 import styles from './style.module.scss';
 
-import { MyProfileProps } from './types';
-
-export function MyProfile({ user }: MyProfileProps) {
+export function MyProfile() {
   const { data: userProfile } = useUserProfile();
+
   return (
     <div>
       <ProfileInfo
-        name={user.name}
+        name={userProfile?.name ?? ''}
         review={userProfile?.enrolledReviews ?? 0}
         campaign={userProfile?.participatedCampaigns ?? 0}
       />
