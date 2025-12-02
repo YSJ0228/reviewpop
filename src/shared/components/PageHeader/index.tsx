@@ -37,7 +37,7 @@ export function PageHeader({
         </button>
       )}
       {title && <h1 className={styles.PageHeader__Title}>{title}</h1>}
-      {showXButton && (
+      {showXButton && onX && (
         <button
           type="button"
           onClick={onX}

@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
+
 import styles from './page.module.scss';
 
 /**

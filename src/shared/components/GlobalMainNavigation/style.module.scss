@@ -1,0 +1,7 @@
+.Content {
+  padding-bottom: 0;
+
+  &--withNavigation {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
+}

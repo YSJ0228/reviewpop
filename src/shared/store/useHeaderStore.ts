@@ -10,11 +10,12 @@ interface HeaderState {
   rightAction: ReactNode | null;
   onBack: (() => void) | null;
   onX: (() => void) | null;
+  ownerId: string | null;
 }
 
 interface HeaderActions {
-  setHeader: (config: Partial<HeaderState>) => void;
-  resetHeader: () => void;
+  setHeader: (config: Partial<HeaderState>, ownerId?: string) => void;
+  resetHeader: (ownerId?: string) => void;
   hideHeader: () => void;
 }
 
@@ -23,23 +24,31 @@ const initialState: HeaderState = {
   showBackButton: true,
   showXButton: false,
   isVisible: false,
-  showBottomNavigation: true, // 기본적으로 GNB 표시
+  showBottomNavigation: true,
   rightAction: null,
   onBack: null,
   onX: null,
+  ownerId: null,
 };
 
 export const useHeaderStore = create<HeaderState & HeaderActions>((set) => ({
   ...initialState,
 
-  setHeader: (config) =>
+  setHeader: (config, ownerId) =>
     set((state) => ({
       ...state,
       ...config,
       isVisible: true,
+      ownerId: ownerId ?? null,
     })),
 
-  resetHeader: () => set(initialState),
+  resetHeader: (ownerId) =>
+    set((state) => {
+      if (ownerId && state.ownerId !== ownerId) {
+        return state;
+      }
+      return initialState;
+    }),
 
   hideHeader: () => set({ isVisible: false }),
 }));

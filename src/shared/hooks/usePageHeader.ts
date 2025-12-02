@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useId, ReactNode } from 'react';
+
 import { useHeaderStore } from '@shared/store/useHeaderStore';
-import { ReactNode } from 'react';
 
 export interface PageHeaderConfig {
   title?: string;
@@ -16,19 +16,13 @@ export interface PageHeaderConfig {
 export function usePageHeader(config: PageHeaderConfig = {}) {
   const setHeader = useHeaderStore((state) => state.setHeader);
   const resetHeader = useHeaderStore((state) => state.resetHeader);
+  const ownerId = useId();
 
   useEffect(() => {
-    setHeader(config);
+    setHeader(config, ownerId);
 
     return () => {
-      resetHeader();
+      resetHeader(ownerId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    config.title,
-    config.showBackButton,
-    config.showXButton,
-    config.isVisible,
-    config.showBottomNavigation,
-  ]);
+  }, [config, setHeader, resetHeader, ownerId]);
 }

@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { Button } from '@shared/components/Button';
 import { Gnb } from '@shared/components/Gnb';
+
 import styles from './not-found.module.scss';
 
 export default function NotFound() {
