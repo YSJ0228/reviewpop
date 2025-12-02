@@ -1,20 +1,22 @@
 @use '@shared/styles/mixins' as *;
 
-.CampaignRequirementsSection {
+.BulletListSection {
   @include flex($direction: column);
   width: 100%;
   @include padding($y: 24, $x: 16);
   background: var(--color-white);
   position: relative;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 16px;
-    right: 16px;
-    height: 1px;
-    background-color: var(--color-gray-50);
+  &--WithDivider {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background-color: var(--color-gray-50);
+    }
   }
 }
 
@@ -24,7 +26,7 @@
   @include margin($bottom: 12);
 }
 
-.RequirementsList {
+.List {
   @include flex($direction: column);
   list-style: none;
   @include padding($all: 0);
@@ -32,11 +34,16 @@
   gap: 8px;
 }
 
-.RequirementItem {
+.Item {
   position: relative;
   @include padding($left: 16);
   @include font($size: 14, $weight: 500, $line-height: 1.5, $letter-spacing: -0.02em);
   color: var(--color-gray-900);
+  @include margin($bottom: 8);
+
+  &:last-child {
+    @include margin($bottom: 0);
+  }
 
   &::before {
     content: '•';
