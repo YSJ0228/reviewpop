@@ -1,11 +1,11 @@
 'use client';
 import { Suspense, use } from 'react';
+import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ApplyForm } from '@features/campaign/components/ApplyForm';
 
 import styles from './page.module.scss';
-import { LoadingSpinner } from '@shared/components';
 
 /**
  * 체험 신청 페이지
@@ -31,7 +31,7 @@ export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
   return (
     <main className={styles.CampaignApplyPage}>
       <ErrorBoundary>
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<Loader />}>
           {/* TODO: ApplyForm 컴포넌트 추가 */}
           <ApplyForm campaignId={campaignId} />
         </Suspense>

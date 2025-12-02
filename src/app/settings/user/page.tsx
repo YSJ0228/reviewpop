@@ -2,14 +2,15 @@
 
 import { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
+import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { Form } from '@shared/components/Form';
 import { useUpdateUserInfo } from '@entities/user/hooks/useUpdateUserInfo';
 import { FormDataType } from '@shared/components/Form/types';
-import { LoadingSpinner } from '@shared/components';
 
 import styles from './page.module.scss';
+
 /**
  * 설정 페이지
  * - 하단 탭: X
@@ -41,7 +42,7 @@ export default function UserPage() {
   return (
     <main className={styles.UserPage}>
       <ErrorBoundary>
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<Loader />}>
           <Form onClick={handleSave} showTextArea={false} />
         </Suspense>
       </ErrorBoundary>

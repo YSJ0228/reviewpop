@@ -1,12 +1,12 @@
 'use client';
 
 import { Suspense } from 'react';
+import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { Settings } from '@features/profile/components/Settings';
 
 import styles from './page.module.scss';
-import { Settings } from '@features/profile/components/Settings';
-import { LoadingSpinner } from '@shared/components';
 
 /**
  * 설정 페이지
@@ -25,7 +25,7 @@ export default function SettingsPage() {
   return (
     <main className={styles.SettingsPage}>
       <ErrorBoundary>
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<Loader />}>
           {/* TODO: Settings 컴포넌트 추가 */}
           <Settings />
         </Suspense>

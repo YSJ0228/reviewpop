@@ -109,34 +109,34 @@ export const authHandlers = [
     // 쿠키에서 토큰 가져오기
     const token = cookies[CONSTANTS.COOKIE_KEYS.AUTH_TOKEN];
 
-    if (!token) {
-      return HttpResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'UNAUTHORIZED',
-            message: '인증이 필요합니다.',
-          },
-        },
-        { status: 401 },
-      );
-    }
+    // if (!token) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: {
+    //         code: 'UNAUTHORIZED',
+    //         message: '인증이 필요합니다.',
+    //       },
+    //     },
+    //     { status: 401 },
+    //   );
+    // }
 
-    // JWT 검증
-    const payload = verifyJWT(token);
+    // // JWT 검증
+    // const payload = verifyJWT(token);
 
-    if (!payload) {
-      return HttpResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'INVALID_TOKEN',
-            message: '유효하지 않은 토큰입니다.',
-          },
-        },
-        { status: 401 },
-      );
-    }
+    // if (!payload) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: {
+    //         code: 'INVALID_TOKEN',
+    //         message: '유효하지 않은 토큰입니다.',
+    //       },
+    //     },
+    //     { status: 401 },
+    //   );
+    // }
 
     // // 사용자 정보 반환
     // const user = {
@@ -147,7 +147,7 @@ export const authHandlers = [
     //   provider: payload.provider,
     //   createdAt: fromUnix(payload.iat).toISOString(),
     // };
-    const user = mockUsers.find((u) => u.id === payload.userId);
+    const user = mockUsers.find((u) => u.id === 'kakao-1001');
 
     return HttpResponse.json({
       success: true,
@@ -158,34 +158,34 @@ export const authHandlers = [
   http.patch(ROUTES.API.ME, async ({ request, cookies }) => {
     const token = cookies[CONSTANTS.COOKIE_KEYS.AUTH_TOKEN];
 
-    if (!token) {
-      return HttpResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'UNAUTHORIZED',
-            message: '인증이 필요합니다.',
-          },
-        },
-        { status: 401 },
-      );
-    }
+    // if (!token) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: {
+    //         code: 'UNAUTHORIZED',
+    //         message: '인증이 필요합니다.',
+    //       },
+    //     },
+    //     { status: 401 },
+    //   );
+    // }
 
-    // JWT 검증
-    const payload = verifyJWT(token);
+    // // JWT 검증
+    // const payload = verifyJWT(token);
 
-    if (!payload) {
-      return HttpResponse.json(
-        {
-          success: false,
-          error: {
-            code: 'INVALID_TOKEN',
-            message: '유효하지 않은 토큰입니다.',
-          },
-        },
-        { status: 401 },
-      );
-    }
+    // if (!payload) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: {
+    //         code: 'INVALID_TOKEN',
+    //         message: '유효하지 않은 토큰입니다.',
+    //       },
+    //     },
+    //     { status: 401 },
+    //   );
+    // }
     const body = (await request.json()) as {
       name?: string;
       phoneNumber?: string;
@@ -193,7 +193,7 @@ export const authHandlers = [
     };
 
     // 실제라면 JWT의 userId로 찾지만, 지금은 mockUsers 활용
-    const user = mockUsers.find((u) => u.id === payload.userId);
+    const user = mockUsers.find((u) => u.id === 'kakao-1001');
     if (!user) {
       return HttpResponse.json(
         {
