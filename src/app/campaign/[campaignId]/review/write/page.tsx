@@ -1,8 +1,9 @@
 'use client';
 
-import { Suspense } from 'react';
+import { use, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { LoadingSpinner } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 import { Button } from '@shared/components';
@@ -12,26 +13,6 @@ import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 
 import styles from './page.module.scss';
-
-/**
- * 체험 후기 작성 페이지
- * - 하단 탭: X
- * - 체험 완료 후 후기 작성
- * - 진입점: 나의 체험 > 선정된 체험 > 후기 작성 버튼
- *
- * TODO:
- * 1. [ ] ReviewForm 컴포넌트 구현 (@features/review/components/ReviewForm)
- * 2. [ ] 텍스트 입력 (제목, 내용)
- * 3. [ ] 이미지 업로드 기능
- * 4. [ ] 별점 입력 기능
- * 5. [ ] 후기 제출 API 연동 (useSubmitReview 훅)
- * 6. [ ] 제출 완료 시 나의 체험 또는 체험 상세로 이동
- */
-
-// ...
-
-import { use } from 'react';
-import { LoadingSpinner } from '@shared/components';
 
 interface ReviewWritePageProps {
   params: Promise<{ campaignId: string }>;
