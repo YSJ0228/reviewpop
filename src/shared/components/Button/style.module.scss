@@ -15,8 +15,10 @@
 
   // 비활성화 상태
   &:disabled {
-    opacity: 0.5;
+    background-color: var(--gray-200);
+    color: var(--color-white);
     cursor: not-allowed;
+    border: none;
   }
 
   // 호버 효과
