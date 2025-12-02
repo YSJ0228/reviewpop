@@ -3,7 +3,6 @@
 import { use, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { PageHeader } from '@shared/components/PageHeader';
 import { ImageGallery, ImageViewer } from '@shared/components/ImageViewer';
 import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusBar';
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
@@ -16,6 +15,7 @@ import { CampaignVisitReservation } from '@features/campaign/components/Campaign
 import { CampaignAdditionalNotice } from '@features/campaign/components/CampaignAdditionalNotice';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
+import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
 
@@ -24,6 +24,10 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
   const router = useRouter();
   const { data: campaign, isLoading, error } = useCampaignDetails(campaignId);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+
+  usePageHeader({
+    showBackButton: true,
+  });
 
   const images = useMemo(() => {
     if (!campaign) return [];
@@ -48,7 +52,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
   if (isLoading) {
     return (
       <div className={styles.Page}>
-        <PageHeader showBackButton />
         <div className={styles.Page__Loading}>
           <p>체험 정보를 불러오는 중...</p>
         </div>
@@ -59,7 +62,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
   if (error || !campaign) {
     return (
       <div className={styles.Page}>
-        <PageHeader showBackButton />
         <div className={styles.Page__Error}>
           <p>체험 정보를 불러올 수 없습니다.</p>
         </div>
@@ -69,8 +71,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
   return (
     <div className={styles.Page}>
-      <PageHeader showBackButton />
-
       <div className={styles.Page__ImageSection}>
         <ImageGallery
           images={images}
@@ -142,8 +142,6 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         <h2 className={styles.Page__SectionTitle}>제공 내역</h2>
         <p className={styles.Page__ListItem}>{campaign.providedItem}</p>
       </section>
-
-      {/* 배송 정보 */}
 
       {/* 주의사항 */}
       {campaign.precautions && campaign.precautions.length > 0 && (

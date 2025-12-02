@@ -1,5 +1,6 @@
 import '@pop-ui/core/styles.css';
 
+import { GlobalPageHeader } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';
@@ -7,7 +8,6 @@ import '@mantine/core/styles.css';
 import '@shared/styles/globals.scss';
 
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
-
 import { Providers } from './providers/Providers';
 
 import type { Metadata, Viewport } from 'next';
@@ -24,6 +24,7 @@ export default function RootLayout({
       </head>
       <body className={`${fontClasses}`}>
         <div className="AppContainer">
+          <GlobalPageHeader />
           <Providers>
             <ErrorBoundary>{children}</ErrorBoundary>
           </Providers>

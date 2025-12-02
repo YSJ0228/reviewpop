@@ -1,6 +1,6 @@
 @use '@shared/styles/mixins' as *;
 
-.NotFound {
+.NotFoundContent {
   width: 100%;
   height: 100dvh;
   @include flex($direction: column, $gap: 16, $align: center, $justify: center);
@@ -14,4 +14,8 @@
   &__Button {
     width: 160px;
   }
+}
+
+.NotFound {
+  min-width: 360px;
 }
