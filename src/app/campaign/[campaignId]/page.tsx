@@ -4,13 +4,14 @@ import { use, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ImageGallery, ImageViewer } from '@shared/components/ImageViewer';
+import { BulletListSection } from '@features/campaign';
+import { AddressMap } from '@shared/components';
 import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusBar';
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
 import ReviewSection from '@features/campaign/components/ReviewSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
-import { CampaignRequirementsSection } from '@features/campaign/components/CampaignRequirementsSection';
 import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
 import { CampaignAdditionalNotice } from '@features/campaign/components/CampaignAdditionalNotice';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
@@ -105,7 +106,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <CampaignScheduleSection campaign={campaign} />
 
-      <CampaignRequirementsSection campaign={campaign} />
+      <BulletListSection title="당첨 조건" items={campaign.requirements || []} />
 
       <CampaignVisitReservation campaign={campaign} />
 
@@ -120,41 +121,34 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         return notice && <CampaignAdditionalNotice content={notice} />;
       })()}
 
-      {/* 리뷰 미션 */}
-      <section className={styles.Page__Section}>
-        <h2 className={styles.Page__SectionTitle}>리뷰 미션</h2>
-        <ul className={styles.Page__List}>
-          {campaign.reviewMission.map((mission, index) => (
-            <li key={index} className={styles.Page__ListItem}>
-              {mission}
-            </li>
-          ))}
-        </ul>
-      </section>
+      {campaign.address && <AddressMap placeName={campaign.brand} address={campaign.address} />}
 
-      {/* 후기 미션 안내 추가 안내사항 */}
-      {campaign.reviewMissionNotice && (
-        <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
+      {/* 리뷰 미션 */}
+      {campaign.reviewMission && campaign.reviewMission.length > 0 && (
+        <>
+          <BulletListSection
+            title="후기 미션 안내"
+            items={campaign.reviewMission}
+            showDivider={false}
+          />
+
+          {/* 후기 미션 안내 추가 안내사항 */}
+          {campaign.reviewMissionNotice && (
+            <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
+          )}
+        </>
       )}
 
-      {/* 제공 내역 */}
-      <section className={styles.Page__Section}>
-        <h2 className={styles.Page__SectionTitle}>제공 내역</h2>
-        <p className={styles.Page__ListItem}>{campaign.providedItem}</p>
-      </section>
-
-      {/* 주의사항 */}
+      {/* 체험 시 주의사항 */}
       {campaign.precautions && campaign.precautions.length > 0 && (
-        <section className={`${styles.Page__Section} ${styles['Page__Section--Notice']}`}>
-          <h2 className={styles.Page__SectionTitle}>주의사항</h2>
-          <ul className={styles.Page__List}>
-            {campaign.precautions.map((notice, index) => (
-              <li key={index} className={styles.Page__ListItem}>
-                {notice}
-              </li>
-            ))}
-          </ul>
-        </section>
+        <BulletListSection
+          title="체험 시 주의사항"
+          items={campaign.precautions}
+          backgroundColor="var(--color-gray-50)"
+          noPadding={true}
+          textColor="var(--color-gray-800)"
+          showDivider={false}
+        />
       )}
     </div>
   );

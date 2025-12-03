@@ -154,6 +154,8 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
           <CampaignReviewedCard
             reviewStatus={application.reviewStatus!}
             campaignStatus={campaign.status}
+            campaignId={campaign.id}
+            applicationId={application.id}
           />
         )}
 

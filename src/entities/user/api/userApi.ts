@@ -1,29 +1,13 @@
 import { apiClient } from '@shared/api/client';
 
 import { User, UserCampaigns } from '../types/user.types';
-
-interface UserCampaignResponse {
-  data: UserCampaigns;
-  success: boolean;
-}
+import { ApiResponse, unwrapApiResponse } from '@shared/api/types/common.types';
 
 export async function getUserProfile() {
-  const response = await apiClient.get<UserCampaignResponse>('/auth/profile', {
+  const response = await apiClient.get<ApiResponse<UserCampaigns>>('/auth/profile', {
     withCredentials: true,
   });
-  return response.data.data;
-}
-
-interface UserResponse {
-  data: User;
-  success: boolean;
-}
-
-export async function getUserInfo() {
-  const response = await apiClient.get<UserResponse>('/auth/me', {
-    withCredentials: true,
-  });
-  return response.data.data;
+  return unwrapApiResponse(response.data);
 }
 
 export interface UpdateUserPayload {
@@ -33,9 +17,17 @@ export interface UpdateUserPayload {
 }
 
 export async function updateUserInfo(payload: UpdateUserPayload) {
-  const response = await apiClient.patch<UserResponse>('/auth/me', payload, {
+  const response = await apiClient.patch<ApiResponse<User>>('/auth/me', payload, {
     withCredentials: true,
   });
 
-  return response.data.data;
+  return unwrapApiResponse(response.data);
+}
+
+/**
+ * 유저 정보 조회
+ */
+export async function getUserInfo() {
+  const response = await apiClient.get<ApiResponse<User>>('/auth/me');
+  return unwrapApiResponse(response.data);
 }
