@@ -3,6 +3,7 @@ import { IconKebap } from '@pop-ui/foundation';
 
 import { Colors } from '@shared/styles/colors';
 import dayjs from '@shared/lib/dayjs.config';
+import { DATE_FORMATS } from '@shared/lib/date';
 
 import { HISTORY_MESSAGES } from '@features/history/constants';
 import { CampaignCardWrapper } from '@features/history/components/CampaignCardWrapper';
@@ -56,7 +57,10 @@ export function CampaignSelectedCard({ application }: CampaignSelectedCardProps)
       return (
         <div className={styles.CampaignSelectedCard__VisitDateWrapper}>
           <span className={styles.CampaignSelectedCard__VisitDate}>
-            {appliedAt && dayjs(`${appliedAt[0]} ${appliedAt[1]}`).format('M월 D일 dddd A h:mm')}
+            {appliedAt &&
+              dayjs(`${appliedAt[0]} ${appliedAt[1]}`).format(
+                DATE_FORMATS.MMDD_DDDD_LONG_WITH_TIME,
+              )}
           </span>
           <button
             type="button"

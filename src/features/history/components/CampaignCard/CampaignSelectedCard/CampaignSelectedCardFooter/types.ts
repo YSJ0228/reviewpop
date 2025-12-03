@@ -1,5 +1,5 @@
 import type { CampaignDetail } from '@entities/campaign/types/campaign.types';
-import type { VisitStatus } from '@features/history/constants';
+import type { VisitStatus } from '@features/history/types';
 
 export interface CampaignSelectedCardFooterProps {
   campaign: CampaignDetail;

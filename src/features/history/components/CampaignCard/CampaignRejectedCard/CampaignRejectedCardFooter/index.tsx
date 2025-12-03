@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
 
 import { CONSTANTS } from '@shared/config/constants';
-import { HISTORY_MESSAGES } from '@features/history/constants';
+import { DATE_FORMATS } from '@shared/lib/date';
+import { HISTORY_MESSAGES, DATE_RANGE_SEPARATOR } from '@features/history/constants';
 
 import type { CampaignRejectedCardFooterProps } from './types';
 
@@ -24,10 +25,13 @@ export function CampaignRejectedCardFooter({
   return (
     <div className={styles.CampaignRejectedCardFooter__Date} aria-label="모집 일정 및 선정 인원">
       <time dateTime={recruitmentSchedule[0]}>
-        {HISTORY_MESSAGES.RECRUITMENT} {dayjs(recruitmentSchedule[0]).format('MM.DD')}
+        {HISTORY_MESSAGES.RECRUITMENT}{' '}
+        {dayjs(recruitmentSchedule[0]).format(DATE_FORMATS.MMDD_SHORT)}
       </time>
-      <span> ~ </span>
-      <time dateTime={recruitmentSchedule[1]}>{dayjs(recruitmentSchedule[1]).format('MM.DD')}</time>
+      <span>{DATE_RANGE_SEPARATOR}</span>
+      <time dateTime={recruitmentSchedule[1]}>
+        {dayjs(recruitmentSchedule[1]).format(DATE_FORMATS.MMDD_SHORT)}
+      </time>
       <span className={styles.CampaignRejectedCardFooter__MaxRecruitment}>
         {maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}{' '}
         {HISTORY_MESSAGES.SELECTED_COUNT}

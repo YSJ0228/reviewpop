@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { SharedCampaignCard } from '@shared/components';
+import { ROUTES } from '@shared/config/routes';
 
 import type { CampaignCardWrapperProps } from './types';
 
@@ -24,7 +25,7 @@ export function CampaignCardWrapper({
 }: CampaignCardWrapperProps) {
   return (
     <Link
-      href={`/campaign/${campaign.id}`}
+      href={ROUTES.CAMPAIGN_DETAIL(campaign.id)}
       className={`${styles.CampaignCardWrapper__Link} ${isSelected ? styles['CampaignCardWrapper__Link--NoBorder'] : ''}`}
     >
       <SharedCampaignCard
