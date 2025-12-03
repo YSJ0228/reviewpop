@@ -7,6 +7,7 @@ export interface NaverLatLng {
 export interface NaverMap {
   setCenter(center: NaverLatLng): void;
   setZoom(zoom: number): void;
+  getSize?(): { width: number; height: number };
 }
 
 export interface NaverMarker {
@@ -23,7 +24,7 @@ export interface NaverMapOptions {
   center: NaverLatLng;
   zoom: number;
   zoomControl: boolean;
-  zoomControlOptions: {
+  zoomControlOptions?: {
     position: number;
   };
   scaleControl?: boolean;
@@ -80,6 +81,7 @@ declare global {
         Event?: {
           addListener: (target: NaverMap, event: string, handler: () => void) => unknown;
           removeListener?: (target: NaverMap, event: string, listener: unknown) => void;
+          trigger?: (target: NaverMap, event: string) => void;
         };
       };
     };
