@@ -6,7 +6,27 @@ import {
   getReservation,
   updateReservation,
   deleteReservation,
+  getReservationConfig,
+  getReservedDateTimes,
 } from '../api/reserveApi';
+
+// 예약 폼에 필요한 설정 정보 조회 hook
+export const useReservationConfig = (campaignId: string) => {
+  return useQuery({
+    queryKey: ['reservationConfig', campaignId],
+    queryFn: () => getReservationConfig(campaignId),
+    enabled: !!campaignId,
+  });
+};
+
+// 특정 날짜의 예약된 시간대 조회 hook
+export const useReservedDateTimes = (campaignId: string, date: string) => {
+  return useQuery({
+    queryKey: ['reservedDateTimes', campaignId, date],
+    queryFn: () => getReservedDateTimes(campaignId, date),
+    enabled: !!date,
+  });
+};
 
 // 예약 생성 hook
 export const useReserve = (campaignId: string) => {
