@@ -2,7 +2,7 @@
  * Application (체험 신청) 엔티티 타입 정의
  */
 
-import { CampaignDetail } from '@features/campaign';
+import { CampaignDetail } from '@entities/campaign/types/campaign.types';
 
 /**
  * 신청 상태

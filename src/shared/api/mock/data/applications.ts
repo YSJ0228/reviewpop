@@ -19,7 +19,7 @@ import { mockCampaignDetails } from '@entities/campaign/lib/mockCampaignDetails'
 //   };
 // }
 
-function getCampaign(id: string) {
+export function getCampaign(id: string) {
   const campaign = mockCampaignDetails.find((c) => c.id === id);
   if (!campaign) throw new Error(`Campaign ${id} not found`);
   return campaign;

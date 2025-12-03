@@ -38,6 +38,7 @@ export const DATE_FORMATS = {
   MMDD_DDD_LONG: 'M월 D일 (ddd)',
   MMDD_DDDD_SHORT: 'MM.DD dddd',
   MMDD_DDDD_LONG: 'M월 D일 dddd',
+  FULL_SHORT: 'YY.MM.DD (ddd) A h시 mm분',
   MMDD_DDDD_LONG_WITH_TIME: 'M월 D일 dddd A h:mm',
   TIME: 'HH:mm',
   TIME_WITH_AMPM: 'A h:mm',
