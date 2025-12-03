@@ -1,0 +1,35 @@
+@use '@/shared/styles/mixins' as *;
+
+.ReviewMissionSection {
+  @include flex($direction: column, $gap: 8);
+
+  h3 {
+    @include font(
+      $size: 18,
+      $weight: 700,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
+}
+
+.ReviewMissionSection__SectionContent {
+  @include flex($direction: column, $gap: 24);
+}
+
+.ReviewMissionSection__MissionList {
+  padding-left: 20px;
+  list-style: disc;
+  @include flex($direction: column, $gap: 8);
+}
+
+.ReviewMissionSection__MissionItem {
+  @include font(
+    $size: 14,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-900)
+  );
+}

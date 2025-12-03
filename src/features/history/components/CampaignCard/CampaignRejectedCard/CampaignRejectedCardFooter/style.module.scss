@@ -1,0 +1,24 @@
+@use '@/shared/styles/mixins' as *;
+
+.CampaignRejectedCardFooter__Date {
+  @include flex($align: center, $gap: 4);
+  @include margin($top: 15);
+  @include font(
+    $size: 12,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
+}
+
+.CampaignRejectedCardFooter__MaxRecruitment {
+  @include margin($left: 6);
+  @include font(
+    $size: 12,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
+}

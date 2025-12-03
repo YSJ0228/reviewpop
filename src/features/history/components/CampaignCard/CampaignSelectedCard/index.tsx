@@ -1,129 +1,114 @@
-import { IconWarningCircle } from '@pop-ui/foundation';
 import { useDisclosure } from '@mantine/hooks';
-import { useRouter } from 'next/navigation';
+import { IconKebap } from '@pop-ui/foundation';
 
 import { Colors } from '@shared/styles/colors';
-import { BottomSheet } from '@shared/components/BottomSheet';
-import { Button } from '@shared/components';
-import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
-import { getCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
+import dayjs from '@shared/lib/dayjs.config';
 
-import type { CampaignSelectedCardProps } from './types';
+import { HISTORY_MESSAGES } from '@features/history/constants';
+import { CampaignCardWrapper } from '@features/history/components/CampaignCardWrapper';
+import { CampaignStatusLabel } from '@features/history/components/CampaignStatusLabel';
+import { ReservationBottomSheet } from '@features/history/components/ReservationBottomSheet';
+import { useCampaignCardData } from '@features/history/hooks/useCampaignCardData';
+import { useReservationActions } from '@features/history/hooks/useReservationActions';
+
+import { CampaignSelectedCardFooter } from './CampaignSelectedCardFooter';
+
+import type { Application } from '@entities/application';
 
 import styles from './style.module.scss';
 
+interface CampaignSelectedCardProps {
+  application: Application;
+}
+
 /**
- * 선정된 체험 카드의 액션 영역 컴포넌트
- * @param visitStatus - 방문 상태 (before: 방문 전, scheduled: 방문 예정)
+ * SELECTED 타입 전용 카드 컴포넌트 (나의 체험 - 선정탭)
+ * @param application - 체험 신청 정보
  */
-export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelectedCardProps) {
-  const [opened, { open, close }] = useDisclosure(false);
+export function CampaignSelectedCard({ application }: CampaignSelectedCardProps) {
+  const { campaign, visitStatus, appliedAt } = useCampaignCardData(application);
 
-  const bottomSheetData = getCampaignBottomSheetData(campaign.id, visitStatus === 'scheduled');
+  const [isOpen, { open, close }] = useDisclosure(false);
+  const { handleChangeDate, handleCancelReservation } = useReservationActions(campaign.id);
 
-  const router = useRouter();
-
-  const handleCampaignDetailClick = () => {
-    router.push(`/campaign/${campaign.id}`);
-  };
-
-  // TODO: 방문 날짜 설정 버튼 클릭 핸들러
-  const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  // 카드 케밥 버튼 클릭 핸들러
+  const handleKebapClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
     open();
   };
 
-  // TODO: 리뷰 미션 버튼 클릭 핸들러
-  const handleReviewMissionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    open();
+  // 예약 날짜 변경 핸들러
+  const handleChangeDateClick = () => {
+    handleChangeDate();
+    close();
+  };
+
+  // 예약 취소 핸들러
+  const handleCancelReservationClick = async () => {
+    await handleCancelReservation();
+    close();
+  };
+
+  // Top Content 렌더링
+  const getTopContent = () => {
+    if (visitStatus === 'scheduled') {
+      return (
+        <div className={styles.CampaignSelectedCard__VisitDateWrapper}>
+          <span className={styles.CampaignSelectedCard__VisitDate}>
+            {appliedAt && dayjs(`${appliedAt[0]} ${appliedAt[1]}`).format('M월 D일 dddd A h:mm')}
+          </span>
+          <button
+            type="button"
+            onClick={handleKebapClick}
+            className={styles.CampaignSelectedCard__KebapButton}
+            aria-label="예약 관리 메뉴 열기"
+            aria-expanded={isOpen}
+            aria-haspopup="dialog"
+          >
+            <IconKebap size={20} color={Colors.COLOR_GRAY_600} />
+          </button>
+        </div>
+      );
+    }
+
+    if (visitStatus === 'before') {
+      return (
+        <span className={styles.CampaignSelectedCard__SelectedText}>
+          {HISTORY_MESSAGES.SELECTED}
+        </span>
+      );
+    }
+
+    return undefined;
   };
 
   return (
-    <footer className={styles.CampaignSelectedCard__ContentWrapper}>
-      {visitStatus === 'before' && (
-        <>
-          <Button
-            variant="primary"
-            fullWidth
-            radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
-            onClick={handleReservationClick}
-          >
-            <span className={styles.CampaignSelectedCard__PrimaryText}>
-              {HISTORY_MESSAGES.SET_VISIT_DATE}
-            </span>
-          </Button>
-          <div className={styles.CampaignSelectedCard__WarningWrapper}>
-            <IconWarningCircle color={Colors.COLOR_GRAY_400} size={HISTORY_UI.WARNING_ICON_SIZE} />
-            <span className={styles.CampaignSelectedCard__WarningText}>
-              {HISTORY_MESSAGES.RESERVATION_WARNING}
-            </span>
-          </div>
-        </>
-      )}
+    <>
+      <CampaignCardWrapper
+        campaign={campaign}
+        isSelected={true}
+        statusLabel={
+          <CampaignStatusLabel
+            type="selected"
+            visitStatus={visitStatus}
+            reviewStatus={application.reviewStatus}
+            reservationDate={application.reservationDate}
+            campaignStatus={campaign.status}
+          />
+        }
+        topContent={getTopContent()}
+      />
+      <CampaignSelectedCardFooter campaign={campaign} visitStatus={visitStatus} />
       {visitStatus === 'scheduled' && (
-        <>
-          <Button
-            variant="secondary"
-            fullWidth
-            radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
-            onClick={handleReviewMissionClick}
-          >
-            <span className={styles.CampaignSelectedCard__BasicText}>
-              {HISTORY_MESSAGES.REVIEW_MISSION}
-            </span>
-          </Button>
-          {opened && (
-            <BottomSheet
-              opened={opened}
-              onClose={close}
-              height={HISTORY_UI.BOTTOM_SHEET_HEIGHT}
-              footer={
-                <Button variant="secondary" fullWidth onClick={handleCampaignDetailClick}>
-                  <span>{HISTORY_MESSAGES.VIEW_CAMPAIGN_DETAIL}</span>
-                </Button>
-              }
-            >
-              <div className={styles.CampaignSelectedCard__BottomSheetContent}>
-                <section
-                  aria-label="제공 혜택 내용"
-                  className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
-                >
-                  <div className={styles.CampaignSelectedCard__SectionContent}>
-                    <h3>제공 혜택</h3>
-                    <p className={styles.CampaignSelectedCard__SectionItem}>
-                      {bottomSheetData?.providedItem || '제공 혜택 정보가 없습니다.'}
-                    </p>
-                  </div>
-                  <p className={styles.CampaignSelectedCard__Description}>
-                    {bottomSheetData?.description}
-                  </p>
-                </section>
-                <section
-                  aria-label="후기 미션 내용"
-                  className={styles['CampaignSelectedCard__BottomSheetContent--Section']}
-                >
-                  <div className={styles.CampaignSelectedCard__SectionContent}>
-                    <h3>후기 미션</h3>
-                    <ul className={styles.CampaignSelectedCard__MissionList}>
-                      {bottomSheetData?.reviewMission.map((mission, index) => (
-                        <li
-                          key={`${campaign.id}-mission-${index}`}
-                          className={styles.CampaignSelectedCard__MissionItem}
-                        >
-                          {mission}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </section>
-              </div>
-            </BottomSheet>
-          )}
-        </>
+        <ReservationBottomSheet
+          appliedAt={appliedAt}
+          isOpen={isOpen}
+          onClose={close}
+          onDateChange={handleChangeDateClick}
+          onCancel={handleCancelReservationClick}
+        />
       )}
-    </footer>
+    </>
   );
 }

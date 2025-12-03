@@ -1,0 +1,24 @@
+@use '@/shared/styles/mixins' as *;
+
+.ReviewEditRequestCard {
+  @include font($size: 14, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
+}
+
+.ReviewEditRequestCard__Content {
+  width: 100%;
+  @include flex($gap: 8);
+}
+
+.ReviewEditRequestCard__ButtonText--Primary {
+  @include font($size: 14, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
+}
+
+.ReviewEditRequestCard__ButtonText--Secondary {
+  @include font(
+    $size: 14,
+    $weight: 600,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-800)
+  );
+}

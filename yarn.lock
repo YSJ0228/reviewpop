@@ -979,31 +979,23 @@
     "@parcel/watcher-win32-ia32" "2.5.1"
     "@parcel/watcher-win32-x64" "2.5.1"
 
-"@pop-ui/core@^0.0.31":
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/@pop-ui/core/-/core-0.0.31.tgz#a95f3b4500e65e81858546001260d29a0f2bfcbf"
-  integrity sha512-VkhBFjQoQdlk7OTnSAHmTDsOqnTUA1ozRZCZnF1b+ePatKurjEMwfSJFAM7QdcTtEH4vpSJV7funH2Vb2T2xbA==
+"@pop-ui/core@^0.0.34":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@pop-ui/core/-/core-0.0.34.tgz#1a47cd933ce341939c98e5df7d5c128873d4f187"
+  integrity sha512-IUB0lgTrlyHkg46kkxEz4L5LVEs0ojBtHvCMbiO7v8GxMaTzKC9CFr8X2u6tiyWsiuHZvg2G+Gq8M5e8lFYDbg==
   dependencies:
     "@mantine/core" "^8.3.6"
     "@mantine/dates" "^8.3.6"
     "@mantine/dropzone" "^8.3.6"
     "@mantine/hooks" "^8.3.6"
     "@mantine/notifications" "^8.3.6"
-    "@pop-ui/foundation" "0.0.28"
+    "@pop-ui/foundation" "0.0.29"
     dayjs "^1.11.18"
 
-"@pop-ui/foundation@0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@pop-ui/foundation/-/foundation-0.0.28.tgz#7e99cfcf80b67e0524ae9aaea9ec5a65f574eac7"
-  integrity sha512-DEAsAlAM7H1oaP4+Y88WEWpf8Hvc/i4dUlyW6go4gRD99MfEQeWAWi90ax1OtwIl0X1kwvf1sSAKBdSeIOLp1Q==
-  dependencies:
-    "@mantine/core" "^8.3.6"
-    "@mantine/hooks" "^8.3.6"
-
-"@pop-ui/foundation@^0.0.25":
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/@pop-ui/foundation/-/foundation-0.0.25.tgz#31dc7377c65f0ab15366ae59ed6648b488e5e402"
-  integrity sha512-P93fxLEFdjTsSTtbKlRt/tcN7HD4RXrzvbbJ6DPafLzB5KC6OoLNCUO4FiLa9nfhVN97NKcMuxkCq9ub2Rrx7Q==
+"@pop-ui/foundation@0.0.29", "@pop-ui/foundation@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@pop-ui/foundation/-/foundation-0.0.29.tgz#92eb4fce950125cc1b69b04acff22e8ef529a4d5"
+  integrity sha512-87AP51fjpZbnvogwXXWSkCcOOBs5PGWj536k0mhGxGLpSZ0MhsdrhNRzv26zbCCa0Pq7txl6ppjnPe7Mfns/nw==
   dependencies:
     "@mantine/core" "^8.3.6"
     "@mantine/hooks" "^8.3.6"

@@ -1,0 +1,41 @@
+@use '@/shared/styles/mixins' as *;
+
+.ProviderBenefitSection {
+  border-bottom: 1px solid var(--gray-50);
+  padding-bottom: 24px;
+  @include flex($direction: column, $gap: 8);
+
+  h3 {
+    @include font(
+      $size: 18,
+      $weight: 700,
+      $line-height: 1.5,
+      $letter-spacing: -0.02em,
+      $color: var(--gray-900)
+    );
+  }
+}
+
+.ProviderBenefitSection__SectionContent {
+  @include flex($direction: column, $gap: 24);
+}
+
+.ProviderBenefitSection__SectionItem {
+  @include font(
+    $size: 16,
+    $weight: 700,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-900)
+  );
+}
+
+.ProviderBenefitSection__Description {
+  @include font(
+    $size: 14,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-600)
+  );
+}
