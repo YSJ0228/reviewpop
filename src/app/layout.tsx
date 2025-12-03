@@ -1,10 +1,9 @@
-import '@pop-ui/core/styles.css';
-
 import { GlobalPageHeader } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';
 import '@mantine/core/styles.css';
+import '@pop-ui/core/styles.css';
 import '@shared/styles/globals.scss';
 
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
