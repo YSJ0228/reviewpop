@@ -1,0 +1,157 @@
+name: Deploy reviewpop-web
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+env:
+  AWS_REGION: ap-northeast-2
+  ECR_REPOSITORY: reviewpop-web
+  CONTAINER_NAME: reviewpop-web
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-24.04
+    permissions:
+      id-token: write
+      contents: read
+      deployments: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # GitHub Deployment 생성
+      - name: Create deployment
+        id: deployment
+        uses: chrnorm/deployment-action@v2
+        with:
+          token: ${{ github.token }}
+          environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+          environment-url: ${{ github.ref == 'refs/heads/main' && 'https://review.datepop.co.kr' || 'https://review-staging.datepop.co.kr' }}
+
+      # 환경 변수 설정
+      - name: Set environment variables
+        id: set-env
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "NEXT_PUBLIC_IS_STAGING=false" >> .env
+            echo "ECS_SERVICE=prod-reviewpop-web" >> $GITHUB_ENV
+            echo "ECS_CLUSTER=datepop-cluster-production-arm" >> $GITHUB_ENV
+            echo "ENVIRONMENT=production" >> $GITHUB_ENV
+          else
+            echo "NEXT_PUBLIC_IS_STAGING=true" >> .env
+            echo "ECS_SERVICE=staging-reviewpop-web" >> $GITHUB_ENV
+            echo "ECS_CLUSTER=datepop-cluster-staging-arm" >> $GITHUB_ENV
+            echo "ENVIRONMENT=staging" >> $GITHUB_ENV
+          fi
+
+      # Node.js 설정 + yarn 캐시
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      # Next.js 빌드 캐시
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('src/**/*.ts', 'src/**/*.tsx') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-
+            nextjs-${{ runner.os }}-
+
+      # 빌드
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build Next.js
+        run: yarn build
+
+      # AWS 인증 (OIDC)
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GithubActions
+          role-session-name: ${{ github.event.repository.name }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # ECR 로그인
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Docker 빌드 설정 (ARM64 크로스 컴파일용)
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Docker 빌드 & 푸시
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+          platforms: linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # ECS 태스크 정의 업데이트
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition \
+            --task-definition ${{ env.CONTAINER_NAME }} \
+            --query taskDefinition > task-def.json
+
+      - name: Update task definition with new image
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-def.json
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+
+      - name: Clean task definition
+        run: |
+          cat ${{ steps.task-def.outputs.task-definition }} | jq 'del(
+            .taskDefinitionArn,
+            .requiresAttributes,
+            .compatibilities,
+            .revision,
+            .status,
+            .registeredAt,
+            .registeredBy
+          )' > cleaned-task-def.json
+
+      # ECS 배포
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: cleaned-task-def.json
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+      # 배포 상태 업데이트
+      - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ github.token }}
+          state: success
+          environment-url: ${{ github.ref == 'refs/heads/main' && 'https://review.datepop.co.kr' || 'https://review-staging.datepop.co.kr' }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ github.token }}
+          state: failure
+          environment-url: ${{ github.ref == 'refs/heads/main' && 'https://review.datepop.co.kr' || 'https://review-staging.datepop.co.kr' }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
