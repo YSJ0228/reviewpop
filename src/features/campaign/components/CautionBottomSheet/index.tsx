@@ -46,7 +46,12 @@ export function CautionBottomSheet({ opened, onClose, formData }: CautionBottomS
   };
 
   return (
-    <BottomSheet opened={opened} onClose={onClose} title="체험단 참여 시 주의사항을 확인해주세요">
+    <BottomSheet
+      opened={opened}
+      onClose={onClose}
+      height={560}
+      title="체험단 참여 시 주의사항을 확인해주세요"
+    >
       <h2 className={styles.CautionBottomSheet__SubTitle}>체험단 참여 시 주의사항</h2>
       <ul className={styles.CautionBottomSheet__Caution}>
         {notices.map((text) => (
