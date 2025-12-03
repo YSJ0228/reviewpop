@@ -9,6 +9,12 @@ export interface BulletListSectionProps {
   items: string[];
   /** 하단 구분선 표시 여부 (기본값: true) */
   showDivider?: boolean;
+  /** 배경색 (CSS 변수 또는 색상 값, 기본값: var(--color-white)) */
+  backgroundColor?: string;
+  /** 패딩 제거 여부 (기본값: false) */
+  noPadding?: boolean;
+  /** 텍스트 색상 (CSS 변수 또는 색상 값, 기본값: var(--color-gray-900)) */
+  textColor?: string;
   /** 커스텀 클래스명 */
   className?: string;
 }
@@ -31,26 +37,35 @@ export function BulletListSection({
   title,
   items,
   showDivider = true,
+  backgroundColor,
+  noPadding = false,
+  textColor,
   className = '',
 }: BulletListSectionProps) {
-  if (!items || items.length === 0) {
+  if (!items?.length) {
     return null;
   }
 
   const containerClassName = [
     styles.BulletListSection,
-    showDivider ? styles['BulletListSection--WithDivider'] : '',
+    showDivider && styles['BulletListSection--WithDivider'],
+    noPadding && styles['BulletListSection--NoPadding'],
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
+  const containerStyle = backgroundColor ? { backgroundColor } : undefined;
+  const textStyle = textColor ? { color: textColor } : undefined;
+
   return (
-    <div className={containerClassName}>
-      <h2 className={styles.Title}>{title}</h2>
+    <div className={containerClassName} style={containerStyle}>
+      <h2 className={styles.Title} style={textStyle}>
+        {title}
+      </h2>
       <ul className={styles.List}>
         {items.map((item, index) => (
-          <li key={index} className={styles.Item}>
+          <li key={index} className={styles.Item} style={textStyle}>
             {item}
           </li>
         ))}
