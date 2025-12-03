@@ -15,8 +15,8 @@ RUN corepack enable && corepack prepare yarn@4.10.3 --activate
 # 의존성 파일 복사
 COPY package.json yarn.lock .yarnrc.yml ./
 
-# 의존성 설치
-RUN yarn install --immutable
+# 의존성 설치 (frozen lockfile mode 대신 일반 모드로 설치)
+RUN yarn install
 
 # 소스 코드 복사 및 빌드
 COPY . .
