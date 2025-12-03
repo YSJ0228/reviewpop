@@ -65,8 +65,16 @@ export function AddressMap({
   const eventListenersRef = useRef<Array<{ target: NaverMap; event: string; listener: unknown }>>(
     [],
   );
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [mapError, setMapError] = useState<string | null>(null);
+
+  // 컴포넌트 마운트 시 네이버 지도 API가 이미 로드되어 있는지 확인
+  useEffect(() => {
+    if (window.naver?.maps) {
+      setIsMapLoaded(true);
+    }
+  }, []);
 
   // 지도 초기화 함수
   const initializeMap = useCallback(
@@ -79,9 +87,6 @@ export function AddressMap({
         minZoom: DEFAULT_ZOOM_LEVEL,
         maxZoom: DEFAULT_ZOOM_LEVEL,
         zoomControl: false,
-        zoomControlOptions: {
-          position: window.naver.maps.Position.TOP_RIGHT,
-        },
         scaleControl: false,
         logoControl: false,
         scrollWheelZoom: false,
@@ -120,6 +125,41 @@ export function AddressMap({
         styles.AddressMap__MarkerBorder,
         styles.AddressMap__MarkerIcon,
       );
+
+      // 지도가 컨테이너 크기를 인식하도록 resize 이벤트 트리거
+      const triggerResize = () => {
+        if (mapInstanceRef.current && window.naver?.maps?.Event?.trigger) {
+          try {
+            window.naver.maps.Event.trigger(mapInstanceRef.current, 'resize');
+          } catch (error) {
+            console.warn('지도 resize 이벤트 트리거 실패:', error);
+          }
+        }
+        window.dispatchEvent(new Event('resize'));
+      };
+
+      // 여러 번 시도하여 지도가 확실히 렌더링되도록 함
+      requestAnimationFrame(() => {
+        triggerResize();
+        setTimeout(() => {
+          triggerResize();
+          setTimeout(triggerResize, 100);
+        }, 50);
+      });
+
+      // ResizeObserver로 컨테이너 크기 변경 감지
+      if (mapRef.current && typeof ResizeObserver !== 'undefined') {
+        resizeObserverRef.current = new ResizeObserver(() => {
+          if (mapInstanceRef.current && window.naver?.maps?.Event?.trigger) {
+            try {
+              window.naver.maps.Event.trigger(mapInstanceRef.current, 'resize');
+            } catch {
+              // 무시
+            }
+          }
+        });
+        resizeObserverRef.current.observe(mapRef.current);
+      }
     },
     [address],
   );
@@ -134,53 +174,87 @@ export function AddressMap({
       return;
     }
 
-    try {
-      if (latitude && longitude) {
-        const position = new window.naver.maps.LatLng(latitude, longitude);
-        initializeMap(position);
-      } else {
-        window.naver.maps.Service.geocode({ query: address }, (status, response) => {
-          if (status === window.naver.maps.Service.Status.ERROR) {
-            console.error('주소 검색 실패:', {
-              address,
-              status,
-              response,
-            });
-            setMapError('주소를 찾을 수 없습니다. 기본 위치로 표시됩니다.');
-            initializeMap(createDefaultPosition());
-            return;
-          }
+    // 컨테이너가 DOM에 마운트되고 크기가 계산될 때까지 대기
+    const checkContainerReady = () => {
+      if (!mapRef.current) return false;
 
-          if (response.v2.meta.totalCount === 0) {
-            console.warn('검색된 주소가 없습니다:', address);
-            setMapError('주소를 찾을 수 없습니다. 기본 위치로 표시됩니다.');
-            initializeMap(createDefaultPosition());
-            return;
-          }
+      const rect = mapRef.current.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    };
 
-          const item = response.v2.addresses[0];
-          const position = new window.naver.maps.LatLng(Number(item.y), Number(item.x));
-          initializeMap(position);
-          setMapError(null);
-        });
+    const initializeWhenReady = () => {
+      if (!checkContainerReady()) {
+        // 컨테이너가 준비되지 않았으면 다음 프레임에 다시 시도
+        requestAnimationFrame(initializeWhenReady);
+        return;
       }
 
-      setMapError(null);
-    } catch (error) {
-      console.error('지도 초기화 오류:', error);
-      setMapError('지도를 불러오는데 실패했습니다.');
-    }
+      try {
+        if (latitude && longitude) {
+          const position = new window.naver.maps.LatLng(latitude, longitude);
+          initializeMap(position);
+        } else {
+          window.naver.maps.Service.geocode({ query: address }, (status, response) => {
+            if (status === window.naver.maps.Service.Status.ERROR) {
+              console.error('주소 검색 실패:', {
+                address,
+                status,
+                response,
+              });
+              setMapError('주소를 찾을 수 없습니다. 기본 위치로 표시됩니다.');
+              initializeMap(createDefaultPosition());
+              return;
+            }
 
-    // cleanup: 이벤트 리스너 제거
+            if (response.v2.meta.totalCount === 0) {
+              console.warn('검색된 주소가 없습니다:', address);
+              setMapError('주소를 찾을 수 없습니다. 기본 위치로 표시됩니다.');
+              initializeMap(createDefaultPosition());
+              return;
+            }
+
+            const item = response.v2.addresses[0];
+            const position = new window.naver.maps.LatLng(Number(item.y), Number(item.x));
+            initializeMap(position);
+            setMapError(null);
+          });
+        }
+      } catch (error) {
+        console.error('지도 초기화 오류:', error);
+        setMapError('지도를 불러오는데 실패했습니다.');
+      }
+    };
+
+    requestAnimationFrame(initializeWhenReady);
+
+    // cleanup: 이벤트 리스너 및 ResizeObserver 제거
+    const currentMapRef = mapRef.current;
     return () => {
+      // ResizeObserver 정리
+      if (resizeObserverRef.current && currentMapRef) {
+        resizeObserverRef.current.disconnect();
+        resizeObserverRef.current = null;
+      }
+
       if (window.naver?.maps?.Event && mapInstanceRef.current) {
         eventListenersRef.current.forEach(({ target, event, listener }) => {
-          if (window.naver.maps.Event?.removeListener && listener) {
-            window.naver.maps.Event.removeListener(target, event, listener);
+          try {
+            // target이 유효하고 mapInstanceRef와 같은지 확인
+            if (
+              window.naver.maps.Event?.removeListener &&
+              listener &&
+              target &&
+              target === mapInstanceRef.current
+            ) {
+              window.naver.maps.Event.removeListener(target, event, listener);
+            }
+          } catch (error) {
+            console.warn('이벤트 리스너 제거 실패:', error);
           }
         });
         eventListenersRef.current = [];
       }
+      mapInstanceRef.current = null;
     };
   }, [isMapLoaded, latitude, longitude, address, initializeMap]);
 
