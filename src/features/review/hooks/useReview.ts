@@ -7,25 +7,24 @@ import {
   getReviews,
   getReviewById,
 } from '../api/reviewApi';
+import { getCampaignDetails } from '@entities/campaign/api/campaignApi';
+import { getUserInfo } from '@entities/user/api/userApi';
+import { getApplicationById } from '@entities/application/api/applicationApi';
 
 /**
  * 리뷰 등록 훅
- * @param campaignId - 캠페인 ID
- * @param userId - 사용자 ID
  * @returns 리뷰 등록 mutation 객체
  */
-export const useCreateReview = (campaignId: string | null, userId: string | null) => {
+export const useCreateReview = (onSuccessCallback?: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: PostReview) => {
-      if (!campaignId || !userId) {
-        throw new Error('필수 정보가 없습니다.');
-      }
-      return createReview(campaignId, userId, data);
+      return createReview(data);
     },
     onSuccess: () => {
       toast.success('후기가 등록되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
+      onSuccessCallback?.();
     },
     onError: (error: Error) => {
       const message = error.message || '후기 등록에 실패했습니다.';
@@ -78,3 +77,19 @@ export const useGetReviewById = (id: number) => {
     queryFn: () => getReviewById(id),
   });
 };
+
+// 예시: useReviewPageData 훅 생성
+export function useReviewPageData(campaignId: string, applicationId: string | null) {
+  return useQuery({
+    queryKey: ['reviewPageData', campaignId, applicationId],
+    queryFn: async () => {
+      const [campaign, user, application] = await Promise.all([
+        getCampaignDetails(campaignId),
+        getUserInfo(),
+        applicationId ? getApplicationById(applicationId) : null,
+      ]);
+      return { campaign, user, application };
+    },
+    enabled: !!applicationId,
+  });
+}

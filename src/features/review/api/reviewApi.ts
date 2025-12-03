@@ -29,11 +29,8 @@ export async function getReviewById(id: number) {
 /**
  * 리뷰 작성
  */
-export async function createReview(campaignId: string, userId: string, data: PostReview) {
-  const response = await apiClient.post<ApiResponse<PostReview>>(
-    `/reviews?campaignId=${campaignId}&userId=${userId}`,
-    data,
-  );
+export async function createReview(data: PostReview) {
+  const response = await apiClient.post<ApiResponse<PostReview>>('/reviews', data);
   return unwrapApiResponse(response.data);
 }
 /**

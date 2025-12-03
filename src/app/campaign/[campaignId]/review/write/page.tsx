@@ -5,11 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, LoadingSpinner, ErrorBoundary } from '@shared/components';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
-import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
-import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { useApplicationById } from '@entities/application/hooks/useApplicationById';
 import { ReviewForm } from '@features/review/components/ReviewForm';
-import { useCreateReview } from '@features/review/hooks/useReview';
+import { useCreateReview, useReviewPageData } from '@features/review/hooks/useReview';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
 import styles from './page.module.scss';
@@ -24,19 +21,16 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
   const searchParams = useSearchParams();
   const applicationId = searchParams.get('applicationId');
 
-  const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
-  const { data: user, isLoading: isUserLoading } = useUserInfo();
+  const { data, isLoading: isPageLoading } = useReviewPageData(campaignId, applicationId);
+  const { campaign, user, application } = data || {};
 
-  const { data: application, isLoading: isApplicationLoading } = useApplicationById(applicationId);
-
-  const { mutate: createReview, isPending } = useCreateReview(
-    campaign?.id ?? null,
-    application?.userId ?? null,
+  const { mutate: createReview, isPending } = useCreateReview(() =>
+    router.push('/my?tab=reviewed'),
   );
 
   const reviewLinkInput = useInputValidate('blogUrl');
 
-  const isLoading = isCampaignLoading || isUserLoading || isApplicationLoading;
+  const isLoading = isPageLoading;
 
   const isSubmitDisabled =
     !reviewLinkInput.value || // 빈 값 체크 (먼저)
@@ -72,6 +66,7 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
 
   const handleSubmit = () => {
     if (!reviewLinkInput.value || reviewLinkInput.errorMsg) return;
+    if (!campaign?.id || !application?.userId) return;
 
     createReview({
       campaignId: campaign.id,
