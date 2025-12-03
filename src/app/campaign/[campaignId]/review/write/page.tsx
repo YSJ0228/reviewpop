@@ -34,6 +34,16 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
     },
   );
 
+  const { mutate: createReview, isPending } = useCreateReview(
+    campaign?.id ?? '',
+    application?.userId ?? '',
+  );
+  const reviewLinkInput = useInputValidate('blogUrl');
+
+  const isLoading = isCampaignLoading || isUserLoading || isApplicationLoading;
+
+  const isSubmitDisabled = Boolean(reviewLinkInput.errorMsg) || !reviewLinkInput.value || isPending;
+
   usePageHeader({
     showBackButton: true,
     title: '체험 후기 등록',
@@ -41,22 +51,22 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
     isVisible: true,
   });
 
-  const { mutate: createReview, isPending } = useCreateReview(
-    campaign?.id ?? '',
-    application?.userId ?? '',
-  );
-  const reviewLinkInput = useInputValidate('blogUrl');
-
-  if (isCampaignLoading || isUserLoading || isApplicationLoading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (!campaign || !user || !application) {
+    const errorMessage = !campaign
+      ? '캠페인 정보를 불러올 수 없습니다.'
+      : !user
+        ? '사용자 정보를 불러올 수 없습니다.'
+        : '신청 정보를 불러올 수 없습니다.';
+
     return (
       <div className={styles.ReviewWritePage__Error}>
-        <p>정보를 불러올 수 없습니다.</p>
+        <p>{errorMessage}</p>
         <p>페이지를 새로고침하거나 다시 시도해 주세요.</p>
-        <Button onClick={() => router.push('/my?tab=reivewed')}>내 후기 목록으로 이동</Button>
+        <Button onClick={() => router.push('/my?tab=reviewed')}>내 후기 목록으로 이동</Button>
       </div>
     );
   }
@@ -80,10 +90,7 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
             application={application}
             reviewLinkInput={reviewLinkInput}
           />
-          <Button
-            onClick={handleSubmit}
-            disabled={Boolean(reviewLinkInput.errorMsg) || !reviewLinkInput.value || isPending}
-          >
+          <Button onClick={handleSubmit} disabled={isSubmitDisabled}>
             {isPending ? '등록 중...' : '후기 등록'}
           </Button>
         </Suspense>

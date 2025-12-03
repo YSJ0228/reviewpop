@@ -8,7 +8,12 @@ import {
   getReviewById,
 } from '../api/reviewApi';
 
-// 리뷰 등록 hook
+/**
+ * 리뷰 등록 훅
+ * @param campaignId - 캠페인 ID
+ * @param userId - 사용자 ID
+ * @returns 리뷰 등록 mutation 객체
+ */
 export const useCreateReview = (campaignId: string, userId: string) => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -25,7 +30,11 @@ export const useCreateReview = (campaignId: string, userId: string) => {
   });
 };
 
-// 리뷰 재등록 hook
+/**
+ * 리뷰 재등록 훅
+ * @param id - 리뷰 ID
+ * @returns 리뷰 재등록 mutation 객체
+ */
 export const useUpdateReview = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -42,6 +51,10 @@ export const useUpdateReview = (id: string) => {
   });
 };
 
+/**
+ * 리뷰 목록 조회 훅
+ * @returns 리뷰 목록 query 객체
+ */
 export const useGetReviews = () => {
   return useQuery({
     queryKey: ['reviews'],
@@ -49,6 +62,11 @@ export const useGetReviews = () => {
   });
 };
 
+/**
+ * 리뷰 상세 조회 훅
+ * @param id - 리뷰 ID
+ * @returns 리뷰 상세 query 객체
+ */
 export const useGetReviewById = (id: number) => {
   return useQuery({
     queryKey: ['review', id],

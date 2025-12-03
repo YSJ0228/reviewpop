@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { LabeledInput } from '@shared/components/LabeledInput';
 
 interface ReviewFormLinkProps {
@@ -9,13 +9,18 @@ interface ReviewFormLinkProps {
   };
 }
 
+const MESSAGES = {
+  EMPTY_LINK: '링크를 입력해주세요.',
+  VALID_LINK: '올바른 링크입니다.',
+} as const;
+
 export function ReviewFormLink({ input }: ReviewFormLinkProps) {
   const [manualError, setManualError] = useState('');
   const [confirmMsg, setConfirmMsg] = useState('');
 
-  const handleCheck = () => {
+  const handleCheck = useCallback(() => {
     if (!input.value) {
-      setManualError('링크를 입력해주세요.');
+      setManualError(MESSAGES.EMPTY_LINK);
       setConfirmMsg('');
       return;
     }
@@ -27,8 +32,8 @@ export function ReviewFormLink({ input }: ReviewFormLinkProps) {
     }
 
     setManualError('');
-    setConfirmMsg('올바른 링크입니다.');
-  };
+    setConfirmMsg(MESSAGES.VALID_LINK);
+  }, [input.value, input.errorMsg]);
 
   return (
     <div>
