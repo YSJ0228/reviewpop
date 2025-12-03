@@ -1,21 +1,30 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import type { Application, ApplicationStatus } from '@entities/application';
-import type { IMyCampaignsResponse } from '../api/mockMyCampaign.types';
+import { getMyCampaigns, deleteMyCampaign } from '../api/myCampaignApi';
 
 /**
- * 체험 신청 목록을 가져오는 React Query 훅
- * @param userId - 조회할 사용자 ID (기본값: 'kakao-1002')
+ * 체험 신청 목록을 가져오는 React Query 훅 (Infinite Scroll)
+ * @param userId - 조회할 사용자 ID
  */
-export function useMyCampaigns(userId: string = 'kakao-1002') {
+export function useMyCampaigns(userId: string) {
   return useQuery({
     queryKey: ['my-applications', userId],
-    queryFn: async (): Promise<Application[]> => {
-      const response = await fetch(`/api/my-campaigns?userId=${userId}`);
-      if (!response.ok) {
-        throw new Error('체험 목록을 불러오는데 실패했습니다.');
-      }
-      const json: IMyCampaignsResponse = await response.json();
-      return json.data;
+    queryFn: () => getMyCampaigns(userId),
+    enabled: !!userId,
+  });
+}
+
+/**
+ * 체험 신청 취소 훅
+ */
+export function useDeleteMyCampaign(applicationId: string) {
+  return useMutation({
+    mutationFn: () => deleteMyCampaign(applicationId),
+    onSuccess: () => {
+      console.log('체험 신청이 삭제되었습니다.');
+    },
+    onError: (error) => {
+      console.error('체험 신청 삭제에 실패했습니다.', error);
     },
   });
 }
