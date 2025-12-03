@@ -10,10 +10,7 @@ import styles from './style.module.scss';
 
 export function CompletedCampaignList({ filteredCampaigns }: Omit<CampaignListProps, 'status'>) {
   const sortedCampaigns = useMemo(
-    () =>
-      filteredCampaigns.sort((a, b) =>
-        diff(b.schedule.winnerAnnouncement.end, a.schedule.winnerAnnouncement.end),
-      ),
+    () => filteredCampaigns.sort((a, b) => diff(b.schedule.review.end, a.schedule.review.end)),
     [filteredCampaigns],
   );
 

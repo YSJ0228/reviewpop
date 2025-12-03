@@ -1000,10 +1000,10 @@
     "@mantine/core" "^8.3.6"
     "@mantine/hooks" "^8.3.6"
 
-"@pop-ui/foundation@^0.0.29":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@pop-ui/foundation/-/foundation-0.0.29.tgz#92eb4fce950125cc1b69b04acff22e8ef529a4d5"
-  integrity sha512-87AP51fjpZbnvogwXXWSkCcOOBs5PGWj536k0mhGxGLpSZ0MhsdrhNRzv26zbCCa0Pq7txl6ppjnPe7Mfns/nw==
+"@pop-ui/foundation@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@pop-ui/foundation/-/foundation-0.0.30.tgz#ed94377ee2b81f6df950fdc5440beddb232ed8d3"
+  integrity sha512-zeBi+cWmCmSMXGvKOORNse40OpAXUhwkol8e+EE/IqrrhDJXITtLTpeppuN4FL3qUowi6Ac5R9RRrZfuoeRnjw==
   dependencies:
     "@mantine/core" "^8.3.6"
     "@mantine/hooks" "^8.3.6"
