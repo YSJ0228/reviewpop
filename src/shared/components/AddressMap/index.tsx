@@ -6,6 +6,7 @@ import Script from 'next/script';
 
 import { env } from '@shared/config/env';
 import { handleNaverMapClick } from '@shared/lib/naverMap';
+import { toast } from '@shared/components/Toast';
 
 import type { NaverLatLng, NaverMap } from './types';
 import { createNaverMarker, hideNaverCopyright } from './utils';
@@ -290,6 +291,18 @@ export function AddressMap({
     );
   }, []);
 
+  const handleAddressCopy = useCallback(async () => {
+    if (!address) return;
+
+    try {
+      await navigator.clipboard.writeText(address);
+      toast.success('주소가 복사되었어요');
+    } catch (error) {
+      console.error('복사 실패:', error);
+      toast.error('주소 복사에 실패했어요');
+    }
+  }, [address]);
+
   const mapContainerStyle = { '--map-height': height } as React.CSSProperties;
 
   // 공통 Info 섹션 렌더링
@@ -320,7 +333,14 @@ export function AddressMap({
           </div>
           {renderInfoSection()}
         </div>
-        <div className={styles.AddressMap__Address}>{address}</div>
+        <button
+          type="button"
+          className={styles.AddressMap__Address}
+          onClick={handleAddressCopy}
+          aria-label={`${address} 주소 복사`}
+        >
+          {address}
+        </button>
       </div>
     );
   }
@@ -350,7 +370,14 @@ export function AddressMap({
           {renderInfoSection()}
         </div>
 
-        <div className={styles.AddressMap__Address}>{address}</div>
+        <button
+          type="button"
+          className={styles.AddressMap__Address}
+          onClick={handleAddressCopy}
+          aria-label={`${address} 주소 복사`}
+        >
+          {address}
+        </button>
       </div>
     </>
   );
