@@ -1,6 +1,5 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { toast } from '@shared/components';
-import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { PostReservation } from '@entities/reservation';
 import {
   createReservation,
@@ -8,7 +7,6 @@ import {
   updateReservation,
   deleteReservation,
 } from '../api/reserveApi';
-import { useRouter } from 'next/navigation';
 
 // 예약 생성 hook
 export const useReserve = (campaignId: string) => {
@@ -43,15 +41,12 @@ export const useUpdateReservation = (campaignId: string, applicationId: string) 
   return useMutation({
     mutationFn: (data: PostReservation) => updateReservation(campaignId, applicationId, data),
     onSuccess: () => {
-      toast.success('예약이 완료되었습니다.');
       // 관련 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: ['reservation', campaignId] });
       queryClient.invalidateQueries({ queryKey: ['campaigns', campaignId] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: (error: Error) => {
-      const message = error.message || '예약 수정에 실패했습니다.';
-      toast.error(message);
       console.error('예약 수정 실패:', error);
     },
   });
@@ -64,15 +59,12 @@ export const useDeleteReservation = (campaignId: string, applicationId: string) 
   return useMutation({
     mutationFn: () => deleteReservation(campaignId, applicationId),
     onSuccess: () => {
-      toast.success('예약이 취소되었습니다.');
       // 관련 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: ['reservation', campaignId] });
       queryClient.invalidateQueries({ queryKey: ['campaigns', campaignId] });
       router.push(`/my?tab=selected`);
     },
     onError: (error: Error) => {
-      const message = error.message || '예약 취소에 실패했습니다.';
-      toast.error(message);
       console.error('예약 취소 실패:', error);
     },
   });
