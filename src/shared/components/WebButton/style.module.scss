@@ -13,8 +13,6 @@
 
   &__ImageInput {
     @include flex($align: center, $gap: 8);
-    flex: 1;
-    min-width: 0;
   }
 
   &__Input {
@@ -22,11 +20,6 @@
     font-size: 14px;
     font-weight: 500;
     color: var(--gray-800);
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 
     &:focus {
       outline: none;
@@ -46,7 +39,6 @@
     @include padding($x: 8);
     @include size($height: 30);
     @include flex($justify: center, $align: center, $gap: 4);
-    cursor: pointer;
 
     &--Edit,
     &--Copy {
