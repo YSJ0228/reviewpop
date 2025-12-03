@@ -13,6 +13,7 @@ import { EmptyState } from '@shared/components';
 import { ROUTES } from '@shared/config/routes';
 
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { TAB_CONFIG, STATUS_EMPTY_MAP, HISTORY_MESSAGES } from '@features/history/constants';
 
 import type { TabKey } from '@features/history/constants';
@@ -27,7 +28,8 @@ export function CampaignTabs() {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   // 캠페인 목록 훅에서 데이터를 가져와 탭별 카운트 계산
-  const { data: campaigns } = useMyCampaigns();
+  const { data: userInfo } = useUserInfo();
+  const { data: campaigns } = useMyCampaigns(userInfo?.id || '');
 
   const counts = useMemo(() => {
     const map: Record<TabKey, number> = {} as Record<TabKey, number>;

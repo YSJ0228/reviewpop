@@ -4,7 +4,7 @@ export const mockMyCampaigns: Application[] = [
   // 1. 미선정 (Rejected)
   {
     id: 'mock-1',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '1',
       title: '스타벅스 아메리카노 체험단 (미선정)',
@@ -39,9 +39,9 @@ export const mockMyCampaigns: Application[] = [
   // 1.5. 신청 (Pending)
   {
     id: 'mock-1-5',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
-      id: '100',
+      id: '2',
       title: '맥북 프로 M4 체험단 (신청완료)',
       brand: 'Apple',
       thumbnail: 'https://picsum.photos/seed/campaign-pending/400/300',
@@ -73,7 +73,7 @@ export const mockMyCampaigns: Application[] = [
   // 2. 선정 - 방문 예약 전 (Selected - Before Reservation)
   {
     id: 'mock-2',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '2',
       title: '삼성전자 갤럭시 S24 (선정/예약전)',
@@ -142,7 +142,7 @@ export const mockMyCampaigns: Application[] = [
   // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
   {
     id: 'mock-4',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '4',
       title: '건강 보조 식품 체험단',
@@ -178,7 +178,7 @@ export const mockMyCampaigns: Application[] = [
   // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
   {
     id: 'mock-4-1',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '4-1',
       title: '올리브영 스킨케어 세트 (체험완료)',
@@ -214,7 +214,7 @@ export const mockMyCampaigns: Application[] = [
   // 4-2. 후기 - 체험이 종료되었지만 후기 미등록 (Review - Closed but Not Reviewed)
   {
     id: 'mock-4-2',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '4-2',
       title: '그라운드 220 티셔츠 제작 체험 (종료/후기미등록)',
@@ -250,7 +250,7 @@ export const mockMyCampaigns: Application[] = [
   // 5. 후기 - 검토 중 (Review - Pending)
   {
     id: 'mock-5',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '5',
       title: 'LG 그램 체험단 (후기검토중)',
@@ -286,7 +286,7 @@ export const mockMyCampaigns: Application[] = [
   // 6. 후기 - 수정 요청 (Review - Requested)
   {
     id: 'mock-6',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '6',
       title: '나이키 러닝화 체험단 (수정요청)',
@@ -322,7 +322,7 @@ export const mockMyCampaigns: Application[] = [
   // 7. 완료 (Completed) - 종료 탭
   {
     id: 'mock-7',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '7',
       title: '블루보틀 원두 체험 (완료)',
