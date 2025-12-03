@@ -12,11 +12,11 @@ WORKDIR /app
 # corepack 활성화 및 yarn 설정
 RUN corepack enable && corepack prepare yarn@4.10.3 --activate
 
-# 의존성 파일 복사
+# 의존성 파일만 먼저 복사 (캐시 활용)
 COPY package.json yarn.lock .yarnrc.yml ./
 
-# 의존성 설치 (frozen lockfile mode 대신 일반 모드로 설치)
-RUN yarn install
+# 의존성 설치
+RUN yarn install --immutable
 
 # 소스 코드 복사 및 빌드
 COPY . .
