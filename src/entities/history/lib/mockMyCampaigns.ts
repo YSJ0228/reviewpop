@@ -103,6 +103,38 @@ export const mockMyCampaigns: Application[] = [
     isReservated: false,
     createdAt: '2025-11-09T14:00:00Z',
   },
+  {
+    id: 'mock-11',
+    userId: 'kakao-1001',
+    campaign: {
+      id: '11',
+      title: '삼성전자 갤럭시 S24 (선정/예약전)',
+      brand: '삼성전자',
+      thumbnail: 'https://picsum.photos/seed/campaign2/400/300',
+      description: '선정되었습니다! 방문 예약을 진행해주세요.',
+      status: 'inProgress',
+      category: '전자제품',
+      schedule: {
+        application: { start: '2025-11-01', end: '2025-11-15' },
+        winnerAnnouncement: { start: '2025-11-20', end: '2025-11-20' },
+        review: { start: '2025-11-25', end: '2025-12-10' },
+      },
+      location: { sido: '서울', sigungu: '서초구' },
+      address: '삼성 강남 플래그십 스토어',
+      maxRecruitment: 50,
+      currentRecruitment: 1200,
+      providedItem: '갤럭시 S24 대여',
+      reservationPrecaution: ['신분증 지참 필수'],
+      keywords: ['갤럭시', 'S24'],
+      reviewMission: ['카메라 테스트'],
+    },
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/user1',
+    phoneNumber: '010-1234-5678',
+    status: 'pending',
+    isReservated: false,
+    createdAt: '2025-11-09T14:00:00Z',
+  },
 
   // 3. 선정 - 방문 예약 후 (Selected - After Reservation)
   {

@@ -17,4 +17,15 @@ export const myCampaignHandlers = [
       success: true,
     });
   }),
+
+  // 체험 신청 취소
+  http.delete('/api/campaigns/:campaignId', ({ params }) => {
+    const { campaignId } = params;
+    console.log(`[MSW] Campaign ${campaignId} application cancelled`);
+
+    return HttpResponse.json({
+      data: null,
+      success: true,
+    });
+  }),
 ];

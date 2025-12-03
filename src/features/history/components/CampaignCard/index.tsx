@@ -69,7 +69,9 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
   // Top Content 렌더링 함수
   const getTopContent = () => {
     if (type === CARD_TYPES.PENDING) {
-      return <CampaignAppliedCard announcementStatus={announcementStatus} />;
+      return (
+        <CampaignAppliedCard announcementStatus={announcementStatus} campaignId={campaign.id} />
+      );
     }
 
     if (type === CARD_TYPES.SELECTED && visitStatus === 'scheduled') {

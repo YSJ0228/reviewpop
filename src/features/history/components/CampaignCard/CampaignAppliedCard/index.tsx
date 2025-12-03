@@ -1,16 +1,17 @@
 import { Modal } from '@shared/components';
+import { useDeleteMyCampaign } from '@entities/history/hooks/useMyCampaigns';
 import styles from './style.module.scss';
 
 interface CampaignAppliedCardProps {
   announcementStatus: string;
+  campaignId: string;
 }
 
-export function CampaignAppliedCard({ announcementStatus }: CampaignAppliedCardProps) {
+export function CampaignAppliedCard({ announcementStatus, campaignId }: CampaignAppliedCardProps) {
+  const { mutateAsync: deleteMyCampaign } = useDeleteMyCampaign(campaignId);
+
   const handleCancelApplication = () => {
-    // TODO: API 연동 필요
-    console.warn('신청 취소 기능 미구현:', announcementStatus);
-    // 임시로 기능이 준비 중임을 알림
-    alert('신청 취소 기능은 준비 중입니다.');
+    deleteMyCampaign();
   };
 
   return (
