@@ -3,7 +3,7 @@ import { useState } from 'react';
 // 정규식을 상수로 분리
 const VALIDATION_PATTERNS = {
   url: /^[a-z0-9-_]{5,30}$/,
-  blogUrl: /^https:\/\/blog\.naver\.com\/[a-zA-Z0-9-_]{3,30}\/[0-9]+$/,
+  blogUrl: /^https:\/\/blog\.naver\.com\/[a-zA-Z0-9-_]{3,30}\/\d{1,12}$/,
   name: /^[가-힣a-zA-Z\s]{1,20}$/,
   phone: /^01\d{8,9}$/,
 } as const;
