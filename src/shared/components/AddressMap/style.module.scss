@@ -120,6 +120,19 @@ $map-default-height: 140px;
   @include padding($y: 0, $x: 4);
   text-decoration: underline;
   text-underline-offset: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--color-gray-700);
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
 }
 
 .AddressMap__MarkerWrapper {
