@@ -1,4 +1,4 @@
-import { CampaignDetail } from '@features/campaign';
+import type { CampaignDetail } from '@entities/campaign/types/campaign.types';
 import { ReactNode } from 'react';
 
 /**

@@ -1,5 +1,4 @@
 import { useDisclosure } from '@mantine/hooks';
-import { useRouter } from 'next/navigation';
 
 import { Button } from '@shared/components';
 import { ModificationBottomSheet } from '@features/review/components/ModificationBottomSheet';
@@ -18,8 +17,10 @@ interface ReviewEditRequestCardProps {
  * @param reviewId - 후기 ID
  * @returns 후기 수정 요청 상태의 카드 컴포넌트
  */
-export function ReviewEditRequestCard({ campaignId, reviewId }: ReviewEditRequestCardProps) {
-  const router = useRouter();
+export function ReviewEditRequestCard({
+  campaignId = '1',
+  reviewId = '1',
+}: ReviewEditRequestCardProps) {
   const [opened, { open, close }] = useDisclosure();
 
   // reviewId와 campaignId가 없으면 ModificationBottomSheet를 사용할 수 없음

@@ -1,4 +1,4 @@
-import { CampaignDetail } from '@features/campaign';
+import type { CampaignDetail } from '@entities/campaign/types/campaign.types';
 
 /**
  * 방문 예정 상태 카드 컴포넌트 타입
