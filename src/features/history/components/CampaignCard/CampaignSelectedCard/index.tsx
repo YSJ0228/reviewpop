@@ -31,6 +31,7 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
   const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    router.push(`/campaign/${campaign.id}/reserve`);
     open();
   };
 
