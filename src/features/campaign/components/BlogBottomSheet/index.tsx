@@ -12,7 +12,12 @@ export function BlogBottomSheet({ opened, onClose, blog, setBlog }: BlogBottomSh
   const urlInput = useInputValidate('url', blog?.replace('blog.naver.com/', '') ?? '');
   const [confirmMsg, setConfirmMsg] = useState<string>('');
   return (
-    <BottomSheet opened={opened} onClose={onClose} title="블로그 아이디를 입력해주세요">
+    <BottomSheet
+      opened={opened}
+      onClose={onClose}
+      height={560}
+      title="블로그 아이디를 입력해주세요"
+    >
       <LabeledInput
         label="블로그 주소"
         placeholder="네이버 블로그 아이디 입력"

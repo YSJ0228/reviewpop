@@ -18,6 +18,7 @@ export function CampaignReviewedCardFooter({
   campaignStatus,
   campaignId,
   applicationId,
+  reviewId,
 }: CampaignReviewedCardFooterProps) {
   // reviewStatus가 undefined인 경우 early return
   if (!reviewStatus) {
@@ -47,7 +48,7 @@ export function CampaignReviewedCardFooter({
 
   // 후기 수정 요청
   if (reviewStatus === 'requiredForEditing') {
-    return <ReviewEditRequestCard />;
+    return <ReviewEditRequestCard campaignId={campaignId} reviewId={reviewId} />;
   }
 
   // 후기 등록 완료

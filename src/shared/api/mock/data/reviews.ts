@@ -5,6 +5,8 @@
 //  * 총 50개의 리뷰로 다양한 체험과 사용자 평가를 시뮬레이션합니다.
 //  */
 
+import { ReviewRequest } from '@entities/review';
+
 // import type { Review } from '@entities/review/types/review.types';
 // import { findUserById } from './users';
 
@@ -738,3 +740,11 @@
 // export function findReviewById(id: number): Review | undefined {
 //   return mockReviews.find((review) => review.id === id);
 // }
+
+export const mockReviewRequest: ReviewRequest = {
+  content: '본문에 ‘#데이트팝 #체험단’ 해시태그가 누락되었습니다',
+  precaution: [
+    '지속적으로 가이드 위반 시 계정이 제한될 수 있습니다.',
+    '지속적으로 가이드 위반 시 계정이 제한될 수 있습니다!',
+  ],
+};

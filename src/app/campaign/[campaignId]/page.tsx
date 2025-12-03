@@ -106,7 +106,9 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <CampaignInfoSection campaign={campaign} />
 
-      <CampaignScheduleSection campaign={campaign} />
+      {campaign.status !== 'completed' && campaign.status !== 'closed' && (
+        <CampaignScheduleSection campaign={campaign} />
+      )}
 
       <BulletListSection title="당첨 조건" items={campaign.requirements || []} />
 
