@@ -8,6 +8,7 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { Form } from '@shared/components/Form';
 import { useUpdateUserInfo } from '@entities/user/hooks/useUpdateUserInfo';
 import { FormDataType } from '@shared/components/Form/types';
+import { HeaderConfig } from '@shared/components';
 
 import styles from './page.module.scss';
 
@@ -41,6 +42,7 @@ export default function UserPage() {
 
   return (
     <main className={styles.UserPage}>
+      <HeaderConfig title="개인정보" showBackButton />
       <ErrorBoundary>
         <Suspense fallback={<Loader />}>
           <Form onClick={handleSave} showTextArea={false} />

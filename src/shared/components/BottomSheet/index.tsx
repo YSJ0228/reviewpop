@@ -1,4 +1,4 @@
-import { Autocomplete, Drawer } from '@mantine/core';
+import { Drawer } from '@mantine/core';
 
 import { BottomSheetProps } from './types';
 
@@ -29,7 +29,7 @@ export function BottomSheet({
           margin: '0 auto',
           borderTopLeftRadius: '16px',
           borderTopRightRadius: '16px',
-          ...(height ? { height } : { maxHeight: '90vh', height: 'auto', minHieght: '100px' }),
+          ...(height ? { height } : { maxHeight: '90vh', height: 'auto', minHeight: '100px' }),
           zIndex: 'var(--z-bottomsheet)',
           ...(hasFooter && {
             display: 'flex',

@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { Loader } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
-import { useReviewModificationRequest } from '@entities/review/hooks/useReviewModification';
+import { useReviewModificationRequest } from '@entities/review/hooks/useReviewModificationRequest';
 import { ButtonBar } from '@features/campaign/components/ButtonBar';
 
 import styles from './style.module.scss';
@@ -13,11 +14,18 @@ export function ModificationBottomSheet({
   opened,
   onClose,
   reviewId,
+  campaignId,
 }: ModificationBottomSheetProps) {
-  const { data: reviewModification } = useReviewModificationRequest(reviewId);
+  const {
+    data: reviewModification,
+    isLoading,
+    error,
+  } = useReviewModificationRequest(reviewId, opened);
   const router = useRouter();
   //TODO: canpaignId, reviewId 어디서 받아오는지 결정
-  console.log(reviewModification);
+  if (isLoading) return <Loader />;
+  if (error) return <div>데이터를 불러올 수 없습니다.</div>;
+
   return (
     <BottomSheet opened={opened} onClose={onClose} title="수정 요청 내용">
       <div className={styles.ModificationBottomSheet}>
@@ -36,7 +44,7 @@ export function ModificationBottomSheet({
             {reviewModification?.content}
           </span>
         </div>
-        <div className={styles.ModificationBottomSheet__Line}></div>
+        <hr className={styles.ModificationBottomSheet__Line}></hr>
         <div>
           <h3 className={styles.ModificationBottomSheet__SubTitle}>유의 사항</h3>
           <ul className={styles.ModificationBottomSheet__Caution}>
@@ -49,7 +57,7 @@ export function ModificationBottomSheet({
       <ButtonBar
         variant="primary"
         text="후기 재등록"
-        onClick={() => router.push('/campaign/1/review/write')}
+        onClick={() => router.push(`/campaign/${campaignId}/review/write`)}
       />
     </BottomSheet>
   );

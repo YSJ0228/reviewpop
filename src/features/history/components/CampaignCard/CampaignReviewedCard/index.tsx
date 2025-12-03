@@ -142,7 +142,7 @@ export function CampaignReviewedCard({
           </Button>
         )}
       </div>
-      <ModificationBottomSheet opened={opened} onClose={close} reviewId="1" />
+      <ModificationBottomSheet opened={opened} onClose={close} reviewId="1" campaignId="1" />
     </div>
   );
 }
