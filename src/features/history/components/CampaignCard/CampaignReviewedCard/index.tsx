@@ -47,6 +47,8 @@ export function CampaignReviewedCard({ application }: CampaignReviewedCardProps)
         <CampaignReviewedCardFooter
           reviewStatus={application.reviewStatus}
           campaignStatus={campaign.status}
+          campaignId={campaign.id}
+          applicationId={application.id}
         />
       )}
     </>

@@ -10,6 +10,7 @@ import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusB
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
+import StatusBadge from '@features/campaign/components/StatusBadge';
 import ReviewSection from '@features/campaign/components/ReviewSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
@@ -92,6 +93,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <div className={styles.Page__StatusBarSection}>
         <CampaignStatusBar campaign={campaign} />
+        <StatusBadge campaign={campaign} />
       </div>
 
       <CampaignContents campaign={campaign} />
@@ -139,18 +141,16 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
         </>
       )}
 
-      {/* 주의사항 */}
+      {/* 체험 시 주의사항 */}
       {campaign.precautions && campaign.precautions.length > 0 && (
-        <section className={`${styles.Page__Section} ${styles['Page__Section--Notice']}`}>
-          <h2 className={styles.Page__SectionTitle}>주의사항</h2>
-          <ul className={styles.Page__List}>
-            {campaign.precautions.map((notice, index) => (
-              <li key={index} className={styles.Page__ListItem}>
-                {notice}
-              </li>
-            ))}
-          </ul>
-        </section>
+        <BulletListSection
+          title="체험 시 주의사항"
+          items={campaign.precautions}
+          backgroundColor="var(--color-gray-50)"
+          noPadding={true}
+          textColor="var(--color-gray-800)"
+          showDivider={false}
+        />
       )}
     </div>
   );

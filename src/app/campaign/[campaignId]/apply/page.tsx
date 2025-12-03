@@ -1,11 +1,9 @@
 'use client';
 import { Suspense, use } from 'react';
-import { useRouter } from 'next/navigation';
+import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ApplyForm } from '@features/campaign/components/ApplyForm';
-import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { useCampaignDetails } from '@features/history';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
@@ -30,38 +28,16 @@ interface CampaignApplyPageProps {
 
 export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
   const { campaignId } = use(params);
-  const router = useRouter();
-  const {
-    data: campaign,
-    isLoading: isLoadingCampaign,
-    error: errorCampaign,
-  } = useCampaignDetails(campaignId);
-  const { data: user, isLoading: isLoadingUser, error: errorUser } = useUserInfo();
-
   usePageHeader({
     showBackButton: true,
     title: '체험단 신청',
   });
-
-  //로딩 처리
-  if (isLoadingCampaign || isLoadingUser) {
-    return <div>로딩 중...</div>;
-  }
-
-  // 에러 처리
-  if (errorCampaign) {
-    return <div>캠페인 정보를 불러오는 중 오류가 발생했습니다.</div>;
-  }
-  if (errorUser) {
-    return <div>유저 정보를 불러오는 중 오류가 발생했습니다.</div>;
-  }
-
   return (
     <main className={styles.CampaignApplyPage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={<Loader />}>
           {/* TODO: ApplyForm 컴포넌트 추가 */}
-          <ApplyForm campaign={campaign} user={user} />
+          <ApplyForm campaignId={campaignId} />
         </Suspense>
       </ErrorBoundary>
     </main>

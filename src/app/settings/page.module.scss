@@ -1,8 +1,6 @@
 @use '@shared/styles/mixins' as *;
 
 .SettingsPage {
-  @include padding($y: 20, $x: 16);
-
   min-height: 100vh;
 
   // TODO: 실제 디자인에 맞게 스타일 수정

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@shared/components';
 
@@ -11,11 +12,18 @@ import styles from './style.module.scss';
 /**
  * 후기 미등록 상태 카드 컴포넌트 (notReviewed & visited 상태일 때 버튼 표시)
  * @param campaignStatus - 캠페인 상태 (체험 상태)
+ * @param campaignId - 캠페인 ID
+ * @param applicationId - 신청 ID
  * @returns 후기 등록 전 상태의 카드 컴포넌트
  */
-export function ReviewNotRegisteredCard({ campaignStatus }: ReviewNotRegisteredCardProps) {
+export function ReviewNotRegisteredCard({
+  campaignStatus,
+  campaignId,
+  applicationId,
+}: ReviewNotRegisteredCardProps) {
   // 체험이 종료되었지만 후기 미등록인 경우 (특별 케이스)
   const isClosedNotReviewed = campaignStatus === 'closed';
+  const router = useRouter();
 
   return (
     <div className={styles.ReviewNotRegisteredCard}>
@@ -45,8 +53,16 @@ export function ReviewNotRegisteredCard({ campaignStatus }: ReviewNotRegisteredC
             </span>
           </Button>
 
-          {/* TODO: 후기 등록 버튼 클릭 시 후기 등록 페이지로 이동 */}
-          <Button variant="primary" fullWidth radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM} size="small">
+          {/* 후기 등록 버튼 클릭 시 후기 등록 페이지로 이동 */}
+          <Button
+            variant="primary"
+            fullWidth
+            radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
+            size="small"
+            onClick={() =>
+              router.push(`/campaign/${campaignId}/review/write?applicationId=${applicationId}`)
+            }
+          >
             <span className={styles['ReviewNotRegisteredCard__ButtonText--Primary']}>
               {HISTORY_MESSAGES.REGISTER_REVIEW}
             </span>

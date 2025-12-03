@@ -1,0 +1,28 @@
+@use '@shared/styles/mixins' as *;
+
+.Badge {
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 6px;
+  @include flex($justify: center, $align: center);
+
+  &--ReviewEnded {
+    background: #f6f6f6;
+
+    span {
+      color: #808080;
+    }
+  }
+
+  &--HighProbability {
+    background: #edfcff;
+
+    span {
+      color: #11badd;
+    }
+  }
+
+  span {
+    @include font($size: 12, $weight: 600);
+  }
+}

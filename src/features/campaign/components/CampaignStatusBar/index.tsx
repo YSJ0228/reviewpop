@@ -41,19 +41,6 @@ export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
     };
   }, [deadline]);
 
-  // 선정 확률 높음 배지 표시 조건: 24시간 이하 남았을 때 신청자 수가 모집 인원의 50% 미만일 때
-  const shouldShowHighProbabilityBadge = useMemo(() => {
-    if (campaign.maxRecruitment === 0 || campaign.maxRecruitment < 0) return false;
-
-    // 남은 시간이 24시간 이하인지 확인
-    const hours = diff(deadline, now(), 'hour');
-    if (hours > 24 || hours <= 0) return false;
-
-    // 신청자 수가 모집 인원의 50% 미만인지 확인
-    const ratio = campaign.currentRecruitment / campaign.maxRecruitment;
-    return ratio < 0.5;
-  }, [deadline, campaign.currentRecruitment, campaign.maxRecruitment]);
-
   return (
     <div className={styles.CampaignStatusBar} role="status" aria-live="polite">
       <span className={styles.RemainingTime}>{remainingTimeText}</span>
@@ -61,11 +48,6 @@ export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
         신청 {campaign.currentRecruitment}명
         <span className={styles.ApplicantCount__Total}>/{campaign.maxRecruitment}명</span>
       </span>
-      {shouldShowHighProbabilityBadge && (
-        <span className={styles.SelectionProbabilityBadge} role="status">
-          선정 확률 높음
-        </span>
-      )}
     </div>
   );
 }

@@ -27,6 +27,7 @@
 .Page__StatusBarSection {
   width: 100%;
   background: var(--color-white);
+  @include flex($direction: row, $justify: center, $align: center, $gap: 16);
 }
 
 .Page__ValueSection {

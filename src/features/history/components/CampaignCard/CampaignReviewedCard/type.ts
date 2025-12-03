@@ -1,5 +1,5 @@
-import type { CampaignStatus } from '@features/campaign';
 import type { ReviewStatus } from '@entities/application';
+import { CampaignStatus } from '@entities/campaign/types/campaign.types';
 
 /**
  * 후기 탭 카드 컴포넌트 타입
@@ -9,4 +9,6 @@ import type { ReviewStatus } from '@entities/application';
 export interface CampaignReviewedCardProps {
   reviewStatus: ReviewStatus | undefined;
   campaignStatus: CampaignStatus | undefined;
+  campaignId: string;
+  applicationId: string;
 }

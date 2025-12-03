@@ -1,0 +1,6 @@
+@use '@shared/styles/mixins' as *;
+
+.ReviewForm {
+  width: 100%;
+  @include flex($direction: column, $gap: 24px);
+}
