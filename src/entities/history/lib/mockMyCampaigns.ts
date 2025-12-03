@@ -38,7 +38,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 1.5. 신청 (Pending)
   {
-    id: 'mock-1-5',
+    id: 'mock-2',
     userId: 'kakao-1001',
     campaign: {
       id: '2',
@@ -72,10 +72,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 2. 선정 - 방문 예약 전 (Selected - Before Reservation)
   {
-    id: 'mock-2',
+    id: 'mock-3',
     userId: 'kakao-1001',
     campaign: {
-      id: '2',
+      id: '3',
       title: '삼성전자 갤럭시 S24 (선정/예약전)',
       brand: '삼성전자',
       thumbnail: 'https://picsum.photos/seed/campaign2/400/300',
@@ -106,10 +106,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 3. 선정 - 방문 예약 후 (Selected - After Reservation)
   {
-    id: 'mock-3',
+    id: 'mock-4',
     userId: 'kakao-1002',
     campaign: {
-      id: '3',
+      id: '4',
       title: '이니스프리 그린티 세럼 (선정/예약완료)',
       brand: '이니스프리',
       thumbnail: 'https://picsum.photos/seed/campaign3/400/300',
@@ -141,10 +141,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
   {
-    id: 'mock-4',
+    id: 'mock-5',
     userId: 'kakao-1001',
     campaign: {
-      id: '4',
+      id: '5',
       title: '건강 보조 식품 체험단',
       brand: '종근당',
       thumbnail: '/images/temp/CampaignCardImg-01.jpg',
@@ -177,10 +177,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
   {
-    id: 'mock-4-1',
+    id: 'mock-6',
     userId: 'kakao-1001',
     campaign: {
-      id: '4-1',
+      id: '6',
       title: '올리브영 스킨케어 세트 (체험완료)',
       brand: '올리브영',
       thumbnail: 'https://picsum.photos/seed/campaign4-1/400/300',
@@ -213,10 +213,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 4-2. 후기 - 체험이 종료되었지만 후기 미등록 (Review - Closed but Not Reviewed)
   {
-    id: 'mock-4-2',
+    id: 'mock-7',
     userId: 'kakao-1001',
     campaign: {
-      id: '4-2',
+      id: '7',
       title: '그라운드 220 티셔츠 제작 체험 (종료/후기미등록)',
       brand: '그라운드 220',
       thumbnail: 'https://picsum.photos/seed/campaign4-2/400/300',
@@ -249,10 +249,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 5. 후기 - 검토 중 (Review - Pending)
   {
-    id: 'mock-5',
+    id: 'mock-8',
     userId: 'kakao-1001',
     campaign: {
-      id: '5',
+      id: '8',
       title: 'LG 그램 체험단 (후기검토중)',
       brand: 'LG전자',
       thumbnail: 'https://picsum.photos/seed/campaign5/400/300',
@@ -285,10 +285,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 6. 후기 - 수정 요청 (Review - Requested)
   {
-    id: 'mock-6',
+    id: 'mock-9',
     userId: 'kakao-1001',
     campaign: {
-      id: '6',
+      id: '9',
       title: '나이키 러닝화 체험단 (수정요청)',
       brand: '나이키',
       thumbnail: 'https://picsum.photos/seed/campaign6/400/300',
@@ -321,10 +321,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 7. 완료 (Completed) - 종료 탭
   {
-    id: 'mock-7',
+    id: 'mock-10',
     userId: 'kakao-1001',
     campaign: {
-      id: '7',
+      id: '10',
       title: '블루보틀 원두 체험 (완료)',
       brand: '블루보틀',
       thumbnail: 'https://picsum.photos/seed/campaign7/400/300',

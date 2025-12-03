@@ -9,6 +9,7 @@ export function useMyCampaigns() {
   return useQuery({
     queryKey: ['my-applications'],
     queryFn: () => getMyCampaigns(),
+    select: (data) => data.applications,
   });
 }
 
