@@ -16,16 +16,6 @@ export { CampaignRequirementsSection } from './components/CampaignRequirementsSe
 export { CampaignVisitReservation } from './components/CampaignVisitReservation';
 export { CampaignAdditionalNotice } from './components/CampaignAdditionalNotice';
 
-// Hooks
-export { useCampaigns } from '@entities/campaign/hooks/useCampaigns';
-export { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
-
-// Types
-export type {
-  Campaign,
-  CampaignStatus,
-  CampaignDetail,
-} from '@entities/campaign/types/campaign.types';
 export type { CampaignCardProps } from './components/CampaignCard/types';
 export type { CampaignListProps } from './components/CampaignList/types';
 export type { CampaignContentsProps } from './components/CampaignContents';
