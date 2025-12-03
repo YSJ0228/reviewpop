@@ -14,7 +14,6 @@ RUN corepack enable && corepack prepare yarn@4.12.0 --activate
 
 # 의존성 파일 복사
 COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn .yarn
 
 # 의존성 설치
 RUN yarn install --immutable
