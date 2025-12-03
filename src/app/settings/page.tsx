@@ -1,6 +1,10 @@
+'use client';
+
 import { Suspense } from 'react';
+import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { Settings } from '@features/profile/components/Settings';
 import { HeaderConfig } from '@shared/components/HeaderConfig';
 
 import styles from './page.module.scss';
@@ -23,14 +27,9 @@ export default function SettingsPage() {
     <main className={styles.SettingsPage}>
       <HeaderConfig title="설정" showBackButton />
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={<Loader />}>
           {/* TODO: Settings 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
-            <p>설정</p>
-            <p className={styles.Todo}>
-              features/profile/components/Settings 컴포넌트를 구현하세요
-            </p>
-          </div>
+          <Settings />
         </Suspense>
       </ErrorBoundary>
     </main>

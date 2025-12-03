@@ -1,0 +1,10 @@
+@use '../../../../shared/styles/mixins' as *;
+.MyCurrentCampaignList {
+  &__Title {
+    @include font($weight: 700, $size: 16, $color: #333333);
+  }
+  &__CampaignCards {
+    @include flex($direction: column, $gap: 12);
+    @include margin($top: 16);
+  }
+}

@@ -1,0 +1,8 @@
+@use '../../../../shared/styles/mixins' as *;
+
+.MyCampaignState {
+  border-radius: 4px;
+  @include font($weight: 600, $size: 14);
+  @include size($width: 63, $height: 20);
+  @include flex($justify: center, $align: center);
+}

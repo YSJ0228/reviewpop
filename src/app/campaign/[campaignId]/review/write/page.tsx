@@ -1,26 +1,42 @@
 'use client';
 
-import { Suspense } from 'react';
+import { use } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { Button, LoadingSpinner, ErrorBoundary } from '@shared/components';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { ReviewForm } from '@features/review/components/ReviewForm';
+import { useCreateReview, useReviewPageData } from '@features/review/hooks/useReview';
+import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
+
 import styles from './page.module.scss';
 
-/**
- * 체험 후기 작성 페이지
- * - 하단 탭: X
- * - 체험 완료 후 후기 작성
- * - 진입점: 나의 체험 > 선정된 체험 > 후기 작성 버튼
- *
- * TODO:
- * 1. [ ] ReviewForm 컴포넌트 구현 (@features/review/components/ReviewForm)
- * 2. [ ] 텍스트 입력 (제목, 내용)
- * 3. [ ] 이미지 업로드 기능
- * 4. [ ] 별점 입력 기능
- * 5. [ ] 후기 제출 API 연동 (useSubmitReview 훅)
- * 6. [ ] 제출 완료 시 나의 체험 또는 체험 상세로 이동
- */
-export default function ReviewWritePage({ params }: { params: { campaignId: string } }) {
+interface ReviewWritePageProps {
+  params: Promise<{ campaignId: string }>;
+}
+
+export default function ReviewWritePage({ params }: ReviewWritePageProps) {
+  const { campaignId } = use(params);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const applicationId = searchParams.get('applicationId');
+
+  const { data, isLoading: isPageLoading } = useReviewPageData(campaignId, applicationId);
+  const { campaign, user, application } = data || {};
+
+  const { mutate: createReview, isPending } = useCreateReview(() =>
+    router.push('/my?tab=reviewed'),
+  );
+
+  const reviewLinkInput = useInputValidate('blogUrl');
+
+  const isLoading = isPageLoading;
+
+  const isSubmitDisabled =
+    !reviewLinkInput.value || // 빈 값 체크 (먼저)
+    !!reviewLinkInput.errorMsg || // 에러 체크
+    isPending; // 로딩 중 체크
+
   usePageHeader({
     showBackButton: true,
     title: '체험 후기 등록',
@@ -28,19 +44,48 @@ export default function ReviewWritePage({ params }: { params: { campaignId: stri
     isVisible: true,
   });
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!campaign || !user || !application) {
+    const errorMessage = !campaign
+      ? '캠페인 정보를 불러올 수 없습니다.'
+      : !user
+        ? '사용자 정보를 불러올 수 없습니다.'
+        : '신청 정보를 불러올 수 없습니다.';
+
+    return (
+      <div className={styles.ReviewWritePage__Error}>
+        <p>{errorMessage}</p>
+        <p>페이지를 새로고침하거나 다시 시도해 주세요.</p>
+        <Button onClick={() => router.push('/my?tab=reviewed')}>내 후기 목록으로 이동</Button>
+      </div>
+    );
+  }
+
+  const handleSubmit = () => {
+    if (!reviewLinkInput.value || reviewLinkInput.errorMsg) return;
+    if (!campaign?.id || !application?.userId) return;
+
+    createReview({
+      campaignId: campaign.id,
+      userId: application.userId,
+      reviewUrl: reviewLinkInput.value,
+    });
+  };
+
   return (
     <main className={styles.ReviewWritePage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
-          {/* TODO: ReviewForm 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
-            <p>체험 ID: {params.campaignId}</p>
-            <p>체험 후기 작성</p>
-            <p className={styles.Todo}>
-              features/review/components/ReviewForm 컴포넌트를 구현하세요
-            </p>
-          </div>
-        </Suspense>
+        <ReviewForm
+          campaign={campaign}
+          application={application}
+          reviewLinkInput={reviewLinkInput}
+        />
+        <Button onClick={handleSubmit} disabled={isSubmitDisabled}>
+          {isPending ? '등록 중...' : '후기 등록'}
+        </Button>
       </ErrorBoundary>
     </main>
   );

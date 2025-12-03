@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ConfirmationCard } from '@shared/components/ConfirmationCard';
 import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
-import { useCampaignDetails } from '@features/campaign';
+import { useCampaignDetails } from '@features/history';
 import { ButtonBar } from '@features/campaign/components/ButtonBar';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 
