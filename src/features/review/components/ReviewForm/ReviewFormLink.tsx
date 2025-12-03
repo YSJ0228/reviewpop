@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { LabeledInput } from '@shared/components/LabeledInput';
 
 interface ReviewFormLinkProps {
@@ -18,7 +18,13 @@ export function ReviewFormLink({ input }: ReviewFormLinkProps) {
   const [manualError, setManualError] = useState('');
   const [confirmMsg, setConfirmMsg] = useState('');
 
-  const handleCheck = useCallback(() => {
+  const handleValueChange = (val: string) => {
+    input.setValue(val);
+    setManualError('');
+    setConfirmMsg('');
+  };
+
+  const handleCheck = () => {
     if (!input.value) {
       setManualError(MESSAGES.EMPTY_LINK);
       setConfirmMsg('');
@@ -33,7 +39,7 @@ export function ReviewFormLink({ input }: ReviewFormLinkProps) {
 
     setManualError('');
     setConfirmMsg(MESSAGES.VALID_LINK);
-  }, [input.value, input.errorMsg]);
+  };
 
   return (
     <div>
@@ -42,11 +48,7 @@ export function ReviewFormLink({ input }: ReviewFormLinkProps) {
         placeholder="후기를 남긴 블로그 링크를 적어주세요"
         input={{
           ...input,
-          setValue: (val) => {
-            input.setValue(val);
-            setManualError('');
-            setConfirmMsg('');
-          },
+          setValue: handleValueChange,
           errorMsg: manualError || input.errorMsg,
         }}
         confirmMsg={confirmMsg}

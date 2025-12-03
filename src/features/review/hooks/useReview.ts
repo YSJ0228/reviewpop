@@ -14,10 +14,15 @@ import {
  * @param userId - 사용자 ID
  * @returns 리뷰 등록 mutation 객체
  */
-export const useCreateReview = (campaignId: string, userId: string) => {
+export const useCreateReview = (campaignId: string | null, userId: string | null) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: PostReview) => createReview(campaignId, userId, data),
+    mutationFn: (data: PostReview) => {
+      if (!campaignId || !userId) {
+        throw new Error('필수 정보가 없습니다.');
+      }
+      return createReview(campaignId, userId, data);
+    },
     onSuccess: () => {
       toast.success('후기가 등록되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['reviews'] });

@@ -95,6 +95,19 @@ export const mockApplications: Application[] = [
     createdAt: '2025-11-05T11:00:00Z',
   },
   {
+    id: 'mock-4',
+    userId: 'kakao-1002',
+    campaign: getCampaign('4'),
+    status: 'reviewed',
+    reviewStatus: 'notReviewed',
+    isReservated: true,
+    reservationDate: '2025-11-15T10:00:00',
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/user1',
+    phoneNumber: '010-1234-5678',
+    createdAt: '2025-11-05T11:00:00Z',
+  },
+  {
     id: 'app-5',
     userId: 'kakao-1006',
     campaign: getCampaign('1'),
@@ -727,6 +740,13 @@ export function findApplicationByUserAndCampaign(
   campaignId: string,
 ): Application | undefined {
   return mockApplications.find((app) => app.userId === userId && app.campaign.id === campaignId);
+}
+
+/**
+ * 신청 ID로 신청 정보 조회
+ */
+export function getApplicationById(applicationId: string): Application | undefined {
+  return mockApplications.find((app) => app.id === applicationId);
 }
 
 /**
