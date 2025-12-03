@@ -1,11 +1,13 @@
 'use client';
 
-import { use, useState, useMemo } from 'react';
+import { use, useState, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ImageGallery, ImageViewer } from '@shared/components/ImageViewer';
 import { BulletListSection } from '@features/campaign';
 import { AddressMap } from '@shared/components';
+import { WebButton } from '@shared/components/WebButton';
+import { toast } from '@shared/components/Toast';
 import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusBar';
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
@@ -50,6 +52,25 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
   const handleCloseViewer = () => {
     setViewerIndex(null);
   };
+
+  const keywordsText = useMemo(() => {
+    if (!campaign?.keywords?.length) return '';
+    return campaign.keywords.join(', ');
+  }, [campaign]);
+
+  const handleCopyKeywords = useCallback(async () => {
+    if (!keywordsText) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(keywordsText);
+      toast.success('키워드가 복사되었어요');
+    } catch (error) {
+      console.error('복사 실패:', error);
+      toast.error('키워드 복사에 실패했어요');
+    }
+  }, [keywordsText]);
 
   if (isLoading) {
     return (
@@ -141,6 +162,18 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
             <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
           )}
         </>
+      )}
+
+      {/* 키워드 */}
+      {keywordsText && (
+        <div className={styles.Page__KeywordsSection}>
+          <WebButton
+            buttonType="copy"
+            label="키워드"
+            text={keywordsText}
+            onClick={handleCopyKeywords}
+          />
+        </div>
       )}
 
       {/* 체험 시 주의사항 */}

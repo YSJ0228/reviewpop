@@ -220,3 +220,7 @@
     }
   }
 }
+
+.Page__KeywordsSection {
+  @include padding($y: 24, $x: 16);
+}
