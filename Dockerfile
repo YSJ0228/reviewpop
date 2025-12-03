@@ -10,7 +10,7 @@ FROM arm64v8/node:20-slim AS builder
 WORKDIR /app
 
 # corepack 활성화 및 yarn 설정
-RUN corepack enable && corepack prepare yarn@4.12.0 --activate
+RUN corepack enable && corepack prepare yarn@4.10.3 --activate
 
 # 의존성 파일 복사
 COPY package.json yarn.lock .yarnrc.yml ./
