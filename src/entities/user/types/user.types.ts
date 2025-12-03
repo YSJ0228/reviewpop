@@ -2,7 +2,7 @@
  * User 관련 타입 정의
  */
 
-import { Campaign } from '@features/campaign';
+import { Campaign } from '@entities/campaign/types/campaign.types';
 import type { OAuthProvider } from '@shared/types/auth.types';
 
 type UserCampaignStatus = 'reservation' | 'review' | 'plan';
@@ -33,6 +33,7 @@ export interface UserCampaign {
 }
 
 export interface UserCampaigns {
+  name: string;
   participatedCampaigns: number;
   enrolledReviews: number;
   campaigns: UserCampaign[];

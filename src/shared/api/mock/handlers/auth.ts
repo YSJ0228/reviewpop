@@ -14,6 +14,7 @@ import type { LoginRequest } from '@entities/user/types/user.types';
 import type { ApiResponse } from '@shared/api/types/common.types';
 import { mockUsers } from '../data/users';
 import { findKakaoUserByToken } from '../data/oauth';
+import { mockUserCampaigns } from '../data/userCampaigns';
 
 export const authHandlers = [
   /**
@@ -106,7 +107,7 @@ export const authHandlers = [
    */
   http.get(ROUTES.API.ME, ({ request, cookies }) => {
     // 쿠키에서 토큰 가져오기
-    // const token = cookies[CONSTANTS.COOKIE_KEYS.AUTH_TOKEN];
+    const token = cookies[CONSTANTS.COOKIE_KEYS.AUTH_TOKEN];
 
     // if (!token) {
     //   return HttpResponse.json(
@@ -151,6 +152,77 @@ export const authHandlers = [
     return HttpResponse.json({
       success: true,
       data: user,
+    });
+  }),
+
+  http.patch(ROUTES.API.ME, async ({ request, cookies }) => {
+    const token = cookies[CONSTANTS.COOKIE_KEYS.AUTH_TOKEN];
+
+    // if (!token) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: {
+    //         code: 'UNAUTHORIZED',
+    //         message: '인증이 필요합니다.',
+    //       },
+    //     },
+    //     { status: 401 },
+    //   );
+    // }
+
+    // // JWT 검증
+    // const payload = verifyJWT(token);
+
+    // if (!payload) {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: {
+    //         code: 'INVALID_TOKEN',
+    //         message: '유효하지 않은 토큰입니다.',
+    //       },
+    //     },
+    //     { status: 401 },
+    //   );
+    // }
+    const body = (await request.json()) as {
+      name?: string;
+      phoneNumber?: string;
+      blogAddress?: string;
+    };
+
+    // 실제라면 JWT의 userId로 찾지만, 지금은 mockUsers 활용
+    const user = mockUsers.find((u) => u.id === 'kakao-1001');
+    if (!user) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: {
+            code: 'USER_NOT_FOUND',
+            message: '사용자를 찾을 수 없습니다.',
+          },
+        },
+        { status: 404 },
+      );
+    }
+
+    // 업데이트
+    if (body.name !== undefined) user.name = body.name;
+    if (body.phoneNumber !== undefined) user.phoneNumber = body.phoneNumber;
+    if (body.blogAddress !== undefined) user.blogAddress = body.blogAddress;
+
+    return HttpResponse.json({
+      success: true,
+      data: user,
+    });
+  }),
+
+  http.get(ROUTES.API.PROFILE, () => {
+    const userCampaign = mockUserCampaigns;
+    return HttpResponse.json({
+      success: true,
+      data: userCampaign,
     });
   }),
 
