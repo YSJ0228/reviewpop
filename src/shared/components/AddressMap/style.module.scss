@@ -1,0 +1,169 @@
+@use '@shared/styles/mixins' as *;
+
+// 마커 스타일 변수
+$marker-size: 48px;
+$marker-border-width: 5px;
+$marker-top: 3px;
+$marker-left: 9px;
+$shadow-width: 20px;
+$shadow-height: 7px;
+$shadow-top: 50px;
+
+// 지도 높이 기본값
+$map-default-height: 140px;
+
+.AddressMap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  @include padding($y: 24, $x: 16);
+  background: var(--color-white);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    background-color: var(--color-gray-50);
+  }
+}
+
+.AddressMap__Title {
+  @include font($size: 14, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-900);
+  @include margin($all: 0);
+}
+
+.AddressMap__Card {
+  width: 100%;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.AddressMap__MapContainer {
+  width: 100%;
+  background: var(--color-gray-100);
+  position: relative;
+  min-height: $map-default-height;
+  height: var(--map-height, $map-default-height);
+
+  // 네이버 로고 및 저작권 문구 숨김
+  // stylelint-disable-next-line selector-class-pattern
+  :global(.nmap_logo),
+  :global(img[alt='NAVER']),
+  :global([alt*='naver']),
+  :global([alt*='NAVER']),
+  :global([title*='naver']),
+  :global([title*='NAVER']),
+  :global(a[href*='naver.com']),
+  :global(a[href*='NAVER.COM']) {
+    display: none !important;
+  }
+}
+
+.AddressMap__Map {
+  width: 100%;
+  height: 100%;
+  min-height: $map-default-height;
+  cursor: pointer;
+}
+
+.AddressMap__Error {
+  width: 100%;
+  height: 100%;
+  @include flex($align: center, $justify: center);
+  background: var(--color-gray-100);
+  color: var(--color-gray-500);
+  @include font($size: 14);
+  @include padding($all: 20);
+  text-align: center;
+}
+
+.AddressMap__Info {
+  @include flex($justify: space-between, $align: center);
+  @include padding($y: 4, $x: 12);
+  background: var(--color-white);
+  border-top: 1px solid var(--color-gray-100);
+  min-width: 328px;
+  min-height: 60px;
+}
+
+.AddressMap__PlaceName {
+  @include font($size: 14, $weight: 600, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-800);
+  flex-shrink: 0;
+}
+
+.AddressMap__Button {
+  @include flex($align: center);
+  gap: 4px;
+  height: 30px;
+  @include padding($y: 8, $x: 12);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-100);
+  border-radius: 8px;
+  cursor: pointer;
+  @include font($size: 12, $weight: 600, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-800);
+  flex-shrink: 0;
+}
+
+.AddressMap__Address {
+  @include font($size: 12, $weight: 500, $line-height: 1.5, $letter-spacing: -0.02em);
+  color: var(--color-gray-500);
+  @include padding($y: 0, $x: 4);
+  text-decoration: underline;
+  text-underline-offset: 0;
+}
+
+.AddressMap__MarkerWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // 마커 아래쪽 동그란 그림자
+  &::after {
+    content: '';
+    position: absolute;
+    top: $shadow-top;
+    left: calc(#{$marker-left} + #{$marker-size} / 2 - #{$shadow-width} / 2);
+    width: $shadow-width;
+    height: $shadow-height;
+    background: var(--color-gray-400);
+    border-radius: 50%;
+    z-index: -1;
+  }
+}
+
+.AddressMap__MarkerBorder {
+  position: absolute;
+  top: calc(#{$marker-top} - #{$marker-border-width});
+  left: calc(#{$marker-left} - #{$marker-border-width});
+  z-index: 1;
+
+  :global(svg) {
+    display: block;
+    width: calc(#{$marker-size} + #{$marker-border-width} * 2);
+    height: calc(#{$marker-size} + #{$marker-border-width} * 2);
+  }
+}
+
+.AddressMap__MarkerIcon {
+  position: absolute;
+  top: $marker-top;
+  left: $marker-left;
+  z-index: 2;
+
+  :global(svg) {
+    display: block;
+    width: $marker-size;
+    height: $marker-size;
+  }
+}

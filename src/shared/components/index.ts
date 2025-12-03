@@ -21,6 +21,7 @@ export { CampaignInfoList } from './CampaignInfoList';
 export { GlobalPageHeader } from './GlobalPageHeader';
 export { GlobalMainNavigation } from './GlobalMainNavigation';
 export { HeaderConfig } from './HeaderConfig';
+export { AddressMap } from './AddressMap';
 
 // Types
 export type { ButtonProps } from './Button/types';
@@ -29,3 +30,4 @@ export type { ErrorBoundaryProps } from './ErrorBoundary/types';
 export type { PageHeaderProps } from './PageHeader/types';
 export type { ToastOptions, ToastInput } from './Toast/types';
 export type { ImageGalleryProps } from './ImageViewer';
+export type { AddressMapProps } from './AddressMap';
