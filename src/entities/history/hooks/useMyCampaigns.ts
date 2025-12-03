@@ -3,14 +3,12 @@ import type { Application, ApplicationStatus } from '@entities/application';
 import { getMyCampaigns, deleteMyCampaign } from '../api/myCampaignApi';
 
 /**
- * 체험 신청 목록을 가져오는 React Query 훅 (Infinite Scroll)
- * @param userId - 조회할 사용자 ID
+ * 체험 신청 목록을 가져오는 React Query 훅
  */
-export function useMyCampaigns(userId: string) {
+export function useMyCampaigns() {
   return useQuery({
-    queryKey: ['my-applications', userId],
-    queryFn: () => getMyCampaigns(userId),
-    enabled: !!userId,
+    queryKey: ['my-applications'],
+    queryFn: () => getMyCampaigns(),
   });
 }
 

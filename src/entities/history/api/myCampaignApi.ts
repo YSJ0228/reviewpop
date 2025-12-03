@@ -4,24 +4,20 @@ import { Application } from '@entities/application';
 
 /**
  * 내 체험 목록 조회
- * @param userId - 사용자 ID
  */
-export const getMyCampaigns = async (userId: string) => {
-  const response = await apiClient.get<ApiResponse<Application[]>>(
-    `/my-campaigns?userId=${userId}`,
-  );
+export const getMyCampaigns = async () => {
+  const response = await apiClient.get<ApiResponse<Application[]>>('/my-campaigns');
   return unwrapApiResponse(response.data);
 };
 
 /**
  * 내 체험 목록 조회 (상태별)
- * @param userId - 사용자 ID
  * @param status - 체험 상태
  * @returns
  */
-export const getMyCampaignsByStatus = async (userId: string, status: string) => {
+export const getMyCampaignsByStatus = async (status: string) => {
   const response = await apiClient.get<ApiResponse<Application[]>>(
-    `/my-campaigns?userId=${userId}&status=${status}`,
+    `/my-campaigns?status=${status}`,
   );
   return unwrapApiResponse(response.data);
 };

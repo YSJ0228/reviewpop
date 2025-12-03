@@ -1,5 +1,4 @@
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
-import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 
 import { APPLICATION_STATUS_LABELS } from '@features/history/constants';
 
@@ -10,8 +9,7 @@ import type { IMyCampaignListProps } from './types';
 import styles from './style.module.scss';
 
 export function CampaignList({ status }: IMyCampaignListProps) {
-  const { data: user } = useUserInfo();
-  const { data: campaigns = [], isLoading, error } = useMyCampaigns(user?.id || '');
+  const { data: campaigns = [], isLoading, error } = useMyCampaigns();
 
   const filteredCampaigns = filterCampaignsByStatus(campaigns, status);
 
