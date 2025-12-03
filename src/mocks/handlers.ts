@@ -5,7 +5,7 @@
  */
 
 import { authHandlers } from '@shared/api/mock/handlers/auth';
-// import { reviewHandlers } from '@shared/api/mock/handlers/reviews';
+import { reviewHandlers } from '@shared/api/mock/handlers/reviews';
 import { kakaoOAuthHandlers } from '@shared/api/mock/handlers/oauth/kakao';
 import { myCampaignHandlers } from '@entities/history/api/myMock';
 import { campaignHandlers } from '@entities/campaign/api/mock';
@@ -21,7 +21,7 @@ import { notificationHandlers } from '@entities/notification/api/mock';
  */
 export const handlers = [
   ...kakaoOAuthHandlers, // OAuth 핸들러 (외부 도메인)
-  // ...reviewHandlers,
+  ...reviewHandlers,
   ...authHandlers,
   ...campaignHandlers,
   ...myCampaignHandlers,

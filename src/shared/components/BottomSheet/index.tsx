@@ -1,4 +1,4 @@
-import { Drawer } from '@mantine/core';
+import { Autocomplete, Drawer } from '@mantine/core';
 
 import { BottomSheetProps } from './types';
 
@@ -11,7 +11,7 @@ export function BottomSheet({
   children,
   footer,
   titleSize = 20,
-  height = 560,
+  height,
   withCloseButton = true,
 }: BottomSheetProps) {
   // footer가 있을 때만 flex 레이아웃 적용
@@ -29,7 +29,7 @@ export function BottomSheet({
           margin: '0 auto',
           borderTopLeftRadius: '16px',
           borderTopRightRadius: '16px',
-          height,
+          ...(height ? { height } : { maxHeight: '90vh', height: 'auto', minHieght: '100px' }),
           zIndex: 'var(--z-bottomsheet)',
           ...(hasFooter && {
             display: 'flex',

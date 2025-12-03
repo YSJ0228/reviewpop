@@ -1,13 +1,13 @@
 import Image from 'next/image';
+import { useDisclosure } from '@mantine/hooks';
 
 import { Button } from '@shared/components';
-
+import { ModificationBottomSheet } from '@features/review/components/ModificationBottomSheet';
 import { HISTORY_UI, HISTORY_MESSAGES } from '@features/history/constants';
 
 import type { CampaignReviewedCardProps } from './type';
 
 import styles from './style.module.scss';
-
 /**
  * 후기 탭 카드 컴포넌트
  * @param reviewStatus - 리뷰 상태
@@ -15,6 +15,8 @@ import styles from './style.module.scss';
  * @returns 후기 탭 카드 컴포넌트 (후기 등록 전, 후기 검토 중, 후기 수정 요청, 후기 등록 완료)
  */
 export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignReviewedCardProps) {
+  const [opened, { open, close }] = useDisclosure();
+
   // 체험이 종료되었지만 후기 미등록인 경우 (특별 케이스)
   const isClosedNotReviewed = campaignStatus === 'closed' && reviewStatus === 'notReviewed';
 
@@ -95,6 +97,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
               fullWidth
               radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
               size="small"
+              onClick={open}
             >
               <span className={styles['CampaignReviewedCard__ButtonText--Secondary']}>
                 {HISTORY_MESSAGES.EDIT_REQUEST_CONTENT}
@@ -130,6 +133,7 @@ export function CampaignReviewedCard({ reviewStatus, campaignStatus }: CampaignR
           </Button>
         )}
       </div>
+      <ModificationBottomSheet opened={opened} onClose={close} reviewId="1" />
     </div>
   );
 }

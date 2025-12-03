@@ -1,4 +1,5 @@
 import { apiClient } from '@shared/api/client';
+
 import { ReviewRequest } from '../types/review.types';
 
 interface ReviewModificationRequestResponse {
@@ -6,9 +7,9 @@ interface ReviewModificationRequestResponse {
   success: boolean;
 }
 
-export async function getReviewModificationRequest() {
+export async function getReviewModificationRequest(reviewId: string) {
   const response = await apiClient.get<ReviewModificationRequestResponse>(
-    '/review/:id/modification-request',
+    `/reviews/${reviewId}/modification-request`,
     {
       withCredentials: true,
     },
