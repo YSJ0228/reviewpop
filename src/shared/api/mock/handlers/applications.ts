@@ -14,7 +14,6 @@ import {
   mockApplications,
   getApplicationsByUserId,
   getApplicationsByCampaignId,
-  findApplicationByUserAndCampaign,
 } from '../data/applications';
 import { findCampaignById } from '@entities/campaign/lib';
 
@@ -32,7 +31,7 @@ export const applicationHandlers = [
         {
           success: false,
           error: '사용자 ID가 필요합니다.',
-        } satisfies ApiResponse<never>,
+        } satisfies ApiResponse<Application[]>,
         { status: 400 },
       );
     }
@@ -48,26 +47,26 @@ export const applicationHandlers = [
   /**
    * 신청 상세 조회
    * GET /api/applications/:id
-   * @deprecated ID 제거로 인해 지원하지 않음
    */
-  // http.get('/api/applications/:id', ({ params }) => {
-  //   const application = findApplicationById(params.id as string);
+  http.get('/api/applications/:id', ({ params }) => {
+    const applicationId = params.id as string;
+    const application = mockApplications.find((app) => app.id === applicationId);
 
-  //   if (!application) {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '신청 내역을 찾을 수 없습니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 404 },
-  //       );
-  //   }
+    if (!application) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '신청 내역을 찾을 수 없습니다.',
+        } satisfies ApiResponse<never>,
+        { status: 404 },
+      );
+    }
 
-  //   return HttpResponse.json({
-  //     success: true,
-  //     data: application,
-  //   } satisfies ApiResponse<Application>);
-  // }),
+    return HttpResponse.json({
+      success: true,
+      data: application,
+    } satisfies ApiResponse<Application>);
+  }),
 
   /**
    * 특정 체험의 신청 목록 조회 (관리자용)
