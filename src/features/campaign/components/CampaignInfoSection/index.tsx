@@ -17,17 +17,36 @@ export interface CampaignInfoSectionProps {
  * - 후기 유형 (네이버 블로그)
  */
 export function CampaignInfoSection({ campaign }: CampaignInfoSectionProps) {
+  const handleAddressClick = () => {
+    if (!campaign.address) return;
+    // 네이버 지도 검색 URL 생성
+    const naverMapUrl = `https://map.naver.com/v5/search/${encodeURIComponent(campaign.address)}`;
+    window.open(naverMapUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className={styles.CampaignInfoSection}>
       {/* 위치 정보 */}
       {campaign.address && (
         <div className={styles.InfoItem}>
-          <div className={`${styles.Icon} ${styles.IconLocation}`}>
+          <button
+            type="button"
+            className={`${styles.Icon} ${styles.IconLocation}`}
+            onClick={handleAddressClick}
+            aria-label={`${campaign.address} 네이버 지도에서 보기`}
+          >
             <Image src="/images/icons/Location.svg" alt="위치 아이콘" width={24} height={24} />
-          </div>
+          </button>
           <div className={styles.Content}>
             <div className={styles.Title}>{campaign.brand || '위치 정보'}</div>
-            <div className={styles.Description}>{campaign.address}</div>
+            <button
+              type="button"
+              className={styles.Description}
+              onClick={handleAddressClick}
+              aria-label={`${campaign.address} 네이버 지도에서 보기`}
+            >
+              {campaign.address}
+            </button>
           </div>
         </div>
       )}
