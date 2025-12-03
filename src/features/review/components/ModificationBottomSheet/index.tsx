@@ -44,7 +44,7 @@ export function ModificationBottomSheet({
             {reviewModification?.content}
           </span>
         </div>
-        <hr className={styles.ModificationBottomSheet__Line}></hr>
+        <div className={styles.ModificationBottomSheet__Line}></div>
         <div>
           <h3 className={styles.ModificationBottomSheet__SubTitle}>유의 사항</h3>
           <ul className={styles.ModificationBottomSheet__Caution}>
