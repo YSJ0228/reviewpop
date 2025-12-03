@@ -41,7 +41,7 @@ export interface BlogReview {
 }
 
 export interface ReviewRequest {
-  images?: string;
+  image?: string;
   content: string;
   precaution: string[];
 }

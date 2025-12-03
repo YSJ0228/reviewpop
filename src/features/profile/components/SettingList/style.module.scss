@@ -1,0 +1,10 @@
+@use '../../../../shared/styles/mixins' as *;
+
+.SettingList {
+  @include flex($justify: space-between, $align: center);
+  @include size($height: 50);
+}
+.SettingList__Title {
+  font-weight: 500;
+  font-size: 14px;
+}

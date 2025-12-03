@@ -15,11 +15,15 @@ RUN corepack enable && corepack prepare yarn@4.10.3 --activate
 # 의존성 파일만 먼저 복사 (캐시 활용)
 COPY package.json yarn.lock .yarnrc.yml ./
 
-# 의존성 설치
-RUN yarn install --immutable
+# 의존성 설치 (ARM64 크로스 컴파일 시 lockfile 차이로 인해 --immutable 제외)
+RUN yarn install
 
-# 소스 코드 복사 및 빌드
-COPY . .
+# 소스 코드 복사 (package 파일 제외하여 yarn install 결과 보존)
+COPY src ./src
+COPY public ./public
+COPY next.config.ts tsconfig.json postcss.config.cjs ./
+
+# 빌드
 RUN yarn build
 
 # Stage 2: 프로덕션 이미지

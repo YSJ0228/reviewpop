@@ -4,7 +4,7 @@ import { Suspense, use } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ReserveConfirm } from '@features/reserve/components/ReserveConfirm';
-import { useCampaignDetails } from '@features/campaign';
+import { useCampaignDetails } from '@features/history';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';

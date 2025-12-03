@@ -10,6 +10,7 @@ import { CampaignStatusBar } from '@features/campaign/components/CampaignStatusB
 import { CampaignContents } from '@features/campaign/components/CampaignContents';
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
+import StatusBadge from '@features/campaign/components/StatusBadge';
 import ReviewSection from '@features/campaign/components/ReviewSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
@@ -92,6 +93,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <div className={styles.Page__StatusBarSection}>
         <CampaignStatusBar campaign={campaign} />
+        <StatusBadge campaign={campaign} />
       </div>
 
       <CampaignContents campaign={campaign} />
@@ -104,7 +106,9 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <CampaignInfoSection campaign={campaign} />
 
-      <CampaignScheduleSection campaign={campaign} />
+      {campaign.status !== 'completed' && campaign.status !== 'closed' && (
+        <CampaignScheduleSection campaign={campaign} />
+      )}
 
       <BulletListSection title="당첨 조건" items={campaign.requirements || []} />
 

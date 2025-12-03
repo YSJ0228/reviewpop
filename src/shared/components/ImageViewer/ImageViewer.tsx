@@ -53,13 +53,18 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
     };
   }, [isOpen, onClose]);
 
-  // 스크롤 잠금 처리 (모달이 닫힐 때만 복원)
+  // 스크롤 잠금 처리 (모달이 닫힐 때 및 컴포넌트 언마운트 시 복원)
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
+
+    // cleanup: 컴포넌트 언마운트 시 스크롤 복원 (페이지 이동 시에도 동작)
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
 
   // 모달이 다시 열릴 때 currentSlide를 initialIndex로 초기화 (카운터 즉시 표시)

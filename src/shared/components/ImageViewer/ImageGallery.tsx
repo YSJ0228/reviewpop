@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { IconCopy } from '@pop-ui/foundation';
+import { IconCards } from '@pop-ui/foundation';
 
 import styles from './ImageGallery.module.scss';
 
@@ -93,7 +93,7 @@ export function ImageGallery({
                     onClick={handleViewAllClick}
                     aria-label="전체 이미지 보기"
                   >
-                    <IconCopy size={20} />
+                    <IconCards size={20} />
                   </button>
                 )}
               </>
