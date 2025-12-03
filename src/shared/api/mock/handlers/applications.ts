@@ -122,16 +122,16 @@ export const applicationHandlers = [
       );
     }
 
-    // 체험 상태 확인
-    if (campaign.status !== 'recruiting') {
-      return HttpResponse.json(
-        {
-          success: false,
-          error: '현재 신청할 수 없는 체험입니다.',
-        } satisfies ApiResponse<never>,
-        { status: 400 },
-      );
-    }
+    // // 체험 상태 확인
+    // if (campaign.status !== 'recruiting') {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: '현재 신청할 수 없는 체험입니다.',
+    //     } satisfies ApiResponse<never>,
+    //     { status: 400 },
+    //   );
+    // }
 
     // // 신청 마감일 확인
     // const now = new Date();
@@ -147,16 +147,16 @@ export const applicationHandlers = [
     // }
 
     // 중복 신청 확인
-    const existingApplication = findApplicationByUserAndCampaign(body.userId, campaignId);
-    if (existingApplication && existingApplication.status !== 'cancelled') {
-      return HttpResponse.json(
-        {
-          success: false,
-          error: '이미 신청한 체험입니다.',
-        } satisfies ApiResponse<never>,
-        { status: 400 },
-      );
-    }
+    // const existingApplication = findApplicationByUserAndCampaign(body.userId, campaignId);
+    // if (existingApplication && existingApplication.status !== 'cancelled') {
+    //   return HttpResponse.json(
+    //     {
+    //       success: false,
+    //       error: '이미 신청한 체험입니다.',
+    //     } satisfies ApiResponse<never>,
+    //     { status: 400 },
+    //   );
+    // }
 
     // // 모집 인원 확인
     // if (campaign.currentRecruitment >= campaign.maxRecruitment) {
