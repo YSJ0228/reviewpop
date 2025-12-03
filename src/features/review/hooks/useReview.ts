@@ -90,6 +90,6 @@ export function useReviewPageData(campaignId: string, applicationId: string | nu
       ]);
       return { campaign, user, application };
     },
-    enabled: !!applicationId,
+    enabled: !!campaignId,
   });
 }
