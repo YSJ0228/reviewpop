@@ -1469,16 +1469,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pop-ui/foundation@npm:^0.0.25":
-  version: 0.0.25
-  resolution: "@pop-ui/foundation@npm:0.0.25"
+"@pop-ui/foundation@npm:^0.0.30":
+  version: 0.0.30
+  resolution: "@pop-ui/foundation@npm:0.0.30"
   dependencies:
     "@mantine/core": "npm:^8.3.6"
     "@mantine/hooks": "npm:^8.3.6"
   peerDependencies:
     react: ^19.2.0
     react-dom: ^19.2.0
-  checksum: 10c0/f6783013f040a30145289cb618cf84376ad64e241c277df1c497f615daa07b8146db59ca922d078973b87d79f01dbfb2f7ec5fa654503938167673ef2f74a767
+  checksum: 10c0/a90f59703a14abf254fc2e43ef214a059584ca6d0e83724e3e533cd9d81f778cde1bc5bd9460992819dbd806b4fe8d4c4670160b9c53ab25c8319d1389fffe28
   languageName: node
   linkType: hard
 
@@ -2393,9 +2393,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001579, caniuse-lite@npm:^1.0.30001754":
-  version: 1.0.30001757
-  resolution: "caniuse-lite@npm:1.0.30001757"
-  checksum: 10c0/3ccb71fa2bf1f8c96ff1bf9b918b08806fed33307e20a3ce3259155fda131eaf96cfcd88d3d309c8fd7f8285cc71d89a3b93648a1c04814da31c301f98508d42
+  version: 1.0.30001759
+  resolution: "caniuse-lite@npm:1.0.30001759"
+  checksum: 10c0/b0f415960ba34995cda18e0d25c4e602f6917b9179290a76bdd0311423505b78cc93e558a90c98a22a1cc6b1781ab720ef6beea24ec7e29a1c1164ca72eac3a2
   languageName: node
   linkType: hard
 
@@ -6019,7 +6019,7 @@ __metadata:
     "@mantine/hooks": "npm:^8.3.7"
     "@mantine/modals": "npm:^8.3.7"
     "@pop-ui/core": "npm:^0.0.31"
-    "@pop-ui/foundation": "npm:^0.0.25"
+    "@pop-ui/foundation": "npm:^0.0.30"
     "@tanstack/react-query": "npm:^5.90.6"
     "@tanstack/react-query-devtools": "npm:^5.90.2"
     "@types/cookie": "npm:^1.0.0"
