@@ -1,7 +1,7 @@
 import type { CampaignDetail } from '@entities/campaign/types/campaign.types';
 import type { VisitStatus } from '@features/history/types';
 
-export interface CampaignSelectedCardProps {
+export interface CampaignSelectedCardFooterProps {
   campaign: CampaignDetail;
   visitStatus: VisitStatus;
 }

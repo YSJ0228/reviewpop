@@ -98,8 +98,6 @@ export const STATUS_VISIT = {
   scheduled: '방문 예정',
 } as const;
 
-export type VisitStatus = keyof typeof STATUS_VISIT;
-
 export const STATUS_REVIEW = {
   visited: '체험 후기를 남겨주세요',
   notReviewed: '체험 후기를 남겨주세요',
@@ -116,3 +114,20 @@ export const STATUS_REVIEW_TITLES = {
   requiredForEditing: '후기 등록 완료',
   closed: '체험 종료', // 체험이 종료되었지만 후기 미등록인 경우
 } as const;
+
+// ReviewStatus 값 상수
+export const REVIEW_STATUS = {
+  VISITED: 'visited',
+  NOT_REVIEWED: 'notReviewed',
+  REVIEW_PENDING: 'reviewPending',
+  REQUIRED_FOR_EDITING: 'requiredForEditing',
+  REVIEWED: 'reviewed',
+} as const;
+
+// CampaignStatus 값 상수 (일부만)
+export const CAMPAIGN_STATUS = {
+  CLOSED: 'closed',
+} as const;
+
+// 날짜 범위 구분자
+export const DATE_RANGE_SEPARATOR = ' ~ ';

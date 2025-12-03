@@ -1,6 +1,6 @@
 @use '@/shared/styles/mixins' as *;
 
-.CampaignReviewedCard__StatusLabel {
+.CampaignCompletedCard__StatusLabel {
   @include font(
     $size: 16,
     $weight: 700,

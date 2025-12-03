@@ -5,7 +5,7 @@ import { Colors } from '@shared/styles/colors';
 import { MAIN_MESSAGES } from './constants';
 import { formatDateForConfirmationCard } from './util';
 
-import type { ConfirmationCardProps } from './type';
+import type { ConfirmationCardProps } from './types';
 
 import styles from './style.module.scss';
 

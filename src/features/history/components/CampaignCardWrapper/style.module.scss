@@ -1,0 +1,16 @@
+@use '@/shared/styles/mixins' as *;
+
+.CampaignCardWrapper__Link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--gray-50);
+
+  &.CampaignCardWrapper__Link--NoBorder {
+    border-bottom: none;
+  }
+}
+
+.CampaignCardWrapper {
+  // SharedCampaignCard 컴포넌트에 전달되는 기본 클래스로 필요시 추가 스타일 정의
+}

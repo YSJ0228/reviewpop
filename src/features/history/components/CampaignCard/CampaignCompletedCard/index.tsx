@@ -4,26 +4,22 @@ import { CampaignCardWrapper } from '@features/history/components/CampaignCardWr
 import { CampaignStatusLabel } from '@features/history/components/CampaignStatusLabel';
 import { useCampaignCardData } from '@features/history/hooks/useCampaignCardData';
 
-import { CampaignReviewedCardFooter } from './CampaignReviewedCardFooter';
+import { CampaignReviewedCardFooter } from '../CampaignReviewedCard/CampaignReviewedCardFooter';
 
-import type { Application } from '@entities/application';
+import type { CampaignCompletedCardProps } from './types';
 
 import styles from './style.module.scss';
 
-interface CampaignReviewedCardProps {
-  application: Application;
-}
-
 /**
- * REVIEWED 타입 전용 카드 컴포넌트 (나의 체험 - 리뷰 탭)
+ * 체험 완료 카드 컴포넌트 (후기 상태 = reviewed)
  * @param application - 체험 신청 정보
  */
-export function CampaignReviewedCard({ application }: CampaignReviewedCardProps) {
+export function CampaignCompletedCard({ application }: CampaignCompletedCardProps) {
   const { campaign } = useCampaignCardData(application);
 
   // Top Content: 후기 상태 라벨
   const topContent = application.reviewStatus ? (
-    <div className={styles.CampaignReviewedCard__StatusLabel} aria-label="후기 상태 라벨">
+    <div className={styles.CampaignCompletedCard__StatusLabel} aria-label="후기 상태 라벨">
       <span>{STATUS_REVIEW[application.reviewStatus]}</span>
     </div>
   ) : undefined;
@@ -34,7 +30,7 @@ export function CampaignReviewedCard({ application }: CampaignReviewedCardProps)
         campaign={campaign}
         statusLabel={
           <CampaignStatusLabel
-            type="reviewed"
+            type="completed"
             visitStatus={undefined}
             reviewStatus={application.reviewStatus}
             reservationDate={application.reservationDate}
@@ -47,8 +43,6 @@ export function CampaignReviewedCard({ application }: CampaignReviewedCardProps)
         <CampaignReviewedCardFooter
           reviewStatus={application.reviewStatus}
           campaignStatus={campaign.status}
-          campaignId={campaign.id}
-          applicationId={application.id}
         />
       )}
     </>

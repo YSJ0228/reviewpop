@@ -1,5 +1,6 @@
-import { TCardType, VisitStatus } from '@features/history/constants';
-import { CampaignStatus } from '@entities/campaign/types/campaign.types';
+import { TCardType } from '@features/history/constants';
+import type { VisitStatus } from '@features/history/types';
+import type { CampaignStatus } from '@entities/campaign/types/campaign.types';
 import type { ReviewStatus } from '@entities/application';
 
 export interface CampaignStatusLabelProps {

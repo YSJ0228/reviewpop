@@ -2,7 +2,7 @@ import dayjs from '@shared/lib/dayjs.config';
 
 import { formatDate, type DateInput } from '@shared/lib/date';
 
-import type { ConfirmationCardType } from './type';
+import type { ConfirmationCardType } from './types';
 
 import { ERROR_MESSAGES, SUB_MESSAGES } from './constants';
 
