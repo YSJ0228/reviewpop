@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw';
+import { ApiResponse } from '@shared/api/types/common.types';
 import { INITIAL_REVIEWS } from './data';
 import { BlogReviews } from '../../types/review.types';
 import { createEditRequest } from './EditData';
@@ -29,10 +30,13 @@ export const reviewHandlers = [
     const end = start + size;
     const content = filteredReviews.slice(start, end);
 
-    return HttpResponse.json<BlogReviews>({
-      reviews: content,
-      pageSize: size,
-      hasNext: page < totalPages,
+    return HttpResponse.json<ApiResponse<BlogReviews>>({
+      success: true,
+      data: {
+        reviews: content,
+        pageSize: size,
+        hasNext: page < totalPages,
+      },
     });
   }),
 
