@@ -31,6 +31,8 @@ export interface ReservationData {
   personCount: number;
   /** 방문 날짜 (ISO 8601 string: YYYY-MM-DDTHH:mm:ss) */
   date: string;
+  /** 예약 ID (수정 시 필요) */
+  reservationId?: string;
 }
 
 interface ReservationState {
