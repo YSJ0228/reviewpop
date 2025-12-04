@@ -3,7 +3,7 @@ import type { Application } from '@entities/application';
 export const mockMyCampaigns: Application[] = [
   // 1. 미선정 (Rejected)
   {
-    id: 'mock-1',
+    id: 'app-1',
     userId: 'kakao-1001',
     campaign: {
       id: '1',
@@ -38,7 +38,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 1.5. 신청 (Pending)
   {
-    id: 'mock-2',
+    id: 'app-2',
     userId: 'kakao-1001',
     campaign: {
       id: '2',
@@ -72,7 +72,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 2. 선정 - 방문 예약 전 (Selected - Before Reservation)
   {
-    id: 'mock-3',
+    id: 'app-3',
     userId: 'kakao-1001',
     campaign: {
       id: '3',
@@ -104,7 +104,7 @@ export const mockMyCampaigns: Application[] = [
     createdAt: '2025-11-09T14:00:00Z',
   },
   {
-    id: 'mock-11',
+    id: 'app-11', // mock-11 -> app-11 (가정)
     userId: 'kakao-1001',
     campaign: {
       id: '11',
@@ -138,7 +138,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 3. 선정 - 방문 예약 후 (Selected - After Reservation)
   {
-    id: 'mock-4',
+    id: 'app-4',
     userId: 'kakao-1001',
     campaign: {
       id: '4',
@@ -174,7 +174,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
   {
-    id: 'mock-5',
+    id: 'app-5',
     userId: 'kakao-1001',
     campaign: {
       id: '5',
@@ -210,7 +210,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
   {
-    id: 'mock-6',
+    id: 'app-6',
     userId: 'kakao-1001',
     campaign: {
       id: '6',
@@ -246,7 +246,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 4-2. 후기 - 체험이 종료되었지만 후기 미등록 (Review - Closed but Not Reviewed)
   {
-    id: 'mock-7',
+    id: 'app-7',
     userId: 'kakao-1001',
     campaign: {
       id: '7',
@@ -282,7 +282,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 5. 후기 - 검토 중 (Review - Pending)
   {
-    id: 'mock-8',
+    id: 'app-8',
     userId: 'kakao-1001',
     campaign: {
       id: '8',
@@ -318,7 +318,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 6. 후기 - 수정 요청 (Review - Requested)
   {
-    id: 'mock-9',
+    id: 'app-9',
     userId: 'kakao-1001',
     campaign: {
       id: '9',
@@ -354,7 +354,7 @@ export const mockMyCampaigns: Application[] = [
 
   // 7. 완료 (Completed) - 종료 탭
   {
-    id: 'mock-10',
+    id: 'app-10',
     userId: 'kakao-1001',
     campaign: {
       id: '10',

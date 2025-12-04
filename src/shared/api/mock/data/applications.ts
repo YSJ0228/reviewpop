@@ -95,7 +95,7 @@ export const mockApplications: Application[] = [
     createdAt: '2025-11-05T11:00:00Z',
   },
   {
-    id: 'mock-4',
+    id: 'app-4',
     userId: 'kakao-1002',
     campaign: getCampaign('4'),
     status: 'reviewed',
