@@ -22,7 +22,14 @@ export interface PostReservation {
   date: string;
 }
 
+/**TODO: 필요없음 */
+export const RESERVATION_STATUSES = ['pending', 'confirmed', 'cancelled', 'completed'] as const;
+
+/**TODO: 필요없음 */
+export type ReservationStatus = (typeof RESERVATION_STATUSES)[number];
+
 /** 본인이 한 예약정보 받기 */
+/**TODO: 필요없음 */
 export interface Reservation {
   id: string;
   campaignId: string;
