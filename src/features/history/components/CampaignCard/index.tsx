@@ -145,7 +145,11 @@ export function CampaignCard({ application, type }: IMyCampaignCardProps) {
 
       {/* selected 타입 - Link 밖으로 분리 */}
       {type === CARD_TYPES.SELECTED && visitStatus && (
-        <CampaignSelectedCard campaign={campaign} visitStatus={visitStatus} />
+        <CampaignSelectedCard
+          campaign={campaign}
+          visitStatus={visitStatus}
+          applicationId={application.id}
+        />
       )}
 
       {/* reviewed/completed 타입 - Link 밖으로 분리 */}

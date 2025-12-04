@@ -29,7 +29,7 @@ export default function CampaignReservePage({
   const { campaignId } = use(params);
   usePageHeader({
     showBackButton: true,
-    title: '체험 방문 예약 폼 헤더',
+    title: '체험 방문 예약',
   });
 
   return (

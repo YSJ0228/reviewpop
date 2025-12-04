@@ -7,6 +7,7 @@ import { BottomSheet } from '@shared/components/BottomSheet';
 import { Button } from '@shared/components';
 import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
 import { getCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
+import { useReservationStore } from '@features/reserve/store/reservationStore';
 
 import type { CampaignSelectedCardProps } from './types';
 
@@ -16,12 +17,17 @@ import styles from './style.module.scss';
  * 선정된 체험 카드의 액션 영역 컴포넌트
  * @param visitStatus - 방문 상태 (before: 방문 전, scheduled: 방문 예정)
  */
-export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelectedCardProps) {
+export function CampaignSelectedCard({
+  campaign,
+  visitStatus,
+  applicationId,
+}: CampaignSelectedCardProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
   const bottomSheetData = getCampaignBottomSheetData(campaign.id, visitStatus === 'scheduled');
 
   const router = useRouter();
+  const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
 
   const handleCampaignDetailClick = () => {
     router.push(`/campaign/${campaign.id}`);
@@ -31,8 +37,11 @@ export function CampaignSelectedCard({ campaign, visitStatus }: CampaignSelected
   const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    setReservationFormData({
+      campaignId: campaign.id,
+      applicationId,
+    });
     router.push(`/campaign/${campaign.id}/reserve`);
-    open();
   };
 
   // TODO: 리뷰 미션 버튼 클릭 핸들러
