@@ -125,7 +125,6 @@
     min-height: 50px;
     align-self: stretch;
     padding: 0 16px;
-    margin-top: 0;
     @include flex($direction: column, $justify: center, $align: flex-end);
   }
 

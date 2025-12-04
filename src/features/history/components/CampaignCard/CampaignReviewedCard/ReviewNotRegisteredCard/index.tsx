@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from '@shared/components';
 
-import { HISTORY_UI, HISTORY_MESSAGES, BLOG_REVIEW_EXAMPLE_URL } from '@features/history/constants';
+import { HISTORY_UI, HISTORY_MESSAGES } from '@features/history/constants';
 
 import type { ReviewNotRegisteredCardProps } from './types';
 
@@ -40,7 +40,11 @@ export function ReviewNotRegisteredCard({
             radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
             size="small"
             onClick={() => {
-              window.open(BLOG_REVIEW_EXAMPLE_URL, '_blank', 'noopener,noreferrer');
+              window.open(
+                process.env.NEXT_PUBLIC_BLOG_REVIEW_EXAMPLE_URL,
+                '_blank',
+                'noopener,noreferrer',
+              );
             }}
           >
             <span className={styles['ReviewNotRegisteredCard__ButtonText--BlogTip']}>

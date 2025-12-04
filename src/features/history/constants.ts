@@ -131,6 +131,3 @@ export const CAMPAIGN_STATUS = {
 
 // 날짜 범위 구분자
 export const DATE_RANGE_SEPARATOR = ' ~ ';
-
-// 블로그 후기 예시 URL
-export const BLOG_REVIEW_EXAMPLE_URL = 'https://blog.naver.com/bm_io/224092105921';
