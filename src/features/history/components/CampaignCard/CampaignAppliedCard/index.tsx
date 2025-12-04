@@ -1,11 +1,9 @@
 import { Modal } from '@shared/components';
 import { useDeleteMyCampaign } from '@entities/history/hooks/useMyCampaigns';
-import styles from './style.module.scss';
 
-interface CampaignAppliedCardProps {
-  announcementStatus: string;
-  campaignId: string;
-}
+import { CampaignAppliedCardProps } from './type';
+
+import styles from './style.module.scss';
 
 export function CampaignAppliedCard({ announcementStatus, campaignId }: CampaignAppliedCardProps) {
   const { mutate: deleteMyCampaign } = useDeleteMyCampaign(campaignId);
