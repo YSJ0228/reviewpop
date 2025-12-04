@@ -52,7 +52,7 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
         text={blog}
         isConnected={isConnected}
       />
-      <LabeledInput label="이름" placeholder="이름 입력" input={nameInput} />
+      <LabeledInput label="이름" placeholder="이름을 입력해주세요" input={nameInput} />
       <LabeledInput label="전화번호" placeholder="01012345678" input={phoneInput} />
       {showTextArea && (
         <TextArea

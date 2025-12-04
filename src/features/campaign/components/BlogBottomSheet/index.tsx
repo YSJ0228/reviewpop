@@ -26,7 +26,7 @@ export function BlogBottomSheet({
     >
       <LabeledInput
         label="블로그 주소"
-        placeholder="네이버 블로그 아이디 입력"
+        placeholder="블로그 아이디를 적어주세요"
         input={urlInput}
         showButton
         showPreview
