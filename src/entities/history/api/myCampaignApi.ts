@@ -2,16 +2,11 @@ import { apiClient } from '@shared/api/client';
 import { ApiResponse, unwrapApiResponse } from '@shared/api/types/common.types';
 import { IMyCampaignList } from '../types/myCampaign.types';
 
-interface MyCampaignListResponse {
-  data: IMyCampaignList;
-  success: true;
-}
-
 /**
  * 내 체험 목록 조회
  */
 export const getMyCampaigns = async () => {
-  const response = await apiClient.get<MyCampaignListResponse>('/my-campaigns', {
+  const response = await apiClient.get<ApiResponse<IMyCampaignList>>('/my-campaigns', {
     withCredentials: true,
   });
   return unwrapApiResponse(response.data);

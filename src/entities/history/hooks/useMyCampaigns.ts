@@ -1,6 +1,7 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Application, ApplicationStatus } from '@entities/application';
 import { getMyCampaigns, deleteMyCampaign } from '../api/myCampaignApi';
+import { toast } from '@shared/components';
 
 /**
  * 체험 신청 목록을 가져오는 React Query 훅
@@ -16,13 +17,17 @@ export function useMyCampaigns() {
 /**
  * 체험 신청 취소 훅
  */
-export function useDeleteMyCampaign(applicationId: string) {
+export function useDeleteMyCampaign(campaignId: string) {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: () => deleteMyCampaign(applicationId),
+    mutationFn: () => deleteMyCampaign(campaignId),
     onSuccess: () => {
-      console.log('체험 신청이 삭제되었습니다.');
+      toast.success('신청이 취소되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['my-applications'] });
     },
     onError: (error) => {
+      toast.error('신청 취소에 실패했습니다.');
       console.error('체험 신청 삭제에 실패했습니다.', error);
     },
   });

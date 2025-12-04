@@ -8,7 +8,7 @@ interface CampaignAppliedCardProps {
 }
 
 export function CampaignAppliedCard({ announcementStatus, campaignId }: CampaignAppliedCardProps) {
-  const { mutateAsync: deleteMyCampaign } = useDeleteMyCampaign(campaignId);
+  const { mutate: deleteMyCampaign } = useDeleteMyCampaign(campaignId);
 
   const handleCancelApplication = () => {
     deleteMyCampaign();
