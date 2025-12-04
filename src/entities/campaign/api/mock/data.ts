@@ -80,7 +80,7 @@ const createRandomCampaign = (index: number): CampaignDetail => {
   const annEnd = new Date(annStart); // 발표는 당일 마감 혹은 하루
 
   return {
-    id: `campaign_${index}`,
+    id: String(index),
     title: `${location.sido} ${location.sigungu} 방문 체험단 모집 ${index + 1}`,
     brand: `브랜드_${index}`,
     thumbnail: `/images/temp/CampaignCardImg-0${getRandomInt(1, 3)}.jpg`,

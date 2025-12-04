@@ -7,7 +7,7 @@ const notifications = [...INITIAL_NOTIFICATIONS];
 export const notificationHandlers = [
   // 내 알림 목록 조회
   http.get('/api/notifications', () => {
-    // 실제로는 토큰 기반 인증. 여기서는 ME의 알림만 있다고 가정 (Mock Data 자체가 ME 기준 생성됨)
+    // 실제로는 토큰 기반 인증.
     // 최신순 정렬
     const sortedNotifications = [...notifications].sort(
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
