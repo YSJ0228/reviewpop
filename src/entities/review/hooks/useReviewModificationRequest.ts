@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getReviewModificationRequest } from '../api/reviewApi';
+import { getReviewModificationRequest } from '../../../features/review/api/reviewApi';
 
 export function useReviewModificationRequest(reviewId: string, enabled = true) {
   return useQuery({

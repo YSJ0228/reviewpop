@@ -1,12 +1,13 @@
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { PostReservation } from '@entities/reservation';
+
 import {
+  PostReservation,
   createReservation,
   getReservation,
   updateReservation,
   deleteReservation,
-} from '../api/reserveApi';
+} from '@entities/reservation';
 
 // 예약 생성 hook
 export const useReserve = (campaignId: string) => {
@@ -16,8 +17,8 @@ export const useReserve = (campaignId: string) => {
     mutationFn: (data: PostReservation) => createReservation(data),
     onSuccess: () => {
       // 관련 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ['reservation', campaignId] });
-      queryClient.invalidateQueries({ queryKey: ['campaigns', campaignId] });
+      queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
+      queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: (error: Error) => {
@@ -27,23 +28,24 @@ export const useReserve = (campaignId: string) => {
 };
 
 // 예약 조회 hook
-export const useGetReservation = (campaignId: string, applicationId: string) => {
+export const useGetReservation = (reservationId: string) => {
   return useQuery({
-    queryKey: ['reservation', campaignId, applicationId],
-    queryFn: () => getReservation(campaignId, applicationId),
+    queryKey: ['reservation', reservationId],
+    queryFn: () => getReservation(reservationId),
   });
 };
 
 // 예약 수정 hook
-export const useUpdateReservation = (campaignId: string, applicationId: string) => {
+export const useUpdateReservation = (campaignId: string, reservationId: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: PostReservation) => updateReservation(campaignId, applicationId, data),
+    mutationFn: (data: PostReservation) => updateReservation(reservationId, data),
     onSuccess: () => {
-      // 관련 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ['reservation', campaignId] });
-      queryClient.invalidateQueries({ queryKey: ['campaigns', campaignId] });
+      // 관련 쿼리 무효화'
+      queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
+      queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
+      queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: (error: Error) => {
@@ -53,16 +55,14 @@ export const useUpdateReservation = (campaignId: string, applicationId: string) 
 };
 
 // 예약 취소 hook
-export const useDeleteReservation = (campaignId: string, applicationId: string) => {
-  const router = useRouter();
+export const useDeleteReservation = (reservationId: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => deleteReservation(campaignId, applicationId),
+    mutationFn: () => deleteReservation(reservationId),
     onSuccess: () => {
       // 관련 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ['reservation', campaignId] });
-      queryClient.invalidateQueries({ queryKey: ['campaigns', campaignId] });
-      router.push(`/my?tab=selected`);
+      queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
+      queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
     },
     onError: (error: Error) => {
       console.error('예약 취소 실패:', error);
