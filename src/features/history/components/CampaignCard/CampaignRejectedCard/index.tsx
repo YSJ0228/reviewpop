@@ -1,37 +1,26 @@
-import dayjs from 'dayjs';
+import { CampaignCardWrapper } from '@features/history/components/CampaignCardWrapper';
+import { useCampaignCardData } from '@features/history/hooks/useCampaignCardData';
 
-import { CONSTANTS } from '@shared/config/constants';
-import { HISTORY_MESSAGES } from '@features/history/constants';
+import { CampaignRejectedCardFooter } from './CampaignRejectedCardFooter';
 
 import type { CampaignRejectedCardProps } from './types';
 
-import styles from './style.module.scss';
-
 /**
- * 미선정 체험 카드 컴포넌트
- * @param recruitmentSchedule - 모집 일정
- * @param maxRecruitment - 최대 선정 인원
- * @returns 미선정 체험 카드 컴포넌트
+ * REJECTED 타입 전용 카드 컴포넌트 (체험 미선정)
+ * @param application - 체험 신청 정보
  */
-export function CampaignRejectedCard({
-  recruitmentSchedule,
-  maxRecruitment,
-}: CampaignRejectedCardProps) {
-  if (!recruitmentSchedule) {
-    return null;
-  }
+export function CampaignRejectedCard({ application }: CampaignRejectedCardProps) {
+  const { campaign, recruitmentSchedule } = useCampaignCardData(application);
 
   return (
-    <div className={styles.CampaignRejectedCard__Date} aria-label="모집 일정 및 선정 인원">
-      <time dateTime={recruitmentSchedule[0]}>
-        {HISTORY_MESSAGES.RECRUITMENT} {dayjs(recruitmentSchedule[0]).format('MM.DD')}
-      </time>
-      <span> ~ </span>
-      <time dateTime={recruitmentSchedule[1]}>{dayjs(recruitmentSchedule[1]).format('MM.DD')}</time>
-      <span className={styles.CampaignRejectedCard__MaxRecruitment}>
-        {maxRecruitment ?? CONSTANTS.DEFAULT_COUNT.MAX_RECRUITMENT}{' '}
-        {HISTORY_MESSAGES.SELECTED_COUNT}
-      </span>
-    </div>
+    <CampaignCardWrapper
+      campaign={campaign}
+      bottomContent={
+        <CampaignRejectedCardFooter
+          recruitmentSchedule={recruitmentSchedule}
+          maxRecruitment={campaign.maxRecruitment}
+        />
+      }
+    />
   );
 }

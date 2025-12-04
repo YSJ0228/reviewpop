@@ -27,6 +27,9 @@ export const ROUTES = {
   /** 리뷰 작성 페이지 */
   REVIEW_CREATE: '/reviews/create',
 
+  /** 체험 상세 페이지 */
+  CAMPAIGN_DETAIL: (id: number | string) => `/campaign/${id}`,
+
   /** 제품 목록 페이지 */
   PRODUCTS: '/products',
 

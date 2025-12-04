@@ -42,6 +42,10 @@ export const DATE_FORMATS = {
   MMDD_DDDD_LONG_WITH_TIME: 'M월 D일 dddd A h:mm',
   TIME: 'HH:mm',
   TIME_WITH_AMPM: 'A h:mm',
+  // API 통신용 날짜 포맷
+  DATE_ONLY: 'YYYY-MM-DD',
+  // 방문 날짜 표시용
+  RESERVATION_DATE_SHORT: 'YY.MM.DD (ddd) A h시',
 } as const;
 
 /**

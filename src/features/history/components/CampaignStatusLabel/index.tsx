@@ -5,9 +5,12 @@ import {
   STATUS_REVIEW_TITLES,
   STATUS_VISIT,
   HISTORY_MESSAGES,
+  REVIEW_STATUS,
+  CAMPAIGN_STATUS,
 } from '@features/history/constants';
+import { DATE_FORMATS } from '@shared/lib/date';
 
-import type { CampaignStatusLabelProps } from './type';
+import type { CampaignStatusLabelProps } from './types';
 
 import styles from './style.module.scss';
 
@@ -44,7 +47,7 @@ export function CampaignStatusLabel({
   ) {
     // 체험이 종료되었지만 후기 미등록인 경우 "체험 종료" 표시
     const statusTitle =
-      reviewStatus === 'notReviewed' && campaignStatus === 'closed'
+      reviewStatus === REVIEW_STATUS.NOT_REVIEWED && campaignStatus === CAMPAIGN_STATUS.CLOSED
         ? STATUS_REVIEW_TITLES.closed
         : STATUS_REVIEW_TITLES[reviewStatus];
 
@@ -53,7 +56,7 @@ export function CampaignStatusLabel({
         <span>{statusTitle}</span>
         <span className={styles.CampaignStatusLabel__ReservationDate}>
           {reservationDate
-            ? `${dayjs(reservationDate).format('YY.MM.DD (ddd) A h시')} ${HISTORY_MESSAGES.VISITED}`
+            ? `${dayjs(reservationDate).format(DATE_FORMATS.RESERVATION_DATE_SHORT)} ${HISTORY_MESSAGES.VISITED}`
             : ' '}
         </span>
       </div>
