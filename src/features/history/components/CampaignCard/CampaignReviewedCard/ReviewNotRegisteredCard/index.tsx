@@ -39,6 +39,13 @@ export function ReviewNotRegisteredCard({
             fullWidth
             radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
             size="small"
+            onClick={() => {
+              window.open(
+                process.env.NEXT_PUBLIC_BLOG_REVIEW_EXAMPLE_URL || '',
+                '_blank',
+                'noopener,noreferrer',
+              );
+            }}
           >
             <span className={styles['ReviewNotRegisteredCard__ButtonText--BlogTip']}>
               <span className={styles['ReviewNotRegisteredCard__ButtonText--Secondary']}>
