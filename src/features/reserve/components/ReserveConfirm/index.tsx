@@ -1,6 +1,6 @@
 import { LoadingSpinner, CampaignInfoList } from '@shared/components';
 import { formatDate } from '@shared/lib/date';
-import { useCreateReservation } from '@entities/reservation';
+import { useCreateReservation, useUpdateReservation } from '@entities/reservation';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 import { mockReservationData } from '@features/reserve/store/mockReservationData';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
@@ -16,7 +16,14 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   const reservationData = useReservationStore(
     (state) => state.reservationData ?? mockReservationData,
   );
-  const { mutate: createReservation } = useCreateReservation(campaignId);
+  const { mutate: createReservation, isPending: isCreatePending } =
+    useCreateReservation(campaignId);
+
+  const { mutate: updateReservation, isPending: isUpdatePending } = useUpdateReservation(
+    campaignId,
+    reservationData?.reservationId || undefined,
+  );
+
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isUserLoading } = useUserInfo();
   const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(
@@ -35,12 +42,18 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     return <div>필요한 정보를 불러올 수 없습니다.</div>;
 
   const handleConfirm = () => {
-    createReservation({
+    const payload = {
       campaignId: reservationData.campaignId,
       applicationId: reservationData.applicationId,
       personCount: reservationData.personCount,
       date: reservationData.date,
-    });
+    };
+
+    if (reservationData.reservationId) {
+      updateReservation(payload);
+    } else {
+      createReservation(payload);
+    }
   };
 
   return (
@@ -67,7 +80,7 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
         </CampaignInfoList.Main>
         <ReservePrecautions precautions={campaign.reservationPrecaution} />
       </div>
-      <ReserveAgreement onConfirm={handleConfirm} />
+      <ReserveAgreement onConfirm={handleConfirm} disabled={isCreatePending || isUpdatePending} />
     </div>
   );
 }

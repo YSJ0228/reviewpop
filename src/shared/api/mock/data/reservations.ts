@@ -9,13 +9,6 @@ import type { Reservation } from '@entities/reservation';
 
 /**
  * Reservation mock 데이터
- *
- * 상태 분포:
- * - pending (대기): 약 5개
- * - confirmed (확정): 약 4개
- * - shipped (배송중): 약 5개
- * - delivered (배송완료): 약 5개
- * - cancelled (취소): 약 1개
  */
 export const mockReservations: Reservation[] = [
   // 최근 예약 (pending)
