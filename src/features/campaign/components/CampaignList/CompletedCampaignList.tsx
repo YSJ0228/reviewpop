@@ -1,6 +1,5 @@
-import { useMemo, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-import { diff } from '@shared/lib/date';
 import { CompletedCard } from '../CampaignCard/CompletedCard';
 import { InfiniteCampaignListProps } from './types';
 
@@ -32,10 +31,6 @@ export function CompletedCampaignList({
 
   const campaigns = data?.pages.flatMap((page) => page.content) || [];
 
-  const sortedCampaigns = useMemo(() => {
-    return [...campaigns].sort((a, b) => diff(b.schedule.review.end, a.schedule.review.end));
-  }, [campaigns]);
-
   if (isLoading) {
     return <div>로딩 중...</div>;
   }
@@ -45,7 +40,7 @@ export function CompletedCampaignList({
   }
   return (
     <div className={styles.CampaignList} role="feed" aria-label="마감된 체험 목록">
-      {sortedCampaigns.map((campaign) => (
+      {campaigns.map((campaign) => (
         <CompletedCard key={campaign.id} campaign={campaign} />
       ))}
       <div ref={observerRef} style={{ height: '20px', background: 'transparent' }} />

@@ -1,4 +1,3 @@
-import { diff } from '@shared/lib/date';
 import { BeforeRecruitingCard } from '../CampaignCard/BeforeRecruitingCard';
 import { CampaignListProps } from './types';
 
@@ -13,11 +12,9 @@ export function BeforeRecruitingCampaignList({ data }: CampaignListProps) {
 
   return (
     <div className={styles.CampaignList} role="feed" aria-label="오픈 예정 체험 목록">
-      {campaigns
-        .sort((a, b) => diff(a.schedule.application.start, b.schedule.application.start))
-        .map((campaign) => (
-          <BeforeRecruitingCard key={campaign.id} campaign={campaign} />
-        ))}
+      {campaigns.map((campaign) => (
+        <BeforeRecruitingCard key={campaign.id} campaign={campaign} />
+      ))}
     </div>
   );
 }

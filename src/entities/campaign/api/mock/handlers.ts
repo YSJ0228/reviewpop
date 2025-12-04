@@ -12,8 +12,6 @@ export const campaignHandlers = [
     const page = Number(url.searchParams.get('page') || '1');
     const size = Number(url.searchParams.get('size') || '10');
 
-    console.log('MSW Campaign Request:', { category, status, location, page, size });
-
     let filteredCampaigns = [...INITIAL_CAMPAIGNS];
 
     if (category) {

@@ -35,11 +35,3 @@ export const getCampaign = async (id: string): Promise<CampaignDetail> => {
   const response = await apiClient.get<ApiResponse<CampaignDetail>>(`/campaigns/${id}`);
   return unwrapApiResponse(response.data);
 };
-
-/**
- * 체험 상세 정보 조회 TODO: 하나로 통일하기
- */
-export async function getCampaignDetails(id: string) {
-  const response = await apiClient.get<ApiResponse<CampaignDetail>>(`/campaigns/${id}`);
-  return unwrapApiResponse(response.data);
-}
