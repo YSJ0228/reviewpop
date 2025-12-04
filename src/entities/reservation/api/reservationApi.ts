@@ -6,12 +6,12 @@ import {
   PostReservation,
   ReservationConfig,
   ReservedDateTimes,
-} from '@entities/reservation';
+} from '../types/reservation.types';
 
 // 예약 폼에 필요한 설정 정보 가져오기
 export const getReservationConfig = async (campaignId: string) => {
   const response = await apiClient.get<ApiResponse<ReservationConfig>>(
-    `/campaigns/${campaignId}/reservations/config`,
+    `/reservations/${campaignId}/config`,
   );
   return unwrapApiResponse(response.data);
 };
@@ -19,7 +19,7 @@ export const getReservationConfig = async (campaignId: string) => {
 // 특정 날짜의 예약된 시간대 가져오기
 export const getReservedDateTimes = async (campaignId: string, date: string) => {
   const response = await apiClient.get<ApiResponse<ReservedDateTimes>>(
-    `/campaigns/${campaignId}/reservations/reserved-times`,
+    `/reservations/${campaignId}/reserved-times`,
     { params: { date } },
   );
   return unwrapApiResponse(response.data);

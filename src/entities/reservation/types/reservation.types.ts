@@ -45,7 +45,7 @@ export interface ReservationConfig {
   maxCount: number; // 타임당 최대 몇명???
   disabled: string[]; // 예약 불가능한 날짜만, YYYY-MM-DD 형식의 배열
   // ["2025-12-05", "2025-12-06"]
-  intervalMinutes: number; // default: 30분
+  intervalMinutes?: number; // default: 30분
   startDate: string; // YYYY-MM-DD
   endDate: string; //YYYY-MM-DD
 }

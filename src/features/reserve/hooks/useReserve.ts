@@ -8,7 +8,7 @@ import {
   deleteReservation,
   getReservationConfig,
   getReservedDateTimes,
-} from '../api/reserveApi';
+} from '@entities/reservation/api/reservationApi';
 
 // 예약 폼에 필요한 설정 정보 조회 hook
 export const useReservationConfig = (campaignId: string) => {
