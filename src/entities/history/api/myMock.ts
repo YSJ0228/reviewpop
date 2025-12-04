@@ -17,17 +17,15 @@ export const myCampaignHandlers = [
     const myApplications = mockApplications
       .filter((app) => app.userId === userId)
       .map((app) => {
-        if (app.reservationId) {
-          const exists = mockReservations.some((r) => r.id === app.reservationId);
-          if (!exists) {
-            return {
-              ...app,
-              isReservated: false,
-              reservationId: undefined,
-              reservationDate: undefined,
-              status: 'selected' as const,
-            };
-          }
+        // 예약 ID가 있지만 실제 예약이 삭제된 경우
+        if (app.reservationId && !mockReservations.some((r) => r.id === app.reservationId)) {
+          return {
+            ...app,
+            isReservated: false,
+            reservationId: undefined,
+            reservationDate: undefined,
+            status: 'selected' as const,
+          };
         }
         return app;
       });

@@ -7,7 +7,7 @@ import { useDeleteReservation } from '@entities/reservation';
  */
 export function useReservationActions(campaignId: string, reservationId?: string) {
   //   const router = useRouter();
-  const { mutateAsync: deleteReservation } = useDeleteReservation(reservationId);
+  const { mutateAsync: deleteReservation } = useDeleteReservation(campaignId, reservationId);
 
   const handleChangeDate = () => {
     // TODO: 예약 날짜 변경 페이지로 리다이렉트 기능 구현
@@ -16,15 +16,12 @@ export function useReservationActions(campaignId: string, reservationId?: string
   };
 
   const handleCancelReservation = async () => {
-    // TODO: 예약 취소 기능 구현
-    // - 확인 모달 표시
-    // - API 호출
-    // - 성공 시 토스트 메시지 및 상태 업데이트
-
     try {
       await deleteReservation();
     } catch (error) {
-      console.error('예약 취소 실패:', error);
+      // useDeleteReservation의 onError에서 이미 토스트를 표시하므로
+      // 여기서는 추가 로깅만 수행하여 Unhandled Promise Rejection 방지
+      console.error('예약 취소 실패 (컴포넌트 내부):', error);
     }
   };
 

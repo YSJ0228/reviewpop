@@ -7,7 +7,7 @@
 import { http, HttpResponse } from 'msw';
 
 import type { ApiResponse } from '@shared/api/types/common.types';
-import type { Reservation } from '@entities/reservation';
+import type { Reservation, PostReservation } from '@entities/reservation';
 import { mockReservations } from '@shared/api/mock/data/reservations';
 
 export const reservationHandlers = [
@@ -65,7 +65,7 @@ export const reservationHandlers = [
    * POST /api/reservations
    */
   http.post('/api/reservations', async ({ request }) => {
-    const body = (await request.json()) as Reservation;
+    const body = (await request.json()) as PostReservation;
 
     // 간단한 검증
     if (!body.campaignId || !body.applicationId || !body.personCount || !body.date) {

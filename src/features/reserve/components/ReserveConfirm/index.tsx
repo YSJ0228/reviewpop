@@ -18,9 +18,10 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   );
   const { mutate: createReservation, isPending: isCreatePending } =
     useCreateReservation(campaignId);
+
   const { mutate: updateReservation, isPending: isUpdatePending } = useUpdateReservation(
     campaignId,
-    reservationData?.reservationId || '',
+    reservationData?.reservationId || undefined,
   );
 
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
