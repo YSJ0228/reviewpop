@@ -9,6 +9,14 @@ FROM arm64v8/node:20-slim AS builder
 
 WORKDIR /app
 
+# 빌드 인자 선언
+ARG NEXT_PUBLIC_USE_MOCK=false
+ARG NEXT_PUBLIC_IS_STAGING=false
+
+# 환경변수로 설정 (Next.js 빌드 시 적용)
+ENV NEXT_PUBLIC_USE_MOCK=$NEXT_PUBLIC_USE_MOCK
+ENV NEXT_PUBLIC_IS_STAGING=$NEXT_PUBLIC_IS_STAGING
+
 # corepack 활성화 및 yarn 설정
 RUN corepack enable && corepack prepare yarn@4.10.3 --activate
 
