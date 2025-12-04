@@ -28,7 +28,6 @@ export function useDeleteMyCampaign(campaignId: string) {
     },
     onError: (error) => {
       toast.error('신청 취소에 실패했습니다.');
-      console.error('체험 신청 삭제에 실패했습니다.', error);
     },
   });
 }

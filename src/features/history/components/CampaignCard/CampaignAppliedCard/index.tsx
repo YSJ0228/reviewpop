@@ -6,10 +6,14 @@ import { CampaignAppliedCardProps } from './type';
 import styles from './style.module.scss';
 
 export function CampaignAppliedCard({ announcementStatus, campaignId }: CampaignAppliedCardProps) {
-  const { mutate: deleteMyCampaign } = useDeleteMyCampaign(campaignId);
+  const { mutateAsync: deleteMyCampaign } = useDeleteMyCampaign(campaignId);
 
-  const handleCancelApplication = () => {
-    deleteMyCampaign();
+  const handleCancelApplication = async () => {
+    try {
+      await deleteMyCampaign();
+    } catch (error) {
+      console.error('체험 신청 취소에 실패했습니다.', error);
+    }
   };
 
   return (

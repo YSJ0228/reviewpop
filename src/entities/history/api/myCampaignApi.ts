@@ -15,7 +15,7 @@ export const getMyCampaigns = async () => {
 /**
  * 특정 체험 신청 삭제
  * @param campaignId string
- * @returns
+ * @returns 성공시 void
  */
 
 export const deleteMyCampaign = async (campaignId: string) => {
