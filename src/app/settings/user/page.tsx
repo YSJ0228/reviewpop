@@ -1,6 +1,9 @@
 'use client';
 
 import { Suspense } from 'react';
+
+// 빌드 시 prerendering 방지 (API 호출이 필요한 페이지)
+export const dynamic = 'force-dynamic';
 import { useRouter } from 'next/navigation';
 import { Loader } from '@mantine/core';
 
