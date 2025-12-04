@@ -25,6 +25,9 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
   const [cautionOpened, { open: cautionOpen, close: cautionClose }] = useDisclosure();
 
   const [text, setText] = useState<string>('');
+
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+
   const formData = {
     name: nameInput.value,
     phoneNumber: phoneInput.value,
@@ -42,7 +45,13 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
 
   return (
     <div className={styles.Form}>
-      <WebButton label="네이버 블로그 주소" buttonType="connect" onClick={blogOpen} text={blog} />
+      <WebButton
+        label="네이버 블로그 주소"
+        buttonType="connect"
+        onClick={blogOpen}
+        text={blog}
+        isConnected={isConnected}
+      />
       <LabeledInput label="이름" placeholder="이름 입력" input={nameInput} />
       <LabeledInput label="전화번호" placeholder="01012345678" input={phoneInput} />
       {showTextArea && (
@@ -60,7 +69,13 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
         onClick={handleClick}
         disabled={!blog || !!nameInput.errorMsg || !!phoneInput.errorMsg}
       />
-      <BlogBottomSheet opened={blogOpened} onClose={blogClose} blog={blog} setBlog={setBlog} />
+      <BlogBottomSheet
+        opened={blogOpened}
+        onClose={blogClose}
+        blog={blog}
+        setBlog={setBlog}
+        setIsConnected={setIsConnected}
+      />
       <CautionBottomSheet opened={cautionOpened} onClose={cautionClose} formData={formData} />
     </div>
   );

@@ -8,7 +8,13 @@ import { ButtonBar } from '../ButtonBar';
 
 import { BlogBottomSheetProps } from './types';
 
-export function BlogBottomSheet({ opened, onClose, blog, setBlog }: BlogBottomSheetProps) {
+export function BlogBottomSheet({
+  opened,
+  onClose,
+  blog,
+  setBlog,
+  setIsConnected,
+}: BlogBottomSheetProps) {
   const urlInput = useInputValidate('url', blog?.replace('blog.naver.com/', '') ?? '');
   const [confirmMsg, setConfirmMsg] = useState<string>('');
   return (
@@ -33,6 +39,7 @@ export function BlogBottomSheet({ opened, onClose, blog, setBlog }: BlogBottomSh
         onClick={() => {
           onClose();
           setBlog(`blog.naver.com/${urlInput.value}`);
+          setIsConnected(true);
         }}
         disabled={!!urlInput.errorMsg}
         text="저장"

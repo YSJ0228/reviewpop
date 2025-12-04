@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader } from '@mantine/core';
 
+import { toast } from '@shared/components/Toast';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { Form } from '@shared/components/Form';
 import { useUpdateUserInfo } from '@entities/user/hooks/useUpdateUserInfo';
@@ -32,10 +33,11 @@ export default function UserPage() {
   const handleSave = (formData: FormDataType) => {
     updateUser.mutate(formData, {
       onSuccess: () => {
+        toast.success('정보가 수정되었습니다.');
         router.push('/settings');
       },
       onError: (error) => {
-        alert('정보 수정에 실패했습니다: ' + error.message);
+        toast.error('정보 수정에 실패하였습니다.');
       },
     });
   };
