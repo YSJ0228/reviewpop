@@ -168,6 +168,7 @@ export const mockMyCampaigns: Application[] = [
     status: 'selected',
     isReservated: true,
     reservationDate: '2025-11-28T14:00:00',
+    reservationId: 'res-004',
     createdAt: '2025-10-25T09:00:00Z',
   },
 

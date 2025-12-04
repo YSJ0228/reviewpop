@@ -8,7 +8,7 @@ import { http, HttpResponse } from 'msw';
 
 import type { ApiResponse } from '@shared/api/types/common.types';
 import type { Reservation } from '@entities/reservation';
-import { mockReservations } from '../data/reservations';
+import { mockReservations } from '@shared/api/mock/data/reservations';
 
 export const reservationHandlers = [
   /**
@@ -172,8 +172,6 @@ export const reservationHandlers = [
         { status: 404 },
       );
     }
-
-    const reservation = mockReservations[reservationIndex];
 
     // 예약 취소 (배열에서 제거)
     mockReservations.splice(reservationIndex, 1);

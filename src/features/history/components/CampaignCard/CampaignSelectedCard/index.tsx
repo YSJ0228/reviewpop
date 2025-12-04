@@ -30,7 +30,11 @@ export function CampaignSelectedCard({ application }: CampaignSelectedCardProps)
   const { campaign, visitStatus, appliedAt } = useCampaignCardData(application);
 
   const [isOpen, { open, close }] = useDisclosure(false);
-  const { handleChangeDate, handleCancelReservation } = useReservationActions(campaign.id);
+
+  const { handleChangeDate, handleCancelReservation } = useReservationActions(
+    campaign.id,
+    application.reservationId,
+  );
 
   // 카드 케밥 버튼 클릭 핸들러
   const handleKebapClick = (e: React.MouseEvent<HTMLButtonElement>) => {

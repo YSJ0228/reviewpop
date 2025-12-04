@@ -57,14 +57,17 @@ export const useUpdateReservation = (campaignId: string, reservationId: string) 
 };
 
 // 예약 취소 hook
-export const useDeleteReservation = () => {
+export const useDeleteReservation = (reservationId?: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (reservationId: string) => deleteReservation(reservationId),
+    mutationFn: () => {
+      if (!reservationId) throw new Error('Reservation ID is required');
+      return deleteReservation(reservationId);
+    },
     onSuccess: () => {
       // 관련 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
-      queryClient.invalidateQueries({ queryKey: ['reservation'] });
+      queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
       queryClient.invalidateQueries({ queryKey: ['campaign'] });
       toast.success('예약이 취소되었습니다.');
     },
