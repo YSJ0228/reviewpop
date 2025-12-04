@@ -25,7 +25,8 @@ export interface PostReservation {
 /** 본인이 한 예약정보 받기 */
 export interface Reservation {
   campaignId: string;
+  applicationId: string;
   date: string;
   personCount: number;
-  isVisited: boolean;
+  isVisited?: boolean;
 }
