@@ -1,0 +1,8 @@
+@use '@/shared/styles/mixins' as *;
+
+.CampaignSelectedCardFooter__Wrapper {
+  border-bottom: 1px solid var(--gray-50);
+  padding-bottom: 16px;
+  @include size($width: 100%);
+  @include flex($direction: column, $gap: 8);
+}

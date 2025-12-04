@@ -4,7 +4,7 @@ export const mockMyCampaigns: Application[] = [
   // 1. 미선정 (Rejected)
   {
     id: 'mock-1',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '1',
       title: '스타벅스 아메리카노 체험단 (미선정)',
@@ -38,10 +38,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 1.5. 신청 (Pending)
   {
-    id: 'mock-1-5',
-    userId: 'kakao-1002',
+    id: 'mock-2',
+    userId: 'kakao-1001',
     campaign: {
-      id: '100',
+      id: '2',
       title: '맥북 프로 M4 체험단 (신청완료)',
       brand: 'Apple',
       thumbnail: 'https://picsum.photos/seed/campaign-pending/400/300',
@@ -72,10 +72,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 2. 선정 - 방문 예약 전 (Selected - Before Reservation)
   {
-    id: 'mock-2',
-    userId: 'kakao-1002',
+    id: 'mock-3',
+    userId: 'kakao-1001',
     campaign: {
-      id: '2',
+      id: '3',
       title: '삼성전자 갤럭시 S24 (선정/예약전)',
       brand: '삼성전자',
       thumbnail: 'https://picsum.photos/seed/campaign2/400/300',
@@ -103,13 +103,45 @@ export const mockMyCampaigns: Application[] = [
     isReservated: false,
     createdAt: '2025-11-09T14:00:00Z',
   },
+  {
+    id: 'mock-11',
+    userId: 'kakao-1001',
+    campaign: {
+      id: '11',
+      title: '삼성전자 갤럭시 S24 (선정/예약전)',
+      brand: '삼성전자',
+      thumbnail: 'https://picsum.photos/seed/campaign2/400/300',
+      description: '선정되었습니다! 방문 예약을 진행해주세요.',
+      status: 'inProgress',
+      category: '전자제품',
+      schedule: {
+        application: { start: '2025-11-01', end: '2025-11-15' },
+        winnerAnnouncement: { start: '2025-11-20', end: '2025-11-20' },
+        review: { start: '2025-11-25', end: '2025-12-10' },
+      },
+      location: { sido: '서울', sigungu: '서초구' },
+      address: '삼성 강남 플래그십 스토어',
+      maxRecruitment: 50,
+      currentRecruitment: 1200,
+      providedItem: '갤럭시 S24 대여',
+      reservationPrecaution: ['신분증 지참 필수'],
+      keywords: ['갤럭시', 'S24'],
+      reviewMission: ['카메라 테스트'],
+    },
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/user1',
+    phoneNumber: '010-1234-5678',
+    status: 'pending',
+    isReservated: false,
+    createdAt: '2025-11-09T14:00:00Z',
+  },
 
   // 3. 선정 - 방문 예약 후 (Selected - After Reservation)
   {
-    id: 'mock-3',
+    id: 'mock-4',
     userId: 'kakao-1002',
     campaign: {
-      id: '3',
+      id: '4',
       title: '이니스프리 그린티 세럼 (선정/예약완료)',
       brand: '이니스프리',
       thumbnail: 'https://picsum.photos/seed/campaign3/400/300',
@@ -141,10 +173,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
   {
-    id: 'mock-4',
-    userId: 'kakao-1002',
+    id: 'mock-5',
+    userId: 'kakao-1001',
     campaign: {
-      id: '4',
+      id: '5',
       title: '건강 보조 식품 체험단',
       brand: '종근당',
       thumbnail: '/images/temp/CampaignCardImg-01.jpg',
@@ -177,10 +209,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
   {
-    id: 'mock-4-1',
-    userId: 'kakao-1002',
+    id: 'mock-6',
+    userId: 'kakao-1001',
     campaign: {
-      id: '4-1',
+      id: '6',
       title: '올리브영 스킨케어 세트 (체험완료)',
       brand: '올리브영',
       thumbnail: 'https://picsum.photos/seed/campaign4-1/400/300',
@@ -213,10 +245,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 4-2. 후기 - 체험이 종료되었지만 후기 미등록 (Review - Closed but Not Reviewed)
   {
-    id: 'mock-4-2',
-    userId: 'kakao-1002',
+    id: 'mock-7',
+    userId: 'kakao-1001',
     campaign: {
-      id: '4-2',
+      id: '7',
       title: '그라운드 220 티셔츠 제작 체험 (종료/후기미등록)',
       brand: '그라운드 220',
       thumbnail: 'https://picsum.photos/seed/campaign4-2/400/300',
@@ -249,10 +281,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 5. 후기 - 검토 중 (Review - Pending)
   {
-    id: 'mock-5',
-    userId: 'kakao-1002',
+    id: 'mock-8',
+    userId: 'kakao-1001',
     campaign: {
-      id: '5',
+      id: '8',
       title: 'LG 그램 체험단 (후기검토중)',
       brand: 'LG전자',
       thumbnail: 'https://picsum.photos/seed/campaign5/400/300',
@@ -285,10 +317,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 6. 후기 - 수정 요청 (Review - Requested)
   {
-    id: 'mock-6',
-    userId: 'kakao-1002',
+    id: 'mock-9',
+    userId: 'kakao-1001',
     campaign: {
-      id: '6',
+      id: '9',
       title: '나이키 러닝화 체험단 (수정요청)',
       brand: '나이키',
       thumbnail: 'https://picsum.photos/seed/campaign6/400/300',
@@ -321,10 +353,10 @@ export const mockMyCampaigns: Application[] = [
 
   // 7. 완료 (Completed) - 종료 탭
   {
-    id: 'mock-7',
-    userId: 'kakao-1002',
+    id: 'mock-10',
+    userId: 'kakao-1001',
     campaign: {
-      id: '7',
+      id: '10',
       title: '블루보틀 원두 체험 (완료)',
       brand: '블루보틀',
       thumbnail: 'https://picsum.photos/seed/campaign7/400/300',

@@ -1,0 +1,20 @@
+@use '@/shared/styles/mixins' as *;
+
+.ReviewPendingCard {
+  @include font($size: 14, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
+}
+
+.ReviewPendingCard__Content {
+  width: 100%;
+  @include flex($gap: 8);
+}
+
+.ReviewPendingCard__ButtonText--Secondary {
+  @include font(
+    $size: 14,
+    $weight: 600,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-800)
+  );
+}

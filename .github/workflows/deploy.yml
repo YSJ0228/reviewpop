@@ -31,17 +31,15 @@ jobs:
           environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
           environment-url: ${{ github.ref == 'refs/heads/main' && 'https://review.datepop.co.kr' || 'https://review-staging.datepop.co.kr' }}
 
-      # 환경 변수 설정
+      # 환경 변수 설정 (GitHub Actions 내부용)
       - name: Set environment variables
         id: set-env
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "NEXT_PUBLIC_IS_STAGING=false" >> .env
             echo "ECS_SERVICE=prod-reviewpop-web" >> $GITHUB_ENV
             echo "ECS_CLUSTER=datepop-cluster-production-arm" >> $GITHUB_ENV
             echo "ENVIRONMENT=production" >> $GITHUB_ENV
           else
-            echo "NEXT_PUBLIC_IS_STAGING=true" >> .env
             echo "ECS_SERVICE=staging-reviewpop-web" >> $GITHUB_ENV
             echo "ECS_CLUSTER=datepop-cluster-staging-arm" >> $GITHUB_ENV
             echo "ENVIRONMENT=staging" >> $GITHUB_ENV
@@ -100,6 +98,9 @@ jobs:
           platforms: linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            NEXT_PUBLIC_USE_MOCK=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
+            NEXT_PUBLIC_IS_STAGING=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
 
       # ECS 태스크 정의 업데이트
       - name: Download task definition

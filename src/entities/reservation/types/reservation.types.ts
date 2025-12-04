@@ -1,43 +1,4 @@
-/**
- * 예약 정보
- */
-// export interface Reservation {
-//   id: string;
-//   userId: string;
-//   campaignId: string;
-//   applicationId: string;
-//   status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
-//   recipientName: string;
-//   recipientPhone: string;
-//   address: string;
-//   addressDetail?: string;
-//   postalCode: string;
-//   deliveryMemo?: string;
-//   reservedAt: string;
-//   confirmedAt?: string;
-//   shippedAt?: string;
-//   deliveredAt?: string;
-//   cancelledAt?: string;
-//   trackingNumber?: string;
-//   courier?: string;
-//   createdAt: string;
-//   updatedAt: string;
-// }
-
-// export interface CreateReservationRequest {
-//   recipientName: string;
-//   recipientPhone: string;
-//   address: string;
-//   addressDetail?: string;
-//   postalCode: string;
-//   deliveryMemo?: string;
-// }
-
-// export interface UpdateReservationRequest extends Partial<CreateReservationRequest> {
-//   status?: Reservation['status'];
-//   trackingNumber?: string;
-//   courier?: string;
-// }
+/** 예약 정보 */
 
 export interface ReservationConfig {
   // campaignId: string;
@@ -63,10 +24,19 @@ export interface PostReservation {
   date: string;
 }
 
+/**TODO: 필요없음 */
+export const RESERVATION_STATUSES = ['pending', 'confirmed', 'cancelled', 'completed'] as const;
+
+/**TODO: 필요없음 */
+export type ReservationStatus = (typeof RESERVATION_STATUSES)[number];
+
 /** 본인이 한 예약정보 받기 */
+/**TODO: 필요없음 */
 export interface Reservation {
+  id: string;
   campaignId: string;
+  applicationId: string;
   date: string;
   personCount: number;
-  isVisited: boolean;
+  isVisited?: boolean;
 }

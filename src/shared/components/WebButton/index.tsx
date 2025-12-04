@@ -45,7 +45,10 @@ export function WebButton({
   isConnected = false,
 }: WebButtonProps) {
   const id = useId();
-  if (text) buttonType = 'edit';
+  // copy 타입일 때는 text가 있어도 edit로 변경하지 않음
+  if (text && buttonType !== 'copy') {
+    buttonType = 'edit';
+  }
   return (
     <div>
       <div className={styles.WebButton__LabelBox}>

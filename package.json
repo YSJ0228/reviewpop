@@ -22,9 +22,9 @@
     "cookie": "^1.0.2",
     "dayjs": "^1.11.19",
     "jsonwebtoken": "^9.0.2",
-    "next": "16.0.1",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "next": "16.0.7",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "swiper": "^12.0.3",
     "zustand": "^5.0.8"
   },
@@ -75,5 +75,6 @@
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "packageManager": "yarn@4.12.0"
 }

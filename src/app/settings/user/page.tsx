@@ -1,15 +1,7 @@
-'use client';
+import UserPageClient from './UserPageClient';
 
-import { Suspense } from 'react';
-import { useRouter } from 'next/navigation';
-import { Loader } from '@mantine/core';
-
-import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-import { Form } from '@shared/components/Form';
-import { useUpdateUserInfo } from '@entities/user/hooks/useUpdateUserInfo';
-import { FormDataType } from '@shared/components/Form/types';
-
-import styles from './page.module.scss';
+// 빌드 시 prerendering 방지 (API 호출이 필요한 페이지)
+export const dynamic = 'force-dynamic';
 
 /**
  * 설정 페이지
@@ -25,27 +17,5 @@ import styles from './page.module.scss';
  * 6. [ ] 앱 정보 (버전, 이용약관, 개인정보처리방침)
  */
 export default function UserPage() {
-  const updateUser = useUpdateUserInfo();
-  const router = useRouter();
-
-  const handleSave = (formData: FormDataType) => {
-    updateUser.mutate(formData, {
-      onSuccess: () => {
-        router.push('/settings');
-      },
-      onError: (error) => {
-        alert('정보 수정에 실패했습니다: ' + error.message);
-      },
-    });
-  };
-
-  return (
-    <main className={styles.UserPage}>
-      <ErrorBoundary>
-        <Suspense fallback={<Loader />}>
-          <Form onClick={handleSave} showTextArea={false} />
-        </Suspense>
-      </ErrorBoundary>
-    </main>
-  );
+  return <UserPageClient />;
 }

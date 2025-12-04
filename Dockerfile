@@ -9,11 +9,20 @@ FROM arm64v8/node:20-slim AS builder
 
 WORKDIR /app
 
+# 빌드 인자 선언
+ARG NEXT_PUBLIC_USE_MOCK=false
+ARG NEXT_PUBLIC_IS_STAGING=false
+
+# 환경변수로 설정 (Next.js 빌드 시 적용)
+ENV NEXT_PUBLIC_USE_MOCK=$NEXT_PUBLIC_USE_MOCK
+ENV NEXT_PUBLIC_IS_STAGING=$NEXT_PUBLIC_IS_STAGING
+
 # corepack 활성화 및 yarn 설정
-RUN corepack enable && corepack prepare yarn@4.10.3 --activate
+RUN corepack enable && corepack prepare yarn@4.12.0 --activate
 
 # 의존성 파일만 먼저 복사 (캐시 활용)
 COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn/releases ./.yarn/releases
 
 # 의존성 설치 (ARM64 크로스 컴파일 시 lockfile 차이로 인해 --immutable 제외)
 RUN yarn install

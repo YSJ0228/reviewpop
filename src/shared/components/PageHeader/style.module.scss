@@ -37,7 +37,7 @@
   }
 
   &__Title {
-    @include font($size: 18px, $weight: 600, $color: var(--color-gray-900));
+    @include font($size: 16px, $weight: 700, $color: var(--color-gray-900));
     @include margin($all: 0);
     position: absolute;
     left: 50%;

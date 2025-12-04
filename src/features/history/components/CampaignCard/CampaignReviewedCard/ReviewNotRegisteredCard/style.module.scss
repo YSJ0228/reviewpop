@@ -1,0 +1,51 @@
+@use '@/shared/styles/mixins' as *;
+
+.ReviewNotRegisteredCard {
+  @include font($size: 14, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
+}
+
+.ReviewNotRegisteredCard__Content {
+  width: 100%;
+  @include flex($gap: 8);
+
+  // 체험 종료이면서 후기 미등록인 경우 세로 배치
+  &--Column {
+    @include flex($direction: column, $gap: 8);
+  }
+}
+
+.ReviewNotRegisteredCard__Buttons {
+  width: 100%;
+  @include flex($gap: 8);
+}
+
+.ReviewNotRegisteredCard__ButtonText--BlogTip {
+  @include flex($gap: 4, $align: center);
+}
+
+.ReviewNotRegisteredCard__ButtonText--Primary {
+  @include font($size: 14, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
+}
+
+.ReviewNotRegisteredCard__ButtonText--Secondary {
+  @include font(
+    $size: 14,
+    $weight: 600,
+    $line-height: 1.5,
+    $letter-spacing: -0.02em,
+    $color: var(--gray-800)
+  );
+}
+
+.ReviewNotRegisteredCard__Warning {
+  text-align: center;
+
+  width: 100%;
+  @include font(
+    $size: 12,
+    $weight: 500,
+    $line-height: 1.5,
+    $letter-spacing: -0.01em,
+    $color: var(--color-red-500)
+  );
+}

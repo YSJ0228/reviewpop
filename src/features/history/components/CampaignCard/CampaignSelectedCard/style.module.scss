@@ -1,75 +1,44 @@
 @use '@/shared/styles/mixins' as *;
 
-.CampaignSelectedCard__ContentWrapper {
-  border-bottom: 1px solid var(--gray-50);
-  padding-bottom: 16px;
-  @include size($width: 100%);
-  @include flex($direction: column, $gap: 8);
+.CampaignSelectedCard__VisitDateWrapper {
+  width: 100%;
+  @include flex($justify: space-between, $align: center);
+}
 
-  .CampaignSelectedCard__WarningWrapper {
-    @include flex($align: center, $gap: 4, $justify: center);
+.CampaignSelectedCard__KebapButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  @include flex($align: center, $justify: center);
 
-    .CampaignSelectedCard__WarningText {
-      @include font(
-        $size: 12,
-        $weight: 500,
-        $line-height: 1.5,
-        $letter-spacing: -0.02em,
-        $color: var(--gray-400)
-      );
-    }
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--gray-50);
+  }
+
+  &:active {
+    background-color: var(--gray-100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-blue-500);
+    outline-offset: 2px;
   }
 }
 
-.CampaignSelectedCard__BasicText {
+.CampaignSelectedCard__VisitDate {
   @include font(
-    $size: 14,
-    $weight: 600,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--gray-800)
-  );
-}
-
-.CampaignSelectedCard__PrimaryText {
-  @include font(
-    $size: 14,
+    $size: 16,
     $weight: 700,
     $line-height: 1.5,
     $letter-spacing: -0.02em,
-    $color: var(--color-white)
+    $color: var(--color-blue-500)
   );
 }
 
-.CampaignSelectedCard__BottomSheetContent {
-  overflow-y: auto;
-  @include flex($direction: column, $gap: 24);
-}
-
-.CampaignSelectedCard__BottomSheetContent--Section {
-  @include flex($direction: column, $gap: 8);
-
-  &:first-child {
-    border-bottom: 1px solid var(--gray-50);
-    padding-bottom: 24px;
-  }
-
-  h3 {
-    @include font(
-      $size: 18,
-      $weight: 700,
-      $line-height: 1.5,
-      $letter-spacing: -0.02em,
-      $color: var(--gray-900)
-    );
-  }
-}
-
-.CampaignSelectedCard__SectionContent {
-  @include flex($direction: column, $gap: 24);
-}
-
-.CampaignSelectedCard__SectionItem {
+.CampaignSelectedCard__SelectedText {
   @include font(
     $size: 16,
     $weight: 700,
@@ -77,30 +46,4 @@
     $letter-spacing: -0.02em,
     $color: var(--gray-900)
   );
-}
-
-.CampaignSelectedCard__Description {
-  @include font(
-    $size: 14,
-    $weight: 500,
-    $line-height: 1.5,
-    $letter-spacing: -0.02em,
-    $color: var(--gray-600)
-  );
-}
-
-.CampaignSelectedCard__MissionList {
-  padding-left: 20px;
-  list-style: disc;
-  @include flex($direction: column, $gap: 8);
-
-  .CampaignSelectedCard__MissionItem {
-    @include font(
-      $size: 14,
-      $weight: 500,
-      $line-height: 1.5,
-      $letter-spacing: -0.02em,
-      $color: var(--gray-900)
-    );
-  }
 }
