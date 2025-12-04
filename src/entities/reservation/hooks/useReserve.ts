@@ -37,7 +37,7 @@ export const useCreateReservation = (campaignId: string) => {
     mutationFn: (data: PostReservation) => createReservation(data),
     onSuccess: () => {
       // 관련 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
+      queryClient.invalidateQueries({ queryKey: ['my-applications'] });
       queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
@@ -57,14 +57,17 @@ export const useGetReservation = (reservationId: string) => {
 };
 
 // 예약 수정 hook
-export const useUpdateReservation = (campaignId: string, reservationId: string) => {
+export const useUpdateReservation = (campaignId: string, reservationId?: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: PostReservation) => updateReservation(reservationId, data),
+    mutationFn: (data: PostReservation) => {
+      if (!reservationId) throw new Error('Reservation ID is required');
+      return updateReservation(reservationId, data);
+    },
     onSuccess: () => {
       // 관련 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
+      queryClient.invalidateQueries({ queryKey: ['my-applications'] });
       queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
       queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
@@ -76,16 +79,23 @@ export const useUpdateReservation = (campaignId: string, reservationId: string) 
 };
 
 // 예약 취소 hook
-export const useDeleteReservation = (reservationId: string) => {
+export const useDeleteReservation = (campaignId: string, reservationId?: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => deleteReservation(reservationId),
+    mutationFn: () => {
+      if (!reservationId) throw new Error('Reservation ID is required');
+      return deleteReservation(reservationId);
+    },
     onSuccess: () => {
       // 관련 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
+      queryClient.invalidateQueries({ queryKey: ['my-applications'] });
       queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
+      queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
+      toast.success('예약이 취소되었습니다.');
     },
     onError: (error: Error) => {
+      const message = error.message || '예약 취소에 실패했습니다. 다시 시도해주세요.';
+      toast.error(message);
       console.error('예약 취소 실패:', error);
     },
   });
