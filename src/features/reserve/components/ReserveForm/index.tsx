@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { DateValue } from '@mantine/dates';
 import { Button } from '@shared/components';
-import { useReservationConfig } from '@features/reserve/hooks/useReserve';
+import { useReservationConfig } from '@entities/reservation';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 import { combineDateAndTime, validateCampaignId } from './utils';
 import { CalendarDatePicker } from './CalendarDatePicker';
@@ -20,9 +20,7 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
   const reservationData = useReservationStore((state) => state.reservationData);
   const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
   const resetReservationData = useReservationStore((state) => state.resetReservationData);
-
   const router = useRouter();
-
   const isValidCampaignId = validateCampaignId(campaignId, reservationData?.campaignId);
 
   const { data: reservationConfig, isLoading, error } = useReservationConfig(campaignId);
@@ -58,8 +56,6 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
       date: dateTimeStr,
       personCount: formState.personCount,
     });
-
-    console.log(reservationData);
     router.push(`/campaign/${campaignId}/reserve/confirm`);
   };
 

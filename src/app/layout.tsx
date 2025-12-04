@@ -3,10 +3,9 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';
 import '@mantine/core/styles.css';
-import '@pop-ui/core/styles.css';
 import '@mantine/dates/styles.css';
+import '@pop-ui/core/styles.css';
 import '@shared/styles/globals.scss';
-// import '@pop-ui/core/styles.css';
 
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import { Providers } from './providers/Providers';

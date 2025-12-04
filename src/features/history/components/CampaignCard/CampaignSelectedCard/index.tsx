@@ -11,17 +11,12 @@ import { CampaignStatusLabel } from '@features/history/components/CampaignStatus
 import { ReservationBottomSheet } from '@features/history/components/ReservationBottomSheet';
 import { useCampaignCardData } from '@features/history/hooks/useCampaignCardData';
 import { useReservationActions } from '@features/history/hooks/useReservationActions';
-import { useReservationStore } from '@features/reserve/store/reservationStore';
 
 import { CampaignSelectedCardFooter } from './CampaignSelectedCardFooter';
 
 import type { Application } from '@entities/application';
 
 import styles from './style.module.scss';
-
-interface CampaignSelectedCardProps {
-  application: Application;
-}
 
 interface CampaignSelectedCardProps {
   application: Application;
@@ -35,18 +30,13 @@ export function CampaignSelectedCard({ application }: CampaignSelectedCardProps)
   const { campaign, visitStatus, appliedAt } = useCampaignCardData(application);
 
   const [isOpen, { open, close }] = useDisclosure(false);
-  const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
   const { handleChangeDate, handleCancelReservation } = useReservationActions(campaign.id);
 
   // 카드 케밥 버튼 클릭 핸들러
   const handleKebapClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    setReservationFormData({
-      campaignId: campaign.id,
-      applicationId: application.id,
-    });
-    router.push(`/campaign/${campaign.id}/reserve`);
+    open();
   };
 
   // 예약 날짜 변경 핸들러
@@ -60,7 +50,6 @@ export function CampaignSelectedCard({ application }: CampaignSelectedCardProps)
     await handleCancelReservation();
     close();
   };
-
   // Top Content 렌더링
   const getTopContent = () => {
     if (visitStatus === 'scheduled') {
@@ -113,7 +102,11 @@ export function CampaignSelectedCard({ application }: CampaignSelectedCardProps)
         }
         topContent={getTopContent()}
       />
-      <CampaignSelectedCardFooter campaign={campaign} visitStatus={visitStatus} />
+      <CampaignSelectedCardFooter
+        campaign={campaign}
+        application={application}
+        visitStatus={visitStatus}
+      />
       {visitStatus === 'scheduled' && (
         <ReservationBottomSheet
           appliedAt={appliedAt}

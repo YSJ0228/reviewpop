@@ -90,6 +90,11 @@ export const counterHelpers = {
  * @param paramCampaignId URL 파라미터로 받은 campaignId
  * @param storeCampaignId 스토어에 저장된 campaignId
  * @returns 유효성 여부
+ *
+ * 로직:
+ * - paramCampaignId와 storeCampaignId가 모두 존재하고 일치해야 함
+ * - 예약 버튼 클릭 시 스토어에 campaignId가 저장되므로,
+ *   정상적인 접근이라면 항상 둘 다 존재하고 일치해야 함
  */
 export function validateCampaignId(
   paramCampaignId: string,

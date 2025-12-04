@@ -4,7 +4,7 @@ import { DateValue, TimeGrid as MantineTimeGrid } from '@mantine/dates';
 import { formatDate } from '@shared/lib/date';
 import 'dayjs/locale/ko';
 import { generateTimeSlots } from './utils';
-import { useReservedDateTimes } from '@features/reserve/hooks/useReserve';
+import { useReservedDateTimes } from '@entities/reservation/hooks/useReserve';
 import styles from './TimeGrid.module.scss';
 
 interface TimeGridProps {
