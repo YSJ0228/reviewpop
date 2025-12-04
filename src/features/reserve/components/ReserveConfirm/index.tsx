@@ -1,11 +1,11 @@
-import { useReserve } from '@entities/reservation/hooks/useReserve';
+import { LoadingSpinner, CampaignInfoList } from '@shared/components';
+import { formatDate } from '@shared/lib/date';
+import { useReserve } from '@entities/reservation';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 import { mockReservationData } from '@features/reserve/store/mockReservationData';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { LoadingSpinner, CampaignInfoList } from '@shared/components';
-import { formatDate } from '@shared/lib/date';
 
 import { ReservePrecautions } from './ReservePrecautions';
 import { ReserveAgreement } from './ReserveAgreement';
