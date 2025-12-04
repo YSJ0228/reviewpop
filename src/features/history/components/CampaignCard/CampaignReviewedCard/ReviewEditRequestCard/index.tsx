@@ -30,7 +30,7 @@ export function ReviewEditRequestCard({
     <>
       <div className={styles.ReviewEditRequestCard}>
         <div className={styles.ReviewEditRequestCard__Content}>
-          {/* 수정 요청 내용 버튼 클릭 시 ModificationBottomSheet 열기 */}
+          {/* TODO: 수정 요청 내용 버튼 클릭 시 ModificationBottomSheet 열기 */}
           <Button
             variant="secondary"
             fullWidth
