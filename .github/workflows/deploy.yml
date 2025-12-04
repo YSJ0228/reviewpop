@@ -76,6 +76,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
+            NEXT_PUBLIC_API_URL=/api
             NEXT_PUBLIC_USE_MOCK=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
             NEXT_PUBLIC_IS_STAGING=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
 
