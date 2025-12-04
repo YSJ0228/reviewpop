@@ -1,3 +1,4 @@
-export interface CampaignAppliedCardProps {
+export interface ICampaignAppliedCardProps {
   announcementStatus: string;
+  campaignId: string;
 }
