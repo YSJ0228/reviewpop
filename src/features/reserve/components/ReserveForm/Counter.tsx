@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { counterHelpers } from './utils';
 import styles from './Counter.module.scss';
 
 interface CounterProps {
@@ -14,31 +15,31 @@ interface CounterProps {
 export function Counter({ title, maxCount, subtitle, onChange, initialValue = 1 }: CounterProps) {
   const [count, setCount] = useState(initialValue);
 
-  const handleDecrement = () => {
-    const newCount = Math.max(1, count - 1);
+  const handleCountChange = (newCount: number) => {
     setCount(newCount);
     onChange?.(newCount);
+  };
+
+  const handleDecrement = () => {
+    handleCountChange(counterHelpers.decrement(count));
   };
 
   const handleIncrement = () => {
-    const newCount = Math.min(maxCount, count + 1);
-    setCount(newCount);
-    onChange?.(newCount);
+    handleCountChange(counterHelpers.increment(count, maxCount));
   };
+
+  const displayText = `${title} ${count}${title === '인원' ? '명' : ''}`;
 
   return (
     <div className={styles.Counter}>
-      {/* Title and Counter Controls */}
       <div className={styles.Counter__Header}>
-        <span className={styles.Counter__Title}>
-          {title} {count}
-          {title === '인원' ? '명' : ''}
-        </span>
+        <span className={styles.Counter__Title}>{displayText}</span>
         <div className={styles.Counter__Controls}>
           <button
             onClick={handleDecrement}
             disabled={count === 1}
             className={styles.Counter__Button}
+            aria-label="감소"
           >
             -
           </button>
@@ -47,13 +48,13 @@ export function Counter({ title, maxCount, subtitle, onChange, initialValue = 1 
             onClick={handleIncrement}
             disabled={count === maxCount}
             className={styles.Counter__Button}
+            aria-label="증가"
           >
             +
           </button>
         </div>
       </div>
 
-      {/* Subtitle */}
       {subtitle && <p className={styles.Counter__Subtitle}>{subtitle}</p>}
     </div>
   );

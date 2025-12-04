@@ -1,29 +1,66 @@
 import { useState } from 'react';
-import dayjs from 'dayjs';
+import { DateValue } from '@mantine/dates';
+import { Button } from '@shared/components';
 import { useReservationConfig } from '@features/reserve/hooks/useReserve';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
+import { combineDateAndTime, validateCampaignId } from './utils';
 import { CalendarDatePicker } from './CalendarDatePicker';
 import { TimeGrid } from './TimeGrid';
 import { Counter } from './Counter';
-import { DateValue } from '@mantine/dates';
-import { Button } from '@shared/components';
+import styles from './style.module.scss';
+import { useRouter } from 'next/navigation';
+
+interface FormState {
+  date: DateValue | null;
+  time: string | null;
+  personCount: number;
+}
 
 export function ReserveForm({ campaignId }: { campaignId: string }) {
-  const { data: reservationConfig, isLoading, error } = useReservationConfig(campaignId);
+  const reservationData = useReservationStore((state) => state.reservationData);
   const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
-  const [date, setDate] = useState<DateValue | null>(null);
-  const [time, setTime] = useState<string | null>(null);
-  const [personCount, setPersonCount] = useState<number>(1);
+  const resetReservationData = useReservationStore((state) => state.resetReservationData);
 
-  const dateChangeHandler = (date: DateValue | null) => {
-    setDate(date);
-    setTime(null);
+  const router = useRouter();
+
+  const isValidCampaignId = validateCampaignId(campaignId, reservationData?.campaignId);
+
+  const { data: reservationConfig, isLoading, error } = useReservationConfig(campaignId);
+
+  const [formState, setFormState] = useState<FormState>({
+    date: null,
+    time: null,
+    personCount: 1,
+  });
+
+  const handleDateChange = (newDate: DateValue | null) => {
+    setFormState((prev) => ({
+      ...prev,
+      date: newDate,
+      time: null, // Reset time when date changes
+    }));
   };
-  const setTimeHandler = (time: string | null) => {
-    setTime(time);
+
+  const handleTimeChange = (newTime: string | null) => {
+    setFormState((prev) => ({ ...prev, time: newTime }));
   };
-  const handlePersonCountChange = (count: number) => {
-    setPersonCount(count);
+
+  const handlePersonCountChange = (newCount: number) => {
+    setFormState((prev) => ({ ...prev, personCount: newCount }));
+  };
+
+  const handleNextClick = () => {
+    const dateTimeStr = combineDateAndTime(formState.date, formState.time);
+    if (!dateTimeStr) return;
+
+    setReservationFormData({
+      campaignId,
+      date: dateTimeStr,
+      personCount: formState.personCount,
+    });
+
+    console.log(reservationData);
+    router.push(`/campaign/${campaignId}/reserve/confirm`);
   };
 
   if (isLoading) {
@@ -34,38 +71,23 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
     );
   }
 
-  if (error || !reservationConfig) {
-    // TODO: toast 띄우고 원래 페이지로 이동 useRouter
+  if (!isValidCampaignId || error || !reservationConfig) {
+    // 스토어 초기화
+    resetReservationData();
+
     return (
       <div className="flex justify-center items-center p-8">
-        <p className="text-red-500">예약 페이지를 불러올 수 없습니다.</p>
+        <p className="text-red-500">
+          {!isValidCampaignId ? '잘못된 접근입니다.' : '예약 페이지를 불러올 수 없습니다.'}
+        </p>
       </div>
     );
   }
 
-  const handleNextClick = () => {
-    // ISO 8601 String 형식으로 변환
-    const dateStr = dayjs(date).format('YYYY-MM-DD');
-    const dateTimeStr = `${dateStr}T${time}:00`;
-
-    setReservationFormData({
-      campaignId,
-      date: dateTimeStr,
-      personCount,
-    });
-    console.log({
-      campaignId,
-      date: dateTimeStr,
-      personCount,
-    });
-
-    // TODO: 예약 확인 페이지로 이동
-  };
-
-  const isNextButtonDisabled = !date || !time || !personCount;
+  const isNextButtonDisabled = !formState.date || !formState.time || !formState.personCount;
 
   return (
-    <>
+    <div className={styles.ReserveForm}>
       <Counter
         title="인원"
         maxCount={reservationConfig.maxCount}
@@ -76,20 +98,20 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
       <CalendarDatePicker
         excludedDates={reservationConfig.disabled}
         excludedDays={undefined}
-        onChange={dateChangeHandler}
+        onChange={handleDateChange}
         startDate={reservationConfig.startDate}
         endDate={reservationConfig.endDate}
       />
       <TimeGrid
         campaignId={campaignId}
-        value={time}
-        date={date}
-        onChange={setTimeHandler}
+        value={formState.time}
+        date={formState.date}
+        onChange={handleTimeChange}
         intervalMinutes={reservationConfig.intervalMinutes}
       />
       <Button fullWidth onClick={handleNextClick} disabled={isNextButtonDisabled}>
         다음
       </Button>
-    </>
+    </div>
   );
 }

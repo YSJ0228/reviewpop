@@ -1,7 +1,8 @@
-import dayjs from 'dayjs';
 import { CalendarDatePicker as PopUiCalendarDatePicker } from '@pop-ui/core';
 import { DateValue } from '@mantine/dates';
+import { formatDateRange } from './utils';
 import styles from './CalendarDatePicker.module.scss';
+
 type TDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 interface CalendarDatePickerProps {
@@ -19,6 +20,8 @@ export function CalendarDatePicker({
   startDate,
   endDate,
 }: CalendarDatePickerProps) {
+  const dateRangeText = formatDateRange(startDate, endDate);
+
   return (
     <div className={styles.CalendarDatePicker}>
       <PopUiCalendarDatePicker
@@ -28,10 +31,12 @@ export function CalendarDatePicker({
         minDate={startDate}
         maxDate={endDate}
       />
-      <span>방문 가능한 기간</span>
-      <span className={styles.CalendarDatePicker__DateRange}>
-        {dayjs(startDate).format('M월 D일')} ~ {dayjs(endDate).format('M월 D일')}
-      </span>
+      <div className={styles.CalendarDatePicker__Footer}>
+        <span className={styles.CalendarDatePicker__Label}>
+          방문 가능한 기간
+          <span className={styles.CalendarDatePicker__DateRange}>{dateRangeText}</span>
+        </span>
+      </div>
     </div>
   );
 }
