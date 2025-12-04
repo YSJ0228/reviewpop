@@ -10,6 +10,4 @@ export type {
   BlogReview,
   BlogReviews,
   ReviewRequest,
-  // Review,
-  // CreateReviewRequest,
 } from './types/review.types';

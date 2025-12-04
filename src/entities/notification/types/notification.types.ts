@@ -1,7 +1,7 @@
 export type NotificationType = 'default' | 'schedule' | 'edit';
 
 export interface Notification {
-  id: number;
+  id: string;
   campaignId: string;
   isWatched: boolean;
   title: string;

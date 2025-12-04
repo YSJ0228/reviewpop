@@ -22,6 +22,17 @@ export interface PaginatedResponse<T> {
   items: T[];
 }
 
+export interface PageResponse<T> {
+  content: T[];
+  meta: {
+    page: number;
+    size: number;
+    totalCount: number;
+    totalPages: number;
+    hasNextPage: boolean;
+  };
+}
+
 /**
  * API 응답 타입 (Discriminated Union)
  *

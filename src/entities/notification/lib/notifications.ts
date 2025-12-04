@@ -2,26 +2,25 @@ import { Notification } from '@entities/notification/types/notification.types';
 
 export const mockNotifications: Notification[] = [
   {
-    id: 1,
+    id: '1',
     campaignId: '1',
     isWatched: false,
     title: '체험단 선정 안내',
-    content: '축하합니다! <그라운드220> 체험단에 선정되었어요. 체험 방문 일정을 예약해주세요.',
+    content: '[서울 강남구] 2024년 1월 체험단에 선정되셨습니다.',
     type: 'default',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60).toISOString(), // 1시간 전
+    createdAt: '2024-01-01T00:00:00.000Z',
   },
   {
-    id: 2,
+    id: '2',
     campaignId: '2',
     isWatched: true,
-    title: '체험단 선정 안내',
-    content:
-      '<그라운드220> 체험단에 선정이 안됐어요. 이번엔 아쉽지만 다음 체험에서 꼭 다시 만나요.',
-    type: 'default',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1일 전
+    title: '리뷰 작성 기간 안내',
+    content: '[서울 마포구] 리뷰 작성 기간이 3일 남았습니다.',
+    type: 'schedule',
+    createdAt: '2024-01-02T00:00:00.000Z',
   },
   {
-    id: 3,
+    id: '3',
     campaignId: '3',
     isWatched: true,
     title: '예약 요청 안내',
@@ -31,7 +30,7 @@ export const mockNotifications: Notification[] = [
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString(), // 1개월 전
   },
   {
-    id: 4,
+    id: '4',
     campaignId: '4',
     isWatched: true,
     title: '후기 수정 안내',

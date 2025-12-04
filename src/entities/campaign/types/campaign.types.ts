@@ -15,12 +15,15 @@ import { DateRange } from '@shared/types/date.types';
  * - completed: 완료
  * - closed: 마감 (모집 실패 등)
  */
-export type CampaignStatus =
-  | 'beforeRecruiting'
-  | 'recruiting'
-  | 'inProgress'
-  | 'completed'
-  | 'closed';
+export const CAMPAIGN_STATUSES = [
+  'beforeRecruiting',
+  'recruiting',
+  'inProgress',
+  'completed',
+  'closed',
+] as const;
+
+export type CampaignStatus = (typeof CAMPAIGN_STATUSES)[number];
 
 export const CAMPAIGN_STATUS_LABELS: Record<CampaignStatus, string> = {
   beforeRecruiting: '모집 전',
@@ -44,18 +47,21 @@ export const CampaignTabs: Record<CampaignTabKey, string> = {
 /**
  * 체험 카테고리
  */
-export type CampaignCategory =
-  | '음료' // beverage
-  | '뷰티' // beauty & cosmetics
-  | '식품' // food
-  | '전자제품' // electronics
-  | '건강' // health
-  | '패션' // fashion
-  | '가전' // home appliances
-  | '향수' // perfume
-  | '액세서리' // accessories
-  | '생활용품' // lifestyle
-  | '기타'; // other
+export const CAMPAIGN_CATEGORIES = [
+  '음료', // beverage
+  '뷰티', // beauty & cosmetics
+  '식품', // food
+  '전자제품', // electronics
+  '건강', // health
+  '패션', // fashion
+  '가전', // home appliances
+  '향수', // perfume
+  '액세서리', // accessories
+  '생활용품', // lifestyle
+  '기타', // other
+] as const;
+
+export type CampaignCategory = (typeof CAMPAIGN_CATEGORIES)[number];
 export interface CampaignSchedule {
   application: DateRange;
   winnerAnnouncement: DateRange;
@@ -95,7 +101,7 @@ export interface Campaign {
   schedule: CampaignSchedule;
 
   // 지역
-  /** 지역 제한, {시} {구} (예: "서울 강남구", 기본값: "전국") */
+  /** 지역 제한, {시} {구} (예: "서울 강남구") */
   location: Location;
   /** 상세 주소 */
   address: string;
