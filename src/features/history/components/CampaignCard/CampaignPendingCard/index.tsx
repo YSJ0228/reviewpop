@@ -15,7 +15,9 @@ export function CampaignPendingCard({ application }: CampaignPendingCardProps) {
   return (
     <CampaignCardWrapper
       campaign={campaign}
-      topContent={<CampaignAppliedCard announcementStatus={announcementStatus} />}
+      topContent={
+        <CampaignAppliedCard announcementStatus={announcementStatus} campaignId={campaign.id} />
+      }
     />
   );
 }
