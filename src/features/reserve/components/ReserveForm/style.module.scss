@@ -1,0 +1,5 @@
+@use '@shared/styles/mixins' as *;
+
+.ReserveForm {
+  @include padding($all: 16);
+}

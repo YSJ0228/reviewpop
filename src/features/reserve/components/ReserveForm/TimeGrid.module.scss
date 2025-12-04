@@ -4,7 +4,6 @@
   @include padding($y: 24, $x: 0);
   @include margin($x: auto);
   @include flex($direction: column, $gap: 16);
-  max-width: 375px;
   border-bottom: 1px solid var(--gray-50);
 
   &__Section {
