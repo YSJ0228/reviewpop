@@ -7,6 +7,7 @@ import { combineDateAndTime, validateCampaignId } from './utils';
 import { CalendarDatePicker } from './CalendarDatePicker';
 import { TimeGrid } from './TimeGrid';
 import { Counter } from './Counter';
+import { ReservationErrorGuard } from './ReservationErrorGuard';
 import styles from './style.module.scss';
 import { useRouter } from 'next/navigation';
 
@@ -21,10 +22,9 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
   const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
   const resetReservationData = useReservationStore((state) => state.resetReservationData);
   const router = useRouter();
+
   const isValidCampaignId = validateCampaignId(campaignId, reservationData?.campaignId);
-
   const { data: reservationConfig, isLoading, error } = useReservationConfig(campaignId);
-
   const [formState, setFormState] = useState<FormState>({
     date: null,
     time: null,
@@ -61,22 +61,22 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center p-8">
-        <p className="text-gray-500">예약 정보를 불러오는 중...</p>
+      <div className={styles.ReserveForm__Loading}>
+        <p>예약 정보를 불러오는 중...</p>
       </div>
     );
   }
 
-  if (!isValidCampaignId || error || !reservationConfig) {
-    // 스토어 초기화
-    resetReservationData();
+  if (!isValidCampaignId) {
+    return <ReservationErrorGuard message="잘못된 접근입니다." onReset={resetReservationData} />;
+  }
 
+  if (error || !reservationConfig) {
     return (
-      <div className="flex justify-center items-center p-8">
-        <p className="text-red-500">
-          {!isValidCampaignId ? '잘못된 접근입니다.' : '예약 페이지를 불러올 수 없습니다.'}
-        </p>
-      </div>
+      <ReservationErrorGuard
+        message="예약 설정을 불러올 수 없습니다."
+        onReset={resetReservationData}
+      />
     );
   }
 

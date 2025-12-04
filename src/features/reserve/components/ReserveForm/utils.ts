@@ -1,5 +1,6 @@
 import { formatDate, type DateInput } from '@shared/lib/date';
 
+const DEFAULT_MIN_COUNT = 1;
 /**
  * 시간 문자열을 분 단위로 변환
  * @param time "HH:mm" 형식의 시간 문자열
@@ -58,7 +59,7 @@ export function generateTimeSlots(options: TimeRangeOptions): string[] {
 export function combineDateAndTime(date: DateInput | null, time: string | null): string | null {
   if (!date || !time) return null;
 
-  const dateStr = formatDate(date, 'SHORT').replace(/\./g, '-');
+  const dateStr = formatDate(date, 'DATE_ONLY'); // YYYY-MM-DD
   return `${dateStr}T${time}:00`;
 }
 
@@ -82,7 +83,8 @@ export function formatDateRange(startDate: string, endDate: string): string {
  */
 export const counterHelpers = {
   increment: (current: number, max: number): number => Math.min(max, current + 1),
-  decrement: (current: number, min: number = 1): number => Math.max(min, current - 1),
+  decrement: (current: number, min: number = DEFAULT_MIN_COUNT): number =>
+    Math.max(min, current - 1),
 };
 
 /**

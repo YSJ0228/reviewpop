@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { ReservationBeforeCard } from '../ReservationBeforeCard';
 import { ReservationScheduledCard } from '../ReservationScheduledCard';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
-import { useRouter } from 'next/navigation';
 import type { CampaignSelectedCardFooterProps } from './types';
 
 import styles from './style.module.scss';
