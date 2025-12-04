@@ -49,7 +49,7 @@ export const mockApplications: Application[] = [
   },
   {
     id: 'app-2',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: getCampaign('1'),
     status: 'pending',
     isReservated: false,
@@ -60,7 +60,7 @@ export const mockApplications: Application[] = [
   },
   {
     id: 'app-3',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: getCampaign('1'),
     status: 'selected',
     isReservated: false,
