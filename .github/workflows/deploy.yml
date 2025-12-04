@@ -45,29 +45,6 @@ jobs:
             echo "ENVIRONMENT=staging" >> $GITHUB_ENV
           fi
 
-      # Node.js 설정 + yarn 캐시
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: yarn
-
-      # Next.js 빌드 캐시
-      - name: Cache Next.js build
-        uses: actions/cache@v4
-        with:
-          path: .next/cache
-          key: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('src/**/*.ts', 'src/**/*.tsx') }}
-          restore-keys: |
-            nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-
-            nextjs-${{ runner.os }}-
-
-      # 빌드
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Build Next.js
-        run: yarn build
-
       # AWS 인증 (OIDC)
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
