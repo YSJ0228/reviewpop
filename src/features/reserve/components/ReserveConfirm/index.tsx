@@ -1,6 +1,6 @@
 import { LoadingSpinner, CampaignInfoList } from '@shared/components';
 import { formatDate } from '@shared/lib/date';
-import { useReserve } from '@entities/reservation';
+import { useCreateReservation } from '@entities/reservation';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 import { mockReservationData } from '@features/reserve/store/mockReservationData';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
@@ -16,7 +16,7 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   const reservationData = useReservationStore(
     (state) => state.reservationData ?? mockReservationData,
   );
-  const { mutate: createReservation } = useReserve(campaignId);
+  const { mutate: createReservation } = useCreateReservation(campaignId);
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isUserLoading } = useUserInfo();
   const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(

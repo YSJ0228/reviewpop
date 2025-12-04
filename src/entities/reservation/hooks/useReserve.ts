@@ -10,7 +10,7 @@ import {
 } from '@entities/reservation';
 
 // 예약 생성 hook
-export const useReserve = (campaignId: string) => {
+export const useCreateReservation = (campaignId: string) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
