@@ -81,6 +81,7 @@ declare global {
         Event?: {
           addListener: (target: NaverMap, event: string, handler: () => void) => unknown;
           removeListener?: (target: NaverMap, event: string, listener: unknown) => void;
+          clearInstanceListeners?: (target: NaverMap) => void;
           trigger?: (target: NaverMap, event: string) => void;
         };
       };
