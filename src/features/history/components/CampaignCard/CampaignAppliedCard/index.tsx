@@ -1,17 +1,18 @@
-import { Modal } from '@shared/components';
+import { Modal, toast } from '@shared/components';
 import { useDeleteMyCampaign } from '@entities/history/hooks/useMyCampaigns';
 
-import { CampaignAppliedCardProps } from './type';
+import type { ICampaignAppliedCardProps } from './type';
 
 import styles from './style.module.scss';
 
-export function CampaignAppliedCard({ announcementStatus, campaignId }: CampaignAppliedCardProps) {
+export function CampaignAppliedCard({ announcementStatus, campaignId }: ICampaignAppliedCardProps) {
   const { mutateAsync: deleteMyCampaign } = useDeleteMyCampaign();
 
   const handleCancelApplication = async () => {
     try {
       await deleteMyCampaign(campaignId);
     } catch (error) {
+      toast.error('신청 취소에 실패했습니다.');
       console.error('체험 신청 취소에 실패했습니다.', error);
     }
   };

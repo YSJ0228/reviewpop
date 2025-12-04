@@ -26,9 +26,6 @@ export function useDeleteMyCampaign() {
       toast.success('신청이 취소되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['my-applications'] });
     },
-    onError: (error) => {
-      toast.error('신청 취소에 실패했습니다.');
-    },
   });
 }
 

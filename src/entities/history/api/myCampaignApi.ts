@@ -17,7 +17,6 @@ export const getMyCampaigns = async () => {
  * @param campaignId string
  * @returns 성공시 void
  */
-
 export const deleteMyCampaign = async (campaignId: string) => {
   const response = await apiClient.delete<ApiResponse<void>>(`/campaigns/${campaignId}`, {
     withCredentials: true,
