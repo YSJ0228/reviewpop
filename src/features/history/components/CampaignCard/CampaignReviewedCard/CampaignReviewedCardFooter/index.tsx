@@ -35,40 +35,40 @@ export function CampaignReviewedCardFooter({
     }
 
     return (
-      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+      <footer className={styles.CampaignReviewedCardFooter__Wrapper}>
         <ReviewNotRegisteredCard
           campaignStatus={campaignStatus}
           campaignId={campaignId}
           applicationId={applicationId}
         />
-      </div>
+      </footer>
     );
   }
 
   // 후기 검토 중
   if (reviewStatus === 'reviewPending') {
     return (
-      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+      <footer className={styles.CampaignReviewedCardFooter__Wrapper}>
         <ReviewPendingCard />
-      </div>
+      </footer>
     );
   }
 
   // 후기 수정 요청
   if (reviewStatus === 'requiredForEditing') {
     return (
-      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+      <footer className={styles.CampaignReviewedCardFooter__Wrapper}>
         <ReviewEditRequestCard campaignId={campaignId} reviewId={reviewId} />
-      </div>
+      </footer>
     );
   }
 
   // 후기 등록 완료
   if (reviewStatus === 'reviewed') {
     return (
-      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+      <footer className={styles.CampaignReviewedCardFooter__Wrapper}>
         <ReviewCompletedCard />
-      </div>
+      </footer>
     );
   }
 
