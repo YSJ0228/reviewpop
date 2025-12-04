@@ -113,7 +113,7 @@ jobs:
           task-definition: cleaned-task-def.json
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+          wait-for-service-stability: false
 
       # 배포 상태 업데이트
       - name: Update deployment status (success)
