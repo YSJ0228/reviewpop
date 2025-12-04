@@ -5,7 +5,7 @@ import { Button } from '@shared/components';
 
 import { HISTORY_UI, HISTORY_MESSAGES } from '@features/history/constants';
 
-import type { ReviewNotRegisteredCardProps } from './type';
+import type { ReviewNotRegisteredCardProps } from './types';
 
 import styles from './style.module.scss';
 
