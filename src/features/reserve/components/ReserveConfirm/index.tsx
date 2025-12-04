@@ -42,20 +42,17 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     return <div>필요한 정보를 불러올 수 없습니다.</div>;
 
   const handleConfirm = () => {
+    const payload = {
+      campaignId: reservationData.campaignId,
+      applicationId: reservationData.applicationId,
+      personCount: reservationData.personCount,
+      date: reservationData.date,
+    };
+
     if (reservationData.reservationId) {
-      updateReservation({
-        campaignId: reservationData.campaignId,
-        applicationId: reservationData.applicationId,
-        personCount: reservationData.personCount,
-        date: reservationData.date,
-      });
+      updateReservation(payload);
     } else {
-      createReservation({
-        campaignId: reservationData.campaignId,
-        applicationId: reservationData.applicationId,
-        personCount: reservationData.personCount,
-        date: reservationData.date,
-      });
+      createReservation(payload);
     }
   };
 

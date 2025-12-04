@@ -70,12 +70,13 @@ export const useDeleteReservation = (campaignId: string, reservationId?: string)
     onSuccess: () => {
       // 관련 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: ['my-applications'] });
-      queryClient.invalidateQueries({ queryKey: ['reservations', reservationId] });
+      queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
       queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
       toast.success('예약이 취소되었습니다.');
     },
     onError: (error: Error) => {
-      toast.error('예약 취소 실패');
+      const message = error.message || '예약 취소에 실패했습니다. 다시 시도해주세요.';
+      toast.error(message);
       console.error('예약 취소 실패:', error);
     },
   });

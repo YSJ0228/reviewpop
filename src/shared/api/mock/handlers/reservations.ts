@@ -116,7 +116,8 @@ export const reservationHandlers = [
    */
   http.patch('/api/reservations/:id', async ({ params, request }) => {
     const reservationId = params.id as string;
-    const body = (await request.json()) as Partial<Reservation>;
+    type UpdateReservationRequest = Pick<Reservation, 'date' | 'personCount'>;
+    const body = (await request.json()) as UpdateReservationRequest;
 
     const reservationIndex = mockReservations.findIndex((r) => r.id === reservationId);
 
