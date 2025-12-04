@@ -7,7 +7,7 @@
 import { http, HttpResponse } from 'msw';
 
 import type { ApiResponse } from '@shared/api/types/common.types';
-import type { Reservation, PostReservation } from '@entities/reservation';
+import type { Reservation } from '@entities/reservation';
 import { mockReservations } from '../data/reservations';
 
 export const reservationHandlers = [
@@ -65,7 +65,7 @@ export const reservationHandlers = [
    * POST /api/reservations
    */
   http.post('/api/reservations', async ({ request }) => {
-    const body = (await request.json()) as PostReservation;
+    const body = (await request.json()) as Reservation;
 
     // 간단한 검증
     if (!body.campaignId || !body.applicationId || !body.personCount || !body.date) {
@@ -159,29 +159,24 @@ export const reservationHandlers = [
    * 예약 취소
    * DELETE /api/reservations/:id
    */
-  http.delete('/api/reservations/:id', () => {
-    // const reservationId = params.id as string;
-    // const reservationIndex = mockReservations.findIndex((r) => r.id === reservationId);
+  http.delete('/api/reservations/:id', ({ params }) => {
+    const reservationId = params.id as string;
+    const reservationIndex = mockReservations.findIndex((r) => r.id === reservationId);
 
-    // if (reservationIndex === -1) {
-    //   return HttpResponse.json(
-    //     {
-    //       success: false,
-    //       error: '예약을 찾을 수 없습니다.',
-    //     } satisfies ApiResponse<never>,
-    //     { status: 404 },
-    //   );
-    // }
+    if (reservationIndex === -1) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '예약을 찾을 수 없습니다.',
+        } satisfies ApiResponse<never>,
+        { status: 404 },
+      );
+    }
 
-    // const reservation = mockReservations[reservationIndex];
+    const reservation = mockReservations[reservationIndex];
 
-    // // 예약 취소
-    // mockReservations[reservationIndex] = {
-    //   ...reservation,
-    //   status: 'cancelled',
-    //   cancelledAt: toISO(),
-    //   updatedAt: toISO(),
-    // };
+    // 예약 취소 (배열에서 제거)
+    mockReservations.splice(reservationIndex, 1);
 
     return HttpResponse.json({
       success: true,
