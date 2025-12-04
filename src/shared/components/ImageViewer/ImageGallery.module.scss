@@ -3,8 +3,10 @@
 .ImageGallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 4px;
   aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .ImageItem {
@@ -17,7 +19,7 @@
 
   cursor: pointer;
   background-color: #f0f0f0;
-  border-radius: 8px;
+  border-radius: 4px;
 
   transition:
     transform 0.2s,

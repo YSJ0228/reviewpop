@@ -7,7 +7,7 @@ import {
   getReviews,
   getReviewById,
 } from '../api/reviewApi';
-import { getCampaignDetails } from '@entities/campaign/api/campaignApi';
+import { getCampaign } from '@entities/campaign/api/campaignApi';
 import { getUserInfo } from '@entities/user/api/userApi';
 import { getApplicationById } from '@entities/application/api/applicationApi';
 
@@ -84,7 +84,7 @@ export function useReviewPageData(campaignId: string, applicationId: string | nu
     queryKey: ['reviewPageData', campaignId, applicationId],
     queryFn: async () => {
       const [campaign, user, application] = await Promise.all([
-        getCampaignDetails(campaignId),
+        getCampaign(campaignId),
         getUserInfo(),
         applicationId ? getApplicationById(applicationId) : null,
       ]);

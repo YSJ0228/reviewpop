@@ -1,6 +1,6 @@
+import { IconCheckCircle, ColorAqua500 } from '@pop-ui/foundation';
+
 import styles from './ReservePrecautions.module.scss';
-import { IconCheckCircle } from '@pop-ui/foundation';
-import { ColorAqua500 } from '@pop-ui/foundation';
 
 interface ReservePrecautionsProps {
   precautions: string[];

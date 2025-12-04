@@ -30,6 +30,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
   usePageHeader({
+    title: campaign?.brand,
     showBackButton: true,
   });
 

@@ -238,21 +238,12 @@ export function AddressMap({
       }
 
       if (window.naver?.maps?.Event && mapInstanceRef.current) {
-        eventListenersRef.current.forEach(({ target, event, listener }) => {
-          try {
-            // target이 유효하고 mapInstanceRef와 같은지 확인
-            if (
-              window.naver.maps.Event?.removeListener &&
-              listener &&
-              target &&
-              target === mapInstanceRef.current
-            ) {
-              window.naver.maps.Event.removeListener(target, event, listener);
-            }
-          } catch (error) {
-            console.warn('이벤트 리스너 제거 실패:', error);
-          }
-        });
+        try {
+          window.naver.maps.Event?.clearInstanceListeners?.(mapInstanceRef.current);
+        } catch (error) {
+          // 지도 인스턴스가 이미 파괴되었거나 내부 상태가 유효하지 않은 경우 무시
+          console.warn('지도 이벤트 리스너 제거 중 오류 발생 (무시됨):', error);
+        }
         eventListenersRef.current = [];
       }
       mapInstanceRef.current = null;

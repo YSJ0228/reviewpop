@@ -28,6 +28,7 @@ export function CampaignCompletedCard({ application }: CampaignCompletedCardProp
     <>
       <CampaignCardWrapper
         campaign={campaign}
+        isSelected={true}
         statusLabel={
           <CampaignStatusLabel
             type="completed"

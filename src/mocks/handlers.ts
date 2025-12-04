@@ -5,14 +5,13 @@
  */
 
 import { authHandlers } from '@shared/api/mock/handlers/auth';
-import { reviewHandlers } from '@shared/api/mock/handlers/reviews';
+import { reviewHandlers } from '@entities/review/api/mock/handlers';
 import { kakaoOAuthHandlers } from '@shared/api/mock/handlers/oauth/kakao';
 import { myCampaignHandlers } from '@entities/history/api/myMock';
-import { campaignHandlers } from '@entities/campaign/api/mock';
+import { campaignHandlers } from '@entities/campaign/api/mock/handlers';
 import { applicationHandlers } from '@shared/api/mock/handlers/applications';
-// import { reservationHandlers } from '@shared/api/mock/handlers/reservations';
-
-import { notificationHandlers } from '@entities/notification/api/mock';
+import { notificationHandlers } from '@entities/notification/api/mock/handlers';
+import { reservationHandlers } from '@shared/api/mock/handlers/reservations';
 
 /**
  * 모든 MSW 핸들러
@@ -26,6 +25,6 @@ export const handlers = [
   ...campaignHandlers,
   ...myCampaignHandlers,
   ...applicationHandlers,
-  // ...reservationHandlers,
+  ...reservationHandlers,
   ...notificationHandlers,
 ];

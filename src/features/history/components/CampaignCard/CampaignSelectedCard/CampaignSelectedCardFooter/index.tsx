@@ -27,7 +27,7 @@ export function CampaignSelectedCardFooter({
   };
 
   return (
-    <footer className={styles.CampaignSelectedCardFooter__ContentWrapper}>
+    <footer className={styles.CampaignSelectedCardFooter__Wrapper}>
       {visitStatus === 'before' && (
         <ReservationBeforeCard onReservationClick={handleReservationClick} />
       )}
