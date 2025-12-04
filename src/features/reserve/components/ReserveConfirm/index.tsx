@@ -1,11 +1,11 @@
-import { useReserve } from '@features/reserve/hooks/useReserve';
+import { LoadingSpinner, CampaignInfoList } from '@shared/components';
+import { formatDate } from '@shared/lib/date';
+import { useCreateReservation } from '@entities/reservation';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 import { mockReservationData } from '@features/reserve/store/mockReservationData';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { LoadingSpinner, CampaignInfoList } from '@shared/components';
-import { formatDate } from '@shared/lib/date';
 
 import { ReservePrecautions } from './ReservePrecautions';
 import { ReserveAgreement } from './ReserveAgreement';
@@ -16,7 +16,7 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
   const reservationData = useReservationStore(
     (state) => state.reservationData ?? mockReservationData,
   );
-  const { mutate: createReservation } = useReserve(campaignId);
+  const { mutate: createReservation } = useCreateReservation(campaignId);
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isUserLoading } = useUserInfo();
   const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(

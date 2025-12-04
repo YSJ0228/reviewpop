@@ -3,3 +3,5 @@
  */
 
 export * from './types/reservation.types';
+export * from './api/reserveApi';
+export * from './hooks/useReserve';

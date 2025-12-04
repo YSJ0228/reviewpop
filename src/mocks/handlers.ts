@@ -10,7 +10,7 @@ import { kakaoOAuthHandlers } from '@shared/api/mock/handlers/oauth/kakao';
 import { myCampaignHandlers } from '@entities/history/api/myMock';
 import { campaignHandlers } from '@entities/campaign/api/mock';
 import { applicationHandlers } from '@shared/api/mock/handlers/applications';
-// import { reservationHandlers } from '@shared/api/mock/handlers/reservations';
+import { reservationHandlers } from '@shared/api/mock/handlers/reservations';
 
 import { notificationHandlers } from '@entities/notification/api/mock';
 
@@ -26,6 +26,6 @@ export const handlers = [
   ...campaignHandlers,
   ...myCampaignHandlers,
   ...applicationHandlers,
-  // ...reservationHandlers,
+  ...reservationHandlers,
   ...notificationHandlers,
 ];
