@@ -1,0 +1,6 @@
+@use '@/shared/styles/mixins' as *;
+
+.CampaignReviewedCardFooter__Wrapper {
+  border-bottom: 1px solid var(--gray-50);
+  padding-bottom: 16px;
+}
