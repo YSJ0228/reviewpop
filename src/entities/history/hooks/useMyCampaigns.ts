@@ -17,11 +17,11 @@ export function useMyCampaigns() {
 /**
  * 체험 신청 취소 훅
  */
-export function useDeleteMyCampaign(campaignId: string) {
+export function useDeleteMyCampaign() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => deleteMyCampaign(campaignId),
+    mutationFn: (campaignId: string) => deleteMyCampaign(campaignId),
     onSuccess: () => {
       toast.success('신청이 취소되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['my-applications'] });
