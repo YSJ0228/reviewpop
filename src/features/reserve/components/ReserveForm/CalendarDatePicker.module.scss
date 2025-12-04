@@ -1,1 +1,14 @@
 @use '@shared/styles/mixins' as *;
+
+.CalendarDatePicker {
+  @include padding($y: 24);
+  text-align: center;
+
+  &__MonthCell {
+    @include font($weight: 600);
+  }
+
+  &__DateRange {
+    // Date range text styling
+  }
+}

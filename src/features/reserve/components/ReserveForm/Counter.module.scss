@@ -1,0 +1,45 @@
+@use '@shared/styles/mixins' as *;
+
+.Counter {
+  @include flex($direction: column, $gap: 8);
+
+  &__Header {
+    @include flex($align: center, $justify: space-between);
+  }
+
+  &__Title {
+    @include font($size: 14, $weight: 500, $color: var(--gray-900));
+  }
+
+  &__Controls {
+    @include flex($align: center, $gap: 12);
+  }
+
+  &__Button {
+    @include font($size: 18, $color: var(--gray-600));
+    @include padding($all: 4 8);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover:not(:disabled) {
+      color: var(--gray-900);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__Value {
+    @include font($size: 14, $weight: 600, $color: var(--gray-900));
+    width: 24px;
+    text-align: center;
+  }
+
+  &__Subtitle {
+    @include font($size: 12, $color: var(--gray-600));
+  }
+}

@@ -37,7 +37,7 @@ export function generateTimeSlots(options: TimeRangeOptions): string[] {
 
   const times: string[] = [];
 
-  // endTime은 제외 (< 사용)
+  // endTime은 제외
   for (let current = startMinutes; current < endMinutes; current += intervalMinutes || 30) {
     times.push(minutesToTime(current));
   }
