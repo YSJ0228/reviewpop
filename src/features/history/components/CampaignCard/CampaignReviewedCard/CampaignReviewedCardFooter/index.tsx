@@ -5,6 +5,8 @@ import { ReviewCompletedCard } from '../ReviewCompletedCard';
 
 import type { CampaignReviewedCardFooterProps } from './types';
 
+import styles from './style.module.scss';
+
 /**
  * 후기 탭 카드 하단 컴포넌트 (footer용)
  * @param reviewStatus - 리뷰 상태
@@ -33,27 +35,41 @@ export function CampaignReviewedCardFooter({
     }
 
     return (
-      <ReviewNotRegisteredCard
-        campaignStatus={campaignStatus}
-        campaignId={campaignId}
-        applicationId={applicationId}
-      />
+      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+        <ReviewNotRegisteredCard
+          campaignStatus={campaignStatus}
+          campaignId={campaignId}
+          applicationId={applicationId}
+        />
+      </div>
     );
   }
 
   // 후기 검토 중
   if (reviewStatus === 'reviewPending') {
-    return <ReviewPendingCard />;
+    return (
+      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+        <ReviewPendingCard />
+      </div>
+    );
   }
 
   // 후기 수정 요청
   if (reviewStatus === 'requiredForEditing') {
-    return <ReviewEditRequestCard campaignId={campaignId} reviewId={reviewId} />;
+    return (
+      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+        <ReviewEditRequestCard campaignId={campaignId} reviewId={reviewId} />
+      </div>
+    );
   }
 
   // 후기 등록 완료
   if (reviewStatus === 'reviewed') {
-    return <ReviewCompletedCard />;
+    return (
+      <div className={styles.CampaignReviewedCardFooter__Wrapper}>
+        <ReviewCompletedCard />
+      </div>
+    );
   }
 
   return null;
