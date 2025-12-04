@@ -560,36 +560,9 @@ export const mockCampaigns: Campaign[] = [
 ];
 
 /**
- * Campaign ID로 찾기
+ * 🚨🚨🚨 /api/campaigns/:id로 변경해주세요 🚨🚨🚨
+ * ~~Campaign ID로 찾기~~
  */
 export function findCampaignById(id: string): Campaign | undefined {
   return mockCampaigns.find((campaign) => campaign.id === id);
-}
-
-/**
- * 상태별 체험 목록 조회
- */
-export function getCampaignsByStatus(status: CampaignStatus): Campaign[] {
-  return mockCampaigns.filter((campaign) => campaign.status === status);
-}
-
-/**
- * 카테고리별 체험 목록 조회
- */
-export function getCampaignsByCategory(category: CampaignCategory): Campaign[] {
-  return mockCampaigns.filter((campaign) => campaign.category === category);
-}
-
-/**
- * 진행 중인 체험 목록 조회
- */
-export function getRecruitingCampaigns(): Campaign[] {
-  return getCampaignsByStatus('recruiting');
-}
-
-/**
- * 마감된 체험 목록 조회
- */
-export function getCompletedCampaigns(): Campaign[] {
-  return getCampaignsByStatus('completed');
 }
