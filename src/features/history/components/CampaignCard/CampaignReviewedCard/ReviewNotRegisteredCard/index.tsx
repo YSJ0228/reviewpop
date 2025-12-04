@@ -41,7 +41,7 @@ export function ReviewNotRegisteredCard({
             size="small"
             onClick={() => {
               window.open(
-                process.env.NEXT_PUBLIC_BLOG_REVIEW_EXAMPLE_URL,
+                process.env.NEXT_PUBLIC_BLOG_REVIEW_EXAMPLE_URL || '',
                 '_blank',
                 'noopener,noreferrer',
               );
