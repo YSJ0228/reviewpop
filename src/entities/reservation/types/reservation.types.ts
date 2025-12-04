@@ -24,6 +24,7 @@ export interface PostReservation {
 
 /** 본인이 한 예약정보 받기 */
 export interface Reservation {
+  id: string;
   campaignId: string;
   applicationId: string;
   date: string;

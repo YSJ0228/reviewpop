@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { toast } from '@shared/components';
 import {
   PostReservation,
   createReservation,
@@ -22,6 +23,7 @@ export const useCreateReservation = (campaignId: string) => {
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: (error: Error) => {
+      toast.error('예약 생성 실패');
       console.error('예약 생성 실패:', error);
     },
   });
@@ -42,7 +44,7 @@ export const useUpdateReservation = (campaignId: string, reservationId: string) 
   return useMutation({
     mutationFn: (data: PostReservation) => updateReservation(reservationId, data),
     onSuccess: () => {
-      // 관련 쿼리 무효화'
+      // 관련 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: ['my-campaigns'] });
       queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
       queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });

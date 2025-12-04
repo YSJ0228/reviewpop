@@ -7,9 +7,8 @@
 import { http, HttpResponse } from 'msw';
 
 import type { ApiResponse } from '@shared/api/types/common.types';
-import type { PostReservation } from '@entities/reservation';
-
-// import { getReservationsByCampaignId } from '../data/reservations';
+import type { Reservation, PostReservation } from '@entities/reservation';
+import { mockReservations } from '../data/reservations';
 
 export const reservationHandlers = [
   /**
@@ -94,19 +93,21 @@ export const reservationHandlers = [
     // }
 
     // 새 예약 생성
-    const newReservation: PostReservation = {
+    const newReservation: Reservation = {
+      id: `res-${Date.now()}`,
       campaignId: body.campaignId,
       applicationId: body.applicationId,
       date: body.date,
       personCount: body.personCount,
+      isVisited: false,
     };
 
-    // mockReservations.push(newReservation); // Reservation 타입 불일치로 일단 주석 처리
+    mockReservations.push(newReservation);
 
     return HttpResponse.json({
       success: true,
       data: newReservation,
-    } satisfies ApiResponse<PostReservation>);
+    } satisfies ApiResponse<Reservation>);
   }),
 
   /**

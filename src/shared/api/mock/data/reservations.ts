@@ -5,7 +5,7 @@
  * 총 20개의 예약 데이터로 다양한 배송 상태를 시뮬레이션합니다.
  */
 
-import type { PostReservation } from '@entities/reservation';
+import type { Reservation } from '@entities/reservation';
 
 /**
  * Reservation mock 데이터
@@ -17,33 +17,38 @@ import type { PostReservation } from '@entities/reservation';
  * - delivered (배송완료): 약 5개
  * - cancelled (취소): 약 1개
  */
-export const mockReservations: PostReservation[] = [
+export const mockReservations: Reservation[] = [
   // 최근 예약 (pending)
   {
+    id: 'res-001',
     campaignId: '1',
     applicationId: 'app-001',
     date: '2025-11-03T11:00:00Z',
     personCount: 2,
   },
   {
+    id: 'res-002',
     campaignId: '2',
     applicationId: 'app-002',
     date: '2025-11-02T15:00:00Z',
     personCount: 2,
   },
   {
+    id: 'res-003',
     campaignId: '3',
     applicationId: 'app-003',
     date: '2025-11-02T16:00:00Z',
     personCount: 2,
   },
   {
+    id: 'res-004',
     campaignId: '4',
     applicationId: 'app-004',
     date: '2025-11-01T10:00:00Z',
     personCount: 2,
   },
   {
+    id: 'res-005',
     campaignId: '5',
     applicationId: 'app-005',
     date: '2025-11-01T11:00:00Z',
@@ -52,12 +57,14 @@ export const mockReservations: PostReservation[] = [
 
   // 확정된 예약 (confirmed)
   {
+    id: 'res-006',
     campaignId: '6',
     applicationId: 'app-006',
     date: '2025-10-29T11:00:00Z',
     personCount: 2,
   },
   {
+    id: 'res-007',
     campaignId: '7',
     applicationId: 'app-007',
     date: '2025-10-29T12:00:00Z',
