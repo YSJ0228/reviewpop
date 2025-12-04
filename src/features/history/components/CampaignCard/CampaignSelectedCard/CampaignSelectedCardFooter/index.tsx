@@ -1,4 +1,4 @@
-import { useDisclosure } from '@mantine/hooks';
+import { useRouter } from 'next/navigation';
 
 import { ReservationBeforeCard } from '../ReservationBeforeCard';
 import { ReservationScheduledCard } from '../ReservationScheduledCard';
@@ -17,13 +17,15 @@ export function CampaignSelectedCardFooter({
   campaign,
   visitStatus,
 }: CampaignSelectedCardFooterProps) {
-  const [, { open }] = useDisclosure(false);
+  const router = useRouter();
 
-  // TODO: 방문 날짜 설정 버튼 클릭 핸들러
   const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    open();
+    if (!campaign?.id) {
+      return;
+    }
+    router.push(`/campaign/${campaign.id}/reserve`);
   };
 
   return (
