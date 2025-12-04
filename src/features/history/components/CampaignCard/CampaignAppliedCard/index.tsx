@@ -11,6 +11,7 @@ export function CampaignAppliedCard({ announcementStatus, campaignId }: ICampaig
   const handleCancelApplication = async () => {
     try {
       await deleteMyCampaign(campaignId);
+      toast.success('신청이 취소되었습니다.');
     } catch (error) {
       toast.error('신청 취소에 실패했습니다.');
       console.error('체험 신청 취소에 실패했습니다.', error);

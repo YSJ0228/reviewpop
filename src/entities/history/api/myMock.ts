@@ -1,6 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
-import { mockMyCampaigns, findMyCampaignById } from '../lib/mockMyCampaigns';
+import { mockMyCampaigns } from '../lib/mockMyCampaigns';
+
+const mockApplications = [...mockMyCampaigns];
 
 export const myCampaignHandlers = [
   // 체험 목록 조회
@@ -10,7 +12,7 @@ export const myCampaignHandlers = [
     const userId = 'kakao-1001';
 
     // 특정 사용자의 신청 내역 반환 (mockMyCampaigns 사용)
-    const myApplications = mockMyCampaigns.filter((app) => app.userId === userId);
+    const myApplications = mockApplications.filter((app) => app.userId === userId);
 
     return HttpResponse.json({
       data: { applications: myApplications },
@@ -21,20 +23,16 @@ export const myCampaignHandlers = [
   // 체험 신청 취소
   http.delete('/api/campaigns/:campaignId', ({ params }) => {
     const { campaignId } = params;
+    const index = mockApplications.findIndex((app) => app.campaign.id === campaignId);
 
-    // 캠페인 ID 유효성 검사
-    const application = findMyCampaignById(campaignId as string);
-
-    if (!application) {
+    if (index === -1) {
       return HttpResponse.json(
-        {
-          success: false,
-          error: '신청 내역을 찾을 수 없습니다.',
-        },
+        { success: false, error: '신청 내역을 찾을 수 없습니다.' },
         { status: 404 },
       );
     }
 
+    mockApplications.splice(index, 1);
     console.log(`[MSW] Campaign ${campaignId} application cancelled`);
 
     return HttpResponse.json({

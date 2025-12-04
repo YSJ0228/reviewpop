@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Application, ApplicationStatus } from '@entities/application';
 import { getMyCampaigns, deleteMyCampaign } from '../api/myCampaignApi';
-import { toast } from '@shared/components';
 
 /**
  * 체험 신청 목록을 가져오는 React Query 훅
@@ -23,7 +22,6 @@ export function useDeleteMyCampaign() {
   return useMutation({
     mutationFn: (campaignId: string) => deleteMyCampaign(campaignId),
     onSuccess: () => {
-      toast.success('신청이 취소되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['my-applications'] });
     },
   });
