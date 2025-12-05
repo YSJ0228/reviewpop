@@ -1,6 +1,6 @@
 'use client';
 
-import { use } from 'react';
+import { use, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, LoadingSpinner, ErrorBoundary } from '@shared/components';
@@ -29,12 +29,14 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
   );
 
   const reviewLinkInput = useInputValidate('blogUrl');
+  const [isLinkVerified, setIsLinkVerified] = useState(false);
 
   const isLoading = isPageLoading;
 
   const isSubmitDisabled =
     !reviewLinkInput.value || // 빈 값 체크 (먼저)
     !!reviewLinkInput.errorMsg || // 에러 체크
+    !isLinkVerified || // 링크 검증 체크
     isPending; // 로딩 중 체크
 
   usePageHeader({
@@ -82,6 +84,7 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
           campaign={campaign}
           application={application}
           reviewLinkInput={reviewLinkInput}
+          onValidationChange={setIsLinkVerified}
         />
         <Button onClick={handleSubmit} disabled={isSubmitDisabled}>
           {isPending ? '등록 중...' : '후기 등록'}

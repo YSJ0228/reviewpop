@@ -47,9 +47,9 @@ export const mockMyCampaigns: Application[] = [
     createdAt: '2025-11-09T14:00:00Z',
   },
   {
-    id: 'app-11',
+    id: 'app-4',
     userId: 'kakao-1001',
-    campaign: getCampaign('11'),
+    campaign: getCampaign('4'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -60,9 +60,9 @@ export const mockMyCampaigns: Application[] = [
 
   // 3. 선정 - 방문 예약 후 (Selected - After Reservation)
   {
-    id: 'app-4',
+    id: 'app-5',
     userId: 'kakao-1001',
-    campaign: getCampaign('4'),
+    campaign: getCampaign('5'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -77,9 +77,9 @@ export const mockMyCampaigns: Application[] = [
   // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
 
   {
-    id: 'app-5',
+    id: 'app-6',
     userId: 'kakao-1001',
-    campaign: getCampaign('5'),
+    campaign: getCampaign('6'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -91,9 +91,9 @@ export const mockMyCampaigns: Application[] = [
   },
   // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
   {
-    id: 'app-6',
+    id: 'app-7',
     userId: 'kakao-1001',
-    campaign: getCampaign('6'),
+    campaign: getCampaign('7'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -106,9 +106,9 @@ export const mockMyCampaigns: Application[] = [
 
   // 4-2. 후기 - 체험이 종료되었지만 후기 미등록 (Review - Closed but Not Reviewed)
   {
-    id: 'app-7',
+    id: 'app-8',
     userId: 'kakao-1001',
-    campaign: getCampaign('7'),
+    campaign: getCampaign('8'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -121,9 +121,9 @@ export const mockMyCampaigns: Application[] = [
 
   // 5. 후기 - 검토 중 (Review - Pending)
   {
-    id: 'app-8',
+    id: 'app-9',
     userId: 'kakao-1001',
-    campaign: getCampaign('8'),
+    campaign: getCampaign('9'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -136,9 +136,9 @@ export const mockMyCampaigns: Application[] = [
 
   // 6. 후기 - 수정 요청 (Review - Requested)
   {
-    id: 'app-9',
+    id: 'app-10',
     userId: 'kakao-1001',
-    campaign: getCampaign('9'),
+    campaign: getCampaign('10'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -151,9 +151,9 @@ export const mockMyCampaigns: Application[] = [
 
   // 7. 완료 (Completed) - 종료 탭
   {
-    id: 'app-10',
+    id: 'app-11',
     userId: 'kakao-1001',
-    campaign: getCampaign('10'),
+    campaign: getCampaign('11'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
