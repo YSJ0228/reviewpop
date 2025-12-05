@@ -6,6 +6,7 @@ import { useApplicationDetails } from '@entities/application/hooks/useApplicatio
 import { CampaignDetail } from '@entities/campaign/types/campaign.types';
 
 import styles from './style.module.scss';
+import Link from 'next/link';
 
 /**
  * - 'Cancel': 체험단 신청 취소하기
@@ -59,9 +60,11 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
 
       <div className={styles.CTA__ButtonWrapper}>
         {CTA_STATUS === 'Apply' && (
-          <Button fullWidth className={styles.CTA}>
-            체험단 신청하기
-          </Button>
+          <Link href={`/campaign/${campaign.id}/apply`} className={styles.CTA__Link}>
+            <Button fullWidth className={styles.CTA}>
+              체험단 신청하기
+            </Button>
+          </Link>
         )}
 
         {CTA_STATUS === 'Cancel' && (
@@ -71,9 +74,11 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
         )}
 
         {CTA_STATUS === 'Reserve' && (
-          <Button fullWidth className={styles.CTA}>
-            체험 방문할 날짜를 설정해주세요
-          </Button>
+          <Link href={`/campaign/${campaign.id}/reserve`} className={styles.CTA__Link}>
+            <Button fullWidth className={styles.CTA}>
+              체험 방문할 날짜를 설정해주세요
+            </Button>
+          </Link>
         )}
 
         {CTA_STATUS === 'ChangeReservation' && (

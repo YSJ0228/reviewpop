@@ -22,3 +22,7 @@
   width: 100%;
   @include flex($direction: row, $align: center, $justify: center, $gap: 8);
 }
+
+.CTA__Link {
+  width: 100%;
+}
