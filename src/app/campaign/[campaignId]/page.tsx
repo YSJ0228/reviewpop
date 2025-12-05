@@ -96,7 +96,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
   return (
     <div className={styles.Page}>
-      <CampaignCTA />
+      <CampaignCTA campaign={campaign} />
       <div className={styles.Page__ImageSection}>
         <ImageGallery
           images={images}
