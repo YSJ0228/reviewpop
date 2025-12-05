@@ -25,10 +25,21 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
 
   const isValidCampaignId = validateCampaignId(campaignId, reservationData?.campaignId);
   const { data: reservationConfig, isLoading, error } = useReservationConfig(campaignId);
-  const [formState, setFormState] = useState<FormState>({
-    date: null,
-    time: null,
-    personCount: 1,
+  const [formState, setFormState] = useState<FormState>(() => {
+    if (reservationData?.date) {
+      const dateObj = new Date(reservationData.date);
+      const timeStr = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
+      return {
+        date: dateObj,
+        time: timeStr,
+        personCount: reservationData.personCount || 1,
+      };
+    }
+    return {
+      date: null,
+      time: null,
+      personCount: 1,
+    };
   });
 
   const handleDateChange = (newDate: DateValue | null) => {
@@ -67,7 +78,8 @@ export function ReserveForm({ campaignId }: { campaignId: string }) {
     );
   }
 
-  if (!isValidCampaignId) {
+  // 수정 모드일 때는 storeCampaignId가 있어도 허용
+  if (!isValidCampaignId && !reservationData?.reservationId) {
     return <ReservationErrorGuard message="잘못된 접근입니다." onReset={resetReservationData} />;
   }
 

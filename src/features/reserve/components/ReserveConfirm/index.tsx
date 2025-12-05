@@ -2,7 +2,6 @@ import { LoadingSpinner, CampaignInfoList } from '@shared/components';
 import { formatDate } from '@shared/lib/date';
 import { useCreateReservation, useUpdateReservation } from '@entities/reservation';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
-import { mockReservationData } from '@features/reserve/store/mockReservationData';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
@@ -13,9 +12,7 @@ import { ReserveAgreement } from './ReserveAgreement';
 import styles from './style.module.scss';
 
 export function ReserveConfirm({ campaignId }: { campaignId: string }) {
-  const reservationData = useReservationStore(
-    (state) => state.reservationData ?? mockReservationData,
-  );
+  const reservationData = useReservationStore((state) => state.reservationData);
   const { mutate: createReservation, isPending: isCreatePending } =
     useCreateReservation(campaignId);
 
