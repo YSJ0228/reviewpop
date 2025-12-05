@@ -25,8 +25,10 @@ export function BottomNavigation() {
 
         return (
           <Link key={path} href={path} className={itemClassName}>
-            <Icon size={28} color={iconColor} />
-            <span>{label}</span>
+            <div className={styles['BottomNavigation__Item--Contents']}>
+              <Icon size={28} color={iconColor} />
+              <span>{label}</span>
+            </div>
           </Link>
         );
       })}

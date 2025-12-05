@@ -18,18 +18,17 @@
 }
 
 .BottomNavigation__Item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
   height: 100%;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--gray-400);
   transition: color 0.2s ease;
   cursor: pointer;
+  @include flex($direction: column, $align: center, $justify: center, $gap: 4);
+  @include font($size: 11, $weight: 500, $line-height: 1.5, $color: var(--gray-400));
+}
+
+.BottomNavigation__Item--Contents {
+  width: 60px;
+  height: 45px;
+  @include flex($direction: column, $align: center, $justify: center);
 }
 
 .BottomNavigation__Item--Active {
