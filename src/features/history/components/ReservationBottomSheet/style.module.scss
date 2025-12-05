@@ -2,7 +2,6 @@
 
 .ReservationBottomSheet__Menu {
   @include flex($direction: column, $gap: 8);
-  @include padding($bottom: 32);
 
   .ReservationBottomSheet__Divider {
     border-bottom: 1px solid var(--gray-50);

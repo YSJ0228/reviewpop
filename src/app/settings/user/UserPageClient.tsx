@@ -8,7 +8,7 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { Form } from '@shared/components/Form';
 import { useUpdateUserInfo } from '@entities/user/hooks/useUpdateUserInfo';
 import { FormDataType } from '@shared/components/Form/types';
-import { HeaderConfig } from '@shared/components';
+import { HeaderConfig, toast } from '@shared/components';
 
 import styles from './page.module.scss';
 
@@ -19,10 +19,11 @@ export default function UserPageClient() {
   const handleSave = (formData: FormDataType) => {
     updateUser.mutate(formData, {
       onSuccess: () => {
+        toast.success('정보가 수정되었습니다.');
         router.push('/settings');
       },
       onError: (error) => {
-        alert('정보 수정에 실패했습니다: ' + error.message);
+        toast.error('정보 수정에 실패하였습니다.');
       },
     });
   };

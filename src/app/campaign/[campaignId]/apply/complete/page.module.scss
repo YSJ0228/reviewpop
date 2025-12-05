@@ -1,7 +1,7 @@
 @use '@shared/styles/mixins' as *;
 
 .CampaignApplyCompletePage {
-  min-height: 100vh;
-  @include padding($y: 20, $x: 16);
-  @include flex($direction: column, $gap: 24, $align: center, $justify: center);
+  min-height: calc(100vh - 48px);
+  @include padding($y: 108, $x: 16);
+  @include flex($direction: column, $gap: 24, $align: center);
 }

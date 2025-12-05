@@ -26,6 +26,7 @@ export function BottomSheet({
       styles={{
         content: {
           width: '100%',
+          maxWidth: '480px',
           margin: '0 auto',
           borderTopLeftRadius: '16px',
           borderTopRightRadius: '16px',
