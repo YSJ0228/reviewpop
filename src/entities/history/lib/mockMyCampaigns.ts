@@ -1,10 +1,18 @@
 import type { Application } from '@entities/application';
 import { INITIAL_CAMPAIGNS } from '@entities/campaign/api/mock/data';
+import type { CampaignDetail } from '@entities/campaign';
 
 function getCampaign(id: string) {
   const campaign = INITIAL_CAMPAIGNS.find((c) => c.id === id);
   if (!campaign) throw new Error(`Campaign ${id} not found`);
   return campaign;
+}
+
+function getReservationDate(campaign: CampaignDetail, daysAfterStart = 1) {
+  const startDate = new Date(campaign.schedule.review.start);
+  startDate.setDate(startDate.getDate() + daysAfterStart);
+  startDate.setHours(0, 0, 0, 0); // 오후 3시로 고정 (KST 00:00 -> UTC 15:00 -> Frontend Local 15:00)
+  return startDate.toISOString().split('.')[0]; // YYYY-MM-DDTHH:mm:ss 형식
 }
 
 export const mockMyCampaigns: Application[] = [
@@ -67,10 +75,10 @@ export const mockMyCampaigns: Application[] = [
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed',
-    reservationId: 'res-004',
+    reservationId: 'res-005',
     reviewStatus: 'notReviewed',
     isReservated: true,
-    reservationDate: '2025-11-15T10:00:00',
+    reservationDate: getReservationDate(getCampaign('5')),
     createdAt: '2025-11-05T11:00:00Z',
   },
 
@@ -85,8 +93,8 @@ export const mockMyCampaigns: Application[] = [
     phoneNumber: '010-1234-5678',
     status: 'selected',
     isReservated: true,
-    reservationDate: '2025-11-28T14:00:00',
-    reservationId: 'res-005',
+    reservationDate: getReservationDate(getCampaign('6')),
+    reservationId: 'res-006',
     createdAt: '2025-10-25T09:00:00Z',
   },
   // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
@@ -100,7 +108,7 @@ export const mockMyCampaigns: Application[] = [
     status: 'reviewed',
     reviewStatus: 'visited', // 체험 완료 (예약 날짜 익일)
     isReservated: true,
-    reservationDate: '2025-11-14T14:00:00',
+    reservationDate: getReservationDate(getCampaign('7'), -1), // 어제로 설정
     createdAt: '2025-11-05T11:00:00Z',
   },
 
@@ -115,7 +123,7 @@ export const mockMyCampaigns: Application[] = [
     status: 'reviewed', // 후기 탭에 표시되도록
     reviewStatus: 'notReviewed', // 후기 미등록 상태
     isReservated: true,
-    reservationDate: '2025-09-18T13:00:00', // 체험 종료일
+    reservationDate: getReservationDate(getCampaign('8'), -5), // 5일 전
     createdAt: '2025-09-05T10:00:00Z',
   },
 
@@ -130,7 +138,7 @@ export const mockMyCampaigns: Application[] = [
     status: 'reviewed',
     reviewStatus: 'reviewPending', // 후기 검토 중
     isReservated: true,
-    reservationDate: '2025-10-22T14:00:00',
+    reservationDate: getReservationDate(getCampaign('9'), -3),
     createdAt: '2025-10-10T15:00:00Z',
   },
 
@@ -145,7 +153,7 @@ export const mockMyCampaigns: Application[] = [
     status: 'reviewed',
     reviewStatus: 'requiredForEditing', // 후기 수정 요청
     isReservated: true,
-    reservationDate: '2025-10-25T11:00:00',
+    reservationDate: getReservationDate(getCampaign('10'), -2),
     createdAt: '2025-10-08T09:00:00Z',
     reviewId: 'review_0',
   },
@@ -161,7 +169,7 @@ export const mockMyCampaigns: Application[] = [
     status: 'completed',
     reviewStatus: 'reviewed', // 체험 종료 (종료 탭)
     isReservated: true,
-    reservationDate: '2025-09-20T13:00:00',
+    reservationDate: getReservationDate(getCampaign('11'), -10),
     createdAt: '2025-09-05T10:00:00Z',
   },
 ];

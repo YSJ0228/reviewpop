@@ -27,12 +27,14 @@ export default function ReviewWritePage({ params }: ReviewWritePageProps) {
   const { data, isLoading: isPageLoading } = useReviewPageData(campaignId, applicationId);
   const { campaign, user, application } = data || {};
 
-  const { mutate: createReview, isPending: isCreatePending } = useCreateReview(() =>
+  const { mutate: createReview, isPending: isCreatePending } = useCreateReview(campaignId, () =>
     router.push('/my?tab=reviewed'),
   );
 
-  const { mutate: updateReview, isPending: isUpdatePending } = useUpdateReview(reviewId || '', () =>
-    router.push('/my?tab=reviewed'),
+  const { mutate: updateReview, isPending: isUpdatePending } = useUpdateReview(
+    reviewId || '',
+    campaignId,
+    () => router.push('/my?tab=reviewed'),
   );
 
   const reviewLinkInput = useInputValidate('blogUrl');

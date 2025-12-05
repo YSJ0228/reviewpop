@@ -3,6 +3,7 @@ import { ApiResponse } from '@shared/api/types/common.types';
 import { INITIAL_REVIEWS } from './data';
 import { BlogReviews, BlogReview, PostReview } from '../../types/review.types';
 import { createEditRequest } from './EditData';
+import { mockApplications } from '@/entities/history/api/myMock';
 
 // 메모리상에서 리뷰 데이터 관리
 const reviews = [...INITIAL_REVIEWS];
@@ -47,9 +48,7 @@ export const reviewHandlers = [
 
   // 리뷰 작성
   http.post('/api/reviews', async ({ request }) => {
-    console.log('MSW: POST /api/reviews called');
     const body = (await request.json()) as PostReview;
-    console.log('MSW: Request body:', body);
 
     const newReview: BlogReview = {
       id: `review_${Date.now()}`,
@@ -62,6 +61,17 @@ export const reviewHandlers = [
     };
 
     reviews.unshift(newReview);
+
+    // Update application status
+    const application = mockApplications.find(
+      (app) => app.campaign.id === body.campaignId && app.userId === body.userId,
+    );
+
+    if (application) {
+      application.status = 'reviewed';
+      application.reviewStatus = 'reviewPending';
+      application.reviewId = newReview.id;
+    }
 
     return HttpResponse.json<ApiResponse<PostReview>>({
       success: true,
@@ -81,6 +91,15 @@ export const reviewHandlers = [
         updatedReview.url = body.reviewUrl;
       }
       reviews[reviewIndex] = updatedReview;
+
+      // Update application status
+      const application = mockApplications.find(
+        (app) => app.campaign.id === updatedReview.campaignId,
+      );
+      if (application) {
+        application.status = 'reviewed';
+        application.reviewStatus = 'reviewPending';
+      }
 
       return HttpResponse.json<ApiResponse<PostReview>>({
         success: true,

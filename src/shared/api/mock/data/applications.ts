@@ -6,23 +6,20 @@
  */
 
 import type { Application } from '@entities/application';
-import { mockCampaignDetails } from '@entities/campaign/lib/mockCampaignDetails';
-// import { mockUsers } from './users';
-
-// /**
-//  * 사용자 정보 헬퍼 함수
-//  */
-// function getUserInfo(userId: string) {
-//   const user = mockUsers.find((u) => u.id === userId);
-//   return {
-//     name: user?.name || '사용자',
-//   };
-// }
+import { INITIAL_CAMPAIGNS } from '@entities/campaign/api/mock/data';
+import type { CampaignDetail } from '@entities/campaign';
 
 export function getCampaign(id: string) {
-  const campaign = mockCampaignDetails.find((c) => c.id === id);
+  const campaign = INITIAL_CAMPAIGNS.find((c) => c.id === id);
   if (!campaign) throw new Error(`Campaign ${id} not found`);
   return campaign;
+}
+
+function getReservationDate(campaign: CampaignDetail, daysAfterStart = 1) {
+  const startDate = new Date(campaign.schedule.review.start);
+  startDate.setDate(startDate.getDate() + daysAfterStart);
+  startDate.setHours(0, 0, 0, 0); // 오후 3시로 고정 (KST 00:00 -> UTC 15:00 -> Frontend Local 15:00)
+  return startDate.toISOString().split('.')[0]; // YYYY-MM-DDTHH:mm:ss 형식
 }
 
 /**
@@ -53,7 +50,7 @@ export const mockApplications: Application[] = [
     campaign: getCampaign('2'),
     status: 'pending',
     isReservated: false,
-    name: '박민주',
+    name: '박민수',
     blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
     createdAt: '2025-10-28T10:30:00Z',
@@ -64,23 +61,11 @@ export const mockApplications: Application[] = [
     campaign: getCampaign('3'),
     status: 'selected',
     isReservated: false,
-    name: '최지영',
-    blogAddress: 'https://blog.naver.com/kakao-1002',
+    name: '박민수',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
     createdAt: '2025-10-29T14:00:00Z',
   },
-  // 잠시 테스트를 위해 변경하였습니다.
-  // {
-  //   id: 'app-4',
-  //   userId: 'naver-2001',
-  //   campaign: getCampaign('1'),
-  //   status: 'rejected',
-  //   isReservated: false,
-  //   name: '한소라',
-  //   blogAddress: 'https://blog.naver.com/naver-2001',
-  //   phoneNumber: '010-1234-5678',
-  //   createdAt: '2025-10-30T11:00:00Z',
-  // },
   {
     id: 'app-4',
     userId: 'kakao-1001',
@@ -90,20 +75,20 @@ export const mockApplications: Application[] = [
     isReservated: true,
     reservationDate: '2025-11-15T10:00:00',
     name: '김철수',
-    blogAddress: 'https://blog.naver.com/user1',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
     createdAt: '2025-11-05T11:00:00Z',
   },
   {
     id: 'app-5',
-    userId: 'kakao-1006',
+    userId: 'kakao-1001',
     campaign: getCampaign('5'),
     status: 'reviewed',
     reviewStatus: 'notReviewed',
     isReservated: true,
-    reservationDate: '2025-11-15T10:00:00',
+    reservationDate: getReservationDate(getCampaign('5')),
     name: '이채린',
-    blogAddress: 'https://blog.naver.com/kakao-1006',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
     createdAt: '2025-10-29T08:00:00Z',
   },
@@ -111,71 +96,81 @@ export const mockApplications: Application[] = [
   // Campaign #2 신청 (4명)
   {
     id: 'app-6',
-    userId: 'kakao-1002',
-    campaign: getCampaign('2'),
+    userId: 'kakao-1001',
+    campaign: getCampaign('6'),
     status: 'pending',
     isReservated: false,
     name: '최지영',
-    blogAddress: 'https://blog.naver.com/kakao-1002',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
     createdAt: '2025-10-25T15:00:00Z',
   },
   {
     id: 'app-7',
-    userId: 'kakao-1004',
-    campaign: getCampaign('2'),
-    status: 'selected',
-    isReservated: false,
-    name: '강유나',
-    blogAddress: 'https://blog.naver.com/kakao-1004',
+    userId: 'kakao-1001',
+    campaign: getCampaign('7'),
+    status: 'reviewed',
+    reviewStatus: 'visited',
+    isReservated: true,
+    reservationDate: getReservationDate(getCampaign('7'), -1),
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
-    createdAt: '2025-10-26T10:00:00Z',
+    createdAt: '2025-11-05T11:00:00Z',
   },
   {
     id: 'app-8',
-    userId: 'naver-2003',
-    campaign: getCampaign('2'),
-    status: 'selected',
-    isReservated: false,
-    name: '임혜민',
-    blogAddress: 'https://blog.naver.com/naver-2003',
+    userId: 'kakao-1001',
+    campaign: getCampaign('8'),
+    status: 'reviewed',
+    reviewStatus: 'notReviewed',
+    isReservated: true,
+    reservationDate: getReservationDate(getCampaign('8'), -5),
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
-    createdAt: '2025-10-26T16:00:00Z',
+    createdAt: '2025-09-05T10:00:00Z',
   },
   {
     id: 'app-9',
-    userId: 'kakao-1008',
-    campaign: getCampaign('2'),
-    status: 'rejected',
-    isReservated: false,
-    name: '남예진',
-    blogAddress: 'https://blog.naver.com/kakao-1008',
+    userId: 'kakao-1001',
+    campaign: getCampaign('9'),
+    status: 'reviewed',
+    reviewStatus: 'reviewPending',
+    isReservated: true,
+    reservationDate: getReservationDate(getCampaign('9'), -3),
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
-    createdAt: '2025-10-27T09:00:00Z',
+    createdAt: '2025-10-10T15:00:00Z',
   },
 
   // Campaign #3 신청 (6명)
   {
     id: 'app-10',
-    userId: 'naver-2001',
-    campaign: getCampaign('3'),
-    status: 'pending',
-    isReservated: false,
-    name: '한소라',
-    blogAddress: 'https://blog.naver.com/naver-2001',
+    userId: 'kakao-1001',
+    campaign: getCampaign('10'),
+    status: 'reviewed',
+    reviewStatus: 'requiredForEditing',
+    isReservated: true,
+    reservationDate: getReservationDate(getCampaign('10'), -2),
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
-    createdAt: '2025-10-22T11:00:00Z',
+    createdAt: '2025-10-08T09:00:00Z',
   },
   {
     id: 'app-11',
-    userId: 'kakao-1003',
-    campaign: getCampaign('3'),
-    status: 'pending',
-    isReservated: false,
-    name: '정세훈',
-    blogAddress: 'https://blog.naver.com/kakao-1003',
+    userId: 'kakao-1001',
+    campaign: getCampaign('11'),
+    status: 'completed',
+    reviewStatus: 'reviewed',
+    isReservated: true,
+    reservationDate: getReservationDate(getCampaign('11'), -10),
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
-    createdAt: '2025-10-22T13:00:00Z',
+    createdAt: '2025-09-05T10:00:00Z',
   },
   {
     id: 'app-12',

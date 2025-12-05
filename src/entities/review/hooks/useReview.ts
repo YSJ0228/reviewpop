@@ -15,15 +15,19 @@ import { getApplicationById } from '@entities/application/api/applicationApi';
  * 리뷰 등록 훅
  * @returns 리뷰 등록 mutation 객체
  */
-export const useCreateReview = (onSuccessCallback?: () => void) => {
+export const useCreateReview = (campaignId: string, onSuccessCallback?: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: PostReview) => {
       return createReview(data);
     },
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('후기가 등록되었습니다.');
-      queryClient.invalidateQueries({ queryKey: ['reviews'] });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['reviews'] }),
+        queryClient.invalidateQueries({ queryKey: ['my-applications'] }),
+        queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] }),
+      ]);
       onSuccessCallback?.();
     },
     onError: (error: Error) => {
@@ -39,13 +43,17 @@ export const useCreateReview = (onSuccessCallback?: () => void) => {
  * @param id - 리뷰 ID
  * @returns 리뷰 재등록 mutation 객체
  */
-export const useUpdateReview = (id: string, onSuccessCallback?: () => void) => {
+export const useUpdateReview = (id: string, campaignId: string, onSuccessCallback?: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: PostReview) => updateReview(id, data),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('후기가 재등록되었습니다.');
-      queryClient.invalidateQueries({ queryKey: ['reviews'] });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['reviews'] }),
+        queryClient.invalidateQueries({ queryKey: ['my-applications'] }),
+        queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] }),
+      ]);
       onSuccessCallback?.();
     },
     onError: (error: Error) => {
