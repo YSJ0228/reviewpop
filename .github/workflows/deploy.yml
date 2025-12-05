@@ -10,6 +10,8 @@ env:
   AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: reviewpop-web
   CONTAINER_NAME: reviewpop-web
+  STAGING_TASK_DEFINITION: staging-reviewpop-web
+  PROD_TASK_DEFINITION: prod-reviewpop-web
 
 jobs:
   build-and-deploy:
@@ -83,8 +85,14 @@ jobs:
       # ECS 태스크 정의 업데이트
       - name: Download task definition
         run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            TASK_DEF_NAME="${{ env.PROD_TASK_DEFINITION }}"
+          else
+            TASK_DEF_NAME="${{ env.STAGING_TASK_DEFINITION }}"
+          fi
+
           aws ecs describe-task-definition \
-            --task-definition ${{ env.CONTAINER_NAME }} \
+            --task-definition $TASK_DEF_NAME \
             --query taskDefinition > task-def.json
 
       - name: Update task definition with new image
