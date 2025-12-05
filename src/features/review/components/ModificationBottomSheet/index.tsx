@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { Loader } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
-import { useReviewModificationRequest } from '@entities/review/hooks/useReviewModificationRequest';
+import { useReviewModificationRequest } from '@entities/review';
 import { ButtonBar } from '@features/campaign/components/ButtonBar';
 
 import styles from './style.module.scss';
@@ -15,6 +15,7 @@ export function ModificationBottomSheet({
   onClose,
   reviewId,
   campaignId,
+  applicationId,
 }: ModificationBottomSheetProps) {
   const {
     data: reviewModification,
@@ -22,7 +23,6 @@ export function ModificationBottomSheet({
     error,
   } = useReviewModificationRequest(reviewId, opened);
   const router = useRouter();
-  //TODO: canpaignId, reviewId 어디서 받아오는지 결정
 
   return (
     <BottomSheet opened={opened} onClose={onClose} title="수정 요청 내용">
@@ -57,7 +57,11 @@ export function ModificationBottomSheet({
           <ButtonBar
             variant="primary"
             text="후기 재등록"
-            onClick={() => router.push(`/campaign/${campaignId}/review/write`)}
+            onClick={() =>
+              router.push(
+                `/campaign/${campaignId}/review/write?applicationId=${applicationId}&reviewId=${reviewId}`,
+              )
+            }
           />
         </div>
       )}

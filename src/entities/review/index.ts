@@ -11,3 +11,6 @@ export type {
   BlogReviews,
   ReviewRequest,
 } from './types/review.types';
+
+// Hooks
+export * from './hooks/useReview';
