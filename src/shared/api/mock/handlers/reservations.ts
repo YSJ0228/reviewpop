@@ -7,10 +7,41 @@
 import { http, HttpResponse } from 'msw';
 
 import type { ApiResponse } from '@shared/api/types/common.types';
-import type { Reservation, PostReservation } from '@entities/reservation';
-import { mockReservations } from '@shared/api/mock/data/reservations';
+import type {
+  Reservation,
+  PostReservation,
+  ReservationConfig,
+  ReservedDateTimes,
+} from '@entities/reservation';
+import {
+  mockReservations,
+  mockReservationConfig,
+  mockReservedDateTimes,
+} from '@shared/api/mock/data/reservations';
 
 export const reservationHandlers = [
+  /**
+   * 예약 설정 조회
+   * GET /api/reservations/:campaignId/config
+   */
+  http.get('/api/reservations/:campaignId/config', () => {
+    return HttpResponse.json({
+      success: true,
+      data: mockReservationConfig,
+    } satisfies ApiResponse<ReservationConfig>);
+  }),
+
+  /**
+   * 예약된 시간대 조회
+   * GET /api/reservations/:campaignId/reserved-times
+   */
+  http.get('/api/reservations/:campaignId/reserved-times', () => {
+    return HttpResponse.json({
+      success: true,
+      data: mockReservedDateTimes,
+    } satisfies ApiResponse<ReservedDateTimes>);
+  }),
+
   /**
    * 예약 목록 조회 (나의 예약)
    * GET /api/reservations

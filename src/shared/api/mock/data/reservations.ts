@@ -5,7 +5,25 @@
  * 총 20개의 예약 데이터로 다양한 배송 상태를 시뮬레이션합니다.
  */
 
-import type { Reservation } from '@entities/reservation';
+import type { Reservation, ReservationConfig, ReservedDateTimes } from '@entities/reservation';
+
+/**
+ * 예약 설정 Mock 데이터
+ */
+export const mockReservationConfig: ReservationConfig = {
+  notice: '본 체험은 2인 기준으로 제공됩니다',
+  maxCount: 2,
+  disabled: ['2025-12-05', '2025-12-06'],
+  startDate: '2025-12-02',
+  endDate: '2025-12-24',
+};
+
+/**
+ * 예약된 시간대 Mock 데이터
+ */
+export const mockReservedDateTimes: ReservedDateTimes = {
+  dateTimes: ['2025-12-04T10:00:00', '2025-12-03T10:30:00', '2025-12-07T14:00:00'],
+};
 
 /**
  * Reservation mock 데이터

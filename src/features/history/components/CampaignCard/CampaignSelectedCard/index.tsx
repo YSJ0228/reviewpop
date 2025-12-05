@@ -54,7 +54,6 @@ export function CampaignSelectedCard({ application }: CampaignSelectedCardProps)
     await handleCancelReservation();
     close();
   };
-
   // Top Content 렌더링
   const getTopContent = () => {
     if (visitStatus === 'scheduled') {
@@ -107,7 +106,11 @@ export function CampaignSelectedCard({ application }: CampaignSelectedCardProps)
         }
         topContent={getTopContent()}
       />
-      <CampaignSelectedCardFooter campaign={campaign} visitStatus={visitStatus} />
+      <CampaignSelectedCardFooter
+        campaign={campaign}
+        application={application}
+        visitStatus={visitStatus}
+      />
       {visitStatus === 'scheduled' && (
         <ReservationBottomSheet
           appliedAt={appliedAt}
