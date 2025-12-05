@@ -34,7 +34,7 @@ RUN --mount=type=cache,target=/root/.yarn,sharing=locked \
 # 소스 코드 복사 (package 파일 제외하여 yarn install 결과 보존)
 COPY src ./src
 COPY public ./public
-COPY next.config.ts tsconfig.json postcss.config.cjs ./
+COPY next.config.ts tsconfig.json postcss.config.cjs eslint.config.mjs .prettierrc .stylelintrc.json ./
 
 # 빌드 (Cache Mount 사용)
 RUN --mount=type=cache,target=/app/.next/cache,id=nextjs_cache,sharing=locked \
