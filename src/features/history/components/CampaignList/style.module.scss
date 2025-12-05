@@ -1,20 +1,18 @@
 @use '@/shared/styles/mixins' as *;
 
 .CampaignList {
+  background-color: var(--color-white);
   @include padding($x: 16);
   @include flex($direction: column);
-  overflow-y: auto;
-  min-height: 200px;
-  background-color: var(--color-white);
 }
 
 .CampaignList--Loading,
 .CampaignList--Error,
 .CampaignList--Empty {
-  @include flex($direction: column, $align: center, $justify: center);
   min-height: 400px;
-  @include padding($y: 40, $x: 20);
   text-align: center;
+  @include flex($direction: column, $align: center, $justify: center);
+  @include padding($y: 40, $x: 20);
 }
 
 .CampaignList--Loading {

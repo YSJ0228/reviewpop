@@ -1,17 +1,19 @@
 /** 예약 정보 */
-export interface ReservationDisable {
+
+export interface ReservationConfig {
   // campaignId: string;
-  notice?: string; // 몇 인분 제공 ex. 본 체험은 2인 기준으로 제공됩니다
-  maxCount: number; // 최대 몇명
-  disabled: string[]; // 안되는 날짜만 date()
-  duration?: number; // default: 30분
-  startDate: string;
-  endDate: string;
+  notice?: string; // 어드민이 입력한 서브타이틀 ex. 본 체험은 2인 기준으로 제공됩니다
+  maxCount: number; // 타임당 최대 몇명???
+  disabled: string[]; // 예약 불가능한 날짜만, YYYY-MM-DD 형식의 배열
+  // ["2025-12-05", "2025-12-06"]
+  intervalMinutes?: number; // default: 30분
+  startDate: string; // YYYY-MM-DD
+  endDate: string; //YYYY-MM-DD
 }
 
-/** 예약 불가능 시간 */
-export interface ReservationDisableTimes {
-  disabled: string[]; // 안되는 시간만 date()
+export interface ReservedDateTimes {
+  dateTimes: string[]; // 이미 예약되었거나 예약 불가능한 시간만, ISO 8601 형식의 배열
+  // ["2025-12-05T10:00:00", "2025-12-05T10:30:00", "2025-12-05T11:00:00"]
 }
 
 /** 체험 예약하기 */

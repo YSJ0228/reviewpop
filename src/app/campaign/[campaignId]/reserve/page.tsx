@@ -1,11 +1,12 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, use } from 'react';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
+import { ReserveForm } from '@features/reserve/components/ReserveForm';
 
 /**
  * 체험 방문 예약 페이지
@@ -20,7 +21,12 @@ import styles from './page.module.scss';
  * 4. [ ] 예약 정보 입력 (방문자 정보 등)
  * 5. [ ] 예약 확인 페이지로 이동 (/campaign/[id]/reserve/confirm)
  */
-export default function CampaignReservePage({ params }: { params: { campaignId: string } }) {
+export default function CampaignReservePage({
+  params,
+}: {
+  params: Promise<{ campaignId: string }>;
+}) {
+  const { campaignId } = use(params);
   usePageHeader({
     showBackButton: true,
     title: '체험 방문 예약',
@@ -29,15 +35,8 @@ export default function CampaignReservePage({ params }: { params: { campaignId: 
   return (
     <main className={styles.CampaignReservePage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
-          {/* TODO: ReserveForm 컴포넌트 추가 */}
-          <div className={styles.Placeholder}>
-            <p>체험 ID: {params.campaignId}</p>
-            <p>방문 예약하기</p>
-            <p className={styles.Todo}>
-              features/reserve/components/ReserveForm 컴포넌트를 구현하세요
-            </p>
-          </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ReserveForm campaignId={campaignId} />
         </Suspense>
       </ErrorBoundary>
     </main>

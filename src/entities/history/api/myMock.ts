@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
+import { mockReservations } from '@shared/api/mock/data/reservations';
 import { mockMyCampaigns } from '../lib/mockMyCampaigns';
 
 const mockApplications = [...mockMyCampaigns];
@@ -12,7 +13,22 @@ export const myCampaignHandlers = [
     const userId = 'kakao-1001';
 
     // 특정 사용자의 신청 내역 반환 (mockMyCampaigns 사용)
-    const myApplications = mockApplications.filter((app) => app.userId === userId);
+    // 예약 상태 동기화: mockReservations에 해당 예약이 있는지 확인
+    const myApplications = mockApplications
+      .filter((app) => app.userId === userId)
+      .map((app) => {
+        // 예약 ID가 있지만 실제 예약이 삭제된 경우
+        if (app.reservationId && !mockReservations.some((r) => r.id === app.reservationId)) {
+          return {
+            ...app,
+            isReservated: false,
+            reservationId: undefined,
+            reservationDate: undefined,
+            status: 'selected' as const,
+          };
+        }
+        return app;
+      });
 
     return HttpResponse.json({
       data: { applications: myApplications },

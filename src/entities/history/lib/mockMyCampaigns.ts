@@ -139,7 +139,7 @@ export const mockMyCampaigns: Application[] = [
   // 3. 선정 - 방문 예약 후 (Selected - After Reservation)
   {
     id: 'mock-4',
-    userId: 'kakao-1002',
+    userId: 'kakao-1001',
     campaign: {
       id: '4',
       title: '이니스프리 그린티 세럼 (선정/예약완료)',
@@ -168,6 +168,7 @@ export const mockMyCampaigns: Application[] = [
     status: 'selected',
     isReservated: true,
     reservationDate: '2025-11-28T14:00:00',
+    reservationId: 'res-004',
     createdAt: '2025-10-25T09:00:00Z',
   },
 

@@ -3,4 +3,5 @@ export interface BlogBottomSheetProps {
   onClose: () => void;
   blog?: string;
   setBlog: (v: string) => void;
+  setIsConnected: (v: boolean) => void;
 }
