@@ -1,0 +1,32 @@
+@use '@shared/styles/mixins' as *;
+
+.ReserveForm {
+  @include padding($all: 16);
+
+  &__Loading {
+    @include flex($direction: column, $align: center, $justify: center);
+    @include padding($all: 32);
+    min-height: 200px;
+    gap: 16px;
+
+    p {
+      color: var(--gray-500);
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+  &__Error {
+    @include flex($direction: column, $align: center, $justify: center);
+    @include padding($all: 32);
+    min-height: 200px;
+
+    p {
+      color: var(--red-500);
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+}

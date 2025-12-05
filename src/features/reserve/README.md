@@ -144,7 +144,7 @@ function ReserveForm({ campaignId }: { campaignId: string }) {
 ### ReserveForm 컴포넌트
 
 - [ ] 날짜 선택 UI (달력 라이브러리 또는 커스텀)
-- [ ] 시간 선택 UI (드롭다운 또는 버튼)
+- [ ] 시간 선택 UI (TimeGrid)
 - [ ] 예약 가능 시간 확인 API
 - [ ] 방문자 정보 입력 폼
 - [ ] 폼 validation

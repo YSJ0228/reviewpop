@@ -45,29 +45,6 @@ jobs:
             echo "ENVIRONMENT=staging" >> $GITHUB_ENV
           fi
 
-      # Node.js 설정 + yarn 캐시
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: yarn
-
-      # Next.js 빌드 캐시
-      - name: Cache Next.js build
-        uses: actions/cache@v4
-        with:
-          path: .next/cache
-          key: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('src/**/*.ts', 'src/**/*.tsx') }}
-          restore-keys: |
-            nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-
-            nextjs-${{ runner.os }}-
-
-      # 빌드
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Build Next.js
-        run: yarn build
-
       # AWS 인증 (OIDC)
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -99,6 +76,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
+            NEXT_PUBLIC_API_URL=/api
             NEXT_PUBLIC_USE_MOCK=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
             NEXT_PUBLIC_IS_STAGING=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
 
@@ -136,7 +114,7 @@ jobs:
           task-definition: cleaned-task-def.json
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+          wait-for-service-stability: false
 
       # 배포 상태 업데이트
       - name: Update deployment status (success)

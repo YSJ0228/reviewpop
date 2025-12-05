@@ -67,8 +67,8 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
           />
           <CampaignInfoList.AddressItem address={campaign.address} />
           <CampaignInfoList.Item label="날짜">
-            <p>{formatDate(reservationData.date, 'SHORT')}</p>
-            <p>{formatDate(reservationData.date, 'TIME')}</p>
+            <p>{formatDate(reservationData.date, 'LONG_WITH_WEEKDAY')}</p>
+            <p>{formatDate(reservationData.date, 'TIME_WITH_AMPM')}</p>
           </CampaignInfoList.Item>
           <CampaignInfoList.Item label="방문 인원">
             <p>{reservationData.personCount} 명</p>

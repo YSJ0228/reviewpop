@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 
 import { ReservationBeforeCard } from '../ReservationBeforeCard';
 import { ReservationScheduledCard } from '../ReservationScheduledCard';
-
+import { useReservationStore } from '@features/reserve/store/reservationStore';
 import type { CampaignSelectedCardFooterProps } from './types';
 
 import styles from './style.module.scss';
@@ -16,15 +16,24 @@ import styles from './style.module.scss';
 export function CampaignSelectedCardFooter({
   campaign,
   visitStatus,
+  application,
 }: CampaignSelectedCardFooterProps) {
   const router = useRouter();
+  const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
 
+  // 방문 날짜 설정 버튼 클릭 핸들러
   const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!campaign?.id) {
+
+    if (!campaign?.id || !application?.id) {
       return;
     }
+    setReservationFormData({
+      campaignId: campaign.id,
+      applicationId: application.id,
+    });
+
     router.push(`/campaign/${campaign.id}/reserve`);
   };
 

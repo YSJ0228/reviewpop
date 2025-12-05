@@ -13,6 +13,7 @@ import dayjs from './dayjs.config';
  * 용도별로 다른 포맷을 사용합니다:
  * - SHORT: 카드, 리스트 등 간결한 표시
  * - LONG: 상세 페이지, 프로필 등 명확한 표시
+ * - LONG_WITH_WEEKDAY: 예약 정보 확인을 위한 요일 표기
  * - DATETIME: 시간까지 포함된 짧은 표기
  * - FULL_DATETIME: 시간까지 포함된 긴 표기
  * - ISO: API 통신용 ISO 8601 표준 형식
@@ -29,6 +30,7 @@ import dayjs from './dayjs.config';
 export const DATE_FORMATS = {
   SHORT: 'YYYY.MM.DD',
   LONG: 'YYYY년 M월 D일',
+  LONG_WITH_WEEKDAY: 'YYYY년 M월 D일 dddd',
   DATETIME: 'YYYY.MM.DD HH:mm',
   FULL_DATETIME: 'YYYY년 M월 D일 HH:mm',
   ISO: 'YYYY-MM-DDTHH:mm:ssZ',
