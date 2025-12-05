@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Button, LoadingSpinner, ErrorBoundary } from '@shared/components';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 import { ReviewForm } from '@features/review/components/ReviewForm';
-import { useCreateReview, useReviewPageData } from '@features/review/hooks/useReview';
+import { useCreateReview, useReviewPageData } from '@entities/review';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
 import styles from './page.module.scss';

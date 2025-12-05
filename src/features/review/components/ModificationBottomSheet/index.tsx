@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { Loader } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
-import { useReviewModificationRequest } from '@entities/review/hooks/useReviewModificationRequest';
+import { useReviewModificationRequest } from '@entities/review';
 import { ButtonBar } from '@features/campaign/components/ButtonBar';
 
 import styles from './style.module.scss';
