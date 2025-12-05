@@ -1,33 +1,26 @@
 import type { Application } from '@entities/application';
+import { INITIAL_CAMPAIGNS } from '@entities/campaign/api/mock/data';
+import type { CampaignDetail } from '@entities/campaign';
+
+function getCampaign(id: string) {
+  const campaign = INITIAL_CAMPAIGNS.find((c) => c.id === id);
+  if (!campaign) throw new Error(`Campaign ${id} not found`);
+  return campaign;
+}
+
+function getReservationDate(campaign: CampaignDetail, daysAfterStart = 1) {
+  const startDate = new Date(campaign.schedule.review.start);
+  startDate.setDate(startDate.getDate() + daysAfterStart);
+  startDate.setHours(0, 0, 0, 0); // 오후 3시로 고정 (KST 00:00 -> UTC 15:00 -> Frontend Local 15:00)
+  return startDate.toISOString().split('.')[0]; // YYYY-MM-DDTHH:mm:ss 형식
+}
 
 export const mockMyCampaigns: Application[] = [
   // 1. 미선정 (Rejected)
   {
-    id: 'mock-1',
+    id: 'app-1',
     userId: 'kakao-1001',
-    campaign: {
-      id: '1',
-      title: '스타벅스 아메리카노 체험단 (미선정)',
-      brand: '스타벅스',
-      thumbnail: 'https://picsum.photos/seed/campaign1/400/300',
-      detailImages: ['https://picsum.photos/seed/campaign1-detail/800/600'],
-      description: '아쉽게도 선정되지 않은 캠페인입니다.',
-      status: 'closed',
-      category: '음료',
-      schedule: {
-        application: { start: '2025-11-01', end: '2025-11-15' },
-        winnerAnnouncement: { start: '2025-11-16', end: '2025-11-16' },
-        review: { start: '2025-11-17', end: '2025-11-30' },
-      },
-      location: { sido: '서울', sigungu: '강남구' },
-      address: '서울 강남구 테헤란로 123',
-      maxRecruitment: 15,
-      currentRecruitment: 45,
-      providedItem: '아메리카노 Tall 1잔',
-      reservationPrecaution: [],
-      keywords: ['커피'],
-      reviewMission: [],
-    },
+    campaign: getCampaign('1'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -38,30 +31,9 @@ export const mockMyCampaigns: Application[] = [
 
   // 1.5. 신청 (Pending)
   {
-    id: 'mock-2',
+    id: 'app-2',
     userId: 'kakao-1001',
-    campaign: {
-      id: '2',
-      title: '맥북 프로 M4 체험단 (신청완료)',
-      brand: 'Apple',
-      thumbnail: 'https://picsum.photos/seed/campaign-pending/400/300',
-      description: '신청이 완료되었습니다. 선정 결과를 기다려주세요.',
-      status: 'recruiting',
-      category: '전자제품',
-      schedule: {
-        application: { start: '2025-11-20', end: '2025-11-30' },
-        winnerAnnouncement: { start: '2025-12-05', end: '2025-12-05' },
-        review: { start: '2025-12-10', end: '2025-12-25' },
-      },
-      location: { sido: '전국', sigungu: '' },
-      address: '온라인 배송',
-      maxRecruitment: 10,
-      currentRecruitment: 150,
-      providedItem: '맥북 프로 M4 14인치',
-      reservationPrecaution: [],
-      keywords: ['맥북', '애플', '노트북'],
-      reviewMission: ['성능 벤치마크', '디자인 리뷰'],
-    },
+    campaign: getCampaign('2'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -72,30 +44,9 @@ export const mockMyCampaigns: Application[] = [
 
   // 2. 선정 - 방문 예약 전 (Selected - Before Reservation)
   {
-    id: 'mock-3',
+    id: 'app-3',
     userId: 'kakao-1001',
-    campaign: {
-      id: '3',
-      title: '삼성전자 갤럭시 S24 (선정/예약전)',
-      brand: '삼성전자',
-      thumbnail: 'https://picsum.photos/seed/campaign2/400/300',
-      description: '선정되었습니다! 방문 예약을 진행해주세요.',
-      status: 'inProgress',
-      category: '전자제품',
-      schedule: {
-        application: { start: '2025-11-01', end: '2025-11-15' },
-        winnerAnnouncement: { start: '2025-11-20', end: '2025-11-20' },
-        review: { start: '2025-11-25', end: '2025-12-10' },
-      },
-      location: { sido: '서울', sigungu: '서초구' },
-      address: '삼성 강남 플래그십 스토어',
-      maxRecruitment: 50,
-      currentRecruitment: 1200,
-      providedItem: '갤럭시 S24 대여',
-      reservationPrecaution: ['신분증 지참 필수'],
-      keywords: ['갤럭시', 'S24'],
-      reviewMission: ['카메라 테스트'],
-    },
+    campaign: getCampaign('3'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -104,30 +55,9 @@ export const mockMyCampaigns: Application[] = [
     createdAt: '2025-11-09T14:00:00Z',
   },
   {
-    id: 'mock-11',
+    id: 'app-4',
     userId: 'kakao-1001',
-    campaign: {
-      id: '11',
-      title: '삼성전자 갤럭시 S24 (선정/예약전)',
-      brand: '삼성전자',
-      thumbnail: 'https://picsum.photos/seed/campaign2/400/300',
-      description: '선정되었습니다! 방문 예약을 진행해주세요.',
-      status: 'inProgress',
-      category: '전자제품',
-      schedule: {
-        application: { start: '2025-11-01', end: '2025-11-15' },
-        winnerAnnouncement: { start: '2025-11-20', end: '2025-11-20' },
-        review: { start: '2025-11-25', end: '2025-12-10' },
-      },
-      location: { sido: '서울', sigungu: '서초구' },
-      address: '삼성 강남 플래그십 스토어',
-      maxRecruitment: 50,
-      currentRecruitment: 1200,
-      providedItem: '갤럭시 S24 대여',
-      reservationPrecaution: ['신분증 지참 필수'],
-      keywords: ['갤럭시', 'S24'],
-      reviewMission: ['카메라 테스트'],
-    },
+    campaign: getCampaign('4'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
@@ -138,253 +68,108 @@ export const mockMyCampaigns: Application[] = [
 
   // 3. 선정 - 방문 예약 후 (Selected - After Reservation)
   {
-    id: 'mock-4',
+    id: 'app-5',
     userId: 'kakao-1001',
-    campaign: {
-      id: '4',
-      title: '이니스프리 그린티 세럼 (선정/예약완료)',
-      brand: '이니스프리',
-      thumbnail: 'https://picsum.photos/seed/campaign3/400/300',
-      description: '방문 예약이 확정되었습니다.',
-      status: 'inProgress',
-      category: '뷰티',
-      schedule: {
-        application: { start: '2025-10-20', end: '2025-10-30' },
-        winnerAnnouncement: { start: '2025-11-01', end: '2025-11-01' },
-        review: { start: '2025-11-05', end: '2025-11-20' },
-      },
-      location: { sido: '서울', sigungu: '용산구' },
-      address: '이니스프리 용산점',
-      maxRecruitment: 100,
-      currentRecruitment: 500,
-      providedItem: '그린티 세럼 80ml',
-      reservationPrecaution: [],
-      keywords: ['뷰티', '세럼'],
-      reviewMission: ['제형 테스트'],
-    },
+    campaign: getCampaign('5'),
+    name: '김철수',
+    blogAddress: 'https://blog.naver.com/user1',
+    phoneNumber: '010-1234-5678',
+    status: 'reviewed',
+    reservationId: 'res-005',
+    reviewStatus: 'notReviewed',
+    isReservated: true,
+    reservationDate: getReservationDate(getCampaign('5')),
+    createdAt: '2025-11-05T11:00:00Z',
+  },
+
+  // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
+
+  {
+    id: 'app-6',
+    userId: 'kakao-1001',
+    campaign: getCampaign('6'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'selected',
     isReservated: true,
-    reservationDate: '2025-11-28T14:00:00',
-    reservationId: 'res-004',
+    reservationDate: getReservationDate(getCampaign('6')),
+    reservationId: 'res-006',
     createdAt: '2025-10-25T09:00:00Z',
   },
-
-  // 4. 후기 - 작성 전 (Review - Before) - 방문 완료
-  {
-    id: 'mock-5',
-    userId: 'kakao-1001',
-    campaign: {
-      id: '5',
-      title: '건강 보조 식품 체험단',
-      brand: '종근당',
-      thumbnail: '/images/temp/CampaignCardImg-01.jpg',
-      description: '종근당의 건강 보조 식품으로 활력 넘치는 하루를 시작하세요.',
-      status: 'inProgress',
-      category: '건강',
-      schedule: {
-        application: { start: '2025-11-20', end: '2025-12-10' },
-        winnerAnnouncement: { start: '2025-12-11', end: '2025-12-13' },
-        review: { start: '2025-12-14', end: '2025-12-28' },
-      },
-      location: { sido: '경기', sigungu: '성남시' },
-      address: '경기도 성남시 분당구 판교역로 235',
-      maxRecruitment: 80,
-      currentRecruitment: 25,
-      providedItem: '건강 보조 식품 1개월분 + 섭취 가이드',
-      reservationPrecaution: ['예약 시 유의사항입니다.'],
-      keywords: ['건강', '비타민'],
-      reviewMission: ['섭취 후기 작성'],
-    },
-    name: '김철수',
-    blogAddress: 'https://blog.naver.com/user1',
-    phoneNumber: '010-1234-5678',
-    status: 'reviewed',
-    reviewStatus: 'notReviewed',
-    isReservated: true,
-    reservationDate: '2025-11-15T10:00:00',
-    createdAt: '2025-11-05T11:00:00Z',
-  },
-
   // 4-1. 후기 - 체험 완료 (예약 날짜 익일)
   {
-    id: 'mock-6',
+    id: 'app-7',
     userId: 'kakao-1001',
-    campaign: {
-      id: '6',
-      title: '올리브영 스킨케어 세트 (체험완료)',
-      brand: '올리브영',
-      thumbnail: 'https://picsum.photos/seed/campaign4-1/400/300',
-      description: '체험이 완료되었습니다. 후기를 작성해주세요.',
-      status: 'inProgress',
-      category: '뷰티',
-      schedule: {
-        application: { start: '2025-11-01', end: '2025-11-10' },
-        winnerAnnouncement: { start: '2025-11-12', end: '2025-11-12' },
-        review: { start: '2025-11-15', end: '2025-11-30' },
-      },
-      location: { sido: '서울', sigungu: '강남구' },
-      address: '올리브영 강남점',
-      maxRecruitment: 20,
-      currentRecruitment: 80,
-      providedItem: '스킨케어 세트',
-      reservationPrecaution: [],
-      keywords: ['뷰티', '스킨케어'],
-      reviewMission: ['사용 후기 필수'],
-    },
+    campaign: getCampaign('7'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed',
     reviewStatus: 'visited', // 체험 완료 (예약 날짜 익일)
     isReservated: true,
-    reservationDate: '2025-11-14T14:00:00', // 어제 날짜 (익일 기준)
+    reservationDate: getReservationDate(getCampaign('7'), -1), // 어제로 설정
     createdAt: '2025-11-05T11:00:00Z',
   },
 
   // 4-2. 후기 - 체험이 종료되었지만 후기 미등록 (Review - Closed but Not Reviewed)
   {
-    id: 'mock-7',
+    id: 'app-8',
     userId: 'kakao-1001',
-    campaign: {
-      id: '7',
-      title: '그라운드 220 티셔츠 제작 체험 (종료/후기미등록)',
-      brand: '그라운드 220',
-      thumbnail: 'https://picsum.photos/seed/campaign4-2/400/300',
-      description: '체험이 종료되었지만 후기를 작성하지 않았습니다.',
-      status: 'closed', // 체험 종료
-      category: '패션',
-      schedule: {
-        application: { start: '2025-09-01', end: '2025-09-10' },
-        winnerAnnouncement: { start: '2025-09-12', end: '2025-09-12' },
-        review: { start: '2025-09-15', end: '2025-09-30' },
-      },
-      location: { sido: '서울', sigungu: '강남구' },
-      address: '그라운드 220 강남점',
-      maxRecruitment: 20,
-      currentRecruitment: 80,
-      providedItem: '티셔츠 2개 제작 체험 + 하이볼 2잔 무료 체험',
-      reservationPrecaution: [],
-      keywords: ['패션', '티셔츠'],
-      reviewMission: ['제작 과정 촬영'],
-    },
+    campaign: getCampaign('8'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed', // 후기 탭에 표시되도록
     reviewStatus: 'notReviewed', // 후기 미등록 상태
     isReservated: true,
-    reservationDate: '2025-09-18T13:00:00', // 체험 종료일
+    reservationDate: getReservationDate(getCampaign('8'), -5), // 5일 전
     createdAt: '2025-09-05T10:00:00Z',
   },
 
   // 5. 후기 - 검토 중 (Review - Pending)
   {
-    id: 'mock-8',
+    id: 'app-9',
     userId: 'kakao-1001',
-    campaign: {
-      id: '8',
-      title: 'LG 그램 체험단 (후기검토중)',
-      brand: 'LG전자',
-      thumbnail: 'https://picsum.photos/seed/campaign5/400/300',
-      description: '작성하신 후기를 검토 중입니다.',
-      status: 'inProgress',
-      category: '전자제품',
-      schedule: {
-        application: { start: '2025-10-01', end: '2025-10-15' },
-        winnerAnnouncement: { start: '2025-10-20', end: '2025-10-20' },
-        review: { start: '2025-10-25', end: '2025-11-10' },
-      },
-      location: { sido: '전국', sigungu: '' },
-      address: '온라인 배송',
-      maxRecruitment: 5,
-      currentRecruitment: 200,
-      providedItem: 'LG 그램 16인치',
-      reservationPrecaution: [],
-      keywords: ['노트북', '그램'],
-      reviewMission: ['성능 테스트'],
-    },
+    campaign: getCampaign('9'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed',
     reviewStatus: 'reviewPending', // 후기 검토 중
     isReservated: true,
-    reservationDate: '2025-10-22T14:00:00',
+    reservationDate: getReservationDate(getCampaign('9'), -3),
     createdAt: '2025-10-10T15:00:00Z',
   },
 
   // 6. 후기 - 수정 요청 (Review - Requested)
   {
-    id: 'mock-9',
+    id: 'app-10',
     userId: 'kakao-1001',
-    campaign: {
-      id: '9',
-      title: '나이키 러닝화 체험단 (수정요청)',
-      brand: '나이키',
-      thumbnail: 'https://picsum.photos/seed/campaign6/400/300',
-      description: '후기 수정 요청이 있습니다. 확인해주세요.',
-      status: 'inProgress',
-      category: '패션',
-      schedule: {
-        application: { start: '2025-10-05', end: '2025-10-15' },
-        winnerAnnouncement: { start: '2025-10-18', end: '2025-10-18' },
-        review: { start: '2025-10-20', end: '2025-11-05' },
-      },
-      location: { sido: '서울', sigungu: '강남구' },
-      address: '나이키 강남점',
-      maxRecruitment: 20,
-      currentRecruitment: 100,
-      providedItem: '러닝화 1족',
-      reservationPrecaution: [],
-      keywords: ['러닝', '나이키'],
-      reviewMission: ['착용샷 필수'],
-    },
+    campaign: getCampaign('10'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'reviewed',
     reviewStatus: 'requiredForEditing', // 후기 수정 요청
     isReservated: true,
-    reservationDate: '2025-10-25T11:00:00',
+    reservationDate: getReservationDate(getCampaign('10'), -2),
     createdAt: '2025-10-08T09:00:00Z',
+    reviewId: 'review_0',
   },
 
   // 7. 완료 (Completed) - 종료 탭
   {
-    id: 'mock-10',
+    id: 'app-11',
     userId: 'kakao-1001',
-    campaign: {
-      id: '10',
-      title: '블루보틀 원두 체험 (완료)',
-      brand: '블루보틀',
-      thumbnail: 'https://picsum.photos/seed/campaign7/400/300',
-      description: '모든 체험 과정이 완료되었습니다.',
-      status: 'closed',
-      category: '음료',
-      schedule: {
-        application: { start: '2025-09-01', end: '2025-09-10' },
-        winnerAnnouncement: { start: '2025-09-12', end: '2025-09-12' },
-        review: { start: '2025-09-15', end: '2025-09-30' },
-      },
-      location: { sido: '서울', sigungu: '성동구' },
-      address: '블루보틀 성수점',
-      maxRecruitment: 30,
-      currentRecruitment: 150,
-      providedItem: '싱글 오리진 원두 200g',
-      reservationPrecaution: [],
-      keywords: ['커피', '원두'],
-      reviewMission: ['홈카페 영상'],
-    },
+    campaign: getCampaign('11'),
     name: '김철수',
     blogAddress: 'https://blog.naver.com/user1',
     phoneNumber: '010-1234-5678',
     status: 'completed',
     reviewStatus: 'reviewed', // 체험 종료 (종료 탭)
     isReservated: true,
-    reservationDate: '2025-09-20T13:00:00',
+    reservationDate: getReservationDate(getCampaign('11'), -10),
     createdAt: '2025-09-05T10:00:00Z',
   },
 ];

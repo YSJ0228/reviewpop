@@ -15,9 +15,15 @@ interface ReviewFormProps {
     setValue: (value: string) => void;
     errorMsg: string;
   };
+  onValidationChange?: (isValid: boolean) => void;
 }
 
-export function ReviewForm({ campaign, application, reviewLinkInput }: ReviewFormProps) {
+export function ReviewForm({
+  campaign,
+  application,
+  reviewLinkInput,
+  onValidationChange,
+}: ReviewFormProps) {
   const visitDate = application.reservationDate
     ? formatDate(application.reservationDate, 'MMDD_DDDD_LONG_WITH_TIME')
     : '';
@@ -34,7 +40,7 @@ export function ReviewForm({ campaign, application, reviewLinkInput }: ReviewFor
           <p>{visitDate}</p>
         </CampaignInfoList.Item>
       </CampaignInfoList.Main>
-      <ReviewFormLink input={reviewLinkInput} />
+      <ReviewFormLink input={reviewLinkInput} onValidationChange={onValidationChange} />
     </div>
   );
 }
