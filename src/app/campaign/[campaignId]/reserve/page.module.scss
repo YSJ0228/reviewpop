@@ -1,7 +1,7 @@
 @use '@shared/styles/mixins' as *;
 
 .CampaignReservePage {
-  @include padding($y: 20, $x: 16);
+  // @include padding($y: 20, $x: 16);
 
   min-height: 100vh;
 

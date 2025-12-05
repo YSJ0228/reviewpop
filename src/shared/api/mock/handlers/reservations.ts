@@ -7,10 +7,41 @@
 import { http, HttpResponse } from 'msw';
 
 import type { ApiResponse } from '@shared/api/types/common.types';
-import type { Reservation, PostReservation } from '@entities/reservation';
-import { mockReservations } from '../data/reservations';
+import type {
+  Reservation,
+  PostReservation,
+  ReservationConfig,
+  ReservedDateTimes,
+} from '@entities/reservation';
+import {
+  mockReservations,
+  mockReservationConfig,
+  mockReservedDateTimes,
+} from '@shared/api/mock/data/reservations';
 
 export const reservationHandlers = [
+  /**
+   * 예약 설정 조회
+   * GET /api/reservations/:campaignId/config
+   */
+  http.get('/api/reservations/:campaignId/config', () => {
+    return HttpResponse.json({
+      success: true,
+      data: mockReservationConfig,
+    } satisfies ApiResponse<ReservationConfig>);
+  }),
+
+  /**
+   * 예약된 시간대 조회
+   * GET /api/reservations/:campaignId/reserved-times
+   */
+  http.get('/api/reservations/:campaignId/reserved-times', () => {
+    return HttpResponse.json({
+      success: true,
+      data: mockReservedDateTimes,
+    } satisfies ApiResponse<ReservedDateTimes>);
+  }),
+
   /**
    * 예약 목록 조회 (나의 예약)
    * GET /api/reservations
@@ -114,74 +145,55 @@ export const reservationHandlers = [
    * 예약 수정
    * PATCH /api/reservations/:id
    */
-  // http.patch('/api/reservations/:id', async ({ params, request }) => {
-  //   const reservationId = params.id as string;
-  //   const body = (await request.json()) as UpdateReservationRequest;
+  http.patch('/api/reservations/:id', async ({ params, request }) => {
+    const reservationId = params.id as string;
+    type UpdateReservationRequest = Pick<Reservation, 'date' | 'personCount'>;
+    const body = (await request.json()) as UpdateReservationRequest;
 
-  //   const reservationIndex = mockReservations.findIndex((r) => r.id === reservationId);
+    const reservationIndex = mockReservations.findIndex((r) => r.id === reservationId);
 
-  //   if (reservationIndex === -1) {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '예약을 찾을 수 없습니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 404 },
-  //     );
-  //   }
+    if (reservationIndex === -1) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '예약을 찾을 수 없습니다.',
+        } satisfies ApiResponse<never>,
+        { status: 404 },
+      );
+    }
 
-  //   // 예약 수정 (pending 상태에서만 가능)
-  //   const reservation = mockReservations[reservationIndex];
-  //   if (reservation.status !== 'pending') {
-  //     return HttpResponse.json(
-  //       {
-  //         success: false,
-  //         error: '대기 중인 예약만 수정할 수 있습니다.',
-  //       } satisfies ApiResponse<never>,
-  //       { status: 400 },
-  //     );
-  //   }
+    // 업데이트
+    mockReservations[reservationIndex] = {
+      ...mockReservations[reservationIndex],
+      ...body,
+    };
 
-  //   // 업데이트
-  //   mockReservations[reservationIndex] = {
-  //     ...reservation,
-  //     ...body,
-  //     updatedAt: toISO(),
-  //   };
-
-  //   return HttpResponse.json({
-  //     success: true,
-  //     data: mockReservations[reservationIndex],
-  //   } satisfies ApiResponse<Reservation>);
-  // }),
+    return HttpResponse.json({
+      success: true,
+      data: mockReservations[reservationIndex],
+    } satisfies ApiResponse<Reservation>);
+  }),
 
   /**
    * 예약 취소
    * DELETE /api/reservations/:id
    */
-  http.delete('/api/reservations/:id', () => {
-    // const reservationId = params.id as string;
-    // const reservationIndex = mockReservations.findIndex((r) => r.id === reservationId);
+  http.delete('/api/reservations/:id', ({ params }) => {
+    const reservationId = params.id as string;
+    const reservationIndex = mockReservations.findIndex((r) => r.id === reservationId);
 
-    // if (reservationIndex === -1) {
-    //   return HttpResponse.json(
-    //     {
-    //       success: false,
-    //       error: '예약을 찾을 수 없습니다.',
-    //     } satisfies ApiResponse<never>,
-    //     { status: 404 },
-    //   );
-    // }
+    if (reservationIndex === -1) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '예약을 찾을 수 없습니다.',
+        } satisfies ApiResponse<never>,
+        { status: 404 },
+      );
+    }
 
-    // const reservation = mockReservations[reservationIndex];
-
-    // // 예약 취소
-    // mockReservations[reservationIndex] = {
-    //   ...reservation,
-    //   status: 'cancelled',
-    //   cancelledAt: toISO(),
-    //   updatedAt: toISO(),
-    // };
+    // 예약 취소 (배열에서 제거)
+    mockReservations.splice(reservationIndex, 1);
 
     return HttpResponse.json({
       success: true,
