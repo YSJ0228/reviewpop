@@ -18,6 +18,7 @@ import {
   mockReservationConfig,
   mockReservedDateTimes,
 } from '@shared/api/mock/data/reservations';
+import { mockApplications } from '../data/applications';
 
 export const reservationHandlers = [
   /**
@@ -72,24 +73,24 @@ export const reservationHandlers = [
    * 예약 상세 조회
    * GET /api/reservations/:id
    */
-  //   http.get('/api/reservations/:id', ({ params }) => {
-  //     const reservation = findReservationByApplicationId(params.id as string);
+  http.get('/api/reservations/:id', ({ params }) => {
+    const reservation = mockReservations.find((r) => r.id === params.id);
 
-  //     if (!reservation) {
-  //       return HttpResponse.json(
-  //         {
-  //           success: false,
-  //           error: '예약을 찾을 수 없습니다.',
-  //         } satisfies ApiResponse<never>,
-  //         { status: 404 },
-  //       );
-  //     }
+    if (!reservation) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '예약을 찾을 수 없습니다.',
+        } satisfies ApiResponse<never>,
+        { status: 404 },
+      );
+    }
 
-  //     return HttpResponse.json({
-  //       success: true,
-  //       data: reservation,
-  //     } satisfies ApiResponse<Reservation>);
-  //   }),
+    return HttpResponse.json({
+      success: true,
+      data: reservation,
+    } satisfies ApiResponse<Reservation>);
+  }),
 
   /**
    * 예약 생성
@@ -134,6 +135,16 @@ export const reservationHandlers = [
     };
 
     mockReservations.push(newReservation);
+
+    // Update application status
+    const application = mockApplications.find((app) => app.id === body.applicationId);
+    if (application) {
+      application.isReservated = true;
+      application.reservationDate = body.date;
+      application.reservationId = newReservation.id;
+      application.status = 'reviewed'; // 예약 완료 시 reviewed 상태로 변경 (리뷰 작성 가능 상태)
+      application.reviewStatus = 'notReviewed';
+    }
 
     return HttpResponse.json({
       success: true,
