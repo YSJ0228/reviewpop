@@ -35,7 +35,7 @@ export function CampaignInfoSection({ campaign }: CampaignInfoSectionProps) {
             onClick={handleAddressClick}
             aria-label={`${campaign.address} 네이버 지도에서 보기`}
           >
-            <Image src="/images/icons/Location.svg" alt="위치 아이콘" width={24} height={24} />
+            <Image src="/images/icons/Location.svg" alt="위치 아이콘" width={32} height={32} />
           </button>
           <div className={styles.Content}>
             <div className={styles.Title}>{campaign.brand || '위치 정보'}</div>
@@ -54,7 +54,7 @@ export function CampaignInfoSection({ campaign }: CampaignInfoSectionProps) {
       {/* 체험 유형 */}
       <div className={styles.InfoItem}>
         <div className={`${styles.Icon} ${styles.IconShop}`}>
-          <Image src="/images/icons/Shop.svg" alt="방문 체험 아이콘" width={24} height={24} />
+          <Image src="/images/icons/Shop.svg" alt="방문 체험 아이콘" width={32} height={32} />
         </div>
         <div className={styles.Content}>
           <div className={styles.Title}>방문 체험</div>
