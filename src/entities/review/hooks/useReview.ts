@@ -39,13 +39,14 @@ export const useCreateReview = (onSuccessCallback?: () => void) => {
  * @param id - 리뷰 ID
  * @returns 리뷰 재등록 mutation 객체
  */
-export const useUpdateReview = (id: string) => {
+export const useUpdateReview = (id: string, onSuccessCallback?: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: PostReview) => updateReview(id, data),
     onSuccess: () => {
       toast.success('후기가 재등록되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
+      onSuccessCallback?.();
     },
     onError: (error: Error) => {
       const message = error.message || '후기 재등록에 실패했습니다.';

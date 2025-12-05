@@ -147,6 +147,7 @@ export const mockMyCampaigns: Application[] = [
     isReservated: true,
     reservationDate: '2025-10-25T11:00:00',
     createdAt: '2025-10-08T09:00:00Z',
+    reviewId: 'review_0',
   },
 
   // 7. 완료 (Completed) - 종료 탭

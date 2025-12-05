@@ -15,6 +15,7 @@ export function ModificationBottomSheet({
   onClose,
   reviewId,
   campaignId,
+  applicationId,
 }: ModificationBottomSheetProps) {
   const {
     data: reviewModification,
@@ -22,7 +23,6 @@ export function ModificationBottomSheet({
     error,
   } = useReviewModificationRequest(reviewId, opened);
   const router = useRouter();
-  //TODO: canpaignId, reviewId 어디서 받아오는지 결정
 
   return (
     <BottomSheet opened={opened} onClose={onClose} title="수정 요청 내용">
@@ -57,7 +57,11 @@ export function ModificationBottomSheet({
           <ButtonBar
             variant="primary"
             text="후기 재등록"
-            onClick={() => router.push(`/campaign/${campaignId}/review/write`)}
+            onClick={() =>
+              router.push(
+                `/campaign/${campaignId}/review/write?applicationId=${applicationId}&reviewId=${reviewId}`,
+              )
+            }
           />
         </div>
       )}

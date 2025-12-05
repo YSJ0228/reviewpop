@@ -50,6 +50,7 @@ export function CampaignReviewedCard({ application }: CampaignReviewedCardProps)
           campaignStatus={campaign.status}
           campaignId={campaign.id}
           applicationId={application.id}
+          reviewId={application.reviewId}
         />
       )}
     </>
