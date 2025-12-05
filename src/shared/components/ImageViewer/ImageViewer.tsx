@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 import { Zoom, Navigation } from 'swiper/modules';
+import { IconClose } from '@pop-ui/foundation';
 
 import 'swiper/css';
 import 'swiper/css/zoom';
@@ -99,7 +100,7 @@ export function ImageViewer({ images, initialIndex = 0, isOpen, onClose }: Image
         </div>
 
         <button className={styles.CloseButton} onClick={onClose} aria-label="닫기">
-          ✕
+          <IconClose />
         </button>
       </div>
 

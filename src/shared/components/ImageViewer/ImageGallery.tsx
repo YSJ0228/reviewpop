@@ -85,7 +85,9 @@ export function ImageGallery({
                   fill
                   className={styles.Image}
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  quality={90}
+                  quality={85}
+                  priority={index === 0}
+                  loading={index === 0 ? 'eager' : 'lazy'}
                 />
                 {showViewAllButton && (
                   <button
