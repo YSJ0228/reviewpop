@@ -1,18 +1,14 @@
 import { apiClient } from '@shared/api/client';
 
 import { ReviewRequest } from '../types/review.types';
-
-interface ReviewModificationRequestResponse {
-  data: ReviewRequest;
-  success: boolean;
-}
+import { ApiResponse, unwrapApiResponse } from '@shared/api/types/common.types';
 
 export async function getReviewModificationRequest(reviewId: string) {
-  const response = await apiClient.get<ReviewModificationRequestResponse>(
-    `/reviews/${reviewId}/modification-request`,
+  const response = await apiClient.get<ApiResponse<ReviewRequest>>(
+    `/reviews/${reviewId}/edit-request`,
     {
       withCredentials: true,
     },
   );
-  return response.data.data;
+  return unwrapApiResponse(response.data);
 }

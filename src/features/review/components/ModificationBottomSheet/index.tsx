@@ -4,7 +4,7 @@ import { Loader } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { useReviewModificationRequest } from '@entities/review/hooks/useReviewModificationRequest';
-import { ButtonBar } from '@features/campaign/components/ButtonBar';
+import { Button } from '@shared/components';
 
 import styles from './style.module.scss';
 
@@ -25,7 +25,20 @@ export function ModificationBottomSheet({
   //TODO: canpaignId, reviewId 어디서 받아오는지 결정
 
   return (
-    <BottomSheet opened={opened} onClose={onClose} title="수정 요청 내용">
+    <BottomSheet
+      opened={opened}
+      onClose={onClose}
+      title="수정 요청 내용"
+      footer={
+        <Button
+          variant="primary"
+          fullWidth
+          onClick={() => router.push(`/campaign/${campaignId}/review/write`)}
+        >
+          후기 재등록
+        </Button>
+      }
+    >
       {isLoading && <Loader />}
       {error && <div>데이터를 불러올 수 없습니다.</div>}
       {reviewModification && (
@@ -54,11 +67,6 @@ export function ModificationBottomSheet({
               ))}
             </ul>
           </div>
-          <ButtonBar
-            variant="primary"
-            text="후기 재등록"
-            onClick={() => router.push(`/campaign/${campaignId}/review/write`)}
-          />
         </div>
       )}
     </BottomSheet>
