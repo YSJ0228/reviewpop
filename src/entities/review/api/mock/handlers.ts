@@ -42,7 +42,7 @@ export const reviewHandlers = [
   }),
 
   // 리뷰 수정 요청
-  http.get('/api/reviews/:id/edit-request', () => {
+  http.get('/api/reviews/:id/modification-request', () => {
     return HttpResponse.json({ data: createEditRequest(), success: true });
   }),
 
