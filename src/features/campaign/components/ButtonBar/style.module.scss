@@ -2,10 +2,10 @@
 .ButtonBar {
   position: fixed;
   bottom: 0;
-  left: 0;
-  z-index: 100;
-
-  @include size($width: 100%);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-sticky);
+  @include size($width: 100%, $max-width: 480);
   @include padding($all: 16);
   @include flex($justify: center, $align: center);
 }

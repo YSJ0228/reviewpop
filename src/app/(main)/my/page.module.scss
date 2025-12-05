@@ -8,23 +8,6 @@
   background: var(--gray-50);
 }
 
-.MyPage__Header {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  z-index: 10;
-  @include padding($all: 20);
-  border-bottom: 1px solid var(--gray-200);
-
-  h1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--gray-900);
-    @include margin($all: 0);
-    line-height: 1.4;
-  }
-}
-
 .MyPage__Main {
   flex: 1;
   display: flex;

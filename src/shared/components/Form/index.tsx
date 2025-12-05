@@ -10,6 +10,7 @@ import { CautionBottomSheet } from '@features/campaign/components/CautionBottomS
 
 import { LabeledInput } from '../LabeledInput';
 import { WebButton } from '../WebButton';
+import { NAME, PHONENUMBER, TEXTAREA } from './constants';
 
 import { FormProps } from './types';
 
@@ -25,6 +26,9 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
   const [cautionOpened, { open: cautionOpen, close: cautionClose }] = useDisclosure();
 
   const [text, setText] = useState<string>('');
+
+  const [isConnected, setIsConnected] = useState<boolean>(user?.blogAddress ? true : false);
+
   const formData = {
     name: nameInput.value,
     phoneNumber: phoneInput.value,
@@ -42,16 +46,26 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
 
   return (
     <div className={styles.Form}>
-      <WebButton label="네이버 블로그 주소" buttonType="connect" onClick={blogOpen} text={blog} />
-      <LabeledInput label="이름" placeholder="이름 입력" input={nameInput} />
-      <LabeledInput label="전화번호" placeholder="01012345678" input={phoneInput} />
+      <WebButton
+        label="네이버 블로그 주소"
+        buttonType="connect"
+        onClick={blogOpen}
+        text={blog}
+        isConnected={isConnected}
+      />
+      <LabeledInput label={NAME.LABEL} placeholder={NAME.PLACEHOLDER} input={nameInput} />
+      <LabeledInput
+        label={PHONENUMBER.LABEL}
+        placeholder={PHONENUMBER.PLACEHOLDER}
+        input={phoneInput}
+      />
       {showTextArea && (
         <TextArea
-          label="전달하고 싶은 한마디(선택)"
+          label={TEXTAREA.LABEL}
           maxTextCount={300}
           text={text}
           setText={setText}
-          placeholder="체험단에 선정되어야 할 이유가 있다면 알려주세요!"
+          placeholder={TEXTAREA.PLACEHOLDER}
         />
       )}
       <ButtonBar
@@ -60,7 +74,13 @@ export function Form({ onClick, showTextArea = true, buttonText = '확인' }: Fo
         onClick={handleClick}
         disabled={!blog || !!nameInput.errorMsg || !!phoneInput.errorMsg}
       />
-      <BlogBottomSheet opened={blogOpened} onClose={blogClose} blog={blog} setBlog={setBlog} />
+      <BlogBottomSheet
+        opened={blogOpened}
+        onClose={blogClose}
+        blog={blog}
+        setBlog={setBlog}
+        setIsConnected={setIsConnected}
+      />
       <CautionBottomSheet opened={cautionOpened} onClose={cautionClose} formData={formData} />
     </div>
   );

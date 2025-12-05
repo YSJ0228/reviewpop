@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BlogReview } from '@entities/review/types/review.types';
-import { reviewApi } from '@entities/review/api/reviewApi';
+import { getReviews } from '@entities/review/api/reviewApi';
 
 export function useBlogReviews(campaignId: string) {
   const [reviews, setReviews] = useState<BlogReview[]>([]);
@@ -10,7 +10,7 @@ export function useBlogReviews(campaignId: string) {
     const fetchReviews = async () => {
       try {
         setIsLoading(true);
-        const data = await reviewApi.getReviews({ campaignId, size: 100 }); // 전체 리뷰를 가져오기 위해 넉넉하게 요청
+        const data = await getReviews({ campaignId, size: 100 }); // 전체 리뷰를 가져오기 위해 넉넉하게 요청
         setReviews(data.reviews);
       } catch (error) {
         console.error('Failed to fetch reviews:', error);

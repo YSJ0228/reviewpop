@@ -58,7 +58,11 @@ export function CampaignReviewedCardFooter({
   if (reviewStatus === 'requiredForEditing') {
     return (
       <footer className={styles.CampaignReviewedCardFooter__Wrapper}>
-        <ReviewEditRequestCard campaignId={campaignId} reviewId={reviewId} />
+        <ReviewEditRequestCard
+          campaignId={campaignId}
+          reviewId={reviewId}
+          applicationId={applicationId}
+        />
       </footer>
     );
   }

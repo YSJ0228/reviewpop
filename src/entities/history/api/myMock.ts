@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { mockReservations } from '@shared/api/mock/data/reservations';
 import { mockMyCampaigns } from '../lib/mockMyCampaigns';
 
-const mockApplications = [...mockMyCampaigns];
+export const mockApplications = [...mockMyCampaigns];
 
 export const myCampaignHandlers = [
   // 체험 목록 조회
