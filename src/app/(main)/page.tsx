@@ -5,12 +5,12 @@ import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { useInfiniteCampaigns, useCampaigns } from '@entities/campaign/hooks/useCampaigns';
-import { CampaignTab } from '@features/campaign/components/CampaignTab';
+import { CampaignTab } from '@features/main/components/CampaignTab';
 import {
   BeforeRecruitingCampaignList,
   RecruitingCampaignList,
   CompletedCampaignList,
-} from '@features/campaign';
+} from '@features/main';
 
 import { CampaignTabKey } from '@entities/campaign/types/campaign.types';
 
@@ -80,7 +80,7 @@ export default function Home() {
   return (
     <main className={styles.HomeContainer}>
       <ErrorBoundary>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader style={{ margin: 'auto' }} />}>
           <CampaignTab
             selectedTab={activeTab}
             onTabClick={handleScroll}

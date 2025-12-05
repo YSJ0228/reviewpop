@@ -4,7 +4,7 @@
   @include padding($y: 24, $x: 16);
   @include flex($direction: column, $gap: 12);
   h2 {
-    @include font($size: 16, $weight: 700, $color: #333);
+    @include font($size: 16, $weight: 700, $color: var(--color-gray-900));
   }
 
   ul {
