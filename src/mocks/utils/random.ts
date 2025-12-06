@@ -21,7 +21,11 @@ export const getRandomElement = <T>(array: T[]): T => {
  * 배열에서 랜덤한 요소 여러 개 반환 (중복 허용 X)
  */
 export const getRandomElements = <T>(array: T[], count: number): T[] => {
-  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  const shuffled = [...array];
+  for (let i = array.length - 1; i > 0; i--) {
+    const pick = Math.floor(Math.random() * (i + 1));
+    [shuffled[pick], shuffled[i]] = [shuffled[i], shuffled[pick]];
+  }
   return shuffled.slice(0, count);
 };
 
