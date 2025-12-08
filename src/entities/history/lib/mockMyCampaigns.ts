@@ -26,7 +26,7 @@ export const mockMyCampaigns: Application[] = [
     phoneNumber: '010-1234-5678',
     status: 'rejected',
     isReservated: false,
-    createdAt: '2025-12-05T10:00:00Z',
+    createdAt: '2025-12-01T10:00:00Z',
   },
 
   // 1.5. 신청 (Pending)

@@ -42,7 +42,7 @@ export const mockApplications: Application[] = [
     name: '김철수',
     blogAddress: 'https://blog.naver.com/kakao-1001',
     phoneNumber: '010-1234-5678',
-    createdAt: '2025-12-05T10:00:00Z',
+    createdAt: '2025-12-01T10:00:00Z',
   },
   {
     id: 'app-2',
