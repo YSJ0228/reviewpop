@@ -92,7 +92,7 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
   const handleCancelApplication = async () => {
     await deleteMyCampaign(campaign.id);
     toast.success('신청이 취소되었습니다.');
-    router.refresh();
+    router.push('/');
   };
 
   // 예약 취소 핸들러
