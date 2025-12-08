@@ -7,8 +7,14 @@
   border-radius: 12px;
   border: 1px solid var(--color-gray-100);
 
+  @include font($size: 14px, $weight: 500, $color: var(--color-gray-900));
+
   span {
     @include font($weight: 700);
+  }
+
+  &__Content {
+    @include flex($direction: column, $align: flex-start, $gap: 4px);
   }
 
   &__Card {
@@ -65,10 +71,6 @@
         background: var(--color-white);
       }
     }
-  }
-
-  &__Content {
-    @include flex($direction: column, $align: flex-start, $gap: 4px);
   }
 }
 
