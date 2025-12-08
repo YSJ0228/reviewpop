@@ -64,7 +64,7 @@ function AddressItem({ address }: AddressItemProps) {
           onClick={() => handleNaverMapClick(address)}
           aria-label="네이버 지도에서 위치 보기"
         >
-          <Image src="/images/NaverMap.png" alt="네이버 맵" width={20} height={20} />
+          <Image src="/images/NaverMapLogo.svg" alt="네이버 맵" width={20} height={20} />
         </button>
       </div>
     </div>
