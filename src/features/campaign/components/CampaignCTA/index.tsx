@@ -105,11 +105,10 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
     if (!application) return;
 
     // 예약 데이터 초기화 (캠페인 ID, 신청 ID)
-    // 날짜/시간 등은 ReserveForm에서 초기화됨
     useReservationStore.getState().setReservationFormData({
       campaignId: campaign.id,
       applicationId: application.id,
-      personCount: 1, // 기본값
+      personCount: 1,
     });
 
     router.push(`/campaign/${campaign.id}/reserve`);
