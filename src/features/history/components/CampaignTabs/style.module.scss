@@ -93,6 +93,11 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 
+    > div[role='tabpanel'] {
+      @include flex($direction: column);
+      min-height: 100%;
+    }
+
     // 스크롤바 스타일링 (선택사항)
     &::-webkit-scrollbar {
       width: 6px;
@@ -112,11 +117,15 @@
     }
   }
 
+  &__ContentWrapper {
+    @include flex($direction: column);
+  }
+
   &__LinkContainer {
-    @include flex($direction: column, $justify: center, $align: flex-end);
-    height: 50px;
+    min-height: 50px;
     align-self: stretch;
     padding: 0 16px;
+    @include flex($direction: column, $justify: center, $align: flex-end);
   }
 
   &__RejectedLink {

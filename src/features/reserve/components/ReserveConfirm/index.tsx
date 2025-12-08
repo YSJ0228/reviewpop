@@ -1,11 +1,10 @@
-import { useReserve } from '@features/reserve/hooks/useReserve';
+import { LoadingSpinner, CampaignInfoList } from '@shared/components';
+import { formatDate } from '@shared/lib/date';
+import { useCreateReservation, useUpdateReservation } from '@entities/reservation';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
-import { mockReservationData } from '@features/reserve/store/mockReservationData';
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { LoadingSpinner, CampaignInfoList } from '@shared/components';
-import { formatDate } from '@shared/lib/date';
 
 import { ReservePrecautions } from './ReservePrecautions';
 import { ReserveAgreement } from './ReserveAgreement';
@@ -13,10 +12,15 @@ import { ReserveAgreement } from './ReserveAgreement';
 import styles from './style.module.scss';
 
 export function ReserveConfirm({ campaignId }: { campaignId: string }) {
-  const reservationData = useReservationStore(
-    (state) => state.reservationData ?? mockReservationData,
+  const reservationData = useReservationStore((state) => state.reservationData);
+  const { mutate: createReservation, isPending: isCreatePending } =
+    useCreateReservation(campaignId);
+
+  const { mutate: updateReservation, isPending: isUpdatePending } = useUpdateReservation(
+    campaignId,
+    reservationData?.reservationId || undefined,
   );
-  const { mutate: createReservation } = useReserve(campaignId);
+
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isUserLoading } = useUserInfo();
   const { data: application, isLoading: isApplicationLoading } = useApplicationDetails(
@@ -35,12 +39,18 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
     return <div>필요한 정보를 불러올 수 없습니다.</div>;
 
   const handleConfirm = () => {
-    createReservation({
+    const payload = {
       campaignId: reservationData.campaignId,
       applicationId: reservationData.applicationId,
       personCount: reservationData.personCount,
       date: reservationData.date,
-    });
+    };
+
+    if (reservationData.reservationId) {
+      updateReservation(payload);
+    } else {
+      createReservation(payload);
+    }
   };
 
   return (
@@ -54,8 +64,8 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
           />
           <CampaignInfoList.AddressItem address={campaign.address} />
           <CampaignInfoList.Item label="날짜">
-            <p>{formatDate(reservationData.date, 'SHORT')}</p>
-            <p>{formatDate(reservationData.date, 'TIME')}</p>
+            <p>{formatDate(reservationData.date, 'LONG_WITH_WEEKDAY')}</p>
+            <p>{formatDate(reservationData.date, 'TIME_WITH_AMPM')}</p>
           </CampaignInfoList.Item>
           <CampaignInfoList.Item label="방문 인원">
             <p>{reservationData.personCount} 명</p>
@@ -67,7 +77,7 @@ export function ReserveConfirm({ campaignId }: { campaignId: string }) {
         </CampaignInfoList.Main>
         <ReservePrecautions precautions={campaign.reservationPrecaution} />
       </div>
-      <ReserveAgreement onConfirm={handleConfirm} />
+      <ReserveAgreement onConfirm={handleConfirm} disabled={isCreatePending || isUpdatePending} />
     </div>
   );
 }

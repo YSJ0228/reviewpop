@@ -1,6 +1,6 @@
 @use '@shared/styles/mixins' as *;
 
 .UserPage {
-  min-height: 100vh;
+  min-height: calc(100vh - 48px);
   @include padding($all: 16); // TODO: 실제 디자인에 맞게 스타일 수정
 }

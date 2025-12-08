@@ -7,7 +7,7 @@
 
 .ListContainer {
   @include flex($direction: column, $gap: 32);
-  margin-top: 8px;
+  margin-top: calc(8px + 52px); // gap + tab
 }
 
 .ScrollSection {

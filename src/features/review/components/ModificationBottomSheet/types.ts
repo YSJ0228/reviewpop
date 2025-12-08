@@ -3,4 +3,5 @@ export interface ModificationBottomSheetProps {
   onClose: () => void;
   reviewId: string;
   campaignId: string;
+  applicationId?: string;
 }

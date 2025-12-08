@@ -32,6 +32,7 @@ export function CampaignReviewedCard({ application }: CampaignReviewedCardProps)
     <>
       <CampaignCardWrapper
         campaign={campaign}
+        isSelected={true}
         statusLabel={
           <CampaignStatusLabel
             type="reviewed"
@@ -49,6 +50,7 @@ export function CampaignReviewedCard({ application }: CampaignReviewedCardProps)
           campaignStatus={campaign.status}
           campaignId={campaign.id}
           applicationId={application.id}
+          reviewId={application.reviewId}
         />
       )}
     </>

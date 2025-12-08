@@ -3,8 +3,8 @@ import { useRouter } from 'next/navigation';
 import { Loader } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
-import { useReviewModificationRequest } from '@entities/review/hooks/useReviewModificationRequest';
 import { Button } from '@shared/components';
+import { useReviewModificationRequest } from '@entities/review';
 
 import styles from './style.module.scss';
 
@@ -15,6 +15,7 @@ export function ModificationBottomSheet({
   onClose,
   reviewId,
   campaignId,
+  applicationId,
 }: ModificationBottomSheetProps) {
   const {
     data: reviewModification,
@@ -22,7 +23,6 @@ export function ModificationBottomSheet({
     error,
   } = useReviewModificationRequest(reviewId, opened);
   const router = useRouter();
-  //TODO: canpaignId, reviewId 어디서 받아오는지 결정
 
   return (
     <BottomSheet
@@ -33,7 +33,11 @@ export function ModificationBottomSheet({
         <Button
           variant="primary"
           fullWidth
-          onClick={() => router.push(`/campaign/${campaignId}/review/write`)}
+          onClick={() =>
+            router.push(
+              `/campaign/${campaignId}/review/write?applicationId=${applicationId}&reviewId=${reviewId}`,
+            )
+          }
         >
           후기 재등록
         </Button>

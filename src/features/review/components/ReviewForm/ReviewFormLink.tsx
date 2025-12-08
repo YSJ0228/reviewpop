@@ -7,6 +7,7 @@ interface ReviewFormLinkProps {
     setValue: (value: string) => void;
     errorMsg: string;
   };
+  onValidationChange?: (isValid: boolean) => void;
 }
 
 const MESSAGES = {
@@ -14,7 +15,7 @@ const MESSAGES = {
   VALID_LINK: '올바른 링크입니다.',
 } as const;
 
-export function ReviewFormLink({ input }: ReviewFormLinkProps) {
+export function ReviewFormLink({ input, onValidationChange }: ReviewFormLinkProps) {
   const [validationState, setValidationState] = useState<{
     type: 'error' | 'success' | 'idle';
     message: string;
@@ -23,20 +24,24 @@ export function ReviewFormLink({ input }: ReviewFormLinkProps) {
   const handleCheck = () => {
     if (!input.value) {
       setValidationState({ type: 'error', message: MESSAGES.EMPTY_LINK });
+      onValidationChange?.(false);
       return;
     }
 
     if (input.errorMsg) {
       setValidationState({ type: 'idle', message: '' });
+      onValidationChange?.(false);
       return;
     }
 
     setValidationState({ type: 'success', message: MESSAGES.VALID_LINK });
+    onValidationChange?.(true);
   };
 
   const handleValueChange = (val: string) => {
     input.setValue(val);
     setValidationState({ type: 'idle', message: '' });
+    onValidationChange?.(false);
   };
 
   return (

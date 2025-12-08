@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { diff, now } from '@shared/lib/date';
 
 import type { Campaign } from '@entities/campaign/types/campaign.types';
+import StatusBadge from '@features/campaign/components/StatusBadge';
 
 import styles from './style.module.scss';
 
@@ -17,8 +18,10 @@ export interface CampaignStatusBarProps {
  * - 남은 일수 표시
  * - 신청 인원 수 표시
  * - 선정 확률 배지 표시
+ * - 종료된 캠페인: 체험 인원 수 표시
  */
 export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
+  const isCompleted = campaign.status === 'completed' || campaign.status === 'closed';
   const deadline = campaign.schedule.application.end;
 
   // 남은 시간 계산
@@ -40,6 +43,17 @@ export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
       remainingTimeText: timeText,
     };
   }, [deadline]);
+
+  // 종료된 캠페인일 때 체험 인원 수 표시
+  if (isCompleted) {
+    const experienceCount = campaign.selectedCount || 0;
+    return (
+      <div className={styles.CampaignStatusBar} role="status" aria-live="polite">
+        <span className={styles.ExperienceCount}>{experienceCount}명이 체험했어요</span>
+        <StatusBadge campaign={campaign} />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.CampaignStatusBar} role="status" aria-live="polite">

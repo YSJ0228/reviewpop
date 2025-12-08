@@ -1,18 +1,27 @@
 import { useState, useEffect } from 'react';
 import { BlogReview } from '@entities/review/types/review.types';
-import { mockBlogReviews } from '@entities/campaign/lib/mockBlogReviews';
+import { getReviews } from '@entities/review/api/reviewApi';
 
 export function useBlogReviews(campaignId: string) {
   const [reviews, setReviews] = useState<BlogReview[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const filteredReviews = mockBlogReviews.filter((review) => review.campaignId === campaignId);
-    function handleReview() {
-      setReviews(filteredReviews);
-      setIsLoading(false);
+    const fetchReviews = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getReviews({ campaignId, size: 100 }); // 전체 리뷰를 가져오기 위해 넉넉하게 요청
+        setReviews(data.reviews);
+      } catch (error) {
+        console.error('Failed to fetch reviews:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (campaignId) {
+      fetchReviews();
     }
-    handleReview();
   }, [campaignId]);
 
   return { data: reviews, isLoading };

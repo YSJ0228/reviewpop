@@ -1,7 +1,7 @@
 import { CampaignInfoList } from '@shared/components';
+import { ReservationData } from '@features/reserve/store/reservationStore';
 import { CampaignDetail } from '@entities/campaign/types/campaign.types';
 import { Application } from '@entities/application/types/application.types';
-import { ReservationData } from '@features/reserve/store/reservationStore';
 
 import { ReserveCompleteText } from './ReserveCompleteText';
 import { ReserveCompleteAction } from './ReserveCompleteAction';

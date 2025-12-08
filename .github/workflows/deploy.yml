@@ -10,6 +10,8 @@ env:
   AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: reviewpop-web
   CONTAINER_NAME: reviewpop-web
+  STAGING_TASK_DEFINITION: staging-reviewpop-web
+  PROD_TASK_DEFINITION: prod-reviewpop-web
 
 jobs:
   build-and-deploy:
@@ -31,44 +33,19 @@ jobs:
           environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
           environment-url: ${{ github.ref == 'refs/heads/main' && 'https://review.datepop.co.kr' || 'https://review-staging.datepop.co.kr' }}
 
-      # 환경 변수 설정
+      # 환경 변수 설정 (GitHub Actions 내부용)
       - name: Set environment variables
         id: set-env
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "NEXT_PUBLIC_IS_STAGING=false" >> .env
             echo "ECS_SERVICE=prod-reviewpop-web" >> $GITHUB_ENV
             echo "ECS_CLUSTER=datepop-cluster-production-arm" >> $GITHUB_ENV
             echo "ENVIRONMENT=production" >> $GITHUB_ENV
           else
-            echo "NEXT_PUBLIC_IS_STAGING=true" >> .env
             echo "ECS_SERVICE=staging-reviewpop-web" >> $GITHUB_ENV
             echo "ECS_CLUSTER=datepop-cluster-staging-arm" >> $GITHUB_ENV
             echo "ENVIRONMENT=staging" >> $GITHUB_ENV
           fi
-
-      # Node.js 설정 + yarn 캐시
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: yarn
-
-      # Next.js 빌드 캐시
-      - name: Cache Next.js build
-        uses: actions/cache@v4
-        with:
-          path: .next/cache
-          key: nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('src/**/*.ts', 'src/**/*.tsx') }}
-          restore-keys: |
-            nextjs-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-
-            nextjs-${{ runner.os }}-
-
-      # 빌드
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Build Next.js
-        run: yarn build
 
       # AWS 인증 (OIDC)
       - name: Configure AWS credentials
@@ -100,12 +77,22 @@ jobs:
           platforms: linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            NEXT_PUBLIC_API_URL=/api
+            NEXT_PUBLIC_USE_MOCK=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
+            NEXT_PUBLIC_IS_STAGING=${{ github.ref != 'refs/heads/main' && 'true' || 'false' }}
 
       # ECS 태스크 정의 업데이트
       - name: Download task definition
         run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            TASK_DEF_NAME="${{ env.PROD_TASK_DEFINITION }}"
+          else
+            TASK_DEF_NAME="${{ env.STAGING_TASK_DEFINITION }}"
+          fi
+
           aws ecs describe-task-definition \
-            --task-definition ${{ env.CONTAINER_NAME }} \
+            --task-definition $TASK_DEF_NAME \
             --query taskDefinition > task-def.json
 
       - name: Update task definition with new image
@@ -135,7 +122,7 @@ jobs:
           task-definition: cleaned-task-def.json
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+          wait-for-service-stability: false
 
       # 배포 상태 업데이트
       - name: Update deployment status (success)

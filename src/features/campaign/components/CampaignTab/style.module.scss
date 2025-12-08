@@ -4,11 +4,11 @@
   height: 36px;
   border-radius: 99px;
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
   @include padding($y: 0, $x: 12);
   @include flex($gap: 4, $justify: center, $align: center);
   @include font($size: 14, $line-height: 150%, $letter-spacing: -0.28);
-  white-space: nowrap;
-  flex-shrink: 0;
 
   &__Wrapper {
     position: sticky;

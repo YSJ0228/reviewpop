@@ -15,7 +15,7 @@
     }
 
     .List {
-      @include padding($left: 16);
+      @include padding($x: 16);
     }
   }
 

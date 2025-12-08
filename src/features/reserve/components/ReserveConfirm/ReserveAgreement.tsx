@@ -1,17 +1,20 @@
 import { Button } from '@shared/components/Button';
+
 import styles from './ReserveAgreement.module.scss';
 
 interface ReserveAgreementProps {
   onConfirm: () => void;
+  disabled?: boolean;
 }
 
-export function ReserveAgreement({ onConfirm }: ReserveAgreementProps) {
+export function ReserveAgreement({ onConfirm, disabled }: ReserveAgreementProps) {
   return (
     <div className={styles.ReserveAgreement}>
       <Button
         fullWidth
         size="large"
         onClick={onConfirm}
+        disabled={disabled}
         className={styles.ReserveAgreement__Button}
       >
         동의하고 예약하기

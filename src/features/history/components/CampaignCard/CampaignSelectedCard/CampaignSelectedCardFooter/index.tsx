@@ -1,8 +1,8 @@
-import { useDisclosure } from '@mantine/hooks';
+import { useRouter } from 'next/navigation';
 
 import { ReservationBeforeCard } from '../ReservationBeforeCard';
 import { ReservationScheduledCard } from '../ReservationScheduledCard';
-
+import { useReservationStore } from '@features/reserve/store/reservationStore';
 import type { CampaignSelectedCardFooterProps } from './types';
 
 import styles from './style.module.scss';
@@ -16,18 +16,31 @@ import styles from './style.module.scss';
 export function CampaignSelectedCardFooter({
   campaign,
   visitStatus,
+  application,
 }: CampaignSelectedCardFooterProps) {
-  const [, { open }] = useDisclosure(false);
+  const router = useRouter();
+  const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
+  const resetReservationData = useReservationStore((state) => state.resetReservationData);
 
-  // TODO: 방문 날짜 설정 버튼 클릭 핸들러
+  // 방문 날짜 설정 버튼 클릭 핸들러
   const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    open();
+
+    if (!campaign?.id || !application?.id) {
+      return;
+    }
+    resetReservationData();
+    setReservationFormData({
+      campaignId: campaign.id,
+      applicationId: application.id,
+    });
+
+    router.push(`/campaign/${campaign.id}/reserve`);
   };
 
   return (
-    <footer className={styles.CampaignSelectedCardFooter__ContentWrapper}>
+    <footer className={styles.CampaignSelectedCardFooter__Wrapper}>
       {visitStatus === 'before' && (
         <ReservationBeforeCard onReservationClick={handleReservationClick} />
       )}

@@ -1,5 +1,3 @@
-'use client';
-
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
 
 import { APPLICATION_STATUS_LABELS } from '@features/history/constants';
@@ -11,7 +9,7 @@ import type { IMyCampaignListProps } from './types';
 import styles from './style.module.scss';
 
 export function CampaignList({ status }: IMyCampaignListProps) {
-  const { data: campaigns, isLoading, error } = useMyCampaigns();
+  const { data: campaigns = [], isLoading, error } = useMyCampaigns();
 
   const filteredCampaigns = filterCampaignsByStatus(campaigns, status);
 

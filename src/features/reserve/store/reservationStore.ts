@@ -31,6 +31,8 @@ export interface ReservationData {
   personCount: number;
   /** 방문 날짜 (ISO 8601 string: YYYY-MM-DDTHH:mm:ss) */
   date: string;
+  /** 예약 ID (수정 시 필요) */
+  reservationId?: string;
 }
 
 interface ReservationState {
@@ -41,6 +43,8 @@ interface ReservationState {
 interface ReservationActions {
   /** 예약 정보 설정 */
   setReservationData: (data: ReservationData) => void;
+  /** 예약 폼 데이터 설정 (부분 업데이트) */
+  setReservationFormData: (data: Partial<ReservationData>) => void;
   /** 예약 정보 초기화 */
   resetReservationData: () => void;
 }
@@ -56,6 +60,14 @@ export const useReservationStore = create<ReservationStore>((set) => ({
 
   // 설정 (정보 저장)
   setReservationData: (data) => set({ reservationData: data }),
+
+  // 폼 데이터 설정 (부분 업데이트)
+  setReservationFormData: (data) =>
+    set((state) => ({
+      reservationData: state.reservationData
+        ? { ...state.reservationData, ...data }
+        : ({ ...data } as ReservationData),
+    })),
 
   // 초기화
   resetReservationData: () => set({ reservationData: null }),

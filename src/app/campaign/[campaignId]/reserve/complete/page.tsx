@@ -1,13 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { use, useEffect } from 'react';
+import { use } from 'react';
 
 import { Button } from '@shared/components';
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { LoadingSpinner } from '@shared/components';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
-import { mockReservationData } from '@features/reserve/store/mockReservationData';
+
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
@@ -23,12 +23,7 @@ interface ReserveCompletePageProps {
 export default function ReserveCompletePage({ params }: ReserveCompletePageProps) {
   const router = useRouter();
   const { campaignId } = use(params);
-  const reservationData = useReservationStore(
-    (state) =>
-      state.reservationData ??
-      (process.env.NODE_ENV === 'development' ? mockReservationData : null),
-  );
-  const resetReservationData = useReservationStore((state) => state.resetReservationData);
+  const reservationData = useReservationStore((state) => state.reservationData);
 
   const { data: campaign, isLoading: isCampaignLoading } = useCampaignDetails(campaignId);
   const { data: user, isLoading: isUserLoading } = useUserInfo();
@@ -49,12 +44,6 @@ export default function ReserveCompletePage({ params }: ReserveCompletePageProps
     showXButton: true,
     onX: handleXButton,
   });
-
-  useEffect(() => {
-    return () => {
-      resetReservationData();
-    };
-  }, [resetReservationData]);
 
   if (isCampaignLoading || isUserLoading || isApplicationLoading) {
     return <LoadingSpinner />;

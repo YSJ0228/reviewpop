@@ -1,32 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { LabeledInput } from '@shared/components/LabeledInput';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
 
 import { ButtonBar } from '../ButtonBar';
+import { BLOG, MESSAGES } from './constant';
 
 import { BlogBottomSheetProps } from './types';
 
-export function BlogBottomSheet({ opened, onClose, blog, setBlog }: BlogBottomSheetProps) {
+export function BlogBottomSheet({
+  opened,
+  onClose,
+  blog,
+  setBlog,
+  setIsConnected,
+}: BlogBottomSheetProps) {
   const urlInput = useInputValidate('url', blog?.replace('blog.naver.com/', '') ?? '');
-  const [confirmMsg, setConfirmMsg] = useState<string>('');
+  const [confirmMsg, setConfirmMsg] = useState<string>(blog ? MESSAGES.CONFIRM : '');
+
+  useEffect(() => {
+    if (confirmMsg === MESSAGES.CONFIRM) setIsConnected(true);
+    else setIsConnected(false);
+  }, [confirmMsg]);
+
   return (
-    <BottomSheet
-      opened={opened}
-      onClose={onClose}
-      height={560}
-      title="블로그 아이디를 입력해주세요"
-    >
+    <BottomSheet opened={opened} onClose={onClose} height={560} title={BLOG.TITLE}>
       <LabeledInput
-        label="블로그 주소"
-        placeholder="네이버 블로그 아이디 입력"
+        label={BLOG.LABEL}
+        placeholder={BLOG.PLACEHOLDER}
         input={urlInput}
         showButton
         showPreview
         confirmMsg={confirmMsg}
         setConfirmMsg={setConfirmMsg}
-        onClick={() => setConfirmMsg('블로그 주소가 확인되었어요')}
+        onClick={() => {
+          setConfirmMsg(MESSAGES.CONFIRM);
+        }}
       />
       <ButtonBar
         variant="primary"

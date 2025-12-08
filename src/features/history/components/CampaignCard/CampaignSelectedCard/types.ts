@@ -4,4 +4,5 @@ import type { VisitStatus } from '@features/history/types';
 export interface CampaignSelectedCardProps {
   campaign: CampaignDetail;
   visitStatus: VisitStatus;
+  applicationId: string;
 }
