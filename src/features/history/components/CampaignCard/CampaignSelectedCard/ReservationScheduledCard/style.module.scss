@@ -13,4 +13,5 @@
 .ReservationScheduledCard__BottomSheetContent {
   overflow-y: auto;
   @include flex($direction: column, $gap: 24);
+  @include margin($bottom: 24);
 }

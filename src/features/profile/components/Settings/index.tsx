@@ -1,4 +1,4 @@
-import { Modal } from '@shared/components';
+import { Modal, toast } from '@shared/components';
 import { ROUTES } from '@shared/config/routes';
 
 import { SettingList } from '../SettingList';
@@ -7,10 +7,15 @@ import styles from './style.module.scss';
 
 export function Settings() {
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include',
-    });
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      toast.success('로그아웃 되었습니다.');
+    } catch (error) {
+      toast.error('로그아웃을 실패하였습니다.');
+    }
   };
   return (
     <div>
