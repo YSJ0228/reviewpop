@@ -12,7 +12,7 @@ interface ReviewFormLinkProps {
 
 const MESSAGES = {
   EMPTY_LINK: '링크를 입력해주세요.',
-  VALID_LINK: '올바른 링크입니다.',
+  VALID_LINK: '올바른 블로그 주소가 확인되었어요.',
 } as const;
 
 export function ReviewFormLink({ input, onValidationChange }: ReviewFormLinkProps) {
