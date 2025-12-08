@@ -5,21 +5,28 @@ import { IconChevronRight } from '@pop-ui/foundation';
 import { formatDate } from '@shared/lib/date';
 
 import { MyCampaignState } from '../MyCampaignState';
+import { useReservationStore } from '@features/reserve/store/reservationStore';
 
 import { MyCurrentCampaignCardProps } from './types';
 
 import styles from './style.module.scss';
 
 export function MyCurrentCampaignCard({ userCampaign }: MyCurrentCampaignCardProps) {
-  const { campaign, status, date } = userCampaign;
+  const { campaign, status, date, applicationId } = userCampaign;
   const router = useRouter();
+  const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
+
   const handleClick = () => {
     if (status === 'plan') {
       router.push(`/campaign/${campaign.id}`);
     } else if (status === 'reservation') {
-      router.push(`campaign/${campaign.id}/reserve`);
+      setReservationFormData({
+        campaignId: campaign.id,
+        applicationId,
+      });
+      router.push(`/campaign/${campaign.id}/reserve`);
     } else {
-      router.push(`campaign/${campaign.id}/review/write`);
+      router.push(`/campaign/${campaign.id}/review/write?applicationId=${applicationId}`);
     }
   };
   return (

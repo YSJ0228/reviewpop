@@ -14,7 +14,7 @@ import type { LoginRequest } from '@entities/user/types/user.types';
 import type { ApiResponse } from '@shared/api/types/common.types';
 import { mockUsers } from '../data/users';
 import { findKakaoUserByToken } from '../data/oauth';
-import { mockUserCampaigns } from '../data/userCampaigns';
+import { getUserCampaigns } from '../data/userCampaigns';
 
 export const authHandlers = [
   /**
@@ -219,7 +219,7 @@ export const authHandlers = [
   }),
 
   http.get(ROUTES.API.PROFILE, () => {
-    const userCampaign = mockUserCampaigns;
+    const userCampaign = getUserCampaigns();
     return HttpResponse.json({
       success: true,
       data: userCampaign,
@@ -230,10 +230,10 @@ export const authHandlers = [
    * 로그아웃
    * POST /api/auth/logout
    */
-  http.post(ROUTES.API.LOGOUT, () => {
-    return HttpResponse.json({
-      success: true,
-      message: '로그아웃되었습니다.',
-    });
-  }),
+  // http.post(ROUTES.API.LOGOUT, () => {
+  //   return HttpResponse.json({
+  //     success: true,
+  //     message: '로그아웃되었습니다.',
+  //   });
+  // }),
 ];

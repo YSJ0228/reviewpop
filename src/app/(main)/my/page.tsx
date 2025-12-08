@@ -22,6 +22,7 @@ import { usePageHeader } from '@shared/hooks/usePageHeader';
 export default function MyPage() {
   usePageHeader({
     showBottomNavigation: true,
+    showBackButton: false,
   });
 
   return (
