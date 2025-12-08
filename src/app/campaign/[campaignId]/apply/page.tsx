@@ -3,7 +3,7 @@ import { Suspense, use } from 'react';
 import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
-import { ApplyForm } from '@features/campaign/components/ApplyForm';
+import { ApplyForm } from '@features/apply/components/ApplyForm';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';

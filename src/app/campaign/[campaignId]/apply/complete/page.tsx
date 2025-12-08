@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ConfirmationCard } from '@shared/components/ConfirmationCard';
-import { CampaignApplyCard } from '@features/campaign/components/CampaignApplyCard';
+import { CampaignApplyCard } from '@features/apply/components/CampaignApplyCard';
 import { useCampaignDetails } from '@features/history';
-import { ButtonBar } from '@features/campaign/components/ButtonBar';
+import { ButtonBar } from '@features/apply/components/ButtonBar';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 
 import styles from './page.module.scss';
