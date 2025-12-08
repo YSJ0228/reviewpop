@@ -2,6 +2,11 @@
 
 .Page {
   min-height: 100vh;
+  @include padding($bottom: 82);
+
+  &--reservation-pending {
+    @include padding($bottom: 111);
+  }
 }
 
 .Page__Loading,

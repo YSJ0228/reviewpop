@@ -21,6 +21,8 @@ import { CampaignAdditionalNotice } from '@features/campaign/components/Campaign
 import { useCampaignDetails } from '@entities/campaign/hooks/useCampaignDetails';
 import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 
 import styles from './page.module.scss';
 
@@ -28,7 +30,16 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
   const { campaignId } = use(params);
   const router = useRouter();
   const { data: campaign, isLoading, error } = useCampaignDetails(campaignId);
+  const { data: user } = useUserInfo();
+  const { data: application } = useApplicationDetails(campaignId, user?.id ?? '', {
+    enabled: !!user?.id,
+  });
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+
+  // 선정되었고 아직 예약하지 않은 상태인지 확인
+  const isSelectedWithoutReservation = useMemo(() => {
+    return application?.status === 'selected' && !application?.isReservated;
+  }, [application]);
 
   usePageHeader({
     title: campaign?.brand,
@@ -100,7 +111,11 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
   }
 
   return (
-    <div className={styles.Page}>
+    <div
+      className={`${styles.Page} ${
+        isSelectedWithoutReservation ? styles['Page--reservation-pending'] : ''
+      }`}
+    >
       <CampaignCTA campaign={campaign} />
       <div className={styles.Page__ImageSection}>
         <ImageGallery
