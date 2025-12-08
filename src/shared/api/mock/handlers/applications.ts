@@ -103,15 +103,14 @@ export const applicationHandlers = [
     const campaignId = params.campaignId as string;
     // CreateApplicationRequest가 주석 처리되었으므로 필요한 필드만 정의
     const body = (await request.json()) as {
-      userId: string;
       name: string;
       phoneNumber: string;
       blogAddress: string;
       message?: string;
     };
-
+    const userId = 'kakao-1001';
     // 체험 존재 여부 확인
-    const campaign = findCampaignById(campaignId);
+    const campaign = getCampaign(campaignId);
     if (!campaign) {
       return HttpResponse.json(
         {
@@ -181,8 +180,8 @@ export const applicationHandlers = [
     // 새 신청 생성
     const newApplication: Application = {
       id: generateRandomId(),
-      campaign: getCampaign(campaignId),
-      userId: body.userId,
+      campaign,
+      userId,
       name: body.name,
       phoneNumber: body.phoneNumber,
       blogAddress: body.blogAddress,
