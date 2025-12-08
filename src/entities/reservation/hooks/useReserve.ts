@@ -39,6 +39,7 @@ export const useCreateReservation = (campaignId: string) => {
       // 관련 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: ['my-applications'] });
       queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
+      queryClient.invalidateQueries({ queryKey: ['user', 'profile'] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: (error: Error) => {
@@ -70,6 +71,7 @@ export const useUpdateReservation = (campaignId: string, reservationId?: string)
       queryClient.invalidateQueries({ queryKey: ['my-applications'] });
       queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
       queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
+      queryClient.invalidateQueries({ queryKey: ['user', 'profile'] });
       router.push(`/campaign/${campaignId}/reserve/complete`);
     },
     onError: (error: Error) => {
@@ -91,6 +93,7 @@ export const useDeleteReservation = (campaignId: string, reservationId?: string)
       queryClient.invalidateQueries({ queryKey: ['my-applications'] });
       queryClient.invalidateQueries({ queryKey: ['reservation', reservationId] });
       queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] });
+      queryClient.invalidateQueries({ queryKey: ['user', 'profile'] });
       toast.success('예약이 취소되었습니다.');
     },
     onError: (error: Error) => {

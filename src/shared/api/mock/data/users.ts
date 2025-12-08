@@ -12,7 +12,7 @@ export const mockUsers: User[] = [
   {
     id: 'kakao-1001',
     email: 'park.minsoo@kakao.com',
-    name: '박민수',
+    name: '김철수',
     provider: 'kakao',
     phoneNumber: '01011112222',
     blogAddress: 'blog.naver.com/reviewpop',
