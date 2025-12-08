@@ -23,6 +23,10 @@
     @include flex($align: center, $justify: center);
     position: relative;
 
+    &:active {
+      background-color: var(--gray-50);
+    }
+
     &__Active {
       @include size($width: 13px, $height: 13px);
       @include flex($align: center, $justify: center);

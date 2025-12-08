@@ -23,6 +23,10 @@
   cursor: pointer;
   @include flex($direction: column, $align: center, $justify: center, $gap: 4);
   @include font($size: 11, $weight: 500, $line-height: 1.5, $color: var(--gray-400));
+
+  &:active {
+    background-color: var(--gray-50);
+  }
 }
 
 .BottomNavigation__Item--Contents {
