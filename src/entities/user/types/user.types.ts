@@ -29,7 +29,6 @@ export interface User {
 export interface UserCampaign {
   applicationId: string;
   campaign: Campaign;
-  applicationId: string;
   status: UserCampaignStatus;
   date?: string;
 }
