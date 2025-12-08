@@ -2,7 +2,7 @@
 
 .ModificationBottomSheet {
   @include flex($direction: column, $gap: 16);
-  @include margin($bottom: 82);
+  @include margin($bottom: 32);
   &__SubTitle {
     @include size($height: 21);
     @include font($color: #808080, $weight: 500, $size: 12);

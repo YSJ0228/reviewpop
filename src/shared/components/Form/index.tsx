@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 
-import { TextArea } from '@features/campaign/components/TextArea';
-import { ButtonBar } from '@features/campaign/components/ButtonBar';
+import { TextArea } from '@features/apply/components/TextArea';
+import { ButtonBar } from '@features/apply/components/ButtonBar';
 import { useInputValidate } from '@entities/campaign/hooks/useInputValidate';
-import { BlogBottomSheet } from '@features/campaign/components/BlogBottomSheet';
+import { BlogBottomSheet } from '@features/apply/components/BlogBottomSheet';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { CautionBottomSheet } from '@features/campaign/components/CautionBottomSheet';
+import { CautionBottomSheet } from '@features/apply/components/CautionBottomSheet';
 
 import { LabeledInput } from '../LabeledInput';
 import { WebButton } from '../WebButton';

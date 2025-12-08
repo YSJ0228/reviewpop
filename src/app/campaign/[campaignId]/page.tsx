@@ -13,6 +13,7 @@ import { CampaignContents } from '@features/campaign/components/CampaignContents
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
 import StatusBadge from '@features/campaign/components/StatusBadge';
+import CampaignCTA from '@features/campaign/components/CampaignCTA';
 import ReviewSection from '@features/campaign/components/ReviewSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
@@ -100,6 +101,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
   return (
     <div className={styles.Page}>
+      <CampaignCTA campaign={campaign} />
       <div className={styles.Page__ImageSection}>
         <ImageGallery
           images={images}
