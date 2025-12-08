@@ -230,10 +230,10 @@ export const authHandlers = [
    * 로그아웃
    * POST /api/auth/logout
    */
-  http.post(ROUTES.API.LOGOUT, () => {
-    return HttpResponse.json({
-      success: true,
-      message: '로그아웃되었습니다.',
-    });
-  }),
+  // http.post(ROUTES.API.LOGOUT, () => {
+  //   return HttpResponse.json({
+  //     success: true,
+  //     message: '로그아웃되었습니다.',
+  //   });
+  // }),
 ];

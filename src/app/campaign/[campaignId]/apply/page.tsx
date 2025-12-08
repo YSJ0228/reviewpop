@@ -1,10 +1,10 @@
-'use client';
-import { Suspense, use } from 'react';
+import { Suspense } from 'react';
 import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ApplyForm } from '@features/apply/components/ApplyForm';
-import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { requireAuth } from '@shared/lib/auth.server';
+import { ROUTES } from '@shared/config/routes';
 
 import styles from './page.module.scss';
 
@@ -26,12 +26,10 @@ interface CampaignApplyPageProps {
   }>;
 }
 
-export default function CampaignApplyPage({ params }: CampaignApplyPageProps) {
-  const { campaignId } = use(params);
-  usePageHeader({
-    showBackButton: true,
-    title: '체험단 신청',
-  });
+export default async function CampaignApplyPage({ params }: CampaignApplyPageProps) {
+  const { campaignId } = await params;
+  const user = await requireAuth(ROUTES.CAMPAIGN_DETAIL(campaignId));
+
   return (
     <main className={styles.CampaignApplyPage}>
       <ErrorBoundary>
