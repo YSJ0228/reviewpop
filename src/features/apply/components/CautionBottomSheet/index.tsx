@@ -4,8 +4,7 @@ import { Checkbox } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { usePostApplication } from '@entities/application/hooks/usePostApplication';
-
-import { ButtonBar } from '../ButtonBar';
+import { Button } from '@shared/components';
 
 import { CautionBottomSheetProps } from './types';
 
@@ -51,6 +50,11 @@ export function CautionBottomSheet({ opened, onClose, formData }: CautionBottomS
       onClose={onClose}
       height={560}
       title="체험단 참여 시 주의사항을 확인해주세요"
+      footer={
+        <Button onClick={handleClick} variant="primary" disabled={!checked} fullWidth>
+          신청하기
+        </Button>
+      }
     >
       <h2 className={styles.CautionBottomSheet__SubTitle}>체험단 참여 시 주의사항</h2>
       <ul className={styles.CautionBottomSheet__Caution}>
@@ -67,7 +71,6 @@ export function CautionBottomSheet({ opened, onClose, formData }: CautionBottomS
         />{' '}
         <span className={styles.CautionBottomSheet__AgreeText}>모두 동의합니다.</span>
       </div>
-      <ButtonBar text="신청하기" onClick={handleClick} variant="primary" disabled={!checked} />
     </BottomSheet>
   );
 }

@@ -59,6 +59,11 @@
   &:not(:disabled):hover {
     background-color: var(--primary-600);
   }
+
+  // pressed 상태일 때 배경 기본값 설정
+  &:not(:disabled):active {
+    background-color: var(--primary-700);
+  }
 }
 
 .Button--Secondary {
@@ -67,6 +72,11 @@
   @include font($color: var(--gray-800));
 
   &:not(:disabled):hover {
+    background-color: var(--gray-25);
+  }
+
+  // pressed 상태일 때 배경 기본값 설정
+  &:not(:disabled):active {
     background-color: var(--gray-50);
   }
 }
@@ -77,6 +87,11 @@
   @include font($color: var(--error-500));
 
   &:not(:disabled):hover {
+    background-color: var(--gray-25);
+  }
+
+  // pressed 상태일 때 배경 기본값 설정
+  &:not(:disabled):active {
     background-color: var(--gray-50);
   }
 }
@@ -86,6 +101,11 @@
   @include font($color: var(--color-white));
 
   &:not(:disabled):hover {
+    background-color: var(--error-700);
+  }
+
+  // pressed 상태일 때 배경 기본값 설정
+  &:not(:disabled):active {
     background-color: var(--error-800);
   }
 }

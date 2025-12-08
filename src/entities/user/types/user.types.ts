@@ -27,6 +27,7 @@ export interface User {
   provider: OAuthProvider;
 }
 export interface UserCampaign {
+  applicationId: string;
   campaign: Campaign;
   status: UserCampaignStatus;
   date?: string;

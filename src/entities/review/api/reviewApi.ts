@@ -4,19 +4,15 @@
  * 리뷰 관련 API 호출 함수들을 정의합니다.
  */
 
-import { apiClient } from '@shared/api/client';
 import { ApiResponse, unwrapApiResponse } from '@shared/api/types/common.types';
+import { apiClient } from '@shared/api/client';
+
 import {
   PostReview,
   BlogReviews,
   BlogReview,
   ReviewRequest,
 } from '@entities/review/types/review.types';
-
-interface ReviewModificationRequestResponse {
-  data: ReviewRequest;
-  success: boolean;
-}
 
 /**
  * 리뷰 목록 조회
@@ -60,12 +56,12 @@ export async function updateReview(id: string, data: Partial<PostReview>) {
  * @param reviewId
  * @returns
  */
-export async function getReviewModificationRequest(reviewId: string) {
-  const response = await apiClient.get<ReviewModificationRequestResponse>(
-    `/reviews/${reviewId}/modification-request`,
+export async function getReviewEditRequest(reviewId: string) {
+  const response = await apiClient.get<ApiResponse<ReviewRequest>>(
+    `/reviews/${reviewId}/edit-request`,
     {
       withCredentials: true,
     },
   );
-  return response.data.data;
+  return unwrapApiResponse(response.data);
 }

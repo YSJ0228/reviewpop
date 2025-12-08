@@ -1,8 +1,12 @@
 'use client';
 import { EmptyState } from '@shared/components';
+
 import { MyCurrentCampaignCard } from '../MyCurrentCampaignCard';
-import styles from './style.module.scss';
+
 import { MyCurrentCampaignListProps } from './types';
+
+import styles from './style.module.scss';
+
 export function MyCurrentCampaignList({ campaigns }: MyCurrentCampaignListProps) {
   return (
     <div>

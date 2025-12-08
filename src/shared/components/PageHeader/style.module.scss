@@ -23,11 +23,11 @@
     transition: background-color 0.2s ease;
 
     &:hover {
-      background: var(--color-gray-100);
+      background: var(--color-gray-25);
     }
 
     &:active {
-      background: var(--color-gray-200);
+      background-color: var(--color-gray-50);
     }
 
     &:focus-visible {
