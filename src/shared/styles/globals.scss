@@ -114,9 +114,30 @@ body[data-scroll-locked] {
   --removed-body-scroll-bar-size: 0px !important;
 }
 
-// Toast 위치 조정: BNB 위에 표시되도록
+// Toast 위치 및 스타일 조정
 /* stylelint-disable selector-class-pattern */
 .mantine-Notifications-root[data-position*='bottom'] {
-  bottom: calc(60px + env(safe-area-inset-bottom)) !important;
+  bottom: calc(28px + env(safe-area-inset-bottom)) !important;
+  z-index: var(--z-toast) !important;
+  width: calc(100% - 16px) !important;
+}
+
+.mantine-Notification-root {
+  width: 100% !important;
+  max-width: 460px !important;
+  min-width: 344px !important;
+  min-height: 48px !important;
+  padding: 12px 20px !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(16px) !important;
+
+  // 내부 요소 왼쪽 정렬
+  > *,
+  .mantine-Notification-body,
+  .mantine-Notification-content {
+    justify-content: flex-start !important;
+    align-items: center !important;
+    display: flex !important;
+  }
 }
 /* stylelint-enable selector-class-pattern */
