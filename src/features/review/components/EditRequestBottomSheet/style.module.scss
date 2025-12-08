@@ -1,6 +1,6 @@
 @use '@shared/styles/mixins' as *;
 
-.ModificationBottomSheet {
+.EditRequestBottomSheet {
   @include flex($direction: column, $gap: 16);
   @include margin($bottom: 32);
   &__SubTitle {

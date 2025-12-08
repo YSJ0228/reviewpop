@@ -1,4 +1,4 @@
-export interface ModificationBottomSheetProps {
+export interface EditRequestBottomSheetProps {
   opened: boolean;
   onClose: () => void;
   reviewId: string;

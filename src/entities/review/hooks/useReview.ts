@@ -1,12 +1,7 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { toast } from '@shared/components';
 import type { PostReview } from '../types/review.types';
-import {
-  createReview,
-  updateReview,
-  getReviewById,
-  getReviewModificationRequest,
-} from '../api/reviewApi';
+import { createReview, updateReview, getReviewById, getReviewEditRequest } from '../api/reviewApi';
 import { getCampaign } from '@entities/campaign/api/campaignApi';
 import { getUserInfo } from '@entities/user/api/userApi';
 import { getApplicationById } from '@entities/application/api/applicationApi';
@@ -100,10 +95,10 @@ export function useReviewPageData(campaignId: string, applicationId: string | nu
  * @param enabled - 쿼리 활성화 여부
  * @returns 리뷰 수정 요청 조회 query 객체
  */
-export function useReviewModificationRequest(reviewId: string, enabled = true) {
+export function useReviewEditRequest(reviewId: string, enabled = true) {
   return useQuery({
-    queryKey: ['review', 'modification', reviewId],
-    queryFn: () => getReviewModificationRequest(reviewId),
+    queryKey: ['review', 'edit', reviewId],
+    queryFn: () => getReviewEditRequest(reviewId),
     enabled: enabled && !!reviewId,
   });
 }

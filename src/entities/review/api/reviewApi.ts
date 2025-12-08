@@ -56,7 +56,7 @@ export async function updateReview(id: string, data: Partial<PostReview>) {
  * @param reviewId
  * @returns
  */
-export async function getReviewModificationRequest(reviewId: string) {
+export async function getReviewEditRequest(reviewId: string) {
   const response = await apiClient.get<ApiResponse<ReviewRequest>>(
     `/reviews/${reviewId}/edit-request`,
     {

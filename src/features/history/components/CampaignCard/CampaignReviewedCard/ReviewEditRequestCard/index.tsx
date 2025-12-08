@@ -2,7 +2,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@shared/components';
-import { ModificationBottomSheet } from '@features/review/components/ModificationBottomSheet';
+import { EditRequestBottomSheet } from '@features/review/components/EditRequestBottomSheet';
 import { HISTORY_UI, HISTORY_MESSAGES } from '@features/history/constants';
 
 import styles from './style.module.scss';
@@ -29,7 +29,7 @@ export function ReviewEditRequestCard({
   const router = useRouter();
 
   // reviewId와 campaignId가 없으면 ModificationBottomSheet를 사용할 수 없음
-  const canOpenModificationSheet = !!reviewId && !!campaignId;
+  const canOpenEditRequestSheet = !!reviewId && !!campaignId;
 
   return (
     <>
@@ -40,7 +40,7 @@ export function ReviewEditRequestCard({
             fullWidth
             radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
             size="small"
-            onClick={canOpenModificationSheet ? open : undefined}
+            onClick={canOpenEditRequestSheet ? open : undefined}
           >
             <span className={styles['ReviewEditRequestCard__ButtonText--Secondary']}>
               {HISTORY_MESSAGES.EDIT_REQUEST_CONTENT}
@@ -65,8 +65,8 @@ export function ReviewEditRequestCard({
           </Button>
         </div>
       </div>
-      {canOpenModificationSheet && (
-        <ModificationBottomSheet
+      {canOpenEditRequestSheet && (
+        <EditRequestBottomSheet
           opened={opened}
           onClose={close}
           reviewId={reviewId}
