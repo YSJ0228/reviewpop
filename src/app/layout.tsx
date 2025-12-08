@@ -37,6 +37,9 @@ export default function RootLayout({
 export const metadata: Metadata = {
   title: '리뷰팝',
   description: '체험단 리뷰 플랫폼',
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export const viewport: Viewport = {
