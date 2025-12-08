@@ -19,7 +19,9 @@ export function MyCurrentCampaignCard({ userCampaign }: MyCurrentCampaignCardPro
     } else if (status === 'reservation') {
       router.push(`campaign/${campaign.id}/reserve`);
     } else {
-      router.push(`campaign/${campaign.id}/review/write`);
+      router.push(
+        `campaign/${campaign.id}/review/write?applicationId=${userCampaign.applicationId}`,
+      );
     }
   };
   return (

@@ -20,7 +20,7 @@ export const HISTORY_MESSAGES = {
 
   // 후기탭에서 활용되는 메시지
   BLOG_REVIEW_EXAMPLE: '블로그 후기 예시',
-  REGISTER_REVIEW: '후기등록',
+  REGISTER_REVIEW: '후기 등록',
   MY_REVIEW: '내가 작성한 후기',
   EDIT_REQUEST_CONTENT: '수정 요청 내용',
   REREGISTER_REVIEW: '후기 재등록',
