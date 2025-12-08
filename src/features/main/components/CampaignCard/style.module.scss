@@ -6,7 +6,7 @@
   aspect-ratio: 1/1;
   overflow: hidden;
   border-radius: 16px;
-  box-shadow: 0 4px 16px 0 rgba(0 0 0 / 8%);
+  box-shadow: 0px 4px 8px 0px hsla(0, 0%, 0%, 0.24);
 
   &__Link {
     display: block;
@@ -68,11 +68,7 @@
   }
 
   &__Recruitment {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: -0.28px;
-    color: rgba(255 255 255 / 60%);
-    height: 24px;
+    @include font($size: 14, $weight: 500, $color: rgba(255 255 255 / 60%));
     @include flex($direction: row, $gap: 8);
 
     b {
@@ -127,8 +123,12 @@
     text-overflow: ellipsis;
   }
 
+  &__MetaWrapper {
+    @include flex($direction: column, $gap: 4);
+  }
+
   &__Meta {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--color-white);
     line-height: 1.5;
@@ -146,12 +146,23 @@
 
 .BlogReviewList {
   display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 4px;
+  gap: 8px;
   padding-bottom: 8px;
   scrollbar-width: none;
+  width: fit-content;
 
+  &:first-child {
+    margin-left: 16px;
+  }
+  &:last-child {
+    margin-right: 16px;
+  }
+}
+
+.BlogReviewListWrapper {
+  overflow-x: auto;
+  width: calc(100% + 32px);
+  margin-left: -16px;
   &::-webkit-scrollbar {
     display: none;
   }

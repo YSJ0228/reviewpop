@@ -1,8 +1,8 @@
-'use client';
+import { Notification } from '@entities/notification/types/notification.types';
 
 import NotificationCard from '../NotificationCard';
+
 import styles from './style.module.scss';
-import { Notification } from '@entities/notification/types/notification.types';
 
 export default function NotificationList({ notifications }: { notifications: Notification[] }) {
   return (

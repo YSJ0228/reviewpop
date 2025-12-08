@@ -1,7 +1,6 @@
 @use '@/shared/styles/mixins' as *;
 
 .CampaignList {
-  overflow-y: auto;
   min-height: 200px;
   @include flex($direction: column, $gap: 32);
 }
