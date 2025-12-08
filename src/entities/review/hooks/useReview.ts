@@ -27,6 +27,7 @@ export const useCreateReview = (campaignId: string, onSuccessCallback?: () => vo
         queryClient.invalidateQueries({ queryKey: ['reviews'] }),
         queryClient.invalidateQueries({ queryKey: ['my-applications'] }),
         queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] }),
+        queryClient.invalidateQueries({ queryKey: ['user', 'profile'] }),
       ]);
       onSuccessCallback?.();
     },
@@ -53,6 +54,7 @@ export const useUpdateReview = (id: string, campaignId: string, onSuccessCallbac
         queryClient.invalidateQueries({ queryKey: ['reviews'] }),
         queryClient.invalidateQueries({ queryKey: ['my-applications'] }),
         queryClient.invalidateQueries({ queryKey: ['campaign', campaignId] }),
+        queryClient.invalidateQueries({ queryKey: ['user', 'profile'] }),
       ]);
       onSuccessCallback?.();
     },
