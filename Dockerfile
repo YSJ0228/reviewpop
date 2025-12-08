@@ -26,9 +26,8 @@ RUN corepack enable && corepack prepare yarn@4.12.0 --activate
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn/releases ./.yarn/releases
 
-# 의존성 설치 (Cache Mount 사용)
+# 의존성 설치 (Yarn 캐시만 사용)
 RUN --mount=type=cache,target=/root/.yarn,sharing=locked \
-    --mount=type=cache,target=/app/node_modules,id=node_modules_cache,sharing=locked \
     yarn install --immutable
 
 # 소스 코드 복사 (package 파일 제외하여 yarn install 결과 보존)
@@ -36,9 +35,8 @@ COPY src ./src
 COPY public ./public
 COPY next.config.ts tsconfig.json postcss.config.cjs ./
 
-# 빌드 (Cache Mount 사용)
+# 빌드 (Next.js 캐시만 사용)
 RUN --mount=type=cache,target=/app/.next/cache,id=nextjs_cache,sharing=locked \
-    --mount=type=cache,target=/app/node_modules,id=node_modules_cache,sharing=locked \
     yarn build
 
 # Stage 2: 프로덕션 이미지

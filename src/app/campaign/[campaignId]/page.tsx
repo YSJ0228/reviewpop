@@ -13,6 +13,7 @@ import { CampaignContents } from '@features/campaign/components/CampaignContents
 import { CampaignValue } from '@features/campaign/components/CampaignValue';
 import { CampaignInfoSection } from '@features/campaign/components/CampaignInfoSection';
 import StatusBadge from '@features/campaign/components/StatusBadge';
+import CampaignCTA from '@features/campaign/components/CampaignCTA';
 import ReviewSection from '@features/campaign/components/ReviewSection';
 import { CampaignScheduleSection } from '@features/campaign/components/CampaignScheduleSection';
 import { CampaignVisitReservation } from '@features/campaign/components/CampaignVisitReservation';
@@ -59,19 +60,24 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
     return campaign.keywords.join(', ');
   }, [campaign]);
 
+  const keywordsTextForCopy = useMemo(() => {
+    if (!campaign?.keywords?.length) return '';
+    return campaign.keywords.map((keyword) => `#${keyword}`).join(' ');
+  }, [campaign]);
+
   const handleCopyKeywords = useCallback(async () => {
-    if (!keywordsText) {
+    if (!keywordsTextForCopy) {
       return;
     }
 
     try {
-      await navigator.clipboard.writeText(keywordsText);
+      await navigator.clipboard.writeText(keywordsTextForCopy);
       toast.success('키워드가 복사되었어요');
     } catch (error) {
       console.error('복사 실패:', error);
       toast.error('키워드 복사에 실패했어요');
     }
-  }, [keywordsText]);
+  }, [keywordsTextForCopy]);
 
   if (isLoading) {
     return (
@@ -95,6 +101,7 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
   return (
     <div className={styles.Page}>
+      <CampaignCTA campaign={campaign} />
       <div className={styles.Page__ImageSection}>
         <ImageGallery
           images={images}
@@ -115,7 +122,9 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
 
       <div className={styles.Page__StatusBarSection}>
         <CampaignStatusBar campaign={campaign} />
-        <StatusBadge campaign={campaign} />
+        {campaign.status !== 'completed' && campaign.status !== 'closed' && (
+          <StatusBadge campaign={campaign} />
+        )}
       </div>
 
       <CampaignContents campaign={campaign} />
@@ -150,23 +159,26 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       {campaign.address && <AddressMap placeName={campaign.brand} address={campaign.address} />}
 
       {/* 리뷰 미션 */}
-      {campaign.reviewMission && campaign.reviewMission.length > 0 && (
-        <>
-          <BulletListSection
-            title="후기 미션 안내"
-            items={campaign.reviewMission}
-            showDivider={false}
-          />
+      {campaign.status !== 'completed' &&
+        campaign.status !== 'closed' &&
+        campaign.reviewMission &&
+        campaign.reviewMission.length > 0 && (
+          <>
+            <BulletListSection
+              title="후기 미션 안내"
+              items={campaign.reviewMission}
+              showDivider={false}
+            />
 
-          {/* 후기 미션 안내 추가 안내사항 */}
-          {campaign.reviewMissionNotice && (
-            <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
-          )}
-        </>
-      )}
+            {/* 후기 미션 안내 추가 안내사항 */}
+            {campaign.reviewMissionNotice && (
+              <CampaignAdditionalNotice content={campaign.reviewMissionNotice} />
+            )}
+          </>
+        )}
 
       {/* 키워드 */}
-      {keywordsText && (
+      {campaign.status !== 'completed' && campaign.status !== 'closed' && keywordsText && (
         <div className={styles.Page__KeywordsSection}>
           <WebButton
             buttonType="copy"
@@ -178,16 +190,19 @@ export default function CampaignDetailPage({ params }: CampaignDetailPageProps) 
       )}
 
       {/* 체험 시 주의사항 */}
-      {campaign.precautions && campaign.precautions.length > 0 && (
-        <BulletListSection
-          title="체험 시 주의사항"
-          items={campaign.precautions}
-          backgroundColor="var(--color-gray-50)"
-          noPadding={true}
-          textColor="var(--color-gray-800)"
-          showDivider={false}
-        />
-      )}
+      {campaign.status !== 'completed' &&
+        campaign.status !== 'closed' &&
+        campaign.precautions &&
+        campaign.precautions.length > 0 && (
+          <BulletListSection
+            title="체험 시 주의사항"
+            items={campaign.precautions}
+            backgroundColor="var(--color-gray-50)"
+            noPadding={true}
+            textColor="var(--color-gray-800)"
+            showDivider={false}
+          />
+        )}
     </div>
   );
 }

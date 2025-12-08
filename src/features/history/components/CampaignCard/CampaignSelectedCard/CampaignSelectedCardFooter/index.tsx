@@ -20,6 +20,7 @@ export function CampaignSelectedCardFooter({
 }: CampaignSelectedCardFooterProps) {
   const router = useRouter();
   const setReservationFormData = useReservationStore((state) => state.setReservationFormData);
+  const resetReservationData = useReservationStore((state) => state.resetReservationData);
 
   // 방문 날짜 설정 버튼 클릭 핸들러
   const handleReservationClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -29,6 +30,7 @@ export function CampaignSelectedCardFooter({
     if (!campaign?.id || !application?.id) {
       return;
     }
+    resetReservationData();
     setReservationFormData({
       campaignId: campaign.id,
       applicationId: application.id,

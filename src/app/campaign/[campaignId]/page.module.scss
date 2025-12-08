@@ -28,6 +28,17 @@
   width: 100%;
   background: var(--color-white);
   @include flex($direction: row, $justify: center, $align: center, $gap: 16);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    background-color: var(--color-gray-50);
+  }
 }
 
 .Page__ValueSection {

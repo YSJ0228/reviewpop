@@ -18,6 +18,9 @@ import {
   mockReservationConfig,
   mockReservedDateTimes,
 } from '@shared/api/mock/data/reservations';
+import { mockApplications } from '../data/applications';
+
+import { mockApplications as myCampaignsMockApps } from '@entities/history/api/myMock';
 
 export const reservationHandlers = [
   /**
@@ -43,53 +46,27 @@ export const reservationHandlers = [
   }),
 
   /**
-   * 예약 목록 조회 (나의 예약)
-   * GET /api/reservations
-   */
-  //   http.get('/api/reservations', ({ request }) => {
-  //     const url = new URL(request.url);
-  //     const userId = url.searchParams.get('userId');
-
-  //     if (!userId) {
-  //       return HttpResponse.json(
-  //         {
-  //           success: false,
-  //           error: '사용자 ID가 필요합니다.',
-  //         } satisfies ApiResponse<never>,
-  //         { status: 400 },
-  //       );
-  //     }
-
-  //     const reservations = getReservationsByCampaignId(userId);
-
-  //     return HttpResponse.json({
-  //       success: true,
-  //       data: reservations,
-  //     } satisfies ApiResponse<Reservation[]>);
-  //   }),
-
-  /**
    * 예약 상세 조회
    * GET /api/reservations/:id
    */
-  //   http.get('/api/reservations/:id', ({ params }) => {
-  //     const reservation = findReservationByApplicationId(params.id as string);
+  http.get('/api/reservations/:id', ({ params }) => {
+    const reservation = mockReservations.find((r) => r.id === params.id);
 
-  //     if (!reservation) {
-  //       return HttpResponse.json(
-  //         {
-  //           success: false,
-  //           error: '예약을 찾을 수 없습니다.',
-  //         } satisfies ApiResponse<never>,
-  //         { status: 404 },
-  //       );
-  //     }
+    if (!reservation) {
+      return HttpResponse.json(
+        {
+          success: false,
+          error: '예약을 찾을 수 없습니다.',
+        } satisfies ApiResponse<never>,
+        { status: 404 },
+      );
+    }
 
-  //     return HttpResponse.json({
-  //       success: true,
-  //       data: reservation,
-  //     } satisfies ApiResponse<Reservation>);
-  //   }),
+    return HttpResponse.json({
+      success: true,
+      data: reservation,
+    } satisfies ApiResponse<Reservation>);
+  }),
 
   /**
    * 예약 생성
@@ -109,20 +86,6 @@ export const reservationHandlers = [
       );
     }
 
-    // 이미 예약이 존재하는지 확인 (실제로는 Application ID로 확인)
-    // const existingReservations = getReservationsByUserId(body.userId); // userId가 body에 없음
-    // const duplicate = existingReservations.find((r) => r.campaignId === body.campaignId);
-
-    // if (duplicate) {
-    //   return HttpResponse.json(
-    //     {
-    //       success: false,
-    //       error: '이미 예약이 완료된 체험입니다.',
-    //     } satisfies ApiResponse<never>,
-    //     { status: 400 },
-    //   );
-    // }
-
     // 새 예약 생성
     const newReservation: Reservation = {
       id: `res-${Date.now()}`,
@@ -134,6 +97,25 @@ export const reservationHandlers = [
     };
 
     mockReservations.push(newReservation);
+
+    // Update application status (Centralized Data)
+    const application = mockApplications.find((app) => app.id === body.applicationId);
+    if (application) {
+      application.isReservated = true;
+      application.reservationDate = body.date;
+      application.reservationId = newReservation.id;
+      // status는 selected 유지 (방문 전까지는 선정 탭에 표시)
+      // reviewStatus도 아직 설정하지 않음
+    }
+
+    // Update application status (My Campaigns Data - Sync)
+    const myCampaignApp = myCampaignsMockApps.find((app) => app.id === body.applicationId);
+    if (myCampaignApp) {
+      myCampaignApp.isReservated = true;
+      myCampaignApp.reservationDate = body.date;
+      myCampaignApp.reservationId = newReservation.id;
+      // status는 selected 유지
+    }
 
     return HttpResponse.json({
       success: true,
@@ -168,6 +150,18 @@ export const reservationHandlers = [
       ...body,
     };
 
+    // Update application status (Centralized Data)
+    const application = mockApplications.find((app) => app.reservationId === reservationId);
+    if (application && body.date) {
+      application.reservationDate = body.date;
+    }
+
+    // Update application status (My Campaigns Data - Sync)
+    const myCampaignApp = myCampaignsMockApps.find((app) => app.reservationId === reservationId);
+    if (myCampaignApp && body.date) {
+      myCampaignApp.reservationDate = body.date;
+    }
+
     return HttpResponse.json({
       success: true,
       data: mockReservations[reservationIndex],
@@ -194,6 +188,26 @@ export const reservationHandlers = [
 
     // 예약 취소 (배열에서 제거)
     mockReservations.splice(reservationIndex, 1);
+
+    // Update application status (Centralized Data)
+    const application = mockApplications.find((app) => app.reservationId === reservationId);
+    if (application) {
+      application.isReservated = false;
+      application.reservationDate = undefined;
+      application.reservationId = undefined;
+      application.status = 'selected'; // 예약 취소 시 selected 상태로 복귀
+      application.reviewStatus = undefined;
+    }
+
+    // Update application status (My Campaigns Data - Sync)
+    const myCampaignApp = myCampaignsMockApps.find((app) => app.reservationId === reservationId);
+    if (myCampaignApp) {
+      myCampaignApp.isReservated = false;
+      myCampaignApp.reservationDate = undefined;
+      myCampaignApp.reservationId = undefined;
+      myCampaignApp.status = 'selected';
+      myCampaignApp.reviewStatus = undefined;
+    }
 
     return HttpResponse.json({
       success: true,
