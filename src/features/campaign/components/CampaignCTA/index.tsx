@@ -1,14 +1,14 @@
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import dayjs from 'dayjs';
 
 import { Button, Modal, toast } from '@shared/components';
-import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useDeleteMyCampaign } from '@entities/history/hooks/useMyCampaigns';
+import { CampaignDetail } from '@entities/campaign/types/campaign.types';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { useReservationActions } from '@features/history/hooks/useReservationActions';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
-import { CampaignDetail } from '@entities/campaign/types/campaign.types';
 
 import styles from './style.module.scss';
 
@@ -153,13 +153,13 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
 
         {CTA_STATUS === 'ChangeReservation' && (
           <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
-            <Button fullWidth variant="outline" className={styles.CTA} onClick={handleChangeDate}>
+            <Button fullWidth variant="secondary" className={styles.CTA} onClick={handleChangeDate}>
               예약 날짜 변경
             </Button>
             <Modal
               variant="outline"
               trigger={
-                <Button fullWidth className={styles.CTA}>
+                <Button fullWidth variant="outline" className={styles.CTA}>
                   예약 취소
                 </Button>
               }
@@ -172,7 +172,7 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
           <Modal
             variant="outline"
             trigger={
-              <Button fullWidth className={styles.CTA}>
+              <Button fullWidth variant="outline" className={styles.CTA}>
                 예약 취소
               </Button>
             }
