@@ -9,8 +9,8 @@ import { HISTORY_MESSAGES } from '@features/history/constants';
 import { CampaignCardWrapper } from '@features/history/components/CampaignCardWrapper';
 import { CampaignStatusLabel } from '@features/history/components/CampaignStatusLabel';
 import { ReservationBottomSheet } from '@features/history/components/ReservationBottomSheet';
-import { useCampaignCardData } from '@features/history/hooks/useCampaignCardData';
-import { useReservationActions } from '@features/history/hooks/useReservationActions';
+import { useCampaignCardData } from '@entities/history/hooks/useCampaignCardData';
+import { useReservationActions } from '@entities/history/hooks/useReservationActions';
 
 import { CampaignSelectedCardFooter } from './CampaignSelectedCardFooter';
 

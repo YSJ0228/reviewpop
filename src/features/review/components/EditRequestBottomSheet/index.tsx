@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Loader } from '@mantine/core';
 
 import { BottomSheet } from '@shared/components/BottomSheet';
-import { Button } from '@shared/components';
+import { Button, LoadingSpinner } from '@shared/components';
 import { useReviewEditRequest } from '@entities/review';
 
 import styles from './style.module.scss';
@@ -39,7 +38,7 @@ export function EditRequestBottomSheet({
         </Button>
       }
     >
-      {isLoading && <Loader />}
+      {isLoading && <LoadingSpinner />}
       {error && <div>데이터를 불러올 수 없습니다.</div>}
       {reviewEditRequest && (
         <div className={styles.EditRequestBottomSheet}>

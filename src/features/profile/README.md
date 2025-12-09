@@ -12,13 +12,17 @@
 
 ```
 profile/
-├── components/         # 프로필 관련 컴포넌트
-│   ├── ProfileInfo/        # 프로필 정보
-│   ├── ProfileEdit/        # 프로필 수정
-│   └── Settings/           # 설정
-├── hooks/              # 프로필 관련 훅
-│   ├── useProfile.ts       # 프로필 조회
-│   └── useUpdateProfile.ts # 프로필 수정
+├── components/             # 프로필 관련 컴포넌트
+│   ├── MyCampaignState/        # 캠페인 상태 태그
+│   ├── MyCurrentCampaignCard/  # 프로필 나의 캠페인 카드
+│   ├── MyCurrentCampaignList/  # 프로필 나의 캠페인
+│   ├── MyProfile/              # 프로필 페이지
+│   ├── ProfileInfo/            # 프로필 정보
+|   ├── SettingList/            # 설정 세부 항목
+│   └── Settings/               # 설정
+├── hooks/                  # 프로필 관련 훅
+│   ├── useProfile.ts           # 프로필 조회
+│   └── useUpdateProfile.ts     # 프로필 수정
 ├── api/                # 프로필 API
 │   └── profileApi.ts
 └── README.md

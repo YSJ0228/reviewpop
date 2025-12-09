@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
-import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { ApplyForm } from '@features/apply/components/ApplyForm';
 import { requireAuth } from '@shared/lib/auth.server';
 import { ROUTES } from '@shared/config/routes';
+import { LoadingSpinner } from '@shared/components';
 
 import styles from './page.module.scss';
 
@@ -33,7 +33,7 @@ export default async function CampaignApplyPage({ params }: CampaignApplyPagePro
   return (
     <main className={styles.CampaignApplyPage}>
       <ErrorBoundary>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<LoadingSpinner />}>
           {/* TODO: ApplyForm 컴포넌트 추가 */}
           <ApplyForm campaignId={campaignId} />
         </Suspense>

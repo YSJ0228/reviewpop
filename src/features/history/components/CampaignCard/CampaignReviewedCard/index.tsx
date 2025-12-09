@@ -2,7 +2,7 @@ import { STATUS_REVIEW } from '@features/history/constants';
 
 import { CampaignCardWrapper } from '@features/history/components/CampaignCardWrapper';
 import { CampaignStatusLabel } from '@features/history/components/CampaignStatusLabel';
-import { useCampaignCardData } from '@features/history/hooks/useCampaignCardData';
+import { useCampaignCardData } from '@entities/history/hooks/useCampaignCardData';
 
 import { CampaignReviewedCardFooter } from './CampaignReviewedCardFooter';
 
