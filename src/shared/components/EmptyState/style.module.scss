@@ -2,35 +2,31 @@
 
 .EmptyState {
   text-align: center;
-  @include size($width: 100%);
   color: var(--gray-400);
+  @include flex($direction: column, $align: center, $justify: center);
+  @include size($width: 100%);
+  @include padding($y: 16);
 
-  // Elements
   &__Title {
     @include margin($bottom: 8);
     @include font($size: 16, $weight: 700);
   }
 
+  // 기본 Description 스타일 (공통)
   &__Description {
-    @include font($size: 14, $weight: 500);
     white-space: pre-line;
+    @include font($size: 14, $weight: 500);
+    @include margin($bottom: 0);
   }
 
-  &--WithButton {
+  // 버튼이 있을 때만 달라지는 Modifier
+  &--hasButton {
     min-height: 400px;
-    @include flex($direction: column, $align: center, $justify: center);
+    @include padding(0);
+
     .EmptyState__Description {
       @include margin($bottom: 16);
       @include font($weight: 600);
-    }
-  }
-
-  &--NoButton {
-    @include padding($y: 16);
-
-    .EmptyState__Description {
-      @include margin($bottom: 0);
-      @include font($weight: 500);
     }
   }
 }

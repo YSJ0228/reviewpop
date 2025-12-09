@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { counterHelpers } from './utils';
 import styles from './Counter.module.scss';
+import { IconMinus, IconPlus } from '@pop-ui/foundation';
 
 interface CounterProps {
   title: string;
@@ -41,7 +42,7 @@ export function Counter({ title, maxCount, subtitle, onChange, initialValue = 1 
             className={styles.Counter__Button}
             aria-label="감소"
           >
-            -
+            <IconMinus size={16} />
           </button>
           <span className={styles.Counter__Value}>{count}</span>
           <button
@@ -50,7 +51,7 @@ export function Counter({ title, maxCount, subtitle, onChange, initialValue = 1 
             className={styles.Counter__Button}
             aria-label="증가"
           >
-            +
+            <IconPlus size={16} />
           </button>
         </div>
       </div>

@@ -5,6 +5,14 @@
   text-align: center;
   border-bottom: 1px solid var(--gray-50);
 
+  &__Day {
+    font-weight: 600;
+  }
+
+  &__HeaderLevel {
+    @include font($weight: 700);
+  }
+
   &__MonthCell {
     @include font($weight: 600);
   }

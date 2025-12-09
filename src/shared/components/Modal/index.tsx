@@ -52,6 +52,8 @@ export function Modal({ texts, variant = 'confirm', trigger, onConfirm, ...props
           withCloseButton={false}
           centered
           classNames={{
+            overlay: styles.Modal__Overlay,
+            inner: styles.Modal__Inner,
             content: styles.Modal,
             body: styles.Modal__Body,
           }}

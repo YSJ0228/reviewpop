@@ -34,10 +34,6 @@ export function Settings() {
         <SettingList title="로그아웃" isIcon={false} onClick={handleLogout} path={ROUTES.LOGIN} />
         <Modal
           variant="warning"
-          texts={{
-            title: '정말 탈퇴하시겠어요?',
-            content: '탈퇴 시 체험단 신청 내역과 후기 기록이 모두 삭제되며 복구할 수 없습니다.',
-          }}
           trigger={
             <SettingList
               title="탈퇴하기"

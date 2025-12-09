@@ -1438,34 +1438,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pop-ui/core@npm:^0.0.35":
-  version: 0.0.35
-  resolution: "@pop-ui/core@npm:0.0.35"
+"@pop-ui/core@npm:^0.0.37":
+  version: 0.0.37
+  resolution: "@pop-ui/core@npm:0.0.37"
   dependencies:
     "@mantine/core": "npm:^8.3.6"
     "@mantine/dates": "npm:^8.3.6"
     "@mantine/dropzone": "npm:^8.3.6"
     "@mantine/hooks": "npm:^8.3.6"
     "@mantine/notifications": "npm:^8.3.6"
-    "@pop-ui/foundation": "npm:0.0.30"
+    "@pop-ui/foundation": "npm:0.0.31"
     dayjs: "npm:^1.11.18"
   peerDependencies:
     react: ^19.2.0
     react-dom: ^19.2.0
-  checksum: 10c0/e6064778c6f1197fc760c36ea630a1734b97dbf85da28639d2c3bf5276ee336bd6d4882fd453baf736c00fa8a830efc386bb3c68ba6f2b9844e0a19a2210c4e1
+  checksum: 10c0/c4f447a13a309e36674267097dfe3e8e627cd7d3b007b0b564d4e840430b1e2368d8ade8e7e09019b8b249912330f38e77086efe573fa8aa888b0a4299dd4ac1
   languageName: node
   linkType: hard
 
-"@pop-ui/foundation@npm:0.0.30, @pop-ui/foundation@npm:^0.0.30":
-  version: 0.0.30
-  resolution: "@pop-ui/foundation@npm:0.0.30"
+"@pop-ui/foundation@npm:0.0.31, @pop-ui/foundation@npm:^0.0.31":
+  version: 0.0.31
+  resolution: "@pop-ui/foundation@npm:0.0.31"
   dependencies:
     "@mantine/core": "npm:^8.3.6"
     "@mantine/hooks": "npm:^8.3.6"
   peerDependencies:
     react: ^19.2.0
     react-dom: ^19.2.0
-  checksum: 10c0/a90f59703a14abf254fc2e43ef214a059584ca6d0e83724e3e533cd9d81f778cde1bc5bd9460992819dbd806b4fe8d4c4670160b9c53ab25c8319d1389fffe28
+  checksum: 10c0/cb516b67636ff427af3186077f5755710f35775f9e610cdbe8d65f25c9a29588e45ecf9cb74ab914c3731ffeae799c397fc75e038c1e6e90663cbba7eb0efb26
   languageName: node
   linkType: hard
 
@@ -6005,8 +6005,8 @@ __metadata:
     "@mantine/core": "npm:^8.3.7"
     "@mantine/hooks": "npm:^8.3.7"
     "@mantine/modals": "npm:^8.3.7"
-    "@pop-ui/core": "npm:^0.0.35"
-    "@pop-ui/foundation": "npm:^0.0.30"
+    "@pop-ui/core": "npm:^0.0.37"
+    "@pop-ui/foundation": "npm:^0.0.31"
     "@tanstack/react-query": "npm:^5.90.6"
     "@tanstack/react-query-devtools": "npm:^5.90.2"
     "@types/cookie": "npm:^1.0.0"
