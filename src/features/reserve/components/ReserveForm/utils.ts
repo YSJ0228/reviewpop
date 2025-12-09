@@ -5,7 +5,7 @@ const DEFAULT_MIN_COUNT = 1;
  * 시간 문자열을 분 단위로 변환
  * @param time "HH:mm" 형식의 시간 문자열
  */
-function timeToMinutes(time: string): number {
+export function timeToMinutes(time: string): number {
   const [hours, minutes] = time.split(':').map(Number);
   return hours * 60 + minutes;
 }
@@ -91,19 +91,22 @@ export const counterHelpers = {
 };
 
 /**
- * campaignId 유효성 검증
- * @param paramCampaignId URL 파라미터로 받은 campaignId
- * @param storeCampaignId 스토어에 저장된 campaignId
- * @returns 유효성 여부
- *
- * 로직:
- * - paramCampaignId와 storeCampaignId가 모두 존재하고 일치해야 함
- * - 예약 버튼 클릭 시 스토어에 campaignId가 저장되므로,
- *   정상적인 접근이라면 항상 둘 다 존재하고 일치해야 함
+ * 오늘이 선택되었을 때 현재 시간 이전의 시간 슬롯 필터링
+ * @param allTimes 모든 시간 슬롯 배열
+ * @param selectedDate 선택된 날짜
+ * @returns 현재 시간 이전의 시간 슬롯 배열 (오늘이 아니면 빈 배열)
  */
-export function validateCampaignId(
-  paramCampaignId: string,
-  storeCampaignId: string | undefined,
-): boolean {
-  return !!paramCampaignId && !!storeCampaignId && paramCampaignId === storeCampaignId;
+export function getPastTimes(allTimes: string[], selectedDate: DateInput | null): string[] {
+  if (!selectedDate) return [];
+
+  const today = formatDate(new Date(), 'DATE_ONLY');
+  const selectedDateStr = formatDate(selectedDate, 'DATE_ONLY');
+
+  // 오늘이 아니면 빈 배열 반환
+  if (selectedDateStr !== today) return [];
+
+  // 현재 시간 이전의 시간들만 필터링
+  const currentTime = formatDate(new Date(), 'TIME');
+  const currentMinutes = timeToMinutes(currentTime);
+  return allTimes.filter((time) => timeToMinutes(time) < currentMinutes);
 }

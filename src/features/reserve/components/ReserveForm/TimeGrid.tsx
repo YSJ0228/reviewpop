@@ -1,9 +1,10 @@
 'use client';
 
+import { useMemo } from 'react';
 import { DateValue, TimeGrid as MantineTimeGrid } from '@mantine/dates';
 import { formatDate } from '@shared/lib/date';
 import 'dayjs/locale/ko';
-import { generateTimeSlots } from './utils';
+import { generateTimeSlots, getPastTimes } from './utils';
 import { useReservedDateTimes } from '@entities/reservation/hooks/useReserve';
 import styles from './TimeGrid.module.scss';
 
@@ -22,47 +23,52 @@ const TIME_SECTIONS = [
 
 const GRID_PROPS = { cols: 4, spacing: 'xs', verticalSpacing: 'xs' } as const;
 
-/**
- * ISO 8601 날짜시간 문자열을 HH:mm 형식으로 변환
- */
-function parseReservedTimes(dateTimes: string[]): string[] {
-  return dateTimes.map((dt) => formatDate(dt, 'TIME'));
-}
-
 export function TimeGrid({ value, onChange, intervalMinutes, date, campaignId }: TimeGridProps) {
   const { data: reservedDateTimes, isLoading } = useReservedDateTimes(
     campaignId,
     date?.toString() ?? '',
   );
 
+  // 각 섹션별 시간 슬롯 생성
+  const sectionTimes = useMemo(() => {
+    return TIME_SECTIONS.map((section) => ({
+      ...section,
+      times: generateTimeSlots({
+        startTime: section.startTime,
+        endTime: section.endTime,
+        intervalMinutes,
+      }),
+    }));
+  }, [intervalMinutes]);
+
+  // 예약된 시간 파싱
   const reservedTimes = reservedDateTimes?.dateTimes
-    ? parseReservedTimes(reservedDateTimes.dateTimes)
+    ? reservedDateTimes.dateTimes.map((dt) => formatDate(dt, 'TIME'))
     : [];
 
-  const handleChange = (time: string | null) => {
-    onChange?.(time);
-  };
+  // 오늘이 선택되었을 때 현재 시간 이전 시간대 비활성화
+  const pastTimes = useMemo(() => {
+    const allTimes = sectionTimes.flatMap((section) => section.times);
+    return getPastTimes(allTimes, date);
+  }, [date, sectionTimes]);
+
+  // 비활성화할 시간 = 예약된 시간 + 과거 시간
+  const disabledTimes = [...new Set([...reservedTimes, ...pastTimes])];
 
   return (
     <div className={styles.TimeGrid}>
-      {TIME_SECTIONS.map((section) => {
-        const times = generateTimeSlots({
-          startTime: section.startTime,
-          endTime: section.endTime,
-          intervalMinutes,
-        });
-
-        const isSelectedInThisSection = value && times.includes(value);
+      {sectionTimes.map((section) => {
+        const isSelectedInThisSection = value && section.times.includes(value);
 
         return (
           <div key={section.label} className={styles.TimeGrid__Section}>
             <h3 className={styles.TimeGrid__SectionLabel}>{section.label}</h3>
             <MantineTimeGrid
-              data={times}
+              data={section.times}
               value={isSelectedInThisSection ? value : null}
-              onChange={handleChange}
+              onChange={onChange}
               disabled={!date || isLoading}
-              disableTime={reservedTimes}
+              disableTime={disabledTimes}
               allowDeselect
               simpleGridProps={GRID_PROPS}
               radius={8}
