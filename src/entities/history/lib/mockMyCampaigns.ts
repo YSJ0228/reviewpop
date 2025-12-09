@@ -136,7 +136,7 @@ export const mockMyCampaigns: Application[] = [
     isReservated: true,
     reservationDate: getReservationDate(getCampaign('9'), -3),
     createdAt: '2025-11-30T15:00:00Z',
-    reviewUrl: 'https://blog.naver.com/kakao-1001/1234',
+    reviewUrl: 'https://blog.naver.com/applelady282/224103295189',
   },
 
   // 6. 후기 - 수정 요청 (Review - Requested)
@@ -153,7 +153,7 @@ export const mockMyCampaigns: Application[] = [
     reservationDate: getReservationDate(getCampaign('10'), -2),
     createdAt: '2025-11-29T09:00:00Z',
     reviewId: 'review_1',
-    reviewUrl: 'https://blog.naver.com/kakao-1001/12345',
+    reviewUrl: 'https://blog.naver.com/tjsdudrhadl/224103342117',
   },
 
   // 7. 완료 (Completed) - 종료 탭
@@ -169,7 +169,7 @@ export const mockMyCampaigns: Application[] = [
     isReservated: true,
     reservationDate: getReservationDate(getCampaign('11'), -10),
     reviewId: 'review_0',
-    reviewUrl: 'https://blog.naver.com/kakao-1001/123456',
+    reviewUrl: 'https://blog.naver.com/mamanomad/224101847989',
     createdAt: '2025-11-28T10:00:00Z',
   },
 ];

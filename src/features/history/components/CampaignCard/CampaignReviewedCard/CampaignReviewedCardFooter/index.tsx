@@ -21,6 +21,7 @@ export function CampaignReviewedCardFooter({
   campaignId,
   applicationId,
   reviewId,
+  reviewUrl,
 }: CampaignReviewedCardFooterProps) {
   // reviewStatus가 undefined인 경우 early return
   if (!reviewStatus) {
@@ -49,7 +50,7 @@ export function CampaignReviewedCardFooter({
   if (reviewStatus === 'reviewPending') {
     return (
       <footer className={styles.CampaignReviewedCardFooter__Wrapper}>
-        <ReviewPendingCard />
+        <ReviewPendingCard reviewUrl={reviewUrl} />
       </footer>
     );
   }
@@ -71,7 +72,7 @@ export function CampaignReviewedCardFooter({
   if (reviewStatus === 'reviewed') {
     return (
       <footer className={styles.CampaignReviewedCardFooter__Wrapper}>
-        <ReviewCompletedCard />
+        <ReviewCompletedCard reviewUrl={reviewUrl} />
       </footer>
     );
   }
