@@ -8,12 +8,35 @@ import styles from './style.module.scss';
  * 후기 등록 완료 상태 카드 컴포넌트 (후기 상태 = reviewed)
  * @returns 후기 등록 완료 상태의 카드 컴포넌트
  */
-export function ReviewCompletedCard() {
+interface ReviewCompletedCardProps {
+  reviewUrl?: string;
+}
+
+/**
+ * 후기 등록 완료 상태 카드 컴포넌트 (후기 상태 = reviewed)
+ * @param reviewUrl - 후기 URL
+ * @returns 후기 등록 완료 상태의 카드 컴포넌트
+ */
+export function ReviewCompletedCard({ reviewUrl }: ReviewCompletedCardProps) {
+  const handleMyBlogReviewClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (reviewUrl) {
+      window.open(reviewUrl, '_blank');
+    }
+  };
+
   return (
     <div className={styles.ReviewCompletedCard}>
       <div className={styles.ReviewCompletedCard__Content}>
-        {/* TODO: 내 블로그 후기 버튼 클릭 시 */}
-        <Button variant="secondary" fullWidth radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM} size="small">
+        <Button
+          variant="secondary"
+          fullWidth
+          radius={HISTORY_UI.BUTTON_RADIUS_MEDIUM}
+          size="small"
+          onClick={handleMyBlogReviewClick}
+        >
           <span className={styles['ReviewCompletedCard__ButtonText--Secondary']}>
             {HISTORY_MESSAGES.MY_BLOG_REVIEW}
           </span>

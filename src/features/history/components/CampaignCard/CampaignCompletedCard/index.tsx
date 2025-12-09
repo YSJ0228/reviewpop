@@ -44,6 +44,7 @@ export function CampaignCompletedCard({ application }: CampaignCompletedCardProp
         <CampaignReviewedCardFooter
           reviewStatus={application.reviewStatus}
           campaignStatus={campaign.status}
+          reviewUrl={application.reviewUrl}
         />
       )}
     </>

@@ -10,6 +10,10 @@
   color: var(--color-gray-800);
 }
 
+.ApplicantCountWrapper {
+  @include flex($direction: row, $align: center, $gap: 16);
+}
+
 .ApplicantCount {
   @include font($size: 14, $weight: 700, $line-height: 1.5, $letter-spacing: -0.02em);
   color: var(--color-gray-800);

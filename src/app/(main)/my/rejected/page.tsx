@@ -7,6 +7,8 @@ import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { RejectedList } from '@features/history/components/RejectedList';
 
 import styles from './page.module.scss';
+import { LoadingSpinner } from '@shared/components';
+
 /**
  * 미선정 체험 페이지
  * - 하단 탭: O (나의 체험 활성화)
@@ -28,7 +30,7 @@ export default function RejectedCampaignsPage() {
   return (
     <main className={styles.RejectedCampaignsPage}>
       <ErrorBoundary>
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={<LoadingSpinner />}>
           <RejectedList />
         </Suspense>
       </ErrorBoundary>
