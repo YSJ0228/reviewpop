@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCampaign } from '@entities/campaign/api/campaignApi';
-import type { CampaignBottomSheetData } from '../types';
+import type { CampaignBottomSheetData } from '../../../features/history/types';
 
 /**
  * 나의 체험(선정) - 바텀시트에 필요한 Campaign 데이터를 조회하는 훅

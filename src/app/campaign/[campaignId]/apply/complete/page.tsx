@@ -35,9 +35,14 @@ export default function CampaignApplyCompletePage({ params }: CampaignApplyCompl
   const router = useRouter();
   const today = '2000-01-01';
 
+  const handleXButton = () => {
+    router.push(`/campaign/${campaignId}`);
+  };
+
   usePageHeader({
     showBackButton: false,
     showXButton: true,
+    onX: handleXButton,
   });
 
   return (

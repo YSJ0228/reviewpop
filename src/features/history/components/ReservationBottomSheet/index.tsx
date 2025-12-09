@@ -5,7 +5,7 @@ import { Modal } from '@shared/components';
 import { Colors } from '@shared/styles/colors';
 
 import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
-import { useIsTodayReservation } from '@features/history/hooks/useIsTodayReservation';
+import { useIsTodayReservation } from '@entities/history/hooks/useIsTodayReservation';
 
 import type { ReservationBottomSheetProps } from './type';
 

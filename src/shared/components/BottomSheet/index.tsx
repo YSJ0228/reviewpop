@@ -23,6 +23,10 @@ export function BottomSheet({
       position="bottom"
       onClose={onClose}
       withCloseButton={withCloseButton}
+      closeButtonProps={{
+        iconSize: 26,
+        className: styles.CloseButton,
+      }}
       styles={{
         content: {
           width: '100%',

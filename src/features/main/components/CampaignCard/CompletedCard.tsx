@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { useBlogReviews } from '@features/review/hooks/useBlogReviews';
+import { useBlogReviews } from '@entities/review/hooks/useBlogReviews';
 
 import type { CampaignCardProps } from './types';
 

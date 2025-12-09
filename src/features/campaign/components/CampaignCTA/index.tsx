@@ -7,7 +7,7 @@ import { useApplicationDetails } from '@entities/application/hooks/useApplicatio
 import { useDeleteMyCampaign } from '@entities/history/hooks/useMyCampaigns';
 import { CampaignDetail } from '@entities/campaign/types/campaign.types';
 import { useUserInfo } from '@entities/user/hooks/useUserInfo';
-import { useReservationActions } from '@features/history/hooks/useReservationActions';
+import { useReservationActions } from '@entities/history/hooks/useReservationActions';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
 
 import styles from './style.module.scss';
