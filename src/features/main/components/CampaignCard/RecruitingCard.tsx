@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IconArrowRight } from '@pop-ui/foundation';
 
-import { diff, formatDate, now } from '@shared/lib/date';
+import { diffDate, formatDate, now } from '@shared/lib/date';
 
 import type { CampaignCardProps } from './types';
 
@@ -11,7 +11,7 @@ import styles from './style.module.scss';
 export function RecruitingCard({ campaign }: CampaignCardProps) {
   const givenTime = campaign.schedule.application.end;
   const currentTime = now();
-  const diffInDays = Math.max(0, diff(givenTime, currentTime, 'day'));
+  const diffInDays = Math.max(0, diffDate(givenTime, currentTime));
   const applicationSchedule = [
     campaign.schedule.application.start,
     campaign.schedule.application.end,

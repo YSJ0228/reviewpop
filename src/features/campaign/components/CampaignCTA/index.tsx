@@ -153,9 +153,6 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
 
         {CTA_STATUS === 'ChangeReservation' && (
           <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
-            <Button fullWidth variant="secondary" className={styles.CTA} onClick={handleChangeDate}>
-              예약 날짜 변경
-            </Button>
             <Modal
               variant="outline"
               trigger={
@@ -165,6 +162,9 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
               }
               onConfirm={handleCancelReservationClick}
             />
+            <Button fullWidth variant="secondary" className={styles.CTA} onClick={handleChangeDate}>
+              예약 날짜 변경
+            </Button>
           </div>
         )}
 
