@@ -14,7 +14,7 @@
     position: sticky;
     height: 52px;
     overflow-x: scroll;
-    background: #fff;
+    background: var(--color-white);
     top: 48px;
     z-index: 300;
     margin-left: -16px;
@@ -28,21 +28,21 @@
   }
 
   &[data-selected='true'] {
-    background: #eff8ff;
-    border: 1px solid #2e90fa;
+    background: var(--color-blue-50);
+    border: 1px solid var(--color-blue-500);
 
     span {
-      color: #2e90fa;
+      color: var(--color-blue-500);
       @include font($weight: 700);
     }
   }
 
   &[data-selected='false'] {
-    background: #ffffff;
-    border: 1px solid #e7e7e7;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-100);
 
     span {
-      color: #4a4a4a;
+      color: var(--color-gray-800);
       @include font($weight: 600);
     }
   }

@@ -1,14 +1,14 @@
-import dayjs from 'dayjs';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import dayjs from 'dayjs';
 
 import { Button, Modal, toast } from '@shared/components';
-import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { useApplicationDetails } from '@entities/application/hooks/useApplicationDetails';
 import { useDeleteMyCampaign } from '@entities/history/hooks/useMyCampaigns';
+import { CampaignDetail } from '@entities/campaign/types/campaign.types';
+import { useUserInfo } from '@entities/user/hooks/useUserInfo';
 import { useReservationActions } from '@features/history/hooks/useReservationActions';
 import { useReservationStore } from '@features/reserve/store/reservationStore';
-import { CampaignDetail } from '@entities/campaign/types/campaign.types';
 
 import styles from './style.module.scss';
 
@@ -83,6 +83,8 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
       }
     }
 
+    if (campaign.status === 'recruiting') return 'Apply';
+
     return 'Closed';
   };
 
@@ -116,12 +118,16 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
 
   return (
     <div className={styles.CTA__Container}>
-      <span>{CTA_STATUS === 'Reserve' && '🎉 체험단에 선정되었어요!'}</span>
+      {CTA_STATUS === 'Reserve' && <span>🎉 체험단에 선정되었어요!</span>}
 
       <div className={styles.CTA__ButtonWrapper}>
         {CTA_STATUS === 'Apply' && (
           <Link href={`/campaign/${campaign.id}/apply`} className={styles.CTA__Link}>
-            <Button fullWidth className={styles.CTA}>
+            <Button
+              fullWidth
+              className={styles.CTA}
+              onClick={() => router.push(`/campaign/${campaign.id}/apply`)}
+            >
               체험단 신청하기
             </Button>
           </Link>
@@ -147,13 +153,13 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
 
         {CTA_STATUS === 'ChangeReservation' && (
           <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
-            <Button fullWidth variant="outline" className={styles.CTA} onClick={handleChangeDate}>
+            <Button fullWidth variant="secondary" className={styles.CTA} onClick={handleChangeDate}>
               예약 날짜 변경
             </Button>
             <Modal
               variant="outline"
               trigger={
-                <Button fullWidth className={styles.CTA}>
+                <Button fullWidth variant="outline" className={styles.CTA}>
                   예약 취소
                 </Button>
               }
@@ -166,7 +172,7 @@ export default function CampaignCTA({ campaign }: { campaign: CampaignDetail }) 
           <Modal
             variant="outline"
             trigger={
-              <Button fullWidth className={styles.CTA}>
+              <Button fullWidth variant="outline" className={styles.CTA}>
                 예약 취소
               </Button>
             }

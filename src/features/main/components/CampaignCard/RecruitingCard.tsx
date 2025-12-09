@@ -37,7 +37,7 @@ export function RecruitingCard({ campaign }: CampaignCardProps) {
             <p className={styles.CampaignCard__Items}>{campaign.providedItem}</p>
           </div>
           <div className={styles.CampaignCard__Content__Active}>
-            <div>
+            <div className={styles.CampaignCard__MetaWrapper}>
               <div className={styles.CampaignCard__Recruitment}>
                 <span>
                   <b>{diffInDays ? `${diffInDays}일 남음` : '오늘 마감'}</b>
