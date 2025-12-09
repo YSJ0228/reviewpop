@@ -1,4 +1,5 @@
-import { GlobalPageHeader } from '@shared/components';
+import { GlobalPageHeader, ScrollToTop } from '@shared/components';
+
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { fontClasses } from '@shared/styles/fonts';
 import '@shared/lib/dayjs.config';
@@ -24,6 +25,7 @@ export default function RootLayout({
       </head>
       <body className={`${fontClasses}`}>
         <div className="AppContainer">
+          <ScrollToTop />
           <GlobalPageHeader />
           <Providers>
             <ErrorBoundary>{children}</ErrorBoundary>
