@@ -15,4 +15,5 @@ export interface CampaignReviewedCardFooterProps {
   campaignId?: string;
   applicationId?: string;
   reviewId?: string;
+  reviewUrl?: string;
 }

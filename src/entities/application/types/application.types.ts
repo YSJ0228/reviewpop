@@ -57,6 +57,7 @@ export interface Application {
   reservationDate?: string;
   reservationId?: string;
   reviewId?: string;
+  reviewUrl?: string;
 }
 
 /**
