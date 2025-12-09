@@ -20,17 +20,6 @@
     cursor: not-allowed;
     border: none;
   }
-
-  // 호버 효과
-  &:not(:disabled):hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
-  }
-
-  // 클릭 효과
-  &:not(:disabled):active {
-    transform: translateY(0);
-  }
 }
 
 // 크기 변형
@@ -55,59 +44,23 @@
 .Button--Primary {
   background-color: var(--primary-500);
   @include font($color: var(--color-white));
-
-  &:not(:disabled):hover {
-    background-color: var(--primary-600);
-  }
-
-  // pressed 상태일 때 배경 기본값 설정
-  &:not(:disabled):active {
-    background-color: var(--primary-700);
-  }
 }
 
 .Button--Secondary {
   background-color: var(--color-white);
   border: 1px solid var(--gray-100);
   @include font($color: var(--gray-800));
-
-  &:not(:disabled):hover {
-    background-color: var(--gray-25);
-  }
-
-  // pressed 상태일 때 배경 기본값 설정
-  &:not(:disabled):active {
-    background-color: var(--gray-50);
-  }
 }
 
 .Button--Outline {
   background-color: var(--color-white);
   border: 1px solid var(--gray-100);
   @include font($color: var(--error-500));
-
-  &:not(:disabled):hover {
-    background-color: var(--gray-25);
-  }
-
-  // pressed 상태일 때 배경 기본값 설정
-  &:not(:disabled):active {
-    background-color: var(--gray-50);
-  }
 }
 
 .Button--Warning {
   background-color: var(--error-500);
   @include font($color: var(--color-white));
-
-  &:not(:disabled):hover {
-    background-color: var(--error-700);
-  }
-
-  // pressed 상태일 때 배경 기본값 설정
-  &:not(:disabled):active {
-    background-color: var(--error-800);
-  }
 }
 
 // 전체 너비
