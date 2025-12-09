@@ -72,6 +72,7 @@ export const reviewHandlers = [
       application.status = 'reviewed';
       application.reviewStatus = 'reviewPending';
       application.reviewId = newReview.id;
+      application.reviewUrl = body.reviewUrl;
     }
 
     // Update application status (Shared Mock - for Profile)
@@ -83,6 +84,7 @@ export const reviewHandlers = [
       sharedApp.status = 'reviewed';
       sharedApp.reviewStatus = 'reviewPending';
       sharedApp.reviewId = newReview.id;
+      sharedApp.reviewUrl = body.reviewUrl;
     }
 
     return HttpResponse.json<ApiResponse<PostReview>>({
@@ -111,6 +113,9 @@ export const reviewHandlers = [
       if (application) {
         application.status = 'reviewed';
         application.reviewStatus = 'reviewPending';
+        if (body.reviewUrl) {
+          application.reviewUrl = body.reviewUrl;
+        }
       }
 
       // Update application status (Shared)
@@ -120,6 +125,9 @@ export const reviewHandlers = [
       if (sharedApp) {
         sharedApp.status = 'reviewed';
         sharedApp.reviewStatus = 'reviewPending';
+        if (body.reviewUrl) {
+          sharedApp.reviewUrl = body.reviewUrl;
+        }
       }
 
       return HttpResponse.json<ApiResponse<PostReview>>({
