@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { Button } from '@shared/components';
 import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
-import { useCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
+import { useCampaignBottomSheetData } from '@entities/history/hooks/useCampaignBottomSheetData';
 
 import { ProviderBenefitSection } from './ProviderBenefitSection';
 import { ReviewMissionSection } from './ReviewMissionSection';

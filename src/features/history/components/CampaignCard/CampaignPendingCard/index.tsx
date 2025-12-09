@@ -1,5 +1,5 @@
 import { CampaignCardWrapper } from '@features/history/components/CampaignCardWrapper';
-import { useCampaignCardData } from '@features/history/hooks/useCampaignCardData';
+import { useCampaignCardData } from '@entities/history/hooks/useCampaignCardData';
 
 import { CampaignAppliedCard } from '../CampaignAppliedCard';
 

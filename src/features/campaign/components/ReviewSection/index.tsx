@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Button } from '@shared/components';
 import { Campaign } from '@entities/campaign/types/campaign.types';
-import { useBlogReviews } from '@features/review/hooks/useBlogReviews';
+import { useBlogReviews } from '@entities/review/hooks/useBlogReviews';
 
 import styles from './style.module.scss';
 import ReviewCard from '@entities/review/ui/ReviewCard';

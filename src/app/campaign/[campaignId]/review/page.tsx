@@ -3,7 +3,7 @@
 import { use } from 'react';
 
 import ReviewCard from '@entities/review/ui/ReviewCard';
-import { useBlogReviews } from '@features/review/hooks/useBlogReviews';
+import { useBlogReviews } from '@entities/review/hooks/useBlogReviews';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
 import { CampaignDetailPageProps } from '@entities/campaign/types/page.types';
 
