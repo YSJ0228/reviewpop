@@ -18,4 +18,9 @@
   span {
     width: 100%;
   }
+
+  &:not(:disabled):hover,
+  &:not(:disabled):active {
+    background: #ecd800;
+  }
 }
