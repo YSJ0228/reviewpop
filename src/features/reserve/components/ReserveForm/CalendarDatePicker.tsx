@@ -1,35 +1,33 @@
-import { CalendarDatePicker as PopUiCalendarDatePicker } from '@pop-ui/core';
-import { DateValue } from '@mantine/dates';
+import {
+  CalendarDatePicker as PopUiCalendarDatePicker,
+  ICalendarDatePickerProps,
+} from '@pop-ui/core';
 import { formatDateRange } from './utils';
 import styles from './CalendarDatePicker.module.scss';
-
-type TDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-
-interface CalendarDatePickerProps {
-  excludedDates?: string[];
-  excludedDays?: TDayOfWeek[];
-  onChange: (date: DateValue | null) => void;
-  startDate: string;
-  endDate: string;
-}
 
 export function CalendarDatePicker({
   excludedDates,
   excludedDays,
   onChange,
-  startDate,
-  endDate,
-}: CalendarDatePickerProps) {
-  const dateRangeText = formatDateRange(startDate, endDate);
+  minDate,
+  maxDate,
+  ...props
+}: ICalendarDatePickerProps) {
+  const dateRangeText = formatDateRange(minDate, maxDate);
 
   return (
     <div className={styles.CalendarDatePicker}>
       <PopUiCalendarDatePicker
+        classNames={{
+          day: styles.CalendarDatePicker__Day,
+          calendarHeaderLevel: styles.CalendarDatePicker__HeaderLevel,
+        }}
         onChange={onChange}
         excludedDates={excludedDates}
         excludedDays={excludedDays}
-        minDate={startDate}
-        maxDate={endDate}
+        minDate={minDate}
+        maxDate={maxDate}
+        {...props}
       />
       <div className={styles.CalendarDatePicker__Footer}>
         <span className={styles.CalendarDatePicker__Label}>

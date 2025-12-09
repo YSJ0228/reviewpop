@@ -72,9 +72,12 @@ export function combineDateAndTime(date: DateInput | null, time: string | null):
  * formatDateRange('2025-12-01', '2025-12-24')
  * // Returns: "12월 1일 ~ 12월 24일"
  */
-export function formatDateRange(startDate: string, endDate: string): string {
-  const start = formatDate(startDate, 'MMDD_LONG');
-  const end = formatDate(endDate, 'MMDD_LONG');
+export function formatDateRange(
+  startDate: string | Date | undefined,
+  endDate: string | Date | undefined,
+): string {
+  const start = formatDate(startDate as Date, 'MMDD_LONG');
+  const end = formatDate(endDate as Date, 'MMDD_LONG');
   return `${start} ~ ${end}`;
 }
 
