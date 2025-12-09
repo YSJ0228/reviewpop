@@ -58,10 +58,13 @@ export function CampaignStatusBar({ campaign }: CampaignStatusBarProps) {
   return (
     <div className={styles.CampaignStatusBar} role="status" aria-live="polite">
       <span className={styles.RemainingTime}>{remainingTimeText}</span>
-      <span className={styles.ApplicantCount}>
-        신청 {campaign.currentRecruitment}명
-        <span className={styles.ApplicantCount__Total}>/{campaign.maxRecruitment}명</span>
-      </span>
+      <div className={styles.ApplicantCountWrapper}>
+        <span className={styles.ApplicantCount}>
+          신청 {campaign.currentRecruitment}명
+          <span className={styles.ApplicantCount__Total}>/{campaign.maxRecruitment}명</span>
+        </span>
+        <StatusBadge campaign={campaign} />
+      </div>
     </div>
   );
 }
