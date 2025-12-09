@@ -22,6 +22,7 @@ export { GlobalPageHeader } from './GlobalPageHeader';
 export { GlobalMainNavigation } from './GlobalMainNavigation';
 export { HeaderConfig } from './HeaderConfig';
 export { AddressMap } from './AddressMap';
+export { ScrollToTop } from './ScrollToTop';
 
 // Types
 export type { ButtonProps } from './Button/types';

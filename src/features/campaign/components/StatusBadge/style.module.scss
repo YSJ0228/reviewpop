@@ -7,18 +7,18 @@
   @include flex($justify: center, $align: center);
 
   &--ReviewEnded {
-    background: #f6f6f6;
+    background: var(--color-gray-50);
 
     span {
-      color: #808080;
+      color: var(--color-gray-600);
     }
   }
 
   &--HighProbability {
-    background: #edfcff;
+    background: var(--color-aqua-50);
 
     span {
-      color: #11badd;
+      color: var(--color-aqua-600);
     }
   }
 

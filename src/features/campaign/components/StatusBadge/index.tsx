@@ -8,10 +8,13 @@ import { diff } from '@shared/lib/date';
 export default function StatusBadge({ campaign }: { campaign: Campaign }) {
   const isCompleted = campaign.status === 'completed' || campaign.status === 'closed';
   const now = dayjs();
-  const reviewEnd = dayjs(campaign.schedule.review.end);
-  const dateDiff = diff(reviewEnd, now, 'hour');
+  const applicationEnd = dayjs(campaign.schedule.application.end);
+  const dateDiff = diff(applicationEnd, now, 'hour');
   const isHighProbability =
-    !isCompleted && campaign.currentRecruitment < campaign.maxRecruitment / 2 && dateDiff < 24;
+    !isCompleted &&
+    campaign.currentRecruitment < campaign.maxRecruitment / 2 &&
+    dateDiff > 0 &&
+    dateDiff <= 24;
   const BADGE_MESSAGE = {
     ReviewEnded: '종료된 체험',
     HighProbability: '선정 확률 높음',

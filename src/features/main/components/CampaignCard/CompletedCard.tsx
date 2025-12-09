@@ -37,30 +37,32 @@ export function CompletedCard({ campaign }: CampaignCardProps) {
         </article>
       </Link>
       {blogReviews.length > 0 && (
-        <div className={styles.BlogReviewList}>
-          {blogReviews.map((review) => (
-            <a
-              key={review.id}
-              href={review.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.BlogReviewItem}
-            >
-              <h4 className={styles.BlogReviewItem__Title}>{review.title}</h4>
-              <div className={styles.BlogReviewItem__Content}>
-                <span className={styles.BlogReviewItem__Article}>{review.article}</span>
-                <div className={styles.BlogReviewItem__Thumbnail}>
-                  <Image
-                    src={review.thumbnail}
-                    alt={review.title}
-                    fill
-                    sizes="56px"
-                    style={{ objectFit: 'cover' }}
-                  />
+        <div className={styles.BlogReviewListWrapper}>
+          <div className={styles.BlogReviewList}>
+            {blogReviews.map((review) => (
+              <a
+                key={review.id}
+                href={review.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.BlogReviewItem}
+              >
+                <h4 className={styles.BlogReviewItem__Title}>{review.title}</h4>
+                <div className={styles.BlogReviewItem__Content}>
+                  <span className={styles.BlogReviewItem__Article}>{review.article}</span>
+                  <div className={styles.BlogReviewItem__Thumbnail}>
+                    <Image
+                      src={review.thumbnail}
+                      alt={review.title}
+                      fill
+                      sizes="56px"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            ))}
+          </div>
         </div>
       )}
     </div>

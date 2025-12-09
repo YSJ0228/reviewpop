@@ -24,7 +24,7 @@ export function CampaignAppliedCard({ announcementStatus, campaignId }: ICampaig
         {announcementStatus}
       </p>
       <Modal
-        variant="outline"
+        variant="confirm"
         onConfirm={handleCancelApplication}
         trigger={
           <span
