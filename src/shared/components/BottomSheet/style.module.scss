@@ -11,3 +11,10 @@
     overflow-y: auto;
   }
 }
+
+.CloseButton {
+  svg,
+  svg * {
+    fill: #333333 !important;
+  }
+}
