@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { LoadingSpinner } from '@shared/components';
 
 import { KakaoLoginButton } from '@features/auth';
 import { NaverLoginButton } from '@features/auth';
@@ -54,7 +55,7 @@ function LoginContent() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className={styles.LoginPage__Fallback}>로딩중...</div>}>
+    <Suspense fallback={<LoadingSpinner />}>
       <LoginContent />
     </Suspense>
   );

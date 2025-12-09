@@ -159,6 +159,21 @@ export function diff(
 }
 
 /**
+ * 날짜 단위 차이 계산 (시간 무시, 캘린더 기준)
+ * D-Day 계산 시 사용합니다.
+ *
+ * @param date1 - 타겟 날짜
+ * @param date2 - 기준 날짜
+ * @returns 날짜 차이 (일 단위 정수)
+ *
+ * @example
+ * diffDate('2024-11-04 23:00', '2024-11-03 14:00') // 1 (11.04 - 11.03)
+ */
+export function diffDate(date1: DateInput, date2: DateInput): number {
+  return dayjs(date1).startOf('day').diff(dayjs(date2).startOf('day'), 'day');
+}
+
+/**
  * UTC 문자열로 변환 (쿠키 만료 시간 등에 사용)
  *
  * @param date - 변환할 날짜

@@ -1,7 +1,6 @@
 'use client';
 
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Loader } from '@mantine/core';
 
 import { ErrorBoundary } from '@shared/components/ErrorBoundary';
 import { useInfiniteCampaigns, useCampaigns } from '@entities/campaign/hooks/useCampaigns';
@@ -15,6 +14,7 @@ import {
 import { CampaignTabKey } from '@entities/campaign/types/campaign.types';
 
 import styles from './page.module.scss';
+import { LoadingSpinner } from '@shared/components';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<CampaignTabKey>('recruiting');
@@ -80,7 +80,7 @@ export default function Home() {
   return (
     <main className={styles.HomeContainer}>
       <ErrorBoundary>
-        <Suspense fallback={<Loader style={{ margin: 'auto' }} />}>
+        <Suspense fallback={<LoadingSpinner />}>
           <CampaignTab
             selectedTab={activeTab}
             onTabClick={handleScroll}

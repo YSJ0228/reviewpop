@@ -4,6 +4,7 @@ import { CompletedCard } from '../CampaignCard/CompletedCard';
 import { InfiniteCampaignListProps } from './types';
 
 import styles from './style.module.scss';
+import { LoadingSpinner } from '@shared/components';
 
 export function CompletedCampaignList({
   data,
@@ -32,11 +33,11 @@ export function CompletedCampaignList({
   const campaigns = data?.pages.flatMap((page) => page.content) || [];
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <LoadingSpinner />;
   }
 
   if (campaigns.length === 0) {
-    return null; // 데이터가 없으면 렌더링 X
+    return null;
   }
   return (
     <div className={styles.CampaignList} role="feed" aria-label="마감된 체험 목록">
@@ -44,7 +45,7 @@ export function CompletedCampaignList({
         <CompletedCard key={campaign.id} campaign={campaign} />
       ))}
       <div ref={observerRef} style={{ height: '20px', background: 'transparent' }} />
-      {isFetchingNextPage && <div>추가 로딩 중...</div>}
+      {isFetchingNextPage && <LoadingSpinner />}
     </div>
   );
 }

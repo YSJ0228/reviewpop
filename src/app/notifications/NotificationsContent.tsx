@@ -1,10 +1,9 @@
 'use client';
 
-import { Loader } from '@mantine/core';
-
-import NotificationList from '@features/notifications/components/NotificationList';
-import { useNotifications } from '@entities/notification/model/useNotifications';
+import { LoadingSpinner } from '@shared/components';
 import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { useNotifications } from '@entities/notification/model/useNotifications';
+import NotificationList from '@features/notifications/components/NotificationList';
 
 import styles from './page.module.scss';
 
@@ -18,7 +17,7 @@ export default function NotificationsContent() {
     isVisible: true,
   });
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div className={styles.Notification}>
       <NotificationList notifications={newNotifications} />
