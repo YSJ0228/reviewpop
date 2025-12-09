@@ -1,5 +1,9 @@
 export interface EmptyStateProps {
-  variant: EmptyStateVariant;
+  description?: string;
+  variant?: EmptyStateVariant;
+  title?: string;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 export type EmptyStateVariant =
@@ -9,9 +13,9 @@ export type EmptyStateVariant =
   | 'no-completed'
   | 'no-opened';
 
-export type EmptyStateConfig = {
+export interface EmptyStateConfig {
   title?: string;
   description: string;
-  showButton: boolean;
   buttonText?: string;
-};
+  buttonLink?: string;
+}
