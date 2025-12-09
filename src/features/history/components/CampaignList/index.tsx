@@ -1,6 +1,7 @@
 import { useMyCampaigns, filterCampaignsByStatus } from '@entities/history/hooks/useMyCampaigns';
 
 import { APPLICATION_STATUS_LABELS } from '@features/history/constants';
+import { LoadingSpinner } from '@shared/components';
 
 import { CampaignCard } from '../CampaignCard';
 
@@ -21,8 +22,7 @@ export function CampaignList({ status }: IMyCampaignListProps) {
         aria-live="polite"
         aria-label="체험 목록 로딩 중"
       >
-        <div className={styles.CampaignList__Spinner} />
-        <span>로딩 중...</span>
+        <LoadingSpinner />
       </div>
     );
   }
