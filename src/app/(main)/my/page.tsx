@@ -6,6 +6,9 @@ import { CampaignTabs } from '@features/history';
 
 import styles from './page.module.scss';
 
+import { usePageHeader } from '@shared/hooks/usePageHeader';
+import { LoadingSpinner } from '@shared/components';
+
 function MyPageContent() {
   return (
     <div className={styles.MyPage}>
@@ -17,8 +20,6 @@ function MyPageContent() {
   );
 }
 
-import { usePageHeader } from '@shared/hooks/usePageHeader';
-
 export default function MyPage() {
   usePageHeader({
     showBottomNavigation: true,
@@ -26,13 +27,7 @@ export default function MyPage() {
   });
 
   return (
-    <Suspense
-      fallback={
-        <div className={styles['MyPage--Loading']} role="status" aria-live="polite">
-          로딩 중...
-        </div>
-      }
-    >
+    <Suspense fallback={<LoadingSpinner />}>
       <MyPageContent />
     </Suspense>
   );

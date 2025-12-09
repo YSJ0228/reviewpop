@@ -20,6 +20,7 @@ import { MantineProvider, createTheme, Loader } from '@mantine/core';
 import { PopUiProvider } from '@pop-ui/core';
 import { useUserStore } from '@entities/user';
 import { env } from '@shared/config/env';
+import { LoadingSpinner } from '@shared/components';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -105,7 +106,7 @@ export function Providers({ children }: ProvidersProps) {
           minHeight: '100vh',
         }}
       >
-        <p>준비 중...</p>
+        <LoadingSpinner />
       </div>
     );
   }

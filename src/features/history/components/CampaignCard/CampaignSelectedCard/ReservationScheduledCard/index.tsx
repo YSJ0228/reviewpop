@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { BottomSheet } from '@shared/components/BottomSheet';
 import { Button } from '@shared/components';
 import { HISTORY_MESSAGES, HISTORY_UI } from '@features/history/constants';
-import { getCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
+import { useCampaignBottomSheetData } from '@features/history/hooks/useCampaignBottomSheetData';
 
 import { ProviderBenefitSection } from './ProviderBenefitSection';
 import { ReviewMissionSection } from './ReviewMissionSection';
@@ -18,7 +18,7 @@ import { ReservationScheduledCardProps } from './types';
  */
 export function ReservationScheduledCard({ campaign }: ReservationScheduledCardProps) {
   const [opened, { open, close }] = useDisclosure(false);
-  const bottomSheetData = getCampaignBottomSheetData(campaign.id, true);
+  const { data: bottomSheetData } = useCampaignBottomSheetData(campaign.id, true);
   const router = useRouter();
 
   const handleCampaignDetailClick = () => {
