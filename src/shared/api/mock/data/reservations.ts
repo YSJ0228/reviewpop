@@ -13,16 +13,16 @@ import type { Reservation, ReservationConfig, ReservedDateTimes } from '@entitie
 export const mockReservationConfig: ReservationConfig = {
   notice: '본 체험은 2인 기준으로 제공됩니다',
   maxCount: 2,
-  disabled: ['2025-12-05', '2025-12-06'],
-  startDate: '2025-12-02',
-  endDate: '2025-12-24',
+  disabled: ['2026-01-05', '2026-01-06'],
+  startDate: '2026-01-01',
+  endDate: '2026-12-31',
 };
 
 /**
  * 예약된 시간대 Mock 데이터
  */
 export const mockReservedDateTimes: ReservedDateTimes = {
-  dateTimes: ['2025-12-04T10:00:00', '2025-12-03T10:30:00', '2025-12-07T14:00:00'],
+  dateTimes: ['2026-01-04T10:00:00', '2026-01-03T10:30:00', '2026-01-07T14:00:00'],
 };
 
 /**
