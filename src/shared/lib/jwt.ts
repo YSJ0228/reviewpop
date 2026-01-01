@@ -17,21 +17,17 @@ import type { JWTPayload, OAuthProvider } from '@shared/types/auth.types';
  * 개발: 자동 생성 (세션마다 새로 생성되므로 서버 재시작 시 토큰 무효화됨)
  */
 function getJWTSecret(): string {
-  // 프로덕션 환경 (Mock 아닐 때만)
-  if (process.env.NODE_ENV === 'production' && !env.useMock) {
-    const secret = process.env.JWT_SECRET;
-    if (!secret) {
-      throw new Error('JWT_SECRET 환경변수가 설정되지 않았습니다.');
-    }
-    return secret;
+  // Mock 모드이거나 개발 환경일 때 (고정된 Secret 사용)
+  if (env.useMock || process.env.NODE_ENV === 'development') {
+    return 'mock-secret-key-for-dev-and-test-1234';
   }
 
-  // 개발 환경 - 자동 생성
-  // 주의: 서버 재시작 시 모든 토큰이 무효화됩니다
-  if (!global.__JWT_SECRET__) {
-    global.__JWT_SECRET__ = crypto.randomBytes(32).toString('hex');
+  // 프로덕션 환경 (Real Secret)
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET 환경변수가 설정되지 않았습니다.');
   }
-  return global.__JWT_SECRET__;
+  return secret;
 }
 
 /**
