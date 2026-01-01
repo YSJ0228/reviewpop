@@ -7,6 +7,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 import { CONSTANTS } from '@shared/config/constants';
+import { env } from '@shared/config/env';
 import { ROUTES } from '@shared/config/routes';
 import { setAuthCookie, verifyOAuthStateCookie } from '@shared/lib/cookies.server';
 import type { KakaoTokenResponse, AuthResponse } from '@shared/types/auth.types';
@@ -43,8 +44,8 @@ export async function GET(request: NextRequest) {
     // 1. 카카오 토큰 서버에 Access Token 요청
     let access_token: string;
 
-    if (process.env.NODE_ENV === 'development') {
-      // 개발 환경: Mock Access Token 사용
+    if (env.useMock || process.env.NODE_ENV === 'development') {
+      // Mock 모드 또는 개발 환경: Mock Access Token 사용
       // (서버에서는 MSW가 작동하지 않으므로)
       access_token = `mock-kakao-access-token-${Date.now()}`;
     } else {
@@ -71,7 +72,8 @@ export async function GET(request: NextRequest) {
     let token: string;
     let userEmail: string;
 
-    if (process.env.NODE_ENV === 'development') {
+    if (env.useMock || process.env.NODE_ENV === 'development') {
+      // Mock 모드 또는 개발 환경: 서버에서 직접 JWT 생성
       // 개발 환경: 서버에서 직접 JWT 생성
       // (MSW는 브라우저에서만 작동하므로)
       const { generateJWT } = await import('@shared/lib/jwt');
