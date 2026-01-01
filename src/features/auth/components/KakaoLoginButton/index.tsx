@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 
 import { CONSTANTS } from '@shared/config/constants';
+import { env } from '@shared/config/env';
 import { ROUTES } from '@shared/config/routes';
 import { Button } from '@shared/components';
 import { toUnix, toUTCString, now } from '@shared/lib/date';
@@ -38,8 +39,8 @@ export function KakaoLoginButton({ className }: KakaoLoginButtonProps) {
     const expires = toUTCString(now().add(10, 'minute'));
     document.cookie = `${CONSTANTS.STORAGE_KEYS.OAUTH_STATE}=${encodeURIComponent(JSON.stringify(stateData))}; path=/; expires=${expires}; SameSite=Lax`;
 
-    // 개발 환경: Mock OAuth (바로 콜백 호출)
-    if (process.env.NODE_ENV === 'development') {
+    // Mock 모드이거나 개발 환경일 때: Mock OAuth (바로 콜백 호출)
+    if (env.useMock) {
       // Mock authorization code 생성
       const mockCode = `mock-kakao-code-${toUnix()}`;
 
